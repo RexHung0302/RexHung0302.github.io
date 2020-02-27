@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言三個月前開始了從零開始的學Code之路，碰了一陣子的JS，大概上個月撞見了Udemy然後買了幾個課程，加上一直都有再關注六角學院，偶然間發現了『新手JS地下城』，剛好最近在練習JS，心想這不正是上天的旨意嗎？！ 最初以為第一層大概都過不了了吧，結果就晃啊晃，騙吃騙喝到了4F。">
+<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,JavaScript,HexSchool,Engineer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 4F World Clock 各國時區">
+<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2019&#x2F;03&#x2F;05&#x2F;20190305&#x2F;index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言三個月前開始了從零開始的學Code之路，碰了一陣子的JS，大概上個月撞見了Udemy然後買了幾個課程，加上一直都有再關注六角學院，偶然間發現了『新手JS地下城』，剛好最近在練習JS，心想這不正是上天的旨意嗎？！ 最初以為第一層大概都過不了了吧，結果就晃啊晃，騙吃騙喝到了4F。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*AGCVXD1qKHDvsr_p7KFWyA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*x_3tUpA6H33gJlh7_fXAhQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*hwiv2QRKv21TpJAjJIenhA.png">
+<meta property="og:updated_time" content="2020-02-26T14:06:53.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*AGCVXD1qKHDvsr_p7KFWyA.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/05/20190305/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[Hero Of UnderGround 地下城] — 4F World Clock 各國時區 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/05/20190305/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 4F World Clock 各國時區
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-03-05 12:00:00" itemprop="dateCreated datePublished" datetime="2019-03-05T12:00:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-26 22:06:53" itemprop="dateModified" datetime="2020-02-26T22:06:53+08:00">2020-02-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a></p>
+</blockquote>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>三個月前開始了從零開始的學Code之路，碰了一陣子的JS，大概上個月撞見了Udemy然後買了幾個課程，加上一直都有再關注六角學院，偶然間發現了『新手JS地下城』，剛好最近在練習JS，心想這不正是上天的旨意嗎？！</p>
+<p>最初以為第一層大概都過不了了吧，結果就晃啊晃，騙吃騙喝到了4F。</p>
+<p><img src="https://miro.medium.com/proxy/1*AGCVXD1qKHDvsr_p7KFWyA.png" alt="廢話太多了(誤"></p>
+<a id="more"></a>
+
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="https://miro.medium.com/proxy/1*x_3tUpA6H33gJlh7_fXAhQ.png" alt="Clock Img"></p>
+<p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有三項。</p>
+<ul>
+<li><p>【特定技術】僅能使用原生 JS 開始，不能使用套件</p>
+</li>
+<li><p>【特定技術】特別注意必須用 JS 處理各國時區</p>
+</li>
+<li><p>【書寫能力】請寫一篇 BLOG 來介紹你的挑戰過程，並介紹 JavaScript 如何提供 GMT、UTC 時區語法，以及何謂 TimeStamp。</p>
+</li>
+</ul>
+<p><em>某些小地方偷偷用了Jquery (逃</em></p>
+<hr>
+<h3 id="使用-toLocaleString-Method"><a href="#使用-toLocaleString-Method" class="headerlink" title="使用 toLocaleString() Method"></a>使用 <a href="http://www.w3school.com.cn/jsref/jsref_toLocaleString_array.asp" target="_blank" rel="noopener">toLocaleString() Method</a></h3><blockquote>
+<p><em>由於剛接觸JS不久，好多東西都是第一次接觸，看了很多範例，爬了無數的文後決定使用 toLocaleString。</em></p>
+</blockquote>
+<ul>
+<li>設定一個變數來接，然後再帶入各地區的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let GotTime = new Date().toLocaleString(location, </span><br><span class="line">&#123; timeZone: location2&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>設定地區的變數帶入location及location2</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function SetTime() &#123;</span><br><span class="line">  let TW = MyClock(&apos;zh-TW&apos;, &apos;Asia/Taipei&apos;);</span><br><span class="line">  let BK = MyClock(&apos;zh-TW&apos;, &apos;Asia/Bangkok&apos;);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基本上會出現這樣的結果 → 2019/2/27 下午2:56:36</p>
+<p>為了統一我把第一個變數都設定為 zh-TW 所以前面都是下午</p>
+<ul>
+<li>修改時間為24小時制 &amp; 取得需要的部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function MyClock(location, location2) &#123;</span><br><span class="line">  let GotTime = new Date().toLocaleString(location, </span><br><span class="line">  &#123; timeZone: location2, hour12: false &#125;);</span><br><span class="line">  return GotTime.split(&quot; &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在第二個變數後加上 <strong>hour12: false</strong> 改為24小時制，另外我先把他們先變成陣列，之後方便再重新排列。</p>
+<hr>
+<h3 id="善用-split-Method-amp-slice-Method"><a href="#善用-split-Method-amp-slice-Method" class="headerlink" title="善用 split() Method &amp; slice Method"></a>善用 <a href="http://www.w3school.com.cn/jsref/jsref_split.asp" target="_blank" rel="noopener">split() Method</a> &amp; <a href="http://www.w3school.com.cn/jsref/jsref_slice_array.asp" target="_blank" rel="noopener">slice Method</a></h3><ul>
+<li>重新排列時間 &amp; 月份</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function SetDate(location) &#123;</span><br><span class="line">  // 設定月份英文</span><br><span class="line">  let months = [&apos;JAN&apos;, &apos;FEB&apos;, &apos;MAR&apos;, &apos;APR&apos;, &apos;MAY&apos;, &apos;JUN&apos;, &apos;JUL&apos;, &apos;AUG&apos;, &apos;SEP&apos;, &apos;OCT&apos;, &apos;NOV&apos;, &apos;DEC&apos;];</span><br><span class="line"></span><br><span class="line">  // 設定日期並重新排列順序及修改成英文月份</span><br><span class="line">  let date = location.split(&apos;/&apos;);</span><br><span class="line">  let date2 = date[2] + &apos; &apos; + months[date[1] - 1] + &apos; &apos; + date[0]</span><br><span class="line">  return date2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊先設定月份的變數，然後使用 split(’/’) 把時間變成 2019227 ，然後再重新排列時間，另外 <strong>（months[date[1] — 1] ）</strong>，因為陣列是從0開始的，不扣會跑到下個月去。</p>
+<p>p.s：這邊的 location 跟一開始的 location 及 location2 並沒有關係！</p>
+<p>時間重新排列後會出現結果 → <strong>27 FEB 2019</strong></p>
+<ul>
+<li>設定變數帶入 location</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function SetTime() &#123;</span><br><span class="line">  let BK_D = SetDate(BK[0]);</span><br><span class="line">  let TW_D = SetDate(TW[0]);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這個 function 和上面那個是同一個，這樣才能抓到我們BK跟TW變數的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.NEW-YORK-Time&apos;).html(TW[1].slice(0, 5));</span><br><span class="line">  </span><br><span class="line">$(&apos;.TW-date&apos;).html(TW_D);</span><br></pre></td></tr></table></figure>
+
+<p>最後再用html替換掉原本預設的字就行了，這邊也需要用到 slice(star,end) 抓取我們重新排列後需要的時間。</p>
+<p><img src="https://miro.medium.com/proxy/1*hwiv2QRKv21TpJAjJIenhA.png" alt="Finish Img"></p>
+<hr>
+<h3 id="何謂-GMT、UTC-時區-？-引用泛科知識"><a href="#何謂-GMT、UTC-時區-？-引用泛科知識" class="headerlink" title="何謂 GMT、UTC 時區 ？ 引用泛科知識"></a>何謂 GMT、UTC 時區 ？ <a href="https://pansci.asia/archives/84978" target="_blank" rel="noopener">引用泛科知識</a></h3><ul>
+<li><p><strong>GMT 格林威治平時 （Greenwich Mean Time）</strong></p>
+<blockquote>
+<p><em>這是一個大家都熟悉且習慣了的名字，至1884年確立，1924年開始向全世界播報時間。</em><br><em>觀察者隨時監控太陽在天空的位置，把每天最高的仰角記錄下來，這個時間點稱作「過中天」。一般理解為兩次的「過中天」相隔等於24小時，也就是一天，但是一年之中會有「比較長的一天」與「比較短的一天」。</em><br><em>所以觀測者必須要至少連續觀測一年，然後求取 365 個長度不一的「天」，再把他們全部平均後，得到固定的一天長度，之後再細分成時、分、秒等單位。這個就是GMT。</em></p>
+</blockquote>
+</li>
+<li><p><strong>UTC 世界時（Universal Time Coordinated）</strong></p>
+<blockquote>
+<p><em>利用宇宙中穩定一致的無線電波源週期性的訊號，搭配電波源抵達地球時觀測的角度，直接計算地球的自轉與公轉速率，再以此計算一年、一天、時分秒的平均長度。</em><br><em>但是地球的自轉正在緩慢減速，所以GMT的一秒會越來越久，UTC總會有一天超過它，所以管理UTC的機構IERS(International Earth Rotation and Reference Systems Service)選擇加入閏秒。</em></p>
+</blockquote>
+</li>
+<li><p><strong>結論</strong></p>
+</li>
+</ul>
+<p>兩個都是「長時間尺度下的平均太陽日」，但是遵循國際標準，台灣的時區會寫成「UTC+8」。正常下我們不會去在意到一秒的差距，用UTC就對了！</p>
+<h3 id="WTX-Timestamp-UNIX-Timestamp、POSIX-Timestamp-？"><a href="#WTX-Timestamp-UNIX-Timestamp、POSIX-Timestamp-？" class="headerlink" title="WTX Timestamp ( UNIX Timestamp、POSIX Timestamp ) ？"></a>WTX Timestamp ( UNIX Timestamp、POSIX Timestamp ) ？</h3><blockquote>
+<p><em>被定義在 <strong>1970年1月1日（00:00:00 GMT）</strong> 的時間，其實就是UNIX生產的年代，那時候的工程師們把那天定義為起始點。</em><br><em>產出來的數字會以秒數表現，1551253485 例如這樣，這是從1970年1月1日到這天的秒數。</em></p>
+</blockquote>
+<ul>
+<li><strong>那我要怎麼轉換？</strong></li>
+</ul>
+<p><a href="https://unixtime.51240.com/" target="_blank" rel="noopener">點我進入神奇的地方</a></p>
+<p><a href="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/" target="_blank" rel="noopener">各種語言轉換方式</a></p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次練習到了不只是如何抓取時間，還學到了怎麼用Function去簡化我的程式碼，達到簡潔的效果，另外自覺陣列跟Function還有邏輯的部分是自己需要加強的。</p>
+<p>最後我想最需要加強的是文筆啦啦啦，第一次寫Blog，覺得這邏輯比JS邏輯還難，總想著要簡明扼要打出重點，結果就屁話一堆la。</p>
+<p>最後簡單列出需要檢討的地方，然後朝下一關邁進，完畢。</p>
+<ul>
+<li><p>JS</p>
+</li>
+<li><p>邏輯</p>
+</li>
+<li><p><del><em>體重</em></del></p>
+</li>
+</ul>
+<hr>
+<h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
+<li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
+<blockquote>
+<p>Demo：<a href="http://href=" target="_blank" rel="noopener"http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a href="https://noob.tw/js-timezone/" target="_blank" rel="noopener">Noob’s Space 4F前端之碑主的Blog</a></li>
+<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school 教學網站</a></li>
+<li><a href="https://pansci.asia/archives/84978" target="_blank" rel="noopener">泛科知識</a></li>
+<li><a href="https://unixtime.51240.com/" target="_blank" rel="noopener">便民查詢網 時間轉換</a></li>
+<li><a href="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/" target="_blank" rel="noopener">MR.沙先生Blog 時間格式轉換方法</a></li>
+<li><a href="https://imgur.com/" target="_blank" rel="noopener">imgur 圖片上傳網站</a></li>
+<li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"># HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/06/20190306/" rel="next" title="[Hero Of UnderGround 地下城] — 5F AQI 全台空氣指標儀表板">
+      [Hero Of UnderGround 地下城] — 5F AQI 全台空氣指標儀表板 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-toLocaleString-Method"><span class="nav-text">使用 toLocaleString() Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#善用-split-Method-amp-slice-Method"><span class="nav-text">善用 split() Method &amp; slice Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何謂-GMT、UTC-時區-？-引用泛科知識"><span class="nav-text">何謂 GMT、UTC 時區 ？ 引用泛科知識</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WTX-Timestamp-UNIX-Timestamp、POSIX-Timestamp-？"><span class="nav-text">WTX Timestamp ( UNIX Timestamp、POSIX Timestamp ) ？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

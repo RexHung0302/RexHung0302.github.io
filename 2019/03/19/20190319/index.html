@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
+<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,JavaScript,HexSchool,Engineer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板">
+<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2019&#x2F;03&#x2F;19&#x2F;20190319&#x2F;index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*LnEeafX9QlQNCJ6wbNNrWA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2052&#x2F;1*9vvaxIWXy-irN7VsNjjFAw.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*JAiK0vdc-tyWJFLQHZ34OQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*seP_S6pzv27alP48JXaUfQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2066&#x2F;1*jyjX1zeYOz0uZ1JgWdJw5Q.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*J_9Cj_53nTXCFVoonq2gLA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*7DlBd3T5oNZgKeAtyFGR4Q.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*BO0Js3hAdDHzgzDO2LYYNg.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*cosnIXYu9v2IYC11cIBXTQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*bBdw5fqQ9UFfFQhzAXsYPQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*ckBh_yTkJNHyBUKp_OoGOA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2330&#x2F;1*sLfEzkq92_cVdVBt8sSYdA.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2330&#x2F;1*TuSeKiSqY4sHURtRNDHTQg.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*un0teQDlE0jAJ3hbDm2yMw.png">
+<meta property="og:updated_time" content="2020-02-26T14:06:33.046Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*LnEeafX9QlQNCJ6wbNNrWA.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[Hero Of UnderGround 地下城] — 7F Canvas 畫板 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 7F Canvas 畫板
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-03-19 12:00:00" itemprop="dateCreated datePublished" datetime="2019-03-19T12:00:00+08:00">2019-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-26 22:06:33" itemprop="dateModified" datetime="2020-02-26T22:06:33+08:00">2020-02-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-7F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a></p>
+</blockquote>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png" alt="7F的大魔王- Canvas畫板遊戲"></p>
+<a id="more"></a>
+
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有二 項。</p>
+<ul>
+<li>【特定技術】<strong>遊戲規則</strong> </li>
+</ul>
+<p>繪圖區請使用 Canvas 來設計，上方的控制列與下方的畫筆調整可不用</p>
+<p>  -&gt; a.SAVE ：點擊後可直接下載轉出的 PNG 圖片</p>
+<p>  -&gt; b.CLEAR ALL：清除畫版樣式</p>
+<p>  -&gt; c.UNDO、REDO：上一步、下一步</p>
+<p>  -&gt; d.點擊箭頭時，功能列介面皆可進行收闔</p>
+<ul>
+<li>【擴充功能】請再自行增加「兩個功能」，我相信勇者們都是很有梗的~</li>
+</ul>
+<h3 id="額外條件"><a href="#額外條件" class="headerlink" title="額外條件"></a>額外條件</h3><ol>
+<li><p>你攻略此 BOSS 的攻略過程心得</p>
+</li>
+<li><p>你學習 Canvas 的學習過程</p>
+</li>
+<li><p>為什麼要用 Canvas，與一般 DOM 繪製有什麼優缺點？</p>
+</li>
+</ol>
+<hr>
+<p><img src="https://cdn-images-1.medium.com/max/2052/1*9vvaxIWXy-irN7VsNjjFAw.png" alt="原諒我字醜，重寫了三小時"></p>
+<h3 id="萬事起頭難…-嗎？"><a href="#萬事起頭難…-嗎？" class="headerlink" title="萬事起頭難…..嗎？"></a>萬事起頭難…..嗎？</h3><p>起頭難不難，其實要先感謝 <a href="https://github.com/HuiyuLiz/vue-canvas-drawing-app">Huiyu</a> 大大，因為很多東西都算是菜雞我第一次接觸，所以會先去爬文看看其他大佬們如何起手。這邊參考了一位國外大神的 <a href="https://www.youtube.com/watch?v=8ZGAzJ0drl0" target="_blank" rel="noopener">Youtube</a> ，教你如何創造出簡單的畫布。<br>這次切版也用到比較多的動畫，順便訓練一下流暢性，還有順便解決 BOSS 的第一個弱點知一 d 。但搞切版就花了半天去了，原諒我菜TAT，比較特別的部分就是前面多位大大提過的 input color 了，後面的部分會提到。</p>
+<blockquote>
+<p>讚嘆感嘆便利的網路還有多位大神無私奉獻，現在很多東西其實不難了。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas *id*=&quot;drawing_board&quot; *width*=&apos;800&apos; *height*=&apos;800&apos;&gt;&lt;/canvas&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Canvas 可以說是一張畫布，而你想要在上面幹啥都行，別想歪。</p>
+<blockquote>
+<p>預設的畫布大小是 300px * 150px（寬 * 高）。但你也可以透過 HTML 寬、高屬性（<a href="https://developer.mozilla.org/en-US/docs/Glossary/attribute" target="_blank" rel="noopener">attribute</a>）自訂。<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="noopener">*點我</a>前往文章*</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const canvas = document.getElementById(&apos;drawing_board&apos;);</span><br><span class="line">const ctx = canvas.getContext(&apos;2d&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>這可以說是只要寫到 <strong>Canvas</strong> 就一定會寫到的，給他的一個變數名稱，然後指定你是要用 <strong>2d</strong> 還是 <strong>3d</strong> 來作畫，這邊我們用到 <strong>2d</strong> 就夠了。之後給他寬高，還有畫筆，畫筆顏色…等等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">canvas.width = window.innerWidth;</span><br><span class="line">canvas.height = window.innerHeight;</span><br><span class="line">// 畫筆的顏色粗細等等</span><br><span class="line">ctx.strokeStyle = &apos;black&apos;;  // 色筆顏色</span><br><span class="line">ctx.lineJoin = &apos;round&apos;;     // 兩條線交會的地方，是圓角</span><br><span class="line">ctx.lineCap = &apos;round&apos;;      // 繪製結束的線帽</span><br><span class="line">ctx.lineWidth = 10;         // 色筆大小</span><br></pre></td></tr></table></figure>
+
+<p>設定完成後我們還需要做到幾件事情，既然我們要做畫板，就必須讓筆掌握在使用者手中，所以我們必須判斷使用者何時下手何時停手畫畫，然後給使用者 一個移動的監聽事件 ， 一個按下滑鼠的監聽事件 ， 一個放開滑鼠的監聽事件 ， 最後一個滑鼠離開的監聽事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 判斷是不是點下滑鼠了</span><br><span class="line">let isDrawing = false;</span><br><span class="line">// 設定滑鼠座標</span><br><span class="line">let lastX = 0;</span><br><span class="line">let lastY = 0;</span><br><span class="line"></span><br><span class="line">// 滑鼠移動的監聽事件</span><br><span class="line">canvas.addEventListener(&apos;mousemove&apos;, draw);</span><br><span class="line"></span><br><span class="line">function draw(e) &#123;</span><br><span class="line">console(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*JAiK0vdc-tyWJFLQHZ34OQ.png" alt="滑鼠監聽事件顯示出滑鼠座標"></p>
+<hr>
+<h3 id="畫下第一筆"><a href="#畫下第一筆" class="headerlink" title="畫下第一筆"></a>畫下第一筆</h3><p>完成了鼠標的座標抓取後，我們就可以來判斷何時該畫畫了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// 滑鼠按下後</span><br><span class="line">canvas.addEventListener(&apos;mousedown&apos;, (e) =&gt; &#123;</span><br><span class="line">  isDrawing = true;   // 判斷是否正在畫畫</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 滑鼠放開後</span><br><span class="line">canvas.addEventListener(&apos;mouseup&apos;, (e) =&gt; &#123;</span><br><span class="line">  push();             // 跑進計算步數的 function 後面會提到</span><br><span class="line">  isDrawing = false;  // 判斷是否正在畫畫</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 滑鼠離開後</span><br><span class="line">canvas.addEventListener(&apos;mouseout&apos;, () =&gt; isDrawing = false);</span><br><span class="line"></span><br><span class="line">// 畫畫得 function 可以改為</span><br><span class="line">function draw(e) &#123;</span><br><span class="line">  if (!isDrawing) return; // 沒有點擊時不回覆座標</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  // 開始</span><br><span class="line">  ctx.moveTo(lastX, lastY);</span><br><span class="line">  // 結束</span><br><span class="line">  ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">  // 畫圖</span><br><span class="line">  ctx.stroke();</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="使用-toDataURL-達到-UNDO-REDO"><a href="#使用-toDataURL-達到-UNDO-REDO" class="headerlink" title="使用 toDataURL() 達到 UNDO REDO"></a>使用 toDataURL() 達到 UNDO REDO</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let step = -1;</span><br><span class="line">let userhistory = [];</span><br></pre></td></tr></table></figure>
+
+<p>首先我們必須設定兩個變數，一個用來計算步數，一個用來裝轉成 Base64 編碼的圖片字串，用陣列來放，讓我們靠  <strong>Step</strong> 就能達到上一步，下一步的功能，每畫一筆，我們就跑一次 <strong>Push</strong> 的 <strong>function</strong> 讓 <strong>Step++，並把圖片的字串放進陣列裡，讓讀取的時候能取出並蓋上畫布</strong> ，反之上一步就是 <strong>−−</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function push() &#123;</span><br><span class="line">  step++;</span><br><span class="line">  if (step &lt; userhistory.length - 1) &#123;</span><br><span class="line">    userhistory.length = step + 1</span><br><span class="line">  &#125;</span><br><span class="line">  userhistory.push(canvas.toDataURL()); // 當前影像存成 Base64 編碼的字串並放入陣列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊需要特別提到，因為一開始布數從 -1開始，為的是讓他可以符合陣列的特定，從 <strong>0</strong>開始算，這樣讀取時才能讀到資料，但是我們的上一步條件必須 <strong>Step &gt; 0</strong>，所以一開始我們就必須讓 <strong>Step+1</strong> ，不然會變成我一樣，苦惱好幾小時，為什麼第一筆畫都不能 <strong>UNDO</strong> …… 這邊感謝 <strong>7F</strong> 前端之碑主 <a href="https://medium.com/javascriptdeugonchallenge/jsdeugon07-2bda5221474f" target="_blank" rel="noopener">陳顯然</a> 大大的解答。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 上一步的function</span><br><span class="line">function undo() &#123;</span><br><span class="line">  if (step &gt; 0) &#123;</span><br><span class="line">  step--;</span><br><span class="line">  let canvaspic = new Image(); //建立新的 Image</span><br><span class="line">  canvaspic.src = userhistory[step]; //載入剛剛存放的影像</span><br><span class="line">  canvaspic.onload = function() &#123;</span><br><span class="line">      ctx.clearRect(0, 0, canvas.width, canvas.height);</span><br><span class="line">      ctx.drawImage(canvaspic, 0, 0) //匯出影像並從座標 x:0 y:0 開始</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 最後這邊是讓上一步下一步可以在不能使用時顯示灰色及更改鼠標，可以不加</span><br><span class="line">  if (step &lt; userhistory.length &amp;&amp; step &gt; 0) &#123;</span><br><span class="line">    $(&apos;.next-step&apos;).removeClass(&apos;disable-btn&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上一步的做法跟下一步的做法相反而已，另外剛開始寫完這段的時候怎麼試都無法上一步，一直到最後加了 <strong>ctx.clearRect</strong> 後才有了反應，這邊不知道是不是有大大說的 <strong>Canvas</strong> 不吃 <strong>CSS</strong> 的問題，會再進一步探討並研究的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a class=&quot;save&quot; href=&quot;#&quot; download=&quot;我的偉大創作&quot;&gt;</span><br><span class="line"></span><br><span class="line">// 儲存畫布的function</span><br><span class="line">function download(position) &#123;</span><br><span class="line">  const dataURL = canvas.toDataURL(&apos;image/png&apos;) // 把影像轉成指定格式的 URL 字串</span><br><span class="line">  position.href = dataURL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外儲存的部分在 <strong>html</strong> 上使用 <strong>href</strong> 去裝我們的字串，<strong>download</strong> 則是下載後的檔案名稱。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*seP_S6pzv27alP48JXaUfQ.png" alt="存在字串裡的 64base 圖片字串"></p>
+<hr>
+<h3 id="關於擴充功能"><a href="#關於擴充功能" class="headerlink" title="關於擴充功能"></a>關於擴充功能</h3><p>由於對 <strong>Canvas</strong> 是第一次接觸，所以就把各位大大做的功能拿來練手，畢竟菜雞腳程慢，到 7F 時各位大佬都已經飛天啦…這邊我選的功能是 <strong>橡皮擦、上傳圖片、顏色選擇器…</strong></p>
+<p><img src="https://cdn-images-1.medium.com/max/2066/1*jyjX1zeYOz0uZ1JgWdJw5Q.png" alt="八土地下城(誤"></p>
+<p>先說說簡單的 橡皮擦 其實就是把畫筆顏色改成背景顏色，然後看起來就像是擦掉了。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*J_9Cj_53nTXCFVoonq2gLA.png" alt="顏色選擇器"></p>
+<blockquote>
+<p>Input Color 对象是 HTML5 新增的，Input Color 對象代表了使用 type=”color”属性的 HTML <input> 元素 。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;color&quot; id=&quot;myColor&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>隨後是我覺得超酷的功能，顏色選擇器，其實也很簡單，只是修改它的外觀比較麻煩。在 <strong>html</strong> 上加上這個之後，你會看見一個長方形的 <strong>input</strong> 但是點下去你就能選顏色了，透過 <strong>change</strong> 事件 <strong>input.value()</strong> 你就能取得使用者選擇的顏色了。然後就讓你的 <strong>ctx.strokeStyle</strong> 畫筆顏色 = <strong>input.value()</strong> 吧！</p>
+<p>這邊非常感謝 <a href="https://github.com/simpsons01/HexSchoolChallenge/blob/master/Week7/index.html">汶穎大大</a> 。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*7DlBd3T5oNZgKeAtyFGR4Q.png" alt="圖片上傳"></p>
+<p>其中比較麻煩的應該就是上傳功能了，不過簡單理解下，就是透過 <strong>html</strong> 的 <strong>input files</strong> 上傳後，一樣透過 <strong>toDataURL()</strong> 把它轉成字串，然後用 <strong>Canvas</strong> 的 <strong>drawImage</strong> 把它畫出來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; class=&quot;form-control-file photo-up rounded&quot; style=&quot;display: none;&quot; id=&quot;photo_up&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*BO0Js3hAdDHzgzDO2LYYNg.png" alt="必須使用Change事件"></p>
+<p>需要注意的就是必須使用 <strong>Change</strong> 事件，不然圖片還沒選到，就會跑進裡面讀你的陣列有沒有圖片，會造成錯誤。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*cosnIXYu9v2IYC11cIBXTQ.png" alt="不要像我一樣傻傻地用Click搞了好幾小時"></p>
+<h3 id="Canvas-的學習過程"><a href="#Canvas-的學習過程" class="headerlink" title="Canvas 的學習過程"></a>Canvas 的學習過程</h3><p>這次可以說是踩雷踩了又踩，看別人寫的 <strong>Code</strong> 像是數學老師解題一樣，自己寫出來又是一回事，不過就正式這樣才有成長，從剛開始什麼都不懂，現在至少能畫個圓形和直線出來…噗</p>
+<h3 id="為什麼要用-Canvas？"><a href="#為什麼要用-Canvas？" class="headerlink" title="為什麼要用 Canvas？"></a>為什麼要用 Canvas？</h3><p><img src="https://cdn-images-1.medium.com/max/2000/1*bBdw5fqQ9UFfFQhzAXsYPQ.png" alt="Canvas歷史由來- 取至維基百科"></p>
+<p><strong>Canvas</strong> 除了能做到畫畫 還能做出非常具有特色的<strong>3D遊戲</strong>，及<strong>動畫</strong>，重點是方便且快速，所以非常多人使用，必且在大神的學習在釋出的寶貴經驗之中， <strong>Canvas</strong> 甚至被做成了非常方便的套件。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ckBh_yTkJNHyBUKp_OoGOA.png" alt="成果出爐了"></p>
+<hr>
+<h3 id="03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><a href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走" class="headerlink" title="03/19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走"></a>03/19更新 — 熟用 fillStyle 及 <strong>fillRect 別讓背景離家出走</strong></h3><p>由於沒注意到下載後背景的顏色，造成一開始背景是透明的，讓我大驚失色。詳細顏色設定請<a href="http://www.w3school.com.cn/tags/canvas_fillstyle.asp" target="_blank" rel="noopener">點我</a></p>
+<p><img src="https://cdn-images-1.medium.com/max/2330/1*sLfEzkq92_cVdVBt8sSYdA.png" alt="Canvas預設背景是透明的"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function firstpush() &#123;</span><br><span class="line">  ctx.fillStyle = &apos;#E8E8E8&apos;; // 讓第一次進來跑 function 的時候就加上背景顏色</span><br><span class="line">  ctx.fillRect(0, 0, canvas.width, canvas.height)</span><br><span class="line">  push();</span><br><span class="line">&#125;</span><br><span class="line">// 因為 canvas.width = window.innerWidth;</span><br></pre></td></tr></table></figure>
+
+<p>還記得一開始說我們的** Step** 預設是 -1 對吧，一開始我們進來必須設定一個 <strong>function</strong> 去讓它加一，我們就可以在裡面加上背景顏色，<strong>fillStyle</strong> 其實就是設定要填滿的顏色，記得要配上 <strong>fillRect *<em>服用，它是 用於填充繪圖的顏色、漸變或模式，預設是黑色，你也可以設定一定的大小範圍去填滿它，例如 *</em>ctx.fillRect(20,20,150,100)</strong>。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2330/1*TuSeKiSqY4sHURtRNDHTQg.png" alt="明顯了許多，背景回家了"></p>
+<hr>
+<h3 id="gradient-讓你的人生有起有落"><a href="#gradient-讓你的人生有起有落" class="headerlink" title="gradient 讓你的人生有起有落"></a><em>gradient 讓你的人生有起有落</em></h3><p>配上 <strong>gradient</strong> 或 <strong>pattern</strong> 服用，可以創造出漸層，也可以使用後者讓你的圖片填充你的畫布。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*un0teQDlE0jAJ3hbDm2yMw.png" alt="取自W3School [點我](https://www.w3schools.com/TAgs/tryit.asp?filename=tryhtml5_canvas_createlineargradient)看文章"><em>取自W3School <a href="https://www.w3schools.com/TAgs/tryit.asp?filename=tryhtml5_canvas_createlineargradient" target="_blank" rel="noopener">點我</a>看文章</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 起手式</span><br><span class="line">var c = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">var ctx = c.getContext(&quot;2d&quot;);</span><br><span class="line"></span><br><span class="line">// 四個參數設定下方會解釋</span><br><span class="line">var grd = ctx.createLinearGradient(0, 0, 170, 0);</span><br><span class="line">// 起始顏色(這邊為黑色)</span><br><span class="line">grd.addColorStop(0, &quot;black&quot;);</span><br><span class="line">// 結束顏色(這邊為白色)</span><br><span class="line">grd.addColorStop(1, &quot;white&quot;);</span><br><span class="line">// 填充的顏色改為漸層Gradient方式</span><br><span class="line">ctx.fillStyle = grd;</span><br><span class="line">// 繪畫的座標及範圍大小</span><br><span class="line">ctx.fillRect(20, 20, 150, 100);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ctx.createLinearGradient(漸變開始點的 x 座標,<br>漸變開始點的 y 座標,漸變結束點的 x 座標,漸變結束的 y 座標)</p>
+</blockquote>
+<p><strong>詳細說明請<a href="http://www.runoob.com/jsref/met-canvas-createlineargradient.html" target="_blank" rel="noopener">點我</a>查看</strong></p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>我想這次的 <strong>7F</strong> 不算破關，是靠著眾多前人智慧以及萬能谷歌大神，讓我學到了寶貴的一課，關於 <strong>Canvas</strong> 還有很多值得我去探討，這是較不容易學會卻是非常好用的東西之一，身為一位勇者，就是必須一直嘗試跌倒在嘗試啊。<br>雖然每一層樓都有主要的目標 <strong>BOSS</strong> 在，但卻會常常在路上學到其他壯大自己的知識，比如這次意外學習到 <strong>ES6</strong> 的 <strong>模板源文本（template strings</strong> ，有興趣可以<a href="https://medium.com/@dd0425/javascript-es6-template-strings-7b8addc97ea6" target="_blank" rel="noopener">點我</a>查看，最後除了繼續努力之外還是要列出檢討的地方，然後朝下一關繼續加油，完畢。（這次真的需要好好加油呀…</p>
+<ul>
+<li><p>JS</p>
+</li>
+<li><p>邏輯</p>
+</li>
+<li><p>文筆</p>
+</li>
+<li><p><del><em>體重</em></del></p>
+</li>
+</ul>
+<hr>
+<h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
+<li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html" target="_blank" rel="noopener">點我</a><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 4F World Clock 各國時區</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br/><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa" target="_blank" rel="noopener">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 5F AQI 全台空氣指標儀表板</strong></p>
+<blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-5F/index.html" target="_blank" rel="noopener">*點我</a>*<br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br/><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454" target="_blank" rel="noopener">點我</a>*</p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 6F SECONDS CHALLENGE 倒數遊戲</strong></p>
+<blockquote>
+<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-6F/index.html" target="_blank" rel="noopener">點我</a><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br/><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb" target="_blank" rel="noopener">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a href="https://medium.com/javascriptdeugonchallenge/jsdeugon07-2bda5221474f" target="_blank" rel="noopener">陳顯然大大的</a> — Canvas畫版</li>
+<li><a href="https://github.com/HuiyuLiz/vue-canvas-drawing-app">HuiyuLiz大大的</a> — GitHub</li>
+<li><a href="https://medium.com/@dd0425/javascript-es6-template-strings-7b8addc97ea6" target="_blank" rel="noopener">Dosmanthus大大</a> — ES6 — Template Strings</li>
+<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school 教學網站</a></li>
+<li><a href="http://www.runoob.com/jsref/dom-obj-color.html" target="_blank" rel="noopener">Runoob</a> — input color</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial/Using_images" target="_blank" rel="noopener">MDN</a> — Canvas</li>
+<li><a href="https://github.com/simpsons01/HexSchoolChallenge/blob/master/Week7/index.html">汶穎大大 </a>— 圖片上傳</li>
+<li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"># HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/13/20190313/" rel="prev" title="[Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲">
+      <i class="fa fa-chevron-left"></i> [Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/26/20190326/" rel="next" title="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲">
+      [Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#額外條件"><span class="nav-text">額外條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#萬事起頭難…-嗎？"><span class="nav-text">萬事起頭難…..嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#畫下第一筆"><span class="nav-text">畫下第一筆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="nav-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於擴充功能"><span class="nav-text">關於擴充功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-的學習過程"><span class="nav-text">Canvas 的學習過程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#為什麼要用-Canvas？"><span class="nav-text">為什麼要用 Canvas？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="nav-text">03/19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient-讓你的人生有起有落"><span class="nav-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

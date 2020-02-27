@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduction &amp;amp; 前言最近終於擺脫了舊電腦，可以捨棄那猶如牛車的速度，每次 yarn server 電腦就像是要起飛了一樣，噢！不對是快爆炸了！最近托公司的福終於換了一台筆電，但是環境就必須重來啦～ 鑑於之前環境太髒亂，那時候什麼都不了解胡亂裝了一通，這次剛好 Blog 搬家了，就剛好做個筆記記錄一下吧。  這一樣是一篇用來筆記的文章，以防日後需要重新建置環境時忘記怎麼設定。">
+<meta name="keywords" content="RexHung,Life,Code,PHP,PHPRedis,Homebrew,Engineer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac OS 使用 HomeBrew 建置 Web 開發環境">
+<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2019&#x2F;11&#x2F;04&#x2F;20191104&#x2F;index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp;amp; 前言最近終於擺脫了舊電腦，可以捨棄那猶如牛車的速度，每次 yarn server 電腦就像是要起飛了一樣，噢！不對是快爆炸了！最近托公司的福終於換了一台筆電，但是環境就必須重來啦～ 鑑於之前環境太髒亂，那時候什麼都不了解胡亂裝了一通，這次剛好 Blog 搬家了，就剛好做個筆記記錄一下吧。  這一樣是一篇用來筆記的文章，以防日後需要重新建置環境時忘記怎麼設定。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;MacbookPro15.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;step1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;step2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;php-v.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;php-form-1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;php-form-2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;startPHP.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;startMySQL.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;useMySQL.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;installNginx.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;sites-enabled.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;chmod777.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;startNginx.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;brewList.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;PHPRedisInstall.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;oldSetting.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;startPHPRedis.png">
+<meta property="og:updated_time" content="2020-02-26T14:18:20.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191104&#x2F;MacbookPro15.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Mac OS 使用 HomeBrew 建置 Web 開發環境 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mac OS 使用 HomeBrew 建置 Web 開發環境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-11-04 23:59:59" itemprop="dateCreated datePublished" datetime="2019-11-04T23:59:59+08:00">2019-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-26 22:18:20" itemprop="dateModified" datetime="2020-02-26T22:18:20+08:00">2020-02-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近終於擺脫了舊電腦，可以捨棄那猶如牛車的速度，每次 <strong>yarn server</strong> 電腦就像是要起飛了一樣，噢！不對是快爆炸了！最近托公司的福終於換了一台筆電，但是環境就必須重來啦～</p>
+<p>鑑於之前環境太髒亂，那時候什麼都不了解胡亂裝了一通，這次剛好 <strong>Blog</strong> 搬家了，就剛好做個筆記記錄一下吧。</p>
+<blockquote>
+<p><em>這一樣是一篇用來筆記的文章，以防日後需要重新建置環境時忘記怎麼設定。</em></p>
+</blockquote>
+<p><img src="/images/20191104/MacbookPro15.png" alt="香！!"></p>
+<a id="more"></a>
+
+<hr>
+<h3 id="安裝目標"><a href="#安裝目標" class="headerlink" title="安裝目標"></a>安裝目標</h3><ol>
+<li><p>基本程式</p>
+</li>
+<li><p>開發環境建置</p>
+</li>
+</ol>
+<blockquote>
+<p><em>本篇以第二項為主，關於第一項會在另一篇文章</em></p>
+</blockquote>
+<hr>
+<h3 id="安裝-PHP7-2"><a href="#安裝-PHP7-2" class="headerlink" title="安裝 PHP7.2"></a>安裝 PHP7.2</h3><p>首先安裝一定會用到的 <strong>PHP</strong>，目前最穩定版本為 <strong>7.2</strong> 所以輸入以下指令開始安裝：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install php72</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/step1.png" alt="安裝中"></p>
+<p><img src="/images/20191104/step2.png" alt="輸入 brew services start php@7.2 啟動"></p>
+<h4 id="PHP-環境變數設定"><a href="#PHP-環境變數設定" class="headerlink" title="PHP 環境變數設定"></a>PHP 環境變數設定</h4><p>接下來把 <strong>PHP</strong> 的環境變數加到 ~/.zshrc 或 ~/.bashrc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vi ~/.zshrc</span><br><span class="line"># 使用 brew 安裝的 php (這行是註解)</span><br><span class="line">export PATH=/usr/local/opt/php@7.2/bin:$PATH;</span><br></pre></td></tr></table></figure>
+
+<p>確定有無安裝成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -v // 確認安裝成功 (7.2.24 或 更高)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/php-v.png" alt="輸入 php -v 可以查看是否安裝成功"></p>
+<h4 id="修改-php-fpm-設定"><a href="#修改-php-fpm-設定" class="headerlink" title="修改 php-fpm 設定"></a>修改 php-fpm 設定</h4><p>先輸入下面這行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/etc/php/7.2/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
+
+<p>接著更新內容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 這邊的 user 及 listen.owner 改為自已的 Mac user</span><br><span class="line">user = rexhung</span><br><span class="line">group = staff</span><br><span class="line"></span><br><span class="line">listen.owner = rexhung</span><br><span class="line">listen.group = staff</span><br><span class="line">listen.mode = 0660</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/php-form-1.png" alt="看到 user 的地方記得修改"></p>
+<p><img src="/images/20191104/php-form-2.png" alt="看到 user 的地方記得修改"></p>
+<p>修改結束後執行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 php fpm</span><br><span class="line">brew services start php72</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">brew services list</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/startPHP.png" alt="brew services start php72"></p>
+<hr>
+<h3 id="安裝-MYSQL5-7"><a href="#安裝-MYSQL5-7" class="headerlink" title="安裝 MYSQL5.7"></a>安裝 MYSQL5.7</h3><p>一樣在終端機輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql@5.7</span><br></pre></td></tr></table></figure>
+
+<h4 id="MYSQL-環境變數設定"><a href="#MYSQL-環境變數設定" class="headerlink" title="MYSQL 環境變數設定"></a>MYSQL 環境變數設定</h4><p>將環境變數加到 ~/.zshrc 或 ~/.bashrc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># ~/.bashrc</span><br><span class="line"># 使用 brew 安裝的 mysql 5.7</span><br><span class="line">export PATH=/usr/local/opt/mysql@5.7/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>接著修改完後輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 mysql5.7</span><br><span class="line">brew services start mysql@5.7</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">brew services list</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/startMySQL.png" alt="brew services start mysql@5.7 這個有小數點要記得"></p>
+<h4 id="修改-MYSQL-密碼"><a href="#修改-MYSQL-密碼" class="headerlink" title="修改 MYSQL 密碼"></a>修改 MYSQL 密碼</h4><p>剛安裝完成後的 <strong>MYSQL</strong> 密碼預設都是空白的，需要更改只需要輸入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p # 登入 mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/useMySQL.png" alt="登入MySQL"></p>
+<p>接著進去後輸入下方指令修改密碼：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 登入 mysql 後執行</span><br><span class="line">set password for &apos;使用者帳號&apos;@&apos;localhost&apos;=password(&apos;新密碼&apos;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>這邊必須要修改密碼，如果不修改密碼會無法登入資料庫(資料庫會檢查密碼是否為空)</em></p>
+</blockquote>
+<hr>
+<h3 id="安裝-Nginx"><a href="#安裝-Nginx" class="headerlink" title="安裝 Nginx"></a>安裝 Nginx</h3><p>接著輸入下方指令安裝 <strong>Nginx</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/installNginx.png" alt="install nginx"></p>
+<blockquote>
+<p><em>設定檔位置在 /usr/local/etc/nginx/</em></p>
+</blockquote>
+<p>設定檔的內容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"># /usr/local/etc/nginx/nginx.conf</span><br><span class="line">#user nobody;</span><br><span class="line">worker_processes 1;</span><br><span class="line"></span><br><span class="line">#error_log logs/error.log;</span><br><span class="line">#error_log logs/error.log notice;</span><br><span class="line">#error_log logs/error.log info;</span><br><span class="line"></span><br><span class="line">#pid    logs/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">  worker_connections 1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">  include    mime.types;</span><br><span class="line">  default_type application/octet-stream;</span><br><span class="line"></span><br><span class="line">  #log_format main &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">  #         &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">  #         &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">  #access_log logs/access.log main;</span><br><span class="line">  error_log /var/log/nginx/error.log;  # &lt;===== 這是你放 log 的地方 可以更改</span><br><span class="line"></span><br><span class="line">  sendfile    on;</span><br><span class="line">  client_max_body_size 5G;</span><br><span class="line">  #tcp_nopush   on;</span><br><span class="line"></span><br><span class="line">  #keepalive_timeout 0;</span><br><span class="line">  keepalive_timeout 300;</span><br><span class="line">  send_timeout 600;</span><br><span class="line"></span><br><span class="line">  fastcgi_connect_timeout   300;</span><br><span class="line">  fastcgi_send_timeout    300;</span><br><span class="line">  fastcgi_read_timeout    300;</span><br><span class="line">  fastcgi_buffer_size     256k;</span><br><span class="line">  fastcgi_buffers     8 256k;</span><br><span class="line">  fastcgi_busy_buffers_size  512k;</span><br><span class="line">  fastcgi_temp_file_write_size    256k;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  proxy_connect_timeout    300;</span><br><span class="line">  proxy_read_timeout     300;</span><br><span class="line">  proxy_send_timeout     300;</span><br><span class="line">  proxy_buffer_size      256k;</span><br><span class="line">  proxy_buffers      8 256k;</span><br><span class="line">  proxy_busy_buffers_size   512k;</span><br><span class="line">  proxy_temp_file_write_size 256k;</span><br><span class="line"></span><br><span class="line">  #gzip on;</span><br><span class="line"></span><br><span class="line">  include /usr/local/etc/nginx/sites-enabled/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>之後如果有新的站，就要加 nginx conf. 到 /usr/local/etc/nginx/sites-enabled/</em></p>
+</blockquote>
+<p><img src="/images/20191104/sites-enabled.png" alt="步驟一個一個來"></p>
+<p><strong>詳細 Nginx 歡迎參考 <a href="https://blog.ariby.tw/article/47cc456a-3614-411e-aa39-804c47b92f63" target="_blank" rel="noopener">Arriby大神</a> 的 Blog.</strong></p>
+<h4 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h4><p>請記得如果有把 <strong>log</strong> 加到 <strong>var</strong> 的資料夾內的話，要給予他權限，比如上方的 <strong>nginx.config</strong> 你就需要給他權限，方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod 777 檔案名稱</span><br></pre></td></tr></table></figure>
+
+<p>最後輸入 ls -al 可以查看所有賦予權限的檔案。</p>
+<p><img src="/images/20191104/chmod777.png" alt="chmod7777777777"></p>
+<h4 id="執行-Nginx"><a href="#執行-Nginx" class="headerlink" title="執行 Nginx"></a>執行 Nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 nginx</span><br><span class="line">brew services start nginx</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">brew services list</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/startNginx.png" alt="brew services start nginx"></p>
+<h4 id="檢查狀態"><a href="#檢查狀態" class="headerlink" title="檢查狀態"></a>檢查狀態</h4><p>在這邊你可以輸入 <strong>brew services list</strong> 檢查上面安裝的三個東西有沒有順利進行起來。</p>
+<p><img src="/images/20191104/brewList.png" alt="brew services list"></p>
+<p>如果像上方有出現黃色的字代表沒有成功啟動，記得可以關掉再重啟，或是輸入下方程式碼，不用整個關掉再啟動：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="安裝-PHPRedis"><a href="#安裝-PHPRedis" class="headerlink" title="安裝 PHPRedis"></a>安裝 PHPRedis</h3><p>到最後一個步驟了，還記得之前我們有篇文章的筆記是關於 <strong>PHPRedis</strong> 嗎？忘記可以再去看看哦！</p>
+<p>因為之前舊的 <strong>PHP</strong> 版本沒有內建 <strong>pecl</strong> 而 <strong>7.2</strong> 之後就有內建了，這邊就無需要安裝繁瑣的步驟。</p>
+<p>這時候只要鍵入 <strong>pecl</strong> 就會正常輸出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 順便連 xdebug 一起安裝，版本可見 https://pecl.php.net/package/xdebug</span><br><span class="line">pecl install xdebug-2.8.0</span><br><span class="line"># 安裝 Igbinary，版本可見 https://pecl.php.net/package/igbinary</span><br><span class="line">pecl install igbinary-3.0.1﻿﻿</span><br><span class="line"># 使用 brew 安裝 Redis</span><br><span class="line">brew install redis</span><br><span class="line"># 安裝 phpredis，版本可見 https://pecl.php.net/package/redis</span><br><span class="line"># 會被詢問兩個問題</span><br><span class="line">#﻿ enable igbinary serializer support? [no]: yes</span><br><span class="line"># ﻿enable lzf compression support? [no]: no</span><br><span class="line"># enable zstd compression support? [no] : no</span><br><span class="line">pecl install redis-5.1.0</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/PHPRedisInstall.png" alt="Install 成功！"></p>
+<h4 id="修改-php-ini-設定檔"><a href="#修改-php-ini-設定檔" class="headerlink" title="修改 php.ini 設定檔"></a>修改 php.ini 設定檔</h4><p>接著到 <strong>php.ini</strong> 檔最上方查看會發現多了幾行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extension=&quot;redis.so&quot;</span><br><span class="line">extension=&quot;igbinary.so&quot;</span><br><span class="line">zend_extension=&quot;xdebug.so&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/oldSetting.png" alt="舊的設定"></p>
+<p>接著把這三行刪除掉(dd掉)，鍵入下方的程式碼：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">; CUSTOM variables</span><br><span class="line">short_open_tag = Off</span><br><span class="line">expose_php = Off</span><br><span class="line"></span><br><span class="line">error_reporting = E_ALL &amp; ~E_STRICT</span><br><span class="line">display_errors = On</span><br><span class="line">error_log = &quot;/usr/local/log/php/php_errors.log&quot; # php log 位置</span><br><span class="line"></span><br><span class="line">upload_tmp_dir = &quot;/tmp/&quot;</span><br><span class="line">allow_url_fopen = on</span><br><span class="line"></span><br><span class="line">[xdebug]</span><br><span class="line">zend_extension=&quot;xdebug.so&quot;</span><br><span class="line">xdebug.remote_enable=1</span><br><span class="line">xdebug.remote_autostart=1</span><br><span class="line">xdebug.remote_host=localhost</span><br><span class="line">xdebug.remote_handler=dbgp</span><br><span class="line">xdebug.remote_port=9000</span><br><span class="line"></span><br><span class="line">[redis]</span><br><span class="line">extension=&quot;igbinary.so&quot;</span><br><span class="line">extension=&quot;redis.so&quot;</span><br><span class="line"># 如果 session 要用 redis</span><br><span class="line"># session.save_handler = &quot;redis&quot;</span><br><span class="line"># session.save_path = &quot;tcp://127.0.0.1:6379?weight=1&amp;timeout=2.5&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="確認安裝完成"><a href="#確認安裝完成" class="headerlink" title="確認安裝完成"></a>確認安裝完成</h3><p>最後輸入下方指令檢查 phpinfo 有沒有 redis ，有則成功！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 redis</span><br><span class="line">brew services start redis</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">brew services list</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/20191104/startPHPRedis.png" alt="brew services start redis"></p>
+<p>在最後輸入 <strong>brew services list</strong> 之後你應該至少會看見三個程式在執行當中。</p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是這次環境建置的小筆記，比上次的省略還多，圖片方面還在想辦法找圖床上傳，目前上傳至 <strong>Hexo</strong> 所以載入會比較慢，文字部分就加減參考囉，如果有什麼問題也歡迎留言告知我～</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+              <a href="/tags/Life/" rel="tag"># Life</a>
+              <a href="/tags/Note/" rel="tag"># Note</a>
+              <a href="/tags/PHPRedis/" rel="tag"># PHPRedis</a>
+              <a href="/tags/Homebrew/" rel="tag"># Homebrew</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/31/20191101/" rel="prev" title="萬事起頭不會難">
+      <i class="fa fa-chevron-left"></i> 萬事起頭不會難
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/01/20191201/" rel="next" title="[Tool Notes] — 關於爬蟲#2">
+      [Tool Notes] — 關於爬蟲#2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝目標"><span class="nav-text">安裝目標</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-PHP7-2"><span class="nav-text">安裝 PHP7.2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-環境變數設定"><span class="nav-text">PHP 環境變數設定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改-php-fpm-設定"><span class="nav-text">修改 php-fpm 設定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-MYSQL5-7"><span class="nav-text">安裝 MYSQL5.7</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MYSQL-環境變數設定"><span class="nav-text">MYSQL 環境變數設定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改-MYSQL-密碼"><span class="nav-text">修改 MYSQL 密碼</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Nginx"><span class="nav-text">安裝 Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小提示"><span class="nav-text">小提示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#執行-Nginx"><span class="nav-text">執行 Nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#檢查狀態"><span class="nav-text">檢查狀態</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-PHPRedis"><span class="nav-text">安裝 PHPRedis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改-php-ini-設定檔"><span class="nav-text">修改 php.ini 設定檔</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#確認安裝完成"><span class="nav-text">確認安裝完成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 強力驅動 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主題 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
