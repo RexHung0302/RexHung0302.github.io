@@ -41,7 +41,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*aSQ-Qp1Su2zDHFetCI6A_A.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*PWh8QK-rtLB3uP0tQtJZEA.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*svckH6-f_Kj8iLnFISy5eQ.png">
-<meta property="og:updated_time" content="2020-02-26T14:05:46.917Z">
+<meta property="og:updated_time" content="2020-02-27T09:03:04.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*5nzGLmRb3Byaq14pVTeDnQ.png">
 
@@ -240,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 22:05:46" itemprop="dateModified" datetime="2020-02-26T22:05:46+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 17:03:04" itemprop="dateModified" datetime="2020-02-27T17:03:04+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -339,12 +339,12 @@
 <h3 id="格線系統是老大"><a href="#格線系統是老大" class="headerlink" title="格線系統是老大"></a>格線系統是老大</h3><p>雖然這次命名還有很大進步空間，但是在之前課程吸取最大的經驗且最好在實戰中拿來實用的就是時時提醒自己切版一定要有自己的格線系統。</p>
 <p>有了隔線系統能少寫好幾行的 <strong>Code</strong>，甚至能重組網頁也沒問題，今天我要把 <strong>header</strong> 的內容拿去 <strong>footer</strong> 內，沒問題！今天要把 <strong>Sidebar</strong> 的內容拿去 <strong>article</strong> 內，沒問題！</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*PWh8QK-rtLB3uP0tQtJZEA.gif" alt="這次直接使用 Bootstrap 的格線系統，斷點在自行訂製"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@mixin pad &#123;</span><br><span class="line">    @media screen and (max-width: 991px) &#123;</span><br><span class="line">      @content</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@mixin md-mobile &#123;</span><br><span class="line">    @media screen and (max-width: 767px) &#123;</span><br><span class="line">      @content</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 搭配 mixin 天衣無縫</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">mixin</span> pad &#123;</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">991px</span>) &#123;</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@mixin md-mobile &#123;</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">767px</span>) &#123;</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 搭配 mixin 天衣無縫</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="拋棄-JS-框架"><a href="#拋棄-JS-框架" class="headerlink" title="拋棄 JS 框架"></a>拋棄 JS 框架</h3><p>從剛開始的地下層朋友建議用 <strong>JQuery</strong> 實作，剛開始還傻傻地覺得怎麼不從 <strong>Javascript</strong> 開始邊學呢，後來用慣了突然不能用 <strong>JS</strong> 框架還真有點困擾呢，就像是沒有了 <strong>v-bind v-if</strong>，不過勇者的精神就是衝就對了，哈。</p>
 <p>這次必較麻煩的點是要判斷目前點的是哪張圖片，剛開始不知道 <strong>li</strong> 能直接去抓排序，還傻傻的以為 <strong>javascript</strong> 也能使用 <strong>div.index()</strong> 這類的語法，最後解決方法還是用最笨的方式給他一個 <strong>Class Name</strong>，然後再用變數去裝，最後 <strong>split</strong> 它。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 抓取 Class 的名稱來判斷是第幾個</span><br><span class="line">var imgClass_Name = e.target.className.split(&quot; &quot;);</span><br><span class="line">now_imgIndex = parseInt(imgClass_Name[2].split(&quot;-&quot;)[2]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抓取 Class 的名稱來判斷是第幾個</span></span><br><span class="line"><span class="keyword">var</span> imgClass_Name = e.target.className.split(<span class="string">" "</span>);</span><br><span class="line">now_imgIndex = <span class="built_in">parseInt</span>(imgClass_Name[<span class="number">2</span>].split(<span class="string">"-"</span>)[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="切換燈片"><a href="#切換燈片" class="headerlink" title="切換燈片"></a>切換燈片</h3><p>這邊反而比較容易解決，在剛開始就先把幻燈片丟進陣列，再靠上面判斷的數字去 <strong>+1</strong> 或 <strong>-1</strong>，如果碰到 -1 或大於幻燈片圖片的時候再把它改為第 <strong>0</strong> 個，或是 <strong>now_imgIndex.length-1</strong>。</p>
@@ -599,12 +599,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

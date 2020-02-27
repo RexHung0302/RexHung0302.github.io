@@ -50,7 +50,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*R2wLE619874j8W_rViKMUA.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*ZzaeHcftemdP5g_SPFklVg.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*ObKobMAi41s_KKTzfnknZg.png">
-<meta property="og:updated_time" content="2020-02-26T13:59:49.115Z">
+<meta property="og:updated_time" content="2020-02-27T09:18:30.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*Hu1IAfpJ4GKDlLWp-7rOQw.png">
 
@@ -249,7 +249,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 21:59:49" itemprop="dateModified" datetime="2020-02-26T21:59:49+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 17:18:30" itemprop="dateModified" datetime="2020-02-27T17:18:30+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +289,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>4.1k</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -374,11 +374,11 @@
 <h3 id="所以到底該怎麼寫-JavaScript？"><a href="#所以到底該怎麼寫-JavaScript？" class="headerlink" title="所以到底該怎麼寫 JavaScript？"></a>所以到底該怎麼寫 JavaScript？</h3><p>講了這麼多，所以我該怎麼開始寫 <strong>JavaScript</strong> 呢？ <strong>JavaScript</strong> 的應用非常的多，前端寫到後端都可以使用。這邊是淺談的原因，先列舉最簡單的使用方式，直接在 <strong>HTML</strong> 引入 <strong>JavaScript</strong> 或是 <strong>.js</strong> 檔。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*Ks9ISStI9EyBXkMBMKLBIQ.png" alt="不囉唆 上菜"></p>
 <p>值得注意的是， <strong>JavaScript</strong> 跟 <strong>CSS</strong> 一樣，會有順序問題，越下面的，就會把上面的給蓋掉，這點對剛開始接觸程式的我常常踩雷啊。引入的方式就很簡·單兩種，在 <strong>HTML</strong> 裡面直接使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;我是 JavaScript 內容&lt;/script&gt;** // 包起來，或是透過 </span><br><span class="line">&lt;script src=”你的 .js 檔路徑”&gt;&lt;/script&gt; // 來引入 JavaScript</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;我是 JavaScript 內容&lt;<span class="regexp">/script&gt;** /</span><span class="regexp">/ 包起來，或是透過 </span></span><br><span class="line"><span class="regexp">&lt;script src=”你的 .js 檔路徑”&gt;&lt;/</span>script&gt; <span class="comment">// 來引入 JavaScript</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="人生都有第一次"><a href="#人生都有第一次" class="headerlink" title="人生都有第一次"></a>人生都有第一次</h3><p>我們前面說到 <strong>JavaScript</strong> 是直譯式語言，所以錯誤往往都是最後才會知道，寫上我們下面的範例，然後打開你以後寫程式的另一半 <strong>F12</strong>，點到 <strong>console</strong> 會發現下圖的 ** eft-hand(註3)** 錯誤。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;Hello World&apos; = 666;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Hello World'</span> = <span class="number">666</span>;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*OYHQLFvhXPUBVxO9T-WVgQ.png" alt="錯誤就是這麼顯眼"></p>
 <blockquote>
@@ -389,7 +389,7 @@
 <h3 id="放下你的魚-開始拿釣竿"><a href="#放下你的魚-開始拿釣竿" class="headerlink" title="放下你的魚 開始拿釣竿"></a>放下你的魚 開始拿釣竿</h3><p>前面講了一堆，這邊就開始，首先你必須先知道 <strong>JavaScript</strong> 使用時常常要先宣告，宣告什麼呢？這就跟 <strong>語法作用域</strong> 有關係了。我們必須要了解 <strong>JavaScript</strong> 是 <strong>靜態作用域(註4)</strong>，基本上 <strong>JavaScript</strong> 都是由很多函式組成的，如下圖。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*GqD8SwuoJil6vWKgAie1Gw.png" alt="**語法作用域**"></p>
 <p>這邊你必須先懂的兩樣東西，一個是宣告變數的方式 <strong>var let const(後面會解說有什麼不同)</strong>，一個是 <strong>function 名稱()</strong>，請見範例。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var abc = &apos;Hello World&apos;;  // 全域</span><br><span class="line"></span><br><span class="line">function a() &#123;            // 函式區域 (a 是你決定要使用時用來呼叫的名稱， 例: a();)</span><br><span class="line">  </span><br><span class="line">  var def = &apos;Hello JavaScript&apos;;</span><br><span class="line"></span><br><span class="line">  console.log(abc);</span><br><span class="line"></span><br><span class="line">  console.log(def);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a();                      // 呼叫並使用 function</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> abc = <span class="string">'Hello World'</span>;  <span class="comment">// 全域</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;            <span class="comment">// 函式區域 (a 是你決定要使用時用來呼叫的名稱， 例: a();)</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> def = <span class="string">'Hello JavaScript'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(abc);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(def);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a();                      <span class="comment">// 呼叫並使用 function</span></span><br></pre></td></tr></table></figure>
 
 <p>通常我們會透過 <strong>var</strong> 宣告一個變數去裝東西，然後會有很多 <strong>function</strong> 去寫我們要做什麼事情，比如說這個 <strong>function</strong> 我要用來新增錢包的零錢，這個 <strong>function</strong> 我要用來刪除錢包… 等等，那變數放的位子就很重要了，基本上在函式執行階段如果找不到那個變數(例： <strong>abc</strong>)，它就會往外找，如果還是找不到就會出現上方的紅色錯誤提示</p>
 <p>你或許會問，那如果我宣告兩個一樣的變數呢？別急！後面會告訴你。</p>
@@ -602,12 +602,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

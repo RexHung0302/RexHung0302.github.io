@@ -36,7 +36,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*AGCVXD1qKHDvsr_p7KFWyA.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*x_3tUpA6H33gJlh7_fXAhQ.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*hwiv2QRKv21TpJAjJIenhA.png">
-<meta property="og:updated_time" content="2020-02-26T14:06:53.741Z">
+<meta property="og:updated_time" content="2020-02-27T06:35:23.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;miro.medium.com&#x2F;proxy&#x2F;1*AGCVXD1qKHDvsr_p7KFWyA.png">
 
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 22:06:53" itemprop="dateModified" datetime="2020-02-26T22:06:53+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 14:35:23" itemprop="dateModified" datetime="2020-02-27T14:35:23+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>3k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -320,26 +320,26 @@
 <ul>
 <li>設定一個變數來接，然後再帶入各地區的值</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let GotTime = new Date().toLocaleString(location, </span><br><span class="line">&#123; timeZone: location2&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> GotTime = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString(location, </span><br><span class="line">&#123; <span class="attr">timeZone</span>: location2&#125;);</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>設定地區的變數帶入location及location2</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function SetTime() &#123;</span><br><span class="line">  let TW = MyClock(&apos;zh-TW&apos;, &apos;Asia/Taipei&apos;);</span><br><span class="line">  let BK = MyClock(&apos;zh-TW&apos;, &apos;Asia/Bangkok&apos;);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> TW = MyClock(<span class="string">'zh-TW'</span>, <span class="string">'Asia/Taipei'</span>);</span><br><span class="line">  <span class="keyword">let</span> BK = MyClock(<span class="string">'zh-TW'</span>, <span class="string">'Asia/Bangkok'</span>);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>基本上會出現這樣的結果 → 2019/2/27 下午2:56:36</p>
 <p>為了統一我把第一個變數都設定為 zh-TW 所以前面都是下午</p>
 <ul>
 <li>修改時間為24小時制 &amp; 取得需要的部分</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function MyClock(location, location2) &#123;</span><br><span class="line">  let GotTime = new Date().toLocaleString(location, </span><br><span class="line">  &#123; timeZone: location2, hour12: false &#125;);</span><br><span class="line">  return GotTime.split(&quot; &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyClock</span>(<span class="params">location, location2</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> GotTime = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString(location, </span><br><span class="line">  &#123; <span class="attr">timeZone</span>: location2, <span class="attr">hour12</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  <span class="keyword">return</span> GotTime.split(<span class="string">" "</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在第二個變數後加上 <strong>hour12: false</strong> 改為24小時制，另外我先把他們先變成陣列，之後方便再重新排列。</p>
 <hr>
 <h3 id="善用-split-Method-amp-slice-Method"><a href="#善用-split-Method-amp-slice-Method" class="headerlink" title="善用 split() Method &amp; slice Method"></a>善用 <a href="http://www.w3school.com.cn/jsref/jsref_split.asp" target="_blank" rel="noopener">split() Method</a> &amp; <a href="http://www.w3school.com.cn/jsref/jsref_slice_array.asp" target="_blank" rel="noopener">slice Method</a></h3><ul>
 <li>重新排列時間 &amp; 月份</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function SetDate(location) &#123;</span><br><span class="line">  // 設定月份英文</span><br><span class="line">  let months = [&apos;JAN&apos;, &apos;FEB&apos;, &apos;MAR&apos;, &apos;APR&apos;, &apos;MAY&apos;, &apos;JUN&apos;, &apos;JUL&apos;, &apos;AUG&apos;, &apos;SEP&apos;, &apos;OCT&apos;, &apos;NOV&apos;, &apos;DEC&apos;];</span><br><span class="line"></span><br><span class="line">  // 設定日期並重新排列順序及修改成英文月份</span><br><span class="line">  let date = location.split(&apos;/&apos;);</span><br><span class="line">  let date2 = date[2] + &apos; &apos; + months[date[1] - 1] + &apos; &apos; + date[0]</span><br><span class="line">  return date2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetDate</span>(<span class="params">location</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 設定月份英文</span></span><br><span class="line">  <span class="keyword">let</span> months = [<span class="string">'JAN'</span>, <span class="string">'FEB'</span>, <span class="string">'MAR'</span>, <span class="string">'APR'</span>, <span class="string">'MAY'</span>, <span class="string">'JUN'</span>, <span class="string">'JUL'</span>, <span class="string">'AUG'</span>, <span class="string">'SEP'</span>, <span class="string">'OCT'</span>, <span class="string">'NOV'</span>, <span class="string">'DEC'</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 設定日期並重新排列順序及修改成英文月份</span></span><br><span class="line">  <span class="keyword">let</span> date = location.split(<span class="string">'/'</span>);</span><br><span class="line">  <span class="keyword">let</span> date2 = date[<span class="number">2</span>] + <span class="string">' '</span> + months[date[<span class="number">1</span>] - <span class="number">1</span>] + <span class="string">' '</span> + date[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">return</span> date2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>這邊先設定月份的變數，然後使用 split(’/’) 把時間變成 2019227 ，然後再重新排列時間，另外 <strong>（months[date[1] — 1] ）</strong>，因為陣列是從0開始的，不扣會跑到下個月去。</p>
 <p>p.s：這邊的 location 跟一開始的 location 及 location2 並沒有關係！</p>
@@ -347,10 +347,10 @@
 <ul>
 <li>設定變數帶入 location</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function SetTime() &#123;</span><br><span class="line">  let BK_D = SetDate(BK[0]);</span><br><span class="line">  let TW_D = SetDate(TW[0]);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> BK_D = SetDate(BK[<span class="number">0</span>]);</span><br><span class="line">  <span class="keyword">let</span> TW_D = SetDate(TW[<span class="number">0</span>]);</span><br><span class="line">  ...等等</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>這個 function 和上面那個是同一個，這樣才能抓到我們BK跟TW變數的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;.NEW-YORK-Time&apos;).html(TW[1].slice(0, 5));</span><br><span class="line">  </span><br><span class="line">$(&apos;.TW-date&apos;).html(TW_D);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.NEW-YORK-Time'</span>).html(TW[<span class="number">1</span>].slice(<span class="number">0</span>, <span class="number">5</span>));</span><br><span class="line">  </span><br><span class="line">$(<span class="string">'.TW-date'</span>).html(TW_D);</span><br></pre></td></tr></table></figure>
 
 <p>最後再用html替換掉原本預設的字就行了，這邊也需要用到 slice(star,end) 抓取我們重新排列後需要的時間。</p>
 <p><img src="https://miro.medium.com/proxy/1*hwiv2QRKv21TpJAjJIenhA.png" alt="Finish Img"></p>
@@ -583,12 +583,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

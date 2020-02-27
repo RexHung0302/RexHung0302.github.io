@@ -39,7 +39,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*nbTHZUOfkasTOaMeBCJVsw.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*umudwkR8NrcQuB-oeYW22Q.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2120&#x2F;1*Bi2gjKOjNZCbSBLxkdrvPg.png">
-<meta property="og:updated_time" content="2020-02-26T14:05:12.323Z">
+<meta property="og:updated_time" content="2020-02-27T09:04:40.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*BRR_0ftKoi9dfKHQXf137A.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 22:05:12" itemprop="dateModified" datetime="2020-02-26T22:05:12+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 17:04:40" itemprop="dateModified" datetime="2020-02-27T17:04:40+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,11 +335,11 @@
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*nbTHZUOfkasTOaMeBCJVsw.png" alt=""></p>
 <hr>
 <h3 id="draggable-有什麼好料？"><a href="#draggable-有什麼好料？" class="headerlink" title="draggable 有什麼好料？"></a>draggable 有什麼好料？</h3><p>其實照著影片看完，先了解到你會用到的幾個 <strong>draggable</strong> 屬性就可以了。首先在你要拖曳的地方加上 <strong>draggable = true</strong>，然後加上下方的事件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ondragstart --&gt; 拖曳開始時發生</span><br><span class="line">ondragover  --&gt; 拖曳經過時發生</span><br><span class="line">ondragleave --&gt; 拖曳離開目標區域時發生</span><br><span class="line">ondragend   --&gt; 拖曳停止時發生(放開滑鼠)</span><br><span class="line">ondrop      --&gt; 拖曳停止時發生(放開滑鼠)</span><br></pre></td></tr></table></figure>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">ondragstart</span> --&gt;</span> 拖曳開始時發生</span><br><span class="line"><span class="function"><span class="title">ondragover</span>  --&gt;</span> 拖曳經過時發生</span><br><span class="line"><span class="function"><span class="title">ondragleave</span> --&gt;</span> 拖曳離開目標區域時發生</span><br><span class="line"><span class="function"><span class="title">ondragend</span>   --&gt;</span> 拖曳停止時發生(放開滑鼠)</span><br><span class="line"><span class="function"><span class="title">ondrop</span>      --&gt;</span> 拖曳停止時發生(放開滑鼠)</span><br></pre></td></tr></table></figure>
 
 <p>在HTML的DOM上直接加上去就不用再 <strong>addEventListener</strong> 一次，然後從最上面開始添加。</p>
 <p>首先 <strong>ondragstart</strong> 抓起時我們必須讓原本殘留在原地的圖片消失，就必須加上 <strong>CSS</strong> <strong>disable:none</strong> ，但是這時候原本的圖片會直接消失，必須加上 <strong>setTimeout</strong> 來防止。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(() =&gt; (e.target.className += &quot; invisible&quot;), 0);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> (e.target.className += <span class="string">" invisible"</span>), <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
 <p>接下來我們必須用到 <strong>ondragover</strong> 幫我們加上 <strong>hover</strong> 的效果，但是因為我們的 <strong>ondrop</strong> 事件會被 <strong>ondragover</strong> 事件不斷發生給卡住，所以這邊必須在  <strong>ondragover</strong> 事件裡面加上 <strong>e.preventDefault()</strong> 來防止事件不斷產生，然後可以再透過 <strong>ondragleave</strong> 事件來取消 <strong>hover</strong> 的樣式。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*umudwkR8NrcQuB-oeYW22Q.gif" alt="hover 事件"></p>
@@ -556,12 +556,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

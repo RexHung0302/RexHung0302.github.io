@@ -43,7 +43,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*YCjPB7cWbf6OSPbxZSZ36Q.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*eiuK_we3XZw6TuH_eJHKUg.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2416&#x2F;1*CJpBXui2OmuG-0Gw8GGWhQ.png">
-<meta property="og:updated_time" content="2020-02-26T14:14:28.126Z">
+<meta property="og:updated_time" content="2020-02-27T06:35:37.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*C_d5oteo5a-qnOn5vQIZ5A.png">
 
@@ -242,7 +242,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 22:14:28" itemprop="dateModified" datetime="2020-02-26T22:14:28+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 14:35:37" itemprop="dateModified" datetime="2020-02-27T14:35:37+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,7 +282,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>4.7k</span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -345,7 +345,7 @@
 <p>首先必須要有一個google帳號，然後進入雲端硬碟，點擊左上角新增，第一次會看不到 Google App Script 這個程式，必須點擊最下面的連結更多應用程式。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*93mwtT1S4qrA7sj-M1Je8A.png" alt="點擊 +連線 新增APP Script"></p>
 <p>然後再裡面貼上一段程式碼：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function doGet(e)&#123;</span><br><span class="line">  var param = e.parameter;</span><br><span class="line">  var url = param.url;</span><br><span class="line">  var response = UrlFetchApp.fetch(decodeURIComponent(url),&#123;</span><br><span class="line">    headers: &#123; &quot;Content-type&quot; : &quot;application/json&quot; &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  var data = JSON.parse(response.getContentText());</span><br><span class="line">  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doGet</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> param = e.parameter;</span><br><span class="line">  <span class="keyword">var</span> url = param.url;</span><br><span class="line">  <span class="keyword">var</span> response = UrlFetchApp.fetch(<span class="built_in">decodeURIComponent</span>(url),&#123;</span><br><span class="line">    headers: &#123; <span class="string">"Content-type"</span> : <span class="string">"application/json"</span> &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">var</span> data = <span class="built_in">JSON</span>.parse(response.getContentText());</span><br><span class="line">  <span class="keyword">return</span> ContentService.createTextOutput(<span class="built_in">JSON</span>.stringify(data)).setMimeType(ContentService.MimeType.JSON);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <ul>
@@ -370,10 +370,10 @@
 <p><em>XMLHttpRequest 本質上但並不是一個設計優良的 API： + 不符合關注分離（Separation of Concerns）的原則 + 配置和調用方式非常混亂 + 使用事件機制來跟蹤狀態變化 + 基於事件的異步模型沒有現代的 Promise，generator/yield，async/await 友好 。<br>Fetch API 旨在修正上述缺陷，它提供了與 HTTP 語義相同的 JS 語法，簡單來說，它引入了 fetch() 這個實用的方法來獲取網絡資源。</em></p>
 </blockquote>
 <h3 id="Promise-優化-XMLHttpRequest-JAX"><a href="#Promise-優化-XMLHttpRequest-JAX" class="headerlink" title="Promise 優化 XMLHttpRequest JAX"></a>Promise 優化 XMLHttpRequest JAX</h3><p>再接觸前端部分之前，有讀過PHP的書，裡面也有用到Ajax，在朋友的建議下，想著第一次串接API不如就直接學習AXIOS，因為他本身也有 Promise 功能了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function getapi() &#123;</span><br><span class="line">  let promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  let xhr = new XMLHttpRequest();</span><br><span class="line">  xhr.open(&apos;get&apos;, API, true); // API取好名字後在全域變數宣告後帶入網址</span><br><span class="line">  xhr.send(null);</span><br><span class="line">  xhr.onload = () =&gt; &#123;</span><br><span class="line">      if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 400) &#123;</span><br><span class="line">          esolve(xhr.response);**</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          reject(&quot;取得資料失敗: &quot; + xhr.status);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  promise.then((res) =&gt; &#123;</span><br><span class="line">    data = JSON.parse(res);</span><br><span class="line">    alldata(); // 成功後讓他進入下一個function**</span><br><span class="line">  &#125;);</span><br><span class="line">  promise.catch((error) =&gt; &#123;</span><br><span class="line">    console.log(error); // api讀取失敗時console.log</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getapi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  xhr.open(<span class="string">'get'</span>, API, <span class="literal">true</span>); <span class="comment">// API取好名字後在全域變數宣告後帶入網址</span></span><br><span class="line">  xhr.send(<span class="literal">null</span>);</span><br><span class="line">  xhr.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">400</span>) &#123;</span><br><span class="line">          esolve(xhr.response);**</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          reject(<span class="string">"取得資料失敗: "</span> + xhr.status);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  promise.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    data = <span class="built_in">JSON</span>.parse(res);</span><br><span class="line">    alldata(); <span class="comment">// 成功後讓他進入下一個function**</span></span><br><span class="line">  &#125;);</span><br><span class="line">  promise.catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error); <span class="comment">// api讀取失敗時console.log</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>有關Axios可以上官方<a href="https://github.com/axios/axios">GitHub</a>查看<br>因為以前完全沒接觸過Ajax及Axios，在查看了各位大神的文章後，<br>Promise的架構大致如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let promise = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">  if (...) &#123;</span><br><span class="line">    resolve();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    reject();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">promise.then((res) =&gt; &#123;</span><br><span class="line">  console.log(res);</span><br><span class="line">&#125;);</span><br><span class="line">promise.catch((error) =&gt; &#123;</span><br><span class="line">  console.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (...) &#123;</span><br><span class="line">    resolve();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    reject();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">promise.then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;);</span><br><span class="line">promise.catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>而白話一點就是可以理解成式子的可能為：</p>
 <blockquote>
@@ -387,7 +387,7 @@
 <p>然而因為我們使用 XMLHttpRequest() 取得結果會是字串，必須使用<strong>JSON.parse() 轉成 JSON 才能使用。</strong></p>
 <hr>
 <h3 id="善用-filter-Method-點我前往"><a href="#善用-filter-Method-點我前往" class="headerlink" title="善用 filter() Method 點我前往"></a>善用 filter() Method <a href="http://www.w3school.com.cn/jquery/traversing_filter.asp" target="_blank" rel="noopener">點我前往</a></h3><p>參考各位<a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">大神文章</a>後，了解了基本方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = [&apos;apple&apos;, &apos;banana&apos;, &apos;lemon&apos;, &apos;apple&apos;, &apos;watermelon&apos;, &apos;grape&apos;];</span><br><span class="line">let result = arr.filter((item, index, array) =&gt;&#123;</span><br><span class="line">  console.log(item, index, array);</span><br><span class="line">  return item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">'apple'</span>, <span class="string">'banana'</span>, <span class="string">'lemon'</span>, <span class="string">'apple'</span>, <span class="string">'watermelon'</span>, <span class="string">'grape'</span>];</span><br><span class="line"><span class="keyword">let</span> result = arr.filter(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item, index, array);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>item — 當前是 arr 陣列中的哪一個值，如「apple」</p>
@@ -397,17 +397,18 @@
 <li><p>array — 這個陣列的內容</p>
 </li>
 </ul>
-<pre><code>function* alldata() {
-  let* result = data.filter((*item*, *index*, *array*)    =&gt; {
-      if ($.inArray(item.County, Country) == -1) {
-        Country.push(item.County); //判斷有無重複並放入縣市名稱
-      $(&apos;.select-box&apos;).append(&apos;&lt;option&gt;&apos; + item.County + &apos;&lt;/option&gt;&apos;);
-      return true;
-    } else {
-      return false;
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span>* <span class="title">alldata</span>(<span class="params"></span>) </span>{
+  <span class="keyword">let</span>* result = data.filter(<span class="function">(<span class="params">*item*, *index*, *array*</span>)    =&gt;</span> {
+      <span class="keyword">if</span> ($.inArray(item.County, Country) == <span class="number">-1</span>) {
+        Country.push(item.County); <span class="comment">//判斷有無重複並放入縣市名稱</span>
+      $(<span class="string">'.select-box'</span>).append(<span class="string">'&lt;option&gt;'</span> + item.County + <span class="string">'&lt;/option&gt;'</span>);
+      <span class="keyword">return</span> <span class="literal">true</span>;
+    } <span class="keyword">else</span> {
+      <span class="keyword">return</span> <span class="literal">false</span>;
     }
   });
-}</code></pre><p>在 <strong>item</strong> 裡我們已經將所有資料分開了，方便我們過濾資料，而這邊我們使用if條件是判斷不讓相同縣市的資料出現第二次以上，因為這邊要把縣市放到上方的 <strong>Select</strong> 內的 <strong>Option</strong> 。</p>
+}</code></pre>
+<p>在 <strong>item</strong> 裡我們已經將所有資料分開了，方便我們過濾資料，而這邊我們使用if條件是判斷不讓相同縣市的資料出現第二次以上，因為這邊要把縣市放到上方的 <strong>Select</strong> 內的 <strong>Option</strong> 。</p>
 <blockquote>
 <p>不得不說真的是常常用到組字串呢</p>
 </blockquote>
@@ -627,12 +628,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

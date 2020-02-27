@@ -44,7 +44,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*rGgEQXPj114cKibDRKfQ2A.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2752&#x2F;1*mYHW0FIrNjSHAub66ZhEtA.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2752&#x2F;1*lTwKETECadBVj7VdHn0gCQ.gif">
-<meta property="og:updated_time" content="2020-02-26T14:06:09.619Z">
+<meta property="og:updated_time" content="2020-02-27T09:02:23.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*iupAX0LSU9ne0n5AZDzcqg.png">
 
@@ -243,7 +243,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 22:06:09" itemprop="dateModified" datetime="2020-02-26T22:06:09+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 17:02:23" itemprop="dateModified" datetime="2020-02-27T17:02:23+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>5.6k</span>
+              <span>5.2k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -338,7 +338,7 @@
 <hr>
 <h3 id="我該怎麼著手？"><a href="#我該怎麼著手？" class="headerlink" title="我該怎麼著手？"></a><strong>我該怎麼著手？</strong></h3><p>由於這次也是第一次玩 <strong>Chrome Extension ，就照起手式先從 manifest.json 開始吧</strong></p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*oFZzBPVt9uKzBSIcDpXTMA.png" alt="來一張完整的結構圖 下方提供複製"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;manifest_version&quot;: 2,</span><br><span class="line">&quot;name&quot;: &quot;幹話產生器&quot;,</span><br><span class="line">&quot;description&quot;: &quot;[Hero Of UnderGround 地下城] — 10F Chrome extension（幹話生產器）&quot;,</span><br><span class="line">&quot;version&quot;: &quot;1.0&quot;,</span><br><span class="line">&quot;author&quot;: &quot;RexHung&quot;,</span><br><span class="line">&quot;icons&quot;: &#123;</span><br><span class="line">  &quot;16&quot;: &quot;assets/icons/icon-16px.png&quot;,</span><br><span class="line">  &quot;64&quot;: &quot;assets/icons/icon-64px.png&quot;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;browser_action&quot;: &#123;</span><br><span class="line">  &quot;default_popup&quot;: &quot;popup.html&quot;,</span><br><span class="line">  &quot;default_icon&quot;: &#123;</span><br><span class="line">    &quot;64&quot;: &quot;assets/icons/icon-64px.png&quot;,</span><br><span class="line">    &quot;128&quot;: &quot;assets/icons/icon-128px.png&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;chrome_url_overrides&quot;: &#123; &quot;newtab&quot;: &quot;./newtab.html&quot; &#125;,</span><br><span class="line">&quot;permissions&quot;: [</span><br><span class="line">  &quot;activeTab&quot;,</span><br><span class="line">  &quot;storage&quot;</span><br><span class="line">],</span><br><span class="line">&quot;content_security_policy&quot;: &quot;script-src &apos;self&apos; &apos;unsafe-eval&apos;; object-src &apos;self&apos;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">"manifest_version"</span>: <span class="number">2</span>,</span><br><span class="line"><span class="string">"name"</span>: <span class="string">"幹話產生器"</span>,</span><br><span class="line"><span class="string">"description"</span>: <span class="string">"[Hero Of UnderGround 地下城] — 10F Chrome extension（幹話生產器）"</span>,</span><br><span class="line"><span class="string">"version"</span>: <span class="string">"1.0"</span>,</span><br><span class="line"><span class="string">"author"</span>: <span class="string">"RexHung"</span>,</span><br><span class="line"><span class="string">"icons"</span>: &#123;</span><br><span class="line">  <span class="string">"16"</span>: <span class="string">"assets/icons/icon-16px.png"</span>,</span><br><span class="line">  <span class="string">"64"</span>: <span class="string">"assets/icons/icon-64px.png"</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"browser_action"</span>: &#123;</span><br><span class="line">  <span class="string">"default_popup"</span>: <span class="string">"popup.html"</span>,</span><br><span class="line">  <span class="string">"default_icon"</span>: &#123;</span><br><span class="line">    <span class="string">"64"</span>: <span class="string">"assets/icons/icon-64px.png"</span>,</span><br><span class="line">    <span class="string">"128"</span>: <span class="string">"assets/icons/icon-128px.png"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">"chrome_url_overrides"</span>: &#123; <span class="string">"newtab"</span>: <span class="string">"./newtab.html"</span> &#125;,</span><br><span class="line"><span class="string">"permissions"</span>: [</span><br><span class="line">  <span class="string">"activeTab"</span>,</span><br><span class="line">  <span class="string">"storage"</span></span><br><span class="line">],</span><br><span class="line"><span class="string">"content_security_policy"</span>: <span class="string">"script-src 'self' 'unsafe-eval'; object-src 'self'"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>首先 <strong>manifest_version</strong> 代表 <strong>manifest file</strong> 格式版本的整數，如果使用的是 <strong>Chrome 18</strong> 以上，則應該設定成 2。接下來後面則是<strong>名字</strong>、<strong>描述</strong>、<strong>版號</strong>、<strong>作者</strong>、<strong>圖標</strong>…等等。</p>
 <p>版號切記！最多由四個整數組成，並且用逗號(<strong>.</strong>)分開，數字必須介在 0 到 <strong>65535</strong> 之間，而且不可以 <strong>0</strong> 當開頭。</p>
@@ -348,7 +348,7 @@
 <p><strong>permissions</strong> 則是聲明權限，這個很重要，由於我們這次想做到兩個頁面同步的效果( <strong>下拉的語錄和分頁的語錄算是兩個獨立頁面</strong> )，只靠本地的 <strong>localStorage</strong> 是很麻煩的。幸好 <strong>Google</strong> 提供了 <strong>chrome.storage</strong> 的 <strong>API</strong> ，它提供了 <strong>chrome.storage.sync、chrome.storage.local、chrome.storage.managed…</strong> 三種類型讓你儲存資料，有興趣可以<a href="https://www.cnblogs.com/champagne/p/4826611.html" target="_blank" rel="noopener">點我</a>拜讀文章。重點是在 <strong>manifest.json</strong> 內必須聲明。</p>
 <p>最後一個是 <strong>内容安全策略標頭</strong>，這邊先不討論這個。</p>
 <hr>
-<h3 id="HTML-的部分？"><a href="#HTML-的部分？" class="headerlink" title="HTML 的部分？"></a>HTML 的部分？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script *src*=&quot;./assets/js/cover.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="HTML-的部分？"><a href="#HTML-的部分？" class="headerlink" title="HTML 的部分？"></a>HTML 的部分？</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> *<span class="attr">src</span>*=<span class="string">"./assets/js/cover.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>記得有多少檔案想共用 <strong>chrome.storage</strong> 就要都引入同一隻 <strong>JS</strong> 喔！</p>
 <hr>
@@ -360,7 +360,7 @@
 <h3 id="關於大魔王同步"><a href="#關於大魔王同步" class="headerlink" title="關於大魔王同步"></a>關於大魔王同步</h3><blockquote>
 <p>還記得這次的挑戰做了兩天，前一天在切版的時候很開心弄一頁，同步也盤算好了，東西都塞到 <strong>localStorage</strong> 內了，結果發現到另外一頁會搞得很麻煩。結果算是又小翻修了一次 <strong>Code</strong>，那時候才發現 <strong>Google</strong> 有提供 <strong>StorageApi。</strong></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">let SwitchBtn = document.querySelector(&apos;#myonoffswitch&apos;); // 滑動鈕</span><br><span class="line"></span><br><span class="line">chrome.storage.sync.get(null, data =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  // 一開始會去讀你的 storage 內的資料</span><br><span class="line"></span><br><span class="line">  SwitchBtn.addEventListener(&apos;click&apos;, () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    // 做什麼事情...</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  chrome.storage.onChanged.addListener(changes =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    // 當 chrome.storage 有變動的時候 就做什麼事情</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> SwitchBtn = <span class="built_in">document</span>.querySelector(<span class="string">'#myonoffswitch'</span>); <span class="comment">// 滑動鈕</span></span><br><span class="line"></span><br><span class="line">chrome.storage.sync.get(<span class="literal">null</span>, data =&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一開始會去讀你的 storage 內的資料</span></span><br><span class="line"></span><br><span class="line">  SwitchBtn.addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 做什麼事情...</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  chrome.storage.onChanged.addListener(<span class="function"><span class="params">changes</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 當 chrome.storage 有變動的時候 就做什麼事情</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);;</span><br></pre></td></tr></table></figure>
 
 <p>苦惱了一下的問題其實全部靠著個就能迎刃而解，很簡單的，分成三部分。</p>
 <p>第一部分 <strong>chrome.storage</strong> 會去抓你的資料，我們放到最後處理。</p>
@@ -369,14 +369,14 @@
 <p>我的做法是在第二部分塞入 <strong>chrome.storage.sync.set({ key : value})</strong> 後，只要陣列有更動，我就把要做的事情放到第三部分，這樣兩邊都會同步一起做事情。</p>
 <hr>
 <h3 id="舉個例子吧"><a href="#舉個例子吧" class="headerlink" title="舉個例子吧"></a>舉個例子吧</h3><p>就拿 <strong>開關燈</strong> 來做例子，首先先宣告，並且給 <strong>value</strong> 一個值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let SwitchBtn = document.querySelector(&apos;#myonoffswitch&apos;); // 開關鈕</span><br><span class="line">let value = 1; // key的value</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> SwitchBtn = <span class="built_in">document</span>.querySelector(<span class="string">'#myonoffswitch'</span>); <span class="comment">// 開關鈕</span></span><br><span class="line"><span class="keyword">let</span> value = <span class="number">1</span>; <span class="comment">// key的value</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*jLhKKdYmMzsEQRbjbp6ojA.png" alt="第二步驟"></p>
 <p>然後第二步加入事件，當我點下開關鈕就塞入一個 <strong>Value</strong> 到 <strong>chrome.storage</strong>，隨後判斷那個 <strong>Value</strong> 是多少。我的設定 <strong>1</strong> 是白色，<strong>0</strong> 是黑色，裡面加入判斷，並且更換陣列的值，引發第三步的監聽事件發生。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*rGgEQXPj114cKibDRKfQ2A.png" alt="第三步驟"></p>
 <p>第三步驟也很簡單，直接寫上你想要改變的事情，在這裏兩邊的 <strong>HTML</strong> 都吃得到，不過要記得，兩邊都要引入同一隻 <strong>JS</strong> 檔案。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2752/1*mYHW0FIrNjSHAub66ZhEtA.gif" alt="這大概是這關最難的點"></p>
-<h3 id="依樣畫葫蘆"><a href="#依樣畫葫蘆" class="headerlink" title="依樣畫葫蘆"></a>依樣畫葫蘆</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (changes.hasOwnProperty(&apos;key&apos;)) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="依樣畫葫蘆"><a href="#依樣畫葫蘆" class="headerlink" title="依樣畫葫蘆"></a>依樣畫葫蘆</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (changes.hasOwnProperty(<span class="string">'key'</span>)) &#123;&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>後面第三步驟加上這個，把 <strong>key</strong> 改成想監聽的事件，就基本上都完成啦！</p>
 <p><img src="https://cdn-images-1.medium.com/max/2752/1*lTwKETECadBVj7VdHn0gCQ.gif" alt="大功告成啦"></p>
@@ -625,12 +625,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

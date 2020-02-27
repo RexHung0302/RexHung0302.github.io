@@ -310,20 +310,20 @@
 <h3 id="安裝-Hexo-Git"><a href="#安裝-Hexo-Git" class="headerlink" title="安裝 Hexo Git"></a>安裝 Hexo Git</h3><ul>
 <li>這是用來部署你的 <strong>Hexo</strong> 上 <strong>GitHub</strong> 用的，透過 <strong>GitHub</strong> 的提供，你能有一個靜態網站</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="安裝-Hexo"><a href="#安裝-Hexo" class="headerlink" title="安裝 Hexo"></a>安裝 Hexo</h3><ul>
 <li>這邊會使用 <strong>npm</strong> 來安裝 <strong>Hexo</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-<span class="keyword">cli</span> -g</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>這邊不了解 <strong>npm</strong> 可以參考我的文章</p>
 </blockquote>
 <p>安裝完成後可以使用下方指令查看版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo version 或 $hexo -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo version 或 <span class="variable">$hexo</span> -v</span><br></pre></td></tr></table></figure>
 
-<h3 id="初始化部落格"><a href="#初始化部落格" class="headerlink" title="初始化部落格"></a>初始化部落格</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog       # 初始化 blog</span><br><span class="line">$ cd blog              # 移動到剛創建的 blog 資料夾裡</span><br><span class="line">$ npm install		   # 安裝相關套件</span><br></pre></td></tr></table></figure>
+<h3 id="初始化部落格"><a href="#初始化部落格" class="headerlink" title="初始化部落格"></a>初始化部落格</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init blog       <span class="comment"># 初始化 blog</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> blog              <span class="comment"># 移動到剛創建的 blog 資料夾裡</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install		   <span class="comment"># 安裝相關套件</span></span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>blog 可以取自己喜歡的資料夾名稱 不過不影響我們後面的部落格網站顯示名稱 後續設定都會在 <strong>_config.yml</strong> 及我們使用的 <strong>themes(主題)</strong> 內</li>
@@ -342,10 +342,10 @@
 </ol>
 <p><img src="/images/20191101/step4.png" alt="成功畫面"></p>
 <p>拉開後到最底部可以看到下方程式碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type:</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span></span><br></pre></td></tr></table></figure>
 
 <p>請改為下方程式碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: http://github.com/yourname/yourname.github.io.git</span><br><span class="line">  branch: master # 或你的分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">  type:</span> git</span><br><span class="line"><span class="symbol">  repository:</span> http:<span class="comment">//github.com/yourname/yourname.github.io.git</span></span><br><span class="line"><span class="symbol">  branch:</span> master <span class="meta"># 或你的分支</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>切記！設定中的 <strong>“ : “</strong> 後面一定要有一個空格，不然會發生錯誤</p>
@@ -353,12 +353,12 @@
 <ol start="4">
 <li>接下來打開終端機，到你的 <strong>Blog</strong> 資料夾，輸入下方程式碼創建一篇新的文章，然後你會在 <strong>source</strong> 內的 <strong>_posts</strong> 看見你的文章，這是預備推上 <strong>GitHub</strong> 的文章區。</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new 你的文章名稱</span><br></pre></td></tr></table></figure>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">new</span> <span class="type"></span>你的文章名稱</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>接下來輸入下方程式碼就會產生一個 <strong>public</strong> 的資料夾，裡面就是要準備推上 <strong>GitHub</strong> 的東西，然後就會根據你的設定推上你的 <strong>GitHub</strong> 了！</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g </span><br><span class="line"># d 表示產生一個 public 的資料夾 -g 表示部署上你的 GitHub</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo d -g </span><br><span class="line"><span class="comment"># d 表示產生一個 public 的資料夾 -g 表示部署上你的 GitHub</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="Hexo-設定檔配置"><a href="#Hexo-設定檔配置" class="headerlink" title="Hexo 設定檔配置"></a>Hexo 設定檔配置</h3><ul>
 <li><strong>_config.yml</strong> 是 <strong>hexo</strong> 的預設設定檔，內容設定是用 <strong>yaml</strong> 格式編寫</li>
@@ -552,12 +552,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         

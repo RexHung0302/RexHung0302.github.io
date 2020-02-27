@@ -34,7 +34,7 @@
 <meta property="og:description" content="Introduction &amp;amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
-<meta property="og:updated_time" content="2020-02-26T13:57:54.154Z">
+<meta property="og:updated_time" content="2020-02-27T09:26:25.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
 
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-26 21:57:54" itemprop="dateModified" datetime="2020-02-26T21:57:54+08:00">2020-02-26</time>
+                <time title="修改時間：2020-02-27 17:26:25" itemprop="dateModified" datetime="2020-02-27T17:26:25+08:00">2020-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,7 +342,7 @@
 </li>
 </ol>
 <p>在我們打開網頁 <strong>F12</strong> 之後開啟 <strong>Sources</strong> 然後就能看見最一開始的 <strong>This</strong> 指的是 <strong>Windows</strong>，而隨著我們的 <strong>Function</strong> ， <strong>This</strong> 的指向位置又會開始改變。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function moreThis() &#123;</span><br><span class="line">  // ....</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var student = &#123;</span><br><span class="line">  name: &apos;Rex&apos;,</span><br><span class="line">  moreThis: moreThis,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">student.moreThis(); </span><br><span class="line">// 前面宣告什麼的都可以不用注意 只要看呼叫的時候 student 就是那個 This</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moreThis</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> student = &#123;</span><br><span class="line">  name: <span class="string">'Rex'</span>,</span><br><span class="line">  moreThis: moreThis,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">student.moreThis(); </span><br><span class="line"><span class="comment">// 前面宣告什麼的都可以不用注意 只要看呼叫的時候 student 就是那個 This</span></span><br></pre></td></tr></table></figure>
 
 <p>上面提到到所謂的 <strong>嚴格模式(‘use strice’)</strong>，在 <strong>JavaScript</strong> 裡有一個靜默的小錯誤，不至於影響程式進行將會被忽略不會跳出警告，而使用 <strong>嚴格模式(‘use strice’)</strong> 後將會直接看見，而 <strong>嚴格模式(‘use strice’)</strong> 也可以依照部分環境加入，意思就是這個 <strong>Function</strong> 我想要加入，另一個不要其實也可以。</p>
 <hr>
@@ -523,12 +523,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">97k</span>
+    <span title="總字數">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:28</span>
+    <span title="所需總閱讀時間">1:25</span>
 </div>
 
         
