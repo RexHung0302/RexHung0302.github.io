@@ -41,7 +41,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200212&#x2F;google-maps-layers.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200212&#x2F;emptyMap.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200212&#x2F;markers.png">
-<meta property="og:updated_time" content="2020-02-27T09:26:56.814Z">
+<meta property="og:updated_time" content="2020-02-28T14:41:02.965Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200212&#x2F;10WeekLogo.png">
 
@@ -240,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-02-27 17:26:56" itemprop="dateModified" datetime="2020-02-27T17:26:56+08:00">2020-02-27</time>
+                <time title="修改時間：2020-02-28 22:41:02" itemprop="dateModified" datetime="2020-02-28T22:41:02+08:00">2020-02-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -351,7 +351,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入地圖</span></span><br><span class="line"><span class="keyword">import</span> L <span class="keyword">from</span> <span class="string">'leaflet'</span>;</span><br><span class="line"><span class="comment">// 引入地圖套件相關</span></span><br><span class="line"><span class="keyword">import</span> &#123; LMap, LTileLayer, LMarker, LPopup, LTooltip &#125; <span class="keyword">from</span> <span class="string">"vue2-leaflet"</span>;</span><br></pre></td></tr></table></figure>
 
 <p>之後在你的 HTML 上使用它。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=<span class="string">"pug"</span>&gt;</span><br><span class="line">l-map(:zoom=<span class="string">'zoom'</span> :center=<span class="string">'center'</span> style=<span class="string">'height: 100%'</span> @ready=<span class="string">"onReady"</span> @locationfound=<span class="string">"onLocationFound"</span>)</span><br><span class="line">  l-tile-layer(:url=<span class="string">'url'</span> :attribution=<span class="string">'attribution'</span>)</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"pug"</span>&gt;</span></span><br><span class="line">l-map(:zoom='zoom' :center='center' style='height: 100%' @ready="onReady" @locationfound="onLocationFound")</span><br><span class="line">  l-tile-layer(:url='url' :attribution='attribution')</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>再來要到設定的地方加上你的圖資，可能會是 <strong>Openstreetmap</strong> 或是 <strong>Google Map</strong> 也可能是 <strong>mapbox</strong>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    zoom: <span class="number">17</span>,</span><br><span class="line">    url: <span class="string">'https://&#123;s&#125;.tile.openstreetmap.org/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.png'</span>,</span><br><span class="line">    attribution:</span><br><span class="line">      <span class="string">'&amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
