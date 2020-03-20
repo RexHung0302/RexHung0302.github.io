@@ -41,7 +41,9 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;copy_right_language_select_show.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;thx_to_read_position.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;thx_to_read_show.png">
-<meta property="og:updated_time" content="2020-03-18T18:41:59.173Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;tag_before.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;tag_after.png">
+<meta property="og:updated_time" content="2020-03-20T18:41:41.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200319&#x2F;hexo_slogan.png">
 
@@ -234,10 +236,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-03-19 01:36:00 / 修改時間：02:41:59" itemprop="dateCreated datePublished" datetime="2020-03-19T01:36:00+08:00">2020-03-19</time>
+              <time title="創建時間：2020-03-19 01:36:00" itemprop="dateCreated datePublished" datetime="2020-03-19T01:36:00+08:00">2020-03-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-03-21 02:41:41" itemprop="dateModified" datetime="2020-03-21T02:41:41+08:00">2020-03-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -272,14 +280,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>2.5k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>2 分鐘</span>
+              <span>3 分鐘</span>
             </span>
 
         </div>
@@ -302,6 +310,8 @@
 <li><p>如何加入 <strong>版權聲明</strong></p>
 </li>
 <li><p>如何在頁尾加入 <strong>本文结束感謝您的閱讀</strong></p>
+</li>
+<li><p>如何修改頁尾的 <strong>Tag</strong></p>
 </li>
 </ol>
 <hr>
@@ -333,6 +343,11 @@
 <p><img src="/images/20200319/thx_to_read_position.png" alt="還不了解就看圖吧"></p>
 <p>再回去看看就會出現啦！</p>
 <p><img src="/images/20200319/thx_to_read_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
+<hr>
+<h3 id="如何修改頁尾的-Tag"><a href="#如何修改頁尾的-Tag" class="headerlink" title="如何修改頁尾的 Tag"></a>如何修改頁尾的 <strong>Tag</strong></h3><p><img src="/images/20200319/tag_before.png" alt="美化前樣式"></p>
+<p>舊版的設定比較麻煩，必須自己到 <code>/themes/next/layout/_macro/post.swig</code> 內修改 <code>#</code> 為 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 但是當到這個文件查看時，會發現上面是帶有判斷式的，有中括弧的 <code>%- if theme.tag_icon %</code> ，而且 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 也已經在程式碼內。</p>
+<p>現在你唯一需要做的事情只有一樣，就是到 <code>/themes/next/_config.yml</code> 裡搜尋 <code>tag_icon</code> 並且將它改為 <code>tag_icon: true</code> ，結果將會為下圖。</p>
+<p><img src="/images/20200319/tag_after.png" alt="美化後樣式"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是接觸 <strong>Hexo</strong> 的第二個主題 <strong>NexT</strong>，其實最一開始是使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9qZXJyeWMubWUv" title="https://jerryc.me/">hexo-theme-archer<i class="fa fa-external-link"></i></span></strong> 這個主題，我想第一次用 <strong>Hexo</strong> 都會想找炫一點的主題，但是有些比較算獨立維護的，可能功能上就沒有那麼齊全，像是很多設定，在 <strong>NexT</strong> 的 <strong>_config.yml</strong> 裡面就有了，你只需要改成 <strong>true</strong> 其實就能用了，但是比較冷門的主題或是沒有那麼多人維護的主題就必須要自己建立檔案，或是東加西加，這也是為什麼後來我選用 <strong>NexT</strong>。 的原因。</p>
 <p>因為之前換過主題中間也加了一些東西導致 <strong>Hexo</strong> 爆開(<strong>真心建議新手不要亂動文件 也記得勤於備份</strong>)，所以重新用了三四次，所以寫篇文章把一些功能記下來，希望日後能快速找到方法不用再到處去爬文了，也希望這篇文章能幫助到您，之後也會不定時的加一些筆記進來。</p>
@@ -468,7 +483,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><span class="nav-text">如何在網頁加入 Fork Me on GitHub(GitHub Corners)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何加入-版權聲明"><span class="nav-text">如何加入 版權聲明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在頁尾加入-本文结束感謝您的閱讀"><span class="nav-text">如何在頁尾加入 本文结束感謝您的閱讀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><span class="nav-text">如何在網頁加入 Fork Me on GitHub(GitHub Corners)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何加入-版權聲明"><span class="nav-text">如何加入 版權聲明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在頁尾加入-本文结束感謝您的閱讀"><span class="nav-text">如何在頁尾加入 本文结束感謝您的閱讀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何修改頁尾的-Tag"><span class="nav-text">如何修改頁尾的 Tag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
