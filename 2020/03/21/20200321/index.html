@@ -40,7 +40,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;success_console.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;finishImg.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;notCompiler.png">
-<meta property="og:updated_time" content="2020-03-20T18:22:55.462Z">
+<meta property="og:updated_time" content="2020-03-20T18:25:03.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;babel_logo.png">
 
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-03-21 02:16:00 / 修改時間：02:22:55" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
+              <time title="創建時間：2020-03-21 02:16:00 / 修改時間：02:25:03" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>3.4k</span>
+              <span>3.5k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -315,7 +315,7 @@
 </blockquote>
 <hr>
 <h3 id="單刀直入"><a href="#單刀直入" class="headerlink" title="單刀直入"></a>單刀直入</h3><p>廢話說了很多，這邊我們繼續說！這篇主要會提到 <strong>Babel</strong>，這就是前言提到的，新的 <strong>ES6</strong> 如果舊手機舊瀏覽器吃不到怎麼辦？那你就必須透過加工廠(<strong>Babel</strong>)加工把東西弄的適合<del>過時</del>的東西吃。</p>
-<p>這邊假設 <strong>if</strong> 您已經看過 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span> <strong>else if</strong> 或已經具備基本的 <strong>Webpack</strong> 概念，<strong>else</strong> 請看看就好尊重友善包容手下留情感激不盡，這邊就不在介紹如何初始化一個 <strong>Webpack</strong> 專案。</p>
+<p>這邊假設 <strong>if</strong> ( 您已經看過 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span> ) <strong>else if</strong> ( 或已經具備基本的 <strong>Webpack</strong> 概念 ) ，<strong>else</strong> ( 請看看就好尊重友善包容手下留情感激不盡，這邊就不在介紹如何初始化一個 <strong>Webpack</strong> 專案 ) 。</p>
 <p>上一篇提過 <strong>module</strong> 及 <strong>plugins</strong> 在 <strong>webpack.config.js</strong> 裡的差別，前者是專們放 <strong>xxx-loader</strong> 的，後者顧名思義是專們放 <strong>plugins</strong>，沒錯，今天的主角 <strong>Babel</strong> 是要放在 <strong>module</strong> 裡的，有點像我們使用 <strong>pug</strong> 或是 <strong>scss</strong> 的預處理器，靠 <strong>loader</strong> 幫我們編譯成網頁看得懂的語言。</p>
 <hr>
 <h3 id="巴別塔？"><a href="#巴別塔？" class="headerlink" title="巴別塔？"></a>巴別塔？</h3><p>首先在 <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4v" title="https://babeljs.io/docs/en/">官方網站<i class="fa fa-external-link"></i></span> 會看見其實 Babel 底下還有很多 Plugins，我們需要幾項東西。</p>
