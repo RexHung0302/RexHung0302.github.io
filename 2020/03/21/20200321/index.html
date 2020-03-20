@@ -34,13 +34,13 @@
 <meta property="og:description" content="溫馨提醒：強烈建議還沒看過 關於Webpack #1 的同學們去看看[Tool Notes] — 關於Webpack #1 - 第一次就上手  Introduction &amp;amp; 前言最近這陣子剛好公司的案子必須從一個新專案開始，是用 Vue Cli3 寫的，恰巧思考到舊手機支援問題，再研究 babel&#x2F;polyfill 的時候想到了前陣子摸過的 Webpack。 相較於這次的專案，之前許多">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;babel_logo.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;six_logo.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;example_code.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;six_logo.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;example_code.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;good.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;success_console.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;finishImg.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;notCompiler.png">
-<meta property="og:updated_time" content="2020-03-20T18:19:48.520Z">
+<meta property="og:updated_time" content="2020-03-20T18:22:27.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;babel_logo.png">
 
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-03-21 02:16:00 / 修改時間：02:19:48" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
+              <time title="創建時間：2020-03-21 02:16:00 / 修改時間：02:22:27" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -303,7 +303,7 @@
 <a id="more"></a>
 
 <p>因為發生了這種狀況，所以 <strong>JavaScript</strong> 能不用 (註1)<strong>ES6</strong> 就盡量避免，但其實在那時候就決定要再回來用 <strong>Webpack</strong> 了，無奈最近時程真的是被壓縮壓縮超級壓縮呀…(苦笑</p>
-<p><img src="/images/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
+<p><img src="/images/20200321/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
 <p>近期六角開了一堂特別的線上直播課程，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=" title="https://www.hexschool.com/courses/web-layout-training-1st.html">網頁切版直播班<i class="fa fa-external-link"></i></span>，因為覺得自己基本功不是很穩，近期切版時程太趕，希望自己能快速且精準又能寫出乾淨程式碼的情況下，就報名了，哎…<strong>出來寫前端，總是要還的，而且是別人說的倍數成長呀</strong>。</p>
 <p>因為課程開始前有新手任務，剛好要切一個版，就打算拿那個版面來練習，不過這篇文章不會介紹怎麼切，而是要先介紹怎麼編譯 <strong>ES6 =&gt; ES5</strong> ，因為目前 <strong>ES5</strong> 的支援度還是比 <strong>ES6</strong> 高。</p>
 <blockquote>
@@ -340,7 +340,7 @@
 <p>接著之後到 <code>/src/js/index.js</code> 裡面輸入下面程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- ES6 Example</span></span><br><span class="line"><span class="keyword">const</span> habit = [<span class="string">"Write Code"</span>, <span class="string">"Watch Udemy"</span>, <span class="string">"DeBug"</span>, <span class="string">"Sleep"</span>];</span><br><span class="line"></span><br><span class="line">habit.forEach(</span><br><span class="line">  (item, index) =&gt; <span class="built_in">console</span>.log( <span class="string">`<span class="subst">$&#123;index&#125;</span> =&gt; <span class="subst">$&#123;item&#125;</span>`</span> )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/example_code.png" alt="範例程式碼"></p>
+<p><img src="/images/20200321/example_code.png" alt="範例程式碼"></p>
 <p>這邊使用了 ES6 常見的幾個語法，包含 const、字串模板、箭頭函式…等等，有興趣可以詳見 <span class="exturl" data-url="aHR0cHM6Ly9lczYucnVhbnlpZmVuZy5jb20v" title="https://es6.ruanyifeng.com/">ES6 武功秘籍大全<i class="fa fa-external-link"></i></span>，語法糖真的香！</p>
 <p><img src="/images/20200321/good.gif" alt="真填真好吃"></p>
 <p>隨後輸入下面程式碼編譯：</p>
