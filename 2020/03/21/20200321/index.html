@@ -26,7 +26,7 @@
   </script>
 
   <meta name="description" content="Introduction &amp;amp; 前言最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 Laravel 底下，新專案是用 Vue Cli3 寫的，最近老闆猛然一題，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 babel&#x2F;polyfill ，研究時 Vue">
-<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,JavaScript,Webpack,Engineer">
+<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,JavaScript,Webpack,Engineer,Babel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Tool Notes] — 關於Webpack #2 - Babel？">
 <meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2020&#x2F;03&#x2F;21&#x2F;20200321&#x2F;index.html">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;success_console.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;finishImg.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;notCompiler.png">
-<meta property="og:updated_time" content="2020-03-20T20:00:21.849Z">
+<meta property="og:updated_time" content="2020-03-22T19:27:48.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200321&#x2F;babel_logo.png">
 
@@ -233,10 +233,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-03-21 02:16:00 / 修改時間：04:00:21" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
+              <time title="創建時間：2020-03-21 02:16:00" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-03-23 03:27:48" itemprop="dateModified" datetime="2020-03-23T03:27:48+08:00">2020-03-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -252,6 +258,10 @@
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Code/Note/Webpack/" itemprop="url" rel="index"><span itemprop="name">Webpack</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Webpack/Babel/" itemprop="url" rel="index"><span itemprop="name">Babel</span></a>
                 </span>
             </span>
 
@@ -440,7 +450,10 @@
     <a href="/2020/03/19/20200319/" rel="prev" title="[Blog Notes] - Hexo NexT 小筆記">
       <i class="fa fa-chevron-left"></i> [Blog Notes] - Hexo NexT 小筆記
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/23/20200323/" rel="next" title="[CSS Notes] - 第一次 Flex 就上手">
+      [CSS Notes] - 第一次 Flex 就上手 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -523,14 +536,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -584,12 +597,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">101k</span>
+    <span title="總字數">106k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:32</span>
+    <span title="所需總閱讀時間">1:36</span>
 </div>
 
         
