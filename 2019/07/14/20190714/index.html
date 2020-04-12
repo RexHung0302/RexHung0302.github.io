@@ -317,7 +317,7 @@
 
 <p>雖然不太了解 <strong>Redis</strong> 是什麼，但是還是要餵狗( <strong>google</strong> )一下。<strong>REmote DIctionary Server(Redis)</strong> 是一個 <strong>key-value</strong> 儲存系統。常常聽到需要大量用到資料庫(<strong>快取 Cache 的時候</strong>)的時候就會透過 <strong>Redis</strong> 來減輕資料庫的壓力。</p>
 <blockquote>
-<p>這邊不過多探討，詳情可以見 <a href="https://blog.techbridge.cc/2016/06/18/redis-introduction/" target="_blank" rel="noopener">傳送門</a></p>
+<p>這邊不過多探討，詳情可以見 <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNi8wNi8xOC9yZWRpcy1pbnRyb2R1Y3Rpb24v" title="https://blog.techbridge.cc/2016/06/18/redis-introduction/">傳送門<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><strong>安裝方法1：</strong></p>
@@ -340,11 +340,11 @@
 </ol>
 <hr>
 <h2 id="Install-wget-amp-pecl"><a href="#Install-wget-amp-pecl" class="headerlink" title="Install wget &amp; pecl"></a>Install wget &amp; pecl</h2><blockquote>
-<p>詳細可參考：<a href="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos" target="_blank" rel="noopener">How to install wget in macOS? [closed]</a></p>
+<p>詳細可參考：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzM4ODY5MTcvaG93LXRvLWluc3RhbGwtd2dldC1pbi1tYWNvcw==" title="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos">How to install wget in macOS? [closed]<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <p><img src="https://cdn-images-1.medium.com/max/2400/1*Il8bOi96ZtUGQTjeUVoG1A.png" alt="Img from https://www.google.com/search?biw=1868&amp;bih=928&amp;tbm=isch&amp;sa=1&amp;ei=sFQoXaSHHcPWhwP346v4Bg&amp;q=homebrew&amp;oq=homebrew&amp;gs_l=img.3..0j0i7i30l2j0i30l7.3393.4872..5048...0.0..0.57.304.6......0....1..gws-wiz-img.......35i39j0i10i24.qZNiJeP4uWY#imgrc=jJS8P8NvKE_aiM:"></p>
 <p>因為安裝 <strong>PHP-Redis</strong> 必須透過 <strong>pecl</strong>，所以必須先做一些事前作業，</p>
-<p>首先如果沒有安裝 <strong><a href="http://brew.sh/" target="_blank" rel="noopener">brew</a></strong> 需要先安裝：</p>
+<p>首先如果沒有安裝 <strong><span class="exturl" data-url="aHR0cDovL2JyZXcuc2gv" title="http://brew.sh/">brew<i class="fa fa-external-link"></i></span></strong> 需要先安裝：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span></span><br></pre></td></tr></table></figure>
 
 <p>接下來透過 <strong>brew</strong> 來安裝 <strong>wget</strong>：</p>
@@ -356,7 +356,7 @@
 
 <hr>
 <h3 id="Now-let’s-install-pear"><a href="#Now-let’s-install-pear" class="headerlink" title="Now let’s install pear"></a>Now let’s install pear</h3><blockquote>
-<p>詳細可參考：<a href="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/" target="_blank" rel="noopener">[教學] Mac 安裝 pecl ，安裝 php extension.</a></p>
+<p>詳細可參考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNhZXNhcmNoaS5jb20vMjAxMi8wMy8xNy8tZTYtOTUtOTktZTUtYWQtYjgtbWFjLS1lNS1hZS04OS1lOC1hMy05ZC1wZWNsLS1lZi1iYy04Yy1lNS1hZS04OS1lOC1hMy05ZC1waHAtZXh0ZW5zaW9uLw==" title="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/">[教學] Mac 安裝 pecl ，安裝 php extension.<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <p>首先安裝 <strong>pear</strong>：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget [<span class="string">http://pear.php.net/go-pear.phar</span>](<span class="link">http://pear.php.net/go-pear.phar</span>)</span><br></pre></td></tr></table></figure>
@@ -375,7 +375,7 @@
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*8UDGLIKug-AZixbFTzLAkQ.png" alt="**pecl can use now**"></p>
 <hr>
 <h3 id="Install-PHP-Redis"><a href="#Install-PHP-Redis" class="headerlink" title="Install PHP-Redis"></a>Install PHP-Redis</h3><blockquote>
-<p>詳細可參考：<a href="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx" target="_blank" rel="noopener">Install phpredis MAC OSX</a>.</p>
+<p>詳細可參考：<span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTE5MDgwMDQvaW5zdGFsbC1waHByZWRpcy1tYWMtb3N4" title="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx">Install phpredis MAC OSX<i class="fa fa-external-link"></i></span>.</p>
 </blockquote>
 <p>首先 <strong>Git clone phpredis</strong> 然後進入資料夾內安裝：</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone [<span class="string">https://www.github.com/phpredis/phpredis.git</span>](<span class="link">https://www.github.com/phpredis/phpredis.git</span>)</span><br><span class="line">$ cd phpredis</span><br><span class="line">$ phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
@@ -407,13 +407,13 @@
 
 <hr>
 <h2 id="Install-PHP-Redis-With-MAMP"><a href="#Install-PHP-Redis-With-MAMP" class="headerlink" title="Install PHP-Redis With MAMP"></a>Install PHP-Redis With MAMP</h2><blockquote>
-<p>MAMP詳細安裝可參考：<a href="https://progressbar.tw/posts/27" target="_blank" rel="noopener">[PHP][Mac] 00. 覺得開發環境設定很麻煩嗎，用MAMP安裝就對了！</a></p>
+<p>MAMP詳細安裝可參考：<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmVzc2Jhci50dy9wb3N0cy8yNw==" title="https://progressbar.tw/posts/27">[PHP][Mac] 00. 覺得開發環境設定很麻煩嗎，用MAMP安裝就對了！<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <blockquote>
-<p>詳細可參考：<a href="https://kknews.cc/other/pgmymrj.html" target="_blank" rel="noopener">在MAC版MAMP環境下為PHP7.x安裝redis擴展的過程</a>.</p>
+<p>詳細可參考：<span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2Mvb3RoZXIvcGdteW1yai5odG1s" title="https://kknews.cc/other/pgmymrj.html">在MAC版MAMP環境下為PHP7.x安裝redis擴展的過程<i class="fa fa-external-link"></i></span>.</p>
 </blockquote>
 <blockquote>
-<p>或是這篇：<a href="https://segmentfault.com/a/1190000010298874" target="_blank" rel="noopener">MAMP下安装PHP Redis扩展及Redis下载使用</a>.( ✔︎ 我是參考這篇安裝完成的)</p>
+<p>或是這篇：<span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAxMDI5ODg3NA==" title="https://segmentfault.com/a/1190000010298874">MAMP下安装PHP Redis扩展及Redis下载使用<i class="fa fa-external-link"></i></span>.( ✔︎ 我是參考這篇安裝完成的)</p>
 </blockquote>
 <p>事前準備必須先安裝 <strong>Homebrew</strong>，直接輸入下方指令安裝：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span></span><br></pre></td></tr></table></figure>
@@ -421,12 +421,12 @@
 <h3 id="讓我們騰雲駕霧吧"><a href="#讓我們騰雲駕霧吧" class="headerlink" title="讓我們騰雲駕霧吧"></a>讓我們騰雲駕霧吧</h3><p>首先必須先對 <strong>PHP</strong> 進行配置，我們先下載 <strong>PHP</strong> 源碼 (依你的版本 盡量是 .tar 格式 網址在下方傳送門)，然後放置你版本的資料夾：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="regexp">/Applications/</span>MAMP<span class="regexp">/bin/</span>php<span class="regexp">/php(你的版本)／include/</span>php</span><br></pre></td></tr></table></figure>
 
-<p><strong>記得路徑不一定是絕對的，要找到自己的 MAMP 資料夾後再去找你的版本號，<a href="https://www.php.net/downloads.php" target="_blank" rel="noopener">源碼下載傳送門</a>，如果找不到可以試著使用下面一行的指令(記得要安裝上方的 wget 哦！)。</strong></p>
+<p><strong>記得路徑不一定是絕對的，要找到自己的 MAMP 資料夾後再去找你的版本號，<span class="exturl" data-url="aHR0cHM6Ly93d3cucGhwLm5ldC9kb3dubG9hZHMucGhw" title="https://www.php.net/downloads.php">源碼下載傳送門<i class="fa fa-external-link"></i></span>，如果找不到可以試著使用下面一行的指令(記得要安裝上方的 wget 哦！)。</strong></p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O php-版本號<span class="selector-class">.tar</span><span class="selector-class">.gz</span> http:<span class="comment">//us.php.net/get/php-5.5.14.tar.gz/from/this/mirror</span></span><br></pre></td></tr></table></figure>
 
 <p>然後輸入 <strong>./configure</strong> 安裝，成功會出現下圖：</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*IrRmQfOKL0Zr_b-OwwboDw.png" alt=""></p>
-<p>如果失敗的話可以參考 <a href="https://stackoverflow.com/questions/24987305/php-configure-error-please-specify-the-install-prefix-of-iconv-with-with-icon" target="_blank" rel="noopener">傳送門</a> 並執行下面這兩個：</p>
+<p>如果失敗的話可以參考 <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjQ5ODczMDUvcGhwLWNvbmZpZ3VyZS1lcnJvci1wbGVhc2Utc3BlY2lmeS10aGUtaW5zdGFsbC1wcmVmaXgtb2YtaWNvbnYtd2l0aC13aXRoLWljb24=" title="https://stackoverflow.com/questions/24987305/php-configure-error-please-specify-the-install-prefix-of-iconv-with-with-icon">傳送門<i class="fa fa-external-link"></i></span> 並執行下面這兩個：</p>
 <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install homebrew/core/libiconv</span><br><span class="line"></span><br><span class="line">$ ./configure --<span class="keyword">with</span>-iconv=<span class="constructor">$(<span class="params">brew</span> --<span class="params">prefix</span> <span class="params">libiconv</span>)</span></span><br></pre></td></tr></table></figure>
 
 <p>然後在 <strong>/Applications/MAMP/bin/php/php( 你的版本 )/include/php</strong> 這個資料夾下 <strong>Git Clone PHP-Redis( <a href="https://github.com/phpredis/phpredis">傳送門</a> )</strong>：</p>
@@ -457,7 +457,7 @@
 <p><em>如果無法成功，記得把上方剛剛最後要輸入路徑的 <strong>redis.so</strong> 那個地方改為 <strong>extension = redis.so;</strong> 即可。</em></p>
 </blockquote>
 <hr>
-<h3 id="關於-Cannot-find-config-m4-錯誤"><a href="#關於-Cannot-find-config-m4-錯誤" class="headerlink" title="關於 Cannot find config.m4 錯誤"></a>關於 Cannot find config.m4 錯誤</h3><p>如果看見這個錯誤(詳情 <a href="https://www.fujieace.com/php/php-extensions/config-m4.html" target="_blank" rel="noopener">傳送門</a>)</p>
+<h3 id="關於-Cannot-find-config-m4-錯誤"><a href="#關於-Cannot-find-config-m4-錯誤" class="headerlink" title="關於 Cannot find config.m4 錯誤"></a>關於 Cannot find config.m4 錯誤</h3><p>如果看見這個錯誤(詳情 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZnVqaWVhY2UuY29tL3BocC9waHAtZXh0ZW5zaW9ucy9jb25maWctbTQuaHRtbA==" title="https://www.fujieace.com/php/php-extensions/config-m4.html">傳送門<i class="fa fa-external-link"></i></span>)</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*MgytsLeSJETtZrDSQJ2Vog.png" alt=""></p>
 <p>這是因為你所在的路徑錯誤，或是沒有找到 <strong>config.m4</strong> 這個檔案。首先進入你  <strong>MAMP</strong> 所用的那個 <strong>PHP</strong>的版本資料夾，進入下面的位子。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd <span class="regexp">/Applications/</span>MAMP<span class="regexp">/bin/</span>php<span class="regexp">/php(你的版本)/i</span>nclude<span class="regexp">/php/</span>ext<span class="regexp">/zlib</span></span><br></pre></td></tr></table></figure>
@@ -476,10 +476,10 @@
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>因為本機安裝一直無法成功，後來改用 <strong>MAMP PRO</strong> 終於安裝成功，一直卡住噴錯的人也可以試試，以上僅供參考，寫成小筆記來記錄之後自己比較不會忘記。因為對後端非常之不熟，有任何疑慮都可以餵狗( <strong>google</strong> )，或是留個言，感謝各位大大指教。</p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><a href="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos" target="_blank" rel="noopener">How to install wget in macOS? [closed]</a></li>
-<li><a href="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/" target="_blank" rel="noopener">[教學] Mac 安裝 pecl ，安裝 php extension.</a></li>
-<li><a href="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx" target="_blank" rel="noopener">Install phpredis MAC OSX</a>.</li>
-<li><a href="https://blog.techbridge.cc/2016/06/18/redis-introduction/" target="_blank" rel="noopener">資料庫的好夥伴:Redis</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMzM4ODY5MTcvaG93LXRvLWluc3RhbGwtd2dldC1pbi1tYWNvcw==" title="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos">How to install wget in macOS? [closed]<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNhZXNhcmNoaS5jb20vMjAxMi8wMy8xNy8tZTYtOTUtOTktZTUtYWQtYjgtbWFjLS1lNS1hZS04OS1lOC1hMy05ZC1wZWNsLS1lZi1iYy04Yy1lNS1hZS04OS1lOC1hMy05ZC1waHAtZXh0ZW5zaW9uLw==" title="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/">[教學] Mac 安裝 pecl ，安裝 php extension.<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvNTE5MDgwMDQvaW5zdGFsbC1waHByZWRpcy1tYWMtb3N4" title="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx">Install phpredis MAC OSX<i class="fa fa-external-link"></i></span>.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxNi8wNi8xOC9yZWRpcy1pbnRyb2R1Y3Rpb24v" title="https://blog.techbridge.cc/2016/06/18/redis-introduction/">資料庫的好夥伴:Redis<i class="fa fa-external-link"></i></span></li>
 </ul>
 
     </div>
@@ -622,20 +622,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -683,12 +683,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">106k</span>
+    <span title="總字數">112k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:36</span>
+    <span title="所需總閱讀時間">1:42</span>
 </div>
 
         

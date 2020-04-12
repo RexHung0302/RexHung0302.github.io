@@ -304,7 +304,7 @@
 
       
         <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter/JS-and-Fighter-5F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNUYvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter/JS-and-Fighter-5F/index.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">點我</a></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>超級菜鳥這次來挑戰第五層的BOSS了，這次必須串接API取的資料後Show在網頁上，對剛接觸JS不久以及根本沒碰過API的我是一大挑戰啊．．．</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*C_d5oteo5a-qnOn5vQIZ5A.png" alt=""></p>
@@ -331,15 +331,15 @@
 <p><img src="https://cdn-images-1.medium.com/max/2802/1*PoQuF-WU9g7kRQ2NJZfFrw.png" alt=""></p>
 <hr>
 <h3 id="關於CORS-amp-XMLHttpRequest-amp-Promise-優化相關"><a href="#關於CORS-amp-XMLHttpRequest-amp-Promise-優化相關" class="headerlink" title="關於CORS &amp; XMLHttpRequest &amp; Promise 優化相關"></a>關於CORS &amp; XMLHttpRequest &amp; Promise 優化相關</h3><blockquote>
-<p><em>跨來源資源共用（Cross-Origin Resource Sharing (<a href="https://developer.mozilla.org/en-US/docs/Glossary/CORS" target="_blank" rel="noopener">CORS</a>)）是一種使用額外 <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP" target="_blank" rel="noopener">HTTP</a> 標頭令目前瀏覽網站的<a href="https://developer.mozilla.org/en-US/docs/Glossary/user_agent" target="_blank" rel="noopener">使用者代理</a>取得存取其他來源（網域）伺服器特定資源權限的機制。當使用者代理請求一個不是目前文件來源 — — 例如來自於不同網域（domain）、通訊協定（protocol）或通訊埠（port）的資源時，會建立一個<strong>跨來源 HTTP 請求（cross-origin HTTP request）</strong>。</em></p>
+<p><em>跨來源資源共用（Cross-Origin Resource Sharing (<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9DT1JT" title="https://developer.mozilla.org/en-US/docs/Glossary/CORS">CORS<i class="fa fa-external-link"></i></span>)）是一種使用額外 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9IVFRQ" title="https://developer.mozilla.org/en-US/docs/Glossary/HTTP">HTTP<i class="fa fa-external-link"></i></span> 標頭令目前瀏覽網站的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS91c2VyX2FnZW50" title="https://developer.mozilla.org/en-US/docs/Glossary/user_agent">使用者代理<i class="fa fa-external-link"></i></span>取得存取其他來源（網域）伺服器特定資源權限的機制。當使用者代理請求一個不是目前文件來源 — — 例如來自於不同網域（domain）、通訊協定（protocol）或通訊埠（port）的資源時，會建立一個<strong>跨來源 HTTP 請求（cross-origin HTTP request）</strong>。</em></p>
 </blockquote>
-<p>這邊引用<a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS" target="_blank" rel="noopener">MDN Web docs</a>的文章，簡單來說，因為安全考量，API端如果沒有開啟CORS的話，我們把做好的網頁發布到公開網站上，資料是沒辦法撈到的。</p>
+<p>這邊引用<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSFRUUC9DT1JT" title="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS">MDN Web docs<i class="fa fa-external-link"></i></span>的文章，簡單來說，因為安全考量，API端如果沒有開啟CORS的話，我們把做好的網頁發布到公開網站上，資料是沒辦法撈到的。</p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*TRJ7tHbIwPx37fLfwA3kaA.png" alt="CORS跨網域問題"></p>
 <p>處理的方法有幾種，一種是透過後端，利用伺服器端程式來繞過此問題，但是必須自己架設一個伺服器，亦或者使用國外免費架設伺服器，但是這邊採取其他方式。</p>
 <hr>
-<h3 id="前人種樹後人乘涼"><a href="#前人種樹後人乘涼" class="headerlink" title="前人種樹後人乘涼"></a>前人種樹後人乘涼</h3><p>感謝各種前端大神的幫忙，像是<a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">pvt5r486大大</a>的<a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">文章</a>內就提到使用別人建立好的服務，例如這個：</p>
+<h3 id="前人種樹後人乘涼"><a href="#前人種樹後人乘涼" class="headerlink" title="前人種樹後人乘涼"></a>前人種樹後人乘涼</h3><p>感謝各種前端大神的幫忙，像是<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3B2dDVyNDg2L2phdmFzY3JpcHQtJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLWx2LTUtJUU1JTg1JUE4JUU1JThGJUIwJUU3JUE5JUJBJUU2JUIwJUEzJUU2JThDJTg3JUU2JUE4JTk5JUU1JTg0JTgwJUU4JUExJUE4JUU2JTlEJUJGLWI0ZjE2MzgzMmZm" title="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff">pvt5r486大大<i class="fa fa-external-link"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3B2dDVyNDg2L2phdmFzY3JpcHQtJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLWx2LTUtJUU1JTg1JUE4JUU1JThGJUIwJUU3JUE5JUJBJUU2JUIwJUEzJUU2JThDJTg3JUU2JUE4JTk5JUU1JTg0JTgwJUU4JUExJUE4JUU2JTlEJUJGLWI0ZjE2MzgzMmZm" title="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff">文章<i class="fa fa-external-link"></i></span>內就提到使用別人建立好的服務，例如這個：</p>
 <ul>
-<li><a href="https://cors-anywhere.herokuapp.com/http://opendata2.epa.gov.tw/AQI.json" target="_blank" rel="noopener">https://cors-anywhere.herokuapp.com/</a> + API網址</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb3JzLWFueXdoZXJlLmhlcm9rdWFwcC5jb20vaHR0cDovL29wZW5kYXRhMi5lcGEuZ292LnR3L0FRSS5qc29u" title="https://cors-anywhere.herokuapp.com/http://opendata2.epa.gov.tw/AQI.json">https://cors-anywhere.herokuapp.com/<i class="fa fa-external-link"></i></span> + API網址</li>
 </ul>
 <p>但是這個方法我在使用上發現速度似乎載入的比較慢，有時還有撈不到資料的問題</p>
 <p>最後我使用了另一種大神推薦的方法，那就是 <strong>Google App Script！</strong></p>
@@ -363,11 +363,11 @@
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*eiuK_we3XZw6TuH_eJHKUg.png" alt="就是這串啦～"><em>就是這串啦～</em></p>
 <p>留下這串網址之後，以後只要有API的問題，加上他就對啦。</p>
 <blockquote>
-<p>這邊感謝<a href="https://mtwmt.github.io/blog/api_cors_error/" target="_blank" rel="noopener">Mandy大神</a>還有<a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">prt5r486大神</a>的<a href="https://mtwmt.github.io/blog/api_cors_error/" target="_blank" rel="noopener">文章</a></p>
+<p>這邊感謝<span class="exturl" data-url="aHR0cHM6Ly9tdHdtdC5naXRodWIuaW8vYmxvZy9hcGlfY29yc19lcnJvci8=" title="https://mtwmt.github.io/blog/api_cors_error/">Mandy大神<i class="fa fa-external-link"></i></span>還有<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3B2dDVyNDg2L2phdmFzY3JpcHQtJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLWx2LTUtJUU1JTg1JUE4JUU1JThGJUIwJUU3JUE5JUJBJUU2JUIwJUEzJUU2JThDJTg3JUU2JUE4JTk5JUU1JTg0JTgwJUU4JUExJUE4JUU2JTlEJUJGLWI0ZjE2MzgzMmZm" title="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff">prt5r486大神<i class="fa fa-external-link"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly9tdHdtdC5naXRodWIuaW8vYmxvZy9hcGlfY29yc19lcnJvci8=" title="https://mtwmt.github.io/blog/api_cors_error/">文章<i class="fa fa-external-link"></i></span></p>
 </blockquote>
 <hr>
 <h3 id="XMLHttpRequest-和-Fetch-API-差異"><a href="#XMLHttpRequest-和-Fetch-API-差異" class="headerlink" title="XMLHttpRequest 和 Fetch API 差異"></a>XMLHttpRequest 和 Fetch API 差異</h3><p>一般Ajax指的就是XMLHttpRequest(XHR)，而Fetch API 是基于 Promise 設計的，後面我們會提到 Promise。</p>
-<p><strong>有興趣可以<a href="https://zhuanlan.zhihu.com/p/24594294" target="_blank" rel="noopener">點我</a>看文章</strong></p>
+<p><strong>有興趣可以<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNDU5NDI5NA==" title="https://zhuanlan.zhihu.com/p/24594294">點我<i class="fa fa-external-link"></i></span>看文章</strong></p>
 <blockquote>
 <p><em>XMLHttpRequest 本質上但並不是一個設計優良的 API： + 不符合關注分離（Separation of Concerns）的原則 + 配置和調用方式非常混亂 + 使用事件機制來跟蹤狀態變化 + 基於事件的異步模型沒有現代的 Promise，generator/yield，async/await 友好 。<br>Fetch API 旨在修正上述缺陷，它提供了與 HTTP 語義相同的 JS 語法，簡單來說，它引入了 fetch() 這個實用的方法來獲取網絡資源。</em></p>
 </blockquote>
@@ -388,7 +388,7 @@
 <p><strong>resolve() 運行 → .then 承諾被兌現</strong><br><br><strong>reject() 運行 → .catch 承諾失敗</strong></p>
 <p>然而因為我們使用 XMLHttpRequest() 取得結果會是字串，必須使用<strong>JSON.parse() 轉成 JSON 才能使用。</strong></p>
 <hr>
-<h3 id="善用-filter-Method-點我前往"><a href="#善用-filter-Method-點我前往" class="headerlink" title="善用 filter() Method 點我前往"></a>善用 filter() Method <a href="http://www.w3school.com.cn/jquery/traversing_filter.asp" target="_blank" rel="noopener">點我前往</a></h3><p>參考各位<a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">大神文章</a>後，了解了基本方法如下：</p>
+<h3 id="善用-filter-Method-點我前往"><a href="#善用-filter-Method-點我前往" class="headerlink" title="善用 filter() Method 點我前往"></a>善用 filter() Method <span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vanF1ZXJ5L3RyYXZlcnNpbmdfZmlsdGVyLmFzcA==" title="http://www.w3school.com.cn/jquery/traversing_filter.asp">點我前往<i class="fa fa-external-link"></i></span></h3><p>參考各位<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3B2dDVyNDg2L2phdmFzY3JpcHQtJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLWx2LTUtJUU1JTg1JUE4JUU1JThGJUIwJUU3JUE5JUJBJUU2JUIwJUEzJUU2JThDJTg3JUU2JUE4JTk5JUU1JTg0JTgwJUU4JUExJUE4JUU2JTlEJUJGLWI0ZjE2MzgzMmZm" title="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff">大神文章<i class="fa fa-external-link"></i></span>後，了解了基本方法如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">'apple'</span>, <span class="string">'banana'</span>, <span class="string">'lemon'</span>, <span class="string">'apple'</span>, <span class="string">'watermelon'</span>, <span class="string">'grape'</span>];</span><br><span class="line"><span class="keyword">let</span> result = arr.filter(<span class="function">(<span class="params">item, index, array</span>) =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item, index, array);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -415,7 +415,7 @@
 <p>不得不說真的是常常用到組字串呢</p>
 </blockquote>
 <p>下方的資料一樣使用 <strong>filter()</strong> 及 組字串方式，把各縣市的資料放上 <strong>div</strong>，造出一個一個的 <strong>div</strong>（誰叫我不會Vue呢TAT</p>
-<h3 id="jQuery-data-方法點我"><a href="#jQuery-data-方法點我" class="headerlink" title="jQuery.data() 方法點我"></a>jQuery.data() <a href="http://www.w3school.com.cn/jquery/data_jquery_data.asp" target="_blank" rel="noopener">方法點我</a></h3><p>這邊值得一提，因為使用重組字串的方法，所以用到了 <strong>jQuery</strong> 的 <strong>data()</strong> ，而造出來的字，會被HTML自動翻成小寫，資質愚鈍如我花了大把時間再找為何我的onclick事件抓不到呢…</p>
+<h3 id="jQuery-data-方法點我"><a href="#jQuery-data-方法點我" class="headerlink" title="jQuery.data() 方法點我"></a>jQuery.data() <span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vanF1ZXJ5L2RhdGFfanF1ZXJ5X2RhdGEuYXNw" title="http://www.w3school.com.cn/jquery/data_jquery_data.asp">方法點我<i class="fa fa-external-link"></i></span></h3><p>這邊值得一提，因為使用重組字串的方法，所以用到了 <strong>jQuery</strong> 的 <strong>data()</strong> ，而造出來的字，會被HTML自動翻成小寫，資質愚鈍如我花了大把時間再找為何我的onclick事件抓不到呢…</p>
 <p><img src="https://cdn-images-1.medium.com/max/2416/1*CJpBXui2OmuG-0Gw8GGWhQ.png" alt=""></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這系列的地下城真的幫助我 <strong>JS</strong> 成長了許多，每每覺得要卡關了，還是能慢慢爬文慢慢吸收，然後破關，我想最主要的還是邏輯部分，簡化自己的程式碼，另外在這次做API之前我根本毫無頭緒，這是很好的練習，也是我的第一次（羞</p>
@@ -433,33 +433,33 @@
 <h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
 <li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
 <blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMUYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
 <blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMkYvY2xvY2suaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
 <blockquote>
-<p>Demo：<a href="http://href=" target="_blank" rel="noopener"http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL2hyZWY9" title="http://href=">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 4F World Clock 各國時區</strong></p>
 <blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNEYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a></p>
 </blockquote>
 </li>
 </ul>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><a href="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff" target="_blank" rel="noopener">pvt5r486大神的Blog</a> — 全台空氣指標攻略心得</li>
-<li><a href="https://mtwmt.github.io/blog/api_cors_error/" target="_blank" rel="noopener">Mandy大神的Bolg </a>— 利用google apps script做中繼點跨網域遠端取得api資料* * )* <a href="https://ithelp.ithome.com.tw/articles/10197529" target="_blank" rel="noopener">henry35208大神的鐵人邦</a> — Promise介紹</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3B2dDVyNDg2L2phdmFzY3JpcHQtJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLWx2LTUtJUU1JTg1JUE4JUU1JThGJUIwJUU3JUE5JUJBJUU2JUIwJUEzJUU2JThDJTg3JUU2JUE4JTk5JUU1JTg0JTgwJUU4JUExJUE4JUU2JTlEJUJGLWI0ZjE2MzgzMmZm" title="https://medium.com/pvt5r486/javascript-%E5%9C%B0%E4%B8%8B%E5%9F%8E-lv-5-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-b4f163832ff">pvt5r486大神的Blog<i class="fa fa-external-link"></i></span> — 全台空氣指標攻略心得</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tdHdtdC5naXRodWIuaW8vYmxvZy9hcGlfY29yc19lcnJvci8=" title="https://mtwmt.github.io/blog/api_cors_error/">Mandy大神的Bolg <i class="fa fa-external-link"></i></span>— 利用google apps script做中繼點跨網域遠端取得api資料* * )* <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5NzUyOQ==" title="https://ithelp.ithome.com.tw/articles/10197529">henry35208大神的鐵人邦<i class="fa fa-external-link"></i></span> — Promise介紹</li>
 <li><a href="https://github.com/axios/axios">axios的GitHub</a> — axios</li>
 <li><a href="https://github.com/camsong/blog/issues/2">camsong大神的GitHubg Bolg</a> — 傳統Ajax已死，Fetch永生</li>
-<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school 教學網站</a></li>
-<li><a href="https://opendata.epa.gov.tw/" target="_blank" rel="noopener">行政院環保署資料開放平臺</a></li>
-<li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener">*巴哈姆特 舒壓用</a>*</li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24v" title="http://www.w3school.com.cn/">W3school 教學網站<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuZGF0YS5lcGEuZ292LnR3Lw==" title="https://opendata.epa.gov.tw/">行政院環保署資料開放平臺<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2FtZXIuY29tLnR3L2luZGV4Mi5waHA/YWQ9Tg==" title="https://www.gamer.com.tw/index2.php?ad=N">*巴哈姆特 舒壓用<i class="fa fa-external-link"></i></span>*</li>
 </ul>
 
     </div>
@@ -604,20 +604,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -665,12 +665,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">106k</span>
+    <span title="總字數">112k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:36</span>
+    <span title="所需總閱讀時間">1:42</span>
 </div>
 
         

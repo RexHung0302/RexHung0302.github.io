@@ -297,7 +297,7 @@
 
       
         <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNEYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>三個月前開始了從零開始的學Code之路，碰了一陣子的JS，大概上個月撞見了Udemy然後買了幾個課程，加上一直都有再關注六角學院，偶然間發現了『新手JS地下城』，剛好最近在練習JS，心想這不正是上天的旨意嗎？！</p>
 <p>最初以為第一層大概都過不了了吧，結果就晃啊晃，騙吃騙喝到了4F。</p>
@@ -316,7 +316,7 @@
 </ul>
 <p><em>某些小地方偷偷用了Jquery (逃</em></p>
 <hr>
-<h3 id="使用-toLocaleString-Method"><a href="#使用-toLocaleString-Method" class="headerlink" title="使用 toLocaleString() Method"></a>使用 <a href="http://www.w3school.com.cn/jsref/jsref_toLocaleString_array.asp" target="_blank" rel="noopener">toLocaleString() Method</a></h3><blockquote>
+<h3 id="使用-toLocaleString-Method"><a href="#使用-toLocaleString-Method" class="headerlink" title="使用 toLocaleString() Method"></a>使用 <span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vanNyZWYvanNyZWZfdG9Mb2NhbGVTdHJpbmdfYXJyYXkuYXNw" title="http://www.w3school.com.cn/jsref/jsref_toLocaleString_array.asp">toLocaleString() Method<i class="fa fa-external-link"></i></span></h3><blockquote>
 <p><em>由於剛接觸JS不久，好多東西都是第一次接觸，看了很多範例，爬了無數的文後決定使用 toLocaleString。</em></p>
 </blockquote>
 <ul>
@@ -338,7 +338,7 @@
 
 <p>在第二個變數後加上 <strong>hour12: false</strong> 改為24小時制，另外我先把他們先變成陣列，之後方便再重新排列。</p>
 <hr>
-<h3 id="善用-split-Method-amp-slice-Method"><a href="#善用-split-Method-amp-slice-Method" class="headerlink" title="善用 split() Method &amp; slice Method"></a>善用 <a href="http://www.w3school.com.cn/jsref/jsref_split.asp" target="_blank" rel="noopener">split() Method</a> &amp; <a href="http://www.w3school.com.cn/jsref/jsref_slice_array.asp" target="_blank" rel="noopener">slice Method</a></h3><ul>
+<h3 id="善用-split-Method-amp-slice-Method"><a href="#善用-split-Method-amp-slice-Method" class="headerlink" title="善用 split() Method &amp; slice Method"></a>善用 <span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vanNyZWYvanNyZWZfc3BsaXQuYXNw" title="http://www.w3school.com.cn/jsref/jsref_split.asp">split() Method<i class="fa fa-external-link"></i></span> &amp; <span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vanNyZWYvanNyZWZfc2xpY2VfYXJyYXkuYXNw" title="http://www.w3school.com.cn/jsref/jsref_slice_array.asp">slice Method<i class="fa fa-external-link"></i></span></h3><ul>
 <li>重新排列時間 &amp; 月份</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SetDate</span>(<span class="params">location</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 設定月份英文</span></span><br><span class="line">  <span class="keyword">let</span> months = [<span class="string">'JAN'</span>, <span class="string">'FEB'</span>, <span class="string">'MAR'</span>, <span class="string">'APR'</span>, <span class="string">'MAY'</span>, <span class="string">'JUN'</span>, <span class="string">'JUL'</span>, <span class="string">'AUG'</span>, <span class="string">'SEP'</span>, <span class="string">'OCT'</span>, <span class="string">'NOV'</span>, <span class="string">'DEC'</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 設定日期並重新排列順序及修改成英文月份</span></span><br><span class="line">  <span class="keyword">let</span> date = location.split(<span class="string">'/'</span>);</span><br><span class="line">  <span class="keyword">let</span> date2 = date[<span class="number">2</span>] + <span class="string">' '</span> + months[date[<span class="number">1</span>] - <span class="number">1</span>] + <span class="string">' '</span> + date[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">return</span> date2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -357,7 +357,7 @@
 <p>最後再用html替換掉原本預設的字就行了，這邊也需要用到 slice(star,end) 抓取我們重新排列後需要的時間。</p>
 <p><img src="https://miro.medium.com/proxy/1*hwiv2QRKv21TpJAjJIenhA.png" alt="Finish Img"></p>
 <hr>
-<h3 id="何謂-GMT、UTC-時區-？-引用泛科知識"><a href="#何謂-GMT、UTC-時區-？-引用泛科知識" class="headerlink" title="何謂 GMT、UTC 時區 ？ 引用泛科知識"></a>何謂 GMT、UTC 時區 ？ <a href="https://pansci.asia/archives/84978" target="_blank" rel="noopener">引用泛科知識</a></h3><ul>
+<h3 id="何謂-GMT、UTC-時區-？-引用泛科知識"><a href="#何謂-GMT、UTC-時區-？-引用泛科知識" class="headerlink" title="何謂 GMT、UTC 時區 ？ 引用泛科知識"></a>何謂 GMT、UTC 時區 ？ <span class="exturl" data-url="aHR0cHM6Ly9wYW5zY2kuYXNpYS9hcmNoaXZlcy84NDk3OA==" title="https://pansci.asia/archives/84978">引用泛科知識<i class="fa fa-external-link"></i></span></h3><ul>
 <li><p><strong>GMT 格林威治平時 （Greenwich Mean Time）</strong></p>
 <blockquote>
 <p><em>這是一個大家都熟悉且習慣了的名字，至1884年確立，1924年開始向全世界播報時間。</em><br><em>觀察者隨時監控太陽在天空的位置，把每天最高的仰角記錄下來，這個時間點稱作「過中天」。一般理解為兩次的「過中天」相隔等於24小時，也就是一天，但是一年之中會有「比較長的一天」與「比較短的一天」。</em><br><em>所以觀測者必須要至少連續觀測一年，然後求取 365 個長度不一的「天」，再把他們全部平均後，得到固定的一天長度，之後再細分成時、分、秒等單位。這個就是GMT。</em></p>
@@ -378,8 +378,8 @@
 <ul>
 <li><strong>那我要怎麼轉換？</strong></li>
 </ul>
-<p><a href="https://unixtime.51240.com/" target="_blank" rel="noopener">點我進入神奇的地方</a></p>
-<p><a href="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/" target="_blank" rel="noopener">各種語言轉換方式</a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly91bml4dGltZS41MTI0MC5jb20v" title="https://unixtime.51240.com/">點我進入神奇的地方<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zaGF6aS5pbmZvL3VuaXgtdGltZXN0YW1wLSVFNiU5OSU4MiVFOSU5NiU5MyVFNiVBMCVCQyVFNSVCQyU4RiVFOCVCRCU4OSVFNiU4RiU5Qi0lRTclQUQlODYlRTglQTglOTgv" title="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/">各種語言轉換方式<i class="fa fa-external-link"></i></span></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次練習到了不只是如何抓取時間，還學到了怎麼用Function去簡化我的程式碼，達到簡潔的效果，另外自覺陣列跟Function還有邏輯的部分是自己需要加強的。</p>
 <p>最後我想最需要加強的是文筆啦啦啦，第一次寫Blog，覺得這邏輯比JS邏輯還難，總想著要簡明扼要打出重點，結果就屁話一堆la。</p>
@@ -396,27 +396,27 @@
 <h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
 <li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
 <blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMUYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
 <blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMkYvY2xvY2suaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
 <blockquote>
-<p>Demo：<a href="http://href=" target="_blank" rel="noopener"http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL2hyZWY9" title="http://href=">點我<i class="fa fa-external-link"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
 </blockquote>
 </li>
 </ul>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><a href="https://noob.tw/js-timezone/" target="_blank" rel="noopener">Noob’s Space 4F前端之碑主的Blog</a></li>
-<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school 教學網站</a></li>
-<li><a href="https://pansci.asia/archives/84978" target="_blank" rel="noopener">泛科知識</a></li>
-<li><a href="https://unixtime.51240.com/" target="_blank" rel="noopener">便民查詢網 時間轉換</a></li>
-<li><a href="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/" target="_blank" rel="noopener">MR.沙先生Blog 時間格式轉換方法</a></li>
-<li><a href="https://imgur.com/" target="_blank" rel="noopener">imgur 圖片上傳網站</a></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ub29iLnR3L2pzLXRpbWV6b25lLw==" title="https://noob.tw/js-timezone/">Noob’s Space 4F前端之碑主的Blog<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24v" title="http://www.w3school.com.cn/">W3school 教學網站<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wYW5zY2kuYXNpYS9hcmNoaXZlcy84NDk3OA==" title="https://pansci.asia/archives/84978">泛科知識<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly91bml4dGltZS41MTI0MC5jb20v" title="https://unixtime.51240.com/">便民查詢網 時間轉換<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaGF6aS5pbmZvL3VuaXgtdGltZXN0YW1wLSVFNiU5OSU4MiVFOSU5NiU5MyVFNiVBMCVCQyVFNSVCQyU4RiVFOCVCRCU4OSVFNiU4RiU5Qi0lRTclQUQlODYlRTglQTglOTgv" title="https://shazi.info/unix-timestamp-%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E8%BD%89%E6%8F%9B-%E7%AD%86%E8%A8%98/">MR.沙先生Blog 時間格式轉換方法<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pbWd1ci5jb20v" title="https://imgur.com/">imgur 圖片上傳網站<i class="fa fa-external-link"></i></span></li>
 <li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
 </ul>
 
@@ -559,20 +559,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -620,12 +620,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">106k</span>
+    <span title="總字數">112k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:36</span>
+    <span title="所需總閱讀時間">1:42</span>
 </div>
 
         

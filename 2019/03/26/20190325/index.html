@@ -327,7 +327,7 @@
 </ol>
 <p>說了這麼多，小總結一下還是必須挑自己需要並且願意花時間成本在上面的框架去學習，因為每學一個都是一個時間的付出，在資訊爆炸的時代，更新速度又這麼快，<strong>「不管任何東西都沒有所謂最好，只有所謂最適合」</strong>。</p>
 <p>然而在使用 <strong>Vue</strong> 之前還是先建議一下必須有基本的 <strong>HTML CSS JavaScript</strong> 知識(雖然自己也沒有敢說很熟…掩面</p>
-<p>在開始前先解釋一下什麼是 <strong>Vue-Cli</strong> ，它是作者開發的 <strong>vue</strong> 懶人開發包，裡面包含有 <strong>5</strong> 種結構，從最基礎的 <strong>simple</strong> 到 <strong>browserify</strong> 以及 <strong>webpack</strong> 版本皆可以自由選擇，詳細不多說，可以<a href="https://ithelp.ithome.com.tw/articles/10184919" target="_blank" rel="noopener">點我</a>看文章。</p>
+<p>在開始前先解釋一下什麼是 <strong>Vue-Cli</strong> ，它是作者開發的 <strong>vue</strong> 懶人開發包，裡面包含有 <strong>5</strong> 種結構，從最基礎的 <strong>simple</strong> 到 <strong>browserify</strong> 以及 <strong>webpack</strong> 版本皆可以自由選擇，詳細不多說，可以<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE4NDkxOQ==" title="https://ithelp.ithome.com.tw/articles/10184919">點我<i class="fa fa-external-link"></i></span>看文章。</p>
 <p>廢話說多了，下面立馬進入正題。</p>
 <hr>
 <p><img src="https://cdn-images-1.medium.com/max/3168/1*-592TAQ_pl-xSqe_p6-iUQ.png" alt="*Node Package Manager*"></p>
@@ -342,7 +342,7 @@
 </blockquote>
 </li>
 </ol>
-<p>因為文章主要是在 <strong>Vue-cli</strong> 部分，所以安裝 <strong>Node.js</strong> 及 <strong>NPM</strong> 的部分會略過，關於 <strong>Node.js</strong> 的安裝可以<a href="https://blog.gtwang.org/web-development/install-node-js-in-windows-mac-os-x-linux/" target="_blank" rel="noopener">點我</a>，另一種安裝 <strong>Node.js</strong> 及 <strong>NPM</strong> 的部分可以<a href="https://medium.com/html-test/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-%E4%BD%BF%E7%94%A8npm%E5%A5%97%E4%BB%B6-317beefdf182" target="_blank" rel="noopener">點我</a>。</p>
+<p>因為文章主要是在 <strong>Vue-cli</strong> 部分，所以安裝 <strong>Node.js</strong> 及 <strong>NPM</strong> 的部分會略過，關於 <strong>Node.js</strong> 的安裝可以<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmd0d2FuZy5vcmcvd2ViLWRldmVsb3BtZW50L2luc3RhbGwtbm9kZS1qcy1pbi13aW5kb3dzLW1hYy1vcy14LWxpbnV4Lw==" title="https://blog.gtwang.org/web-development/install-node-js-in-windows-mac-os-x-linux/">點我<i class="fa fa-external-link"></i></span>，另一種安裝 <strong>Node.js</strong> 及 <strong>NPM</strong> 的部分可以<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2h0bWwtdGVzdC8lRTUlQkUlOUUlRTklOUIlQjYlRTklOTYlOEIlRTUlQTclOEItJUU0JUJEJUJGJUU3JTk0JUE4bnBtJUU1JUE1JTk3JUU0JUJCJUI2LTMxN2JlZWZkZjE4Mg==" title="https://medium.com/html-test/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-%E4%BD%BF%E7%94%A8npm%E5%A5%97%E4%BB%B6-317beefdf182">點我<i class="fa fa-external-link"></i></span>。</p>
 <hr>
 <h3 id="重頭戲來了"><a href="#重頭戲來了" class="headerlink" title="重頭戲來了"></a>重頭戲來了</h3><p>安裝好 <strong>Node.js</strong> 及 <strong>NPM</strong> 後打開你的終端機，輸入其中一個指令開始全域安裝：</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">npm</span> install -g @vue/cli</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">$ yarn <span class="built_in">global</span> add @vue/cli</span><br></pre></td></tr></table></figure>
@@ -373,23 +373,23 @@
 <p><img src="https://cdn-images-1.medium.com/max/2692/1*pGo9Alb0wbtekkAx1tYbYg.png" alt="所有指令都在這"></p>
 <p>點進輸出裡，你就能知道在你按下滑鼠按鍵的時候， <strong>Vue</strong> 都幫你幹了什麼事，說到這兒，大家應該都把第一個專案建起來了吧，點進上面那兩串網址其中一個。</p>
 <p>App running at:</p>
-<p> — Local: <a href="http://localhost:8083/" target="_blank" rel="noopener">http://localhost:8083/</a> </p>
-<p> — Network: <a href="http://192.168.1.110:8083/" target="_blank" rel="noopener">http://192.168.1.110:8083/</a></p>
+<p> — Local: <span class="exturl" data-url="aHR0cDovL2xvY2FsaG9zdDo4MDgzLw==" title="http://localhost:8083/">http://localhost:8083/<i class="fa fa-external-link"></i></span> </p>
+<p> — Network: <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMS4xMTA6ODA4My8=" title="http://192.168.1.110:8083/">http://192.168.1.110:8083/<i class="fa fa-external-link"></i></span></p>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*60yel0eQJ6UW8HCjDM3fxQ.png" alt="你的第一個專案出爐囉"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實這算是我第一次 <strong>Build</strong> 出一個專案，最開始在寫 <strong>html</strong> 的時候常常因為同一個 <strong>header</strong> 跟 <strong>layout</strong> 不同的內容卻要弄出好幾個差不多的檔案，就在思考，該怎麼樣才能有效的分離他們，並且減少程式碼。</p>
-<p>剛好最近在 <strong><a href="https://www.udemy.com/" target="_blank" rel="noopener">Udemy</a></strong> 的 <a href="https://www.facebook.com/hexschool/" target="_blank" rel="noopener"><strong>六角學院</strong> </a>— 勇者地下城 挑戰中發現好多人在使用 <strong>Vue</strong>，讓我又開始想嘗試著挑戰看看，才開始碰我的第一個 <strong>Vue</strong> 專案，所以如果內容有什麼錯誤的話，要麻煩各路高手大大包容，並且不吝嗇指教了。</p>
+<p>剛好最近在 <strong><span class="exturl" data-url="aHR0cHM6Ly93d3cudWRlbXkuY29tLw==" title="https://www.udemy.com/">Udemy<i class="fa fa-external-link"></i></span></strong> 的 <a href="https://www.facebook.com/hexschool/" target="_blank" rel="noopener"><strong>六角學院</strong> </a>— 勇者地下城 挑戰中發現好多人在使用 <strong>Vue</strong>，讓我又開始想嘗試著挑戰看看，才開始碰我的第一個 <strong>Vue</strong> 專案，所以如果內容有什麼錯誤的話，要麻煩各路高手大大包容，並且不吝嗇指教了。</p>
 <p>這次寫部落格紀錄，主要是希望養成自己的習慣，並且希望幾年後再回頭看看自己，能一樣保持著寫程式的熱衷還有那份初衷。</p>
 <p>關於 <strong>Vue</strong> 的更多學習歷程，會再繼續新增文章上去，希望就算只有 <strong>0.1</strong> 能幫助到那個在疑惑的你，或是迷茫需要解答的自己，這篇文章就值得了，我們下次見。</p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><a href="https://medium.com/html-test/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-%E4%BD%BF%E7%94%A8npm%E5%A5%97%E4%BB%B6-317beefdf182" target="_blank" rel="noopener">sexyoung大大的Medium</a> — 從零開始: 使用NPM套件</li>
-<li><a href="https://blog.johnsonlu.org/getting-started-with-vue/" target="_blank" rel="noopener">佛祖球球 </a>— Getting Started with Vue</li>
-<li><a href="http://chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=Vue%20%E6%B5%85%E8%B0%88%E5%89%8D%E7%AB%AFjs%E6%A1%86%E6%9E%B6vue%20-%20Or_so%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD&pos=423&uri=https://www.cnblogs.com/mxs-blog/p/8059213.html" target="_blank" rel="noopener">Or_so </a>— 淺談前端js框vue</li>
-<li><a href="https://www.brilliantcode.net/907/mac-vue-js-development-environment-setup/" target="_blank" rel="noopener">Andy Wang Blog </a>— 學習Vue.js 開發環境建置</li>
-<li><a href="https://buzzorange.com/techorange/2017/07/31/all-about-javascript-framework/" target="_blank" rel="noopener">TechOrange</a> — 框架大比拼</li>
-<li><a href="https://segmentfault.com/a/1190000015366009" target="_blank" rel="noopener">segmentfault</a> — 更多的Vue-cli UI圖文教學</li>
-<li><a href="https://www.udemy.com/" target="_blank" rel="noopener">Udemy </a>— 學習網站</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2h0bWwtdGVzdC8lRTUlQkUlOUUlRTklOUIlQjYlRTklOTYlOEIlRTUlQTclOEItJUU0JUJEJUJGJUU3JTk0JUE4bnBtJUU1JUE1JTk3JUU0JUJCJUI2LTMxN2JlZWZkZjE4Mg==" title="https://medium.com/html-test/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B-%E4%BD%BF%E7%94%A8npm%E5%A5%97%E4%BB%B6-317beefdf182">sexyoung大大的Medium<i class="fa fa-external-link"></i></span> — 從零開始: 使用NPM套件</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmpvaG5zb25sdS5vcmcvZ2V0dGluZy1zdGFydGVkLXdpdGgtdnVlLw==" title="https://blog.johnsonlu.org/getting-started-with-vue/">佛祖球球 <i class="fa fa-external-link"></i></span>— Getting Started with Vue</li>
+<li><span class="exturl" data-url="aHR0cDovL2Nocm9tZS1leHRlbnNpb246Ly9rbGJpYmtlY2Nuamxramtpb2tqb2RvY2ViYWphbmFrZy9zdXNwZW5kZWQuaHRtbCN0dGw9VnVlJTIwJUU2JUI1JTg1JUU4JUIwJTg4JUU1JTg5JThEJUU3JUFCJUFGanMlRTYlQTElODYlRTYlOUUlQjZ2dWUlMjAtJTIwT3Jfc28lMjAtJTIwJUU1JThEJTlBJUU1JUFFJUEyJUU1JTlCJUFEJnBvcz00MjMmdXJpPWh0dHBzOi8vd3d3LmNuYmxvZ3MuY29tL214cy1ibG9nL3AvODA1OTIxMy5odG1s" title="http://chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=Vue%20%E6%B5%85%E8%B0%88%E5%89%8D%E7%AB%AFjs%E6%A1%86%E6%9E%B6vue%20-%20Or_so%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD&pos=423&uri=https://www.cnblogs.com/mxs-blog/p/8059213.html">Or_so <i class="fa fa-external-link"></i></span>— 淺談前端js框vue</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJpbGxpYW50Y29kZS5uZXQvOTA3L21hYy12dWUtanMtZGV2ZWxvcG1lbnQtZW52aXJvbm1lbnQtc2V0dXAv" title="https://www.brilliantcode.net/907/mac-vue-js-development-environment-setup/">Andy Wang Blog <i class="fa fa-external-link"></i></span>— 學習Vue.js 開發環境建置</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9idXp6b3JhbmdlLmNvbS90ZWNob3JhbmdlLzIwMTcvMDcvMzEvYWxsLWFib3V0LWphdmFzY3JpcHQtZnJhbWV3b3JrLw==" title="https://buzzorange.com/techorange/2017/07/31/all-about-javascript-framework/">TechOrange<i class="fa fa-external-link"></i></span> — 框架大比拼</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAxNTM2NjAwOQ==" title="https://segmentfault.com/a/1190000015366009">segmentfault<i class="fa fa-external-link"></i></span> — 更多的Vue-cli UI圖文教學</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudWRlbXkuY29tLw==" title="https://www.udemy.com/">Udemy <i class="fa fa-external-link"></i></span>— 學習網站</li>
 <li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
 </ul>
 
@@ -536,20 +536,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -597,12 +597,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">106k</span>
+    <span title="總字數">112k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:36</span>
+    <span title="所需總閱讀時間">1:42</span>
 </div>
 
         
