@@ -45,7 +45,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;series_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;stream_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;compare.png">
-<meta property="og:updated_time" content="2020-05-05T15:52:32.619Z">
+<meta property="og:updated_time" content="2020-05-05T16:49:32.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;gulp_logo.jpg">
 
@@ -238,10 +238,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-05-05 07:11:00 / 修改時間：23:52:32" itemprop="dateCreated datePublished" datetime="2020-05-05T07:11:00+08:00">2020-05-05</time>
+              <time title="創建時間：2020-05-05 07:11:00" itemprop="dateCreated datePublished" datetime="2020-05-05T07:11:00+08:00">2020-05-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-06 00:49:32" itemprop="dateModified" datetime="2020-05-06T00:49:32+08:00">2020-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -280,7 +286,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>7.7k</span>
+              <span>7.8k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -347,7 +353,7 @@
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install gulp-<span class="keyword">cli</span> -g // 安裝全域的 gulp-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
 
 <p>接著進到你要實作的專案底下輸入以下指令(安裝路徑記得要對喔！！)，縮寫的 <strong>i</strong> 為 <strong>install</strong> 縮寫 <strong>-D</strong> 為 <strong>–save-dev</strong> 的縮寫，意指只安裝到 <strong>package.json</strong> 的 <strong>devDependencies</strong>，不理解的話先略過沒關係</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="selector-tag">i</span> -D gulp <span class="comment">// 安裝 gulp 到專案，</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="selector-tag">i</span> -D gulp <span class="comment">// 安裝 gulp 到專案</span></span><br></pre></td></tr></table></figure>
 
 <p>安裝完成輸入 <code>gulp --version</code> ，如果看見下圖 <strong>Local version: Unknown</strong> 就代表你目前在錯誤的目錄，一定要進到你要實作的專案底下安裝才會有版本號出現！</p>
 <p><img src="/images/20200506/gulp_install_finished.png" alt="安裝完成"></p>
@@ -445,8 +451,9 @@
 <h3 id="超級比一比"><a href="#超級比一比" class="headerlink" title="超級比一比"></a>超級比一比</h3><p>雖然這樣比好像不是正確的，但目前自己練習完 <strong>Webpack</strong> 及 <strong>Gulp</strong> 之後的整理心得如下圖，如果想入門一探這兩種自動建構工具的學習基礎：</p>
 <p><img src="/images/20200506/compare.png" alt="自動化建構工具比一比"></p>
 <hr>
-<h3 id="你要的魚在這"><a href="#你要的魚在這" class="headerlink" title="你要的魚在這"></a>你要的魚在這</h3><blockquote>
-<p><strong>範例傳送門 =&gt; <a href="#">點我</a></strong></p>
+<h3 id="你要的魚在這"><a href="#你要的魚在這" class="headerlink" title="你要的魚在這"></a>你要的魚在這</h3><p>這邊提供一個範例，包含 <strong>JS 編譯、Sass/Scss 編譯、檔案複製、檔案監聽、模擬瀏覽器</strong>…等等，之後會再補上 <strong>HTML</strong> 模板部分，可至 <strong>GitHtb</strong> 的 <strong>README.md</strong> 查看安裝的過程。</p>
+<blockquote>
+<p><strong>Gulp 範例傳送門 =&gt; <a href="https://github.com/RexHung0302/GulpPractice">點我</a></strong></p>
 </blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實以前已經想研究 <strong>Gulp</strong> 很久了，這次會接觸也是因為<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=" title="https://www.hexschool.com/courses/web-layout-training-1st.html">六角切版直播班<i class="fa fa-external-link"></i></span>，但因為是切版為主，課程沒有太在 <strong>Gulp</strong> 著墨，但我想工程師的本質都是想追根究底的，碰到東西還是會想研究學習一番，畢竟之後開始處理問題總不能一直拿老師的範例吧。</p>
