@@ -45,7 +45,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;series_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;stream_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;compare.png">
-<meta property="og:updated_time" content="2020-05-06T04:43:20.720Z">
+<meta property="og:updated_time" content="2020-05-06T04:45:00.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200506&#x2F;gulp_logo.jpg">
 
@@ -246,7 +246,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-05-06 12:43:20" itemprop="dateModified" datetime="2020-05-06T12:43:20+08:00">2020-05-06</time>
+                <time title="修改時間：2020-05-06 12:45:00" itemprop="dateModified" datetime="2020-05-06T12:45:00+08:00">2020-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -399,7 +399,7 @@
 <blockquote>
 <p><em>除了前面寫的 cb() 當作結束任務外，任務還可以使用諸如 <code>promise</code>、<code>event emitter</code>、<code>child process</code>或<code>observable</code>…等等，詳細可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9hc3luYy1jb21wbGV0aW9uLw==" title="https://www.gulpjs.com.cn/docs/getting-started/async-completion/">官方指南<i class="fa fa-external-link"></i></span>，如果都不用就是必須向前面寫的，要有一個 <strong>callback</strong>(例：cb())。</em></p>
 </blockquote>
-<h4 id="關鍵懶人包一"><a href="#關鍵懶人包一" class="headerlink" title="關鍵懶人包一"></a>關鍵懶人包一</h4><p><strong>上述例子做完你已經學會了基本的兩個 **API</strong>，<code>series</code> 及 <code>parallel</code>，只要記得要呼叫任務就是使用這兩個，前者為不同步呼叫，後者為同步呼叫！**</p>
+<h4 id="關鍵懶人包一"><a href="#關鍵懶人包一" class="headerlink" title="關鍵懶人包一"></a>關鍵懶人包一</h4><p><strong>上述例子做完你已經學會了基本的兩個API，<code>series</code> 及 <code>parallel</code>，只要記得要呼叫任務就是使用這兩個，前者為不同步呼叫，後者為同步呼叫！</strong></p>
 <h3 id="還有什麼全都拿出來！"><a href="#還有什麼全都拿出來！" class="headerlink" title="還有什麼全都拿出來！"></a>還有什麼全都拿出來！</h3><p>再學會前面兩個基本的 <strong>API</strong> 後，這邊開始我們要學另外<strong>兩個</strong>基本的 <strong>API</strong>；想要 <strong>自動化建構</strong> 我們最基本需要的事情就是 <strong>操作檔案</strong>。</p>
 <blockquote>
 <p><em>為什麼 <strong>Gulp</strong> 的 <strong>API</strong> 可以操作檔案呢？因為他接受 <strong>glob</strong> 參數，詳細的介紹可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9leHBsYWluaW5nLWdsb2JzLw==" title="https://www.gulpjs.com.cn/docs/getting-started/explaining-globs/">此處<i class="fa fa-external-link"></i></span>。</em></p>
@@ -433,7 +433,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 來源, 目的地</span></span><br><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">js</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">'./app/assets/js/*.js'</span>)  <span class="comment">// 讀取資料夾 ./app/assets/js 底下的所有 .js 檔案</span></span><br><span class="line">    .pipe(dest(<span class="string">'./dist'</span>)) <span class="comment">// 輸出所有被讀取的 .js 檔案</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = js</span><br></pre></td></tr></table></figure>
 
 <p>接著在終端機輸入 <strong>gulp(或 gulp default)</strong>，就會開始編譯，這時候你會發現多出一個 <strong>dist</strong> 資料夾，仔細瞧，你的自動化已經踏出一大步了！</p>
-<h4 id="關鍵懶人包二"><a href="#關鍵懶人包二" class="headerlink" title="關鍵懶人包二"></a>關鍵懶人包二</h4><p><strong>上述例子做完你又學會了基本的兩個 **API</strong>，<code>src()</code> 及 <code>dest()</code>，只要記得想要操作檔案，就要取檔案及輸出檔案，前者為取得檔案，後者為輸出檔案，而這中間的過程可以對檔案做一些<del>壞壞的事情</del>想做的事情！**</p>
+<h4 id="關鍵懶人包二"><a href="#關鍵懶人包二" class="headerlink" title="關鍵懶人包二"></a>關鍵懶人包二</h4><p><strong>上述例子做完你又學會了基本的兩個API，<code>src()</code> 及 <code>dest()</code>，只要記得想要操作檔案，就要取檔案及輸出檔案，前者為取得檔案，後者為輸出檔案，而這中間的過程可以對檔案做一些<del>壞壞的事情</del>想做的事情！</strong></p>
 <hr>
 <h4 id="補充說明"><a href="#補充說明" class="headerlink" title="補充說明"></a>補充說明</h4><p>上面提到的 <code>.pipe(dest())</code> 為 <code>gulp</code> 提供的一個 <strong>API</strong>，而我們有一些多的套件都可以加入到這裡面，比方說 <code>ES6</code> 編譯，接著來學習怎麼使用套件吧！</p>
 <p>先輸入 <code>npm i -D gulp-babel @babel/core @babel/preset-env</code> 然後在  <strong>gulpfile.js</strong> 上方引入 <code>const babel = require(&#39;gulp-babel&#39;);</code> 編譯套件，接著在把前面提到的範例程式碼做一下改編：</p>
