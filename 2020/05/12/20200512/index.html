@@ -34,7 +34,8 @@
 <meta property="og:description" content="Introduction &amp;amp; 前言結束了前兩週的 RWD 地獄式訓練，這週迎來的是難度稍微低一點的後台表單設計，因為後台通常很少用手機看，所以本週沒有 RWD。 因為這次的課程有提到 Bootstrap，所以這次作業老師是建議套上 Bootstrap，但因為平常就有在使用，所以想改用手幹的方式看看能不能幹出一個 Modal 以及 Table。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
-<meta property="og:updated_time" content="2020-05-11T19:33:56.087Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;select_style.png">
+<meta property="og:updated_time" content="2020-05-11T20:01:33.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
 
@@ -229,7 +230,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-05-12 03:33:00 / 修改時間：03:33:56" itemprop="dateCreated datePublished" datetime="2020-05-12T03:33:00+08:00">2020-05-12</time>
+              <time title="創建時間：2020-05-12 03:33:00 / 修改時間：04:01:33" itemprop="dateCreated datePublished" datetime="2020-05-12T03:33:00+08:00">2020-05-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,14 +270,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>2.4k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>2 分鐘</span>
+              <span>3 分鐘</span>
             </span>
 
         </div>
@@ -340,6 +341,19 @@
 <p>主要就是要將 <strong>Modal</strong> 的 <strong>Div</strong> 放置中央，透過 <code>display: flex;</code> 應該可以很快就辦到！</p>
 <p>這邊用類似上次第三週助教<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL1R6dUh1aS9wZW4vV05RUmpYZA==" title="https://codepen.io/TzuHui/pen/WNQRjXd">漢堡鈕<i class="fa fa-external-link"></i></span>的寫法，設定好樣式之後，透過最大寬度或是最大高度，預設為 <strong>0</strong> 的方式隱藏它，最後在透過 <strong>JavaScript</strong> 的操作，替設定寬高為 <strong>0</strong> 的那個 <strong>Div</strong> 加上額外的 <strong>Class Name</strong>，比如 <strong>show</strong>，然後透過這個 <strong>Class Name</strong> 去吃另一個設定好的 <em>CSS</em>，之後就會把原本預設寬高為 <strong>0</strong> 的 <strong>CSS</strong> 給蓋過去了！</p>
 <p>另外應該就是對話框的部分，這邊也是要透過 <strong>JS</strong> 去取得 <strong>Div</strong> 的寬高。這邊透過 <code>$(&#39;.xxx&#39;).height()</code> <code>$(&#39;.xxx&#39;).width()</code> 這種方式取得元素的高及寬，最後一樣加上 <code>transition: all .5s ease</code> 這樣動畫才跑得順！</p>
+<h3 id="關於-Select"><a href="#關於-Select" class="headerlink" title="關於 Select"></a>關於 Select</h3><p>我記得上課時校長才說如果你的設計師出了很多更改原本 <strong>Select</strong> 樣式的設計稿，記得去跟他<del>吵一番</del>討論，因為要強制改 <strong>Select</strong> 的內容是不大可能的，幾乎都要另外寫樣式才能，但還好六角的設計師還夠有良心，沒有坐下拉的部分，但是預設的箭頭樣式跟原本的差滿大的，先來一張原本 <strong>Select</strong> 的樣式照片。</p>
+<p><img src="/images/20200512/select_style.png" alt="預設樣式"></p>
+<p>這時我們大概就是只能更改 <strong>Select</strong> 的背景為白色，然後透過隱藏下拉的箭頭符號，自己替換上圖片或是 Icon 來達到外觀與設計稿一致，裡面想當然耳如果不客製化 <strong>Div</strong> 是不太可能了，總之我們先讓他 <strong>87%</strong> 像吧！</p>
+<p>透過使用 <code>appearance:none;</code> 來隱藏預設下拉箭頭，如果怕瀏覽器不同語法支援程度也不同的話可以考慮改為下方範例，改掉箭頭，背景改為透明，取消預設邊框：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">select</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ffffff00</span>;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">  appearance:none;  // 隱藏預設下拉箭頭</span><br><span class="line">  <span class="selector-tag">-moz-appearance</span><span class="selector-pseudo">:none</span>;</span><br><span class="line">  <span class="selector-tag">-webkit-appearance</span><span class="selector-pseudo">:none</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="關於輸入框"><a href="#關於輸入框" class="headerlink" title="關於輸入框"></a>關於輸入框</h3><p>最後這個要稍微提一下，因為看到設計稿對話框框的的樣式不像是一般的 <strong>Input</strong>，所以這邊就採用了 <strong>contenteditable</strong> 這個屬性，他是一個可以讓你編輯元素的屬性，只要在 <strong>Element</strong> 上加上這個屬性即可編輯。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">contenteditable</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是我們要怎麽替 <strong>Div</strong> 加上 <strong>PlaceHolder</strong> 呢？這時候就要靠 <strong>CSS</strong> 來幫我們辦到這件事情了！</p>
+<p>這邊我們會用到 <strong>Attribute selectors（屬性選取器）</strong> 來選擇，就是會用中括弧來選擇特定的屬性，透過 <code>[contenteditable][placeholder]</code> 來找到這個 <strong>Div</strong> 並在後面加上 <code>:empty:before</code>，代表內容是空的時候就加上偽元素，這樣是不是超方便的呀，例子就像下方這樣：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[contenteditable]</span><span class="selector-attr">[placeholder]</span><span class="selector-pseudo">:empty</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(placeholder);</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">color</span>: gray;</span><br><span class="line">  <span class="attribute">background-color</span>: transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <hr>
 <h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果"><a href="#任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果" class="headerlink" title="任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果"></a>任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果</h4><p>待補上 CodePen</p>
 <h4 id="任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視"><a href="#任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視" class="headerlink" title="任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視"></a>任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視</h4><p>本次 <strong>Table</strong> 就是使用 <strong>HTML</strong> 裡的表格標籤，就不另外做了。</p>
@@ -485,7 +499,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-CSS-Reset-及-CSS-Normalize"><span class="nav-text">關於 CSS Reset 及 CSS Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap"><span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果"><span class="nav-text">任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視"><span class="nav-text">任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務三-討論第五週版型該怎麼做"><span class="nav-text">任務三 - 討論第五週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-CSS-Reset-及-CSS-Normalize"><span class="nav-text">關於 CSS Reset 及 CSS Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap"><span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-Select"><span class="nav-text">關於 Select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於輸入框"><span class="nav-text">關於輸入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果"><span class="nav-text">任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視"><span class="nav-text">任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務三-討論第五週版型該怎麼做"><span class="nav-text">任務三 - 討論第五週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -562,12 +576,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">131k</span>
+    <span title="總字數">132k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">1:59</span>
+    <span title="所需總閱讀時間">2:01</span>
 </div>
 
         
