@@ -36,7 +36,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;modal-example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;select_style.png">
-<meta property="og:updated_time" content="2020-05-13T08:35:11.842Z">
+<meta property="og:updated_time" content="2020-05-13T08:46:44.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
 
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-05-13 16:35:11" itemprop="dateModified" datetime="2020-05-13T16:35:11+08:00">2020-05-13</time>
+                <time title="修改時間：2020-05-13 16:46:44" itemprop="dateModified" datetime="2020-05-13T16:46:44+08:00">2020-05-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -363,7 +363,7 @@
 <p>這邊提供一下這次自己實作的的方法， <code>.modal</code> 為要顯示的彈窗，加上 <code>background-color: rgba(0, 0, 0, 0.7);</code> 看起來會更有彈窗的感覺：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.modal</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: auto;</span><br><span class="line">  <span class="attribute">transition</span>: all <span class="number">250ms</span> ease;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(0, 0);</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0.7);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其中 Modal 可以縮放的動畫就是透過 <code>transform: scale(0, 0);</code> 及 <code>transition: all 250ms ease;</code>，其實只要你更改到 CSS 樣式，在那個元件加上 <code>transition: all 250ms ease;</code> 就會替你更改的事情加上補間動畫，有興趣可以參考<span class="exturl" data-url="aHR0cHM6Ly93d3cub3h4b3N0dWRpby50dy9hcnRpY2xlcy8yMDE4MDMvY3NzLWFuaW1hdGlvbi5odG1s" title="https://www.oxxostudio.tw/articles/201803/css-animation.html">此篇文章<i class="fa fa-external-link"></i></span>。</p>
+<p>其中 <strong>Modal</strong> 可以縮放的動畫就是透過 <code>transform: scale(0, 0);</code> 及 <code>transition: all 250ms ease;</code>，其實只要你更改到 CSS 樣式，在那個元件加上 <code>transition: all 250ms ease;</code> 就會替你更改的事情加上補間動畫，有興趣可以參考<span class="exturl" data-url="aHR0cHM6Ly93d3cub3h4b3N0dWRpby50dy9hcnRpY2xlcy8yMDE4MDMvY3NzLWFuaW1hdGlvbi5odG1s" title="https://www.oxxostudio.tw/articles/201803/css-animation.html">此篇文章<i class="fa fa-external-link"></i></span>。</p>
 <p>接著再透過 <strong>JavaScript</strong> 的操作，在點擊要開啟彈窗的地方加上 <code>onclick=&quot;showDetailModalHandler()&quot;</code>，例如下列程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"#"</span> onclick=<span class="string">"showDetailModalHandler()"</span>&gt;</span><br><span class="line">  &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"material-icons icon"</span>&gt;visibility&lt;<span class="regexp">/i&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>a&gt;</span><br></pre></td></tr></table></figure>
 
