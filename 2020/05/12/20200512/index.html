@@ -35,7 +35,7 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;select_style.png">
-<meta property="og:updated_time" content="2020-05-12T10:27:44.724Z">
+<meta property="og:updated_time" content="2020-05-13T07:13:44.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200512&#x2F;week_5_classLogo.png">
 
@@ -228,10 +228,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-05-12 03:33:00 / 修改時間：18:27:44" itemprop="dateCreated datePublished" datetime="2020-05-12T03:33:00+08:00">2020-05-12</time>
+              <time title="創建時間：2020-05-12 03:33:00" itemprop="dateCreated datePublished" datetime="2020-05-12T03:33:00+08:00">2020-05-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-13 15:13:44" itemprop="dateModified" datetime="2020-05-13T15:13:44+08:00">2020-05-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -341,7 +347,7 @@
 <p>主要就是要將 <strong>Modal</strong> 的 <strong>Div</strong> 放置中央，透過 <code>display: flex;</code> 應該可以很快就辦到！</p>
 <p>這邊用類似上次第三週助教<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL1R6dUh1aS9wZW4vV05RUmpYZA==" title="https://codepen.io/TzuHui/pen/WNQRjXd">漢堡鈕<i class="fa fa-external-link"></i></span>的寫法，設定好樣式之後，透過最大寬度或是最大高度，預設為 <strong>0</strong> 的方式隱藏它，最後在透過 <strong>JavaScript</strong> 的操作，替設定寬高為 <strong>0</strong> 的那個 <strong>Div</strong> 加上額外的 <strong>Class Name</strong>，比如 <strong>show</strong>，然後透過這個 <strong>Class Name</strong> 去吃另一個設定好的 <em>CSS</em>，之後就會把原本預設寬高為 <strong>0</strong> 的 <strong>CSS</strong> 給蓋過去了！</p>
 <p>另外應該就是對話框的部分，這邊也是要透過 <strong>JS</strong> 去取得 <strong>Div</strong> 的寬高。這邊透過 <code>$(&#39;.xxx&#39;).height()</code> <code>$(&#39;.xxx&#39;).width()</code> 這種方式取得元素的高及寬，最後一樣加上 <code>transition: all .5s ease</code> 這樣動畫才跑得順！</p>
-<h3 id="關於-Select"><a href="#關於-Select" class="headerlink" title="關於 Select"></a>關於 Select</h3><p>我記得上課時校長才說如果你的設計師出了很多更改原本 <strong>Select</strong> 樣式的設計稿，記得去跟他<del>吵一番</del>討論，因為要強制改 <strong>Select</strong> 的內容是不大可能的，幾乎都要另外寫樣式才能，但還好六角的設計師還夠有良心，沒有坐下拉的部分，但是預設的箭頭樣式跟原本的差滿大的，先來一張原本 <strong>Select</strong> 的樣式照片。</p>
+<h3 id="關於-Select"><a href="#關於-Select" class="headerlink" title="關於 Select"></a>關於 Select</h3><p>我記得上課時校長才說如果你的設計師出了很多更改原本 <strong>Select</strong> 樣式的設計稿，記得去跟他<del>吵一番</del>討論，因為要強制改 <strong>Select</strong> 的內容是不大可能的，幾乎都要另外寫樣式才能，但還好六角的設計師還夠有良心，沒有做下拉內部的設計，但是預設的箭頭樣式跟原本的差滿大的，先來一張原本 <strong>Select</strong> 的樣式照片。</p>
 <p><img src="/images/20200512/select_style.png" alt="預設樣式"></p>
 <p>這時我們大概就是只能更改 <strong>Select</strong> 的背景為白色，然後透過隱藏下拉的箭頭符號，自己替換上圖片或是 Icon 來達到外觀與設計稿一致，裡面想當然耳如果不客製化 <strong>Div</strong> 是不太可能了，總之我們先讓他 <strong>87%</strong> 像吧！</p>
 <p>透過使用 <code>appearance:none;</code> 來隱藏預設下拉箭頭，如果怕瀏覽器不同語法支援程度也不同的話可以考慮改為下方範例，改掉箭頭，背景改為透明，取消預設邊框：</p>
