@@ -44,7 +44,8 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200524&#x2F;copySCSSExample2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200524&#x2F;copySCSSExample3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200524&#x2F;copySCSSExample4.png">
-<meta property="og:updated_time" content="2020-05-23T18:15:53.613Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200524&#x2F;PinterestExample.png">
+<meta property="og:updated_time" content="2020-05-25T13:09:30.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200524&#x2F;week_6_classLogo.png">
 
@@ -237,10 +238,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2020-05-24 02:14:00 / 修改時間：02:15:53" itemprop="dateCreated datePublished" datetime="2020-05-24T02:14:00+08:00">2020-05-24</time>
+              <time title="創建時間：2020-05-24 02:14:00" itemprop="dateCreated datePublished" datetime="2020-05-24T02:14:00+08:00">2020-05-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-05-25 21:09:30" itemprop="dateModified" datetime="2020-05-25T21:09:30+08:00">2020-05-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -279,7 +286,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>5k</span>
+              <span>5.2k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -389,7 +396,8 @@
 <p><img src="/images/20200524/d-md-example.png" alt="用處多多"></p>
 <h4 id="改進再利用，威力再加倍"><a href="#改進再利用，威力再加倍" class="headerlink" title="改進再利用，威力再加倍"></a>改進再利用，威力再加倍</h4><p>前面講這麼多，其實我們就是要利用 <strong>BS</strong> 已經串好的斷點設計，將預設的變數改為我們設計稿的數字，直接加以利用，下方練習心得將會示範如何修改。</p>
 <hr>
-<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>這次也是第一次直接修改 <strong>BS</strong> 的預設變數來開發切版，之前在上 <strong>SASS</strong> 課程也沒有這樣做過，實際做起來真的省下不少時間；首先你必須要有 <strong>npm</strong> 的基礎，不然你可能要另外找編譯軟體，因為我們是使用 <strong>SCSS</strong> 來開發，首先安裝 <strong>BS</strong>。</p>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>這次也是第一次直接修改 <strong>BS</strong> 的預設變數來開發切版，之前在上 <strong>SASS</strong> 課程也沒有這樣做過，實際做起來真的省下不少時間；首先你必須要有 <strong>npm</strong> 的基礎，不然你可能要另外找編譯軟體，因為我們是使用 <strong>SCSS</strong> 來開發。</p>
+<h4 id="主角登場"><a href="#主角登場" class="headerlink" title="主角登場"></a>主角登場</h4><p>首先安裝 <strong>BS</strong>。</p>
 <blockquote>
 <p>此處提醒一下，如果沒有建立 Gulp 的環境</p>
 </blockquote>
@@ -404,9 +412,16 @@
 
 <p>這邊引入之後編譯就能把原本預設的樣式改掉了。</p>
 <p><img src="/images/20200524/copySCSSExample3.png" alt="修改後的結果"></p>
-<p>按照這個樣子，除了修改顏色，也能修改間距，比方說下方這樣：</p>
+<p>按照這個樣子，除了修改顏色，也能修改間距，比方說下方這樣：</p>
 <p><img src="/images/20200524/copySCSSExample4.png" alt="修改後的結果"></p>
 <p>就這麼簡單！以上就教完怎麼修改了，這邊看了一遍設計稿抓了大概的數字直接做修改，但其實實務上還是必須和設計師討論過，不然還是會有很多魔數呢…</p>
+<h4 id="關於瀑布流"><a href="#關於瀑布流" class="headerlink" title="關於瀑布流"></a>關於瀑布流</h4><p>什麼是瀑布流呢？下面一張圖告訴你。</p>
+<p><img src="/images/20200524/PinterestExample.png" alt="瀑布流"></p>
+<p>平常我們使用 <code>display:flex;</code> 排版，不管元素是不是不一樣高，每一行的高度一定都是抓那一行最高的為主，所以沒辦法做到像上圖這樣的瀑布流。</p>
+<p>但是我們可以透過 <code>flex-direction: column;</code> 把一行一行改為一列一列的方式，這樣每一個元素的下一個元素將會緊跟著上一個的屁股，然後第二列也是這樣做，這樣就能做到瀑布流的樣子。</p>
+<blockquote>
+<p>範例可以參考<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL0Nob2tjb2NvL3Blbi93WWdZWFg=" title="https://codepen.io/Chokcoco/pen/wYgYXX">此處<i class="fa fa-external-link"></i></span></p>
+</blockquote>
 <hr>
 <h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一：請每個小組討論成員，試著用-NPM-安裝-BS4-SCSS-，並修改變數來調整主色，同時能看到編譯成功的結果"><a href="#任務一：請每個小組討論成員，試著用-NPM-安裝-BS4-SCSS-，並修改變數來調整主色，同時能看到編譯成功的結果" class="headerlink" title="任務一：請每個小組討論成員，試著用 NPM 安裝 BS4 SCSS ，並修改變數來調整主色，同時能看到編譯成功的結果"></a>任務一：請每個小組討論成員，試著用 NPM 安裝 BS4 SCSS ，並修改變數來調整主色，同時能看到編譯成功的結果</h4><p>上方已示範如何修改。</p>
 <h4 id="任務二：請試著用第六週分享到的格線系統來實作-album-相簿-、Blog-部落格-的其中一個頁面，還請不要偷看他的程式碼來討論出來。"><a href="#任務二：請試著用第六週分享到的格線系統來實作-album-相簿-、Blog-部落格-的其中一個頁面，還請不要偷看他的程式碼來討論出來。" class="headerlink" title="任務二：請試著用第六週分享到的格線系統來實作 album (相簿)、Blog (部落格)的其中一個頁面，還請不要偷看他的程式碼來討論出來。"></a>任務二：請試著用第六週分享到的格線系統來實作 album (相簿)、Blog (部落格)的其中一個頁面，還請不要偷看他的程式碼來討論出來。</h4><p>程式碼待補。</p>
@@ -550,7 +565,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-text">課程心得</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Desktop-First-Mobile-First"><span class="nav-text">Desktop First ? Mobile First ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#魔數？"><span class="nav-text">魔數？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#960-Grid"><span class="nav-text">960 Grid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小心地雷"><span class="nav-text">小心地雷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改進再利用，威力再加倍"><span class="nav-text">改進再利用，威力再加倍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一：請每個小組討論成員，試著用-NPM-安裝-BS4-SCSS-，並修改變數來調整主色，同時能看到編譯成功的結果"><span class="nav-text">任務一：請每個小組討論成員，試著用 NPM 安裝 BS4 SCSS ，並修改變數來調整主色，同時能看到編譯成功的結果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二：請試著用第六週分享到的格線系統來實作-album-相簿-、Blog-部落格-的其中一個頁面，還請不要偷看他的程式碼來討論出來。"><span class="nav-text">任務二：請試著用第六週分享到的格線系統來實作 album (相簿)、Blog (部落格)的其中一個頁面，還請不要偷看他的程式碼來討論出來。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務三：討論第六週版型該怎麼做"><span class="nav-text">任務三：討論第六週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-text">課程心得</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Desktop-First-Mobile-First"><span class="nav-text">Desktop First ? Mobile First ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#魔數？"><span class="nav-text">魔數？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#960-Grid"><span class="nav-text">960 Grid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小心地雷"><span class="nav-text">小心地雷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改進再利用，威力再加倍"><span class="nav-text">改進再利用，威力再加倍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-text">練習心得</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主角登場"><span class="nav-text">主角登場</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#關於瀑布流"><span class="nav-text">關於瀑布流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一：請每個小組討論成員，試著用-NPM-安裝-BS4-SCSS-，並修改變數來調整主色，同時能看到編譯成功的結果"><span class="nav-text">任務一：請每個小組討論成員，試著用 NPM 安裝 BS4 SCSS ，並修改變數來調整主色，同時能看到編譯成功的結果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二：請試著用第六週分享到的格線系統來實作-album-相簿-、Blog-部落格-的其中一個頁面，還請不要偷看他的程式碼來討論出來。"><span class="nav-text">任務二：請試著用第六週分享到的格線系統來實作 album (相簿)、Blog (部落格)的其中一個頁面，還請不要偷看他的程式碼來討論出來。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務三：討論第六週版型該怎麼做"><span class="nav-text">任務三：討論第六週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -627,7 +642,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">139k</span>
+    <span title="總字數">140k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
