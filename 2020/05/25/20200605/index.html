@@ -25,20 +25,24 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Introduction &amp;amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
-<meta name="keywords" content="RexHung,CodeLife,JavaScript,Engineer">
+  <meta name="description" content="Introduction &amp;amp; 前言為期八週的訓練本週是最後一次課程，這週除了複習過去七週的重點外，這週的重點也放在如何更好的管理 CSS， 這週也會將 BS 利用的更淋漓盡致。">
+<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,HexSchool,Engineer,Web-Layout-Training">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[JavaScript Notes] — 淺談 JavaScript #4">
-<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2019&#x2F;10&#x2F;28&#x2F;20191028&#x2F;index.html">
+<meta property="og:title" content="[Hexschool Web Layout Training] — Week_8 CSS 模組化管理">
+<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2020&#x2F;05&#x2F;25&#x2F;20200605&#x2F;index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp;amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
+<meta property="og:description" content="Introduction &amp;amp; 前言為期八週的訓練本週是最後一次課程，這週除了複習過去七週的重點外，這週的重點也放在如何更好的管理 CSS， 這週也會將 BS 利用的更淋漓盡致。">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
-<meta property="og:updated_time" content="2020-05-13T07:52:17.690Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;week_8_classLogo.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;oocss_bem_blog.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;detail_example.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;member_example.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;week_8.png">
+<meta property="og:updated_time" content="2020-06-04T19:59:23.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200605&#x2F;week_8_classLogo.png">
 
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/">
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200605/">
 
 
 <script id="page-configurations">
@@ -50,7 +54,7 @@
   };
 </script>
 
-  <title>[JavaScript Notes] — 淺談 JavaScript #4 | RexHung's Blog</title>
+  <title>[Hexschool Web Layout Training] — Week_8 CSS 模組化管理 | RexHung's Blog</title>
   
 
 
@@ -205,7 +209,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200605/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile/profile_2.png">
@@ -218,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [JavaScript Notes] — 淺談 JavaScript #4
+          [Hexschool Web Layout Training] — Week_8 CSS 模組化管理
         </h1>
 
         <div class="post-meta">
@@ -228,14 +232,14 @@
               </span>
               <span class="post-meta-item-text">發表於</span>
 
-              <time title="創建時間：2019-10-28 12:00:00" itemprop="dateCreated datePublished" datetime="2019-10-28T12:00:00+08:00">2019-10-28</time>
+              <time title="創建時間：2020-05-25 09:10:00" itemprop="dateCreated datePublished" datetime="2020-05-25T09:10:00+08:00">2020-05-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-05-13 15:52:17" itemprop="dateModified" datetime="2020-05-13T15:52:17+08:00">2020-05-13</time>
+                <time title="修改時間：2020-06-05 03:59:23" itemprop="dateModified" datetime="2020-06-05T03:59:23+08:00">2020-06-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -247,11 +251,11 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
                 </span>
             </span>
 
@@ -264,8 +268,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2019/10/28/20191028/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/28/20191028/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2020/05/25/20200605/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/05/25/20200605/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,7 +279,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>1.5k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -294,70 +298,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這章節主要筆記關於 <strong>This</strong> 的一些淺談，剛學 <strong>JavaScript</strong> 時就常常聽到『你真的了解 <strong>This</strong> 嗎？』、『<strong>This</strong> 到底指的是什麼？』，剛好在 <strong>JavaScript</strong> 核心篇的一個章節提到 <strong>This</strong> ，課後終於小了解關於 <strong>This</strong> 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 <strong>This</strong> 吧。</p>
+        <p><img src="/images/20200605/week_8_classLogo.png" alt="第八週的最後練習"></p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>為期八週的訓練本週是最後一次課程，這週除了複習過去七週的重點外，這週的重點也放在如何更好的管理 <strong>CSS</strong>，</p>
+<p>這週也會將 <strong>BS</strong> 利用的更淋漓盡致。</p>
 <a id="more"></a>
 
-<blockquote>
-<p>接下來的每一章，不免俗的都會來一句：</p>
-</blockquote>
-<blockquote>
-<p>本篇文章一切皆為筆記作用，有任何錯誤及問題，歡迎理性指教及討論，詳情請查閱公開課程說明書。</p>
-</blockquote>
+<p>最後一週也是使用 <strong>Gulp</strong>，如果你還沒用過或是想知道怎麼從 0 開始建立一個 <strong>Gulp</strong> 歡迎參考我的上一篇文章，<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNS8wNi8yMDIwMDUwNi8jbW9yZQ==" title="https://rexhung0302.github.io/2020/05/06/20200506/#more">[Tool Notes] — 關於Gulp<i class="fa fa-external-link"></i></span>。</p>
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
-<p>本系列將會淺談 <strong>JavaScript</strong> ，希望給未來自己當作筆記以及剛接觸 <strong>JavaScript</strong> 的夥伴們，甚至能帶點不一樣觀點或您沒聽過的觀點給大家，所以不會太過深入的討論。</p>
+<p><em>本篇文章將會以三個角度來紀錄， <strong>課程心得(上課後的心得整理)</strong>、<strong>練習心得(做完作業後的心得整理))</strong> 及 <strong>小組任務(每週會有一項小組任務，寫完後的心得)</strong>。</em></p>
 </blockquote>
-<p>關於淺談的主題將會大致分為下列幾項，<strong>項目可能會做更動</strong>。</p>
+<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQFltY01nby1OU0tPcWdUR0FqbF81dGcvSEpwSms4QUJVLyUyRmlFNm14b2hPUy11aktVMzk4RXdrMXc=" title="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w">練習菜單<i class="fa fa-external-link"></i></span>，及額外的一項打字練習。</p>
 <ol>
-<li><p><strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8wOS8yMDE5MTAwOS8=" title="https://rexhung0302.github.io/2019/10/09/20191009/">JavaScript 執行環境及作用域<i class="fa fa-external-link"></i></span></strong></p>
+<li><p>語意命名</p>
 </li>
-<li><p><strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8xNS8yMDE5MTAxNS8=" title="https://rexhung0302.github.io/2019/10/15/20191015/">運算子、型別與文法<i class="fa fa-external-link"></i></span></strong></p>
+<li><p><strong>幾乎全程使用 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmVtbWV0LmlvL2NoZWF0LXNoZWV0Lw==" title="https://docs.emmet.io/cheat-sheet/">emmet<i class="fa fa-external-link"></i></span> 開發</strong></p>
 </li>
-<li><p><strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8yNC8yMDE5MTAyNC8=" title="https://rexhung0302.github.io/2019/10/24/20191024/">物件<i class="fa fa-external-link"></i></span></strong></p>
-</li>
-<li><p><strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8yOC8yMDE5MTAyOC8=" title="https://rexhung0302.github.io/2019/10/28/20191028/">關於 This 那些事<i class="fa fa-external-link"></i></span></strong></p>
+<li><p><strong><span class="exturl" data-url="aHR0cDovL2tleWJyLmNvbS8=" title="http://keybr.com/">英打速度<i class="fa fa-external-link"></i></span></strong> 練習</p>
 </li>
 </ol>
-<p>本章討論的幾個關鍵標題為下列幾項。</p>
-<ol>
-<li><p>This 是什麼？</p>
-</li>
-<li><p>This 的特性</p>
-</li>
+<h4 id="關卡目標"><a href="#關卡目標" class="headerlink" title="關卡目標"></a>關卡目標</h4><ol>
+<li>最終練習</li>
 </ol>
 <hr>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*emhX3OcXv7c1b7yzUfsg5A.png" alt="關於 This"></p>
-<h3 id="This-是什麼？"><a href="#This-是什麼？" class="headerlink" title="This 是什麼？"></a>This 是什麼？</h3><p>關於 <strong>JavaScript</strong> 的 <strong>This</strong> 其實上 <strong>Google</strong> 就會發現好多大神的文章，究竟為什麼 <strong>This</strong> 這麼重要呢？在相關文章中能看見，如果你搞清楚 <strong>This</strong> 你就能掌握到程式將會怎麼走，也能掌握程式在對的地方執行對的事情。</p>
+<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>這週課程前半段複習了前七週的內容，另外六角校長為了讓大家更了解如何管理好 <strong>CSS</strong> 在上課時也提到了 <strong>OOCSS、BEM</strong>…等等。</p>
+<p>之前在上六角 <strong>SASS</strong> 課程時自己有寫了一篇文章，有興趣可以看看那篇文章，我只能說，至今為止，幫助很大！如果你還不懂關於 <strong>CSS</strong> 的規範更應該要看看 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNS8zMC8yMDE5MDUzMC8=" title="https://rexhung0302.github.io/2019/05/30/20190530/">[CSS Notes] - CSS模組化<i class="fa fa-external-link"></i></span>。</p>
+<p><img src="/images/20200605/oocss_bem_blog.png" alt="有興趣可以參考"></p>
+<p>另外大部分時間應該都是在講解一些 <strong>CSS</strong> 拆分及學生的程式碼拆分分享，第八週就是複習的一週，也是最後一週了。</p>
+<hr>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>其實本週上次講到很多，但還是像前面說的，本週著重在複習前幾週的成果，所以這週就是最後實戰演練了。</p>
+<p>本週其實想挑戰在 <strong>SCSS</strong> 上不用任何一頁 <strong>pages</strong>，想把所有的 <strong>CSS</strong> 都拆分為 <strong>元件(Components)</strong>，但說實在的，超級難啊！</p>
+<p><img src="/images/20200605/detail_example.png" alt="照片牆"></p>
+<p>像是在某一頁需要一個照片牆，這個地方想把它變成元件其實沒這麼容易，而且設計稿看來看去就只有這個地方有用到。</p>
+<p>雖然排版可以使用 <strong>BS</strong> 的格線系統搞定，但是這種需要 <strong>RWD</strong> 變化的版型，使用格線系統常常就會爆版…</p>
+<p><img src="/images/20200605/member_example.png" alt="照片牆"></p>
+<p>還有使用者頭像這部分，其實最上方的 <strong>Header</strong> 已經弄成模板了，這時候就會猶豫關於頭像照片的 <strong>CSS</strong> 我應該放在 <strong>Layout</strong> 的 <strong>header.scss</strong> 裡面，還是放在 <strong>components</strong> 裡面呢？</p>
+<p>其實上了八週課程，幾乎每週都在思考怎麼排版外，也在思考怎麼分類 <strong>CSS</strong>，但其實寫程式就是這樣，沒有最好的解答，只有最適合你的方式，如果你寫的分類的 <strong>CSS</strong> 是讓你幾個月後回來看一幕瞭然，且其他人接手也可以快速進入狀況，那我覺得就是及格的了！</p>
 <blockquote>
-<p>JavaScript <strong>函式內的 this 關鍵字</strong> 表現，和其他語言相比略有差異。在<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRnVuY3Rpb25zX2FuZF9mdW5jdGlvbl9zY29wZS9TdHJpY3RfbW9kZQ==" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">嚴格模式<i class="fa fa-external-link"></i></span>與非嚴格模式下也有所不同。<br>通常，this 值由被呼叫的函式來決定。它不能在執行期間被指派，每次函式呼叫調用的值也可能不同。ES5 引入了 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvRnVuY3Rpb24vYmluZA==" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind<i class="fa fa-external-link"></i></span> 方法去<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvT3BlcmF0b3JzL3RoaXMjVGhlX2JpbmRfbWV0aG9k" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/this#The_bind_method">設置函式的 this 值，而不管它怎麼被呼叫。<i class="fa fa-external-link"></i></span><strong>ECMAScript 2015</strong> 也導入了定義 this 詞法範圍的<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRnVuY3Rpb25zL0Fycm93X2Z1bmN0aW9ucw==" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions">箭頭函式<i class="fa fa-external-link"></i></span><br>— 擷至 MDN</p>
+<p><em>因為我們常常過度設計化，也就是可能只有一個地方在用的 <strong>CSS</strong> 也拆開來，我想這個還是我必須要克服的點。</em></p>
 </blockquote>
 <hr>
-<h3 id="This-的特性"><a href="#This-的特性" class="headerlink" title="This 的特性"></a>This 的特性</h3><p>原理或是理論的部分這邊就不過多的詳細描述，但是主要還是要說一些比較淺顯易懂的東西。關於 <strong>This</strong> 的特性有幾點：</p>
-<ol>
-<li><p><strong>不需宣告。</strong></p>
-</li>
-<li><p><strong>每個執行環境都有自己的 This 關鍵字。</strong></p>
-</li>
-<li><p><strong>This 和 Function 如何宣告沒有關聯性，和被呼叫方式有關。</strong></p>
-</li>
-<li><p><strong>在嚴格模式下，與在簡易模式下很不同。</strong></p>
-</li>
-</ol>
-<p>在我們打開網頁 <strong>F12</strong> 之後開啟 <strong>Sources</strong> 然後就能看見最一開始的 <strong>This</strong> 指的是 <strong>Windows</strong>，而隨著我們的 <strong>Function</strong> ， <strong>This</strong> 的指向位置又會開始改變。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moreThis</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> student = &#123;</span><br><span class="line">  name: <span class="string">'Rex'</span>,</span><br><span class="line">  moreThis: moreThis,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">student.moreThis(); </span><br><span class="line"><span class="comment">// 前面宣告什麼的都可以不用注意 只要看呼叫的時候 student 就是那個 This</span></span><br></pre></td></tr></table></figure>
-
-<p>上面提到到所謂的 <strong>嚴格模式(‘use strice’)</strong>，在 <strong>JavaScript</strong> 裡有一個靜默的小錯誤，不至於影響程式進行將會被忽略不會跳出警告，而使用 <strong>嚴格模式(‘use strice’)</strong> 後將會直接看見，而 <strong>嚴格模式(‘use strice’)</strong> 也可以依照部分環境加入，意思就是這個 <strong>Function</strong> 我想要加入，另一個不要其實也可以。</p>
+<h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一：請每個小組討論成員，挑選其中此連結的-SCSS-結構來進行討論其優缺點"><a href="#任務一：請每個小組討論成員，挑選其中此連結的-SCSS-結構來進行討論其優缺點" class="headerlink" title="任務一：請每個小組討論成員，挑選其中此連結的 SCSS 結構來進行討論其優缺點"></a>任務一：請每個小組討論成員，挑選其中此<span class="exturl" data-url="aHR0cHM6Ly93d3cubm90aW9uLnNvLzY2OTc5YjRhOTZmMjRhNGNiYmYxNGZkODAyZWQ1OWJlP3Y9NWJlZjczZWYzNmM0NDRiNTgxN2ZkYjhiMGIxNTIyZmU=" title="https://www.notion.so/66979b4a96f24a4cbbf14fd802ed59be?v=5bef73ef36c444b5817fdb8b0b1522fe">連結<i class="fa fa-external-link"></i></span>的 SCSS 結構來進行討論其優缺點</h4><h4 id="任務二：討論第八週版型該怎麼做"><a href="#任務二：討論第八週版型該怎麼做" class="headerlink" title="任務二：討論第八週版型該怎麼做"></a>任務二：討論第八週版型該怎麼做</h4><hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>雖然這週心得看起來爆炸少，但其實每天都切的快爆炸，上週結束後禮拜一開工幾乎是天天切版，很多地方真的是要動手做才會發現精髓，這次的直播課程收益真的良多，更多的心得就留到下一篇總結吧！</p>
+<p><img src="/images/20200605/week_8.png" alt="成品"></p>
+<p>這邊真的要給設計師一個最高敬意，幾乎每週都是用心設計過，不是胡亂設計的，最近工作幾乎都是客戶要我們切版搭設計，光是設計就搞得一個頭兩個大，難怪很多人常常說，設計的美感是天生的，很好我沒有Ｑ，我還是乖乖切版！</p>
 <hr>
-<p>待補…</p>
-<hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實在原本就是打算做筆記之用途，因為實在有太多的大神已經寫了好多篇關於 <strong>This</strong> 的文章，沒有十足把握的話其實覺得多寫一篇關於 <strong>This</strong> 的文章真的是很沒意義，不過既然是自己要作為筆記用途，那就多少寫一些多少記一些囉。</p>
-<p>更多關於 <strong>This</strong> 就等之後補上囉～</p>
+<h2 id="Demo-amp-成果程式碼"><a href="#Demo-amp-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>Source Code：<a href="https://github.com/RexHung0302/Hexschool-web-layout-training/tree/master/Week_8">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSGV4c2Nob29sLXdlYi1sYXlvdXQtdHJhaW5pbmcvV2Vla184L2Rpc3QvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_8/dist/index.html">點我<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p><em>關於設計稿有版權問題，所以這系列文章的連結都已經拿掉囉，需要的可以參考我的成果版面，再進行練習。</em></p>
+</blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>六角學院 — <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL2pzLWNvcmUuaHRtbD91dG1fc291cmNlPUxJTkUmdXRtX21lZGl1bT1tZXNzYWdlJnV0bV9jYW1wYWlnbj0wODA3TElORV9tZXNzYWdlI3JlY29tbWVuZA==" title="https://www.hexschool.com/courses/js-core.html?utm_source=LINE&utm_medium=message&utm_campaign=0807LINE_message#recommend">JavaScript 核心篇<i class="fa fa-external-link"></i></span></li>
-<li>MDN — <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvT3BlcmF0b3JzL3RoaXM=" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/this">This<i class="fa fa-external-link"></i></span></li>
-<li>TechBridge 技術共筆部落格 — <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnRlY2hicmlkZ2UuY2MvMjAxOS8wMi8yMy9qYXZhc2NyaXB0LXRoaXMv" title="https://blog.techbridge.cc/2019/02/23/javascript-this/">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9rdXJvLnR3Lw==" title="https://kuro.tw/">Kuro’s Blog<i class="fa fa-external-link"></i></span> — <span class="exturl" data-url="aHR0cHM6Ly9rdXJvLnR3L3Bvc3RzLzIwMTcvMTAvMTIvV2hhdC1pcy1USElTLWluLUphdmFTY3JpcHQtJUU0JUI4JThBLw==" title="https://kuro.tw/posts/2017/10/12/What-is-THIS-in-JavaScript-%E4%B8%8A/">What’s THIS in JavaScript ? [上]<i class="fa fa-external-link"></i></span></li>
+<li>無</li>
 </ul>
 
     </div>
@@ -378,7 +371,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/" title="[JavaScript Notes] — 淺談 JavaScript #4">https://github.com/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/</a>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200605/" title="[Hexschool Web Layout Training] — Week_8 CSS 模組化管理">https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200605/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
@@ -401,7 +394,10 @@
           
           <div class="post-tags">
               <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"><i class="fa fa-tag"></i> Web-Layout-Training</a>
           </div>
 
         
@@ -410,12 +406,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/10/24/20191024/" rel="prev" title="[JavaScript Notes] — 淺談 JavaScript #3">
-      <i class="fa fa-chevron-left"></i> [JavaScript Notes] — 淺談 JavaScript #3
+    <a href="/2020/05/24/20200524/" rel="prev" title="[Hexschool Web Layout Training] — Week_6 導入網頁規範設計流程">
+      <i class="fa fa-chevron-left"></i> [Hexschool Web Layout Training] — Week_6 導入網頁規範設計流程
     </a></div>
       <div class="post-nav-item">
-    <a href="/2019/11/01/20191101/" rel="next" title="萬事起頭不會難">
-      萬事起頭不會難 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/05/25/20200525/" rel="next" title="[Hexschool Web Layout Training] — Week_7 視差滾動">
+      [Hexschool Web Layout Training] — Week_7 視差滾動 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -483,7 +479,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-是什麼？"><span class="nav-text">This 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#This-的特性"><span class="nav-text">This 的特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一：請每個小組討論成員，挑選其中此連結的-SCSS-結構來進行討論其優缺點"><span class="nav-text">任務一：請每個小組討論成員，挑選其中此連結的 SCSS 結構來進行討論其優缺點</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二：討論第八週版型該怎麼做"><span class="nav-text">任務二：討論第八週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -627,9 +623,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/";
-    this.page.identifier = "2019/10/28/20191028/";
-    this.page.title = "[JavaScript Notes] — 淺談 JavaScript #4";
+    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200605/";
+    this.page.identifier = "2020/05/25/20200605/";
+    this.page.title = "[Hexschool Web Layout Training] — Week_8 CSS 模組化管理";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
