@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-06-07T06:05:16.797Z">
+<meta property="og:updated_time" content="2020-06-07T06:10:50.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -232,7 +232,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-06-07 00:00:01 / 修改時間：14:05:16" itemprop="dateCreated datePublished" datetime="2020-06-07T00:00:01+08:00">2020-06-07</time>
+              <time title="創建時間：2020-06-07 00:00:01 / 修改時間：14:10:50" itemprop="dateCreated datePublished" datetime="2020-06-07T00:00:01+08:00">2020-06-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,7 +268,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>2.4k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -303,14 +303,18 @@
 <hr>
 <h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h3><p>第一天是關於 <strong>JS</strong> 宣告的練習。</p>
 <p><img src="/images/20200607/Day1.png" alt="第一天的練習"></p>
-<p>由於 var 在創造階段會先被提升到頂部，所以通常有經過宣告的變數在還沒賦值的情況下 <code>console.log</code> 都會拿到 <code>undefined</code>。</p>
-<p>有興趣了解基本原理可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8wOS8yMDE5MTAwOS8=" title="https://rexhung0302.github.io/2019/10/09/20191009/">[JavaScript Notes] — 淺談 JavaScript #1<i class="fa fa-external-link"></i></span></p>
+<blockquote>
+<p>解題關鍵：由於 <code>var</code> 在創造階段會先被提升到頂部，所以通常有經過宣告的變數在還沒賦值的情況下 <code>console.log</code> 都會拿到 <code>undefined</code>；有興趣了解基本原理可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8wOS8yMDE5MTAwOS8=" title="https://rexhung0302.github.io/2019/10/09/20191009/">[JavaScript Notes] — 淺談 JavaScript #1<i class="fa fa-external-link"></i></span>。</p>
+</blockquote>
 <h3 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h3><p>第二天六角的題目：</p>
 <p>請依照以下房型資訊，去定義各個變數名稱，變數務必要命名比較語意化且好懂。</p>
 <p><img src="/images/20200607/Day2.png" alt="第一天的練習"></p>
 <p>第二日六角題目解答：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 採用小駝峰命名</span></span><br><span class="line"><span class="comment">// 2. 房間的設定都包在 singleRoom 裡, 這樣可以減少命名重複</span></span><br><span class="line"><span class="comment">// 如果有其他的房間設定, 就可以再包一個 例: var doubleRoom = &#123; ...略 &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> singleRoom = &#123;</span><br><span class="line">    peopleLimit: <span class="number">1</span>,      <span class="comment">// (人數限制)Number</span></span><br><span class="line">    bedSize: <span class="string">'單人床'</span>,    <span class="comment">// (床型)String</span></span><br><span class="line">    bathroomNum: <span class="number">1</span>,      <span class="comment">// (廁所數量)Number</span></span><br><span class="line">    feetSize: <span class="number">18</span>,        <span class="comment">// (房間大小)Number</span></span><br><span class="line">    sizeType: <span class="string">'平方公尺'</span>, <span class="comment">// (房間大小單位)String</span></span><br><span class="line">    description: <span class="string">'Single Room is only...'</span>, <span class="comment">// (房間描述)String</span></span><br><span class="line">    checkInTimeFrom: <span class="string">'15:00'</span>,   <span class="comment">// (CheckIn時間, 起始時間)String</span></span><br><span class="line">    checkInTimeTo: <span class="string">'21:00'</span>,     <span class="comment">// (CheckIn時間, 結束時間)String</span></span><br><span class="line">    checkOutTimeFrom: <span class="string">'10:00'</span>,  <span class="comment">// (CheckOut時間, 起始時間)String</span></span><br><span class="line">    checkOutTimeTo: <span class="string">'21:00'</span>,    <span class="comment">// (CheckOut時間, 結束時間)String</span></span><br><span class="line">    feature: &#123;</span><br><span class="line">        wifi: <span class="literal">true</span>,             <span class="comment">// (無線網路)Boolean</span></span><br><span class="line">        landlinePhone: <span class="literal">true</span>,    <span class="comment">// (室內電話)Boolean</span></span><br><span class="line">        breakfast: <span class="literal">true</span>,        <span class="comment">// (早餐)Boolean</span></span><br><span class="line">        airConditioning: <span class="literal">true</span>,  <span class="comment">// (空調)Boolean</span></span><br><span class="line">        miniBar: <span class="literal">false</span>,         <span class="comment">// (酒吧))Boolean</span></span><br><span class="line">        refrigerator: <span class="literal">true</span>      <span class="comment">// (冰箱)Boolean</span></span><br><span class="line">    &#125;,  <span class="comment">// (房間特徵/設備)Object</span></span><br><span class="line">&#125;   <span class="comment">// (單人房)Object</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>解題關鍵：變數命名務必好懂為主，且 <strong>第一個字元不允許是數字，不允許包含空格和其他標點符號</strong>！另外變數 <strong>名區分大小寫，允許包含字母、數字、美元符號($)和下劃線</strong>，但是通常開頭不會使用 <strong>美元符號($)和下劃線</strong>，第一個字以後也會盡量避免，所以通常推薦使用<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFOSVBNyU5RCVFNSVCMyVCMCVFNSVCQyU4RiVFNSVBNCVBNyVFNSVCMCU4RiVFNSVBRiVBQg==" title="https://zh.wikipedia.org/zh-tw/%E9%A7%9D%E5%B3%B0%E5%BC%8F%E5%A4%A7%E5%B0%8F%E5%AF%AB">駝峰命名法<i class="fa fa-external-link"></i></span>。</p>
+</blockquote>
 <p>第二日自己的題目為：</p>
 <p><img src="/images/20200607/Day2MyQuestion.png" alt="第二天自己的題目"></p>
 <h3 id="Day3"><a href="#Day3" class="headerlink" title="Day3"></a>Day3</h3><p>第三天六角的題目為：</p>
@@ -333,6 +337,9 @@
 <p>第三題解答</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">9</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a+<span class="number">9</span>); <span class="comment">// 18</span></span><br><span class="line"><span class="built_in">console</span>.log(a+<span class="string">'9'</span>); <span class="comment">// 99</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="string">"9"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b*b) <span class="comment">// 91</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(b*b)) <span class="comment">// Number</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>解題關鍵：注意型別轉換，通常 <strong>數字</strong> 及 <strong>字串</strong>，最容易發生轉換後的問題，還有小數點相加等於的問題，有興趣可參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy91c2Vycy8yMDA2NTUwNC9pcm9ubWFu" title="https://ithelp.ithome.com.tw/users/20065504/ironman">Kuro Hsu<i class="fa fa-external-link"></i></span> 大大的 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5MDg3Mw==" title="https://ithelp.ithome.com.tw/articles/10190873">重新認識 JavaScript: Day 03 變數與資料型別<i class="fa fa-external-link"></i></span>。</p>
+</blockquote>
 <p>第三日自己的題目為：</p>
 <p>請依序告知以下 console.log 會顯示什麼值。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">'a'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a*<span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'ba'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b+(+a)+a);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> (a*<span class="number">10</span>));</span><br></pre></td></tr></table></figure>
@@ -540,7 +547,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">150k</span>
+    <span title="總字數">151k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
