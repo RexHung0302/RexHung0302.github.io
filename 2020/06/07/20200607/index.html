@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-06-09T15:56:17.823Z">
+<meta property="og:updated_time" content="2020-06-10T19:54:32.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-06-09 23:56:17" itemprop="dateModified" datetime="2020-06-09T23:56:17+08:00">2020-06-09</time>
+                <time title="修改時間：2020-06-11 03:54:32" itemprop="dateModified" datetime="2020-06-11T03:54:32+08:00">2020-06-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,14 +274,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>5.4k</span>
+              <span>7.6k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>5 分鐘</span>
+              <span>7 分鐘</span>
             </span>
 
         </div>
@@ -305,6 +305,9 @@
 <li><a href="#Day1">Day1</a></li>
 <li><a href="#Day2">Day2</a></li>
 <li><a href="#Day3">Day3</a></li>
+<li><a href="#Day4">Day4</a></li>
+<li><a href="#Day5">Day5</a></li>
+<li><a href="#Day6">Day6</a></li>
 </ul>
 <hr>
 <h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h3><p>第一天是關於 <strong>JS</strong> 宣告的練習。</p>
@@ -402,7 +405,45 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">maryTotal = maryWallet - ((<span class="number">10</span> * hamburgerPrice) + (<span class="number">10</span> * friesPrice)) * sale; <span class="comment">// 4190</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( <span class="string">'Mary 買完東西後,錢包剩下 4190 元'</span>)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>解題關鍵：本日需要注意加減乘除的運算權重，如果同樣權重的但是有區分先後，建議用括號刮起來，如果不確定，可以向本日筆者解題一樣，把需要一起先算的地方，先一起括號起來！</p>
+<p>解題關鍵：本日需要注意加減乘除的運算權重，如果同樣權重的但是有區分先後，建議用括號刮起來，如果不確定，可以向本日筆者解題一樣，<strong>把需要一起先算的地方，先一起括號起來</strong>！</p>
+</blockquote>
+<h3 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h3><p>第六天六角的題目為：</p>
+<p>第一題 - 布林與比較運算子練習</p>
+<p>成為 VIP 會員的條件，只要購買滿 200 元，就可無條件成為會員，Bob 買了 2 個漢堡，2 個 薯條，是否有滿足條件？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> VIPTotal = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">var</span> friesPrice = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">var</span> isVIP;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 請透過比較運算子，將比較結果寫在isVip 上</span></span><br><span class="line"><span class="comment">// 請利用 VIPTotal、hamburgerPrice、friesPrice 的變數進行比較</span></span><br><span class="line"><span class="comment">// isVIP 的型別必須為布林值(true or false)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Bob的 VIP 條件為"</span>+isVIP)</span><br></pre></td></tr></table></figure>
+
+<p>第二題 - 三心二意的老闆希望用邏輯運算子 &amp;&amp;</p>
+<p>老闆發現大家都只買薯條衝 VIP 資格，導致大家都不買漢堡，老闆好生氣，他認為他的美味蟹堡是全美最好吃的，小杰也不知道他的自信從哪裡來的。</p>
+<p>所以他跟小杰說，從今天起，VIP 條件必須同時符合以下兩點，才能成為 VIP 資格。</p>
+<ol>
+<li>一次消費滿 200 元</li>
+<li>一定要買 1 個漢堡</li>
+</ol>
+<p>這時又來了兩位顧客，Mary 與 Mark，來看看他們有沒有符合條件吧！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此變數不可更改</span></span><br><span class="line"><span class="keyword">var</span> VIPTotal = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">var</span> friesprice = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">var</span> markHamburgerNum = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> markfriesNum = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> markIsVIP;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如上面新增的變數，馬克買了2個漢堡，與4個薯條</span></span><br><span class="line"><span class="comment">// 請同時運用比較運算子與邏輯運算子，將比較結果寫在 markIsVIP 上</span></span><br><span class="line"><span class="comment">// markIsVIP 的型別必須為布林值(true or false)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mark的 VIP 條件為"</span>+ markIsVIP)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> maryHamburgerNum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> maryfriesNum = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> maryIsVIP;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如上面新增的變數，Mary買了0個漢堡，與10個薯條</span></span><br><span class="line"><span class="comment">// 請同時運用比較運算子與邏輯運算子，將比較結果寫在 markIsVIP 上</span></span><br><span class="line"><span class="comment">// maryIsVIP 的型別必須為布林值(true or false)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP)</span><br></pre></td></tr></table></figure>
+
+<p>第三題 - Mary 很生氣，他覺得現在的 VIP 資格吃人夠夠，希望用 || 邏輯運算子</p>
+<p>Mary 說：「老闆我好歹是忠實老客戶欸，我買了你八年的薯條，而且遠遠超過 200 元，竟然還不算我是 VIP，你有沒有搞錯！」</p>
+<p>老闆怕了，他很擔心會上台灣的老天鵝娛樂被當作笑柄，所以他立馬將 VIP 條件改成，只要符合以下任一點消費條件，就能成為 VIP 資格。</p>
+<ol>
+<li>一次消費滿 200 元</li>
+<li>一定要買 1 個漢堡</li>
+</ol>
+<p>我們再看看 Mary 有沒有符合條件吧！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> VIPTotal = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">var</span> friesPrice = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">var</span> maryHamburgerNum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> maryfriesNum = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> maryIsVIP;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如上面新增的變數，Mary買了0個漢堡,與10個薯條</span></span><br><span class="line"><span class="comment">// 請同時運用比較運算子與邏輯運算子，將比較結果寫在 markIsVIP 上</span></span><br><span class="line"><span class="comment">// maryIsVIP 的型別必須為布林值(true or false)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP)</span><br></pre></td></tr></table></figure>
+
+<p>第六天六角題目解答：</p>
+<p>第一題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">isVIP = (( <span class="number">2</span> * hamburgerPrice ) + ( <span class="number">2</span> * friesprice )) &gt;= <span class="number">200</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Bob的 VIP 條件為"</span>+isVIP) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>第二題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">markIsVIP = (( markHamburgerNum * hamburgerPrice ) + ( markfriesNum * friesprice )) &gt;= <span class="number">200</span> &amp;&amp; markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mark的 VIP 條件為"</span>+ markIsVIP) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">maryIsVIP = (( maryHamburgerNum * hamburgerPrice ) + ( maryfriesNum * friesprice )) &gt;= <span class="number">200</span> &amp;&amp; markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>第三題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">maryIsVIP = (( maryHamburgerNum * hamburgerPrice ) + ( maryfriesNum * friesprice )) &gt;= VIPTotal || markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解題關鍵：善用三元運算子可以大幅縮減程式碼，只要記得公式就是 <code>條件 ? 值1(如果前方條件成立) : 值2(如果前方條件不成立)</code>，當然也可以一直串接下去，比如 <code>條件1 ? 值1(如果前方條件成立) : 條件2(當前方條件1不成立時觸發) ? 值2(如果前方條件2成立) : 值3(如果前方條件2不成立)</code>，用這種方式可以省去很多 <code>if-else</code>，但是在閱讀上可能要花點時間，所以要慎用！</p>
 </blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
@@ -530,7 +571,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-text">Day6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -607,12 +648,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">153k</span>
+    <span title="總字數">156k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">2:20</span>
+    <span title="所需總閱讀時間">2:22</span>
 </div>
 
         
