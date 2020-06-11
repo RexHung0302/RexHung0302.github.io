@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-06-11T02:41:52.518Z">
+<meta property="og:updated_time" content="2020-06-11T17:39:54.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-06-11 10:41:52" itemprop="dateModified" datetime="2020-06-11T10:41:52+08:00">2020-06-11</time>
+                <time title="修改時間：2020-06-12 01:39:54" itemprop="dateModified" datetime="2020-06-12T01:39:54+08:00">2020-06-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,14 +274,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>7.6k</span>
+              <span>9.4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>7 分鐘</span>
+              <span>9 分鐘</span>
             </span>
 
         </div>
@@ -445,6 +445,41 @@
 <blockquote>
 <p>解題關鍵：善用三元運算子可以大幅縮減程式碼，只要記得公式就是 <code>條件 ? 值1(如果前方條件成立) : 值2(如果前方條件不成立)</code>，當然也可以一直串接下去，比如 <code>條件1 ? 值1(如果前方條件成立) : 條件2(當前方條件1不成立時觸發) ? 值2(如果前方條件2成立) : 值3(如果前方條件2不成立)</code>，用這種方式可以省去很多 <code>if-else</code>，但是在閱讀上可能要花點時間，所以要慎用！(因為本週講義有用到三元運算子，所以有刻意使用，其實後方的判斷都可以不用加上去)</p>
 </blockquote>
+<h3 id="Day7"><a href="#Day7" class="headerlink" title="Day7"></a>Day7</h3><p>第七天六角的題目為：</p>
+<p>第一題 - if 的練習</p>
+<p>老闆說現在要來驗收 if 成果，<br>成為 VIP 會員的條件，只要購買滿 200 元，<br>現在 會員 A 購買了 350 元，請用 if 判斷是否要給他 VIP 卡。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> VIPTotal = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">var</span> memberPrice = <span class="number">350</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 請透過 if 來設計回覆，如果對方滿足門檻</span></span><br><span class="line"><span class="comment">// 就回覆 console.log("您好，您有達到 VIP 門檻。這裡給您 VIP 會員卡(遞上")</span></span><br></pre></td></tr></table></figure>
+
+<p>第二題 - if else 的練習</p>
+<p>又有人來申請 VIP 活動了！<br>成為 VIP 會員的條件，只要購買滿 200 元，就可無條件成為會員，Mark 買了 2 個漢堡，2 個 薯條，是否有滿足條件？</p>
+<p>這次要記得用 if，以及注意你的語氣啊~ (小杰覺得人生好難</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> VIPTotal = <span class="number">200</span>;</span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">var</span> friesPrice = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 請透過 if else 來去設計對方是否有達到條件，有或沒有都需要回覆對方</span></span><br><span class="line"><span class="comment">// 如果有，請顯示 console.log("尊敬的客戶您好，您有達到 VIP 條件")</span></span><br><span class="line"><span class="comment">// 如果沒有達到條件，便用 else 顯示 console.log("尊敬的客戶您好，您還差 xx 元，才有符合 VIP 條件哦~")</span></span><br></pre></td></tr></table></figure>
+
+<p>第三題 - if、else if、else 練習</p>
+<p>工作一整天，小杰累到懷疑人生，累歸累，但還是得吃東西，小杰吃東西有自己的 SOP，來幫幫小杰看看他該吃什麼食物。</p>
+<ul>
+<li>小杰都用飢餓度 1~100 來計算，100 就是代表最飢餓，數值皆為整數，不會有小數點</li>
+<li>小杰飢餓度 0~20 時，都吃飯糰</li>
+<li>小杰飢餓度在 21~40 時，都吃肉燥飯+貢丸湯</li>
+<li>小杰飢餓度在 41~60 時，都吃麥當勞</li>
+<li>小杰飢餓度在 61~100 時，都吃 99 元火鍋吃到飽</li>
+<li>今天小杰的飢餓度是 53，請引導小杰去指定地點用餐</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hungryNum = <span class="number">53</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(條件式)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log();</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 請用 if、else if 去判斷主人公該吃什麼</span></span><br><span class="line"><span class="comment">// 各區塊回覆內容請顯示 console.log("主人公因為飢餓度在"+hungryNum+"，所以他決定去吃麥當勞")</span></span><br></pre></td></tr></table></figure>
+
+<p>第七天六角題目解答：</p>
+<p>第一題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(memberPrice &gt;= VIPTotal) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"您好，您有達到 VIP 門檻。這裡給您 VIP 會員卡(遞上"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MarkTotal = (<span class="number">2</span> * hamburgerPrice) + (<span class="number">2</span> * friesPrice); <span class="comment">// 馬克實際購買金額</span></span><br><span class="line"><span class="keyword">var</span> shortage; <span class="comment">// 放短少金額</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(MarkTotal &gt;= VIPTotal) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"尊敬的客戶您好，您有達到 VIP 條件"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// 計算短少金額</span></span><br><span class="line">  shortage = VIPTotal - MarkTotal;</span><br><span class="line">  	</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"尊敬的客戶您好，您還差 "</span> + shortage + <span class="string">" 元，才有符合 VIP 條件哦~"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(hungryNum &gt;= <span class="number">0</span> &amp;&amp; hungryNum &lt;= <span class="number">20</span>) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"主人公因為飢餓度在"</span>+hungryNum+<span class="string">"，所以他決定去吃 飯糰"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (hungryNum &gt;= <span class="number">21</span> &amp;&amp; hungryNum &lt;= <span class="number">40</span>) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"主人公因為飢餓度在"</span>+hungryNum+<span class="string">"，所以他決定去吃 肉燥飯+貢丸湯"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (hungryNum &gt;= <span class="number">41</span> &amp;&amp; hungryNum &lt;= <span class="number">60</span>) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"主人公因為飢餓度在"</span>+hungryNum+<span class="string">"，所以他決定去吃 麥當勞"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (hungryNum &gt;= <span class="number">61</span> &amp;&amp; hungryNum &lt;= <span class="number">100</span>) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"主人公因為飢餓度在"</span>+hungryNum+<span class="string">"，所以他決定去吃 99 元火鍋吃到飽"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解題關鍵：本日重點為 if、else、else if…，和昨日一樣，如果善用三元運算子其實可以省很多程式碼，但是有時候精確的寫出整行程式碼，也是算比較保險不容易出錯的方式哦！</p>
+</blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
 
@@ -571,7 +606,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-text">Day6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-text">Day6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day7"><span class="nav-text">Day7</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -648,12 +683,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">156k</span>
+    <span title="總字數">158k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">2:22</span>
+    <span title="所需總閱讀時間">2:23</span>
 </div>
 
         
