@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-06-10T19:54:32.822Z">
+<meta property="og:updated_time" content="2020-06-11T02:41:52.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-06-11 03:54:32" itemprop="dateModified" datetime="2020-06-11T03:54:32+08:00">2020-06-11</time>
+                <time title="修改時間：2020-06-11 10:41:52" itemprop="dateModified" datetime="2020-06-11T10:41:52+08:00">2020-06-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -440,10 +440,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">markIsVIP = (( markHamburgerNum * hamburgerPrice ) + ( markfriesNum * friesprice )) &gt;= <span class="number">200</span> &amp;&amp; markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mark的 VIP 條件為"</span>+ markIsVIP) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">maryIsVIP = (( maryHamburgerNum * hamburgerPrice ) + ( maryfriesNum * friesprice )) &gt;= <span class="number">200</span> &amp;&amp; markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 
 <p>第三題</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">maryIsVIP = (( maryHamburgerNum * hamburgerPrice ) + ( maryfriesNum * friesprice )) &gt;= VIPTotal || markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">maryIsVIP = (( maryHamburgerNum * hamburgerPrice ) + ( maryfriesNum * friesPrice )) &gt;= VIPTotal || markHamburgerNum &gt;= <span class="number">1</span> ? <span class="string">'true'</span> : <span class="string">'false'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"mary的 VIP 條件為"</span>+ maryIsVIP) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>解題關鍵：善用三元運算子可以大幅縮減程式碼，只要記得公式就是 <code>條件 ? 值1(如果前方條件成立) : 值2(如果前方條件不成立)</code>，當然也可以一直串接下去，比如 <code>條件1 ? 值1(如果前方條件成立) : 條件2(當前方條件1不成立時觸發) ? 值2(如果前方條件2成立) : 值3(如果前方條件2不成立)</code>，用這種方式可以省去很多 <code>if-else</code>，但是在閱讀上可能要花點時間，所以要慎用！</p>
+<p>解題關鍵：善用三元運算子可以大幅縮減程式碼，只要記得公式就是 <code>條件 ? 值1(如果前方條件成立) : 值2(如果前方條件不成立)</code>，當然也可以一直串接下去，比如 <code>條件1 ? 值1(如果前方條件成立) : 條件2(當前方條件1不成立時觸發) ? 值2(如果前方條件2成立) : 值3(如果前方條件2不成立)</code>，用這種方式可以省去很多 <code>if-else</code>，但是在閱讀上可能要花點時間，所以要慎用！(因為本週講義有用到三元運算子，所以有刻意使用，其實後方的判斷都可以不用加上去)</p>
 </blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
