@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-06-16T19:18:12.770Z">
+<meta property="og:updated_time" content="2020-06-18T05:52:02.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-06-17 03:18:12" itemprop="dateModified" datetime="2020-06-17T03:18:12+08:00">2020-06-17</time>
+                <time title="修改時間：2020-06-18 13:52:02" itemprop="dateModified" datetime="2020-06-18T13:52:02+08:00">2020-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,14 +274,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>16k</span>
+              <span>19k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>15 分鐘</span>
+              <span>17 分鐘</span>
             </span>
 
         </div>
@@ -312,6 +312,8 @@
 <li><a href="#Day8">Day8</a></li>
 <li><a href="#Day9">Day9</a></li>
 <li><a href="#Day10">Day10</a></li>
+<li><a href="#Day11">Day11</a></li>
+<li><a href="#Day11-2">Day11-2</a></li>
 </ul>
 <hr>
 <h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h3><p>第一天是關於 <strong>JS</strong> 宣告的練習。</p>
@@ -567,6 +569,59 @@
 <blockquote>
 <p>解題關鍵：第十天因為要練習 <strong>Function</strong>，突然想到之前有練習過 <a href="https://rexhung0302.github.io/2019/10/15/20191015/#%E5%87%BD%E5%BC%8F%E5%B0%8F%E8%A3%9C%E5%85%85" target="_blank" rel="noopener"><strong>閉包</strong> 及 <strong>工廠</strong></a> 就剛好拿來練習了，好處是錢包可以一直往下扣，而且外面的變數如果都會用到往內移到 <strong>Function</strong> 內的話，跑完 <strong>Function</strong> 就會釋放記憶體，只會暫存錢包計算後的金額！本次為練習，關於 <strong>閉包</strong> 及 <strong>工廠</strong> 還有許多可以改進的地方，還請各路大神手下留情。</p>
 </blockquote>
+<h3 id="Day11"><a href="#Day11" class="headerlink" title="Day11"></a>Day11</h3><p>第十一天六角的題目為：</p>
+<p>第一題 - 老闆想要隨時扣你的薪水</p>
+<p>老闆：「今天是發薪日，先發給你薪資 23500 元(遞給小杰」<br>老闆：「以下三步驟動作請寫成程式」<br>老闆：「步驟一：昨天你上廁所太久了，我要扣你 1000 元」<br>老闆：「步驟二：小黑說不喜歡你煮的狗食，我要再扣你 3500 元 (再次取走」<br>老闆：「步驟三：我今天心情不太好，扣個 500 元意思一下」<br>小杰：「屁啦！心情不太好關我啥事！」<br>老闆：「這不是重點，快點算！將之前的寫法換成函式，並增加一個參數，讓我方便何時扣你多少都沒問題」<br>老闆：「最後你寫的函式，要執行三次，每次都要回報你的總薪水剩下多少。」</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salary = <span class="number">23500</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//請依照上面的武功秘笈Codepen,依序實現兩步驟,算出小杰被扣了多少錢</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"小杰目前還剩下"</span>+salary+<span class="string">"元"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>第二題 - if + 指派運算子</p>
+<p>老闆：「好了，現在我要告訴你贈品條件！」</p>
+<p>目前小杰手上有 3 個贈品<br>消費滿 100 元就送對方贈品<br>下為第八關程式碼，請依照以下邏輯進行改寫：</p>
+<p>現在來了三個客人，並依序有消費，A顧客消費 150、B 顧客消費 99、C 顧客消費 110。<br>請設計一個函式，裡面代入一個參數為顧客消費金額，確認該客戶是否符合贈品條件，若符合就讓 giftNum 變數減少數量。<br>並依序執行三次函式，每次函式皆會 return 目前贈品數量剩下多少。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 贈品數量 var giftNum = 3;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> customerA = <span class="number">150</span>; <span class="comment">// 顧客 A 消費金額</span></span><br><span class="line"><span class="keyword">var</span> customerB = <span class="number">99</span>;  <span class="comment">// 顧客 B 消費金額</span></span><br><span class="line"><span class="keyword">var</span> customerC = <span class="number">110</span>; <span class="comment">// 顧客 C 消費金額</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(客戶A條件)&#123;&#125;</span><br><span class="line"><span class="keyword">if</span>(客戶B條件)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"目前贈品剩下"</span>+giftNum+<span class="string">"個"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>第三題 - if+指派運算子</p>
+<p>老闆：「我現在補齊給你總計 200 個贈品！」<br>老闆：「然後我覺得現在贈品門檻太高了，我決定大放送，只要滿 50 元就送一個！以此類推，他買 500 元就送 10 個贈品！」<br>小杰：「老闆你竟然利用我的特休，我跟你沒完啦。」<br>老闆：「別廢話，客人來了快點！他買完後告訴我贈品還夠不夠！」</p>
+<p>下為第八關程式碼，giftNum 已改為 200 份，請依照以下邏輯進行改寫：</p>
+<p>請用函式改寫，同時來了三組客人，請用你寫的函式連續執行三次，來幫助顧客是否有符合贈品條件。<br>另外每次執行函式時，都必須告訴老闆一次目前贈品數量。<br>第一組客人：Mary 買了 10 份薯條，10 份漢堡<br>第二組客人：Bob 買了 1 份薯條<br>第三組客人：Tim 買了 20 份薯條，15 份漢堡</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> giftNum = <span class="number">200</span>;       <span class="comment">// 贈品數量</span></span><br><span class="line"><span class="keyword">var</span> friesPrice = <span class="number">30</span>;     <span class="comment">// 薯條單價</span></span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>; <span class="comment">// 漢堡單價</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是題目</span></span><br><span class="line"><span class="comment">// mary買了10份薯條,10份漢堡</span></span><br><span class="line"><span class="comment">// 請計算完贈品規則後,善用指派運算子去計算目前剩下的贈品有幾個</span></span><br><span class="line"><span class="comment">// 並用下面的 if 回報給老閱</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>()&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"老閱!贈品還夠!剩下"</span>+giftNum+<span class="string">"個~"</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"老闖贈品賣光啦~"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第十一天六角題目解答：</p>
+<p>第一題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salary = <span class="number">23500</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">payCutHandler</span>(<span class="params">reduceMoney</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`小杰目前還剩下<span class="subst">$&#123;salary -= reduceMoney&#125;</span>元`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 昨天你上廁所太久了，我要扣你 1000 元</span></span><br><span class="line">payCutHandler(<span class="number">1000</span>);</span><br><span class="line"><span class="comment">// 小黑說不喜歡你煮的狗食，我要再扣你 3500 元</span></span><br><span class="line">payCutHandler(<span class="number">3500</span>);</span><br><span class="line"><span class="comment">// 我今天心情不太好，扣個 500 元意思一下</span></span><br><span class="line">payCutHandler(<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+
+<p>第二題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> giftNum = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">var</span> customerA = <span class="number">150</span>; <span class="comment">// 顧客 A 消費金額</span></span><br><span class="line"><span class="keyword">var</span> customerB = <span class="number">99</span>;  <span class="comment">// 顧客 B 消費金額</span></span><br><span class="line"><span class="keyword">var</span> customerC = <span class="number">110</span>; <span class="comment">// 顧客 C 消費金額</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendGift</span>(<span class="params">spendMoney</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(spendMoney &gt;= <span class="number">100</span> &amp;&amp; giftNum &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">`目前贈品剩下<span class="subst">$&#123;giftNum -= <span class="number">1</span>&#125;</span>個`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (giftNum &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">`目前贈品不夠囉`</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">`您的消費金額不夠！`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sendGift(customerA); <span class="comment">// 目前贈品剩下2個</span></span><br><span class="line">sendGift(customerB); <span class="comment">// 您的消費金額不夠！</span></span><br><span class="line">sendGift(customerC); <span class="comment">// 目前贈品剩下1個</span></span><br></pre></td></tr></table></figure>
+
+<p>第三題</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> giftNum = <span class="number">200</span>;       <span class="comment">// 贈品數量</span></span><br><span class="line"><span class="keyword">var</span> friesPrice = <span class="number">30</span>;     <span class="comment">// 薯條單價</span></span><br><span class="line"><span class="keyword">var</span> hamburgerPrice = <span class="number">50</span>; <span class="comment">// 漢堡單價</span></span><br><span class="line"><span class="keyword">var</span> sendGiftDoorsill = <span class="number">50</span>; <span class="comment">// 贈品門檻</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下是題目</span></span><br><span class="line"><span class="comment">// mary買了10份薯條,10份漢堡</span></span><br><span class="line"><span class="comment">// 請計算完贈品規則後,善用指派運算子去計算目前剩下的贈品有幾個</span></span><br><span class="line"><span class="comment">// 並用下面的 if 回報給老閱</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sendGift</span>(<span class="params">friesNum, hamburgerNum</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> spendTotal = friesPrice * friesNum + hamburgerPrice * hamburgerNum;</span><br><span class="line">  	<span class="keyword">var</span> sendGiftNum = <span class="built_in">Math</span>.floor(spendTotal/sendGiftDoorsill);</span><br><span class="line">  	giftNum -= sendGiftNum;</span><br><span class="line">  	<span class="keyword">if</span>(giftNum &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="string">`老闆！贈品還夠！剩下<span class="subst">$&#123;giftNum&#125;</span>個~`</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="string">`老闆贈品賣光啦~`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解題關鍵：今天也是練習 <strong>Function</strong> 練習應用。</p>
+</blockquote>
+<h3 id="Day11-2"><a href="#Day11-2" class="headerlink" title="Day11-2"></a>Day11-2</h3><p>第十一天六角直播的額外題目為：</p>
+<p>整理 <strong>OPENDATA</strong> 資料，並且篩選出自己要的陣列，另外筆者也補上了手動輸入後塞選的功能(<strong>前端老毛病</strong>)，資料來源為 <strong><span class="exturl" data-url="aHR0cHM6Ly9vcGVuZGF0YS50YWljaHVuZy5nb3YudHcvZGF0YXNldC8zYjcxODQzYy0xYTlmLTExZTgtOGY0My0wMDE1NWQwMjEyMDI=" title="https://opendata.taichung.gov.tw/dataset/3b71843c-1a9f-11e8-8f43-00155d021202">台中政府資料開放平臺<i class="fa fa-external-link"></i></span></strong>，這次練習的題目為 <strong>iBike車站</strong> 且項目為下：</p>
+<ol>
+<li><p>列出 <strong>iBike</strong> 的車站總數</p>
+<blockquote>
+<p>因為 <strong>CodePen</strong> 不能塞太多 <strong>JS</strong> 內容，所以資料內容有刪減過</p>
+</blockquote>
+</li>
+<li><p>列出 <strong>iBike</strong> 的所有車站名稱</p>
+</li>
+<li><p>列出關於 <strong>公園</strong> 相關的所有車站名稱</p>
+</li>
+<li><p>使用者輸入 <strong>input</strong> 後可以自動篩選(<strong>前端老毛病</strong>)</p>
+</li>
+</ol>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - OPEN Data 整理練習" src="https://codepen.io/rexhung0302/embed/jOWVQPr?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/rexhung0302/pen/jOWVQPr' target="_blank" rel="noopener">JS學徒特訓班 - OPEN Data 整理練習</a> by ZeHung
+  (<a href='https://codepen.io/rexhung0302' target="_blank" rel="noopener">@rexhung0302</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：善用 <code>array.forEach()</code> 及 <code>include()</code> 還有 <code>innerHTML</code> 等等功能，即可整理成自己想要的陣列，另外推薦一個觀念，盡量不要直接去改變最一開始拿到的資料，把自己需要的篩選出來後放到新的陣列，舊的就維持原本的樣子就好！</p>
+</blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
 
@@ -693,7 +748,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-text">Day6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day7"><span class="nav-text">Day7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day8"><span class="nav-text">Day8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day9"><span class="nav-text">Day9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day10"><span class="nav-text">Day10</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-text">Day6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day7"><span class="nav-text">Day7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day8"><span class="nav-text">Day8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day9"><span class="nav-text">Day9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day10"><span class="nav-text">Day10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day11"><span class="nav-text">Day11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day11-2"><span class="nav-text">Day11-2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -770,12 +825,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">164k</span>
+    <span title="總字數">167k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">2:29</span>
+    <span title="所需總閱讀時間">2:32</span>
 </div>
 
         
