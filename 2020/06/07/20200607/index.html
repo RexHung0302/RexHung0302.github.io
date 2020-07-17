@@ -37,7 +37,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
-<meta property="og:updated_time" content="2020-07-17T08:53:06.437Z">
+<meta property="og:updated_time" content="2020-07-17T10:06:18.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -238,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-07-17 16:53:06" itemprop="dateModified" datetime="2020-07-17T16:53:06+08:00">2020-07-17</time>
+                <time title="修改時間：2020-07-17 18:06:18" itemprop="dateModified" datetime="2020-07-17T18:06:18+08:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,7 +274,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>36k</span>
+              <span>35k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -798,7 +798,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.querySelector(<span class="string">".list"</span>)</span><br><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line">data.push(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"廖洧杰"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="number">178</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">data.push(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"小乖"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="number">120</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">data.push(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"小麗"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="number">140</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">data.push(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"小新"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="number">80</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">data.push(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="string">"name"</span>:<span class="string">"小華"</span>,</span><br><span class="line">    <span class="string">"height"</span>:<span class="number">50</span></span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">  <span class="keyword">var</span> str = <span class="string">""</span>;</span><br><span class="line">data.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> content = <span class="string">'&lt;li&gt;'</span>+item.name+<span class="string">"你的身高是"</span>+item.height+<span class="string">'&lt;/li&gt;'</span></span><br><span class="line">  str+=content;</span><br><span class="line"> </span><br><span class="line">&#125;)</span><br><span class="line"> list.innerHTML = str;</span><br></pre></td></tr></table></figure>
 
 <p>第十八天六角的題目解答為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe height=<span class="string">"265"</span> style=<span class="string">"width: 100%;"</span> scrolling=<span class="string">"no"</span> title=<span class="string">"JS學徒特訓班 - 第十八天練習"</span> src=<span class="string">"https://codepen.io/rexhung0302/embed/gOPGeMm?height=265&amp;theme-id=dark&amp;default-tab=js,result"</span> frameborder=<span class="string">"no"</span> allowtransparency=<span class="string">"true"</span> allowfullscreen=<span class="string">"true"</span>&gt;</span><br><span class="line">  See the Pen &lt;a href=<span class="string">'https://codepen.io/rexhung0302/pen/gOPGeMm'</span>&gt;JS學徒特訓班 - 第十八天練習&lt;<span class="regexp">/a&gt; by RexHung</span></span><br><span class="line"><span class="regexp">  (&lt;a href='https:/</span><span class="regexp">/codepen.io/</span>rexhung0302<span class="string">'&gt;@rexhung0302&lt;/a&gt;) on &lt;a href='</span>https:<span class="comment">//codepen.io'&gt;CodePen&lt;/a&gt;.</span></span><br><span class="line">&lt;<span class="regexp">/iframe&gt;</span></span><br></pre></td></tr></table></figure>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第十八天練習" src="https://codepen.io/rexhung0302/embed/gOPGeMm?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/rexhung0302/pen/gOPGeMm' target="_blank" rel="noopener">JS學徒特訓班 - 第十八天練習</a> by RexHung
+  (<a href='https://codepen.io/rexhung0302' target="_blank" rel="noopener">@rexhung0302</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
 
 <blockquote>
 <p>解題關鍵：今天的練習重點為 <strong>字串模板</strong> 及變數應該放 <strong>function</strong> 外面還是裡面，這必須考量到你的變數是要每次在使用前都要回覆最初樣貌，還是要拿來累加上去。</p>
@@ -1173,7 +1176,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">184k</span>
+    <span title="總字數">183k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
