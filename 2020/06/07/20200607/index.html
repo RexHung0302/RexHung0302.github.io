@@ -38,7 +38,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day2MyQuestion.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day37.png">
-<meta property="og:updated_time" content="2020-07-28T03:11:03.633Z">
+<meta property="og:updated_time" content="2020-07-28T03:11:40.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -239,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-07-28 11:11:03" itemprop="dateModified" datetime="2020-07-28T11:11:03+08:00">2020-07-28</time>
+                <time title="修改時間：2020-07-28 11:11:40" itemprop="dateModified" datetime="2020-07-28T11:11:40+08:00">2020-07-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1055,7 +1055,7 @@
 
 <p>雖然 <code>var</code> 會被全域污染，但要記得 <code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，下面再畫一張圖好理解：</p>
 <p><img src="/images/20200607/Day37.png" alt="關於 var 的奧秘"></p>
-<p>塗上可以很清楚看到有 <strong>三個紅色的 var</strong>，<code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，所以三個 <code>console.log()</code> 分別為 <strong>1.王大錘 2.王小明 3.陳小王</strong>。</p>
+<p>圖上可以很清楚看到有 <strong>三個紅色的 var</strong>，<code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，所以三個 <code>console.log()</code> 分別為 <strong>1.王大錘 2.王小明 3.陳小王</strong>。</p>
 <p>上述舉了一個簡單的例子，可能剛開始我們定義好 <strong>全域變數</strong>，但在我們寫了幾百幾千行 <strong>JS</strong> 之後可能早已經忘了取過什麼變數了(沒有使用 <strong>前端開發工具</strong>、<strong>前端框架</strong> 的情況下單支 <strong>JS</strong> 都會露露長)，然後可能中途某個 <strong>function</strong> 你就這麼剛好的重複使用了這個變數，這時候全域變數就會被污染。</p>
 <p>然而 <code>ES6</code> 的 <code>let</code> 出現拯救了這個問題(雖然同時也會有缺點，後面會提到)，<code>let</code> 屬於 <strong>區塊(Block)</strong>，它並不會依附在 <strong>window</strong> 上，所以下述情況會發生：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name_one = <span class="string">'王小明'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name_one); <span class="comment">// '王小明'</span></span><br><span class="line"><span class="keyword">let</span> name_two = <span class="string">'王大錘'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name_two); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
