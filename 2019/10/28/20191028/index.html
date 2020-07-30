@@ -34,7 +34,9 @@
 <meta property="og:description" content="Introduction &amp;amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
-<meta property="og:updated_time" content="2020-05-13T07:52:17.690Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191028&#x2F;es6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20191028&#x2F;es_history.png">
+<meta property="og:updated_time" content="2020-07-30T17:07:38.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*emhX3OcXv7c1b7yzUfsg5A.png">
 
@@ -235,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-05-13 15:52:17" itemprop="dateModified" datetime="2020-05-13T15:52:17+08:00">2020-05-13</time>
+                <time title="修改時間：2020-07-31 01:07:38" itemprop="dateModified" datetime="2020-07-31T01:07:38+08:00">2020-07-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,14 +277,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>1.5k</span>
+              <span>4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>1 分鐘</span>
+              <span>4 分鐘</span>
             </span>
 
         </div>
@@ -324,6 +326,8 @@
 </li>
 <li><p>This 的特性</p>
 </li>
+<li><p>關於箭頭函式對 this 的影響</p>
+</li>
 </ol>
 <hr>
 <p><img src="https://cdn-images-1.medium.com/max/2000/1*emhX3OcXv7c1b7yzUfsg5A.png" alt="關於 This"></p>
@@ -348,7 +352,61 @@
 
 <p>上面提到到所謂的 <strong>嚴格模式(‘use strice’)</strong>，在 <strong>JavaScript</strong> 裡有一個靜默的小錯誤，不至於影響程式進行將會被忽略不會跳出警告，而使用 <strong>嚴格模式(‘use strice’)</strong> 後將會直接看見，而 <strong>嚴格模式(‘use strice’)</strong> 也可以依照部分環境加入，意思就是這個 <strong>Function</strong> 我想要加入，另一個不要其實也可以。</p>
 <hr>
-<p>待補…</p>
+<p>2020.07.31 後更：</p>
+<h3 id="關於箭頭函式對-this-的影響"><a href="#關於箭頭函式對-this-的影響" class="headerlink" title="關於箭頭函式對 this 的影響"></a>關於箭頭函式對 this 的影響</h3><h4 id="廢話前言"><a href="#廢話前言" class="headerlink" title="廢話前言"></a>廢話前言</h4><p>沒想到過了快一年才回來補充，最近剛好在挑戰六角學院的 <strong>JS 60 Day</strong>，有興趣可以看看我的文章 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNy8yMDIwMDYwNy8jbW9yZQ==" title="https://rexhung0302.github.io/2020/06/07/20200607/#more">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30<i class="fa fa-external-link"></i></span> 及 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNy8yOS8yMDIwMDcyOS8jbW9yZQ==" title="https://rexhung0302.github.io/2020/07/29/20200729/#more">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60<i class="fa fa-external-link"></i></span>。</p>
+<p>在第三十九天練習時碰到的題目剛好跟之前的 <strong>JS核心</strong> 有相關，就補充在這邊啦！</p>
+<p><img src="/images/20191028/es6.png" alt="ECMAScript6 - ES6"></p>
+<p>關於 <strong>ES6</strong> 的歷史，在這個系列前一章 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8yNC8yMDE5MTAyNC8jJUU5JUExJThEJUU1JUE0JTk2JUU4JUEzJTlDJUU1JTg1JTg1" title="https://rexhung0302.github.io/2019/10/24/20191024/#%E9%A1%8D%E5%A4%96%E8%A3%9C%E5%85%85">[JavaScript Notes] — 淺談 JavaScript #3<i class="fa fa-external-link"></i></span> 有介紹到，這邊大致再帶過一次。</p>
+<p><img src="/images/20191028/es_history.png" alt="ES歷史"></p>
+<blockquote>
+<p><em>ES 又稱 ECMAScript，Script 代表著腳本，而 ECMAScript 提供了腳本語言需要遵守的規則、細節和規範， JavaScript 是實現 ECMAScript 的規範後所誕生出來的語言。簡單點來說就是一些可以讓你更簡單做事情的 Function 及 一些寫 Code 規範，更詳細的發展歷程可以點 傳送門 查看。</em></p>
+</blockquote>
+<h4 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h4><p>這邊雖然大家可能已經知道箭頭函式是做什麼的，但還是要提一下，在剛學習 <strong>JS</strong> 一陣子後可能會開始發現很多很酷炫的寫法，比如常見的 <strong>箭頭函式</strong>、<strong>解構</strong>、<strong>字串模板</strong>…等等，以下為 <strong>箭頭函式</strong> 的範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 舊寫法</span></span><br><span class="line"><span class="keyword">var</span> callName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"I'm"</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 箭頭函式 寫法</span></span><br><span class="line"><span class="keyword">var</span> callName = <span class="function">(<span class="params">name</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"I'm"</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(callName(<span class="string">'王小明'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>上面可以看到 <strong>箭頭函式</strong> 取代了 <code>function</code>，雖然剛開始不是很習慣，但寫久了會變得很直覺，而且省下很多時間，身為工程師就必須能多懶就多懶，但是又要能懶到要處，讓人一看 <strong>Code</strong> 就知道你在寫蝦咪碗糕！</p>
+<p>所以上面的例子我們還能這樣省：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭頭函式 寫法</span></span><br><span class="line"><span class="comment">// 單一行陳述不需要 `&#123;&#125;`</span></span><br><span class="line"><span class="comment">// 此為舉例，如果需要 return 要自己帶入，並非可以省略並有 return 效果！</span></span><br><span class="line"><span class="keyword">var</span> callName = <span class="function"><span class="params">name</span> =&gt;</span> <span class="string">"I'm"</span> + name;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(callName(<span class="string">'王小明'</span>))</span><br></pre></td></tr></table></figure>
+
+<p>夠省吧！簡單的說只要記得下列幾點：</p>
+<ol>
+<li><p><code>function</code> 改為 <code>=&gt;</code></p>
+</li>
+<li><p>帶有參數情況下，<code>()</code> 必須移到 <code>=&gt;</code> 箭頭前，且如果只有一個參數情況下，可省略 <code>()</code>，但若 <strong>沒有參數</strong> 或 <strong>一個以上的參數</strong> 情況下，一定要帶括號！</p>
+</li>
+<li><p>單一行陳述不需要 <code>{}</code></p>
+</li>
+</ol>
+<h4 id="呼應主題-This"><a href="#呼應主題-This" class="headerlink" title="呼應主題 This"></a>呼應主題 This</h4><p>一篇好的文章結尾處是必須要呼應主題的，既然這篇文章是在講 <strong>This</strong>，那這邊就要再回來題 <strong>箭頭函式</strong> 對 <strong>This</strong> 的影響。</p>
+<p>首先我們先記得兩點關於 <strong>This</strong> 的差別：</p>
+<ol>
+<li><p>傳統函式 =&gt; 依呼叫的方法而定</p>
+</li>
+<li><p>箭頭函式 =&gt; 綁定到其定義時所在的物件 </p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'王小明'</span>;</span><br><span class="line"><span class="keyword">var</span> myFriend = &#123;</span><br><span class="line">  name = <span class="string">'王大錘'</span>,</span><br><span class="line">  callName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">// 王大錘</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// myFriend</span></span><br><span class="line">  &#125;,</span><br><span class="line">  callName_2: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">// 王小明</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// window</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myFriend.callName();</span><br><span class="line">myFriend.callName_2();</span><br></pre></td></tr></table></figure>
+
+<p>上述例子很清楚可以看見使用 <strong>箭頭函式</strong> 的 <strong>This</strong> 會穿過原本的區塊直接指向外層的 <strong>window</strong>，這是因為 <strong>箭頭函式</strong> 的 <strong>This</strong> 會綁定在 <code>其定義時所在的物件</code>，一般建立函式都是在 <strong>window</strong> 下，所以很自然就會指向 <strong>window</strong>，那要怎麼才能指向函式呢？</p>
+<p>這邊再說一個比較好記的方式：</p>
+<p>建立在物件內的函式，才會影響箭頭函式的 <strong>This</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fun = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> fun2 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> fun3 = &#123;</span><br><span class="line">    fun: fun2,</span><br><span class="line">    xxx: <span class="string">'xxx'</span></span><br><span class="line">  &#125;</span><br><span class="line">  fun2(); <span class="comment">// this =&gt; window</span></span><br><span class="line">  fun3.fun(); <span class="comment">// this =&gt; fun3 Object</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>簡單說就是如果你的 <strong>function</strong> 有被物件包起來，這時候 <strong>This</strong> 指向的位置就不會是 <strong>window</strong>，因為你並不是建立在 <strong>window</strong> 上的，而是 <strong>Object</strong> 上的。</p>
+<blockquote>
+<p>注意：上方示範的箭頭函式，適用於原本一般的函式。</p>
+</blockquote>
+<h4 id="call，apply，bind"><a href="#call，apply，bind" class="headerlink" title="call，apply，bind"></a>call，apply，bind</h4><p>關於這三個可以參考 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDE5NTg5Ng==" title="https://ithelp.ithome.com.tw/articles/10195896">JavaScript - call，apply，bind<i class="fa fa-external-link"></i></span>，會提到這三個屬性是因為在 <strong>箭頭函式</strong> 裡， <strong>This</strong> 是被綁定的，所以 <code>call()</code> 無法修改 <strong>This</strong>，<code>call()</code> 或 <code>apply()</code> 呼叫箭頭函式只能傳入參數。</p>
+<h4 id="建構函式-Out"><a href="#建構函式-Out" class="headerlink" title="建構函式 Out"></a>建構函式 Out</h4><p>如果使用 <strong>new</strong> 運算子，<strong>箭頭函式</strong> 不可作為建構式使用；若使用於建構式，會在使用 <strong>new</strong> 時候拋出錯誤(範例為 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvRnVuY3Rpb25zL0Fycm93X2Z1bmN0aW9ucw==" title="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN<i class="fa fa-external-link"></i></span>)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); <span class="comment">// TypeError: Foo is not a constructor</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DOM-監聽"><a href="#DOM-監聽" class="headerlink" title="DOM 監聽"></a>DOM 監聽</h4><p>記得前面提過的 <strong>This</strong> 會綁到 <strong>window</strong> 上嗎？所以如果拿來當 <strong>監聽事件</strong> 的作用會錯誤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="built_in">document</span>.getElementsById(<span class="string">'name_input'</span>);</span><br><span class="line"><span class="keyword">var</span> changeName = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);                   <span class="comment">// window</span></span><br><span class="line">  <span class="keyword">this</span>.style.disable = <span class="string">'true'</span> <span class="comment">// 錯誤</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">name.addEventListener(<span class="string">'onkeyup'</span>, changeName, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述例子為參考 <span class="exturl" data-url="aHR0cHM6Ly93Y2M3MjMuZ2l0aHViLmlvL2phdmFzY3JpcHQvMjAxNy8xMi8yMS9qYXZhc2NyaXB0LWVzNi1hcnJvdy1mdW5jdGlvbi8=" title="https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/">卡斯伯老師 - 鐵人賽：箭頭函式 (Arrow functions)<i class="fa fa-external-link"></i></span> 修改。</p>
+</blockquote>
+<h4 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h4><p>關於 <strong>箭頭函式</strong> 或是其他一些 <strong>ES語法糖</strong> 雖然很方便，但總還是會有需要注意的地方，但我們並無法都預先知道所有的錯誤， 就算知道了也可能很快就會忘記，所以最好的作法就是多練習，多犯錯！</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實在原本就是打算做筆記之用途，因為實在有太多的大神已經寫了好多篇關於 <strong>This</strong> 的文章，沒有十足把握的話其實覺得多寫一篇關於 <strong>This</strong> 的文章真的是很沒意義，不過既然是自己要作為筆記用途，那就多少寫一些多少記一些囉。</p>
 <p>更多關於 <strong>This</strong> 就等之後補上囉～</p>
@@ -483,7 +541,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-是什麼？"><span class="nav-text">This 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#This-的特性"><span class="nav-text">This 的特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-是什麼？"><span class="nav-text">This 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#This-的特性"><span class="nav-text">This 的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於箭頭函式對-this-的影響"><span class="nav-text">關於箭頭函式對 this 的影響</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#廢話前言"><span class="nav-text">廢話前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#進入正題"><span class="nav-text">進入正題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#呼應主題-This"><span class="nav-text">呼應主題 This</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#call，apply，bind"><span class="nav-text">call，apply，bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建構函式-Out"><span class="nav-text">建構函式 Out</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM-監聽"><span class="nav-text">DOM 監聽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小結"><span class="nav-text">小結</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -560,12 +618,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">189k</span>
+    <span title="總字數">192k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">2:52</span>
+    <span title="所需總閱讀時間">2:54</span>
 </div>
 
         
