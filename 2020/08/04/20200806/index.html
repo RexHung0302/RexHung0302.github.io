@@ -28,14 +28,15 @@
   <meta name="description" content="Introduction &amp;amp; 前言接觸程式近一年半多，常常想一虧後端的樣貌，想知道整個程式流程是怎麼跑的，甚至想要試試看寫出從前到後的 Side Project，如果你也對後端有點興趣，就跟著筆者一起往下學習吧！這是筆者接觸的 第一個後端語言，所以不會有太過艱深的研究或是內容。">
 <meta name="keywords" content="RexHung,CodeLife,HexSchool,Engineer,Back-end,NodeJS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[NodeJS Become A Full Stack Developer] — 從0開始 何謂 NodeJS">
+<meta property="og:title" content="[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手">
 <meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2020&#x2F;08&#x2F;04&#x2F;20200806&#x2F;index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
 <meta property="og:description" content="Introduction &amp;amp; 前言接觸程式近一年半多，常常想一虧後端的樣貌，想知道整個程式流程是怎麼跑的，甚至想要試試看寫出從前到後的 Side Project，如果你也對後端有點興趣，就跟著筆者一起往下學習吧！這是筆者接觸的 第一個後端語言，所以不會有太過艱深的研究或是內容。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;nodejs-logo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;hexschoolNodeJSLogo.jpg">
-<meta property="og:updated_time" content="2020-08-06T02:42:55.394Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;globalVSwindow.jpg">
+<meta property="og:updated_time" content="2020-08-06T15:31:18.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;nodejs-logo.png">
 
@@ -51,7 +52,7 @@
   };
 </script>
 
-  <title>[NodeJS Become A Full Stack Developer] — 從0開始 何謂 NodeJS | RexHung's Blog</title>
+  <title>[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手 | RexHung's Blog</title>
   
 
 
@@ -219,7 +220,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [NodeJS Become A Full Stack Developer] — 從0開始 何謂 NodeJS
+          [NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手
         </h1>
 
         <div class="post-meta">
@@ -236,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-06 10:42:55" itemprop="dateModified" datetime="2020-08-06T10:42:55+08:00">2020-08-06</time>
+                <time title="修改時間：2020-08-06 23:31:18" itemprop="dateModified" datetime="2020-08-06T23:31:18+08:00">2020-08-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,7 +277,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>293</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -303,7 +304,37 @@
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/20200806/hexschoolNodeJSLogo.jpg" alt="六角學院課程"></p>
 <p>沒有錯！這次也是照著六角學院線上課程 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s" title="https://www.hexschool.com/courses/nodejs.html">NodeJS 前後端開發實戰<i class="fa fa-external-link"></i></span> 學習筆記，好處是隨時想進行就進行學習，缺點也顯而易見就是太懶惰可能會讓課程擺著生灰塵(有興趣參考 線上課程 vs 直播課程 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNi8yMDIwMDYwNi8=" title="https://rexhung0302.github.io/2020/06/06/20200606/">八週總結心得<i class="fa fa-external-link"></i></span> )，鑑於以往筆記過長，這系列會使用簡短且重點筆記。</p>
 <hr>
-<h3 id="長話短說"><a href="#長話短說" class="headerlink" title="長話短說"></a>長話短說</h3><hr>
+<h2 id="簡短介紹"><a href="#簡短介紹" class="headerlink" title="簡短介紹"></a>簡短介紹</h2><p><strong>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</strong></p>
+<p><strong>Node.js</strong> 使用了 <strong>V8</strong> 引擎，而它是一個能夠執行 <strong>JS</strong> 的環境，而 <strong>V8</strong> 專案也是開源的，有興趣可以參考<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWl1bS5nb29nbGVzb3VyY2UuY29tL3Y4L3Y4" title="https://chromium.googlesource.com/v8/v8">此處<i class="fa fa-external-link"></i></span>。</p>
+<p>而 <strong>Node.js</strong> 的出現，使得原本在前端已經被廣泛的運用，甚至可以只靠 <strong>JS</strong> 就從前端寫到透端；由於很多前端工程師在接觸 <strong>前端三寶(HTML、CSS、JS)</strong> 之後，往往想一虧後端都會不知所措，甚至需要重新適應一個後端語言，因為 <strong>Node.js</strong> 讓前端可以輕鬆的就入門。</p>
+<hr>
+<h3 id="初試啼聲"><a href="#初試啼聲" class="headerlink" title="初試啼聲"></a>初試啼聲</h3><h4 id="如何開始"><a href="#如何開始" class="headerlink" title="如何開始"></a>如何開始</h4><p>一開始我們可以上 <strong>Node.js</strong> 的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==" title="https://nodejs.org/en/">官方網站<i class="fa fa-external-link"></i></span> 下載，這邊會有兩個版本，左邊代表比較穩定的版本，通常建議新手或是不熟的人先下載這個，而右邊那個則是最新版本，如果想試試新功能，可以選擇這一個，下載安裝完後打開中關機輸入以下指令即可查看是否安裝成功及版本號：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">--version</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>點選下方的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Fib3V0L3JlbGVhc2VzLw==" title="https://nodejs.org/en/about/releases/">Long Term Support (LTS) schedule.<i class="fa fa-external-link"></i></span> 可以看到個版本的時間軸，比方說預期什麼版本預期維護到什麼時候。</p>
+</blockquote>
+<h4 id="簡單上手"><a href="#簡單上手" class="headerlink" title="簡單上手"></a>簡單上手</h4><p>在終端機輸入 <code>node</code>，即會進入 <code>node</code> 的環境，在這裡面可以寫任何的 <strong>JS</strong>，但我們通常不會這樣子做，我們會寫在檔案上，再交由 <strong>NodeJS</strong> 去執行，所以你可以試著創立一個 <code>app.js</code>，然後在裡面輸入下面內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello NodeJS!!'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>隨後打開終端機輸入 <code>node app.js</code>(記得要在同一層！)，就會出現 <code>Hello NodeJS!!</code>。</p>
+<hr>
+<h3 id="模組介紹"><a href="#模組介紹" class="headerlink" title="模組介紹"></a>模組介紹</h3><p>原生的 <strong>NodeJS</strong> 其實裡面幫我們包含了很多東西，可以想像成 <strong>JS</strong> 有很多原生用法，比方說原生的 <strong>JS</strong> 可以直接使用 <code>console.log()</code> 或是 <code>new Date()</code>，可以參考 <a href="https://github.com/nodejs/node/tree/master/lib">node git lib</a>。</p>
+<h4 id="全域物件"><a href="#全域物件" class="headerlink" title="全域物件"></a>全域物件</h4><p>值得先提的是關於全域這件事情，在 <strong>JS</strong> 裡面最外層是 <strong>window</strong>，而 <strong>NodeJS</strong> 因為下面可能會有好幾個 <strong>JS</strong> ，所以最外層則是 <strong>global</strong>，如果你在檔案 A 想要檔案 Ｂ 吃得到這個變數，就必須要用 <strong>global</strong>，如下圖：</p>
+<p><img src="/images/20200806/globalVSwindow.jpg" alt="環境介紹"></p>
+<h4 id="檔案橋樑"><a href="#檔案橋樑" class="headerlink" title="檔案橋樑"></a>檔案橋樑</h4><p>那如何讓檔案能相互溝通了，就必須依靠 <code>require()</code> 及 <code>module.exports</code> 或 <code>exports</code>，當一隻檔案要讓另一隻檔案引入的時候必須要先指定這隻檔案要輸出什麼東西，比如下方(B.js)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">'王小明'</span>;</span><br><span class="line"></span><br><span class="line">exports.name = myName;</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">'王小明'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  name: myName</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>基本上都會推薦第二種寫法，簡單明瞭，而且主要的重點是，<code>這兩種方法絕對不可以共用</code>，如果共用後面的會把前面的覆蓋過去。</p>
+</blockquote>
+<p>那需要引用的檔案就更簡單了，只需要使用 <code>require()</code> 即可，如下(A.js)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nameInfo = <span class="built_in">require</span>(<span class="string">'./B.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(nameInfo.name);</span><br></pre></td></tr></table></figure>
+
+<hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><hr>
 
     </div>
@@ -324,7 +355,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/08/04/20200806/" title="[NodeJS Become A Full Stack Developer] — 從0開始 何謂 NodeJS">https://github.com/RexHung0302/RexHung0302.github.io/2020/08/04/20200806/</a>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/08/04/20200806/" title="[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手">https://github.com/RexHung0302/RexHung0302.github.io/2020/08/04/20200806/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
@@ -430,7 +461,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#長話短說"><span class="nav-text">長話短說</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#簡短介紹"><span class="nav-text">簡短介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初試啼聲"><span class="nav-text">初試啼聲</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何開始"><span class="nav-text">如何開始</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#簡單上手"><span class="nav-text">簡單上手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模組介紹"><span class="nav-text">模組介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全域物件"><span class="nav-text">全域物件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#檔案橋樑"><span class="nav-text">檔案橋樑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -507,12 +538,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">195k</span>
+    <span title="總字數">196k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">2:57</span>
+    <span title="所需總閱讀時間">2:58</span>
 </div>
 
         
@@ -576,7 +607,7 @@
   var disqus_config = function() {
     this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2020/08/04/20200806/";
     this.page.identifier = "2020/08/04/20200806/";
-    this.page.title = "[NodeJS Become A Full Stack Developer] — 從0開始 何謂 NodeJS";
+    this.page.title = "[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
