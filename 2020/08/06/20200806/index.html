@@ -35,10 +35,10 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;nodejs-logo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;hexschoolNodeJSLogo.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;globalVSwindow.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;globalVSwindow.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;how_backend_work.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;example.png">
-<meta property="og:updated_time" content="2020-08-06T20:18:09.466Z">
+<meta property="og:updated_time" content="2020-08-06T20:18:52.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200806&#x2F;nodejs-logo.png">
 
@@ -239,7 +239,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-07 04:18:09" itemprop="dateModified" datetime="2020-08-07T04:18:09+08:00">2020-08-07</time>
+                <time title="修改時間：2020-08-07 04:18:52" itemprop="dateModified" datetime="2020-08-07T04:18:52+08:00">2020-08-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -323,7 +323,7 @@
 <hr>
 <h3 id="模組介紹"><a href="#模組介紹" class="headerlink" title="模組介紹"></a>模組介紹</h3><p>原生的 <strong>NodeJS</strong> 其實裡面幫我們包含了很多東西，可以想像成 <strong>JS</strong> 有很多原生用法，比方說原生的 <strong>JS</strong> 可以直接使用 <code>console.log()</code> 或是 <code>new Date()</code>，可以參考 <a href="https://github.com/nodejs/node/tree/master/lib">node git lib</a>。</p>
 <h4 id="全域物件"><a href="#全域物件" class="headerlink" title="全域物件"></a>全域物件</h4><p>值得先提的是關於全域這件事情，在 <strong>JS</strong> 裡面最外層是 <strong>window</strong>，而 <strong>NodeJS</strong> 因為下面可能會有好幾個 <strong>JS</strong> ，所以最外層則是 <strong>global</strong>，如果你在檔案 A 想要檔案 Ｂ 吃得到這個變數，就必須要用 <strong>global</strong>，如下圖：</p>
-<p><img src="/images/20200806/globalVSwindow.jpg" alt="環境介紹"></p>
+<p><img src="/images/20200806/globalVSwindow.png" alt="環境介紹"></p>
 <h4 id="檔案橋樑"><a href="#檔案橋樑" class="headerlink" title="檔案橋樑"></a>檔案橋樑</h4><p>那如何讓檔案能相互溝通了，就必須依靠 <code>require()</code> 及 <code>module.exports</code> 或 <code>exports</code>，當一隻檔案要讓另一隻檔案引入的時候必須要先指定這隻檔案要輸出什麼東西，比如下方(B.js)：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">'王小明'</span>;</span><br><span class="line"></span><br><span class="line">exports.name = myName;</span><br></pre></td></tr></table></figure>
 
