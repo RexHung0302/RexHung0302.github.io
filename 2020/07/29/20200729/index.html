@@ -35,7 +35,7 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day37.png">
-<meta property="og:updated_time" content="2020-08-12T16:37:37.543Z">
+<meta property="og:updated_time" content="2020-08-15T13:46:07.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -236,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-13 00:37:37" itemprop="dateModified" datetime="2020-08-13T00:37:37+08:00">2020-08-13</time>
+                <time title="修改時間：2020-08-15 21:46:07" itemprop="dateModified" datetime="2020-08-15T21:46:07+08:00">2020-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,14 +272,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>7.2k</span>
+              <span>9.2k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>7 分鐘</span>
+              <span>8 分鐘</span>
             </span>
 
         </div>
@@ -315,6 +315,10 @@
 <li><a href="#Day42">Day-42</a></li>
 <li><a href="#Day43">Day-43</a></li>
 <li><a href="#Day44">Day-44</a></li>
+<li><a href="#Day45">Day-45</a></li>
+<li><a href="#Day46">Day-46</a></li>
+<li><a href="#Day47">Day-47</a></li>
+<li><a href="#Day48">Day-48</a></li>
 </ul>
 <hr>
 <h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day31"><a href="#Day31" class="headerlink" title="Day31"></a>Day31</h3><p>第三十一天六角的題目為：</p>
@@ -500,6 +504,30 @@
 <blockquote>
 <p>解題關鍵：雖然 <strong>Codepen</strong> 抓不到網址，還是暫時用 <strong>Codepen</strong> 練習。四十五天的題目跟四十六天其實很相像，插在一個要另外傳參數，而我們秉持的原則就是會想兩個以上類似的 <strong>function</strong> 就把他們合再一起。而四十六天第二個題目在前一天的文章有提到 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8xMS8yMDIwMDgxMS8jbW9yZQ==" title="https://rexhung0302.github.io/2020/08/11/20200811/#more">[JavaScript Notes] — 關於 Url 轉址及 取得參數<i class="fa fa-external-link"></i></span>。</p>
 </blockquote>
+<h3 id="Day47"><a href="#Day47" class="headerlink" title="Day47"></a>Day47</h3><h3 id="Day48"><a href="#Day48" class="headerlink" title="Day48"></a>Day48</h3><p>第四十七及四十八天六角的題目為：</p>
+<p>使用六角提供的 <a href="https://github.com/hexschool/nodejs_ajax_tutorial#%E8%A8%BB%E5%86%8A">API</a> 練習 <strong>AJAX POST</strong>，並且使用三個範例分別為 <strong>xmlhttprequest、Fetch、axios</strong>，做出 <strong>註冊</strong> 及 <strong>登入</strong> 的版面。</p>
+<p>第四十七及四十八天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第四十七、四十八天練習" src="https://codepen.io/rexhung0302/embed/oNxxZXJ?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/rexhung0302/pen/oNxxZXJ' target="_blank" rel="noopener">JS學徒特訓班 - 第四十七、四十八天練習</a> by RexHung
+  (<a href='https://codepen.io/rexhung0302' target="_blank" rel="noopener">@rexhung0302</a>) on <a href='https://codepen.io' target="_blank" rel="noopener">CodePen</a>.
+</iframe>
+
+<p>之前打 <strong>API</strong> 都是使用 <strong>axios</strong> 居多，趁著這次練習熟悉一下 <strong>xmlhttprequest、Fetch</strong>。</p>
+<p>首先為 <strong>xmlhttprequest</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); <span class="comment">// 起手式為 先新增一個 **xmlhttprequest** 方法 </span></span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"POST"</span>, <span class="string">"https://hexschool-tutorial.herokuapp.com/api/signup"</span>, <span class="literal">true</span>); <span class="comment">// 然後在開啟一個實例</span></span><br><span class="line"></span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>); <span class="comment">// 接著要設定我們要送什麼個是</span></span><br><span class="line"></span><br><span class="line">xhr.send(<span class="string">`email=<span class="subst">$&#123;email&#125;</span>&amp;password=<span class="subst">$&#123;password&#125;</span>`</span>);  <span class="comment">// 我們要送出什麼</span></span><br><span class="line"></span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="comment">// ... 做什麼</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">JSON</span>.parse(xhr.responseText)); <span class="comment">// 這邊可以在查看一次剛剛宣告的 xhr 可以拿到一些資訊</span></span><br><span class="line">&#125; <span class="comment">// 這邊為傳送結束後要做什麼事情</span></span><br></pre></td></tr></table></figure>
+
+<p>再來為 <strong>Fetch</strong>(範例取自 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvQVBJL0ZldGNoX0FQSS9Vc2luZ19GZXRjaA==" title="https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch">MDN<i class="fa fa-external-link"></i></span>)：</p>
+<p>這個要簡單可以用簡單的方法，也可以使用自定義的方法去打 <strong>API</strong>，一般來說最簡單的方法為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">'http://example.com/movies.json'</span>)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">myJson</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面這個為簡單的 <strong>get</strong> 傳法，接著如果需要自定義會建議把設定包為一個 <strong>function</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定義方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postData</span>(<span class="params">url, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fetch(url, &#123;</span><br><span class="line">    body: <span class="built_in">JSON</span>.stringify(data), <span class="comment">// must match 'Content-Type' header</span></span><br><span class="line">    cache: <span class="string">'no-cache'</span>, <span class="comment">// *default, no-cache, reload, force-cache, only-if-cached</span></span><br><span class="line">    credentials: <span class="string">'same-origin'</span>, <span class="comment">// include, same-origin, *omit</span></span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'user-agent'</span>: <span class="string">'Mozilla/4.0 MDN Example'</span>,</span><br><span class="line">      <span class="string">'content-type'</span>: <span class="string">'application/json'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    method: <span class="string">'POST'</span>, <span class="comment">// *GET, POST, PUT, DELETE, etc.</span></span><br><span class="line">    mode: <span class="string">'cors'</span>, <span class="comment">// no-cors, cors, *same-origin</span></span><br><span class="line">    redirect: <span class="string">'follow'</span>, <span class="comment">// manual, *follow, error</span></span><br><span class="line">    referrer: <span class="string">'no-referrer'</span>, <span class="comment">// *client, no-referrer</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">response</span> =&gt;</span> response.json()) <span class="comment">// 輸出成 json，這樣呼叫那邊就能拿到回傳的資訊</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接著呼叫方法</span></span><br><span class="line">postData(<span class="string">'http://example.com/answer'</span>, &#123;<span class="attr">answer</span>: <span class="number">42</span>&#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">console</span>.log(data)) <span class="comment">// JSON from `response.json()` call</span></span><br><span class="line">  .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.error(error))</span><br></pre></td></tr></table></figure>
+
+<p>這邊要注意，雖然直接使用 <strong>fetch</strong> 像是上方最後的 <code>postData()</code> 禮最後的 <strong>response</strong> 可以拿到回傳結果，但是僅能拿到 <strong><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSFRUUC9TdGF0dXM=" title="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status">Status Code<i class="fa fa-external-link"></i></span></strong>，你不能知道回傳什麼。</p>
+<p>例如這次的作業，回傳雖然 <strong>200</strong> 是成功，但可能會回傳 <strong>該帳號已被註冊</strong>，所以必須等 <code>response.json()</code> 之後再去看最後拿到什麼。</p>
+<blockquote>
+<p>解題關鍵：練習裡三種方法都有示範，可以使用看看，不過現在有 <strong>axios</strong> 這麼方便的東西，其實有機會我們還是該好好了解一下底層的做法是什麼，因為你可能在實務上不太會有機會碰到了。</p>
+</blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
 
@@ -629,7 +657,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day31"><span class="nav-text">Day31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day32"><span class="nav-text">Day32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day33"><span class="nav-text">Day33</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day34"><span class="nav-text">Day34</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#註1"><span class="nav-text">註1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day35"><span class="nav-text">Day35</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day36"><span class="nav-text">Day36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day37"><span class="nav-text">Day37</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day38"><span class="nav-text">Day38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day39"><span class="nav-text">Day39</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day40"><span class="nav-text">Day40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day41"><span class="nav-text">Day41</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day42"><span class="nav-text">Day42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day43"><span class="nav-text">Day43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day44"><span class="nav-text">Day44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day45"><span class="nav-text">Day45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day46"><span class="nav-text">Day46</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day31"><span class="nav-text">Day31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day32"><span class="nav-text">Day32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day33"><span class="nav-text">Day33</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day34"><span class="nav-text">Day34</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#註1"><span class="nav-text">註1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day35"><span class="nav-text">Day35</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day36"><span class="nav-text">Day36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day37"><span class="nav-text">Day37</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day38"><span class="nav-text">Day38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day39"><span class="nav-text">Day39</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day40"><span class="nav-text">Day40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day41"><span class="nav-text">Day41</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day42"><span class="nav-text">Day42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day43"><span class="nav-text">Day43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day44"><span class="nav-text">Day44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day45"><span class="nav-text">Day45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day46"><span class="nav-text">Day46</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day47"><span class="nav-text">Day47</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day48"><span class="nav-text">Day48</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -706,12 +734,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">206k</span>
+    <span title="總字數">208k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">3:07</span>
+    <span title="所需總閱讀時間">3:09</span>
 </div>
 
         
