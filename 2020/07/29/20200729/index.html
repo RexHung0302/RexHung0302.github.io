@@ -35,7 +35,7 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day37.png">
-<meta property="og:updated_time" content="2020-08-15T13:46:07.215Z">
+<meta property="og:updated_time" content="2020-08-17T09:51:30.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -236,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-15 21:46:07" itemprop="dateModified" datetime="2020-08-15T21:46:07+08:00">2020-08-15</time>
+                <time title="修改時間：2020-08-17 17:51:30" itemprop="dateModified" datetime="2020-08-17T17:51:30+08:00">2020-08-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,14 +272,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>9.2k</span>
+              <span>9.7k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>8 分鐘</span>
+              <span>9 分鐘</span>
             </span>
 
         </div>
@@ -319,6 +319,8 @@
 <li><a href="#Day46">Day-46</a></li>
 <li><a href="#Day47">Day-47</a></li>
 <li><a href="#Day48">Day-48</a></li>
+<li><a href="#Day49">Day-49</a></li>
+<li><a href="#Day50">Day-50</a></li>
 </ul>
 <hr>
 <h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day31"><a href="#Day31" class="headerlink" title="Day31"></a>Day31</h3><p>第三十一天六角的題目為：</p>
@@ -528,6 +530,14 @@
 <blockquote>
 <p>解題關鍵：練習裡三種方法都有示範，可以使用看看，不過現在有 <strong>axios</strong> 這麼方便的東西，其實有機會我們還是該好好了解一下底層的做法是什麼，因為你可能在實務上不太會有機會碰到了。</p>
 </blockquote>
+<h3 id="Day49"><a href="#Day49" class="headerlink" title="Day49"></a>Day49</h3><h3 id="Day50"><a href="#Day50" class="headerlink" title="Day50"></a>Day50</h3><p>第四十九及五十天六角的題目為：</p>
+<p>修改題目的 <strong>API</strong> 設定，因為沒有帶入 <strong>Token</strong> 所以無法打成功，這邊需要到 <strong><span class="exturl" data-url="aHR0cHM6Ly9jaGFsbGVuZ2UudGhlZjJlLmNvbS9uZXdzLzE3" title="https://challenge.thef2e.com/news/17">The F2E<i class="fa fa-external-link"></i></span></strong> 申請一組 <strong>Token</strong>。</p>
+<p>第四十九及五十天六角的題目解答為：</p>
+<p>看到 <strong><span class="exturl" data-url="aHR0cHM6Ly9jaGFsbGVuZ2UudGhlZjJlLmNvbS9uZXdzLzE3" title="https://challenge.thef2e.com/news/17">The F2E<i class="fa fa-external-link"></i></span></strong> 真的好懷念，去年最後一關時車禍了，所以未完賽Ｑ。</p>
+<p>這次打 <strong>API</strong> 需要帶入 <strong>Token</strong>，因為這次使用 <strong>axios</strong> 來打 <strong>API</strong>，所以使用 <strong>axios</strong> 配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.baseURL = <span class="string">'https://example.com'</span>; <span class="comment">// 打 API 網址</span></span><br><span class="line">axios.defaults.headers.common[<span class="string">'Authorization'</span>] = <span class="string">`<span class="subst">$&#123;token&#125;</span>`</span>; <span class="comment">// 塞 從F2E拿到的 Token</span></span><br><span class="line">axios.defaults.headers.post[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded'</span>; <span class="comment">// 傳送的格式</span></span><br></pre></td></tr></table></figure>
+
+<p>其實後端需要檢查什麼，可以再另外在前端這邊塞入，這是一種保護的機制，不會讓別人隨意打 <strong>API</strong>。</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
 
@@ -657,7 +667,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day31"><span class="nav-text">Day31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day32"><span class="nav-text">Day32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day33"><span class="nav-text">Day33</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day34"><span class="nav-text">Day34</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#註1"><span class="nav-text">註1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day35"><span class="nav-text">Day35</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day36"><span class="nav-text">Day36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day37"><span class="nav-text">Day37</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day38"><span class="nav-text">Day38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day39"><span class="nav-text">Day39</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day40"><span class="nav-text">Day40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day41"><span class="nav-text">Day41</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day42"><span class="nav-text">Day42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day43"><span class="nav-text">Day43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day44"><span class="nav-text">Day44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day45"><span class="nav-text">Day45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day46"><span class="nav-text">Day46</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day47"><span class="nav-text">Day47</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day48"><span class="nav-text">Day48</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每日題目"><span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day31"><span class="nav-text">Day31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day32"><span class="nav-text">Day32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day33"><span class="nav-text">Day33</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day34"><span class="nav-text">Day34</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#註1"><span class="nav-text">註1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day35"><span class="nav-text">Day35</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day36"><span class="nav-text">Day36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day37"><span class="nav-text">Day37</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day38"><span class="nav-text">Day38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day39"><span class="nav-text">Day39</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day40"><span class="nav-text">Day40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day41"><span class="nav-text">Day41</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day42"><span class="nav-text">Day42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day43"><span class="nav-text">Day43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day44"><span class="nav-text">Day44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day45"><span class="nav-text">Day45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day46"><span class="nav-text">Day46</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day47"><span class="nav-text">Day47</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day48"><span class="nav-text">Day48</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day49"><span class="nav-text">Day49</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day50"><span class="nav-text">Day50</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
