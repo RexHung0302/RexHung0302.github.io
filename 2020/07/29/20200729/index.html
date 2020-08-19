@@ -35,7 +35,7 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;Day37.png">
-<meta property="og:updated_time" content="2020-08-19T20:56:32.577Z">
+<meta property="og:updated_time" content="2020-08-19T20:59:09.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200607&#x2F;JS60.png">
 
@@ -236,7 +236,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-08-20 04:56:32" itemprop="dateModified" datetime="2020-08-20T04:56:32+08:00">2020-08-20</time>
+                <time title="修改時間：2020-08-20 04:59:09" itemprop="dateModified" datetime="2020-08-20T04:59:09+08:00">2020-08-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -558,7 +558,10 @@
 <p>首先這次使用 <strong>Gulp</strong> 來切頁面，如果還不清楚 <strong>Gulp</strong> 是蝦咪，可以參考筆者之前這篇 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNS8wNi8yMDIwMDUwNi8=" title="https://rexhung0302.github.io/2020/05/06/20200506/">[Tool Notes] — 關於Gulp<i class="fa fa-external-link"></i></span></strong>，對於前端開發可以省很多力氣，少做許多要重複做的事情，總之推推推！</p>
 <p>接著簡短說一下這次的做法：</p>
 <ol>
-<li>第一頁 index.html 先把所有房型拿出來並渲染到畫面，這應該沒有太大問題，和 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNy8yOS8yMDIwMDcyOS8jRGF5NTA=" title="https://rexhung0302.github.io/2020/07/29/20200729/#Day50">49及50天<i class="fa fa-external-link"></i></span></strong> 一樣，只是在每一個房型點擊跳頁時，需要帶參數在網址上。</li>
+<li><p>最一開始還是要提醒一下，因為這次的 <strong>API</strong> 會檢查 <strong>Token</strong>，所以我們必須拿到可以通過檢查的 <strong>Token</strong>，然後再將 <strong>Token</strong> 塞在 <strong>Headers</strong> 裡面，詳細可參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNy8yOS8yMDIwMDcyOS8jRGF5NTA=" title="https://rexhung0302.github.io/2020/07/29/20200729/#Day50">49及50天<i class="fa fa-external-link"></i></span></strong>。</p>
+</li>
+<li><p>第一頁 index.html 先把所有房型拿出來並渲染到畫面，這應該沒有太大問題，和 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNy8yOS8yMDIwMDcyOS8jRGF5NTA=" title="https://rexhung0302.github.io/2020/07/29/20200729/#Day50">49及50天<i class="fa fa-external-link"></i></span></strong> 一樣，只是在每一個房型點擊跳頁時，需要帶參數在網址上。</p>
+</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">linkRoomHandler</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.location = <span class="string">`./room.html?roomId=<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
