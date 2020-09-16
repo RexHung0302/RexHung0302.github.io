@@ -45,7 +45,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200914&#x2F;ejs_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200914&#x2F;ejs_user_example.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200914&#x2F;ejs_user_edit_example.png">
-<meta property="og:updated_time" content="2020-09-16T05:47:01.411Z">
+<meta property="og:updated_time" content="2020-09-16T09:24:01.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200914&#x2F;express_logo.jpg">
 
@@ -246,7 +246,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-09-16 13:47:01" itemprop="dateModified" datetime="2020-09-16T13:47:01+08:00">2020-09-16</time>
+                <time title="修改時間：2020-09-16 17:24:01" itemprop="dateModified" datetime="2020-09-16T17:24:01+08:00">2020-09-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -393,7 +393,7 @@
 <p>接著一樣在 <strong>app.js</strong> 引入路由：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>); <span class="comment">// 引入 index 的所有路由</span></span><br><span class="line"><span class="keyword">var</span> userRouter = <span class="built_in">require</span>(<span class="string">'./routes/user'</span>); <span class="comment">// 引入 user 的所有路由</span></span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/'</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">'/user'</span>, userRouter);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Example Nodejs Express listening on port 3000!'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>緊接著在終端機輸入 <code>node app.js</code> 啟動網頁，輸入網址 <code>http://localhost:3000/</code>、<code>http://localhost:3000/detail</code>、<code>http://localhost:3000/user</code> 及 <code>http://localhost:3000/user/user-edit</code>：</p>
+<p>緊接著在終端機輸入 <code>node app.js</code> 啟動網頁，分別輸入網址 <code>http://localhost:3000/</code>、<code>http://localhost:3000/detail</code>、<code>http://localhost:3000/user</code> 及 <code>http://localhost:3000/user/user-edit</code>：</p>
 <p><img src="/images/20200914/router_info.png" alt="架構概念"></p>
 <p>懶人包：建立 <strong>routes</strong> 資料夾，每次要新增一個路由分類時，先到 <strong>routes</strong> 資料夾底下新增，例：<strong>user</strong>、<strong>member</strong> 或 <strong>login</strong> 等等，然後再到 <strong>app.js</strong> 分別引入，例：<code>var indexRouter = require(&#39;./routes/index&#39;);</code> 或 <code>var userRouter = require(&#39;./routes/user&#39;);</code> 然後在使用路由 <code>app.use(&#39;/&#39;, indexRouter);</code> 及 <code>app.use(&#39;/user&#39;, userRouter);</code>。</p>
 <hr>
