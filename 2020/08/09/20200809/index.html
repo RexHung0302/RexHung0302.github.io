@@ -28,7 +28,7 @@
   <meta name="description" content="Introduction &amp;amp; 前言在之前 The F2E - 第二屆 前端 &amp;amp; UI 修練精神時光屋 只會切版時候的筆者，在其中一關 第七週 - ChatRoom 匿名聊天室 第一次聽到了 Firebase 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 Node.js 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。">
 <meta name="keywords" content="RexHung,CodeLife,HexSchool,Engineer,Back-end,DB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Tool Notes] — Google Firebase DB 怎麼用？">
+<meta property="og:title" content="[Tool Notes] — Google Firebase DB 怎麼用(前端串接)？">
 <meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2020&#x2F;08&#x2F;09&#x2F;20200809&#x2F;index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
 <meta property="og:description" content="Introduction &amp;amp; 前言在之前 The F2E - 第二屆 前端 &amp;amp; UI 修練精神時光屋 只會切版時候的筆者，在其中一關 第七週 - ChatRoom 匿名聊天室 第一次聽到了 Firebase 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 Node.js 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200809&#x2F;ready.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200809&#x2F;rule.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200809&#x2F;new_data.png">
-<meta property="og:updated_time" content="2020-09-13T12:44:19.503Z">
+<meta property="og:updated_time" content="2020-09-16T17:12:04.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200809&#x2F;firebase_logo.png">
 
@@ -65,7 +65,7 @@
   };
 </script>
 
-  <title>[Tool Notes] — Google Firebase DB 怎麼用？ | RexHung's Blog</title>
+  <title>[Tool Notes] — Google Firebase DB 怎麼用(前端串接)？ | RexHung's Blog</title>
   
 
 
@@ -233,7 +233,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [Tool Notes] — Google Firebase DB 怎麼用？
+          [Tool Notes] — Google Firebase DB 怎麼用(前端串接)？
         </h1>
 
         <div class="post-meta">
@@ -250,7 +250,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-09-13 20:44:19" itemprop="dateModified" datetime="2020-09-13T20:44:19+08:00">2020-09-13</time>
+                <time title="修改時間：2020-09-17 01:12:04" itemprop="dateModified" datetime="2020-09-17T01:12:04+08:00">2020-09-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +290,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>3.5k</span>
+              <span>3.6k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -326,7 +326,7 @@
 <p><img src="/images/20200809/step3.png" alt="step3"></p>
 <p>接著可以選擇是否要使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLz9obD16aC1UVw==" title="https://analytics.google.com/analytics/web/?hl=zh-TW">Google Analytics (分析)<i class="fa fa-external-link"></i></span></strong>，這邊可以選擇不開啟。</p>
 <blockquote>
-<p>之後會寫一篇文章來介紹 <strong>GA</strong> 及 <strong>GTM</strong>，剛好最近專案有碰到，這是一個很強大的 <strong>分析、行銷</strong> 工具。</p>
+<p>之後會寫一篇文章來介紹 <strong>GA</strong> 及 <strong>GTM</strong>，剛好最近專案有碰到，這是一個很強大的 <strong>分析、行銷</strong> 工具(註1)。</p>
 </blockquote>
 <p><img src="/images/20200809/step4.gif" alt="step4"></p>
 <h4 id="接通管線"><a href="#接通管線" class="headerlink" title="接通管線"></a>接通管線</h4><p><img src="/images/20200809/step5.png" alt="step5"></p>
@@ -338,6 +338,9 @@
 <p>之後找不到 <strong>Firebase SDK</strong> 的話，可以至 <strong>Firebase</strong> 網頁，點選左邊 <strong>專案總覽</strong> 旁的 <strong>齒輪</strong>，然後再點選 <strong>專案設定</strong>，接著畫面滑到底就會有 <strong>Firebase SDK snippet</strong>。</p>
 </blockquote>
 <p><img src="/images/20200809/Firebase_SDK_snippet.png" alt="Firebase SDK"></p>
+<blockquote>
+<p>註1：<em>2020/09/13 寫了一篇 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xMy8yMDIwMDkxMy8=" title="https://rexhung0302.github.io/2020/09/13/20200913/">[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？<i class="fa fa-external-link"></i></span></strong> 對行銷或統計甚至對 <strong>GA、GTM</strong> 有興趣都可以參考。</em></p>
+</blockquote>
 <hr>
 <h3 id="筆者帶進門"><a href="#筆者帶進門" class="headerlink" title="筆者帶進門"></a>筆者帶進門</h3><h4 id="建立線上資料庫"><a href="#建立線上資料庫" class="headerlink" title="建立線上資料庫"></a>建立線上資料庫</h4><p>再來我們新增一個專案，然後新增一支 <strong>index.html</strong>，檔案，然後在 <strong>head</strong> 處引入剛剛複製的那些代碼。 </p>
 <p>這邊有個地方很重要，在那串代碼裡面有一行寫著 <code>&lt;!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries --&gt;</code>，這個意思是提醒使用者在 <strong>Firebase</strong> 眾多的功能當中你需要用到什麼功能就要分別去引入，這邊是使用 <strong>Database</strong> 的功能所以我們加上這行 <code>&lt;script src=&quot;https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js&quot;&gt;&lt;/script&gt;</code> 就可以使用 <strong>firebase-database</strong> 的功能啦！</p>
@@ -420,7 +423,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/08/09/20200809/" title="[Tool Notes] — Google Firebase DB 怎麼用？">https://github.com/RexHung0302/RexHung0302.github.io/2020/08/09/20200809/</a>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/08/09/20200809/" title="[Tool Notes] — Google Firebase DB 怎麼用(前端串接)？">https://github.com/RexHung0302/RexHung0302.github.io/2020/08/09/20200809/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
@@ -675,7 +678,7 @@
   var disqus_config = function() {
     this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2020/08/09/20200809/";
     this.page.identifier = "2020/08/09/20200809/";
-    this.page.title = "[Tool Notes] — Google Firebase DB 怎麼用？";
+    this.page.title = "[Tool Notes] — Google Firebase DB 怎麼用(前端串接)？";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
