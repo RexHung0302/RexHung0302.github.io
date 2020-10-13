@@ -37,7 +37,8 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201013&#x2F;demo.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201013&#x2F;framework.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201013&#x2F;error_msg.png">
-<meta property="og:updated_time" content="2020-10-13T07:02:37.719Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201013&#x2F;checkAuth.png">
+<meta property="og:updated_time" content="2020-10-13T07:14:20.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201013&#x2F;todo_list_banner.png">
 
@@ -232,7 +233,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-10-13 12:00:00 / 修改時間：15:02:37" itemprop="dateCreated datePublished" datetime="2020-10-13T12:00:00+08:00">2020-10-13</time>
+              <time title="創建時間：2020-10-13 12:00:00 / 修改時間：15:14:20" itemprop="dateCreated datePublished" datetime="2020-10-13T12:00:00+08:00">2020-10-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,14 +273,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>3.6k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>3 分鐘</span>
+              <span>4 分鐘</span>
             </span>
 
         </div>
@@ -375,6 +376,22 @@
 
 <p>上方可以看到筆者也在 <code>req.body</code> 拿出了相關資訊，因為我們可能會在某一個欄位輸入錯誤，但其他欄位可能是正確的，這時候就必須將原本的值帶回，提升使用者體驗！</p>
 <p><img src="/images/20201013/error_msg.png" alt="錯誤提示"></p>
+<hr>
+<h3 id="中介層"><a href="#中介層" class="headerlink" title="中介層"></a>中介層</h3><p>這次的練習也透過 <strong><a href="https://github.com/expressjs/session#readme">express-session</a></strong> 將登入權杖存在 <strong>session</strong> 並且前端無法透過開發者工具取得，另外也把登入後 <strong>Firebase</strong> 的相關資訊存在 <strong>session</strong>，方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 5行</span></span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>確保有引入套件後在使用下面的方法拿取 Token：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 24行</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  secret: <span class="string">'todo list'</span>,</span><br><span class="line">  resave: <span class="literal">true</span>,</span><br><span class="line">  rolling: <span class="literal">true</span>,</span><br><span class="line">  saveUninitialized: <span class="literal">true</span>,</span><br><span class="line">  cookie: &#123;</span><br><span class="line">    httpOnly: <span class="literal">true</span>,</span><br><span class="line">    maxAge: <span class="number">10</span>*<span class="number">10</span>*<span class="number">10000</span> <span class="comment">// 過期時間</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>接著在登入完成後將相關的資訊存在 session：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /controllers/user.js 32行</span></span><br><span class="line">req.session.auth = &#123;</span><br><span class="line">    uid: response.user.uid,</span><br><span class="line">    email: response.user.email</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後再寫一支中介層檔案，內容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /middleware/auth.js 1行</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  verifyAuth: <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!req.sessionID || !req.session.auth || !req.session.auth.uid || !req.session.auth.email) &#123;</span><br><span class="line">      res.redirect(<span class="string">'users/login'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣一來就能在想要驗證的路由上使用了，先在要使用的地方引入中介層檔案 <code>const checkAuth = require(&#39;../middleware/auth&#39;);</code>，接著即可使用：</p>
+<p><img src="/images/20201013/checkAuth.png" alt="中介層"></p>
+<p>如果有通過驗證才會 <code>next()</code> 其他會倒回登入頁面！</p>
 <hr>
 <h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
 <p>GitHub: <a href="https://github.com/RexHung0302/node-todos">傳送門</a></p>
@@ -511,7 +528,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整體規劃"><span class="nav-text">整體規劃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大致功能"><span class="nav-text">大致功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板題外話"><span class="nav-text">模板題外話</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於驗證"><span class="nav-text">關於驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事前準備"><span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#簡單的功能"><span class="nav-text">簡單的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回傳錯誤訊息"><span class="nav-text">回傳錯誤訊息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#範例"><span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整體規劃"><span class="nav-text">整體規劃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大致功能"><span class="nav-text">大致功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板題外話"><span class="nav-text">模板題外話</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於驗證"><span class="nav-text">關於驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事前準備"><span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#簡單的功能"><span class="nav-text">簡單的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回傳錯誤訊息"><span class="nav-text">回傳錯誤訊息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中介層"><span class="nav-text">中介層</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#範例"><span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -593,7 +610,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">3:26</span>
+    <span title="所需總閱讀時間">3:27</span>
 </div>
 
         
