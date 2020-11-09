@@ -36,7 +36,8 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201109&#x2F;MySQL_logo.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201109&#x2F;nodeToMysql.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201109&#x2F;relational_db.png">
-<meta property="og:updated_time" content="2020-11-09T17:28:55.972Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201109&#x2F;table_after_migrate.png">
+<meta property="og:updated_time" content="2020-11-09T17:29:48.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201109&#x2F;MySQL_logo.png">
 
@@ -237,7 +238,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2020-11-10 01:28:55" itemprop="dateModified" datetime="2020-11-10T01:28:55+08:00">2020-11-10</time>
+                <time title="修改時間：2020-11-10 01:29:48" itemprop="dateModified" datetime="2020-11-10T01:29:48+08:00">2020-11-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +290,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>9.6k</span>
+              <span>9.5k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -418,7 +419,7 @@
 
 <p>上方的 <strong>type</strong> 即為種類，像是單純 <strong>字串</strong> 、 <strong>Radio</strong> 或 <strong>日期</strong>，其中裡面還能設定 <strong>備註</strong> 等等，可以上 <span class="exturl" data-url="aHR0cHM6Ly9zZXF1ZWxpemUub3JnL21hc3Rlci9pZGVudGlmaWVycy5odG1s" title="https://sequelize.org/master/identifiers.html">Sequelize<i class="fa fa-external-link"></i></span> 的官網查看更詳細的種類。</p>
 <p>介紹完之後就輸入 <code>sequelize db:migrate</code> 然後進入資料庫看看是不是有新增成功。</p>
-<p>!(新增成功)[/images/20201109/table_after_migrate.png]</p>
+<p><img src="/images/20201109/table_after_migrate.png" alt="新增成功"></p>
 <p>我們會發現多了一個 <strong>SequelizeMeta</strong> 及 <strong>users</strong>，前者就是用來紀錄你跑過多少個 <strong>migrate</strong> 的紀錄，後者為你剛剛上方設定的 <strong>Table</strong> 內容。</p>
 <blockquote>
 <p><em>如果新增錯誤，想要重新來過，可以在輸入 <code>sequelize db:migrate:undo</code></em> 就會跑回去上一個步驟了，執行的內容為 <code>migrations/2020XXXXXXXXXX-create-users.js</code> 內的 <code>function down()</code>。</p>
@@ -666,7 +667,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">3:36</span>
+    <span title="所需總閱讀時間">3:35</span>
 </div>
 
         
