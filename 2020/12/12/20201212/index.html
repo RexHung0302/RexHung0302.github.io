@@ -36,7 +36,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;shell-banner.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;env-preview.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;echo-color-preview.png">
-<meta property="og:updated_time" content="2020-12-12T02:34:18.481Z">
+<meta property="og:updated_time" content="2020-12-12T02:35:21.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;shell-banner.png">
 
@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-12-12 02:22:00 / 修改時間：10:34:18" itemprop="dateCreated datePublished" datetime="2020-12-12T02:22:00+08:00">2020-12-12</time>
+              <time title="創建時間：2020-12-12 02:22:00 / 修改時間：10:35:21" itemprop="dateCreated datePublished" datetime="2020-12-12T02:22:00+08:00">2020-12-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,7 +336,8 @@
 </li>
 </ol>
 <hr>
-<h3 id="如何防呆"><a href="#如何防呆" class="headerlink" title="如何防呆"></a>如何防呆</h3><p>在我們提到的 <strong>Shell Script</strong> 其實也可以像我們寫 php 或是 JS 一樣寫一些判斷式，這邊提供一個範例：</p>
+<h3 id="如何防呆"><a href="#如何防呆" class="headerlink" title="如何防呆"></a>如何防呆</h3><p>這時候如果我們只有輸入 <code>upEnv</code> 其實是會更改成功的，所以我們必須做一些防呆措施。</p>
+<p>在我們提到的 <strong>Shell Script</strong> 其實也可以像我們寫 <strong>php</strong> 或是 <strong>JS</strong> 一樣寫一些判斷式，這邊提供一個範例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ ! -n <span class="string">"<span class="variable">$1</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Error: You need type keyword to change env!"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="comment"># DO something...</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Success: Already changed -&gt; <span class="variable">$1</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
 <p>這邊有幾個雷需要注意，<strong>Shell Script</strong> <strong>每個判斷</strong> 或 <strong>每個值</strong> 建議都留一個空白鍵跟下個值做區隔，不然容易報錯。</p>
