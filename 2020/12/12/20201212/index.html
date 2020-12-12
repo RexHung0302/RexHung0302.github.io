@@ -36,7 +36,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;shell-banner.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;env-preview.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;echo-color-preview.png">
-<meta property="og:updated_time" content="2020-12-11T19:47:45.598Z">
+<meta property="og:updated_time" content="2020-12-12T02:34:18.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20201212&#x2F;shell-banner.png">
 
@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-12-12 02:22:00 / 修改時間：03:47:45" itemprop="dateCreated datePublished" datetime="2020-12-12T02:22:00+08:00">2020-12-12</time>
+              <time title="創建時間：2020-12-12 02:22:00 / 修改時間：10:34:18" itemprop="dateCreated datePublished" datetime="2020-12-12T02:22:00+08:00">2020-12-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>2.2k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -313,26 +313,26 @@
 <hr>
 <h3 id="如何製作腳本並執行"><a href="#如何製作腳本並執行" class="headerlink" title="如何製作腳本並執行"></a>如何製作腳本並執行</h3><p>在我們一鍵部署前，還是必須先寫好任務內容，這邊會用筆者工作上的例子來舉例。</p>
 <ol>
-<li>先至隨便一個地方寫上自己的腳本。</li>
+<li><p>先至隨便在一個你會記得的地方建立之後要一鍵啟動任務執行的 <strong>sh</strong> 檔案，<code>touch /你的路徑/update_api_env.sh</code>。</p>
+</li>
+<li><p>編輯這支 <strong>sh</strong> 檔案，<code>vim update_api_env.sh</code>。</p>
+</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 沒有帶目標關鍵字</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改資料庫位置</span></span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑1/.env</span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑2/.env</span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑3/.env</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 更改資料庫位置</span></span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑1/.env</span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑2/.env</span><br><span class="line">sed -i <span class="string">''</span> -e <span class="string">"s/DB_DATABASE=.*/DB_DATABASE=<span class="variable">$1_db</span>/1"</span> /路徑3/.env</span><br></pre></td></tr></table></figure>
 
 <p>在開頭的 <code>#!/bin/bash</code> 則為 <strong>Shell Script</strong> 的起手式。</p>
-<ol start="2">
-<li><p>在 <strong>Terminal</strong> 輸入 <code>vim ~/.zshrc</code> 或 <code>vim ~/.z</code>。</p>
-</li>
-<li><p>接著在隨意一個地方加入之後要一鍵啟動任務執行的 <strong>keyword</strong>。</p>
-</li>
+<ol start="3">
+<li>在 <strong>Terminal</strong> 輸入 <code>vim ~/.zshrc</code> 或 <code>vim ~/.bashrc</code>，接著加入下面的自定義快捷鍵(關鍵字)。</li>
 </ol>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定義快捷鍵</span></span><br><span class="line">alias <span class="attribute">upEnv</span>=<span class="string">'sh /你的路由/update_api_env.sh'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定義快捷鍵</span></span><br><span class="line">alias <span class="attribute">upEnv</span>=<span class="string">'sh /你的路徑/update_api_env.sh'</span>;</span><br></pre></td></tr></table></figure>
 
-<p>在這邊的自定義快捷鍵也可加入許多自己平常會用到的指令，像是開頭提過的 <code>git pull</code>、<code>git push</code>…等等。</p>
+<p>在這邊的自定義快捷鍵(關鍵字)也可加入許多自己平常會用到的指令，像是開頭提過的 <code>git pull</code>、<code>git push</code>…等等。</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">alias gis</span>=<span class="string">'git status'</span>;</span><br><span class="line"><span class="attribute">alias gia</span>=<span class="string">'git add -A'</span>;</span><br><span class="line"><span class="attribute">alias gic</span>=<span class="string">'git commit'</span>;</span><br><span class="line"><span class="attribute">alias gipl</span>=<span class="string">'git pull origin'</span>;</span><br><span class="line"><span class="attribute">alias giph</span>=<span class="string">'git push origin'</span>;</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><p>關掉你的 <strong>Terminal</strong> 然後重新開啟。</p>
 </li>
-<li><p>輸入剛剛取的快捷鍵名稱 <code>upEnv xxx</code> 就會替換成功了。</p>
+<li><p>輸入剛剛取的快捷鍵名稱(關鍵字) <code>upEnv xxx</code> 就會替換成功了。</p>
 </li>
 </ol>
 <hr>
