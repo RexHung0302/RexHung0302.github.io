@@ -34,13 +34,13 @@
 <meta property="og:description" content="Introduction &amp;amp; 前言 先說這篇文章僅用於筆記，如果您剛好、恰巧有專案是 前端 VUE 後端 NODE 想佈上虛擬主機上，不管是給客戶看還是自己當作品用，都可以接著往下看，亦或許您會在文章中圖找到一樣的問題，還有我怎麼蹶誒的。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;banner.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;dns.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;how_nginx_work.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;nginx_default.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;nginx_config.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200104&#x2F;DigitalOcean_connect_err.png">
-<meta property="og:updated_time" content="2021-01-03T18:49:28.178Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;banner.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;dns.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;how_nginx_work.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_default.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_config.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;DigitalOcean_connect_err.png">
+<meta property="og:updated_time" content="2021-01-03T18:50:34.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
 
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：02:49:28" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
+              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：02:50:34" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,7 +304,7 @@
 
 <p>這邊也不會去探討哪台虛擬主機比較好，但我會跟你說說為什麼我從 <strong>DigitalOcean</strong> 跳到 <strong>Linode</strong> 使用。</p>
 <hr>
-<h3 id="當程式完成後的下一步"><a href="#當程式完成後的下一步" class="headerlink" title="當程式完成後的下一步"></a>當程式完成後的下一步</h3><p><img src="/images/20200104/banner.png" alt="滿滿程式碼"></p>
+<h3 id="當程式完成後的下一步"><a href="#當程式完成後的下一步" class="headerlink" title="當程式完成後的下一步"></a>當程式完成後的下一步</h3><p><img src="/images/20210104/banner.png" alt="滿滿程式碼"></p>
 <p>相信不管你學什麼前端，什麼後端，寫完程式碼後，下一步就是想要想辦法把作品呈現出來，雖然我們平常可以使用 GitHub+Heroku 其實就可以簡單呈現一個小作品，但缺點是 Heroku 太久沒動靜，需要一點時間喚醒，加上免費專案只能有五個。</p>
 <p>基於上面的問題加上筆者最近剛好在幫家人做 <strong>Side Project</strong> 預約系統，目前已經到了完成一個小階段，需要呈現給家人看，最後決定使用虛擬主機來放置我的專案。</p>
 <p>考量到以後可能還會有其他 <strong>Side Project</strong> 所以就挑選了便宜的主機來用。</p>
@@ -358,11 +358,11 @@
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo yum upgrade</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="安裝-Nginx"><a href="#安裝-Nginx" class="headerlink" title="安裝 Nginx"></a>安裝 Nginx</h4><p>這邊要講解為什麼要安裝 <strong>Nginx</strong>，但不會深入討論，有興趣可以參考 <span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvY29kZS9hdmt4cW54Lmh0bWw=" title="https://kknews.cc/zh-tw/code/avkxqnx.html">淺談Nginx之反向代理<i class="fa fa-external-link"></i></span> 中介紹反向代理，亦或是 <span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvY29kZS9vZWFlcmtvLmh0bWw=" title="https://kknews.cc/zh-tw/code/oeaerko.html">深度詳解Nginx正向代理與反向代理？<i class="fa fa-external-link"></i></span>。</p>
-<p><img src="/images/20200104/dns.png" alt="DNS"></p>
+<p><img src="/images/20210104/dns.png" alt="DNS"></p>
 <p>先看看上方這張圖，通常我們會在網路輸入一串網址，比如 <strong>fonts.google.com</strong> 或 <strong>translate.google.com</strong>，通常我們一個網域可能會有好幾個需要呈現的不同專案，就可以使用 <strong>主網域</strong> 及 <strong>子網域</strong> 來實現，很清楚我們可以看到 google 就是主網域，<strong>fonts</strong> 及 <strong>translate</strong> 就是子網域。</p>
 <p>但你會想，一台主機一個 <strong>IPv4</strong> 會對應到一個子網域，那我是不是一個專案只能放一台機器呢？</p>
 <p>其實我們靠 <strong>Nginx</strong> 就可以達到，輸入一串網址，網址子網域都對到同一個 <strong>IPv4</strong>，然後再依靠 <strong>Nginx</strong> 去找尋對應網域名稱的專案。</p>
-<p><img src="/images/20200104/how_nginx_work.png" alt="DNS"></p>
+<p><img src="/images/20210104/how_nginx_work.png" alt="DNS"></p>
 <p>找到對應專案的設定欓，會把設定檔裡面的 <strong>root</strong> 路徑的檔案顯示出來，這樣就能達成輸入什麼網址會顯示什麼內容出來了。</p>
 <p>知道後廢話不多說我們開始安裝，使用 yum 裝 Nginx：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure>
@@ -377,7 +377,7 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="builtin-name">enable</span> nginx</span><br></pre></td></tr></table></figure>
 
 <p>這時候進入網頁輸入 <strong>IPv4</strong> 或是已經掛載上 <strong>Godady</strong> 的網域，應該就可以看到。</p>
-<p><img src="/images/20200104/nginx_default.png" alt="Nginx 預設頁面"></p>
+<p><img src="/images/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
 <h4 id="安裝-Git"><a href="#安裝-Git" class="headerlink" title="安裝 Git"></a>安裝 Git</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
 
 <p>先查看版本號，確認是否安裝成功：</p>
@@ -406,7 +406,7 @@
 <h3 id="設定-Nginx"><a href="#設定-Nginx" class="headerlink" title="設定 Nginx"></a>設定 Nginx</h3><p>這邊略過 <strong>clone</strong> 專案下來的過程，但還是筆記一下通常筆者會把專案放置在 <code>/var/www/</code> 下面。</p>
 <p>如果你是自己安裝 <strong>Nginx</strong>，會發現沒有 <strong>default.config</strong> 這個檔案，沒關係我們自己創見一個。</p>
 <p>你可以先使用 <code>vi /etc/nginx/nginx.config</code> 去查看立面是否有顯示 <code>include /etc/nginx/conf.d/*.conf</code> 沒有可以自己加上去，基本上之後設定檔不是放在這個地方，就是放在 <code>/etc/nginx/sites-available/</code> 或是 <code>/etc/nginx/sites-enabled/</code> 都可以。</p>
-<p><img src="/images/20200104/nginx_config.png" alt="include"></p>
+<p><img src="/images/20210104/nginx_config.png" alt="include"></p>
 <p>範例程式馬可以複製這邊，或是上 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGlnaXRhbG9jZWFuLmNvbS9jb21tdW5pdHkvdG9vbHMvbmdpbng=" title="https://www.digitalocean.com/community/tools/nginx">Digitalocean NGINXConfig<i class="fa fa-external-link"></i></span> 試著配置出一份，通常都大同小異，只是內部有一些細微更改：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">listen</span>   <span class="string">443 http2 ssl; ## listen for ipv4; this line is default and implied</span></span><br><span class="line"><span class="comment">    #listen   [::]:80 default ipv6only=on; ## listen for ipv6</span></span><br><span class="line"><span class="comment">    # Make site accessible from http://localhost/</span></span><br><span class="line">    <span class="attr">server_name</span> <span class="string">frontend.abc.com; # 前面說的對應的網域就是設定在這</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">root</span> <span class="string">/var/www/frontend/dist; # 你要渲染出來檔案的位子，這邊是 Vue 所以吃 dist</span></span><br><span class="line">    <span class="attr">index</span> <span class="string">index.php index.html index.htm; # 這邊會去抓結尾符合的檔案</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    # ssl_certificate ＃等等補上; </span></span><br><span class="line"><span class="comment">    # ssl_certificate_key ＃等等補上;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    # Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html</span></span><br><span class="line">    <span class="attr">sendfile</span> <span class="string">on;</span></span><br><span class="line">    <span class="attr">client_max_body_size</span> <span class="string">10M;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">error_log</span> <span class="string">/var/log/nginx/error.log;</span></span><br><span class="line">    <span class="attr">access_log</span> <span class="string">/var/log/nginx/access.log;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">location</span> <span class="string">/ &#123;</span></span><br><span class="line"><span class="comment">        # proxy_pass http://127.0.0.1:1337; # 後端專案才需要使用，改為自己對應的 Port</span></span><br><span class="line"><span class="comment">        # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 後端專案才需要使用</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">error_page</span> <span class="string">404 /404.html;</span></span><br><span class="line">    <span class="attr">location</span> = <span class="string">/404.html &#123;</span></span><br><span class="line">        <span class="attr">root</span> <span class="string">/var/www/errors;</span></span><br><span class="line">        <span class="attr">internal;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    # pass the PHP scripts to FastCGI server listening on socket</span></span><br><span class="line">    <span class="attr">location</span> <span class="string">~ \.php$ &#123;</span></span><br><span class="line">        <span class="attr">try_files</span> <span class="string">$uri =404;</span></span><br><span class="line">        <span class="attr">fastcgi_split_path_info</span> <span class="string">^(.+\.php)(/.+)$;</span></span><br><span class="line"><span class="comment">        # fastcgi_pass unix:/var/run/php-fpm.sock;</span></span><br><span class="line">        <span class="attr">fastcgi_pass</span>   <span class="string">127.0.0.1:9000;</span></span><br><span class="line">        <span class="attr">fastcgi_param</span> <span class="string">SCRIPT_FILENAME $document_root$fastcgi_script_name;</span></span><br><span class="line">        <span class="attr">fastcgi_param</span> <span class="string">SCRIPT_NAME $fastcgi_script_name;</span></span><br><span class="line">        <span class="attr">fastcgi_index</span> <span class="string">index.php;</span></span><br><span class="line">        <span class="attr">include</span> <span class="string">fastcgi_params;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">location</span> <span class="string">~* \.(jpg|jpeg|gif|png|css|js|ico|webp|tiff|ttf|svg)$ &#123;</span></span><br><span class="line">        <span class="attr">expires</span>           <span class="string">5d;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">    # deny access to . files, for security</span></span><br><span class="line"><span class="comment">    #</span></span><br><span class="line">    <span class="attr">location</span> <span class="string">~ /\. &#123;</span></span><br><span class="line">        <span class="attr">log_not_found</span> <span class="string">off;</span></span><br><span class="line">        <span class="attr">deny</span> <span class="string">all;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">location</span> <span class="string">^~ /.well-known &#123;</span></span><br><span class="line">        <span class="attr">allow</span> <span class="string">all;</span></span><br><span class="line">        <span class="attr">auth_basic</span> <span class="string">off;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -453,7 +453,7 @@
 <p>雖然嘴裡常常在寫不出程式碼時不時的咒罵，但其實親身體會一次才是最好的學習，並且會有滿滿德成就感。</p>
 <p>最後要說說，上面有提到為什麼後來改用 <strong>Linode</strong> 了，因為筆者在 DigitalOcean 第一次更改環境時，最後輸入了 <strong>Reboot</strong> 想重啟機器，但關掉之後就再也連不進去，連 <strong>Console</strong> 也不行，最後整個砍掉重新在建立一次。</p>
 <p>就在今天弄了一天之後筆者在安裝 Mysql 的過程卡住了，索性關閉機器，再度重啟時，又出現了下面這張圖，網站的 <strong>Console</strong> 也不能開啟，一氣之下就改用其他家主機了。</p>
-<p><img src="/images/20200104/DigitalOcean_connect_err.png" alt="Nginx 預設頁面"></p>
+<p><img src="/images/20210104/DigitalOcean_connect_err.png" alt="怎麼也連不上了"></p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
 <li><p>蔡宗融個人網站 - <span class="exturl" data-url="aHR0cHM6Ly93d3cuaWNoaWF5aS5jb20vd2lraS90ZWNoL3NzbF9sZXRzZW5jcnlwdA==" title="https://www.ichiayi.com/wiki/tech/ssl_letsencrypt">https://www.ichiayi.com/wiki/tech/ssl_letsencrypt<i class="fa fa-external-link"></i></span></p>
