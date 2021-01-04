@@ -40,7 +40,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_default.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_config.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;DigitalOcean_connect_err.png">
-<meta property="og:updated_time" content="2021-01-04T15:09:32.048Z">
+<meta property="og:updated_time" content="2021-01-04T15:58:37.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
 
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：23:09:32" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
+              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：23:58:37" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -510,7 +510,7 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -h localhost -p</span><br><span class="line"><span class="comment">// Enter password: 接著輸入密碼</span></span><br></pre></td></tr></table></figure>
 
 <p>然後新增可以遠端登入的帳號：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> 使用者名稱@IP位置 <span class="keyword">identified</span> <span class="keyword">by</span><span class="string">'要登入的密碼'</span>;//本機端</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> 使用者名稱@IP位置 identified <span class="keyword">by</span><span class="string">'要登入的密碼'</span>;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p><em>上面 *.</em> 為權限，這個意思是可以訪問所有的資料庫及資料表。*</p>
