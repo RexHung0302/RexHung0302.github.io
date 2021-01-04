@@ -28,7 +28,7 @@
   <meta name="description" content="Introduction &amp;amp; 前言 先說這篇文章僅用於筆記，如果您剛好、恰巧有專案是 前端 VUE 後端 NODE 想佈上虛擬主機上，不管是給客戶看還是自己當作品用，都可以接著往下看，亦或許您會在文章中圖找到一樣的問題，還有我怎麼蹶誒的。">
 <meta name="keywords" content="RexHung,CodeLife,Nodejs,Linode,DigitalOcean,image,upload,Engineer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Third party service] - Vue + Node.js + Nginx, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手">
+<meta property="og:title" content="[Third party service] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手">
 <meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2021&#x2F;01&#x2F;04&#x2F;20210104&#x2F;index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
 <meta property="og:description" content="Introduction &amp;amp; 前言 先說這篇文章僅用於筆記，如果您剛好、恰巧有專案是 前端 VUE 後端 NODE 想佈上虛擬主機上，不管是給客戶看還是自己當作品用，都可以接著往下看，亦或許您會在文章中圖找到一樣的問題，還有我怎麼蹶誒的。">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_default.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_config.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;DigitalOcean_connect_err.png">
-<meta property="og:updated_time" content="2021-01-03T19:22:10.241Z">
+<meta property="og:updated_time" content="2021-01-04T15:09:32.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
 
@@ -56,7 +56,7 @@
   };
 </script>
 
-  <title>[Third party service] - Vue + Node.js + Nginx, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手 | RexHung's Blog</title>
+  <title>[Third party service] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手 | RexHung's Blog</title>
   
 
 
@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [Third party service] - Vue + Node.js + Nginx, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手
+          [Third party service] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手
         </h1>
 
         <div class="post-meta">
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：03:22:10" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
+              <time title="創建時間：2021-01-04 00:46:00 / 修改時間：23:09:32" itemprop="dateCreated datePublished" datetime="2021-01-04T00:46:00+08:00">2021-01-04</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,14 +279,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>6.7k</span>
+              <span>9.6k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>6 分鐘</span>
+              <span>9 分鐘</span>
             </span>
 
         </div>
@@ -336,26 +336,26 @@
 <p><strong>注意！因為每個人需要的不一樣，該裝的東西可能也會有些許差異，請自行斟酌。</strong></p>
 </blockquote>
 <p>請先進入到您自己得主機，通常會在終端機上輸入：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用密碼登入</span></span><br><span class="line">ssh root@xxx<span class="selector-class">.xxx</span><span class="selector-class">.xx</span><span class="selector-class">.xx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 ssh 登入</span></span><br><span class="line">ssh -<span class="selector-tag">i</span> ~/.ssh/id_rsa root@xxx<span class="selector-class">.xxx</span><span class="selector-class">.xx</span><span class="selector-class">.xx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用密碼登入</span></span><br><span class="line">$ ssh root@xxx<span class="selector-class">.xxx</span><span class="selector-class">.xx</span><span class="selector-class">.xx</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 ssh 登入</span></span><br><span class="line">$ ssh -<span class="selector-tag">i</span> ~/.ssh/id_rsa root@xxx<span class="selector-class">.xxx</span><span class="selector-class">.xx</span><span class="selector-class">.xx</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p><em>xxx.xxx.xx.xx 為您的主機 <strong>IPv4</strong> 位置，而使用 <strong>ssh</strong> 需要您自己指定到您的 <strong>ssh</strong> 檔案位置。</em></p>
 </blockquote>
 <h4 id="設定時區"><a href="#設定時區" class="headerlink" title="設定時區"></a>設定時區</h4><p>登入成功後，第一個需要做的不是安裝，是檢查自己的時區，因為錯誤的時區可能照成您的<strong>排程錯誤</strong>、<strong>資料庫資料時間錯誤</strong>…等等。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">date</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">date</span></span><br></pre></td></tr></table></figure>
 
 <p>這時候如果出現時間錯誤，可以改為自己得時區：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 設定為亞洲台北</span><br><span class="line"><span class="string">sudo </span><span class="string">timedatectl </span><span class="built_in">set-timezone</span> <span class="string">Asia/</span><span class="string">Taipei</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 設定為亞洲台北</span><br><span class="line">$ <span class="string">sudo </span><span class="string">timedatectl </span><span class="built_in">set-timezone</span> <span class="string">Asia/</span><span class="string">Taipei</span></span><br></pre></td></tr></table></figure>
 
 <p>如何查看時區可以輸入：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">list</span>-timezones</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ timedatectl <span class="built_in">list</span>-timezones</span><br></pre></td></tr></table></figure>
 
 <p>設定結束後記得再次輸入 <code>date</code> 查看時間對不對。</p>
 <h4 id="安裝-EPEL"><a href="#安裝-EPEL" class="headerlink" title="安裝 EPEL"></a>安裝 EPEL</h4><p>有許多套件只有 <strong>EPEL</strong> 中才有，所以這邊我們需要先安裝：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> epel-<span class="keyword">release</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum <span class="keyword">install</span> epel-<span class="keyword">release</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="更新套件"><a href="#更新套件" class="headerlink" title="更新套件"></a>更新套件</h4><p>安裝結束後我們需要更新一下我們所有的套件：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo yum upgrade</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo yum upgrade</span><br></pre></td></tr></table></figure>
 
 <h4 id="安裝-Nginx"><a href="#安裝-Nginx" class="headerlink" title="安裝 Nginx"></a>安裝 Nginx</h4><p>這邊要講解為什麼要安裝 <strong>Nginx</strong>，但不會深入討論，有興趣可以參考 <span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvY29kZS9hdmt4cW54Lmh0bWw=" title="https://kknews.cc/zh-tw/code/avkxqnx.html">淺談Nginx之反向代理<i class="fa fa-external-link"></i></span> 中介紹反向代理，亦或是 <span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvY29kZS9vZWFlcmtvLmh0bWw=" title="https://kknews.cc/zh-tw/code/oeaerko.html">深度詳解Nginx正向代理與反向代理？<i class="fa fa-external-link"></i></span>。</p>
 <p><img src="/images/20210104/dns.png" alt="DNS"></p>
@@ -365,26 +365,26 @@
 <p><img src="/images/20210104/how_nginx_work.png" alt="DNS"></p>
 <p>找到對應專案的設定欓，會把設定檔裡面的 <strong>root</strong> 路徑的檔案顯示出來，這樣就能達成輸入什麼網址會顯示什麼內容出來了。</p>
 <p>知道後廢話不多說我們開始安裝，使用 yum 裝 Nginx：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure>
 
 <p>啟動 <strong>Nginx</strong> 服務：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="literal">start</span> nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="literal">start</span> nginx</span><br></pre></td></tr></table></figure>
 
 <p>接著檢查 <strong>nginx</strong> 是否正常：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo systemctl status nginx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo systemctl status nginx</span><br></pre></td></tr></table></figure>
 
 <p>然後很重要記得，永久啟用 <strong>Nginx</strong> 服務，重新開機後可自動啟動：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="builtin-name">enable</span> nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="builtin-name">enable</span> nginx</span><br></pre></td></tr></table></figure>
 
 <p>這時候進入網頁輸入 <strong>IPv4</strong> 或是已經掛載上 <strong>Godady</strong> 的網域，應該就可以看到。</p>
 <p><img src="/images/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
-<h4 id="安裝-Git"><a href="#安裝-Git" class="headerlink" title="安裝 Git"></a>安裝 Git</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
+<h4 id="安裝-Git"><a href="#安裝-Git" class="headerlink" title="安裝 Git"></a>安裝 Git</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
 
 <p>先查看版本號，確認是否安裝成功：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
 
 <p>接著安裝結束後記得設定你的 <strong>git config</strong>：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name 你的名字</span><br><span class="line">git<span class="built_in"> config </span>--global user.email 你的信箱</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git<span class="built_in"> config </span>--global user.name 你的名字</span><br><span class="line">$ git<span class="built_in"> config </span>--global user.email 你的信箱</span><br></pre></td></tr></table></figure>
 
 <p>接著輸入 <code>git config --list</code> 查看是否設定成功，之後就成功安裝了。</p>
 <h4 id="安裝-Node"><a href="#安裝-Node" class="headerlink" title="安裝 Node"></a>安裝 Node</h4><p>因為我們必須使用到 <strong>Node.js</strong> 以及 <strong>Npm</strong> 或 <strong>Yarn</strong> 功能，所以必須先安裝 <strong>Node</strong>，但由於筆者喜歡將機器上的版本改為跟本地一樣，所以我們這邊需要先安裝 <strong>nvm</strong>，可以當他是 <strong>Node</strong> 的版本管理器。</p>
@@ -392,15 +392,15 @@
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> wget</span><br></pre></td></tr></table></figure>
 
 <p>接著輸入以下指令安裝：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">35.1</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -qO- http<span class="variable">s:</span>//raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">35.1</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure>
 
 <p>然後記得登出在登入！接著輸入 <code>nvm --version</code> 就會拿到目前得版號。</p>
 <p>緊接著安裝 <strong>Node</strong>，可以使用 <code>nvm ls-remote</code> 可以查看所有可以提供安裝的版本，挑選你喜歡或熟悉的版本：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install v12<span class="number">.16</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v12<span class="number">.16</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
 
 <p>安裝完成後輸入 <code>node -v</code> 查看是否安裝完成。</p>
 <h4 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h4><p>因為有些人比較習慣使用 <strong>Yarn</strong>，這邊簡單說說怎麼安裝，有些教學會請您輸入 <code>sudo yum install yarn</code> 但會顯示沒有這個 <strong>package</strong>，所以這邊我們使用：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 請注意一定要 -g</span></span><br><span class="line">npm install yarn -g</span><br></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 請注意一定要 -g</span></span><br><span class="line"><span class="symbol">$</span> npm install yarn -g</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="設定-Nginx"><a href="#設定-Nginx" class="headerlink" title="設定 Nginx"></a>設定 Nginx</h3><p>這邊略過 <strong>clone</strong> 專案下來的過程，但還是筆記一下通常筆者會把專案放置在 <code>/var/www/</code> 下面。</p>
@@ -414,10 +414,10 @@
 <h3 id="設定-SSL"><a href="#設定-SSL" class="headerlink" title="設定 SSL"></a>設定 SSL</h3><p>到這邊大致完成了，揭著我們必須讓我們的網址可以吃 <strong>443</strong>，也就是 <strong>https</strong>，有興趣可以參考 <span class="exturl" data-url="aHR0cHM6Ly90dy5hbHBoYWNhbXAuY28vYmxvZy9odHRwLWh0dHBzLWRpZmZlcmVuY2U=" title="https://tw.alphacamp.co/blog/http-https-difference">一文搞懂 HTTP 和 HTTPS 是什麼？兩者有什麼差別<i class="fa fa-external-link"></i></span>，簡單說最明顯的就是如果網站不是 <strong>443(https)</strong> 頁面左上角就會出現不安全。</p>
 <p>而通常 <strong>SSL</strong> 是需要用買的，但這邊我們要當個免費仔(放心不是破解)，而免費缺點是三個月需要更新一次，但別擔心各路大神都幫我們想好了怎麼自動更新憑證。</p>
 <p>由於我們是 <strong>CentOS 7</strong> 所以輸入下列程式碼安裝：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> certbot</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum <span class="keyword">install</span> certbot</span><br></pre></td></tr></table></figure>
 
 <p>然後我們需要產生 <strong>SSL</strong> 憑證：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">yum</span> <span class="string">install python-certbot-nginx</span></span><br><span class="line"><span class="attr">certbot</span> <span class="string">--nginx</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>yum install python-certbot-nginx</span><br><span class="line"><span class="variable">$ </span>certbot --nginx</span><br></pre></td></tr></table></figure>
 
 <p>通常如果您已經有設定 <strong>Nginx</strong> 的 <strong>Config</strong>，他會自動問您是否要選擇那一個網域，選擇後會幫您建立一個 <strong>SSL</strong> 憑證，而且 <strong>config</strong> 裡面也會自動幫您更新。</p>
 <p>成功產生出來會出現以下的文字提示：</p>
@@ -435,17 +435,105 @@
 </li>
 </ol>
 <hr>
+<h3 id="安裝資料庫"><a href="#安裝資料庫" class="headerlink" title="安裝資料庫"></a>安裝資料庫</h3><p>如果你已經有在其他服務申請資料庫，這個步驟可以跳過，但如果你跟筆者一樣安裝在虛擬主機上，就可以照著以下步驟走。</p>
+<p>首先確定你要安裝 <strong>MySQL 5.7</strong> 還是 <strong>MySQL 8.0</strong> 兩者差別可以參考 <strong><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS50dy9uZXdzLzEyMjU4MQ==" title="https://www.ithome.com.tw/news/122581">MySQL 8.0正式版來了! 高負載讀寫效能是5.7版的2倍<i class="fa fa-external-link"></i></span></strong>，這邊不過多討論。</p>
+<ul>
+<li>首先我們需要用到 <strong>yum-utils</strong> 套件，下面會用到 <strong>yum-config-manager</strong> 指令：</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum <span class="keyword">install</span> yum-utils -y</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下載安裝相關套件：</li>
+</ul>
+<p>接著安裝套件，通常看到的教學文章會安裝指定版本號套件，下面這個會將幾個版本的套件包含進去</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum localinstall http<span class="variable">s:</span>//dev.mysql.<span class="keyword">com</span>/<span class="built_in">get</span>/mysql80-community-release-el7-<span class="number">3</span>.noarch.rpm -<span class="keyword">y</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>啟用要安裝的 <strong>MySQL 5.7</strong> 源：</li>
+</ul>
+<p>因為接下來我們需要安裝 <strong>5.7</strong> 版本，先將剛剛包含幾個本版進去的套件 <strong>MySQL 8.0</strong> 關閉，並啟用 <strong>5.7</strong></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum-<span class="built_in">config</span>-manager <span class="comment">--disable mysql80-community</span></span><br><span class="line">$ sudo yum-<span class="built_in">config</span>-manager <span class="comment">--enable mysql57-community</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>檢查 <strong>MySQL Yum</strong> 源是否為 <strong>5.7</strong> 版本：</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum repolist enabled <span class="string">| grep "</span>mysql.*-community.*<span class="string">"</span></span><br><span class="line"><span class="comment">// mysql-connectors-community/x86_64       MySQL Connectors Community           118</span></span><br><span class="line"><span class="comment">// mysql-tools-community/x86_64            MySQL Tools Community                 95</span></span><br><span class="line"><span class="comment">// mysql57-community/x86_64                MySQL 5.7 Community Server           364</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果是需要安裝 <strong>8.0</strong> 最後一個會看到 <strong>MySQL 8.0 Community Server</strong>。</p>
+</blockquote>
+<ul>
+<li>安裝 <strong>MySQL</strong>，並啟用 <strong>MySQL</strong> 服務，然後加上每次重開機會啟動的設定，在檢查啟動狀態：</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> 安裝</span><br><span class="line">$ sudo yum install mysql-community-server -y</span><br><span class="line"><span class="string">//</span> 啟用</span><br><span class="line">$ sudo systemctl start mysqld</span><br><span class="line"><span class="string">//</span> 讓每次開機 MySQL 服務會自動被啟動</span><br><span class="line">$ sudo systemctl enable mysqld</span><br><span class="line"><span class="string">//</span> 檢查啟動狀態</span><br><span class="line">$ sudo systemctl status mysqld</span><br><span class="line"><span class="string">//</span> mysqld.service - MySQL Server</span><br><span class="line"><span class="string">//</span>   Loaded: loaded <span class="params">(/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span></span><br><span class="line"><span class="string">//</span>   Active: active <span class="params">(running)</span> since Tue 2019-09-10 20<span class="function">:37</span><span class="function">:18</span> CST; 48s ago</span><br><span class="line"><span class="string">//</span>     Docs: man<span class="function">:mysqld</span><span class="params">(8)</span></span><br><span class="line"><span class="string">//</span>           http:<span class="string">//...</span>略<span class="string">//</span></span><br><span class="line"><span class="string">//</span> Main PID: 1825 <span class="params">(mysqld)</span></span><br><span class="line"><span class="string">//</span>   CGroup: <span class="string">/system.slice/mysqld.service</span></span><br><span class="line"><span class="string">//</span>           1825 <span class="string">/usr/sbin/mysqld</span> <span class="params">--daemonize</span> <span class="params">--pid-file=/var/run/mysqld/mysql</span>.<span class="string">..</span></span><br><span class="line"><span class="string">//</span></span><br><span class="line"><span class="string">//</span> Jan 04 22<span class="function">:30</span><span class="function">:33</span> centos7-cli.lab.example.com systemd[1]: Starting MySQL Server.<span class="string">..</span></span><br><span class="line"><span class="string">//</span> Jan 04 22<span class="function">:30</span><span class="function">:36</span> centos7-cli.lab.example.com systemd[1]: Started MySQL Server.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安裝完成後，現在的密碼會是一組暫時密碼，所以我們必須要更改成自己會記得的密碼，先輸入下列程式碼拿取暫時密碼，<strong>請記得要截圖留存下來，或是把最後那串密碼複製存下來，等等馬上會用到</strong>：</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo grep <span class="string">'temporary password'</span> /var/log/mysqld.log</span><br><span class="line"><span class="number">2021</span><span class="number">-01</span><span class="number">-04</span>T14:<span class="number">08</span>:<span class="number">05.129641</span>Z <span class="number">1</span> [Note] A temporary password <span class="keyword">is</span> generated <span class="keyword">for</span> <span class="symbol">root@</span>localhost: +ew=SLsfd1#H</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更改密碼並且填寫相關設定：</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mysql_secure_installation</span><br><span class="line"></span><br><span class="line"><span class="comment">// Securing the MySQL server deployment.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Enter password for user root: 這邊請輸入剛剛拿到的臨時密碼</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The existing password for the user account root has expired. Please set a new password.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// New password: 請輸入新密碼</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Re-enter new password: 請再次輸入新密碼</span></span><br><span class="line"><span class="comment">// The 'validate_password' plugin is installed on the server.</span></span><br><span class="line"><span class="comment">// The subsequent steps will run with the existing configuration</span></span><br><span class="line"><span class="comment">// of the plugin.</span></span><br><span class="line"><span class="comment">// Using existing password for root.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//...下略</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>請注意： 密碼必須包含一個大寫字母、一個小寫字母、一個數字和一個特殊符號，長度至少為 8 個字元</em></p>
+</blockquote>
+<p>基本上後面開始都是一些問題，像是 <strong>是否移除 anonymous 匿名者帳號、禁止 root 從非本機登入、移除測試資料庫</strong>…等等，基本上全都填寫 <strong>Y(同意/確定)</strong>。</p>
+<ul>
+<li>查看版本：</li>
+</ul>
+<p>這時候輸入指令查看是否安裝完成：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mysqld -V</span><br><span class="line">mysqld  Ver 5.7.32 <span class="keyword">for</span> Linux on x86_64 (MySQL<span class="built_in"> Community Server </span>(GPL))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>開啟 <strong>3306</strong> 防火牆</li>
+</ul>
+<p>資料庫預設都是吃 <strong>3306port</strong> 的，如果不打開會出現 <strong>Connection Refused</strong>，然後我們要設定一組可以遠端從其他地方登入的帳號，我們總不能每次都連上主機再去連進資料庫吧。</p>
+<p>先查看防火牆是否開啟：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd --query-port=<span class="number">3306</span>/tcp</span><br><span class="line"><span class="comment">// No 代表沒開啟</span></span><br></pre></td></tr></table></figure>
+
+<p>開啟防火牆：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--add-port</span>=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>如果要關閉可以輸入：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--remove-port</span>=3306/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<p>重新啟動防火牆：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ firewall-<span class="keyword">cmd</span><span class="bash"> --reload</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>登入資料庫：</li>
+</ul>
+<p>接著我們要去新增可以任意登入的用戶，我們先登入：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -h localhost -p</span><br><span class="line"><span class="comment">// Enter password: 接著輸入密碼</span></span><br></pre></td></tr></table></figure>
+
+<p>然後新增可以遠端登入的帳號：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> 使用者名稱@IP位置 <span class="keyword">identified</span> <span class="keyword">by</span><span class="string">'要登入的密碼'</span>;//本機端</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>上面 *.</em> 為權限，這個意思是可以訪問所有的資料庫及資料表。*</p>
+</blockquote>
+<p>這樣就新增成功了，之後在任何地方都可以使用 <strong>root</strong> 登入。</p>
+<p>使修改重新生效：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; flush privileges<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>試看看遠端連線吧！</li>
+</ul>
+<hr>
 <h3 id="額外小坑"><a href="#額外小坑" class="headerlink" title="額外小坑"></a>額外小坑</h3><h4 id="出現-“permissions-are-too-open”-的錯誤"><a href="#出現-“permissions-are-too-open”-的錯誤" class="headerlink" title="出現 “permissions are too open” 的錯誤"></a>出現 “permissions are too open” 的錯誤</h4><p>這是您的 <strong>SSH</strong> 的權限問題，只需要輸入 <code>chmod 400 ~/.ssh/id_rsa</code> 或 <code>chmod 600 ~/.ssh/id_rsa</code> 即可解決</p>
 <h4 id="VUE-的-Router-導致頁面出現-404"><a href="#VUE-的-Router-導致頁面出現-404" class="headerlink" title="VUE 的 Router 導致頁面出現 404"></a>VUE 的 Router 導致頁面出現 404</h4><p>由於我們在 Nginx 已經設定好路由就是吃到 <code>/var/www/frontend/dist</code> 的 <strong>index</strong>，如果被路由轉導後，可能會變成 <code>https://xxx.xxx/index/dashboard/edit/1</code> 之類的網址，這時候就會找不到對應該渲染的畫面。</p>
 <p>解決方式其實很簡單，只需要在 Nginx 的設定欓修改一下：</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 找到 <span class="keyword">location</span> <span class="title">並在裡面加上 try_files</span> 這行即可</span><br><span class="line"><span class="keyword">location</span> <span class="title">/ &#123;</span></span><br><span class="line"><span class="title">  try_files</span> $uri $uri/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="頁面出現-502-Bad-Gateway"><a href="#頁面出現-502-Bad-Gateway" class="headerlink" title="頁面出現 502 Bad Gateway"></a>頁面出現 502 Bad Gateway</h4><p>查看 <strong>Nginx</strong> 的 <strong>Error config</strong>：</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 詳細位置可先查看</span></span><br><span class="line">vi /etc/nginx/nginx.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接著找到 err 的位子</span></span><br><span class="line">vi /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/<span class="keyword">error</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 詳細位置可先查看</span></span><br><span class="line">$ vi /etc/nginx/nginx.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接著找到 err 的位子</span></span><br><span class="line">$ vi /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/<span class="keyword">error</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 
 <p>裡面如果出現了 <strong>(13: Permission denied)</strong> 的關鍵字，代表你的那個專案的 Nginx 設定檔指定的 <strong>Port</strong> 是權限不足的。</p>
 <p>這時候輸入 <code>semanage port --list</code> 找尋 <strong>http_port_t</strong> 可以看到後面有一串 port 號，如果沒有你的就代表需要自己新增上去。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage<span class="built_in"> port </span>--<span class="builtin-name">add</span> --type http_port_t --proto tcp <span class="string">"你要新增的 Port 號"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ semanage<span class="built_in"> port </span>--<span class="builtin-name">add</span> --type http_port_t --proto tcp <span class="string">"你要新增的 Port 號"</span></span><br></pre></td></tr></table></figure>
 
 <p>然後再次輸入剛剛的 <code>semanage port --list</code> 就會看見了！</p>
 <hr>
@@ -488,7 +576,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/" title="[Third party service] - Vue + Node.js + Nginx, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手">https://github.com/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/</a>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/" title="[Third party service] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手">https://github.com/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
@@ -592,7 +680,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當程式完成後的下一步"><span class="nav-text">當程式完成後的下一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主機筆者怎麼挑"><span class="nav-text">主機筆者怎麼挑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事前準備"><span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝環境"><span class="nav-text">安裝環境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#設定時區"><span class="nav-text">設定時區</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-EPEL"><span class="nav-text">安裝 EPEL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新套件"><span class="nav-text">更新套件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Nginx"><span class="nav-text">安裝 Nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Git"><span class="nav-text">安裝 Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Node"><span class="nav-text">安裝 Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Yarn"><span class="nav-text">Yarn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-Nginx"><span class="nav-text">設定 Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-SSL"><span class="nav-text">設定 SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立-SSL-之前必需要做的事情"><span class="nav-text">建立 SSL 之前必需要做的事情</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#額外小坑"><span class="nav-text">額外小坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#出現-“permissions-are-too-open”-的錯誤"><span class="nav-text">出現 “permissions are too open” 的錯誤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VUE-的-Router-導致頁面出現-404"><span class="nav-text">VUE 的 Router 導致頁面出現 404</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#頁面出現-502-Bad-Gateway"><span class="nav-text">頁面出現 502 Bad Gateway</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#當程式完成後的下一步"><span class="nav-text">當程式完成後的下一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主機筆者怎麼挑"><span class="nav-text">主機筆者怎麼挑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事前準備"><span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝環境"><span class="nav-text">安裝環境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#設定時區"><span class="nav-text">設定時區</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-EPEL"><span class="nav-text">安裝 EPEL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新套件"><span class="nav-text">更新套件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Nginx"><span class="nav-text">安裝 Nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Git"><span class="nav-text">安裝 Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安裝-Node"><span class="nav-text">安裝 Node</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Yarn"><span class="nav-text">Yarn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-Nginx"><span class="nav-text">設定 Nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-SSL"><span class="nav-text">設定 SSL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立-SSL-之前必需要做的事情"><span class="nav-text">建立 SSL 之前必需要做的事情</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝資料庫"><span class="nav-text">安裝資料庫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#額外小坑"><span class="nav-text">額外小坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#出現-“permissions-are-too-open”-的錯誤"><span class="nav-text">出現 “permissions are too open” 的錯誤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VUE-的-Router-導致頁面出現-404"><span class="nav-text">VUE 的 Router 導致頁面出現 404</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#頁面出現-502-Bad-Gateway"><span class="nav-text">頁面出現 502 Bad Gateway</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -669,12 +757,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">256k</span>
+    <span title="總字數">259k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">3:53</span>
+    <span title="所需總閱讀時間">3:55</span>
 </div>
 
         
@@ -738,7 +826,7 @@
   var disqus_config = function() {
     this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/";
     this.page.identifier = "2021/01/04/20210104/";
-    this.page.title = "[Third party service] - Vue + Node.js + Nginx, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手";
+    this.page.title = "[Third party service] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
