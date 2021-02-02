@@ -40,10 +40,11 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_default.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;cant_content_website.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;firewall_open.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;allowZoneDriftingErr.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_config.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;node_err.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;DigitalOcean_connect_err.png">
-<meta property="og:updated_time" content="2021-02-02T08:11:30.595Z">
+<meta property="og:updated_time" content="2021-02-02T08:21:41.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
 
@@ -244,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-02-02 16:11:30" itemprop="dateModified" datetime="2021-02-02T16:11:30+08:00">2021-02-02</time>
+                <time title="修改時間：2021-02-02 16:21:41" itemprop="dateModified" datetime="2021-02-02T16:21:41+08:00">2021-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -288,14 +289,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>10k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>9 分鐘</span>
+              <span>10 分鐘</span>
             </span>
 
         </div>
@@ -388,14 +389,20 @@
 <p>這時候進入網頁輸入 <strong>IPv4</strong> 或是已經掛載上 <strong>Godady</strong> 的網域，應該就可以看到。</p>
 <p><img src="/images/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
 <blockquote>
-<p><em>PS: 如果進入網頁看到類似下面的網頁 <strong>無法連上這個網站</strong> 的話，有可能是你的防火牆沒打開，請記得打開防火牆。</em></p>
+<p><em>PS: 如果進入網頁看到類似下面的網頁 <strong>無法連上這個網站</strong> 的話，有兩種情況，第一個是有可能是你的防火牆沒打開，請記得打開防火牆，第二個是需要修改 <code>/etc/firewalld/firewalld.conf</code> 文件。</em></p>
 </blockquote>
 <p><img src="/images/20210104/cant_content_website.png" alt="無法連上這個網站"></p>
-<p>打開方式請輸入：</p>
+<p>第一種情況解決方式，輸入：</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-<span class="keyword">cmd</span><span class="bash"> --add-service=dns --permanent</span></span><br><span class="line"></span><br><span class="line">$ sudo firewall-<span class="keyword">cmd</span><span class="bash"> --reload</span></span><br></pre></td></tr></table></figure>
 
 <p>之後就能成功了！</p>
 <p><img src="/images/20210104/firewall_open.png" alt="打開防火牆"></p>
+<p>第二種情況解決放是，輸入 <code>systemctl status firewalld</code> 查看有無報錯，如果有問題會出現下圖情況：</p>
+<p><img src="/images/20210104/allowZoneDriftingErr.png" alt="防火牆出錯"></p>
+<p>這種情形請輸入：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ vi <span class="string">/etc/firewalld/firewalld.conf</span></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> 在命令模式<span class="params">(不是輸入的時候，點擊ESC退出輸入模式)</span>輸入 <span class="string">/AllowZoneDrifting</span> 搜索</span><br><span class="line"><span class="string">//</span> 接著將 AllowZoneDrifting=yes 改為 AllowZoneDrifting=no</span><br></pre></td></tr></table></figure>
+
+<p>然後輸入 <code>systemctl restart firewalld</code> 重啟防火牆，接著在輸入 <code>systemctl status firewalld</code> 查看還有無錯誤訊息，沒有就是排解了！</p>
 <h4 id="安裝-Git"><a href="#安裝-Git" class="headerlink" title="安裝 Git"></a>安裝 Git</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
 
 <p>先查看版本號，確認是否安裝成功：</p>
@@ -790,7 +797,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="總字數">259k</span>
+    <span title="總字數">260k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
