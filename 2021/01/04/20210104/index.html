@@ -38,10 +38,12 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;dns.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;how_nginx_work.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_default.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;cant_content_website.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;firewall_open.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;nginx_config.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;node_err.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;DigitalOcean_connect_err.png">
-<meta property="og:updated_time" content="2021-01-09T08:42:38.538Z">
+<meta property="og:updated_time" content="2021-02-02T08:02:17.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20210104&#x2F;logo.png">
 
@@ -242,7 +244,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-09 16:42:38" itemprop="dateModified" datetime="2021-01-09T16:42:38+08:00">2021-01-09</time>
+                <time title="修改時間：2021-02-02 16:02:17" itemprop="dateModified" datetime="2021-02-02T16:02:17+08:00">2021-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -286,7 +288,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>9.9k</span>
+              <span>10k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -385,6 +387,15 @@
 
 <p>這時候進入網頁輸入 <strong>IPv4</strong> 或是已經掛載上 <strong>Godady</strong> 的網域，應該就可以看到。</p>
 <p><img src="/images/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
+<blockquote>
+<p><em>PS: 如果進入網頁看到類似下面的網頁 <strong>無法連上這個網站</strong> 的話，有可能是你的防火牆沒打開，請記得打開防火牆。</em></p>
+</blockquote>
+<p><img src="/images/20210104/cant_content_website.png" alt="無法連上這個網站"></p>
+<p>打開方式請輸入：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-<span class="keyword">cmd</span><span class="bash"> --add-service=dns --permanent</span></span><br><span class="line"></span><br><span class="line">$ sudo firewall-<span class="keyword">cmd</span><span class="bash"> --reload</span></span><br></pre></td></tr></table></figure>
+
+<p>之後就能成功了！</p>
+<p><img src="/images/20210104/firewall_open.png" alt="打開防火牆"></p>
 <h4 id="安裝-Git"><a href="#安裝-Git" class="headerlink" title="安裝 Git"></a>安裝 Git</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum <span class="keyword">install</span> git</span><br></pre></td></tr></table></figure>
 
 <p>先查看版本號，確認是否安裝成功：</p>
