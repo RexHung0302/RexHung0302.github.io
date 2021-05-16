@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.2.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
@@ -25,23 +25,31 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Introduction &amp;amp; 前言你在看網頁時肯定看過東西突然浮出來會是跳出來，在沒有肯定也看過蘋果官網。 這週就是要來學學怎麼實作視差滾動，而且！而且！而且！可以不寫任何一行 JS！">
-<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,HexSchool,Engineer,Web-Layout-Training">
+  <meta name="description" content="Introduction &amp; 前言你在看網頁時肯定看過東西突然浮出來會是跳出來，在沒有肯定也看過蘋果官網。 這週就是要來學學怎麼實作視差滾動，而且！而且！而且！可以不寫任何一行 JS！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Hexschool Web Layout Training] — Week_7 視差滾動">
-<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2020&#x2F;05&#x2F;25&#x2F;20200525&#x2F;index.html">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp;amp; 前言你在看網頁時肯定看過東西突然浮出來會是跳出來，在沒有肯定也看過蘋果官網。 這週就是要來學學怎麼實作視差滾動，而且！而且！而且！可以不寫任何一行 JS！">
-<meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;week_7_classLogo.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;animateCSSWebSite.gif">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;NickYoung.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;aosAttributes.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;IWantAll.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;homeworkExample.gif">
-<meta property="og:updated_time" content="2020-06-04T19:57:50.450Z">
+<meta property="og:description" content="Introduction &amp; 前言你在看網頁時肯定看過東西突然浮出來會是跳出來，在沒有肯定也看過蘋果官網。 這週就是要來學學怎麼實作視差滾動，而且！而且！而且！可以不寫任何一行 JS！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://github.com/images/20200525/week_7_classLogo.png">
+<meta property="og:image" content="https://github.com/images/20200525/animateCSSWebSite.gif">
+<meta property="og:image" content="https://github.com/images/20200525/NickYoung.jpg">
+<meta property="og:image" content="https://github.com/images/20200525/aosAttributes.png">
+<meta property="og:image" content="https://github.com/images/20200525/IWantAll.jpg">
+<meta property="og:image" content="https://github.com/images/20200525/homeworkExample.gif">
+<meta property="article:published_time" content="2020-05-25T01:10:00.000Z">
+<meta property="article:modified_time" content="2020-06-04T19:57:50.450Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="RexHung">
+<meta property="article:tag" content="CodeLife">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Engineer">
+<meta property="article:tag" content="Web-Layout-Training">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;images&#x2F;20200525&#x2F;week_7_classLogo.png">
+<meta name="twitter:image" content="https://github.com/images/20200525/week_7_classLogo.png">
 
 <link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/">
 
@@ -654,9 +662,19 @@
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -665,7 +683,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 

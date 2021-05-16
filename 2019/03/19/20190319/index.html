@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 4.2.1">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
@@ -25,31 +25,39 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
-<meta name="keywords" content="RexHung,CodeLife,HTML,CSS,JavaScript,HexSchool,Engineer">
+  <meta name="description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板">
-<meta property="og:url" content="https:&#x2F;&#x2F;github.com&#x2F;RexHung0302&#x2F;RexHung0302.github.io&#x2F;2019&#x2F;03&#x2F;19&#x2F;20190319&#x2F;index.html">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="成果 &amp;amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp;amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
-<meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*LnEeafX9QlQNCJ6wbNNrWA.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2052&#x2F;1*9vvaxIWXy-irN7VsNjjFAw.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*JAiK0vdc-tyWJFLQHZ34OQ.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*seP_S6pzv27alP48JXaUfQ.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2066&#x2F;1*jyjX1zeYOz0uZ1JgWdJw5Q.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*J_9Cj_53nTXCFVoonq2gLA.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*7DlBd3T5oNZgKeAtyFGR4Q.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*BO0Js3hAdDHzgzDO2LYYNg.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*cosnIXYu9v2IYC11cIBXTQ.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*bBdw5fqQ9UFfFQhzAXsYPQ.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*ckBh_yTkJNHyBUKp_OoGOA.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2330&#x2F;1*sLfEzkq92_cVdVBt8sSYdA.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2330&#x2F;1*TuSeKiSqY4sHURtRNDHTQg.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*un0teQDlE0jAJ3hbDm2yMw.png">
-<meta property="og:updated_time" content="2020-02-27T09:02:04.214Z">
+<meta property="og:description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2052/1*9vvaxIWXy-irN7VsNjjFAw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*JAiK0vdc-tyWJFLQHZ34OQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*seP_S6pzv27alP48JXaUfQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2066/1*jyjX1zeYOz0uZ1JgWdJw5Q.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*J_9Cj_53nTXCFVoonq2gLA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*7DlBd3T5oNZgKeAtyFGR4Q.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*BO0Js3hAdDHzgzDO2LYYNg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*cosnIXYu9v2IYC11cIBXTQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*bBdw5fqQ9UFfFQhzAXsYPQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*ckBh_yTkJNHyBUKp_OoGOA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2330/1*sLfEzkq92_cVdVBt8sSYdA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2330/1*TuSeKiSqY4sHURtRNDHTQg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*un0teQDlE0jAJ3hbDm2yMw.png">
+<meta property="article:published_time" content="2019-03-19T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-27T09:02:04.214Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="RexHung">
+<meta property="article:tag" content="CodeLife">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Engineer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;cdn-images-1.medium.com&#x2F;max&#x2F;2000&#x2F;1*LnEeafX9QlQNCJ6wbNNrWA.png">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png">
 
 <link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">
 
@@ -597,7 +605,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#額外條件"><span class="nav-text">額外條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#萬事起頭難…-嗎？"><span class="nav-text">萬事起頭難…..嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#畫下第一筆"><span class="nav-text">畫下第一筆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="nav-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於擴充功能"><span class="nav-text">關於擴充功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-的學習過程"><span class="nav-text">Canvas 的學習過程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#為什麼要用-Canvas？"><span class="nav-text">為什麼要用 Canvas？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="nav-text">03/19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient-讓你的人生有起有落"><span class="nav-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#額外條件"><span class="nav-text">額外條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#萬事起頭難…-嗎？"><span class="nav-text">萬事起頭難…..嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#畫下第一筆"><span class="nav-text">畫下第一筆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="nav-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於擴充功能"><span class="nav-text">關於擴充功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-的學習過程"><span class="nav-text">Canvas 的學習過程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#為什麼要用-Canvas？"><span class="nav-text">為什麼要用 Canvas？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="nav-text">03&#x2F;19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient-讓你的人生有起有落"><span class="nav-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-text">參考網站</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -701,9 +709,19 @@
   <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -712,7 +730,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
