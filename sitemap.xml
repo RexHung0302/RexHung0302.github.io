@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://github.com/RexHung0302/RexHung0302.github.io/2020/11/09/20201109/</loc>
+    <loc>https://github.com/RexHung0302/RexHung0302.github.io/2021/05/28/20210528/</loc>
     
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/2021/05/16/20210516/</loc>
     
-    <lastmod>2021-05-16</lastmod>
+    <lastmod>2021-05-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://github.com/RexHung0302/RexHung0302.github.io/2020/11/09/20201109/</loc>
+    
+    <lastmod>2021-05-26</lastmod>
     
   </url>
   
@@ -396,7 +403,7 @@
 
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -404,315 +411,322 @@
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Code/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/HTML/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/CSS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/JavaScript/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/HexSchool/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/FrameWork/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Vue/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Webpack/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/PHP/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Redis/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Other/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Crawler/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Life/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Note/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Hexo/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/PHPRedis/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Homebrew/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/TheF2E/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/NexT/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/LINE/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/TECHPULSE/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Web-Layout-Training/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Gulp/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Git/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Github/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Google/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Google-Analytics/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/GA/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Google-Tag-Manager/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/GTM/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Back-end/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/NodeJS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Express/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/DB/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/MySQL/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Shell-Script/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Investment/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Crypto/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Binance/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/PancakeSwap/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Third-party-service/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/AWS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/S3/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/Linode/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/DigitalOcean/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://github.com/RexHung0302/RexHung0302.github.io/tags/i18n/</loc>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -721,266 +735,266 @@
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/JavaScript/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Vue/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Hexo/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Other/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Crawler/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/%E5%89%8D%E7%AB%AF/TheF2E/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/LINE/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Webpack/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/CSS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Gulp/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/PHP/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Git/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/JavaScript/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Google/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Shell-Script/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/%E6%8A%95%E8%B3%87%E7%90%86%E8%B2%A1/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Third-Party-Service/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Webpack/Babel/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/CSS/Flex/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/NodeJS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/DB/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Shell-Script/Env/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/%E6%8A%95%E8%B3%87%E7%90%86%E8%B2%A1/Crypto/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Third-Party-Service/AWS/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Third-Party-Service/Linode/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/CSS/Flex/Flexbox/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/NodeJS/MySQL/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Shell-Script/Env/env/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/%E6%8A%95%E8%B3%87%E7%90%86%E8%B2%A1/Crypto/Note/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Note/Third-Party-Service/AWS/S3/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/NodeJS/MySQL/ORM/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://github.com/RexHung0302/RexHung0302.github.io/categories/Code/Back-end/NodeJS/MySQL/ORM/Sequelize/</loc>
-    <lastmod>2021-05-26</lastmod>
+    <lastmod>2021-05-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

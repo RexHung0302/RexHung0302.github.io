@@ -25,12 +25,12 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.json"};
   </script>
 
-  <meta name="description" content="Introduction &amp; 前言最近繼續在完成全端 Side Project 時剛好碰到需要引入 Icon 的情形，以往的專案都是使用 Fontawesome 的免費方案，但有時候需要使用到的 Icon 在上面找不到，需要再另外引入現成的 SVG 去使用，所以索性又乾脆直接研究一番怎麼直接引入 SVG，如果你也有相同目的也有興趣就往下看吧，這邊筆者會記錄幾種使用方式。">
+  <meta name="description" content="Introduction &amp; 前言 先說 Vue3 可以參考本篇紀錄  最近繼續在完成全端 Side Project 時剛好碰到需要引入 Icon 的情形，以往的專案都是使用 Fontawesome 的免費方案，但有時候需要使用到的 Icon 在上面找不到，需要再另外引入現成的 SVG 去使用，所以索性又乾脆直接研究一番怎麼直接引入 SVG，如果你也有相同目的也有興趣就往下看吧，這邊筆者會">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Vue Notes] — 在 Vue 優雅的引入 SVG 幾種方式">
 <meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2021/05/16/20210516/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言最近繼續在完成全端 Side Project 時剛好碰到需要引入 Icon 的情形，以往的專案都是使用 Fontawesome 的免費方案，但有時候需要使用到的 Icon 在上面找不到，需要再另外引入現成的 SVG 去使用，所以索性又乾脆直接研究一番怎麼直接引入 SVG，如果你也有相同目的也有興趣就往下看吧，這邊筆者會記錄幾種使用方式。">
+<meta property="og:description" content="Introduction &amp; 前言 先說 Vue3 可以參考本篇紀錄  最近繼續在完成全端 Side Project 時剛好碰到需要引入 Icon 的情形，以往的專案都是使用 Fontawesome 的免費方案，但有時候需要使用到的 Icon 在上面找不到，需要再另外引入現成的 SVG 去使用，所以索性又乾脆直接研究一番怎麼直接引入 SVG，如果你也有相同目的也有興趣就往下看吧，這邊筆者會">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://github.com/images/20210516/svg_logo.png">
 <meta property="og:image" content="https://github.com/images/20210516/news.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://github.com/images/20210516/step3-1.png">
 <meta property="og:image" content="https://github.com/images/20210516/news_fuck_COVID19.png">
 <meta property="article:published_time" content="2021-05-16T07:50:00.000Z">
-<meta property="article:modified_time" content="2021-05-16T16:53:28.679Z">
+<meta property="article:modified_time" content="2021-05-28T10:20:45.607Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="RexHung">
 <meta property="article:tag" content="CodeLife">
@@ -257,7 +257,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-05-17 00:53:28" itemprop="dateModified" datetime="2021-05-17T00:53:28+08:00">2021-05-17</time>
+                <time title="修改時間：2021-05-28 18:20:45" itemprop="dateModified" datetime="2021-05-28T18:20:45+08:00">2021-05-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -316,20 +316,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近繼續在完成全端 <strong>Side Project</strong> 時剛好碰到需要引入 <strong>Icon</strong> 的情形，以往的專案都是使用 <span class="exturl" data-url="aHR0cHM6Ly9mb250YXdlc29tZS5jb20v" title="https://fontawesome.com/">Fontawesome<i class="fa fa-external-link"></i></span> 的免費方案，但有時候需要使用到的 <strong>Icon</strong> 在上面找不到，需要再另外引入現成的 <strong>SVG</strong> 去使用，所以索性又乾脆直接研究一番怎麼直接引入 <strong>SVG</strong>，如果你也有相同目的也有興趣就往下看吧，這邊筆者會記錄幾種使用方式。</p>
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><blockquote>
+<p>先說 <strong>Vue3</strong> 可以參考本篇紀錄</p>
+</blockquote>
+<p>最近繼續在完成全端 <strong>Side Project</strong> 時剛好碰到需要引入 <strong>Icon</strong> 的情形，以往的專案都是使用 <span class="exturl" data-url="aHR0cHM6Ly9mb250YXdlc29tZS5jb20v">Fontawesome<i class="fa fa-external-link-alt"></i></span> 的免費方案，但有時候需要使用到的 <strong>Icon</strong> 在上面找不到，需要再另外引入現成的 <strong>SVG</strong> 去使用，所以索性又乾脆直接研究一番怎麼直接引入 <strong>SVG</strong>，如果你也有相同目的也有興趣就往下看吧，這邊筆者會記錄幾種使用方式。</p>
 <a id="more"></a>
 
 <p><img src="/images/20210516/svg_logo.png" alt="SVG"></p>
 <h3 id="SVG-可縮放向量圖形-Scalable-Vector-Graphics"><a href="#SVG-可縮放向量圖形-Scalable-Vector-Graphics" class="headerlink" title="SVG(可縮放向量圖形) - Scalable Vector Graphics"></a>SVG(可縮放向量圖形) - Scalable Vector Graphics</h3><p><em>- SVG 是一種圖型格式，SVG是一種基於可延伸標記式語言 XML(電腦所能理解的資訊符號，類似 HTML)，用於描述二維向量圖形的圖形格式。SVG 由 W3C 制定，是一個開放標準。</em></p>
-<p>有興趣可以參考這篇文章 <span class="exturl" data-url="aHR0cHM6Ly9pbnRlcnNlY3Rpb24udHcvJUU4JUE4JUFEJUU4JUE4JTg4JUU1JUI4JUFCJUU1JUIwJThELXN2Zy0lRTYlODclODklRTglQTklQjIlRTYlOUMlODklRTclOUElODQlRTglQTclODAlRTUlQkYlQjUtMzhiYTY0YjQ4YjMy" title="https://intersection.tw/%E8%A8%AD%E8%A8%88%E5%B8%AB%E5%B0%8D-svg-%E6%87%89%E8%A9%B2%E6%9C%89%E7%9A%84%E8%A7%80%E5%BF%B5-38ba64b48b32">設計師對 SVG 應該有的觀念<i class="fa fa-external-link"></i></span> 裡面介紹到了 <strong>SVG</strong> 的優點，包括 <strong>放大不會失真、可以做成動畫同時保有小檔案容量的優點 及 圖示集</strong>…等等。</p>
+<p>有興趣可以參考這篇文章 <span class="exturl" data-url="aHR0cHM6Ly9pbnRlcnNlY3Rpb24udHcvJUU4JUE4JUFEJUU4JUE4JTg4JUU1JUI4JUFCJUU1JUIwJThELXN2Zy0lRTYlODclODklRTglQTklQjIlRTYlOUMlODklRTclOUElODQlRTglQTclODAlRTUlQkYlQjUtMzhiYTY0YjQ4YjMy">設計師對 SVG 應該有的觀念<i class="fa fa-external-link-alt"></i></span> 裡面介紹到了 <strong>SVG</strong> 的優點，包括 <strong>放大不會失真、可以做成動畫同時保有小檔案容量的優點 及 圖示集</strong>…等等。</p>
 <hr>
 <h2 id="超級前言"><a href="#超級前言" class="headerlink" title="超級前言"></a>超級前言</h2><p><img src="/images/20210516/news.png" alt="疫情爆炸"></p>
-<p>最近疫情大爆炸，一天前的報導 <strong><span class="exturl" data-url="aHR0cHM6Ly9oZWhvLmNvbS50dy9hcmNoaXZlcy8xNzIzMjI=" title="https://heho.com.tw/archives/172322">疫情即時／國內單日新增 180 例確診個案！雙北防疫升級到第三級疫情即時／國內單日新增 180 例確診個案！雙北防疫升級到第三級<i class="fa fa-external-link"></i></span></strong> 已經到了單日新增 <strong>180</strong> 例。</p>
+<p>最近疫情大爆炸，一天前的報導 <strong><span class="exturl" data-url="aHR0cHM6Ly9oZWhvLmNvbS50dy9hcmNoaXZlcy8xNzIzMjI=">疫情即時／國內單日新增 180 例確診個案！雙北防疫升級到第三級疫情即時／國內單日新增 180 例確診個案！雙北防疫升級到第三級<i class="fa fa-external-link-alt"></i></span></strong> 已經到了單日新增 <strong>180</strong> 例。</p>
 <p>最近經歷了停水停電又疫情，希望大家一起加油撐過這個難關，平日不能出門就在家讀讀書看看影片寫寫 <strong>Code</strong> 吧!</p>
 <p>超級前言要先提醒大家 <strong>勤洗手、少外出、多戴口罩</strong> 之外，請大家下載 <strong>臺灣社交距離App</strong>，這是一款透過藍芽偵測附近是否有確診者的 <strong>APP</strong>，但放心全程不須填寫任何個人資料。</p>
 <p><img src="/images/20210516/app.png" alt="臺灣社交距離"></p>
 <hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>因為這次專案使用 <strong>Vue3 + TS(TypeScript)</strong> 所以設定上有些許不依樣，但不會差異太多，如果您使用 <strong>Vue2</strong> 也不用擔心！</p>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>因為這次專案使用 <strong>Vue3 + TS(TypeScript)</strong> 所以設定上有些許不一樣，但不會差異太多，如果您使用 <strong>Vue2</strong> 也不用擔心！</p>
 <p>主要會介紹幾種引入方式：</p>
 <ol>
 <li><p><strong><code>&lt;Img&gt;</code></strong> 引入方式</p>
@@ -370,7 +373,7 @@
 <hr>
 <p>講解完這幾個標籤你大概就知道該怎麼做成 <strong>Component</strong>，一開始筆者不知道還以為是把所有要用到的 <strong>SVG</strong> 都引入到那個 <strong>Component</strong> 裡面再去呼叫，這樣也太不清爽了。</p>
 <p><em>- 把所有要用到的 <strong>SVG</strong> 分類好分成幾個檔案放，然後再透過 <strong>Webpack</strong> 的 <strong>require.context</strong> 遍歷 <strong>SVG</strong> 把他們都寫入 <strong>main.js</strong> 裡面，最後透過 <code>&lt;use&gt;</code> 的標籤寫在 <strong>Vue Component</strong> 裡面，透過帶入 <strong>Prop</strong> 去呼叫你要使用的 Icon。</em></p>
-<p><strong>＊這邊使用 <span class="exturl" data-url="aHR0cHM6Ly9jb3JldWkuaW8vdnVlL2RlbW8vZnJlZS8zLjEuMS8jL2ljb25zL2NvcmV1aS1pY29ucw==" title="https://coreui.io/vue/demo/free/3.1.1/#/icons/coreui-icons">Coreui Free Admin<i class="fa fa-external-link"></i></span> 的免費 Icon 做範例＊</strong></p>
+<p><strong>＊這邊使用 <span class="exturl" data-url="aHR0cHM6Ly9jb3JldWkuaW8vdnVlL2RlbW8vZnJlZS8zLjEuMS8jL2ljb25zL2NvcmV1aS1pY29ucw==">Coreui Free Admin<i class="fa fa-external-link-alt"></i></span> 的免費 Icon 做範例＊</strong></p>
 <ol>
 <li><strong>建立 Icon 的相關資料夾</strong></li>
 </ol>
@@ -437,13 +440,13 @@
 <p><img src="/images/20210516/news_fuck_COVID19.png" alt="不戴好口罩你知道的！！！！！"></p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p>簡書 - <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83YTM0ZTMyYWE5N2Y=" title="https://www.jianshu.com/p/7a34e32aa97f">【vue】vue3中使用svg切图<i class="fa fa-external-link"></i></span></p>
+<li><p>簡書 - <span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC83YTM0ZTMyYWE5N2Y=">【vue】vue3中使用svg切图<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p>IT邦幫忙 — <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIzMDMzNA==" title="https://ithelp.ithome.com.tw/articles/10230334">在 Vue 聰明使用 SVG-Icon<i class="fa fa-external-link"></i></span></p>
+<li><p>IT邦幫忙 — <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIzMDMzNA==">在 Vue 聰明使用 SVG-Icon<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p>Medium - <span class="exturl" data-url="aHR0cHM6Ly9pbnRlcnNlY3Rpb24udHcvJUU4JUE4JUFEJUU4JUE4JTg4JUU1JUI4JUFCJUU1JUIwJThELXN2Zy0lRTYlODclODklRTglQTklQjIlRTYlOUMlODklRTclOUElODQlRTglQTclODAlRTUlQkYlQjUtMzhiYTY0YjQ4YjMy" title="https://intersection.tw/%E8%A8%AD%E8%A8%88%E5%B8%AB%E5%B0%8D-svg-%E6%87%89%E8%A9%B2%E6%9C%89%E7%9A%84%E8%A7%80%E5%BF%B5-38ba64b48b32">設計師對 SVG 應該有的觀念<i class="fa fa-external-link"></i></span></p>
+<li><p>Medium - <span class="exturl" data-url="aHR0cHM6Ly9pbnRlcnNlY3Rpb24udHcvJUU4JUE4JUFEJUU4JUE4JTg4JUU1JUI4JUFCJUU1JUIwJThELXN2Zy0lRTYlODclODklRTglQTklQjIlRTYlOUMlODklRTclOUElODQlRTglQTclODAlRTUlQkYlQjUtMzhiYTY0YjQ4YjMy">設計師對 SVG 應該有的觀念<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p>痞客邦 - <span class="exturl" data-url="aHR0cHM6Ly95dGxpdTAucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMjI5NTgzNzE0LXN2ZyVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQyVFNiU4NCU4RiVFNiU4MCU5RCVFRiVCQyU5RnN2ZyVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQyVFNyU5QSU4NCVFNyVCOCVBRSVFNSVBRiVBQiVFRiVCQyU5Rg==" title="https://ytliu0.pixnet.net/blog/post/229583714-svg%E6%98%AF%E4%BB%80%E9%BA%BC%E6%84%8F%E6%80%9D%EF%BC%9Fsvg%E6%98%AF%E4%BB%80%E9%BA%BC%E7%9A%84%E7%B8%AE%E5%AF%AB%EF%BC%9F">SVG是什麼意思？SVG是什麼的縮寫？<i class="fa fa-external-link"></i></span></p>
+<li><p>痞客邦 - <span class="exturl" data-url="aHR0cHM6Ly95dGxpdTAucGl4bmV0Lm5ldC9ibG9nL3Bvc3QvMjI5NTgzNzE0LXN2ZyVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQyVFNiU4NCU4RiVFNiU4MCU5RCVFRiVCQyU5RnN2ZyVFNiU5OCVBRiVFNCVCQiU4MCVFOSVCQSVCQyVFNyU5QSU4NCVFNyVCOCVBRSVFNSVBRiVBQiVFRiVCQyU5Rg==">SVG是什麼意思？SVG是什麼的縮寫？<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
@@ -504,7 +507,10 @@
     <a href="/2021/04/25/20210425/" rel="prev" title="[Crypto] - 如何第一次交易虛擬幣就上手">
       <i class="fa fa-chevron-left"></i> [Crypto] - 如何第一次交易虛擬幣就上手
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/28/20210528/" rel="next" title="[Vue Notes] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新">
+      [Vue Notes] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -586,7 +592,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -599,7 +605,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-count">46</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -649,12 +655,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">272k</span>
+    <span title="總字數">282k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:08</span>
+    <span title="所需總閱讀時間">4:16</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>
