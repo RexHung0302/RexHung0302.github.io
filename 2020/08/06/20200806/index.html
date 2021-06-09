@@ -315,17 +315,17 @@
 
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/20200806/hexschoolNodeJSLogo.jpg" alt="六角學院課程"></p>
-<p>沒有錯！這次也是照著六角學院線上課程 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s" title="https://www.hexschool.com/courses/nodejs.html">NodeJS 前後端開發實戰<i class="fa fa-external-link"></i></span> 學習筆記，好處是隨時想進行就進行學習，缺點也顯而易見就是太懶惰可能會讓課程擺著生灰塵(有興趣參考 線上課程 vs 直播課程 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNi8yMDIwMDYwNi8=" title="https://rexhung0302.github.io/2020/06/06/20200606/">八週總結心得<i class="fa fa-external-link"></i></span> )，鑑於以往筆記過長，這系列會使用簡短且重點筆記。</p>
+<p>沒有錯！這次也是照著六角學院線上課程 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s">NodeJS 前後端開發實戰<i class="fa fa-external-link-alt"></i></span> 學習筆記，好處是隨時想進行就進行學習，缺點也顯而易見就是太懶惰可能會讓課程擺著生灰塵(有興趣參考 線上課程 vs 直播課程 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNi8yMDIwMDYwNi8=">八週總結心得<i class="fa fa-external-link-alt"></i></span> )，鑑於以往筆記過長，這系列會使用簡短且重點筆記。</p>
 <hr>
 <h2 id="簡短介紹"><a href="#簡短介紹" class="headerlink" title="簡短介紹"></a>簡短介紹</h2><p><strong>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</strong></p>
-<p><strong>Node.js</strong> 使用了 <strong>V8</strong> 引擎，而它是一個能夠執行 <strong>JS</strong> 的環境，而 <strong>V8</strong> 專案也是開源的，有興趣可以參考<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWl1bS5nb29nbGVzb3VyY2UuY29tL3Y4L3Y4" title="https://chromium.googlesource.com/v8/v8">此處<i class="fa fa-external-link"></i></span>。</p>
+<p><strong>Node.js</strong> 使用了 <strong>V8</strong> 引擎，而它是一個能夠執行 <strong>JS</strong> 的環境，而 <strong>V8</strong> 專案也是開源的，有興趣可以參考<span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWl1bS5nb29nbGVzb3VyY2UuY29tL3Y4L3Y4">此處<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>而 <strong>Node.js</strong> 的出現，使得原本在前端已經被廣泛的運用，甚至可以只靠 <strong>JS</strong> 就從前端寫到透端；由於很多前端工程師在接觸 <strong>前端三寶(HTML、CSS、JS)</strong> 之後，往往想一虧後端都會不知所措，甚至需要重新適應一個後端語言，因為 <strong>Node.js</strong> 讓前端可以輕鬆的就入門。</p>
 <hr>
-<h3 id="初試啼聲"><a href="#初試啼聲" class="headerlink" title="初試啼聲"></a>初試啼聲</h3><h4 id="如何開始"><a href="#如何開始" class="headerlink" title="如何開始"></a>如何開始</h4><p>一開始我們可以上 <strong>Node.js</strong> 的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==" title="https://nodejs.org/en/">官方網站<i class="fa fa-external-link"></i></span> 下載，這邊會有兩個版本，左邊代表比較穩定的版本，通常建議新手或是不熟的人先下載這個，而右邊那個則是最新版本，如果想試試新功能，可以選擇這一個，下載安裝完後打開中關機輸入以下指令即可查看是否安裝成功及版本號：</p>
+<h3 id="初試啼聲"><a href="#初試啼聲" class="headerlink" title="初試啼聲"></a>初試啼聲</h3><h4 id="如何開始"><a href="#如何開始" class="headerlink" title="如何開始"></a>如何開始</h4><p>一開始我們可以上 <strong>Node.js</strong> 的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">官方網站<i class="fa fa-external-link-alt"></i></span> 下載，這邊會有兩個版本，左邊代表比較穩定的版本，通常建議新手或是不熟的人先下載這個，而右邊那個則是最新版本，如果想試試新功能，可以選擇這一個，下載安裝完後打開中關機輸入以下指令即可查看是否安裝成功及版本號：</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">--version</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>點選下方的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Fib3V0L3JlbGVhc2VzLw==" title="https://nodejs.org/en/about/releases/">Long Term Support (LTS) schedule.<i class="fa fa-external-link"></i></span> 可以看到個版本的時間軸，比方說預期什麼版本預期維護到什麼時候。</p>
+<p>點選下方的 <span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Fib3V0L3JlbGVhc2VzLw==">Long Term Support (LTS) schedule.<i class="fa fa-external-link-alt"></i></span> 可以看到個版本的時間軸，比方說預期什麼版本預期維護到什麼時候。</p>
 </blockquote>
 <h4 id="簡單上手"><a href="#簡單上手" class="headerlink" title="簡單上手"></a>簡單上手</h4><p>在終端機輸入 <code>node</code>，即會進入 <code>node</code> 的環境，在這裡面可以寫任何的 <strong>JS</strong>，但我們通常不會這樣子做，我們會寫在檔案上，再交由 <strong>NodeJS</strong> 去執行，所以你可以試著創立一個 <code>app.js</code>，然後在裡面輸入下面內容：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'Hello NodeJS!!'</span>);</span><br></pre></td></tr></table></figure>
@@ -347,7 +347,7 @@
 <p>那需要引用的檔案就更簡單了，只需要使用 <code>require()</code> 即可，如下(A.js)：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nameInfo = <span class="built_in">require</span>(<span class="string">'./B.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(nameInfo.name); <span class="comment">// 王小明</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="又是一把釣竿"><a href="#又是一把釣竿" class="headerlink" title="又是一把釣竿"></a>又是一把釣竿</h4><p>那我們該怎麼入門使用 <strong>Node.js</strong> 呢？上面提到，原生的 <strong>Node.js</strong> 就有提供幾種 <strong>API</strong> 可以使用，首先到官方網站的 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2RvY3Mv" title="https://nodejs.org/en/docs/">Documentation<i class="fa fa-external-link"></i></span></strong>，然後找到適合自己的版本，這邊拿 <code>v12.16.1</code> 來舉例，滑到下面找到該版本的指南 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2RvY3MvbGF0ZXN0LXYxMi54L2FwaS8=" title="https://nodejs.org/docs/latest-v12.x/api/">Node.js 12.x<i class="fa fa-external-link"></i></span></strong> 點進去。</p>
+<h4 id="又是一把釣竿"><a href="#又是一把釣竿" class="headerlink" title="又是一把釣竿"></a>又是一把釣竿</h4><p>那我們該怎麼入門使用 <strong>Node.js</strong> 呢？上面提到，原生的 <strong>Node.js</strong> 就有提供幾種 <strong>API</strong> 可以使用，首先到官方網站的 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2RvY3Mv">Documentation<i class="fa fa-external-link-alt"></i></span></strong>，然後找到適合自己的版本，這邊拿 <code>v12.16.1</code> 來舉例，滑到下面找到該版本的指南 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2RvY3MvbGF0ZXN0LXYxMi54L2FwaS8=">Node.js 12.x<i class="fa fa-external-link-alt"></i></span></strong> 點進去。</p>
 <p>這時候會發現左邊有很多 <strong>API</strong>，這些都是原生的方法，裡面也紀錄了該怎麼使用，這邊先舉經典的 <strong>HTTP</strong> 為例吧！</p>
 <p>一樣新增一支 <strong>App.js</strong>，所有要應用到的方法起手式都是上面提到的 <code>require()</code>，先載入進來，才能使用，所以照下面程式碼寫：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// request -&gt; 請求來源相關資料</span></span><br><span class="line">  <span class="comment">// response -&gt; 伺服器(Node.js 這邊)回覆相關資料</span></span><br><span class="line">  response.writeHead(<span class="number">200</span>, &#123; <span class="string">"Content-Type"</span>: <span class="string">"text/plan"</span> &#125;);</span><br><span class="line">  response.write(<span class="string">'Hello Node.js!!'</span>);</span><br><span class="line">  response.end();</span><br><span class="line">&#125;).listen(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure>
@@ -360,8 +360,8 @@
 <blockquote>
 <p>上圖省略了去資料庫拿資料及資料呈現是交由前端或是後端 <strong>SSR(Server-Side Rendering)</strong>，但整個 <strong>要求(request)</strong> 跟 <strong>回應(response)</strong> 差不多是這麼一回事。</p>
 </blockquote>
-<h4 id="關於路徑"><a href="#關於路徑" class="headerlink" title="關於路徑"></a>關於路徑</h4><p>上面提到 <strong>router</strong>，而在我們使用後端語言常常會使用到路徑，常見的 <strong>Node.js</strong> 路徑有幾個常用的東西，像是 <code>__dirname(資料夾路徑)</code> 或 <code>__filename(檔案路徑)</code>，這兩個在 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDAwNw==" title="https://ithelp.ithome.com.tw/articles/10200007">VSCode 除錯模式<i class="fa fa-external-link"></i></span>可以看見，</p>
-<p>這邊就會提到關於 <strong>Node.js</strong> 就提供了另一個很有用的 <strong>API</strong> -&gt; <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9wYXRoLmh0bWw=" title="https://nodejs.org/api/path.html">path<i class="fa fa-external-link"></i></span></strong>，使用方式跟上面起手式一樣，並示範幾個基本的方法：</p>
+<h4 id="關於路徑"><a href="#關於路徑" class="headerlink" title="關於路徑"></a>關於路徑</h4><p>上面提到 <strong>router</strong>，而在我們使用後端語言常常會使用到路徑，常見的 <strong>Node.js</strong> 路徑有幾個常用的東西，像是 <code>__dirname(資料夾路徑)</code> 或 <code>__filename(檔案路徑)</code>，這兩個在 <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDAwNw==">VSCode 除錯模式<i class="fa fa-external-link-alt"></i></span>可以看見，</p>
+<p>這邊就會提到關於 <strong>Node.js</strong> 就提供了另一個很有用的 <strong>API</strong> -&gt; <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9wYXRoLmh0bWw=">path<i class="fa fa-external-link-alt"></i></span></strong>，使用方式跟上面起手式一樣，並示範幾個基本的方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 讀取目錄路徑</span></span><br><span class="line"><span class="built_in">console</span>.log(path.dirname(<span class="string">'/a/b/c.js'</span>)); <span class="comment">// /a/b</span></span><br><span class="line"><span class="comment">// 路徑合併</span></span><br><span class="line"><span class="built_in">console</span>.log(path.join(__dirname, <span class="string">'c.js'</span>)); <span class="comment">// /User/xxx/Desktop/c.js</span></span><br><span class="line"><span class="comment">// 讀取檔案名稱</span></span><br><span class="line"><span class="built_in">console</span>.log(path.basename(<span class="string">'/a/b/c.js'</span>)); <span class="comment">// c.js</span></span><br><span class="line"><span class="comment">// 讀取檔案副檔名</span></span><br><span class="line"><span class="built_in">console</span>.log(path.basename(<span class="string">'/a/b/c.js'</span>)); <span class="comment">// .js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 讀取所有資訊 包含路徑 檔案名稱 副檔名 檔案名稱(不包含副檔名) - 組合包</span></span><br><span class="line"><span class="built_in">console</span>.log(path.parse(<span class="string">'/a/b/c.js'</span>)); <span class="comment">// 回傳 Object &#123; root: '/', dir: '/a/b', base: 'c.js', ext: '.js', name: 'c' &#125;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -369,21 +369,21 @@
 </blockquote>
 <p><img src="/images/20200806/example.png" alt="不存在的檔案"></p>
 <hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這邊只是簡短的紀錄並介紹 <strong>Node.js</strong>，而 <strong>Node.js</strong> 其實強大且豐富，不是三言兩語就能介紹完畢，由於原生的方法沒辦法滿足所有情況，所以在開源的情況下，大家又會各自開發功能並且發布出去，使得 <strong>Node.js</strong> 越來越豐富，類似於前端的套件，前端只需要 <strong>CDN</strong> 就可以使用，而後端一定要 <strong>npm install</strong>(關於 <strong>npm</strong> 介紹可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span>) 後並且使用起手式 <strong>require</strong> 才能使用；你可能會想，每次建立後端都這麼麻煩嗎？後面我們將會繼續提到如何快速建立後端環境、如何應用。</p>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這邊只是簡短的紀錄並介紹 <strong>Node.js</strong>，而 <strong>Node.js</strong> 其實強大且豐富，不是三言兩語就能介紹完畢，由於原生的方法沒辦法滿足所有情況，所以在開源的情況下，大家又會各自開發功能並且發布出去，使得 <strong>Node.js</strong> 越來越豐富，類似於前端的套件，前端只需要 <strong>CDN</strong> 就可以使用，而後端一定要 <strong>npm install</strong>(關於 <strong>npm</strong> 介紹可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span>) 後並且使用起手式 <strong>require</strong> 才能使用；你可能會想，每次建立後端都這麼麻煩嗎？後面我們將會繼續提到如何快速建立後端環境、如何應用。</p>
 <blockquote>
 <p>對於後端矇懞懂懂的我如果有誤還請各位手下留情，所有的比較資料來源幾乎都是從課程上得知或上網爬文學習。</p>
 </blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWl1bS5nb29nbGVzb3VyY2UuY29tL3Y4L3Y4" title="https://chromium.googlesource.com/v8/v8">V8 Git<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWl1bS5nb29nbGVzb3VyY2UuY29tL3Y4L3Y4">V8 Git<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==" title="https://nodejs.org/en/">NodeJS<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuLw==">NodeJS<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDAwNw==" title="https://ithelp.ithome.com.tw/articles/10200007">Day 4 - 一周目- 用VSCode debug 模式，玩玩 ES6 常用語法<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwMDAwNw==">Day 4 - 一周目- 用VSCode debug 模式，玩玩 ES6 常用語法<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNi8yMDIwMDYwNi8=" title="https://rexhung0302.github.io/2020/06/06/20200606/">[Hexschool Web Layout Training] — 八週總結<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wNi8wNi8yMDIwMDYwNi8=">[Hexschool Web Layout Training] — 八週總結<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
@@ -526,7 +526,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -539,7 +539,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -589,12 +589,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

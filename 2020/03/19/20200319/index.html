@@ -325,9 +325,9 @@
 </li>
 </ol>
 <hr>
-<h3 id="如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><a href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners" class="headerlink" title="如何在網頁加入 Fork Me on GitHub(GitHub Corners)"></a>如何在網頁加入 Fork Me on GitHub(GitHub Corners)</h3><p>首先到這個網頁挑選喜歡的樣式 -&gt; <span class="exturl" data-url="aHR0cDovL3Rob2xtYW4uY29tL2dpdGh1Yi1jb3JuZXJzLw==" title="http://tholman.com/github-corners/">傳送門<i class="fa fa-external-link"></i></span></p>
+<h3 id="如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><a href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners" class="headerlink" title="如何在網頁加入 Fork Me on GitHub(GitHub Corners)"></a>如何在網頁加入 Fork Me on GitHub(GitHub Corners)</h3><p>首先到這個網頁挑選喜歡的樣式 -&gt; <span class="exturl" data-url="aHR0cDovL3Rob2xtYW4uY29tL2dpdGh1Yi1jb3JuZXJzLw==">傳送門<i class="fa fa-external-link-alt"></i></span></p>
 <p><img src="/images/20200319/github_fork_style.png" alt="挑一個你愛的樣式吧"></p>
-<p>以第一個白底黑貓為例子，複製後先貼到空白處，然後要修改掉那串程式碼最前面的 <strong>href</strong> 內的 <strong><span class="exturl" data-url="aHR0cHM6Ly95b3VyLXVybA==" title="https://your-url">https://your-url<i class="fa fa-external-link"></i></span></strong> ，內容替換成你的 GitHub 頁面網址。</p>
+<p>以第一個白底黑貓為例子，複製後先貼到空白處，然後要修改掉那串程式碼最前面的 <strong>href</strong> 內的 <strong><span class="exturl" data-url="aHR0cHM6Ly95b3VyLXVybA==">https://your-url<i class="fa fa-external-link-alt"></i></span></strong> ，內容替換成你的 GitHub 頁面網址。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">"https://your-url"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"github-corner"</span> aria-label=<span class="string">"View source on GitHub"</span>&gt;</span><br><span class="line">&lt;svg width=<span class="string">"80"</span> height=<span class="string">"80"</span> viewBox=<span class="string">"0 0 250 250"</span> style=<span class="string">"fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"</span> aria-hidden=<span class="string">"true"</span>&gt;</span><br><span class="line">&lt;path d=<span class="string">"M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">path</span>&gt;</span></span>...略&lt;<span class="regexp">/svg&gt; </span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ ...略</span></span><br></pre></td></tr></table></figure>
 
 <p>隨後把下代碼複製貼至 <strong>/themes/next/layout/_layout.swig</strong> 文件中 <strong>div</strong> 的 <strong>class name</strong> 為 <strong>headband</strong> 的下面。</p>
@@ -337,11 +337,11 @@
 <p>再回去看看就會出現啦！</p>
 <p><img src="/images/20200319/github_fork_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
 <hr>
-<h3 id="如何加入-版權聲明"><a href="#如何加入-版權聲明" class="headerlink" title="如何加入 版權聲明"></a>如何加入 版權聲明</h3><p>原本的做法比較複雜，需要自己去新建文件(<span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZy9uZXh0LTYtNi0wLXJlbGVhc2VkLw==" title="https://theme-next.org/next-6-6-0-released/">詳情可見主題文件<i class="fa fa-external-link"></i></span>)，不過在 <strong>NexT 6.6.0</strong> 開始直接到 <strong>/themes/next/_config.yml</strong> 裡搜尋 <strong>creative_commons</strong> 然後修改要顯示在 <strong>sidebar</strong> 還是 <strong>post</strong> 還是<strong>全都要</strong>就可以了，如下設定：</p>
+<h3 id="如何加入-版權聲明"><a href="#如何加入-版權聲明" class="headerlink" title="如何加入 版權聲明"></a>如何加入 版權聲明</h3><p>原本的做法比較複雜，需要自己去新建文件(<span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZy9uZXh0LTYtNi0wLXJlbGVhc2VkLw==">詳情可見主題文件<i class="fa fa-external-link-alt"></i></span>)，不過在 <strong>NexT 6.6.0</strong> 開始直接到 <strong>/themes/next/_config.yml</strong> 裡搜尋 <strong>creative_commons</strong> 然後修改要顯示在 <strong>sidebar</strong> 還是 <strong>post</strong> 還是<strong>全都要</strong>就可以了，如下設定：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span></span><br><span class="line"><span class="comment"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span></span><br><span class="line"><span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line"><span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line"></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line"><span class="attr">  license:</span> <span class="string">by-nc-sa</span></span><br><span class="line"><span class="attr">  sidebar:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  post:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  language:</span> <span class="string">deed.zh_TW</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/images/20200319/copy_right_show.png" alt="然後你就會發現左邊的 sidebar 跟文章內都會出現啦"></p>
-<p>順帶一提，<strong>language</strong> 並非文字在<strong>文章</strong>內顯示的語言喔！而是你導向 <strong>creative commons</strong> 網址時，你的版權聲明顯示的語言，預設是英文，如果改成 <strong>deed.zh_TW</strong> 就會顯示中文，如何看你的語言呢？在<span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX" title="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">版權聲明網站<i class="fa fa-external-link"></i></span>內中間有一個語言 <strong>select</strong> 下拉後在看網址最後帶的是什麼，·比如說中文是 <strong>deed.zh_TW</strong> 而日文就是 <strong>deed.ja</strong>。</p>
+<p>順帶一提，<strong>language</strong> 並非文字在<strong>文章</strong>內顯示的語言喔！而是你導向 <strong>creative commons</strong> 網址時，你的版權聲明顯示的語言，預設是英文，如果改成 <strong>deed.zh_TW</strong> 就會顯示中文，如何看你的語言呢？在<span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX">版權聲明網站<i class="fa fa-external-link-alt"></i></span>內中間有一個語言 <strong>select</strong> 下拉後在看網址最後帶的是什麼，·比如說中文是 <strong>deed.zh_TW</strong> 而日文就是 <strong>deed.ja</strong>。</p>
 <p><img src="/images/20200319/copy_right_language_select_show.png" alt="隨意更改其他語言就能找到相對應的代號了"></p>
 <hr>
 <h3 id="如何在頁尾加入-本文结束感謝您的閱讀"><a href="#如何在頁尾加入-本文结束感謝您的閱讀" class="headerlink" title="如何在頁尾加入 本文结束感謝您的閱讀"></a>如何在頁尾加入 本文结束感謝您的閱讀</h3><p>先到 <strong>/themes/next/layout/_macro</strong> 下查看有無 <strong>passage-end-tag.swig</strong> 這隻檔案，沒有就自己手動建立一個，隨後在內文貼上下列程式碼：</p>
@@ -364,12 +364,12 @@
 
 <p><img src="/images/20200319/tag_hover.gif" alt="成果展示"></p>
 <hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是接觸 <strong>Hexo</strong> 的第二個主題 <strong>NexT</strong>，其實最一開始是使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9qZXJyeWMubWUv" title="https://jerryc.me/">hexo-theme-archer<i class="fa fa-external-link"></i></span></strong> 這個主題，我想第一次用 <strong>Hexo</strong> 都會想找炫一點的主題，但是有些比較算獨立維護的，可能功能上就沒有那麼齊全，像是很多設定，在 <strong>NexT</strong> 的 <strong>_config.yml</strong> 裡面就有了，你只需要改成 <strong>true</strong> 其實就能用了，但是比較冷門的主題或是沒有那麼多人維護的主題就必須要自己建立檔案，或是東加西加，這也是為什麼後來我選用 <strong>NexT</strong>。 的原因。</p>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是接觸 <strong>Hexo</strong> 的第二個主題 <strong>NexT</strong>，其實最一開始是使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9qZXJyeWMubWUv">hexo-theme-archer<i class="fa fa-external-link-alt"></i></span></strong> 這個主題，我想第一次用 <strong>Hexo</strong> 都會想找炫一點的主題，但是有些比較算獨立維護的，可能功能上就沒有那麼齊全，像是很多設定，在 <strong>NexT</strong> 的 <strong>_config.yml</strong> 裡面就有了，你只需要改成 <strong>true</strong> 其實就能用了，但是比較冷門的主題或是沒有那麼多人維護的主題就必須要自己建立檔案，或是東加西加，這也是為什麼後來我選用 <strong>NexT</strong>。 的原因。</p>
 <p>因為之前換過主題中間也加了一些東西導致 <strong>Hexo</strong> 爆開(<strong>真心建議新手不要亂動文件 也記得勤於備份</strong>)，所以重新用了三四次，所以寫篇文章把一些功能記下來，希望日後能快速找到方法不用再到處去爬文了，也希望這篇文章能幫助到您，之後也會不定時的加一些筆記進來。</p>
 <h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLXR3Lw==" title="https://hexo.io/zh-tw/">Hexo 官網文件<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZy8=" title="https://theme-next.org/">NexT 主題 Blog<i class="fa fa-external-link"></i></span></li>
-<li><span class="exturl" data-url="aHR0cDovL3Rob2xtYW4uY29tL2dpdGh1Yi1jb3JuZXJzLw==" title="http://tholman.com/github-corners/">GitHub Corners<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLXR3Lw==">Hexo 官網文件<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0Lm9yZy8=">NexT 主題 Blog<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3Rob2xtYW4uY29tL2dpdGh1Yi1jb3JuZXJzLw==">GitHub Corners<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -513,7 +513,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -526,7 +526,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -576,12 +576,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

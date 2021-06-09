@@ -325,13 +325,13 @@
 <p><strong>Nodejs</strong> 的 <strong>Template</strong> 有許多種，這邊示範的為 <strong>EJS</strong>。</p>
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/20200914/EJS_logo.png" alt="EJS Template"></p>
-<p>在前面的文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=" title="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link"></i></span></strong> 我們開啟了全端之路，在入門如何安裝及使用 <strong>Nodejs</strong> 之後這篇文章就要簡短講解如何快速建立後端環境，並且規劃簡單的架構及使用模板建立多頁面。</p>
+<p>在前面的文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link-alt"></i></span></strong> 我們開啟了全端之路，在入門如何安裝及使用 <strong>Nodejs</strong> 之後這篇文章就要簡短講解如何快速建立後端環境，並且規劃簡單的架構及使用模板建立多頁面。</p>
 <hr>
 <h3 id="老樣子"><a href="#老樣子" class="headerlink" title="老樣子"></a>老樣子</h3><p>按照慣例文章開頭還是要講一下什麼是 <strong>Express</strong>。</p>
 <p>跟前端一樣，<strong>Nodejs</strong> 也有三個比較流行的框架，分別為 <strong>Express、Koa</strong> 及 <strong>Hapi</strong>，但你可能會有點疑問，我安裝了這些框架但他們好像沒有幫我弄好環境？</p>
 <p>沒有錯，這些框架和前端那些框架有些異曲同工之妙，這三個框架提供了一些更方便的 <strong>API</strong> 可以使用，但環境必須要自行建立，如果你不想要手動建立環境的話別擔心，可以考慮研究一下 <strong><a href="https://github.com/expressjs/generator">Express Generator</a>(註1)</strong>，但這邊推薦新手先自行從 0 開始建立環境才能比較了解為什麼 <strong><a href="https://github.com/expressjs/generator">Express Generator</a></strong> 要幫我把環境這樣放。</p>
 <p><img src="/images/20200914/three_logo.png" alt="Nodejs 框架三劍客"></p>
-<p>關於三個框架的好壞這邊稍微提一下(不是專業的分析，有誤還請各路大神見諒)，詳細可參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvdGVjaC9najlya2F5Lmh0bWw=" title="https://kknews.cc/zh-tw/tech/gj9rkay.html">如何正確選擇Node框架：Express、Koa還是Hapi<i class="fa fa-external-link"></i></span></strong>：</p>
+<p>關於三個框架的好壞這邊稍微提一下(不是專業的分析，有誤還請各路大神見諒)，詳細可參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9ra25ld3MuY2MvemgtdHcvdGVjaC9najlya2F5Lmh0bWw=">如何正確選擇Node框架：Express、Koa還是Hapi<i class="fa fa-external-link-alt"></i></span></strong>：</p>
 <ol>
 <li><a href="https://github.com/expressjs/express">Express</a> </li>
 </ol>
@@ -426,7 +426,7 @@
 <p>在上面我們把原本的 <code>response.send()</code> 改為 <code>response.render(&#39;index&#39;)</code> 意思就是把 <strong>views</strong> 底下的 <strong>index.ejs</strong> 渲染回去給瀏覽器，那為什麼 <strong>nodejs</strong> 會知道我們要選染哪一隻檔案回去呢？因為上面我們使用了下列的程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs'</span>);</span><br></pre></td></tr></table></figure>
 
-<p>上面的 <strong>path</strong> 就是 <strong>nodejs</strong> 原始的 <strong>API</strong>，而 <strong>__dirname</strong> 我們在前面的 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=" title="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link"></i></span></strong> 有提到，這邊大概的意思就是當我使用 <code>response.render(&#39;index&#39;)</code> 的時候，會自動幫我抓路徑 <code>response.render(&#39;index&#39;) =&gt; response.render(&#39;目前路徑/views/index&#39;)</code>，最後一行則是把目前的 <strong>view</strong> 引擎設定為 <strong>ejs</strong>。</p>
+<p>上面的 <strong>path</strong> 就是 <strong>nodejs</strong> 原始的 <strong>API</strong>，而 <strong>__dirname</strong> 我們在前面的 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link-alt"></i></span></strong> 有提到，這邊大概的意思就是當我使用 <code>response.render(&#39;index&#39;)</code> 的時候，會自動幫我抓路徑 <code>response.render(&#39;index&#39;) =&gt; response.render(&#39;目前路徑/views/index&#39;)</code>，最後一行則是把目前的 <strong>view</strong> 引擎設定為 <strong>ejs</strong>。</p>
 <p>現在停止終端機的指令，重新輸入 <code>node app.js</code> 打開瀏覽器輸入 <code>http://localhost:3000/</code> 吧，會出現下面的畫面就代表成功了：</p>
 <p><img src="/images/20200914/ejs_example.png" alt="成功渲染"></p>
 <blockquote>
@@ -448,7 +448,7 @@
 <p><img src="/images/20200914/ejs_user_edit_example.png" alt="user頁面成功渲染"></p>
 <p>我們可以在參數使用 <strong>Boolean</strong> 然後在渲染時依靠 <strong>true/false</strong> 去決定是否顯示內容，也可以用迴圈的方式把資料給渲染出來，這和我們使用 <strong>JS</strong> 來渲染畫面到 <strong>HTML</strong> 是大同小異的。</p>
 <blockquote>
-<p><em>關於更多的 *</em>ejs** 用法可以參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9lanMuY28vI2RvY3M=" title="https://ejs.co/#docs">ejs docs<i class="fa fa-external-link"></i></span>*</strong></p>
+<p><em>關於更多的 *</em>ejs** 用法可以參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9lanMuY28vI2RvY3M=">ejs docs<i class="fa fa-external-link-alt"></i></span>*</strong></p>
 </blockquote>
 <hr>
 <h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊附上簡單的 <strong>express-example</strong>，裡面包含簡單的 <strong>routes</strong> 拆分 及 <strong>ejs</strong> 的模板使用。</p>
@@ -458,13 +458,13 @@
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這篇文章原本想簡短介紹 <strong>EJS</strong>，但因為提到了 Router 不得不在最後把文章標題從 <strong>Express 及 EJS 入門淺談</strong> 改為 <strong>Express、Router 及 EJS 入門淺談</strong>，原本想長話短說，不知不覺又越寫越長，不過到這邊也大致對 nodejs 的環境有些許了解了，之後的篇章將會繼續講解如何使用 <strong>nodejs</strong> 的 <strong>Cookie</strong> 及 <strong>Session</strong>。</p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9oc2lhbmdmZW5nLmdpdGh1Yi5pby9ub2RlanMvMjAxOTA3MDEvMzczOTM2MTUzOC8=" title="https://hsiangfeng.github.io/nodejs/20190701/3739361538/">全端勇士之路 Node.js 基礎學習-Express EJS 撰寫篇<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9oc2lhbmdmZW5nLmdpdGh1Yi5pby9ub2RlanMvMjAxOTA3MDEvMzczOTM2MTUzOC8=">全端勇士之路 Node.js 基礎學習-Express EJS 撰寫篇<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmZ1bmRlYnVnLmNvbS8yMDE5LzA1LzEwL2V4cHJlc3Mta29hLWhhcGkv" title="https://blog.fundebug.com/2019/05/10/express-koa-hapi/">如何选择正确的Node框架：Express，Koa还是Hapi？<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmZ1bmRlYnVnLmNvbS8yMDE5LzA1LzEwL2V4cHJlc3Mta29hLWhhcGkv">如何选择正确的Node框架：Express，Koa还是Hapi？<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0Byb3Jhc3QucG93ZXIuZ2FtZS8lRTUlOUYlQkElRTYlOTYlQkNub2RlanMlRTclOUElODRrb2EyJUU1JTlGJUJBJUU2JTlDJUFDJUU2JTk1JTk5JUU1JUFEJUI4LTY3ZDFjZTBiYjU5YQ==" title="https://medium.com/@rorast.power.game/%E5%9F%BA%E6%96%BCnodejs%E7%9A%84koa2%E5%9F%BA%E6%9C%AC%E6%95%99%E5%AD%B8-67d1ce0bb59a">基於Nodejs的Koa2基本教學<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0Byb3Jhc3QucG93ZXIuZ2FtZS8lRTUlOUYlQkElRTYlOTYlQkNub2RlanMlRTclOUElODRrb2EyJUU1JTlGJUJBJUU2JTlDJUFDJUU2JTk1JTk5JUU1JUFEJUI4LTY3ZDFjZTBiYjU5YQ==">基於Nodejs的Koa2基本教學<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=" title="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
@@ -608,7 +608,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -621,7 +621,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -671,12 +671,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

@@ -321,7 +321,7 @@
 
       
         <p><img src="/images/20200809/firebase_logo.png" alt="Firebase"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>在之前 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS8yMDE5LzA2LzE0LzIwMTktMDYtMTQtdGhlX2YyZS8=" title="https://www.hexschool.com/2019/06/14/2019-06-14-the_f2e/">The F2E - 第二屆 前端 &amp; UI 修練精神時光屋<i class="fa fa-external-link"></i></span> 只會切版時候的筆者，在其中一關 <a href="https://github.com/RexHung0302/The-F2E-Challenge/tree/master/chatroom">第七週 - ChatRoom 匿名聊天室</a> 第一次聽到了 <strong>Firebase</strong> 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 <strong>Node.js</strong> 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。</p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>在之前 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS8yMDE5LzA2LzE0LzIwMTktMDYtMTQtdGhlX2YyZS8=">The F2E - 第二屆 前端 &amp; UI 修練精神時光屋<i class="fa fa-external-link-alt"></i></span> 只會切版時候的筆者，在其中一關 <a href="https://github.com/RexHung0302/The-F2E-Challenge/tree/master/chatroom">第七週 - ChatRoom 匿名聊天室</a> 第一次聽到了 <strong>Firebase</strong> 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 <strong>Node.js</strong> 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。</p>
 <a id="more"></a>
 
 <p>本篇文章一樣不會過於允長及深入，會教基本的 <strong>CRUD</strong>，有興趣的前端仔不會後端也可以靠這個做出一個小全端 <strong>Side Project</strong>。</p>
@@ -330,18 +330,18 @@
 <p>如果還沒聽過 <strong>Firebase</strong> 的話這邊簡短介紹一下。<strong>Firebase</strong> 是 <strong>後端服務平台(Backend as a Services，BaaS)</strong>，在筆者開始學習的時候已經改過版本，現在也提供了免費的 <strong>數據分析、雲端訊息推播、通知系統、備份、Log 報告…等等</strong>(看購買的課程影片上的 <strong>Firebase</strong> 似乎已經是幾年前了)。</p>
 <p>而 <strong>Firebase</strong> 並非剛開始就是 <strong>Google</strong> 的，<strong>2011年</strong> 成立一直到了 <strong>2014年10月</strong> 才被 <strong>Google</strong> 收購；而這次我們會介紹 <strong>Firebase</strong> 的 <strong>Database</strong>！</p>
 <hr>
-<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="踏出第一步"><a href="#踏出第一步" class="headerlink" title="踏出第一步"></a>踏出第一步</h4><p>首先上 <strong><span class="exturl" data-url="aHR0cHM6Ly9maXJlYmFzZS5nb29nbGUuY29tLw==" title="https://firebase.google.com/">Firebase 網站<i class="fa fa-external-link"></i></span></strong>，然後點選 <strong>Get Started</strong>。</p>
+<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="踏出第一步"><a href="#踏出第一步" class="headerlink" title="踏出第一步"></a>踏出第一步</h4><p>首先上 <strong><span class="exturl" data-url="aHR0cHM6Ly9maXJlYmFzZS5nb29nbGUuY29tLw==">Firebase 網站<i class="fa fa-external-link-alt"></i></span></strong>，然後點選 <strong>Get Started</strong>。</p>
 <p><img src="/images/20200809/step1.png" alt="step1"></p>
 <p>然後新增一個專案，並且取一個專案名稱。</p>
 <p><img src="/images/20200809/step2.png" alt="step2"></p>
 <p><img src="/images/20200809/step3.png" alt="step3"></p>
-<p>接著可以選擇是否要使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLz9obD16aC1UVw==" title="https://analytics.google.com/analytics/web/?hl=zh-TW">Google Analytics (分析)<i class="fa fa-external-link"></i></span></strong>，這邊可以選擇不開啟。</p>
+<p>接著可以選擇是否要使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLz9obD16aC1UVw==">Google Analytics (分析)<i class="fa fa-external-link-alt"></i></span></strong>，這邊可以選擇不開啟。</p>
 <blockquote>
 <p>之後會寫一篇文章來介紹 <strong>GA</strong> 及 <strong>GTM</strong>，剛好最近專案有碰到，這是一個很強大的 <strong>分析、行銷</strong> 工具(註1)。</p>
 </blockquote>
 <p><img src="/images/20200809/step4.gif" alt="step4"></p>
 <h4 id="接通管線"><a href="#接通管線" class="headerlink" title="接通管線"></a>接通管線</h4><p><img src="/images/20200809/step5.png" alt="step5"></p>
-<p>接著點選 <code>&lt;/&gt;</code> 這個符號，然後註冊一個網頁應用程式，下方的代管選項可以不必勾選，所謂的代管可以參考 <span class="exturl" data-url="aHR0cHM6Ly9hbmR5NjgwNHR3LmdpdGh1Yi5pby8yMDE4LzAxLzI5L2ZpcmViYXNlLWhvc3RpbmctZGVwbG95Lw==" title="https://andy6804tw.github.io/2018/01/29/firebase-hosting-deploy/">Firebase Hosting 靜態網站部署<i class="fa fa-external-link"></i></span>，有點類似於 <strong>Github Page</strong> 的概念。</p>
+<p>接著點選 <code>&lt;/&gt;</code> 這個符號，然後註冊一個網頁應用程式，下方的代管選項可以不必勾選，所謂的代管可以參考 <span class="exturl" data-url="aHR0cHM6Ly9hbmR5NjgwNHR3LmdpdGh1Yi5pby8yMDE4LzAxLzI5L2ZpcmViYXNlLWhvc3RpbmctZGVwbG95Lw==">Firebase Hosting 靜態網站部署<i class="fa fa-external-link-alt"></i></span>，有點類似於 <strong>Github Page</strong> 的概念。</p>
 <p><img src="/images/20200809/step6.png" alt="step6"></p>
 <p>接著完成後就會出現一大串 <strong>JS Code</strong>，這時候可以先保存下來，我們將會做一個簡單的教學。</p>
 <p><img src="/images/20200809/step7.png" alt="step7"></p>
@@ -350,7 +350,7 @@
 </blockquote>
 <p><img src="/images/20200809/Firebase_SDK_snippet.png" alt="Firebase SDK"></p>
 <blockquote>
-<p>註1：<em>2020/09/13 寫了一篇 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xMy8yMDIwMDkxMy8=" title="https://rexhung0302.github.io/2020/09/13/20200913/">[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？<i class="fa fa-external-link"></i></span></strong> 對行銷或統計甚至對 <strong>GA、GTM</strong> 有興趣都可以參考。</em></p>
+<p>註1：<em>2020/09/13 寫了一篇 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xMy8yMDIwMDkxMy8=">[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？<i class="fa fa-external-link-alt"></i></span></strong> 對行銷或統計甚至對 <strong>GA、GTM</strong> 有興趣都可以參考。</em></p>
 </blockquote>
 <hr>
 <h3 id="筆者帶進門"><a href="#筆者帶進門" class="headerlink" title="筆者帶進門"></a>筆者帶進門</h3><h4 id="建立線上資料庫"><a href="#建立線上資料庫" class="headerlink" title="建立線上資料庫"></a>建立線上資料庫</h4><p>再來我們新增一個專案，然後新增一支 <strong>index.html</strong>，檔案，然後在 <strong>head</strong> 處引入剛剛複製的那些代碼。 </p>
@@ -395,11 +395,11 @@
 <p>而會提到 <code>forEach()</code> 是因為 <code>orderByChild()</code> 過濾出來的資料，必須在用 <code>forEach()</code> 取出每一個內容。</p>
 <hr>
 <h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊附上一個使用 <strong>Google Firebase</strong> 的小專案，是六角學院的小作業，使用 <strong>Side Project</strong> 新增刪除自己的 <strong>BMI</strong>，有興趣可以自行 <strong>Clone</strong> 下來研究。</p>
-<p>這個作樂使用 <span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTkvMDEtMjYtbm9kZS13aXRoLWVudi1maXJzdC8=" title="https://dwatow.github.io/2019/01-26-node-with-env-first/">Dotenv(讀取環境變數的套件)<i class="fa fa-external-link"></i></span> 所以可以放心的 <strong>Clone</strong> 下來，並且修改完成之後上傳到自己的 <strong>GiuHub</strong>。</p>
-<p>Demo: <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSGV4c2Nob29sLWZpcmViYXNlLWJtaS1wcmFjdGljZS9pbmRleC5odG1s" title="https://rexhung0302.github.io/Hexschool-firebase-bmi-practice/index.html">傳送門<i class="fa fa-external-link"></i></span></p>
+<p>這個作樂使用 <span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTkvMDEtMjYtbm9kZS13aXRoLWVudi1maXJzdC8=">Dotenv(讀取環境變數的套件)<i class="fa fa-external-link-alt"></i></span> 所以可以放心的 <strong>Clone</strong> 下來，並且修改完成之後上傳到自己的 <strong>GiuHub</strong>。</p>
+<p>Demo: <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSGV4c2Nob29sLWZpcmViYXNlLWJtaS1wcmFjdGljZS9pbmRleC5odG1s">傳送門<i class="fa fa-external-link-alt"></i></span></p>
 <p>Source Code: <a href="https://github.com/RexHung0302/Hexschool-firebase-bmi-practice">傳送門</a></p>
 <blockquote>
-<p><em>題外話：此作業有使用一鍵指令快數部署靜態資源至 GitHub，有興趣可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNC8yMDIwMDgwNC8=" title="https://rexhung0302.github.io/2020/08/04/20200804/">[Git Notes] — 快速部署 Vue Cli 靜態資源至 GitHub Pages<i class="fa fa-external-link"></i></span>。</em></p>
+<p><em>題外話：此作業有使用一鍵指令快數部署靜態資源至 GitHub，有興趣可參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNC8yMDIwMDgwNC8=">[Git Notes] — 快速部署 Vue Cli 靜態資源至 GitHub Pages<i class="fa fa-external-link-alt"></i></span>。</em></p>
 </blockquote>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實還有更多的方法沒有寫上來，但基本的操作流程就是這樣，想好好的用好一個套件或是服務，那就是 <strong>document</strong> 讀熟就對啦！</p>
@@ -408,11 +408,11 @@
 </blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><span class="exturl" data-url="aHR0cDovL2RvZzA0MTYuYmxvZ3Nwb3QuY29tLzIwMTgvMDYvZmlyZWJhc2UtZmlyZWJhc2UuaHRtbA==" title="http://dog0416.blogspot.com/2018/06/firebase-firebase.html">[Firebase] Firebase 介紹與建立專案<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cDovL2RvZzA0MTYuYmxvZ3Nwb3QuY29tLzIwMTgvMDYvZmlyZWJhc2UtZmlyZWJhc2UuaHRtbA==">[Firebase] Firebase 介紹與建立專案<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9hbmR5NjgwNHR3LmdpdGh1Yi5pby8yMDE4LzAxLzI5L2ZpcmViYXNlLWhvc3RpbmctZGVwbG95Lw==" title="https://andy6804tw.github.io/2018/01/29/firebase-hosting-deploy/">Firebase Hosting 靜態網站部署<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9hbmR5NjgwNHR3LmdpdGh1Yi5pby8yMDE4LzAxLzI5L2ZpcmViYXNlLWhvc3RpbmctZGVwbG95Lw==">Firebase Hosting 靜態網站部署<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTkvMDEtMjYtbm9kZS13aXRoLWVudi1maXJzdC8=" title="https://dwatow.github.io/2019/01-26-node-with-env-first/">《Chris 技術筆記》- Node.js 使用 .env 加上環境變數<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTkvMDEtMjYtbm9kZS13aXRoLWVudi1maXJzdC8=">《Chris 技術筆記》- Node.js 使用 .env 加上環境變數<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
@@ -558,7 +558,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -571,7 +571,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -621,12 +621,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

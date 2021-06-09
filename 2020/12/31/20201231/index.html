@@ -345,8 +345,8 @@
 <p>如果有興趣透過 <strong>Node.js</strong> 傳送圖片至 <strong>S3</strong> 的人可以先到 <strong><a href="https://github.com/expressjs/multer">Multer GitHub</a></strong> 瀏覽一下，如果沒興趣只想知道怎麼開通 <strong>S3</strong> 服務最後一節可以跳過。</p>
 </blockquote>
 <hr>
-<h3 id="開始使用-S3-服務"><a href="#開始使用-S3-服務" class="headerlink" title="開始使用 S3 服務"></a>開始使用 S3 服務</h3><h4 id="S3-憑證"><a href="#S3-憑證" class="headerlink" title="S3 憑證"></a>S3 憑證</h4><p>如同 <strong>Google Analytics</strong> 一樣，<strong>S3</strong> 只是 <strong>AWS</strong> 的眾多服務之一，您必須先到 <strong><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9mcmVl" title="https://aws.amazon.com/tw/free">AWS<i class="fa fa-external-link"></i></span></strong> 去註冊帳號密碼。</p>
-<p>註冊結束後進入 <strong><span class="exturl" data-url="aHR0cHM6Ly9hcC1ub3J0aGVhc3QtMS5jb25zb2xlLmF3cy5hbWF6b24uY29tL2NvbnNvbGUvaG9tZQ==" title="https://ap-northeast-1.console.aws.amazon.com/console/home">AWS 管理控制台<i class="fa fa-external-link"></i></span></strong>，</p>
+<h3 id="開始使用-S3-服務"><a href="#開始使用-S3-服務" class="headerlink" title="開始使用 S3 服務"></a>開始使用 S3 服務</h3><h4 id="S3-憑證"><a href="#S3-憑證" class="headerlink" title="S3 憑證"></a>S3 憑證</h4><p>如同 <strong>Google Analytics</strong> 一樣，<strong>S3</strong> 只是 <strong>AWS</strong> 的眾多服務之一，您必須先到 <strong><span class="exturl" data-url="aHR0cHM6Ly9hd3MuYW1hem9uLmNvbS90dy9mcmVl">AWS<i class="fa fa-external-link-alt"></i></span></strong> 去註冊帳號密碼。</p>
+<p>註冊結束後進入 <strong><span class="exturl" data-url="aHR0cHM6Ly9hcC1ub3J0aGVhc3QtMS5jb25zb2xlLmF3cy5hbWF6b24uY29tL2NvbnNvbGUvaG9tZQ==">AWS 管理控制台<i class="fa fa-external-link-alt"></i></span></strong>，</p>
 <p>這和其他第三方服務一樣，您需要有 <strong>Token</strong> 這類的東西才能夠使用它們的服務，而 <strong>AWS</strong> 需要 <strong>訪問密鑰ID(Access ID)</strong> 和 <strong>私有訪問密鑰(Secret Access key)</strong> 您才能使用這項服務。</p>
 <p><img src="/images/20201231/console.png" alt="AWS 管理控制台"></p>
 <p>點選 <strong>My Security Credentials</strong>。</p>
@@ -382,7 +382,7 @@
 </li>
 </ul>
 <p>先說說為什麼會用這個套件，因為在 <strong>Express 4.16</strong> 版本以前跟之後讀取 <strong>Form Data</strong> 的方式不太一樣，筆者上網爬文過後發現這個套件可以檢查檔案格式或是限制檔案大小，並且可以方便抓取檔案，所以就入坑了。</p>
-<h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>首先必須安裝套件以及上傳圖片至 <strong>S3</strong> 必須使用的套件(關於 <strong>Node</strong> 環境如何建立可以參考我的另篇文章 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8=" title="https://rexhung0302.github.io/2020/09/14/20200914/">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link"></i></span>，這邊先預設您已經安裝好且環境都設定好了)。</p>
+<h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>首先必須安裝套件以及上傳圖片至 <strong>S3</strong> 必須使用的套件(關於 <strong>Node</strong> 環境如何建立可以參考我的另篇文章 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8=">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link-alt"></i></span>，這邊先預設您已經安裝好且環境都設定好了)。</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="selector-tag">i</span> aws-sdk multer --save</span><br></pre></td></tr></table></figure>
 
 <h4 id="抓取上傳檔案"><a href="#抓取上傳檔案" class="headerlink" title="抓取上傳檔案"></a>抓取上傳檔案</h4><p>其實官方教學已經寫得差不多，但這次我把抓取檔案的流程寫在 <strong>Middleware</strong>，一來方便管理，二來乾淨清爽。</p>
@@ -409,8 +409,8 @@
 <blockquote>
 <p>上傳成功後如果 <code>console.log(data)</code> 可以看見更多資訊，只是 <strong>data.Location</strong> 就是我們要用來預覽的檔案，如果點選網址變成下載，請記得一定要檢查你的副檔名稱是不是正確的(Ex:.jpg|.jpeg|.png)。</p>
 </blockquote>
-<p>相關上傳、刪除、瀏覽的 API 可以參考 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3Nkay1mb3ItamF2YXNjcmlwdC92Mi9kZXZlbG9wZXItZ3VpZGUvczMtZXhhbXBsZS1waG90by1hbGJ1bS5odG1s" title="https://docs.aws.amazon.com/zh_tw/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html">從瀏覽器上傳相片至 Amazon S3<i class="fa fa-external-link"></i></span>，這邊也有詳盡的介紹。</p>
-<h4 id="本地新增刪除儲存桶"><a href="#本地新增刪除儲存桶" class="headerlink" title="本地新增刪除儲存桶"></a>本地新增刪除儲存桶</h4><p>如果您不想要線上建立 <strong>儲存桶(Bucket)</strong> 其實也可以本地建立，有興趣可以參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9zdGFja2FidXNlLmNvbS91cGxvYWRpbmctZmlsZXMtdG8tYXdzLXMzLXdpdGgtbm9kZS1qcy8jY3JlYXRpbmdhbnMzYnVja2V0" title="https://stackabuse.com/uploading-files-to-aws-s3-with-node-js/#creatingans3bucket">Uploading Files to AWS S3 with Node.js<i class="fa fa-external-link"></i></span></strong> 的下半篇文章，或是參考官方的 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL0FXU0phdmFTY3JpcHRTREsvbGF0ZXN0L0FXUy9TMy5odG1sI2NyZWF0ZUJ1Y2tldC1wcm9wZXJ0eQ==" title="https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#createBucket-property">API Document<i class="fa fa-external-link"></i></span></p>
+<p>相關上傳、刪除、瀏覽的 API 可以參考 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3Nkay1mb3ItamF2YXNjcmlwdC92Mi9kZXZlbG9wZXItZ3VpZGUvczMtZXhhbXBsZS1waG90by1hbGJ1bS5odG1s">從瀏覽器上傳相片至 Amazon S3<i class="fa fa-external-link-alt"></i></span>，這邊也有詳盡的介紹。</p>
+<h4 id="本地新增刪除儲存桶"><a href="#本地新增刪除儲存桶" class="headerlink" title="本地新增刪除儲存桶"></a>本地新增刪除儲存桶</h4><p>如果您不想要線上建立 <strong>儲存桶(Bucket)</strong> 其實也可以本地建立，有興趣可以參考 <strong><span class="exturl" data-url="aHR0cHM6Ly9zdGFja2FidXNlLmNvbS91cGxvYWRpbmctZmlsZXMtdG8tYXdzLXMzLXdpdGgtbm9kZS1qcy8jY3JlYXRpbmdhbnMzYnVja2V0">Uploading Files to AWS S3 with Node.js<i class="fa fa-external-link-alt"></i></span></strong> 的下半篇文章，或是參考官方的 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL0FXU0phdmFTY3JpcHRTREsvbGF0ZXN0L0FXUy9TMy5odG1sI2NyZWF0ZUJ1Y2tldC1wcm9wZXJ0eQ==">API Document<i class="fa fa-external-link-alt"></i></span></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>會有這篇文章的起因為筆者目前正在實踐開始寫程式兩年自己的目標計畫，完成前後端電商的 <strong>Side Project</strong>，但由於剛好親朋好友有個需求可以寫成 <strong>Side Project</strong> 就改成寫預約系統了，這次剛好有使用者上傳大頭貼的部分，就研究了一直聽同事在說的 <strong>S3</strong>(為什麼沒挑 <strong>GCP</strong> 呢，因為聽說 <strong>GCP</strong> 比較貴)。</p>
 <p>而同事也有跟我說其實放專案本機即可，但秉持著<strong>碰到就研究是最好的學習</strong>，所以就一頭栽進去啦，其實整個過程挺好玩的，並沒有想像中複雜。</p>
@@ -420,11 +420,11 @@
 <p><strong>揮別 2020 歡迎 2021。</strong></p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p>AWS - <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3Nkay1mb3ItamF2YXNjcmlwdC92Mi9kZXZlbG9wZXItZ3VpZGUvczMtZXhhbXBsZS1waG90by1hbGJ1bS5odG1s" title="https://docs.aws.amazon.com/zh_tw/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html">從瀏覽器上傳相片至 Amazon S3<i class="fa fa-external-link"></i></span></p>
+<li><p>AWS - <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmF3cy5hbWF6b24uY29tL3poX3R3L3Nkay1mb3ItamF2YXNjcmlwdC92Mi9kZXZlbG9wZXItZ3VpZGUvczMtZXhhbXBsZS1waG90by1hbGJ1bS5odG1s">從瀏覽器上傳相片至 Amazon S3<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9KYW5pdGhLYXN1bg==" title="https://twitter.com/JanithKasun">Janith Kasun<i class="fa fa-external-link"></i></span> — <span class="exturl" data-url="aHR0cHM6Ly9zdGFja2FidXNlLmNvbS91cGxvYWRpbmctZmlsZXMtdG8tYXdzLXMzLXdpdGgtbm9kZS1qcy8jY3JlYXRpbmdhbnMzYnVja2V0" title="https://stackabuse.com/uploading-files-to-aws-s3-with-node-js/#creatingans3bucket">Uploading Files to AWS S3 with Node.js<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9KYW5pdGhLYXN1bg==">Janith Kasun<i class="fa fa-external-link-alt"></i></span> — <span class="exturl" data-url="aHR0cHM6Ly9zdGFja2FidXNlLmNvbS91cGxvYWRpbmctZmlsZXMtdG8tYXdzLXMzLXdpdGgtbm9kZS1qcy8jY3JlYXRpbmdhbnMzYnVja2V0">Uploading Files to AWS S3 with Node.js<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p>Mike Huang — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVCQSVBNSVFNSU4NSU4QiVFNyU5QSU4NCVFNSU4RCU4QSVFOCVCNyVBRiVFNSU4NyVCQSVFNSVBRSVCNiVFNyVBRCU4NiVFOCVBOCU5OC8lRTclQUQlODYlRTglQTglOTgtJUU0JUJEJUJGJUU3JTk0JUE4LW11bHRlci0lRTUlQUYlQTYlRTQlQkQlOUMlRTUlQTQlQTclRTklQTAlQUQlRTglQjIlQkMlRTQlQjglOEElRTUlODIlQjMtZWU1YmYxNjgzMTEz" title="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E4%BD%BF%E7%94%A8-multer-%E5%AF%A6%E4%BD%9C%E5%A4%A7%E9%A0%AD%E8%B2%BC%E4%B8%8A%E5%82%B3-ee5bf1683113">[筆記] 使用 Multer 實作大頭貼上傳(Part 1)<i class="fa fa-external-link"></i></span></p>
+<li><p>Mike Huang — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVCQSVBNSVFNSU4NSU4QiVFNyU5QSU4NCVFNSU4RCU4QSVFOCVCNyVBRiVFNSU4NyVCQSVFNSVBRSVCNiVFNyVBRCU4NiVFOCVBOCU5OC8lRTclQUQlODYlRTglQTglOTgtJUU0JUJEJUJGJUU3JTk0JUE4LW11bHRlci0lRTUlQUYlQTYlRTQlQkQlOUMlRTUlQTQlQTclRTklQTAlQUQlRTglQjIlQkMlRTQlQjglOEElRTUlODIlQjMtZWU1YmYxNjgzMTEz">[筆記] 使用 Multer 實作大頭貼上傳(Part 1)<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 </ul>
 
@@ -568,7 +568,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -581,7 +581,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -631,12 +631,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

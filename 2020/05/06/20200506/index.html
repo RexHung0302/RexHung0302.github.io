@@ -324,7 +324,7 @@
 <p>開始前先提醒一下文章較長，您可以重頭開始看怎麼建立 <strong>Gulp</strong> 抑或是滑到下方選擇觀看 <strong><a href="#預告太長了">安裝後的Gulp筆記</a></strong> 或 <strong><a href="#關鍵懶人包目錄">關鍵懶人包目錄</a></strong>！！</p>
 <p>之前玩過 <strong>Webpack</strong> 時就一直聽過 <strong>Gulp</strong>，但是一直沒有去研究過，一直以為兩個是差不多性質的東西，應該一個就夠用了，但是藉由這次的六角切版直播班真的接觸到了 <strong>Gulp</strong>，我想是時候好好研究研究一番了。</p>
 <blockquote>
-<p><em>溫馨提醒：如果還沒看過 Webpack 或是您已經是 Webpack 高手，建議可以先參考看看我的前兩篇文章，如果您只是想研究 Gulp 其實只看本篇文章也沒關係，<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span> 及 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMS8yMDIwMDMyMS8=" title="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？<i class="fa fa-external-link"></i></span> 如果有歡念錯誤歡迎各路高手不吝社指教。</em></p>
+<p><em>溫馨提醒：如果還沒看過 Webpack 或是您已經是 Webpack 高手，建議可以先參考看看我的前兩篇文章，如果您只是想研究 Gulp 其實只看本篇文章也沒關係，<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span> 及 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMS8yMDIwMDMyMS8=">[Tool Notes] — 關於Webpack #2 - Babel？<i class="fa fa-external-link-alt"></i></span> 如果有歡念錯誤歡迎各路高手不吝社指教。</em></p>
 </blockquote>
 <blockquote>
 <p><em>地雷警告：由於 <strong>Gulp</strong> 自己也還不是很熟，本篇文章就是用來筆記加練習的，如果有觀念錯誤也歡迎各路高手不吝社指教。</em></p>
@@ -348,7 +348,7 @@
 <p><em>註1:就字面上的意思大概已經解釋了 87% 簡單說就是下個指令之後幫你執行一些不必重複做的工作，比方說 編譯、壓縮、命名或是開發時用一種寫法，上正式環境換一種寫法。</em></p>
 </blockquote>
 <h3 id="使用說明？"><a href="#使用說明？" class="headerlink" title="使用說明？"></a>使用說明？</h3><p><img src="/images/20200506/gulp_logo_gif.gif" alt="自動化建構工具"></p>
-<p>其實仔細看 <strong>Gulp</strong> 跟 <strong><span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy8=" title="https://webpack.js.org/">Webpack<i class="fa fa-external-link"></i></span></strong> 的官網介紹，會發現兩個非常像，但你實際使用，會發現 <strong>Gulp</strong> 更注重於 <strong>任務</strong> 的概念，而 <strong>Webpack</strong> 注重於 <strong>打包</strong> 及 <strong>效能</strong> 方面。</p>
+<p>其實仔細看 <strong>Gulp</strong> 跟 <strong><span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmpzLm9yZy8=">Webpack<i class="fa fa-external-link-alt"></i></span></strong> 的官網介紹，會發現兩個非常像，但你實際使用，會發現 <strong>Gulp</strong> 更注重於 <strong>任務</strong> 的概念，而 <strong>Webpack</strong> 注重於 <strong>打包</strong> 及 <strong>效能</strong> 方面。</p>
 <p>但其實兩種工具官方都有很詳盡的介紹，只要跟著走，基本都沒什麼問題！甚至最後你還能將兩者合併使用呢！</p>
 <p>但筆記不是寫心情日記，今天還是要認真的跑過一次流程，下面開始就會介紹怎麼把 <strong>Gulp</strong> 跑過一遍。</p>
 <hr>
@@ -357,7 +357,7 @@
 </blockquote>
 <p>首先您必須要先安裝 <strong>Node.js</strong> 之後才能使用 <strong>npm</strong>，這邊先不用搞懂他們在幹嘛，只要記得之後常常會碰到 <strong>node_module</strong> 而這裡面放滿你會用到的<strong>前端套件</strong>。</p>
 <p><img src="/images/20200506/node_logo.png" alt="NodeJS"></p>
-<p>安裝方法很簡單，可以到 <strong>Node.js</strong> 的官方網站下載安裝檔安裝，或是參考我的這篇文章安裝 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span> 裡面有提到 <strong>Node.js</strong> 怎麼安裝。</p>
+<p>安裝方法很簡單，可以到 <strong>Node.js</strong> 的官方網站下載安裝檔安裝，或是參考我的這篇文章安裝 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span> 裡面有提到 <strong>Node.js</strong> 怎麼安裝。</p>
 <blockquote>
 <p><em>安裝完成記得打開終端機輸入 <code>node --version</code> 如果安裝成功你會看到 <code>v版本號</code>，就是安裝成功了，記得也要輸入 <code>npm --version</code> 就能看到有沒有把 <strong>npm</strong> 安裝成功！</em></p>
 </blockquote>
@@ -411,21 +411,21 @@
 <p><em>順帶一提，最前方的 <code>const { series, parallel } = require(&#39;gulp&#39;);</code> 亦可寫為 <code>const gulp = require(&#39;gulp&#39;);</code> 然後在需要使用的地方加上 <code>gulp.series</code> 或 <code>gulp.parallel</code>，例如最後一句可改為 <code>exports.default = gulp.series(taskOne, gulp.parallel(taskTwo, taskThree))</code>，意思為使用 <strong>gulp 的 API</strong> <code>series</code> 及 <code>parallel</code>。</em></p>
 </blockquote>
 <blockquote>
-<p><em>除了前面寫的 cb() 當作結束任務外，任務還可以使用諸如 <code>promise</code>、<code>event emitter</code>、<code>child process</code>或<code>observable</code>…等等，詳細可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9hc3luYy1jb21wbGV0aW9uLw==" title="https://www.gulpjs.com.cn/docs/getting-started/async-completion/">官方指南<i class="fa fa-external-link"></i></span>，如果都不用就是必須向前面寫的，要有一個 <strong>callback</strong>(例：cb())。</em></p>
+<p><em>除了前面寫的 cb() 當作結束任務外，任務還可以使用諸如 <code>promise</code>、<code>event emitter</code>、<code>child process</code>或<code>observable</code>…等等，詳細可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9hc3luYy1jb21wbGV0aW9uLw==">官方指南<i class="fa fa-external-link-alt"></i></span>，如果都不用就是必須向前面寫的，要有一個 <strong>callback</strong>(例：cb())。</em></p>
 </blockquote>
 <h4 id="關鍵懶人包一"><a href="#關鍵懶人包一" class="headerlink" title="關鍵懶人包一"></a>關鍵懶人包一</h4><p><strong>上述例子做完你已經學會了基本的兩個API，<code>series</code> 及 <code>parallel</code>，只要記得要呼叫任務就是使用這兩個，前者為不同步呼叫，後者為同步呼叫！</strong></p>
 <h3 id="還有什麼全都拿出來！"><a href="#還有什麼全都拿出來！" class="headerlink" title="還有什麼全都拿出來！"></a>還有什麼全都拿出來！</h3><p>再學會前面兩個基本的 <strong>API</strong> 後，這邊開始我們要學另外<strong>兩個</strong>基本的 <strong>API</strong>；想要 <strong>自動化建構</strong> 我們最基本需要的事情就是 <strong>操作檔案</strong>。</p>
 <blockquote>
-<p><em>為什麼 <strong>Gulp</strong> 的 <strong>API</strong> 可以操作檔案呢？因為他接受 <strong>glob</strong> 參數，詳細的介紹可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9leHBsYWluaW5nLWdsb2JzLw==" title="https://www.gulpjs.com.cn/docs/getting-started/explaining-globs/">此處<i class="fa fa-external-link"></i></span>。</em></p>
+<p><em>為什麼 <strong>Gulp</strong> 的 <strong>API</strong> 可以操作檔案呢？因為他接受 <strong>glob</strong> 參數，詳細的介紹可參考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC9leHBsYWluaW5nLWdsb2JzLw==">此處<i class="fa fa-external-link-alt"></i></span>。</em></p>
 </blockquote>
 <p>首先我們要記得第一個 <strong>API</strong> 為 <strong>src()</strong>，意思就是從哪個路徑讀取檔案，使用方式和前方一樣，先引入 <code>const gulp = require(&#39;gulp&#39;);</code>，然後呼叫 <code>gulp.src(&#39;./檔案路徑&#39;)</code>，或是在最前方改為 <code>const { src } = require(&#39;gulp&#39;);</code>，然後使用 <code>src(&#39;./檔案路徑&#39;)</code>。</p>
-<p>按照官網的說法，取得檔案後會生成一個 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong>，意思是蝦咪呢？<del>Steam 我還理解(誤)</del></p>
-<p>翻了網上的解釋，它是一種數據處理的方法，從輸入到輸出，可以稱為一個流，他並不是像傳統的讀寫文件，一次一個，而是隨讀取的數據多寡，處理其內容，而在大數據之中就非常強大，例如檔案可能超過你的空間容量，不可能將整個文件塞進你的空間在讀取，而這時後 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong> 就發揮作用了。</p>
+<p>按照官網的說法，取得檔案後會生成一個 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong>，意思是蝦咪呢？<del>Steam 我還理解(誤)</del></p>
+<p>翻了網上的解釋，它是一種數據處理的方法，從輸入到輸出，可以稱為一個流，他並不是像傳統的讀寫文件，一次一個，而是隨讀取的數據多寡，處理其內容，而在大數據之中就非常強大，例如檔案可能超過你的空間容量，不可能將整個文件塞進你的空間在讀取，而這時後 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong> 就發揮作用了。</p>
 <p><img src="/images/20200506/stream_example.png" alt="流的抽象概念"></p>
 <blockquote>
 <p><em>抱歉我實在是找不到圖片，如果比喻有誤還請手下留情。</em></p>
 </blockquote>
-<p>而 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong> 分為四種流：</p>
+<p>而 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong> 分為四種流：</p>
 <h4 id="清流？流派？"><a href="#清流？流派？" class="headerlink" title="清流？流派？"></a>清流？流派？</h4><p>流大致可分為四種類型：</p>
 <ol>
 <li><p>Writable - 可寫入的流</p>
@@ -438,10 +438,10 @@
 </li>
 </ol>
 <blockquote>
-<p><em>上面貼這麼多流得介紹網站如果你英文不好可以參考這邊 <span class="exturl" data-url="aHR0cDovL25vZGVqcy5jbi9hcGkvc3RyZWFtLmh0bWw=" title="http://nodejs.cn/api/stream.html">中文流<i class="fa fa-external-link"></i></span>。</em></p>
+<p><em>上面貼這麼多流得介紹網站如果你英文不好可以參考這邊 <span class="exturl" data-url="aHR0cDovL25vZGVqcy5jbi9hcGkvc3RyZWFtLmh0bWw=">中文流<i class="fa fa-external-link-alt"></i></span>。</em></p>
 </blockquote>
-<h4 id="繼續開車"><a href="#繼續開車" class="headerlink" title="繼續開車"></a>繼續開車</h4><p>接著繼續學習我們的 <strong>Gulp API</strong>，簡單理解下，從我們發起讀取檔案 <code>gulp.src(&#39;./檔案路徑&#39;)</code> 後，這時候就會產生 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong> 而這時候我們就可以在這之間去對 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong> 做動作。</p>
-<p>然而怎麼做動作可以依靠 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==" title="https://nodejs.org/api/stream.html">Node流(stream)<i class="fa fa-external-link"></i></span></strong> 提供的方法 <code>.pipe()</code>，適用於 <strong>轉換流(Transform streams)</strong> 或是 <strong>寫流(Writable streams)</strong>，透過 <code>.pipe()</code> 我們可以把想做的事情透過方法寫在 <code>.pipe()</code> 內，比如 <code>.pipe(babel())</code>。</p>
+<h4 id="繼續開車"><a href="#繼續開車" class="headerlink" title="繼續開車"></a>繼續開車</h4><p>接著繼續學習我們的 <strong>Gulp API</strong>，簡單理解下，從我們發起讀取檔案 <code>gulp.src(&#39;./檔案路徑&#39;)</code> 後，這時候就會產生 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong> 而這時候我們就可以在這之間去對 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong> 做動作。</p>
+<p>然而怎麼做動作可以依靠 <strong><span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2FwaS9zdHJlYW0uaHRtbA==">Node流(stream)<i class="fa fa-external-link-alt"></i></span></strong> 提供的方法 <code>.pipe()</code>，適用於 <strong>轉換流(Transform streams)</strong> 或是 <strong>寫流(Writable streams)</strong>，透過 <code>.pipe()</code> 我們可以把想做的事情透過方法寫在 <code>.pipe()</code> 內，比如 <code>.pipe(babel())</code>。</p>
 <p>這邊就會學到我們接下來第二個基本的 <strong>API</strong>，<strong>dest()</strong>。</p>
 <p>如果不想理解上方這麼多細節的話，請先在專案底下創建 <strong>app</strong> 資料夾，裡面在創建一個 <strong>assets</strong> 資料夾，最後再放入 <strong>js</strong> 資料夾，然後創建兩個 <strong>.js</strong> 在裡面，這邊範例一個名稱為 <strong>main.js</strong> 另一個為 <strong>second.js</strong>，接著在 核心檔案 <strong>gulpfile.js</strong> 內輸入以下程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 來源, 目的地</span></span><br><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">js</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> src(<span class="string">'./app/assets/js/*.js'</span>)  <span class="comment">// 讀取資料夾 ./app/assets/js 底下的所有 .js 檔案</span></span><br><span class="line">    .pipe(dest(<span class="string">'./dist'</span>)) <span class="comment">// 輸出所有被讀取的 .js 檔案</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.default = js</span><br></pre></td></tr></table></figure>
@@ -476,7 +476,7 @@
 <p><strong>Gulp 範例傳送門 =&gt; <a href="https://github.com/RexHung0302/GulpPractice">點我</a></strong></p>
 </blockquote>
 <hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實以前已經想研究 <strong>Gulp</strong> 很久了，這次會接觸也是因為<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=" title="https://www.hexschool.com/courses/web-layout-training-1st.html">六角切版直播班<i class="fa fa-external-link"></i></span>，但因為是切版為主，課程沒有太在 <strong>Gulp</strong> 著墨，但我想工程師的本質都是想追根究底的，碰到東西還是會想研究學習一番，畢竟之後開始處理問題總不能一直拿老師的範例吧。</p>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實以前已經想研究 <strong>Gulp</strong> 很久了，這次會接觸也是因為<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=">六角切版直播班<i class="fa fa-external-link-alt"></i></span>，但因為是切版為主，課程沒有太在 <strong>Gulp</strong> 著墨，但我想工程師的本質都是想追根究底的，碰到東西還是會想研究學習一番，畢竟之後開始處理問題總不能一直拿老師的範例吧。</p>
 <p>這次為 <strong>Gulp</strong> 初體驗，我想還有許多改進空間，像是之後還會再考慮如何把 <strong>Webpack</strong> 融入進 <strong>Gulp</strong>，而我想後者的學習門檻似乎比前者還要低一點，恰巧最近碰到需要把前端規劃出一個有效且快速的部署環境，我想 <strong>Gulp</strong> 應該會很適合我。</p>
 <p>這邊有機會在寫下一篇 <strong>Gulp</strong> 了，感謝各路大神的觀看，如果有錯還請各路大神不吝社指教，在此小弟先謝過了！</p>
 <blockquote>
@@ -484,14 +484,14 @@
 </blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>Gulp 官網 — <span class="exturl" data-url="aHR0cHM6Ly9ndWxwanMuY29tLw==" title="https://gulpjs.com/">Gulp EN<i class="fa fa-external-link"></i></span></li>
-<li>Gulp 中文官網 — <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC93b3JraW5nLXdpdGgtZmlsZXMv" title="https://www.gulpjs.com.cn/docs/getting-started/working-with-files/">Gulp CH<i class="fa fa-external-link"></i></span></li>
-<li>鐵人邦 ayugioh2003 大大 — <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNzU5NQ==" title="https://ithelp.ithome.com.tw/articles/10217595">[試著把切版專案升級到 gulp4.0 吧] Day03 Gulp4 環境配置<i class="fa fa-external-link"></i></span></li>
-<li>Roya’s Blog — <span class="exturl" data-url="aHR0cHM6Ly9hd2RyNzQxMDAuZ2l0aHViLmlvLzIwMjAtMDEtMDgtZ3VscC1ndWxwYmFiZWwv" title="https://awdr74100.github.io/2020-01-08-gulp-gulpbabel/">Gulp 前端自動化 - 使用 Babel 編譯 ES6<i class="fa fa-external-link"></i></span></li>
-<li>Ray Blog — <span class="exturl" data-url="aHR0cHM6Ly9oc2lhbmdmZW5nLmdpdGh1Yi5pby90YWdzLyVFOSU4MCU5OSVFNiU5OCVBRiVFNSU5QyVBOCVFOCVBQyU5Qi1HdWxwLSVFNCVCOCU4RCVFNiU5OCVBRiVFOSVBMyVCMiVFNiU5NiU5OSVFNiU5OCVBRiVFNCVCQiVCQiVFNSU4QiU5OSVFOCU4NyVBQSVFNSU4QiU5NSVFNSU4QyU5NiVFNSVCNyVBNSVFNSU4NSVCNyVFOSU4MCU5OSVFNCVCQiVCNiVFNCVCQSU4Qi8=" title="https://hsiangfeng.github.io/tags/%E9%80%99%E6%98%AF%E5%9C%A8%E8%AC%9B-Gulp-%E4%B8%8D%E6%98%AF%E9%A3%B2%E6%96%99%E6%98%AF%E4%BB%BB%E5%8B%99%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E5%85%B7%E9%80%99%E4%BB%B6%E4%BA%8B/">這是在講 Gulp 不是飲料是任務自動化工具這件事<i class="fa fa-external-link"></i></span></li>
-<li>六角 — <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=" title="https://www.hexschool.com/courses/web-layout-training-1st.html">切版直播班<i class="fa fa-external-link"></i></span></li>
-<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span></li>
-<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMS8yMDIwMDMyMS8=" title="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？<i class="fa fa-external-link"></i></span></li>
+<li>Gulp 官網 — <span class="exturl" data-url="aHR0cHM6Ly9ndWxwanMuY29tLw==">Gulp EN<i class="fa fa-external-link-alt"></i></span></li>
+<li>Gulp 中文官網 — <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3VscGpzLmNvbS5jbi9kb2NzL2dldHRpbmctc3RhcnRlZC93b3JraW5nLXdpdGgtZmlsZXMv">Gulp CH<i class="fa fa-external-link-alt"></i></span></li>
+<li>鐵人邦 ayugioh2003 大大 — <span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIxNzU5NQ==">[試著把切版專案升級到 gulp4.0 吧] Day03 Gulp4 環境配置<i class="fa fa-external-link-alt"></i></span></li>
+<li>Roya’s Blog — <span class="exturl" data-url="aHR0cHM6Ly9hd2RyNzQxMDAuZ2l0aHViLmlvLzIwMjAtMDEtMDgtZ3VscC1ndWxwYmFiZWwv">Gulp 前端自動化 - 使用 Babel 編譯 ES6<i class="fa fa-external-link-alt"></i></span></li>
+<li>Ray Blog — <span class="exturl" data-url="aHR0cHM6Ly9oc2lhbmdmZW5nLmdpdGh1Yi5pby90YWdzLyVFOSU4MCU5OSVFNiU5OCVBRiVFNSU5QyVBOCVFOCVBQyU5Qi1HdWxwLSVFNCVCOCU4RCVFNiU5OCVBRiVFOSVBMyVCMiVFNiU5NiU5OSVFNiU5OCVBRiVFNCVCQiVCQiVFNSU4QiU5OSVFOCU4NyVBQSVFNSU4QiU5NSVFNSU4QyU5NiVFNSVCNyVBNSVFNSU4NSVCNyVFOSU4MCU5OSVFNCVCQiVCNiVFNCVCQSU4Qi8=">這是在講 Gulp 不是飲料是任務自動化工具這件事<i class="fa fa-external-link-alt"></i></span></li>
+<li>六角 — <span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=">切版直播班<i class="fa fa-external-link-alt"></i></span></li>
+<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span></li>
+<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMS8yMDIwMDMyMS8=">[Tool Notes] — 關於Webpack #2 - Babel？<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h3 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h3><p>這篇文其實實在 <strong>2020/05/05</strong> 晚上寫的，但 <strong>hexo</strong> 似乎無法用兩個一樣名字的 <strong>.md</strong> 所以只好把日期往後延一天了。</p>
@@ -637,7 +637,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -650,7 +650,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -700,12 +700,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

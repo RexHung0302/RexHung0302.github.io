@@ -306,18 +306,18 @@
 
       
         <p><img src="/images/20201013/todo_list_banner.png" alt="Todo List"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這一篇文章會快速介紹一下筆者在上 <strong><span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s" title="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰<i class="fa fa-external-link"></i></span></strong> 課程時，章節練習的小作業，透過 <strong>Nodejs</strong> 及 <strong>Firebase</strong> 寫一個菜鳥都必須要練習過的題目 <strong>Todo List</strong>。</p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這一篇文章會快速介紹一下筆者在上 <strong><span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s">六角學院 - NodeJS 前後端開發實戰<i class="fa fa-external-link-alt"></i></span></strong> 課程時，章節練習的小作業，透過 <strong>Nodejs</strong> 及 <strong>Firebase</strong> 寫一個菜鳥都必須要練習過的題目 <strong>Todo List</strong>。</p>
 <a id="more"></a>
 
 <p>本次 <strong>Nodejs</strong> 的 <strong>Template</strong> 使用為 <strong>PUG(Jade)</strong>。</p>
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/20201013/demo.gif" alt="Demo"></p>
-<p>有興趣跟筆者一起從後端窺探可以參考前幾篇文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=" title="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link"></i></span></strong> 及 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8jbW9yZQ==" title="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link"></i></span></strong>。</p>
+<p>有興趣跟筆者一起從後端窺探可以參考前幾篇文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOC8wNi8yMDIwMDgwNi8=">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手<i class="fa fa-external-link-alt"></i></span></strong> 及 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8jbW9yZQ==">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link-alt"></i></span></strong>。</p>
 <p>本次作業練習將會使用 <strong>Express</strong> 及 <strong>Firebase</strong> 實作。</p>
 <hr>
 <h3 id="整體規劃"><a href="#整體規劃" class="headerlink" title="整體規劃"></a>整體規劃</h3><p>其實這次作業是希望我們做形象官網，但想了一下還是想從待辦清單下手，也可以串接 <strong>Firebase</strong> 的登入驗證，不需要在自己寫一個會員系統。</p>
 <p>而這次路由也規劃拆成 <code>routes -&gt; controllers -&gt; models</code><strong>(MVC架構)</strong>，一方面好維護，一方面檔案也不會那麼亂，比較清爽。</p>
-<p>在前篇文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8jbW9yZQ==" title="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link"></i></span></strong> 有提到如何使用 <strong>Express</strong> 快速建立一個專案環境，但資料夾架構怎麼放就是看個人了，這邊筆者拆成自己比較容易理解且好處理的架構。</p>
+<p>在前篇文章 <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wOS8xNC8yMDIwMDkxNC8jbW9yZQ==">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談<i class="fa fa-external-link-alt"></i></span></strong> 有提到如何使用 <strong>Express</strong> 快速建立一個專案環境，但資料夾架構怎麼放就是看個人了，這邊筆者拆成自己比較容易理解且好處理的架構。</p>
 <p><img src="/images/20201013/framework.png" alt="大致架構"></p>
 <p>由上至下大概為：</p>
 <ol>
@@ -359,7 +359,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;- &#x2F;views&#x2F;editTask.pug 13行</span><br><span class="line">if error</span><br><span class="line">    each val,index in error</span><br><span class="line">        .alert.alert-danger.alert-dismissible.fade.show.animate__animated.animate__shakeX(</span><br><span class="line">            role&#x3D;&quot;alert&quot;</span><br><span class="line">        )</span><br><span class="line">            strong&#x3D; val.msg</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="關於驗證"><a href="#關於驗證" class="headerlink" title="關於驗證"></a>關於驗證</h3><h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>這邊使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzLXZhbGlkYXRvci5naXRodWIuaW8vZG9jcy8=" title="https://express-validator.github.io/docs/">express-validator-v6.6.1<i class="fa fa-external-link"></i></span></strong> 作為驗證，一般驗證我們不止透過前端驗證，後端也需要驗證，而這邊使用這個套件也提供了很簡單的驗證方式。</p>
+<h3 id="關於驗證"><a href="#關於驗證" class="headerlink" title="關於驗證"></a>關於驗證</h3><h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>這邊使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzLXZhbGlkYXRvci5naXRodWIuaW8vZG9jcy8=">express-validator-v6.6.1<i class="fa fa-external-link-alt"></i></span></strong> 作為驗證，一般驗證我們不止透過前端驗證，後端也需要驗證，而這邊使用這個套件也提供了很簡單的驗證方式。</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安裝套件</span></span><br><span class="line"><span class="symbol">$</span> npm install express-validator</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入套件 </span></span><br><span class="line"><span class="keyword">const</span> &#123; check, body, cookie, header, param  &#125; = <span class="built_in">require</span>(<span class="string">'express-validator'</span>)</span><br><span class="line"><span class="comment">// 更多引入方法可查看 https://express-validator.github.io/docs/check-api.html</span></span><br></pre></td></tr></table></figure>
@@ -408,15 +408,15 @@
 <hr>
 <h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
 <p>GitHub: <a href="https://github.com/RexHung0302/node-todos">傳送門</a></p>
-<p>Demo: <span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzLXRvZG9zLWxpc3QuaGVyb2t1YXBwLmNvbS91c2Vycy9sb2dpbg==" title="https://express-todos-list.herokuapp.com/users/login">傳送門<i class="fa fa-external-link"></i></span></p>
+<p>Demo: <span class="exturl" data-url="aHR0cHM6Ly9leHByZXNzLXRvZG9zLWxpc3QuaGVyb2t1YXBwLmNvbS91c2Vycy9sb2dpbg==">傳送門<i class="fa fa-external-link-alt"></i></span></p>
 <blockquote>
 <p><em>因為是使用 Heroku 免費方案，如果太久沒有人打開網頁，打開需要點時間喚醒，請見諒</em></p>
 </blockquote>
 <hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實沒有什麼技術成分在，但純分享一下自己小作業做出來的成果，我想還有許多需要改進，<strong><span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s" title="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰<i class="fa fa-external-link"></i></span></strong> 課程也還沒完成，這邊要在繼續惡補了！</p>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實沒有什麼技術成分在，但純分享一下自己小作業做出來的成果，我想還有許多需要改進，<strong><span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL25vZGVqcy5odG1s">六角學院 - NodeJS 前後端開發實戰<i class="fa fa-external-link-alt"></i></span></strong> 課程也還沒完成，這邊要在繼續惡補了！</p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVCQSVBNSVFNSU4NSU4QiVFNyU5QSU4NCVFNSU4RCU4QSVFOCVCNyVBRiVFNSU4NyVCQSVFNSVBRSVCNiVFNyVBRCU4NiVFOCVBOCU5OC8lRTclQUQlODYlRTglQTglOTgtJUU2JThBJThBJUU3JThFJUE5LWV4cHJlc3MtdmFsaWRhdG9yLSVFNSU5QyVBOCVFNCVCQyVCQSVFNiU5QyU4RCVFNSU5OSVBOCVFNyVBQiVBRiVFNSU4MSU5QSVFOCVBMSVBOCVFNSU5NiVBRSVFOSVBOSU5NyVFOCVBRCU4OS03OTczNDJhYWIyZDM=" title="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E6%8A%8A%E7%8E%A9-express-validator-%E5%9C%A8%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%AB%AF%E5%81%9A%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89-797342aab2d3">[筆記] 把玩 express-validator 在伺服器端做表單驗證<i class="fa fa-external-link"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLyVFOSVCQSVBNSVFNSU4NSU4QiVFNyU5QSU4NCVFNSU4RCU4QSVFOCVCNyVBRiVFNSU4NyVCQSVFNSVBRSVCNiVFNyVBRCU4NiVFOCVBOCU5OC8lRTclQUQlODYlRTglQTglOTgtJUU2JThBJThBJUU3JThFJUE5LWV4cHJlc3MtdmFsaWRhdG9yLSVFNSU5QyVBOCVFNCVCQyVCQSVFNiU5QyU4RCVFNSU5OSVBOCVFNyVBQiVBRiVFNSU4MSU5QSVFOCVBMSVBOCVFNSU5NiVBRSVFOSVBOSU5NyVFOCVBRCU4OS03OTczNDJhYWIyZDM=">[筆記] 把玩 express-validator 在伺服器端做表單驗證<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>
@@ -559,7 +559,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -572,7 +572,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -622,12 +622,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

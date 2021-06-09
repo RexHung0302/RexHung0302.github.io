@@ -326,7 +326,7 @@
 
       
         <p><img src="/images/20200913/GA_logo.png" alt="GA"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>前陣子拖工作專案之福，碰到了 <span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLyMv" title="https://analytics.google.com/analytics/web/#/">Google Analytics(以下簡稱GA)<i class="fa fa-external-link"></i></span>，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 <strong>GA</strong> 及 <strong>GTM</strong> 可以做什麼，及如何設定。</p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>前陣子拖工作專案之福，碰到了 <span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLyMv">Google Analytics(以下簡稱GA)<i class="fa fa-external-link-alt"></i></span>，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 <strong>GA</strong> 及 <strong>GTM</strong> 可以做什麼，及如何設定。</p>
 <a id="more"></a>
 
 <p>本篇將會使用 <strong>Vue Cli</strong> 來做示範，並且搭配 <a href="https://github.com/mib200/vue-gtm">vue-gtm</a> 使用，如果是普通的 <strong>HTML</strong> 也可以輕易上手，沒毛病！</p>
@@ -365,7 +365,7 @@
 <p><img src="/images/20200913/GTM_step2.png" alt="按照彈窗的指示"></p>
 <p>之後再按照本篇下方的 <strong>GA</strong> <a href="#事前準備">設定教學</a> 即可。</p>
 <hr>
-<h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wMy8yNi8yMDE5MDMyNS8=" title="https://rexhung0302.github.io/2019/03/26/20190325/">[Vue Notes] — Vue-Cli #1 初次見面<i class="fa fa-external-link"></i></span>。</p>
+<h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wMy8yNi8yMDE5MDMyNS8=">[Vue Notes] — Vue-Cli #1 初次見面<i class="fa fa-external-link-alt"></i></span>。</p>
 <blockquote>
 <p><em>由於當初有消息 <strong>Vue3</strong> 即將釋出，所以只寫了一篇就停止了，之後等 <strong>Vue3</strong> 正式釋出會再繼續研究。</em></p>
 </blockquote>
@@ -386,7 +386,7 @@
 <hr>
 <h3 id="開始設定"><a href="#開始設定" class="headerlink" title="開始設定"></a>開始設定</h3><p>大致了解運作流程後我們就開始設定吧，這邊我們先設定使用者瀏覽的事件，先到 <strong>GTM</strong> 左方的 <strong>觸發條件</strong>，新增一個 <strong>自訂事件</strong>，我們先取名為 <strong>click-event</strong>，並且選擇部分 <strong>自訂事件</strong>，要剛好 <strong>有事件發生且這些條件全都符合時，啟用這個觸發條件</strong>。</p>
 <p><img src="/images/20200913/click_event.png" alt="第一個自訂事件"></p>
-<p>接著先到 <strong>GA</strong> 去<span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLz9hdXRodXNlcj0wI3Byb3Zpc2lvbi9TaWduVXAv" title="https://analytics.google.com/analytics/web/?authuser=0#provision/SignUp/">申請<i class="fa fa-external-link"></i></span>一個分析，填完內容及同意事項後會出現 <strong>追蹤ID</strong> 保存下來！</p>
+<p>接著先到 <strong>GA</strong> 去<span class="exturl" data-url="aHR0cHM6Ly9hbmFseXRpY3MuZ29vZ2xlLmNvbS9hbmFseXRpY3Mvd2ViLz9hdXRodXNlcj0wI3Byb3Zpc2lvbi9TaWduVXAv">申請<i class="fa fa-external-link-alt"></i></span>一個分析，填完內容及同意事項後會出現 <strong>追蹤ID</strong> 保存下來！</p>
 <p><img src="/images/20200913/GA_apply.png" alt="建立新的GA"></p>
 <p><img src="/images/20200913/GA_info.png" alt="複製追蹤ID"></p>
 <p>然後到 <strong>GTM</strong> 左方的變數新增一個變數，變數類型選擇 <strong>Google Analytics(分析)設定</strong>，然後填上剛剛的追蹤編號，這樣就可以和 <strong>GA</strong> 連結了。</p>
@@ -409,7 +409,7 @@
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'App'</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      userID: <span class="string">'ABC-123456'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    sendGTMHandler() &#123;</span><br><span class="line">      <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">      vm.$gtm.trackEvent(&#123;</span><br><span class="line">        event: <span class="string">'click-event'</span>,</span><br><span class="line">        category: <span class="string">'點擊事件'</span>, <span class="comment">// 類別 字元(必填)</span></span><br><span class="line">        action: <span class="string">'click'</span>, <span class="comment">// 動作 字元(必填)</span></span><br><span class="line">        label: vm.userID, <span class="comment">// 標籤 字元(選填)</span></span><br><span class="line">        value: <span class="literal">null</span>, <span class="comment">// 標籤 數字(選填)</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>透過套件的使用方法發送為上方的方法，如果你是使用前面提到的彈窗的內容埋進程式碼裡面，可以使用下面的方法，詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vYW5hbHl0aWNzL2Rldmd1aWRlcy9jb2xsZWN0aW9uL2FuYWx5dGljc2pzL2V2ZW50cz9obD16aC1jbg==" title="https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=zh-cn">Google Analytics Document<i class="fa fa-external-link"></i></span>：</p>
+<p>透過套件的使用方法發送為上方的方法，如果你是使用前面提到的彈窗的內容埋進程式碼裡面，可以使用下面的方法，詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXJzLmdvb2dsZS5jb20vYW5hbHl0aWNzL2Rldmd1aWRlcy9jb2xsZWN0aW9uL2FuYWx5dGljc2pzL2V2ZW50cz9obD16aC1jbg==">Google Analytics Document<i class="fa fa-external-link-alt"></i></span>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//當使用者觸發 會發送 類別:導覽清單 ,動作:點擊 ,標籤:註冊會員 , 價值:200</span></span><br><span class="line">ga(<span class="string">'send'</span>, &#123;</span><br><span class="line">  hitType: <span class="string">'click-event'</span>,</span><br><span class="line">  eventCategory: <span class="string">'點擊事件'</span>, <span class="comment">// 類別 字元(必填)</span></span><br><span class="line">  eventAction: <span class="string">'click'</span>, <span class="comment">// 動作 字元(必填)</span></span><br><span class="line">  eventLabel: vm.userID <span class="comment">// 標籤 字元(選填)</span></span><br><span class="line">  eventValue: <span class="literal">null</span> <span class="comment">// 標籤 數字(選填)</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 簡化寫法</span></span><br><span class="line">ga(<span class="string">'send'</span>, <span class="string">'click-event'</span>, <span class="string">'點擊事件'</span>, <span class="string">'click'</span>, vm.userID);</span><br></pre></td></tr></table></figure>
 
 <p>之後去點擊看看你的按鈕吧，會發現 Debug 視窗出現一個新的事件，如果打開後你的事件出現在 <strong>Tags Fired</strong> 代表是成功的，如果是出現在 <strong>Tags Not Fired</strong> 代表是失敗的，點擊 <strong>Tags Fired</strong> 成功的事件進入後也會發現事件名稱旁邊會出現一個成功的小勾勾。</p>
@@ -430,13 +430,13 @@
 </blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbmJvdW5kbWFya2V0aW5nLmNvbS50dy93ZWJzaXRlcy1vcHRpbWl6YXRpb24vZ3RtJUU2JTk1JTk5JUU1JUFEJUI4LSVFNiU5NiVCMCVFNiU4OSU4QiVFOCVBNyU4MCVFNSVCRiVCNSVFNyVBRiU4Ny5odG1s" title="https://inboundmarketing.com.tw/websites-optimization/gtm%E6%95%99%E5%AD%B8-%E6%96%B0%E6%89%8B%E8%A7%80%E5%BF%B5%E7%AF%87.html">GTM教學-新手觀念篇，追蹤網站數據你只需Google Tag Manager代碼<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pbmJvdW5kbWFya2V0aW5nLmNvbS50dy93ZWJzaXRlcy1vcHRpbWl6YXRpb24vZ3RtJUU2JTk1JTk5JUU1JUFEJUI4LSVFNiU5NiVCMCVFNiU4OSU4QiVFOCVBNyU4MCVFNSVCRiVCNSVFNyVBRiU4Ny5odG1s">GTM教學-新手觀念篇，追蹤網站數據你只需Google Tag Manager代碼<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9pYW5kYXlzLmNvbS8yMDE4LzA0LzI1L2dhZXZlbnRzLw==" title="https://iandays.com/2018/04/25/gaevents/">Google analytics 事件追蹤、轉換目標設定教學 ga event<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pYW5kYXlzLmNvbS8yMDE4LzA0LzI1L2dhZXZlbnRzLw==">Google analytics 事件追蹤、轉換目標設定教學 ga event<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9zaGlhbi50dy9hcnRpY2xlLzU1" title="https://shian.tw/article/55">GA 帳號申請、GA設定、GA驗證，3個步驟一次說明<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9zaGlhbi50dy9hcnRpY2xlLzU1">GA 帳號申請、GA設定、GA驗證，3個步驟一次說明<i class="fa fa-external-link-alt"></i></span></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9nYS5hd29vLmNvbS50dy9kYXRhLWxheWVyLw==" title="https://ga.awoo.com.tw/data-layer/">資料層 Data Layer, 存放各種訪客、網頁行為數據的地方<i class="fa fa-external-link"></i></span></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9nYS5hd29vLmNvbS50dy9kYXRhLWxheWVyLw==">資料層 Data Layer, 存放各種訪客、網頁行為數據的地方<i class="fa fa-external-link-alt"></i></span></p>
 </li>
 <li><p><a href="https://github.com/mib200/vue-gtm">vue-gtm</a></p>
 </li>
@@ -587,7 +587,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -600,7 +600,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -650,12 +650,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>

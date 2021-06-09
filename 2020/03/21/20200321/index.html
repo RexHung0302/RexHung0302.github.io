@@ -318,30 +318,30 @@
 
       
         <p><img src="/images/20200321/babel_logo.png" alt="Webpack又來啦！"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 <strong>Laravel</strong> 底下，新專案是用 <strong>Vue Cli3</strong> 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4vYmFiZWwtcG9seWZpbGw=" title="https://babeljs.io/docs/en/babel-polyfill">babel/polyfill<i class="fa fa-external-link"></i></span> ，研究時 <strong>Vue Cli3</strong> 爆出一些警告訊息(內容就先不討論了)，這時候想到了前陣子摸過的 <strong>Webpack</strong>。</p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 <strong>Laravel</strong> 底下，新專案是用 <strong>Vue Cli3</strong> 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4vYmFiZWwtcG9seWZpbGw=">babel/polyfill<i class="fa fa-external-link-alt"></i></span> ，研究時 <strong>Vue Cli3</strong> 爆出一些警告訊息(內容就先不討論了)，這時候想到了前陣子摸過的 <strong>Webpack</strong>。</p>
 <p>相較於這次的專案，之前許多頁面都是單純<del>SPA</del>一頁式的網頁 ( <strong>HTML CSS JavaScript</strong> )，而且只有在手機上跑，不會到萬惡的 <strong>Bug Maker IE</strong> 跑，所以基本上不是非常舊的東西還是都支援。但最後還是碰到了有手機不能跑的問題，其實會發現這種不能跑的情況是從一個拿 <strong>Iphone6 IOS9</strong> 的同事身上開始…</p>
 <a id="more"></a>
 
 <blockquote>
-<p>溫馨提醒：強烈建議還沒看過 關於Webpack #1 的同學們去看看<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span></p>
+<p>溫馨提醒：強烈建議還沒看過 關於Webpack #1 的同學們去看看<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span></p>
 </blockquote>
 <p>因為發生了這種狀況，所以 <strong>JavaScript</strong> 能不用 (註1)<strong>ES6</strong> 就盡量避免，但其實在那時候就決定要再回來用 <strong>Webpack</strong> 了，無奈最近時程真的是被壓縮壓縮超級壓縮呀…(苦笑</p>
 <p><img src="/images/20200321/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
-<p>近期六角開了一堂特別的線上直播課程，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=" title="https://www.hexschool.com/courses/web-layout-training-1st.html">網頁切版直播班<i class="fa fa-external-link"></i></span>，因為覺得自己基本功不是很穩，近期切版時程太趕，希望自己能快速且精準又能寫出乾淨程式碼的情況下，就報名了，哎…<strong>出來寫前端，總是要還的，而且是別人說的倍數成長呀</strong>。</p>
+<p>近期六角開了一堂特別的線上直播課程，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS9jb3Vyc2VzL3dlYi1sYXlvdXQtdHJhaW5pbmctMXN0Lmh0bWw=">網頁切版直播班<i class="fa fa-external-link-alt"></i></span>，因為覺得自己基本功不是很穩，近期切版時程太趕，希望自己能快速且精準又能寫出乾淨程式碼的情況下，就報名了，哎…<strong>出來寫前端，總是要還的，而且是別人說的倍數成長呀</strong>。</p>
 <p>因為課程開始前有新手任務，剛好要切一個版，就打算拿那個版面來練習，不過這篇文章不會介紹怎麼切，而是要先介紹怎麼編譯 <strong>ES6 =&gt; ES5</strong> ，因為目前 <strong>ES5</strong> 的支援度還是比 <strong>ES6</strong> 高。</p>
 <blockquote>
 <p>謎之音：如果 ES5 也不支援怎麼辦呢？</p>
 <p>答：解決有 ES 看不到問題的人就@&amp;^<em>$&amp;)(#</em>@)…</p>
 </blockquote>
 <blockquote>
-<p><em>註1:  <strong>ES</strong> 為 <strong>ECMAScript</strong>，他制定了瀏覽器腳本語言的標準，而 <strong>JavaScript</strong> 算是 <strong>ECMAScript</strong> 最著名的實現。<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwOTgwOQ==" title="https://ithelp.ithome.com.tw/articles/10209809">詳情請點我<i class="fa fa-external-link"></i></span></em></p>
+<p><em>註1:  <strong>ES</strong> 為 <strong>ECMAScript</strong>，他制定了瀏覽器腳本語言的標準，而 <strong>JavaScript</strong> 算是 <strong>ECMAScript</strong> 最著名的實現。<span class="exturl" data-url="aHR0cHM6Ly9pdGhlbHAuaXRob21lLmNvbS50dy9hcnRpY2xlcy8xMDIwOTgwOQ==">詳情請點我<i class="fa fa-external-link-alt"></i></span></em></p>
 </blockquote>
 <hr>
 <h3 id="單刀直入"><a href="#單刀直入" class="headerlink" title="單刀直入"></a>單刀直入</h3><p>廢話說了很多，這邊我們繼續說！這篇主要會提到 <strong>Babel</strong>，這就是前言提到的，新的 <strong>ES6</strong> 如果舊手機舊瀏覽器吃不到怎麼辦？那你就必須透過加工廠(<strong>Babel</strong>)加工把東西弄的適合<del>過時</del>的東西吃。</p>
-<p>這邊假設 <strong>if</strong> ( 您已經看過 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span> ) <strong>else if</strong> ( 或已經具備基本的 <strong>Webpack</strong> 概念 ) ，<strong>else</strong> ( 請看看就好尊重友善包容手下留情感激不盡，這邊就不在介紹如何初始化一個 <strong>Webpack</strong> 專案 ) 。</p>
+<p>這邊假設 <strong>if</strong> ( 您已經看過 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span> ) <strong>else if</strong> ( 或已經具備基本的 <strong>Webpack</strong> 概念 ) ，<strong>else</strong> ( 請看看就好尊重友善包容手下留情感激不盡，這邊就不在介紹如何初始化一個 <strong>Webpack</strong> 專案 ) 。</p>
 <p>上一篇提過 <strong>module</strong> 及 <strong>plugins</strong> 在 <strong>webpack.config.js</strong> 裡的差別，前者是專們放 <strong>xxx-loader</strong> 的，後者顧名思義是專們放 <strong>plugins</strong>，沒錯，今天的主角 <strong>Babel</strong> 是要放在 <strong>module</strong> 裡的，有點像我們使用 <strong>pug</strong> 或是 <strong>scss</strong> 的預處理器，靠 <strong>loader</strong> 幫我們編譯成網頁看得懂的語言。</p>
 <hr>
-<h3 id="巴別塔？"><a href="#巴別塔？" class="headerlink" title="巴別塔？"></a>巴別塔？</h3><p>首先在 <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4v" title="https://babeljs.io/docs/en/">官方網站<i class="fa fa-external-link"></i></span> 會看見其實 Babel 底下還有很多 Plugins，我們需要幾項東西。</p>
+<h3 id="巴別塔？"><a href="#巴別塔？" class="headerlink" title="巴別塔？"></a>巴別塔？</h3><p>首先在 <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4v">官方網站<i class="fa fa-external-link-alt"></i></span> 會看見其實 Babel 底下還有很多 Plugins，我們需要幾項東西。</p>
 <ol>
 <li><p><strong>babel-loader</strong>       =&gt; 最基本的橋樑, 透過它來讀取在 <strong>Webpack</strong> 上 <strong>ES6</strong> 的語言</p>
 </li>
@@ -364,7 +364,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- ES6 Example</span></span><br><span class="line"><span class="keyword">const</span> habit = [<span class="string">"Write Code"</span>, <span class="string">"Watch Udemy"</span>, <span class="string">"DeBug"</span>, <span class="string">"Sleep"</span>];</span><br><span class="line"></span><br><span class="line">habit.forEach(</span><br><span class="line">  (item, index) =&gt; <span class="built_in">console</span>.log( <span class="string">`<span class="subst">$&#123;index&#125;</span> =&gt; <span class="subst">$&#123;item&#125;</span>`</span> )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p><img src="/images/20200321/example_code.png" alt="範例程式碼"></p>
-<p>這邊使用了 ES6 常見的幾個語法，包含 const、字串模板、箭頭函式…等等，有興趣可以詳見 <span class="exturl" data-url="aHR0cHM6Ly9lczYucnVhbnlpZmVuZy5jb20v" title="https://es6.ruanyifeng.com/">ES6 武功秘籍大全<i class="fa fa-external-link"></i></span>，語法糖真的香！</p>
+<p>這邊使用了 ES6 常見的幾個語法，包含 const、字串模板、箭頭函式…等等，有興趣可以詳見 <span class="exturl" data-url="aHR0cHM6Ly9lczYucnVhbnlpZmVuZy5jb20v">ES6 武功秘籍大全<i class="fa fa-external-link-alt"></i></span>，語法糖真的香！</p>
 <p><img src="/images/20200321/good.gif" alt="真甜真好吃"></p>
 <p>隨後輸入下面程式碼編譯：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="builtin-name">run</span> build:dev 或 npm <span class="builtin-name">run</span> build</span><br></pre></td></tr></table></figure>
@@ -393,19 +393,19 @@
 </blockquote>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>Babel 官網 — <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4v" title="https://babeljs.io/docs/en/">Babel<i class="fa fa-external-link"></i></span></li>
-<li>ES6 寶典 — <span class="exturl" data-url="aHR0cHM6Ly9lczYucnVhbnlpZmVuZy5jb20v" title="https://es6.ruanyifeng.com/">ESMAScript 6 入門<i class="fa fa-external-link"></i></span></li>
-<li>Mike 大大 — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2ktYW0tbWlrZS93ZWJwYWNrJUU2JTk1JTk5JUU1JUFEJUI4LSVFNSU5QiU5Qi1qYXZhc2NyaXB0LSVFOCU4OCU4Ny1iYWJlbC0xZDdhY2Q5MTFlNjM=" title="https://medium.com/i-am-mike/webpack%E6%95%99%E5%AD%B8-%E5%9B%9B-javascript-%E8%88%87-babel-1d7acd911e63">Webpack教學 (四)：JavaScript 與 Babel<i class="fa fa-external-link"></i></span></li>
-<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=" title="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link"></i></span></li>
-<li>Chris 技術筆記 — <span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTgvMDMtMDgtYmFiZWwtY2xpLw==" title="https://dwatow.github.io/2018/03-08-babel-cli/">Babel 第一次接觸<i class="fa fa-external-link"></i></span></li>
-<li>小蘑菇小哥 — <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzI0OTEyMQ==" title="https://zhuanlan.zhihu.com/p/43249121">一口（很长的）气了解 babel<i class="fa fa-external-link"></i></span></li>
-<li><del>在線梗圖</del> — <span class="exturl" data-url="aHR0cHM6Ly9zb3JyeS54dXR5LnRrL3dhbmdqaW5nemUv" title="https://sorry.xuty.tk/wangjingze/">愿你出走半生，归来仍是少年<i class="fa fa-external-link"></i></span></li>
+<li>Babel 官網 — <span class="exturl" data-url="aHR0cHM6Ly9iYWJlbGpzLmlvL2RvY3MvZW4v">Babel<i class="fa fa-external-link-alt"></i></span></li>
+<li>ES6 寶典 — <span class="exturl" data-url="aHR0cHM6Ly9lczYucnVhbnlpZmVuZy5jb20v">ESMAScript 6 入門<i class="fa fa-external-link-alt"></i></span></li>
+<li>Mike 大大 — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2ktYW0tbWlrZS93ZWJwYWNrJUU2JTk1JTk5JUU1JUFEJUI4LSVFNSU5QiU5Qi1qYXZhc2NyaXB0LSVFOCU4OCU4Ny1iYWJlbC0xZDdhY2Q5MTFlNjM=">Webpack教學 (四)：JavaScript 與 Babel<i class="fa fa-external-link-alt"></i></span></li>
+<li>Rex — <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack #1 - 第一次就上手<i class="fa fa-external-link-alt"></i></span></li>
+<li>Chris 技術筆記 — <span class="exturl" data-url="aHR0cHM6Ly9kd2F0b3cuZ2l0aHViLmlvLzIwMTgvMDMtMDgtYmFiZWwtY2xpLw==">Babel 第一次接觸<i class="fa fa-external-link-alt"></i></span></li>
+<li>小蘑菇小哥 — <span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC80MzI0OTEyMQ==">一口（很长的）气了解 babel<i class="fa fa-external-link-alt"></i></span></li>
+<li><del>在線梗圖</del> — <span class="exturl" data-url="aHR0cHM6Ly9zb3JyeS54dXR5LnRrL3dhbmdqaW5nemUv">愿你出走半生，归来仍是少年<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <hr>
 <h3 id="題外話"><a href="#題外話" class="headerlink" title="題外話"></a>題外話</h3><p>最近安裝 <strong>npm</strong> 套件突然一直出現下列錯誤：</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">No</span> receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.CLTools_Executables'</span> <span class="built_in">found</span> at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line"><span class="keyword">No</span> receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLILeo'</span> <span class="built_in">found</span> at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line"><span class="keyword">No</span> receipt <span class="keyword">for</span> <span class="string">'com.apple.pkg.DeveloperToolsCLI'</span> <span class="built_in">found</span> at <span class="string">'/'</span>.</span><br><span class="line"></span><br><span class="line">gyp: <span class="keyword">No</span> Xcode <span class="keyword">or</span> CLT <span class="keyword">version</span> detected!</span><br></pre></td></tr></table></figure>
 
-<p>上網爬<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZTNjYzNmY2U1MWQ0NTI3MGMyNzZmN2Y=" title="https://juejin.im/post/5e3cc3fce51d45270c276f7f">相關文章<i class="fa fa-external-link"></i></span>過後都說要輸入下面兩行指令：</p>
+<p>上網爬<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81ZTNjYzNmY2U1MWQ0NTI3MGMyNzZmN2Y=">相關文章<i class="fa fa-external-link-alt"></i></span>過後都說要輸入下面兩行指令：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf $(xcode-<span class="built_in">select</span> -<span class="built_in">print</span>-<span class="built_in">path</span>)</span><br><span class="line">$ xcode-<span class="built_in">select</span> <span class="comment">--install</span></span><br></pre></td></tr></table></figure>
 
 <p>但是好像沒有用，20點跪求大神解答…</p>
@@ -551,7 +551,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -564,7 +564,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -614,12 +614,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="總字數">284k</span>
+    <span title="總字數">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="所需總閱讀時間">4:18</span>
+    <span title="所需總閱讀時間">4:20</span>
 </div>
   <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
   </div>
