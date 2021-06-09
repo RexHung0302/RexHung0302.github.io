@@ -1,337 +1,36 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="Introduction &amp; 前言其實從接觸資訊相關工作開始至今一年又25天，也是自己的第一份程式語言工作，一直都沒有去參加過什麼大型的會議，再加上自己工作的內容跟 LINE 息息相關，一直覺得自己應該去參加個資訊相關活動，很開心的意外在2019年尾聲有幸參加了 LINE TAIWAN TECHPULSE 2019。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="LINE TAIWAN TECHPULSE 2019">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/index.html">
-<meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言其實從接觸資訊相關工作開始至今一年又25天，也是自己的第一份程式語言工作，一直都沒有去參加過什麼大型的會議，再加上自己工作的內容跟 LINE 息息相關，一直覺得自己應該去參加個資訊相關活動，很開心的意外在2019年尾聲有幸參加了 LINE TAIWAN TECHPULSE 2019。">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://github.com/images/20191204/LINE_TECHPULSE_2019.png">
-<meta property="og:image" content="https://github.com/images/20191204/LINE_outside_logo.png">
-<meta property="og:image" content="https://github.com/images/20191204/LINE_BeaconSeat.png">
-<meta property="og:image" content="https://github.com/images/20191204/go_share.png">
-<meta property="og:image" content="https://github.com/images/20191204/signIn.png">
-<meta property="og:image" content="https://github.com/images/20191204/speakImg_1.png">
-<meta property="og:image" content="https://github.com/images/20191204/LINE_Time_2018.png">
-<meta property="og:image" content="https://github.com/images/20191204/LIFF_V2.png">
-<meta property="og:image" content="https://github.com/images/20191204/LIFF_SupImg.jpeg">
-<meta property="og:image" content="https://github.com/images/20191204/LINE_Time_2018to2019.png">
-<meta property="og:image" content="https://github.com/images/20191204/JaewonLeeImg_01.png">
-<meta property="og:image" content="https://github.com/images/20191204/JaewonLeeImg_02.png">
-<meta property="og:image" content="https://github.com/images/20191204/BeistImg_01.png">
-<meta property="og:image" content="https://github.com/images/20191204/BeistImg_02.png">
-<meta property="og:image" content="https://github.com/images/20191204/JihongLeeImg_01.png">
-<meta property="og:image" content="https://github.com/images/20191204/JihongLeeImg_02.png">
-<meta property="og:image" content="https://github.com/images/20191204/Timeline_post_recommender.png">
-<meta property="og:image" content="https://github.com/images/20191204/Tournii_QRCode.png">
-<meta property="og:image" content="https://github.com/images/20191204/see_you.png">
-<meta property="og:image" content="https://github.com/images/20191204/finally.png">
-<meta property="article:published_time" content="2019-12-04T15:59:59.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:45:31.806Z">
-<meta property="article:author" content="RexHung">
-<meta property="article:tag" content="RexHung">
-<meta property="article:tag" content="CodeLife">
-<meta property="article:tag" content="LINE">
-<meta property="article:tag" content="Engineer">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/images/20191204/LINE_TECHPULSE_2019.png">
-
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>LINE TAIWAN TECHPULSE 2019 | RexHung's Blog</title>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>LINE TAIWAN TECHPULSE 2019 | RexHung's Blog</title><meta name="description" content="LINE TAIWAN TECHPULSE 2019"><meta name="keywords" content="Code,Other,Life,LINE,TECHPULSE"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="LINE TAIWAN TECHPULSE 2019"><meta name="twitter:description" content="LINE TAIWAN TECHPULSE 2019"><meta name="twitter:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta property="og:type" content="article"><meta property="og:title" content="LINE TAIWAN TECHPULSE 2019"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="LINE TAIWAN TECHPULSE 2019"><meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/"><link rel="next" title="[Tool Notes] — 關於爬蟲#2" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支持'
+  },
+  bookmark: {
+    title: '添加書籤',
+    message_prev: '按',
+    message_next: '鍵將本頁加入書籤'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">RexHung's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
-
-  </li>
-        <li class="menu-item menu-item-link">
-
-    <a href="/link/" rel="section"><i class="fa fa-link fa-fw"></i>link</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile/profile_2.png">
-      <meta itemprop="name" content="RexHung">
-      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RexHung's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          LINE TAIWAN TECHPULSE 2019
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2019-12-04 23:59:59" itemprop="dateCreated datePublished" datetime="2019-12-04T23:59:59+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-09 14:45:31" itemprop="dateModified" datetime="2021-06-09T14:45:31+08:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/LINE/" itemprop="url" rel="index"><span itemprop="name">LINE</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/12/04/20191204/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/04/20191204/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>4 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>其實從接觸資訊相關工作開始至今一年又25天，也是自己的第一份程式語言工作，一直都沒有去參加過什麼大型的會議，再加上自己工作的內容跟 <strong>LINE</strong> 息息相關，一直覺得自己應該去參加個資訊相關活動，很開心的意外在2019年尾聲有幸參加了 <strong>LINE TAIWAN TECHPULSE 2019</strong>。</p>
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#本次重點"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">本次重點</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#報到"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">報到</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#活動開始"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">活動開始</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#上半場"><span class="toc_mobile_items-number">1.3.1.</span> <span class="toc_mobile_items-text">上半場</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-5"><a class="toc_mobile_items-link" href="#第一位-LINE台灣資深技術總監-陳鴻嘉"><span class="toc_mobile_items-number">1.3.1.1.</span> <span class="toc_mobile_items-text">第一位(LINE台灣資深技術總監 - 陳鴻嘉)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-5"><a class="toc_mobile_items-link" href="#第二位-LINE台灣董事總經理-陳立人"><span class="toc_mobile_items-number">1.3.1.2.</span> <span class="toc_mobile_items-text">第二位(LINE台灣董事總經理 - 陳立人)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-5"><a class="toc_mobile_items-link" href="#第三位-LINE-技術專家-技術傳教士-Evan-Lin"><span class="toc_mobile_items-number">1.3.1.3.</span> <span class="toc_mobile_items-text">第三位(LINE 技術專家&#x2F;技術傳教士 - Evan Lin)</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#第四位-Clova-Chatbot-AutoML-專家-Jaewon-Lee-及-LINE台灣資深資料工程師-Penny-Sun"><span class="toc_mobile_items-number">1.3.2.</span> <span class="toc_mobile_items-text">第四位(Clova Chatbot AutoML 專家 - Jaewon Lee 及 LINE台灣資深資料工程師 - Penny Sun)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#第五位-國際頂尖白帽駭客-李丞鎮-Beist"><span class="toc_mobile_items-number">1.3.3.</span> <span class="toc_mobile_items-text">第五位(國際頂尖白帽駭客 - 李丞鎮(Beist))</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#第六位-Timeline-Post-Recommender-System-Jihong-Lee"><span class="toc_mobile_items-number">1.3.4.</span> <span class="toc_mobile_items-text">第六位(Timeline Post Recommender System - Jihong Lee)</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#下半場"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">下半場</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#LINE-PAY"><span class="toc_mobile_items-number">1.4.1.</span> <span class="toc_mobile_items-text">LINE PAY</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#LINE-SPOT"><span class="toc_mobile_items-number">1.4.2.</span> <span class="toc_mobile_items-text">LINE SPOT</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Fact-Checker"><span class="toc_mobile_items-number">1.4.3.</span> <span class="toc_mobile_items-text">Fact Checker</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Other"><span class="toc_mobile_items-number">1.4.4.</span> <span class="toc_mobile_items-text">Other</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">1.</span> <span class="toc-text">Introduction &amp; 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本次重點"><span class="toc-number">1.1.</span> <span class="toc-text">本次重點</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#報到"><span class="toc-number">1.2.</span> <span class="toc-text">報到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#活動開始"><span class="toc-number">1.3.</span> <span class="toc-text">活動開始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上半場"><span class="toc-number">1.3.1.</span> <span class="toc-text">上半場</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#第一位-LINE台灣資深技術總監-陳鴻嘉"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">第一位(LINE台灣資深技術總監 - 陳鴻嘉)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第二位-LINE台灣董事總經理-陳立人"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">第二位(LINE台灣董事總經理 - 陳立人)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#第三位-LINE-技術專家-技術傳教士-Evan-Lin"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">第三位(LINE 技術專家&#x2F;技術傳教士 - Evan Lin)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四位-Clova-Chatbot-AutoML-專家-Jaewon-Lee-及-LINE台灣資深資料工程師-Penny-Sun"><span class="toc-number">1.3.2.</span> <span class="toc-text">第四位(Clova Chatbot AutoML 專家 - Jaewon Lee 及 LINE台灣資深資料工程師 - Penny Sun)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第五位-國際頂尖白帽駭客-李丞鎮-Beist"><span class="toc-number">1.3.3.</span> <span class="toc-text">第五位(國際頂尖白帽駭客 - 李丞鎮(Beist))</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第六位-Timeline-Post-Recommender-System-Jihong-Lee"><span class="toc-number">1.3.4.</span> <span class="toc-text">第六位(Timeline Post Recommender System - Jihong Lee)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下半場"><span class="toc-number">1.4.</span> <span class="toc-text">下半場</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LINE-PAY"><span class="toc-number">1.4.1.</span> <span class="toc-text">LINE PAY</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LINE-SPOT"><span class="toc-number">1.4.2.</span> <span class="toc-text">LINE SPOT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Fact-Checker"><span class="toc-number">1.4.3.</span> <span class="toc-text">Fact Checker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Other"><span class="toc-number">1.4.4.</span> <span class="toc-text">Other</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">2.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考網站"><span class="toc-number">3.</span> <span class="toc-text">參考網站</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(LINE_outside_logo.png)"><div id="post-info"><div id="post-title"><div class="posttitle">LINE TAIWAN TECHPULSE 2019</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-12-04<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/">Note</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/LINE/">LINE</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">2.6k</span><span class="post-meta__separator">|</span><span>閲讀時長: 8 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>其實從接觸資訊相關工作開始至今一年又25天，也是自己的第一份程式語言工作，一直都沒有去參加過什麼大型的會議，再加上自己工作的內容跟 <strong>LINE</strong> 息息相關，一直覺得自己應該去參加個資訊相關活動，很開心的意外在2019年尾聲有幸參加了 <strong>LINE TAIWAN TECHPULSE 2019</strong>。</p>
 <a id="more"></a>
 
 <p>這次的開發者大會是第四屆，並且首次移動到了 <strong>臺北和平籃球館</strong>，聽說規模是去年的兩倍，將近千人到場參與，因為這是我第一次參加，就不會去比較今年有多好還是多壞了。</p>
-<p><img src="/images/20191204/LINE_TECHPULSE_2019.png" alt="LINE TAIWAN TECHPULSE 2019"></p>
+<p><img alt="LINE TAIWAN TECHPULSE 2019" data-src="/images/20191204/LINE_TECHPULSE_2019.png" class="lozad"></p>
 <blockquote>
 <p><em>嚴重提醒：本篇也是以筆記及心得為主的文章，如果內容有誤，敬請不吝社指出也請多多海涵，感謝各路大神！另外圖片會有模糊問題因為當天臨時靠手機拍攝，離得也較遠，還請各位大神見諒。</em></p>
 </blockquote>
 <hr>
-<h3 id="本次重點"><a href="#本次重點" class="headerlink" title="本次重點"></a>本次重點</h3><p><img src="/images/20191204/LINE_outside_logo.png" alt="門外的看板"></p>
+<h3 id="本次重點"><a href="#本次重點" class="headerlink" title="本次重點"></a>本次重點</h3><p><img alt="門外的看板" data-src="/images/20191204/LINE_outside_logo.png" class="lozad"></p>
 <p>今天的主題其實一直圍繞著最近很火紅的 <strong>AI人工智慧</strong>，並且延伸至 <strong>數據分析及使用</strong>、<strong>資安</strong>、<strong>公司開發規劃</strong> 及 <strong>工商時間</strong>…等等。</p>
 <p>與以往一樣分別為 <strong>上半場</strong> 及 <strong>下半場</strong>，上半場為 <strong>LINE台灣公司員工</strong> 介紹 <strong>公司目前近況</strong> 及 <strong>未來目標</strong>，還有 <strong>Clova Chatbot AutoML 專家</strong> - <strong>李在元</strong>(<strong>Jaewon Lee</strong>) 及 補充說明的 <strong>LINE台灣資深資料工程師</strong> - <strong>孫韻如</strong>(<strong>Penny Sun</strong>)，及 <strong>國際頂尖白帽駭客</strong> - <strong>李丞鎮</strong>(<strong>Beist</strong>)，最後還有 <strong>LINE貼文串推薦系統</strong>(<strong>Timeline Post Recommender System</strong>) - <strong>李知洪</strong>(<strong>Jihong Lee</strong>)…等等，下午多為開發應用示範及 <strong>LINE</strong> 內部員工介紹各項功能還有預期要上線的功能。</p>
 <p>-&gt; 簡單給個重點：</p>
@@ -345,19 +44,19 @@
 <li><p><strong>LINE 預期願景</strong></p>
 </li>
 </ol>
-<p><img src="/images/20191204/LINE_BeaconSeat.png" alt="這次座位表是用 Beacon 推播的 酷"></p>
+<p><img alt="這次座位表是用 Beacon 推播的 酷" data-src="/images/20191204/LINE_BeaconSeat.png" class="lozad"></p>
 <hr>
 <h3 id="報到"><a href="#報到" class="headerlink" title="報到"></a>報到</h3><p>順帶一提這次到會場騎乘的是 <strong>GOShare</strong> 的 <strong>GOGORO</strong>，不得不說方便是很方便，但是發動了很久，原來不管是 <strong>側柱</strong>、<strong>中柱</strong> 甚至 <strong>車廂</strong> 只要一個沒關好沒收好就不能發動。</p>
-<p><img src="/images/20191204/go_share.png" alt="人品還大爆發 拿到壞掉的安全帽"></p>
+<p><img alt="人品還大爆發 拿到壞掉的安全帽" data-src="/images/20191204/go_share.png" class="lozad"></p>
 <p>到會場會給先發一則座位的訊息，接著再到報到區，他們會給你對應顏色手環。</p>
-<p><img src="/images/20191204/signIn.png" alt="報到處 紅圈為辨別位置用"></p>
+<p><img alt="報到處 紅圈為辨別位置用" data-src="/images/20191204/signIn.png" class="lozad"></p>
 <hr>
 <h3 id="活動開始"><a href="#活動開始" class="headerlink" title="活動開始"></a>活動開始</h3><h4 id="上半場"><a href="#上半場" class="headerlink" title="上半場"></a>上半場</h4><h5 id="第一位-LINE台灣資深技術總監-陳鴻嘉"><a href="#第一位-LINE台灣資深技術總監-陳鴻嘉" class="headerlink" title="第一位(LINE台灣資深技術總監 - 陳鴻嘉)"></a>第一位(LINE台灣資深技術總監 - 陳鴻嘉)</h5><blockquote>
 <p>從全球與地區的兩種角度，了解 LINE 的技術策略布局；了解 LINE TW 的工程團隊如何與總部及其他國家團隊分工合作，並培養自我職能，貢獻價值。</p>
 </blockquote>
 <p>主要提 <strong>八大人工智慧的應用領域</strong>(Speed, NLU, Voice, Data, Video, Face, OCR, Vision)</p>
 <p>2020目標繼續朝 <strong>人工AI</strong> 發展，<strong>LINE Brain</strong>。</p>
-<p><img src="/images/20191204/speakImg_1.png" alt="八大人工智慧的應用領域"></p>
+<p><img alt="八大人工智慧的應用領域" data-src="/images/20191204/speakImg_1.png" class="lozad"></p>
 <hr>
 <h5 id="第二位-LINE台灣董事總經理-陳立人"><a href="#第二位-LINE台灣董事總經理-陳立人" class="headerlink" title="第二位(LINE台灣董事總經理 - 陳立人)"></a>第二位(LINE台灣董事總經理 - 陳立人)</h5><p>講者一開始就提到 <strong>Life of LINE</strong>，並且深深地提醒了使用者，你的日常生活都與 <strong>LINE</strong> 息息相關，所以他們希望能將使用者的生活上每一個細節都與 <strong>LINE</strong> 串接起來。</p>
 <p>講者接著提到將會透過兩大策略來優化使用者體驗：</p>
@@ -377,7 +76,7 @@
 <h5 id="第三位-LINE-技術專家-技術傳教士-Evan-Lin"><a href="#第三位-LINE-技術專家-技術傳教士-Evan-Lin" class="headerlink" title="第三位(LINE 技術專家/技術傳教士 - Evan Lin)"></a>第三位(LINE 技術專家/技術傳教士 - Evan Lin)</h5><blockquote>
 <p>Clova Chatbot Builder 是一項 AI 服務，讓使用者建立自己業務領域的聊天機器人，透過深度學習與自然語言處理技術建構智能對話。本議程將介紹 Clova Chatbot Builder 架構的 pipeline、如何處理對話情境資料，以及串接 LINE 平台。此外，也將展示 Chatbot Builder 的主要功能與應用案例。</p>
 </blockquote>
-<p><img src="/images/20191204/LINE_Time_2018.png" alt="2018年 LINE 的整年預覽"></p>
+<p><img alt="2018年 LINE 的整年預覽" data-src="/images/20191204/LINE_Time_2018.png" class="lozad"></p>
 <p>講者一開始就提到去年的整年度表現 及 新的一年的時程，關於目前及未來的展望：</p>
 <ol>
 <li><p>UX/DX</p>
@@ -390,8 +89,8 @@
 </li>
 </ol>
 <p>隨後也提到了 <strong>LIFF V2</strong> 可以在手機以外的網頁上開啟並且做一些 <strong>API</strong> 的串接，以往的 <strong>LIFF</strong> 是以 <strong>LINE</strong> 開頭的，<strong>V2</strong> 改為 <strong>https</strong> 開頭。</p>
-<p><img src="/images/20191204/LIFF_V2.png" alt="LIFF V2"></p>
-<p><img src="/images/20191204/LIFF_SupImg.jpeg" alt="支援 Browsers"></p>
+<p><img alt="LIFF V2" data-src="/images/20191204/LIFF_V2.png" class="lozad"></p>
+<p><img alt="支援 Browsers" data-src="/images/20191204/LIFF_SupImg.jpeg" class="lozad"></p>
 <p>結論：更好的使用者提現 及 開發者體驗，Flex Message V2 不用再面對 JSON，Rich menu Batch API。</p>
 <p>AI ChatBox：</p>
 <ol>
@@ -402,34 +101,34 @@
 <li><p>Chit-chat</p>
 </li>
 </ol>
-<p><img src="/images/20191204/LINE_Time_2018to2019.png" alt="2018至2019的總結"></p>
+<p><img alt="2018至2019的總結" data-src="/images/20191204/LINE_Time_2018to2019.png" class="lozad"></p>
 <hr>
 <h4 id="第四位-Clova-Chatbot-AutoML-專家-Jaewon-Lee-及-LINE台灣資深資料工程師-Penny-Sun"><a href="#第四位-Clova-Chatbot-AutoML-專家-Jaewon-Lee-及-LINE台灣資深資料工程師-Penny-Sun" class="headerlink" title="第四位(Clova Chatbot AutoML 專家 - Jaewon Lee 及 LINE台灣資深資料工程師 - Penny Sun)"></a>第四位(Clova Chatbot AutoML 專家 - Jaewon Lee 及 LINE台灣資深資料工程師 - Penny Sun)</h4><p>應該是算第四組上場的是來自韓國的 <strong>Clova Chatbot AutoML</strong> 專家 - <strong>李在元</strong>(<strong>Jaewon Lee</strong>)，隨後還有 <strong>LINE台灣資深資料工程師</strong> - <strong>孫韻如</strong>(<strong>Penny Sun</strong>)。</p>
-<p><img src="/images/20191204/JaewonLeeImg_01.png" alt="李在元 - Jaewon Lee"></p>
+<p><img alt="李在元 - Jaewon Lee" data-src="/images/20191204/JaewonLeeImg_01.png" class="lozad"></p>
 <p>開場是以 <strong>Chatbot</strong> 為開頭，其中最主要的主菜當然是 <strong>Clova Chatbot Builder</strong>，其中提到了當未來企業要製作一個 <strong>AI</strong> 聊天機器人，甚至要開發一個內容管理系統，建立一個介面，讓使用者輸入問題並且不是關鍵字式回覆，這些 <strong>Clova Chatbot Builder</strong> 都幫你做好了，未來也會靠你的客群們來搜集訓練材料，並且慢慢成長為更精準更到位的 <strong>AI Chatbot</strong>。</p>
 <p>不過中文博大精深，中文還未引進，看起來中文要精準的回答還需要一哩路呢。</p>
-<p><img src="/images/20191204/JaewonLeeImg_02.png" alt="未來非工程師建立自己的 ChatBot 也越來越方便且快速了"></p>
+<p><img alt="未來非工程師建立自己的 ChatBot 也越來越方便且快速了" data-src="/images/20191204/JaewonLeeImg_02.png" class="lozad"></p>
 <hr>
 <h4 id="第五位-國際頂尖白帽駭客-李丞鎮-Beist"><a href="#第五位-國際頂尖白帽駭客-李丞鎮-Beist" class="headerlink" title="第五位(國際頂尖白帽駭客 - 李丞鎮(Beist))"></a>第五位(<strong>國際頂尖白帽駭客</strong> - <strong>李丞鎮</strong>(<strong>Beist</strong>))</h4><blockquote>
 <p>本議程將介紹企業資安團隊的運作模式，並說明企業面臨的資安風險與因應策略。此外，將介紹 LINE 資安團隊如何與開發人員合作，進行程式碼審核、檢查內部和外部網路安全，以及使用機器學習檢測惡意行為。</p>
 </blockquote>
-<p><img src="/images/20191204/BeistImg_01.png" alt="國際頂尖白帽駭客"></p>
+<p><img alt="國際頂尖白帽駭客" data-src="/images/20191204/BeistImg_01.png" class="lozad"></p>
 <p>來自韓國，目前擔任 <strong>LINE GrayLab資安研究室</strong> 的負責人 <strong>李丞鎮</strong>(<strong>Beist</strong>)，是亞洲首位進入 <strong>世界駭客大賽DEFCON CTF</strong> 決賽的選手，也在韓國駭客競賽中獲得多次優勝；開場以 <strong>Why Enterprise Security Is Hard ?</strong> 切入。</p>
 <p>講者在演講期間多次提到安全把關你我做起，破解工程師比破解伺服器容易。</p>
 <blockquote>
-<p><em>直得一提：LINE GrayLab特別構思出Becks (資安社群聚會），以定期巡迴的方式與各地的駭客們交流最頂尖的防護技術，全球首場Becks (資安社群聚會）。相關訊息可點擊 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS50dy9wci8xMzA4NTU=">傳送門<i class="fa fa-external-link-alt"></i></span></em></p>
+<p><em>直得一提：LINE GrayLab特別構思出Becks (資安社群聚會），以定期巡迴的方式與各地的駭客們交流最頂尖的防護技術，全球首場Becks (資安社群聚會）。相關訊息可點擊 <a href="https://www.ithome.com.tw/pr/130855" target="_blank" rel="noopener">傳送門</a></em></p>
 </blockquote>
-<p><img src="/images/20191204/BeistImg_02.png" alt="Summary"></p>
+<p><img alt="Summary" data-src="/images/20191204/BeistImg_02.png" class="lozad"></p>
 <hr>
 <h4 id="第六位-Timeline-Post-Recommender-System-Jihong-Lee"><a href="#第六位-Timeline-Post-Recommender-System-Jihong-Lee" class="headerlink" title="第六位(Timeline Post Recommender System - Jihong Lee)"></a>第六位(Timeline Post Recommender System - Jihong Lee)</h4><blockquote>
 <p>LINE 貼文串讓使用者們分享貼文進行互動，取得的使用數據讓我們能為使用者提供個人化推薦服務。本議程將介紹我們如何為使用者提供完善的體驗、持續進化推薦系統，並從資料分析的角度探討相關洞見，以及如何提升整體系統品質。</p>
 </blockquote>
-<p><img src="/images/20191204/JihongLeeImg_01.png" alt="資料交叉比對"></p>
+<p><img alt="資料交叉比對" data-src="/images/20191204/JihongLeeImg_01.png" class="lozad"></p>
 <p>講者主要在分析推薦系統 <strong>Recommender System</strong>，以及如何分析使用者然後利用演算法去推薦使用者他想看的東西，其實也是離不開 <strong>AI</strong>。</p>
 <p>總結：Recommender System, Pareto Optimality</p>
-<p><img src="/images/20191204/JihongLeeImg_02.png" alt="Summary"></p>
+<p><img alt="Summary" data-src="/images/20191204/JihongLeeImg_02.png" class="lozad"></p>
 <p>另外現場還 <strong>show</strong> 出了用 <strong>Timeline Post Recommender System</strong> 技術做出來的照片牆，只要現場拍照就可以上傳到照片牆，大家都拿手機出來拍照上傳，最後也被拿來當 <strong>See You Next Year</strong> 的背景圖，很有創意！</p>
-<p><img src="/images/20191204/Timeline_post_recommender.png" alt="照片牆"></p>
+<p><img alt="照片牆" data-src="/images/20191204/Timeline_post_recommender.png" class="lozad"></p>
 <hr>
 <h3 id="下半場"><a href="#下半場" class="headerlink" title="下半場"></a>下半場</h3><p>這次演講比較緊湊，時間上有往後延，過了大約半小時開始下半場，下半場的前半部時間是 <strong>LINE新星計畫新創團隊</strong> 介紹，就像是工商時間，各家公司紛紛分享自己的機器人或產品。</p>
 <table>
@@ -477,9 +176,9 @@
 </tr>
 </tbody></table>
 <blockquote>
-<p>更詳細資訊請點 <span class="exturl" data-url="aHR0cHM6Ly9saW5lY29ycC5jb20vemgtaGFudC9wci9uZXdzL3poLWhhbnQvMjAxOS8zMDA1">傳送門<i class="fa fa-external-link-alt"></i></span></p>
+<p>更詳細資訊請點 <a href="https://linecorp.com/zh-hant/pr/news/zh-hant/2019/3005" target="_blank" rel="noopener">傳送門</a></p>
 </blockquote>
-<p><img src="/images/20191204/Tournii_QRCode.png" alt="這邊奉上途你的九折優惠 搭 LINE Text 也可以用喔"></p>
+<p><img alt="這邊奉上途你的九折優惠 搭 LINE Text 也可以用喔" data-src="/images/20191204/Tournii_QRCode.png" class="lozad"></p>
 <hr>
 <h4 id="LINE-PAY"><a href="#LINE-PAY" class="headerlink" title="LINE PAY"></a>LINE PAY</h4><p>緊接著都是 LINE 公司的相關技術介紹，首先登場的是 <strong>LINE PAY</strong>，介紹一些變動、 <strong>LINE BANK</strong>、<strong>APP2APP</strong> 及 <strong>API V3</strong>…等等，甚至未來出國能直接在國外使用 <strong>LINE PAY</strong> 付款，無需換匯。</p>
 <h4 id="LINE-SPOT"><a href="#LINE-SPOT" class="headerlink" title="LINE SPOT"></a>LINE SPOT</h4><p>再來是 <strong>LINE SPOT</strong>，他們的初衷是目前 <strong>LINE</strong> 有了眾多服務，但是卻無法好好的串起來直接使用，比方說想約朋友吃飯，但是卻要在眾多的 <strong>APP 來回穿梭</strong>，達到 <strong>訂餐廳</strong>、<strong>看菜單</strong>、<strong>叫車</strong>…等等的最終結果，因為這樣，所以 <strong>LINE SPOT</strong> 誕生了。</p>
@@ -487,330 +186,33 @@
 <h4 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h4><p>其他還有提到<strong>收尋</strong>、<strong>音樂</strong>、<strong>QA</strong>、<strong>FCU</strong> 甚至 <strong>LINE的環境架構</strong>…等等，這邊就不一一補充說明了。</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次去 <strong>LINE TAIWAN TECHPULSE 2019</strong> 算是收穫頗多，也聽了很多家企業的分享，常常覺得自己在碰到資訊相關知識時，自己就好像走入了一片森林，自己只看到最前面那棵樹，不過就跟運動一樣，這種事情就是什麼都不重要，重要的是你的毅力呀！</p>
-<p><img src="/images/20191204/see_you.png" alt="明年見 各位"></p>
+<p><img alt="明年見 各位" data-src="/images/20191204/see_you.png" class="lozad"></p>
 <p>最後用一張紀念品圖來結束這回合囉，以上資訊如有誤還請多見諒，圖片模糊再次跟各位大神道歉，因為很臨時的用手機拍攝，距離也較遠，當天電腦恰巧又沒電，當下都是手寫筆記，如果之後有再想起什麼片段，會再更新並且補上來。</p>
-<p><img src="/images/20191204/finally.png" alt="聽說啤酒很好喝"></p>
+<p><img alt="聽說啤酒很好喝" data-src="/images/20191204/finally.png" class="lozad"></p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p>LINE - <span class="exturl" data-url="aHR0cHM6Ly90ZWNocHVsc2UubGluZS5tZS8=">報名網站<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>LINE - <a href="https://techpulse.line.me/" target="_blank" rel="noopener">報名網站</a></p>
 </li>
-<li><p>LINE — <span class="exturl" data-url="aHR0cHM6Ly9saW5lY29ycC5jb20vemgtaGFudC9wci9uZXdzL3poLWhhbnQvMjAxOS8zMDA1">LINE TAIWAN TECHPULSE 2019 LINE 旗下服務全面導入人工智慧 LINE BRAIN 計畫即將開始招募台灣企業夥伴<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>LINE — <a href="https://linecorp.com/zh-hant/pr/news/zh-hant/2019/3005" target="_blank" rel="noopener">LINE TAIWAN TECHPULSE 2019 LINE 旗下服務全面導入人工智慧 LINE BRAIN 計畫即將開始招募台灣企業夥伴</a></p>
 </li>
-<li><p>LINE TODAY — <span class="exturl" data-url="aHR0cHM6Ly90b2RheS5saW5lLm1lL3R3L3BjL2FydGljbGUvTElORSVFNSVCOSVCNCVFNSVCQSVBNjEwJUU1JUE0JUE3JUU2JTk2JUIwJUU1JTg5JUI1JUU2JTlDJThEJUU1JThCJTk5JUUzJTgwJTgwQUklRTQlQjglQjIlRTklODAlQTMlRTclOTQlOUYlRTYlQjQlQkIrMjAyMCVFNSVCOSVCNENsb3ZhJUU0JUI4JUFEJUU2JTk2JTg3JUU1JThDJTk2LW1HWDhYdw==">LINE年度10大新創服務　AI串連生活 2020年Clova中文化<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>LINE TODAY — <a href="https://today.line.me/tw/pc/article/LINE%E5%B9%B4%E5%BA%A610%E5%A4%A7%E6%96%B0%E5%89%B5%E6%9C%8D%E5%8B%99%E3%80%80AI%E4%B8%B2%E9%80%A3%E7%94%9F%E6%B4%BB+2020%E5%B9%B4Clova%E4%B8%AD%E6%96%87%E5%8C%96-mGX8Xw" target="_blank" rel="noopener">LINE年度10大新創服務　AI串連生活 2020年Clova中文化</a></p>
 </li>
-<li><p>電腦DIY — <span class="exturl" data-url="aHR0cHM6Ly93d3cuY29tcHV0ZXJkaXkuY29tLnR3LzIwMTkxMjA0X2FpY2hhdGJvdF9saW5lLXRhaXdhbi10ZWNocHVsc2UtMjAxOS8=">導入AI聊天機器人服務LINE TAIWAN TECHPULSE 2019精彩內容看這篇<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>電腦DIY — <a href="https://www.computerdiy.com.tw/20191204_aichatbot_line-taiwan-techpulse-2019/" target="_blank" rel="noopener">導入AI聊天機器人服務LINE TAIWAN TECHPULSE 2019精彩內容看這篇</a></p>
 </li>
-<li><p>Yahoo!新聞 - <span class="exturl" data-url="aHR0cHM6Ly90dy5uZXdzLnlhaG9vLmNvbS9saW5lJUU5JTk2JThCJUU3JTk5JUJDJUU4JTgwJTg1JUU1JUE0JUE3JUU2JTlDJTgzLWFpJUU2JTk5JUJBJUU2JTg1JUE3JUU1JUI5JUFCJUU1JUJGJTk5JUU2JThFJUE1JUU5JUE0JTkwJUU1JUJCJUIzJUU1JUFFJUEyJUU2JTlDJThEJUU4JUE4JTgyJUU0JUJEJThELTA5NTAxOTY3NC5odG1s">LINE開發者大會 AI智慧幫忙接餐廳客服訂位<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>Yahoo!新聞 - <a href="https://tw.news.yahoo.com/line%E9%96%8B%E7%99%BC%E8%80%85%E5%A4%A7%E6%9C%83-ai%E6%99%BA%E6%85%A7%E5%B9%AB%E5%BF%99%E6%8E%A5%E9%A4%90%E5%BB%B3%E5%AE%A2%E6%9C%8D%E8%A8%82%E4%BD%8D-095019674.html" target="_blank" rel="noopener">LINE開發者大會 AI智慧幫忙接餐廳客服訂位</a></p>
 </li>
 </ul>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright" style="background: var(--card-bg-color);
-    border-left: 3px solid #ff2a2a;
-    list-style: none;
-    margin: 2em 0 0;
-    padding: 0.5em 1em;">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>RexHung
-  </li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/" title="LINE TAIWAN TECHPULSE 2019">https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
-  </li>
-</ul>
-</div>
-
-
-      <div>
-        
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
-    
-</div>
-        
-      </div>
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/Other/" rel="tag"><i class="fa fa-tag"></i> Other</a>
-              <a href="/tags/Life/" rel="tag"><i class="fa fa-tag"></i> Life</a>
-              <a href="/tags/LINE/" rel="tag"><i class="fa fa-tag"></i> LINE</a>
-              <a href="/tags/TECHPULSE/" rel="tag"><i class="fa fa-tag"></i> TECHPULSE</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/12/01/20191201/" rel="prev" title="[Tool Notes] — 關於爬蟲#2">
-      <i class="fa fa-chevron-left"></i> [Tool Notes] — 關於爬蟲#2
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/12/20200212/" rel="next" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖">
-      [The F2E 2nd] — 10 Week Masks Map 口罩地圖 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本次重點"><span class="nav-number">1.1.</span> <span class="nav-text">本次重點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#報到"><span class="nav-number">1.2.</span> <span class="nav-text">報到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活動開始"><span class="nav-number">1.3.</span> <span class="nav-text">活動開始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上半場"><span class="nav-number">1.3.1.</span> <span class="nav-text">上半場</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一位-LINE台灣資深技術總監-陳鴻嘉"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">第一位(LINE台灣資深技術總監 - 陳鴻嘉)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二位-LINE台灣董事總經理-陳立人"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">第二位(LINE台灣董事總經理 - 陳立人)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三位-LINE-技術專家-技術傳教士-Evan-Lin"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">第三位(LINE 技術專家&#x2F;技術傳教士 - Evan Lin)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四位-Clova-Chatbot-AutoML-專家-Jaewon-Lee-及-LINE台灣資深資料工程師-Penny-Sun"><span class="nav-number">1.3.2.</span> <span class="nav-text">第四位(Clova Chatbot AutoML 專家 - Jaewon Lee 及 LINE台灣資深資料工程師 - Penny Sun)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五位-國際頂尖白帽駭客-李丞鎮-Beist"><span class="nav-number">1.3.3.</span> <span class="nav-text">第五位(國際頂尖白帽駭客 - 李丞鎮(Beist))</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第六位-Timeline-Post-Recommender-System-Jihong-Lee"><span class="nav-number">1.3.4.</span> <span class="nav-text">第六位(Timeline Post Recommender System - Jihong Lee)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下半場"><span class="nav-number">1.4.</span> <span class="nav-text">下半場</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LINE-PAY"><span class="nav-number">1.4.1.</span> <span class="nav-text">LINE PAY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINE-SPOT"><span class="nav-number">1.4.2.</span> <span class="nav-text">LINE SPOT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fact-Checker"><span class="nav-number">1.4.3.</span> <span class="nav-text">Fact Checker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Other"><span class="nav-number">1.4.4.</span> <span class="nav-text">Other</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-number">3.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/images/profile/profile_2.png">
-  <p class="site-author-name" itemprop="name">RexHung</p>
-  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">47</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fab twitter fa-fw"></i></span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fab facebook fa-fw"></i></span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="總字數">286k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="所需總閱讀時間">4:20</span>
-</div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://RexHung0302.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/";
-    this.page.identifier = "2019/12/04/20191204/";
-    this.page.title = "LINE TAIWAN TECHPULSE 2019";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://RexHung0302.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-
-  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/click-word.js"></script>
-</body>
-</html>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/">https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/Other/">Other    </a><a class="post-meta__tags" href="/tags/Life/">Life    </a><a class="post-meta__tags" href="/tags/LINE/">LINE    </a><a class="post-meta__tags" href="/tags/TECHPULSE/">TECHPULSE    </a></div><div class="post_share"><div class="social-share" data-image="/img/article_404.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/12/20200212/"><img class="prev_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[The F2E 2nd] — 10 Week Masks Map 口罩地圖</span></div></a></div><div class="next-post pull-right"><a href="/2019/12/01/20191201/"><img class="next_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[Tool Notes] — 關於爬蟲#2</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/12/19/20201219/" title="LINE TAIWAN TECHPULSE 2020"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">LINE TAIWAN TECHPULSE 2020</div></a></div><div class="relatedPosts_item"><a href="/2020/03/19/20200319/" title="[Blog Notes] - Hexo NexT 小筆記"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Blog Notes] - Hexo NexT 小筆記</div></a></div><div class="relatedPosts_item"><a href="/2019/12/01/20191201/" title="[Tool Notes] — 關於爬蟲#2"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Tool Notes] — 關於爬蟲#2</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/';
+  this.page.identifier = '2019/12/04/20191204/';
+  this.page.title = 'LINE TAIWAN TECHPULSE 2019';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(LINE_outside_logo.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>

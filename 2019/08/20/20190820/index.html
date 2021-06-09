@@ -1,398 +1,107 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="Introduction &amp; 前言講到爬蟲可能大多數人都會想到 Python，但今天我們不談 Python。前陣子因為朋友在玩爬蟲，利用 PHP 寫了幾隻爬蟲爬二手商品資訊，雖然菜雞我接觸前端不久，但常常在想前端是不是也能做到什麼類型的事情。這時候就問了問朋友 JavaScript 能不能爬呢？得到的答案是可以的，其實各有優缺點，主要看你寫什麼起來順手。這邊有一篇知乎對爬蟲的比較有興趣可以">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Tool Notes] — 關於爬蟲">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/index.html">
-<meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言講到爬蟲可能大多數人都會想到 Python，但今天我們不談 Python。前陣子因為朋友在玩爬蟲，利用 PHP 寫了幾隻爬蟲爬二手商品資訊，雖然菜雞我接觸前端不久，但常常在想前端是不是也能做到什麼類型的事情。這時候就問了問朋友 JavaScript 能不能爬呢？得到的答案是可以的，其實各有優缺點，主要看你寫什麼起來順手。這邊有一篇知乎對爬蟲的比較有興趣可以">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*uaFTnckTNveOgf4DnpOj4g.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*Pane3sMRa-18xniuaBHozQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2048/1*9kl-JA3WwdqYnC65UarJiQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2764/1*VGEc49auJIOgSPbrgvvx3g.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2196/1*EG7hPk1rHmPSVp8rEriBig.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*tIhy_sY4YCNKuV2heJmLug.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*Jed7cw539RHX5l6uYeOQ7Q.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*vyhq7hbf5TdTIXmghBxd5w.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*iGzx4Ciy3hF5Spz3XQTG9w.png">
-<meta property="article:published_time" content="2019-08-20T04:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:45:46.540Z">
-<meta property="article:author" content="RexHung">
-<meta property="article:tag" content="RexHung">
-<meta property="article:tag" content="CodeLife">
-<meta property="article:tag" content="Crawler">
-<meta property="article:tag" content="Engineer">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*uaFTnckTNveOgf4DnpOj4g.png">
-
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>[Tool Notes] — 關於爬蟲 | RexHung's Blog</title>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Tool Notes] — 關於爬蟲 | RexHung's Blog</title><meta name="description" content="[Tool Notes] — 關於爬蟲"><meta name="keywords" content="Code,Other,Crawler"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Tool Notes] — 關於爬蟲"><meta name="twitter:description" content="[Tool Notes] — 關於爬蟲"><meta name="twitter:image" content="https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg"><meta property="og:type" content="article"><meta property="og:title" content="[Tool Notes] — 關於爬蟲"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Tool Notes] — 關於爬蟲"><meta property="og:image" content="https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[JavaScript Notes] — 淺談 JavaScript #1" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/09/20191009/"><link rel="next" title="[PHP Notes] — 關於 php-Redis install on Mac OSX" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/07/14/20190714/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支持'
+  },
+  bookmark: {
+    title: '添加書籤',
+    message_prev: '按',
+    message_next: '鍵將本頁加入書籤'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">RexHung's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
-
-  </li>
-        <li class="menu-item menu-item-link">
-
-    <a href="/link/" rel="section"><i class="fa fa-link fa-fw"></i>link</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile/profile_2.png">
-      <meta itemprop="name" content="RexHung">
-      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RexHung's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          [Tool Notes] — 關於爬蟲
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2019-08-20 12:00:00" itemprop="dateCreated datePublished" datetime="2019-08-20T12:00:00+08:00">2019-08-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-09 14:45:46" itemprop="dateModified" datetime="2021-06-09T14:45:46+08:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/Crawler/" itemprop="url" rel="index"><span itemprop="name">Crawler</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/08/20/20190820/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/20/20190820/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>3.9k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>4 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>講到爬蟲可能大多數人都會想到 <strong>Python</strong>，但今天我們不談 <strong>Python</strong>。前陣子因為朋友在玩爬蟲，利用 <strong>PHP</strong> 寫了幾隻爬蟲爬二手商品資訊，雖然菜雞我接觸前端不久，但常常在想前端是不是也能做到什麼類型的事情。這時候就問了問朋友 <strong>JavaScript</strong> 能不能爬呢？得到的答案是可以的，其實各有優缺點，主要看你寫什麼起來順手。這邊有一篇知乎對爬蟲的比較有興趣可以看看，<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzIzNjQzMDYx">傳送門<i class="fa fa-external-link-alt"></i></span>。</p>
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#快給我釣竿"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">快給我釣竿</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#事前準備"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">事前準備</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#除了釣竿還需要魚餌"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">除了釣竿還需要魚餌</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#怎麼綁上我的魚餌？"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">怎麼綁上我的魚餌？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#那我怎麼抓-DOM-呢？"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">那我怎麼抓 DOM 呢？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#所以我要一直守在電腦前？"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">所以我要一直守在電腦前？</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。"><span class="toc_mobile_items-number">1.6.1.</span> <span class="toc_mobile_items-text">如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#所以還是要守在電腦前輸入指令嗎？"><span class="toc_mobile_items-number">1.7.</span> <span class="toc_mobile_items-text">所以還是要守在電腦前輸入指令嗎？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢-笑！"><span class="toc_mobile_items-number">1.8.</span> <span class="toc_mobile_items-text">切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢 ( 笑！</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#等等說好的-JSON-呢？"><span class="toc_mobile_items-number">1.9.</span> <span class="toc_mobile_items-text">等等說好的 JSON 呢？</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#另外關於這次的爬蟲有上傳-GitHub-如果不嫌棄的大大可以下載來玩玩，傳送門。"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text">另外關於這次的爬蟲有上傳 GitHub 如果不嫌棄的大大可以下載來玩玩，傳送門。</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">1.</span> <span class="toc-text">Introduction &amp; 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#快給我釣竿"><span class="toc-number">1.1.</span> <span class="toc-text">快給我釣竿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事前準備"><span class="toc-number">1.2.</span> <span class="toc-text">事前準備</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#除了釣竿還需要魚餌"><span class="toc-number">1.3.</span> <span class="toc-text">除了釣竿還需要魚餌</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎麼綁上我的魚餌？"><span class="toc-number">1.4.</span> <span class="toc-text">怎麼綁上我的魚餌？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#那我怎麼抓-DOM-呢？"><span class="toc-number">1.5.</span> <span class="toc-text">那我怎麼抓 DOM 呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#所以我要一直守在電腦前？"><span class="toc-number">1.6.</span> <span class="toc-text">所以我要一直守在電腦前？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。"><span class="toc-number">1.6.1.</span> <span class="toc-text">如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#所以還是要守在電腦前輸入指令嗎？"><span class="toc-number">1.7.</span> <span class="toc-text">所以還是要守在電腦前輸入指令嗎？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢-笑！"><span class="toc-number">1.8.</span> <span class="toc-text">切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢 ( 笑！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#等等說好的-JSON-呢？"><span class="toc-number">1.9.</span> <span class="toc-text">等等說好的 JSON 呢？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">2.</span> <span class="toc-text">Conclusion &amp; 結論</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#另外關於這次的爬蟲有上傳-GitHub-如果不嫌棄的大大可以下載來玩玩，傳送門。"><span class="toc-number">2.1.</span> <span class="toc-text">另外關於這次的爬蟲有上傳 GitHub 如果不嫌棄的大大可以下載來玩玩，傳送門。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考網站"><span class="toc-number">3.</span> <span class="toc-text">參考網站</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg)"><div id="post-info"><div id="post-title"><div class="posttitle">[Tool Notes] — 關於爬蟲</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-08-20<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/">Note</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/Crawler/">Crawler</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">2k</span><span class="post-meta__separator">|</span><span>閲讀時長: 6 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>講到爬蟲可能大多數人都會想到 <strong>Python</strong>，但今天我們不談 <strong>Python</strong>。前陣子因為朋友在玩爬蟲，利用 <strong>PHP</strong> 寫了幾隻爬蟲爬二手商品資訊，雖然菜雞我接觸前端不久，但常常在想前端是不是也能做到什麼類型的事情。這時候就問了問朋友 <strong>JavaScript</strong> 能不能爬呢？得到的答案是可以的，其實各有優缺點，主要看你寫什麼起來順手。這邊有一篇知乎對爬蟲的比較有興趣可以看看，<a href="https://www.zhihu.com/question/23643061" target="_blank" rel="noopener">傳送門</a>。</p>
 <a id="more"></a>
 
 <blockquote>
-<p>9/22後更：關於我的神人朋友 — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ODg5MjQ2My8lRTYlQjIlOTIlRTYlOUMlODklRTglQTYlODElRTUlOUMlQTglRTklODAlOTklRTYlOTUlOTklRTQlQkQlQTAlRTQlQkIlODAlRTklQkElQkMtOGEzMmYxMDU0NDMw">Chatbot Taichung＃2工作坊 沒有要在這教你什麼<i class="fa fa-external-link-alt"></i></span> ( 其實教了你一大堆 ， 有興趣可以看看他的玩具</p>
+<p>9/22後更：關於我的神人朋友 — <a href="https://medium.com/@z8892463/%E6%B2%92%E6%9C%89%E8%A6%81%E5%9C%A8%E9%80%99%E6%95%99%E4%BD%A0%E4%BB%80%E9%BA%BC-8a32f1054430" target="_blank" rel="noopener">Chatbot Taichung＃2工作坊 沒有要在這教你什麼</a> ( 其實教了你一大堆 ， 有興趣可以看看他的玩具</p>
 </blockquote>
 <p><strong>這篇文章主要會寫如何用爬蟲爬外幣資訊並且在條件符合下寄信通知你，另外文章最後附上 GitHub。</strong></p>
 <blockquote>
-<p><strong>網路爬蟲</strong>（英語：web crawler），也叫網路蜘蛛（spider），是一種用來自動瀏覽<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU0JUI4JTg3JUU3JUJCJUI0JUU3JUJEJTkx">全球資訊網<i class="fa fa-external-link-alt"></i></span>的<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3cvaW5kZXgucGhwP3RpdGxlPSVFNyVCRCU5MSVFNyVCQiU5QyVFNiU5QyVCQSVFNSU5OSVBOCVFNCVCQSVCQSZhY3Rpb249ZWRpdCZyZWRsaW5rPTE=">網路機器人<i class="fa fa-external-link-alt"></i></span>。其目的一般為編纂<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3cvaW5kZXgucGhwP3RpdGxlPSVFNyVCRCU5MSVFNyVCQiU5QyVFNyVCNCVBMiVFNSVCQyU5NSZhY3Rpb249ZWRpdCZyZWRsaW5rPTE=">網路索引<i class="fa fa-external-link-alt"></i></span> — 取自<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3poLXR3LyVFNyVCNiVCMiVFOCVCNyVBRiVFNyU4OCVBQyVFOCU5RiVCMg==">維基百科<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>網路爬蟲</strong>（英語：web crawler），也叫網路蜘蛛（spider），是一種用來自動瀏覽<a href="https://zh.wikipedia.org/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91" target="_blank" rel="noopener">全球資訊網</a>的<a href="https://zh.wikipedia.org/w/index.php?title=%E7%BD%91%E7%BB%9C%E6%9C%BA%E5%99%A8%E4%BA%BA&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">網路機器人</a>。其目的一般為編纂<a href="https://zh.wikipedia.org/w/index.php?title=%E7%BD%91%E7%BB%9C%E7%B4%A2%E5%BC%95&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">網路索引</a> — 取自<a href="https://zh.wikipedia.org/zh-tw/%E7%B6%B2%E8%B7%AF%E7%88%AC%E8%9F%B2" target="_blank" rel="noopener">維基百科</a></p>
 </blockquote>
 <hr>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*uaFTnckTNveOgf4DnpOj4g.png" alt=""></p>
+<p><img alt="" data-src="https://cdn-images-1.medium.com/max/2000/1*uaFTnckTNveOgf4DnpOj4g.png" class="lozad"></p>
 <h3 id="快給我釣竿"><a href="#快給我釣竿" class="headerlink" title="快給我釣竿"></a>快給我釣竿</h3><p>記得之前要學前端框架的時候選擇 <strong>Vue.js</strong> 一來是因為比較好上手，二來因為以後如果要一窺後端世界可以透過 <strong>node.js</strong> 去學習，剛好這次能透過 <strong>node.js</strong> 去爬需要的資訊，就索性學起來啦。</p>
 <blockquote>
 <p><em>這次也是筆記形式，所寫之文章皆是作為筆記之用，如果有哪邊寫錯了還請各路高手不吝嗇指教。</em></p>
 </blockquote>
-<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>這邊我們爬蟲最基本需要用到的 <strong>node.js</strong> 需要至少 <strong>4.x</strong> 版本以上，不過現在官方網站都能下載到最新的，所以還沒安裝到官方網站下載就可以囉，<span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Rvd25sb2FkLw==">傳送門<i class="fa fa-external-link-alt"></i></span>。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png" alt="安裝完成"></p>
-<p>安裝的時候會一併安裝 <strong>npm</strong>，不曉得這是什麼可以點我看我的文章介紹，<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvdG9vbC1ub3Rlcy0lRTklOTclOUMlRTYlOTYlQkN3ZWJwYWNrLTNjMDY2ZGJhOTNhMg==">[Tool Notes] — 關於Webpack<i class="fa fa-external-link-alt"></i></span>。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*Pane3sMRa-18xniuaBHozQ.png" alt="[關於 node_modules](https://medium.com/@zehung860486/tool-notes-%E9%97%9C%E6%96%BCwebpack-3c066dba93a2)"></p>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>這邊我們爬蟲最基本需要用到的 <strong>node.js</strong> 需要至少 <strong>4.x</strong> 版本以上，不過現在官方網站都能下載到最新的，所以還沒安裝到官方網站下載就可以囉，<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">傳送門</a>。</p>
+<p><img alt="安裝完成" data-src="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png" class="lozad"></p>
+<p>安裝的時候會一併安裝 <strong>npm</strong>，不曉得這是什麼可以點我看我的文章介紹，<a href="https://medium.com/@zehung860486/tool-notes-%E9%97%9C%E6%96%BCwebpack-3c066dba93a2" target="_blank" rel="noopener">[Tool Notes] — 關於Webpack</a>。</p>
+<p><img alt="[關於 node_modules](https://medium.com/@zehung860486/tool-notes-%E9%97%9C%E6%96%BCwebpack-3c066dba93a2)" data-src="https://cdn-images-1.medium.com/max/2000/1*Pane3sMRa-18xniuaBHozQ.png" class="lozad"></p>
 <hr>
 <h3 id="除了釣竿還需要魚餌"><a href="#除了釣竿還需要魚餌" class="headerlink" title="除了釣竿還需要魚餌"></a>除了釣竿還需要魚餌</h3><p>打完我們的地基之後就須魚餌啦，就是我們的套件們，你會需要用到以下的套件。</p>
 <ol>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnBtanMuY29tL3BhY2thZ2UvcmVxdWVzdA==">request<i class="fa fa-external-link-alt"></i></span> 獲取整個網頁的 <strong>HTML</strong></p>
+<li><p><a href="https://www.npmjs.com/package/request" target="_blank" rel="noopener">request</a> 獲取整個網頁的 <strong>HTML</strong></p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnBtanMuY29tL3BhY2thZ2UvY2hlZXJpbw==">cheerio<i class="fa fa-external-link-alt"></i></span> 後端的 jQuery</p>
+<li><p><a href="https://www.npmjs.com/package/cheerio" target="_blank" rel="noopener">cheerio</a> 後端的 jQuery</p>
 </li>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnBtanMuY29tL3BhY2thZ2Uvbm9kZW1haWxlcg==">nodemailer<i class="fa fa-external-link-alt"></i></span> 用來寄信</p>
+<li><p><a href="https://www.npmjs.com/package/nodemailer" target="_blank" rel="noopener">nodemailer</a> 用來寄信</p>
 </li>
 </ol>
 <p>前兩項的介紹如果不了解看看下面這張圖吧。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2048/1*9kl-JA3WwdqYnC65UarJiQ.png" alt="匯率的數字不是真的"></p>
+<p><img alt="匯率的數字不是真的" data-src="https://cdn-images-1.medium.com/max/2048/1*9kl-JA3WwdqYnC65UarJiQ.png" class="lozad"></p>
 <p>安裝方式也很簡單，打開你的 <strong>終端機(terminal)</strong> 照著下面的指令打吧。</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">install</span> request</span><br><span class="line">$ npm <span class="keyword">install</span> cheerio</span><br><span class="line">$ npm <span class="keyword">install</span> nodemailer</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">install</span> request</span><br><span class="line">$ npm <span class="keyword">install</span> cheerio</span><br><span class="line">$ npm <span class="keyword">install</span> nodemailer</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
 <h3 id="怎麼綁上我的魚餌？"><a href="#怎麼綁上我的魚餌？" class="headerlink" title="怎麼綁上我的魚餌？"></a><strong>怎麼綁上我的魚餌？</strong></h3><p>首先建立一支 <strong>index.js</strong> 檔，然後在前面引入我們需要用到的套件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">"request"</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</span><br><span class="line"><span class="keyword">var</span> nodemailer = <span class="built_in">require</span>(<span class="string">'nodemailer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 這個不需要安裝直接引用即可，用來把資料寫入 JSON檔案</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>(<span class="string">"request"</span>);</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>);</span><br><span class="line"><span class="keyword">var</span> nodemailer = <span class="built_in">require</span>(<span class="string">'nodemailer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 這個不需要安裝直接引用即可，用來把資料寫入 JSON檔案</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br></pre></td></tr></tbody></table></figure>
 
 <p>之後基本的起手式大致如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> JPN_Crawler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  request(&#123;</span><br><span class="line">    <span class="comment">// 爬蟲要爬的網站</span></span><br><span class="line">    url: <span class="string">"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"</span>,</span><br><span class="line">    method: <span class="string">"GET"</span></span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (error || !body) &#123;</span><br><span class="line">      <span class="comment">// 如果沒爬到就不做事</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 寫你要做的事情</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> JPN_Crawler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">  request({</span><br><span class="line">    <span class="comment">// 爬蟲要爬的網站</span></span><br><span class="line">    url: <span class="string">"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"</span>,</span><br><span class="line">    method: <span class="string">"GET"</span></span><br><span class="line">  }, <span class="function"><span class="keyword">function</span>(<span class="params">error, response, body</span>) </span>{</span><br><span class="line">    <span class="keyword">if</span> (error || !body) {</span><br><span class="line">      <span class="comment">// 如果沒爬到就不做事</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">      } <span class="keyword">else</span> {</span><br><span class="line">      <span class="comment">// 寫你要做的事情</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>之後再 <strong>else</strong> 裡面寫上你要做的事情，寫法就跟一般我們寫 <strong>JavaScript</strong> 一樣。</p>
 <hr>
 <h3 id="那我怎麼抓-DOM-呢？"><a href="#那我怎麼抓-DOM-呢？" class="headerlink" title="那我怎麼抓 DOM 呢？"></a>那我怎麼抓 DOM 呢？</h3><p>你可能會有這樣的疑問，所以我們裝了 <strong>Cheerio</strong> 這個套件。使用方法也很簡單，相下面那樣去抓到 <strong>body</strong> 後再去你需要的區塊爬你需要的資訊。這邊以台銀的匯率網站作為介紹。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $ = cheerio.load(body); <span class="comment">// 抓到 body</span></span><br><span class="line"><span class="keyword">const</span> tr = $(<span class="string">"tbody tr"</span>);     <span class="comment">// 爬每一行的 tr</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $ = cheerio.load(body); <span class="comment">// 抓到 body</span></span><br><span class="line"><span class="keyword">const</span> tr = $(<span class="string">"tbody tr"</span>);     <span class="comment">// 爬每一行的 tr</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/2764/1*VGEc49auJIOgSPbrgvvx3g.png" alt="抓取每一行的 tr"></p>
+<p><img alt="抓取每一行的 tr" data-src="https://cdn-images-1.medium.com/max/2764/1*VGEc49auJIOgSPbrgvvx3g.png" class="lozad"></p>
 <p>你可以只爬特定的一行，或是每一行都爬，爬到你需要的條件就記下來。因為之後還想要爬其他幣別，所以我就每一行都爬。</p>
 <p>因為後面我們會把結果寫進 JSON 裡，這邊我們需要宣告一個陣列。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = []; <span class="comment">// 建立一個儲存結果的容器*</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = []; <span class="comment">// 建立一個儲存結果的容器*</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/2196/1*EG7hPk1rHmPSVp8rEriBig.png" alt="抓取你想要的資訊"></p>
+<p><img alt="抓取你想要的資訊" data-src="https://cdn-images-1.medium.com/max/2196/1*EG7hPk1rHmPSVp8rEriBig.png" class="lozad"></p>
 <p>找到你要的內容，然後輸入 <strong>node index.js</strong>，然後就盡情地爬吧。</p>
 <hr>
 <h3 id="所以我要一直守在電腦前？"><a href="#所以我要一直守在電腦前？" class="headerlink" title="所以我要一直守在電腦前？"></a>所以我要一直守在電腦前？</h3><p>還記得前面我們裝了 <strong>nodemailer</strong> 嗎？這個就是用來寄信提醒你的，使用方式也很簡單，用一組自己的信箱去寄信，但是切記要先到  <strong>Google</strong>  修改安全性，這很重要，不然會報錯呦！</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*tIhy_sY4YCNKuV2heJmLug.png" alt="進入你的 Google 帳戶設定"></p>
+<p><img alt="進入你的 Google 帳戶設定" data-src="https://cdn-images-1.medium.com/max/2000/1*tIhy_sY4YCNKuV2heJmLug.png" class="lozad"></p>
 <blockquote>
 <p><em>進入「<strong>登入和安全性</strong>」，勾選「<strong>允許安全性較低的應用程式</strong>」 設定處於啟用狀態，這一步驟一定要做，不然屆時就會<strong>回報錯誤</strong>。</em></p>
 </blockquote>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*Jed7cw539RHX5l6uYeOQ7Q.png" alt="選擇左側的安全性"></p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*vyhq7hbf5TdTIXmghBxd5w.png" alt="打開這道鎖"></p>
+<p><img alt="選擇左側的安全性" data-src="https://cdn-images-1.medium.com/max/2000/1*Jed7cw539RHX5l6uYeOQ7Q.png" class="lozad"></p>
+<p><img alt="打開這道鎖" data-src="https://cdn-images-1.medium.com/max/2000/1*vyhq7hbf5TdTIXmghBxd5w.png" class="lozad"></p>
 <p>都打開了之後這個套件的起手勢也很簡單，按照下面的方式打在你的 <strong>index.js</strong> 上吧。記得 <strong>user</strong> 和 <strong>pass</strong> 要改成自己的信箱帳號密碼。</p>
 <blockquote>
 <h4 id="如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。"><a href="#如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。" class="headerlink" title="如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。"></a>如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。</h4></blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化寄信</span></span><br><span class="line"><span class="keyword">var</span> transporter = nodemailer.createTransport(&#123;</span><br><span class="line">  service: <span class="string">'gmail'</span>,</span><br><span class="line">  auth: &#123;</span><br><span class="line">    user: <span class="string">'user@oggole.com'</span>, <span class="comment">// mail Address</span></span><br><span class="line">    pass: <span class="string">'password'</span>         <span class="comment">// 密碼</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化寄信</span></span><br><span class="line"><span class="keyword">var</span> transporter = nodemailer.createTransport({</span><br><span class="line">  service: <span class="string">'gmail'</span>,</span><br><span class="line">  auth: {</span><br><span class="line">    user: <span class="string">'user@oggole.com'</span>, <span class="comment">// mail Address</span></span><br><span class="line">    pass: <span class="string">'password'</span>         <span class="comment">// 密碼</span></span><br><span class="line">  }</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
 <p>這樣就算初始化完成，那如何寄信也很簡單，你可以設定條件或者不設定都可以，這邊設定如果日幣現金或即期賣出匯率低於 <strong>0.3</strong> ( 當下台銀為 <strong>0.29</strong>)就寄出一封信作為測試。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果匯率小於我們設定的就寄信 ( 變數記得自己設定 )</span></span><br><span class="line"><span class="keyword">if</span> (JPY_cashSellExchange &lt; <span class="number">0.29</span> || JPY_sightSellExchange &lt; <span class="number">0.29</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> mailOptions = &#123;</span><br><span class="line">    <span class="keyword">from</span>: <span class="string">'"你的爬蟲小弟" &lt;user@google.com&gt;'</span>, <span class="comment">// 寄件者</span></span><br><span class="line">    to: <span class="string">'who@gmail.com'</span>,                    <span class="comment">// 收件者</span></span><br><span class="line">    subject: <span class="string">'該買日幣啦'</span>,                    <span class="comment">// 標題</span></span><br><span class="line">    html: <span class="string">'&lt;body&gt;&lt;h4&gt;日幣匯率：&lt;/h4&gt;&lt;span&gt;現在時間 -&gt; &lt;/span&gt;&lt;span&gt;'</span> + todayDate + <span class="string">' | '</span> + time + <span class="string">'&lt;/span&gt;&lt;br/&gt;&lt;span&gt;日幣現金匯率為 -&gt; &lt;/span&gt;&lt;span style="color:yellow;"&gt;'</span> + JPY_cashSellExchange + <span class="string">'&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;&lt;span&gt;日幣現金匯率為 -&gt; &lt;/span&gt;&lt;span style="color:yellow;"&gt;'</span> + JPY_cashSellExchange + <span class="string">'&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;&lt;h5 href="https://rate.bot.com.tw/xrt?Lang=zh-TW"&gt;以上取自台灣銀行 &lt;span style="font-size: 20px;"&gt;'</span> + bankDate + <span class="string">'&lt;/span&gt; 牌告匯率&lt;/h5&gt;&lt;/body&gt;'</span> <span class="comment">// 帶有 HTML 格式的內容</span></span><br><span class="line">  &#125;;</span><br><span class="line">  transporter.sendMail(mailOptions, <span class="function"><span class="keyword">function</span>(<span class="params">error, info</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(error);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Message sent: '</span> + info.response); <span class="comment">// 寄信成功後印出訊息</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果匯率小於我們設定的就寄信 ( 變數記得自己設定 )</span></span><br><span class="line"><span class="keyword">if</span> (JPY_cashSellExchange &lt; <span class="number">0.29</span> || JPY_sightSellExchange &lt; <span class="number">0.29</span>) {</span><br><span class="line">  <span class="keyword">var</span> mailOptions = {</span><br><span class="line">    <span class="keyword">from</span>: <span class="string">'"你的爬蟲小弟" &lt;user@google.com&gt;'</span>, <span class="comment">// 寄件者</span></span><br><span class="line">    to: <span class="string">'who@gmail.com'</span>,                    <span class="comment">// 收件者</span></span><br><span class="line">    subject: <span class="string">'該買日幣啦'</span>,                    <span class="comment">// 標題</span></span><br><span class="line">    html: <span class="string">'&lt;body&gt;&lt;h4&gt;日幣匯率：&lt;/h4&gt;&lt;span&gt;現在時間 -&gt; &lt;/span&gt;&lt;span&gt;'</span> + todayDate + <span class="string">' | '</span> + time + <span class="string">'&lt;/span&gt;&lt;br/&gt;&lt;span&gt;日幣現金匯率為 -&gt; &lt;/span&gt;&lt;span style="color:yellow;"&gt;'</span> + JPY_cashSellExchange + <span class="string">'&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;&lt;span&gt;日幣現金匯率為 -&gt; &lt;/span&gt;&lt;span style="color:yellow;"&gt;'</span> + JPY_cashSellExchange + <span class="string">'&lt;/b&gt;&lt;/span&gt;&lt;br/&gt;&lt;h5 href="https://rate.bot.com.tw/xrt?Lang=zh-TW"&gt;以上取自台灣銀行 &lt;span style="font-size: 20px;"&gt;'</span> + bankDate + <span class="string">'&lt;/span&gt; 牌告匯率&lt;/h5&gt;&lt;/body&gt;'</span> <span class="comment">// 帶有 HTML 格式的內容</span></span><br><span class="line">  };</span><br><span class="line">  transporter.sendMail(mailOptions, <span class="function"><span class="keyword">function</span>(<span class="params">error, info</span>) </span>{</span><br><span class="line">    <span class="keyword">if</span> (error) {</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">console</span>.log(error);</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Message sent: '</span> + info.response); <span class="comment">// 寄信成功後印出訊息</span></span><br><span class="line">    }</span><br><span class="line">  });</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
 <p><strong>*html</strong> 的部分是可以帶有 <strong>HTML</strong> 格式的內容，目前還沒研究怎麼打會比較方便，雖然只是要用來提醒，但是這樣子輸入就是有點麻煩，日後再補上其他方法。*</p>
 </blockquote>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*iGzx4Ciy3hF5Spz3XQTG9w.png" alt="完成啦"></p>
+<p><img alt="完成啦" data-src="https://cdn-images-1.medium.com/max/2000/1*iGzx4Ciy3hF5Spz3XQTG9w.png" class="lozad"></p>
 <h3 id="所以還是要守在電腦前輸入指令嗎？"><a href="#所以還是要守在電腦前輸入指令嗎？" class="headerlink" title="所以還是要守在電腦前輸入指令嗎？"></a>所以還是要守在電腦前輸入指令嗎？</h3><p>前面雖然提到了條件符合可以直接寄信，但是我們還是沒讓他做到自動爬蟲的重點，其實你已經完成了大部分了，很簡單接下來只要讓他 <strong>setInterval</strong> 就完成。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 兩十分鐘爬一次</span></span><br><span class="line">setInterval( 你的<span class="function"><span class="keyword">function</span>名稱 , 12000 * 10);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 兩十分鐘爬一次</span></span><br><span class="line">setInterval( 你的<span class="function"><span class="keyword">function</span>名稱 , 12000 * 10);</span></span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <h3 id="切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢-笑！"><a href="#切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢-笑！" class="headerlink" title="切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢 ( 笑！"></a><em>切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢 ( 笑！</em></h3></blockquote>
 <hr>
 <h3 id="等等說好的-JSON-呢？"><a href="#等等說好的-JSON-呢？" class="headerlink" title="等等說好的 JSON 呢？"></a>等等說好的 JSON 呢？</h3><p>記得前面我們說的 <strong>fs</strong> 嗎？其實只需要使用這個就可以寫入 <strong>JSON</strong>了！</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 這個不需要安裝直接引用即可，用來把資料寫入JSON檔案</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寫入 result.json 檔案</span></span><br><span class="line">fs.writeFileSync(<span class="string">"result.json"</span>, <span class="built_in">JSON</span>.stringify(result));</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 這個不需要安裝直接引用即可，用來把資料寫入JSON檔案</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寫入 result.json 檔案</span></span><br><span class="line">fs.writeFileSync(<span class="string">"result.json"</span>, <span class="built_in">JSON</span>.stringify(result));</span><br></pre></td></tr></tbody></table></figure>
 
 <p>按照這種方式就會自動創建一個 <strong>JSON</strong> 檔案了，很方便吧！</p>
 <hr>
@@ -401,316 +110,21 @@
 <blockquote>
 <h3 id="另外關於這次的爬蟲有上傳-GitHub-如果不嫌棄的大大可以下載來玩玩，傳送門。"><a href="#另外關於這次的爬蟲有上傳-GitHub-如果不嫌棄的大大可以下載來玩玩，傳送門。" class="headerlink" title="另外關於這次的爬蟲有上傳 GitHub 如果不嫌棄的大大可以下載來玩玩，傳送門。"></a>另外關於這次的爬蟲有上傳 GitHub 如果不嫌棄的大大可以下載來玩玩，<a href="https://github.com/RexHung0302/Crawler">傳送門</a>。</h3></blockquote>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>台銀 — <span class="exturl" data-url="aHR0cHM6Ly9yYXRlLmJvdC5jb20udHcveHJ0">牌告匯率<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sYXJyeWx1LmJsb2cvQGxhcnJ5ODUwODA2P3NvdXJjZT1wb3N0X3BhZ2UtLS0tLTQxNGUzM2Y0NWM3ZC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0=">Larry Lu<i class="fa fa-external-link-alt"></i></span>大神 —<span class="exturl" data-url="aHR0cHM6Ly9sYXJyeWx1LmJsb2cvbm9kZWpzLXJlcXVlc3QtY2hlZXJpby13ZWF0aGVyLTQxNGUzM2Y0NWM3ZA=="> [Node.js] 用 request + cheerio 抓取即時天氣<i class="fa fa-external-link-alt"></i></span></li>
-<li>Webduino學習手冊 — <span class="exturl" data-url="aHR0cHM6Ly90dXRvcmlhbHMud2ViZHVpbm8uaW8vemgtdHcvZG9jcy9zb2NrZXQvdXNlZnVsL2V4Y2hhbmdlLW5vZGVqcy5odG1s">日幣匯率 ( Node-js 爬蟲 )<i class="fa fa-external-link-alt"></i></span></li>
+<li>台銀 — <a href="https://rate.bot.com.tw/xrt" target="_blank" rel="noopener">牌告匯率</a></li>
+<li><a href="https://larrylu.blog/@larry850806?source=post_page-----414e33f45c7d----------------------" target="_blank" rel="noopener">Larry Lu</a>大神 —<a href="https://larrylu.blog/nodejs-request-cheerio-weather-414e33f45c7d" target="_blank" rel="noopener"> [Node.js] 用 request + cheerio 抓取即時天氣</a></li>
+<li>Webduino學習手冊 — <a href="https://tutorials.webduino.io/zh-tw/docs/socket/useful/exchange-nodejs.html" target="_blank" rel="noopener">日幣匯率 ( Node-js 爬蟲 )</a></li>
 </ul>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright" style="background: var(--card-bg-color);
-    border-left: 3px solid #ff2a2a;
-    list-style: none;
-    margin: 2em 0 0;
-    padding: 0.5em 1em;">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>RexHung
-  </li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/" title="[Tool Notes] — 關於爬蟲">https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
-  </li>
-</ul>
-</div>
-
-
-      <div>
-        
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
-    
-</div>
-        
-      </div>
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/Other/" rel="tag"><i class="fa fa-tag"></i> Other</a>
-              <a href="/tags/Crawler/" rel="tag"><i class="fa fa-tag"></i> Crawler</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/07/14/20190714/" rel="prev" title="[PHP Notes] — 關於 php-Redis install on Mac OSX">
-      <i class="fa fa-chevron-left"></i> [PHP Notes] — 關於 php-Redis install on Mac OSX
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/10/09/20191009/" rel="next" title="[JavaScript Notes] — 淺談 JavaScript #1">
-      [JavaScript Notes] — 淺談 JavaScript #1 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#快給我釣竿"><span class="nav-number">1.1.</span> <span class="nav-text">快給我釣竿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事前準備"><span class="nav-number">1.2.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除了釣竿還需要魚餌"><span class="nav-number">1.3.</span> <span class="nav-text">除了釣竿還需要魚餌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎麼綁上我的魚餌？"><span class="nav-number">1.4.</span> <span class="nav-text">怎麼綁上我的魚餌？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那我怎麼抓-DOM-呢？"><span class="nav-number">1.5.</span> <span class="nav-text">那我怎麼抓 DOM 呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所以我要一直守在電腦前？"><span class="nav-number">1.6.</span> <span class="nav-text">所以我要一直守在電腦前？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。"><span class="nav-number">1.6.1.</span> <span class="nav-text">如果有安全疑慮的話建議申辦一組平常沒在用的信箱，只會用來寄信而已。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所以還是要守在電腦前輸入指令嗎？"><span class="nav-number">1.7.</span> <span class="nav-text">所以還是要守在電腦前輸入指令嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢-笑！"><span class="nav-number">1.8.</span> <span class="nav-text">切記如果時間設得太短記得增加條件去判斷是否記過信了，不然信箱可是會被塞爆呢 ( 笑！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#等等說好的-JSON-呢？"><span class="nav-number">1.9.</span> <span class="nav-text">等等說好的 JSON 呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#另外關於這次的爬蟲有上傳-GitHub-如果不嫌棄的大大可以下載來玩玩，傳送門。"><span class="nav-number">2.1.</span> <span class="nav-text">另外關於這次的爬蟲有上傳 GitHub 如果不嫌棄的大大可以下載來玩玩，傳送門。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-number">3.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/images/profile/profile_2.png">
-  <p class="site-author-name" itemprop="name">RexHung</p>
-  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">47</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fab twitter fa-fw"></i></span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fab facebook fa-fw"></i></span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="總字數">286k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="所需總閱讀時間">4:20</span>
-</div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://RexHung0302.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/";
-    this.page.identifier = "2019/08/20/20190820/";
-    this.page.title = "[Tool Notes] — 關於爬蟲";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://RexHung0302.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-
-  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/click-word.js"></script>
-</body>
-</html>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/">https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/Other/">Other    </a><a class="post-meta__tags" href="/tags/Crawler/">Crawler    </a></div><div class="post_share"><div class="social-share" data-image="https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/10/09/20191009/"><img class="prev_cover lozad" data-src="https://miro.medium.com/max/688/1*UwGvHvi4kBF5JAlZiO4IGA.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[JavaScript Notes] — 淺談 JavaScript #1</span></div></a></div><div class="next-post pull-right"><a href="/2019/07/14/20190714/"><img class="next_cover lozad" data-src="https://miro.medium.com/max/3200/1*1qHFQTwQOj6sPvFkJW4Qlg.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[PHP Notes] — 關於 php-Redis install on Mac OSX</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2019/12/01/20191201/" title="[Tool Notes] — 關於爬蟲#2"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Tool Notes] — 關於爬蟲#2</div></a></div><div class="relatedPosts_item"><a href="/2020/12/19/20201219/" title="LINE TAIWAN TECHPULSE 2020"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">LINE TAIWAN TECHPULSE 2020</div></a></div><div class="relatedPosts_item"><a href="/2019/12/04/20191204/" title="LINE TAIWAN TECHPULSE 2019"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">LINE TAIWAN TECHPULSE 2019</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/08/20/20190820/';
+  this.page.identifier = '2019/08/20/20190820/';
+  this.page.title = '[Tool Notes] — 關於爬蟲';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>

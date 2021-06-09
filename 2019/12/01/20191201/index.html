@@ -1,332 +1,35 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="Introduction &amp; 前言繼上一篇爬蟲之後這次決定繼續研究爬蟲，一方面當興趣玩，一方面了解 LINE 的機器人及繼續了解 Node.js。這次一樣是透過上次完成的爬蟲機器人將日幣資訊傳送至 LINE 上，文章將不會過多涉略到太難的 LINE API。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Tool Notes] — 關於爬蟲#2">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/index.html">
-<meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言繼上一篇爬蟲之後這次決定繼續研究爬蟲，一方面當興趣玩，一方面了解 LINE 的機器人及繼續了解 Node.js。這次一樣是透過上次完成的爬蟲機器人將日幣資訊傳送至 LINE 上，文章將不會過多涉略到太難的 LINE API。">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://github.com/images/20191201/Node.js_logo.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png">
-<meta property="og:image" content="https://github.com/images/20191201/LineBotImg_1.png">
-<meta property="og:image" content="https://github.com/images/20191201/stepImg.png">
-<meta property="og:image" content="https://github.com/images/20191201/Line_difference.png">
-<meta property="og:image" content="https://github.com/images/20191201/Line_charge.png">
-<meta property="og:image" content="https://github.com/images/20191201/LINE_SignIn.png">
-<meta property="og:image" content="https://github.com/images/20191201/Line_Messaging_API.png">
-<meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_Messaging_API_2.png">
-<meta property="og:image" content="https://github.com/images/20191201/Line_Messaging_API_3.png">
-<meta property="og:image" content="https://github.com/images/20191201/herokuImg.png">
-<meta property="og:image" content="https://github.com/images/20191201/git.png">
-<meta property="og:image" content="https://github.com/images/20191201/heroku-create-fail.png">
-<meta property="og:image" content="https://github.com/images/20191201/heroku-create-success.png">
-<meta property="og:image" content="https://github.com/images/20191201/heroku-index.png">
-<meta property="og:image" content="https://github.com/images/20191201/heroku-open-app.png">
-<meta property="article:published_time" content="2019-12-01T15:59:59.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:45:33.395Z">
-<meta property="article:author" content="RexHung">
-<meta property="article:tag" content="RexHung">
-<meta property="article:tag" content="CodeLife">
-<meta property="article:tag" content="Crawler">
-<meta property="article:tag" content="Engineer">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/images/20191201/Node.js_logo.png">
-
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>[Tool Notes] — 關於爬蟲#2 | RexHung's Blog</title>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Tool Notes] — 關於爬蟲#2 | RexHung's Blog</title><meta name="description" content="[Tool Notes] — 關於爬蟲#2"><meta name="keywords" content="Code,Other,Crawler"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Tool Notes] — 關於爬蟲#2"><meta name="twitter:description" content="[Tool Notes] — 關於爬蟲#2"><meta name="twitter:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta property="og:type" content="article"><meta property="og:title" content="[Tool Notes] — 關於爬蟲#2"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Tool Notes] — 關於爬蟲#2"><meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="LINE TAIWAN TECHPULSE 2019" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/"><link rel="next" title="Mac OS 使用 HomeBrew 建置 Web 開發環境" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支持'
+  },
+  bookmark: {
+    title: '添加書籤',
+    message_prev: '按',
+    message_next: '鍵將本頁加入書籤'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">RexHung's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
-
-  </li>
-        <li class="menu-item menu-item-link">
-
-    <a href="/link/" rel="section"><i class="fa fa-link fa-fw"></i>link</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile/profile_2.png">
-      <meta itemprop="name" content="RexHung">
-      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RexHung's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          [Tool Notes] — 關於爬蟲#2
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2019-12-01 23:59:59" itemprop="dateCreated datePublished" datetime="2019-12-01T23:59:59+08:00">2019-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-09 14:45:33" itemprop="dateModified" datetime="2021-06-09T14:45:33+08:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/Crawler/" itemprop="url" rel="index"><span itemprop="name">Crawler</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/12/01/20191201/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/01/20191201/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>9.3k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>8 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>繼上一篇爬蟲之後這次決定繼續研究爬蟲，一方面當興趣玩，一方面了解 <strong>LINE</strong> 的機器人及繼續了解 <strong>Node.js</strong>。這次一樣是透過上次完成的爬蟲機器人將日幣資訊傳送至 <strong>LINE</strong> 上，文章將不會過多涉略到太難的 <strong>LINE API</strong>。</p>
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#事前準備"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">事前準備</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#目錄"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">目錄</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#LINE-Bot-基本介紹"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">LINE Bot 基本介紹</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#基本概念說明"><span class="toc_mobile_items-number">1.3.1.</span> <span class="toc_mobile_items-text">基本概念說明</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#基本架構說明"><span class="toc_mobile_items-number">1.3.2.</span> <span class="toc_mobile_items-text">基本架構說明</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#LINE-Bot-申請"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">LINE Bot 申請</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#LINE-Bot-基本介紹-1"><span class="toc_mobile_items-number">1.4.1.</span> <span class="toc_mobile_items-text">LINE Bot 基本介紹</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#LINE-Bot-帳號申請"><span class="toc_mobile_items-number">1.4.2.</span> <span class="toc_mobile_items-text">LINE Bot 帳號申請</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#LINE-Messaging-API-啟用"><span class="toc_mobile_items-number">1.4.3.</span> <span class="toc_mobile_items-text">LINE Messaging API 啟用</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Channel-Access-Token-頻道存取令牌"><span class="toc_mobile_items-number">1.4.4.</span> <span class="toc_mobile_items-text">Channel Access Token 頻道存取令牌</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#LINE-Bot-Webhook-伺服器-建置"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">LINE Bot Webhook 伺服器 建置</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Heroku-帳號申請"><span class="toc_mobile_items-number">1.5.1.</span> <span class="toc_mobile_items-text">Heroku 帳號申請</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Heroku-Cli-安裝"><span class="toc_mobile_items-number">1.5.2.</span> <span class="toc_mobile_items-text">Heroku Cli 安裝</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#Git-版本控制軟體"><span class="toc_mobile_items-number">1.5.3.</span> <span class="toc_mobile_items-text">Git 版本控制軟體</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#LINE-Bot-與日幣爬蟲應用"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">LINE Bot 與日幣爬蟲應用</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#接下來會簡單講解一下另外一個頁面的程式碼"><span class="toc_mobile_items-number">1.6.1.</span> <span class="toc_mobile_items-text">接下來會簡單講解一下另外一個頁面的程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#一枝穿雲箭"><span class="toc_mobile_items-number">1.6.2.</span> <span class="toc_mobile_items-text">一枝穿雲箭</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#錯誤千軍萬馬來相見"><span class="toc_mobile_items-number">1.6.3.</span> <span class="toc_mobile_items-text">錯誤千軍萬馬來相見</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">1.</span> <span class="toc-text">Introduction &amp; 前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事前準備"><span class="toc-number">1.1.</span> <span class="toc-text">事前準備</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目錄"><span class="toc-number">1.2.</span> <span class="toc-text">目錄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LINE-Bot-基本介紹"><span class="toc-number">1.3.</span> <span class="toc-text">LINE Bot 基本介紹</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本概念說明"><span class="toc-number">1.3.1.</span> <span class="toc-text">基本概念說明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本架構說明"><span class="toc-number">1.3.2.</span> <span class="toc-text">基本架構說明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LINE-Bot-申請"><span class="toc-number">1.4.</span> <span class="toc-text">LINE Bot 申請</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LINE-Bot-基本介紹-1"><span class="toc-number">1.4.1.</span> <span class="toc-text">LINE Bot 基本介紹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LINE-Bot-帳號申請"><span class="toc-number">1.4.2.</span> <span class="toc-text">LINE Bot 帳號申請</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LINE-Messaging-API-啟用"><span class="toc-number">1.4.3.</span> <span class="toc-text">LINE Messaging API 啟用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Channel-Access-Token-頻道存取令牌"><span class="toc-number">1.4.4.</span> <span class="toc-text">Channel Access Token 頻道存取令牌</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LINE-Bot-Webhook-伺服器-建置"><span class="toc-number">1.5.</span> <span class="toc-text">LINE Bot Webhook 伺服器 建置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Heroku-帳號申請"><span class="toc-number">1.5.1.</span> <span class="toc-text">Heroku 帳號申請</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Heroku-Cli-安裝"><span class="toc-number">1.5.2.</span> <span class="toc-text">Heroku Cli 安裝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Git-版本控制軟體"><span class="toc-number">1.5.3.</span> <span class="toc-text">Git 版本控制軟體</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LINE-Bot-與日幣爬蟲應用"><span class="toc-number">1.6.</span> <span class="toc-text">LINE Bot 與日幣爬蟲應用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接下來會簡單講解一下另外一個頁面的程式碼"><span class="toc-number">1.6.1.</span> <span class="toc-text">接下來會簡單講解一下另外一個頁面的程式碼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一枝穿雲箭"><span class="toc-number">1.6.2.</span> <span class="toc-text">一枝穿雲箭</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#錯誤千軍萬馬來相見"><span class="toc-number">1.6.3.</span> <span class="toc-text">錯誤千軍萬馬來相見</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">2.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(LineBotImg_1.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[Tool Notes] — 關於爬蟲#2</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-12-01<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/">Note</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/Note/Crawler/">Crawler</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">4.1k</span><span class="post-meta__separator">|</span><span>閲讀時長: 14 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>繼上一篇爬蟲之後這次決定繼續研究爬蟲，一方面當興趣玩，一方面了解 <strong>LINE</strong> 的機器人及繼續了解 <strong>Node.js</strong>。這次一樣是透過上次完成的爬蟲機器人將日幣資訊傳送至 <strong>LINE</strong> 上，文章將不會過多涉略到太難的 <strong>LINE API</strong>。</p>
 <a id="more"></a>
 
-<p><img src="/images/20191201/Node.js_logo.png" alt=""></p>
+<p><img alt="" data-src="/images/20191201/Node.js_logo.png" class="lozad"></p>
 <hr>
-<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>一樣需要 <strong>node.js</strong> 需要至少 <strong>4.x</strong> 版本以上，不過現在官方網站都能下載到最新的，所以還沒安裝到官方網站下載就可以囉，<span class="exturl" data-url="aHR0cHM6Ly9ub2RlanMub3JnL2VuL2Rvd25sb2FkLw==">傳送門<i class="fa fa-external-link-alt"></i></span>。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png" alt="安裝完成"></p>
-<p>-&gt; 安裝的時候會一併安裝 <strong>npm</strong>，不曉得這是什麼可以點我看我的文章介紹，<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8=">[Tool Notes] — 關於Webpack<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>關於爬蟲的套件可以參考 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wOC8yMC8yMDE5MDgyMC8=">[Tool Notes] — 關於爬蟲<i class="fa fa-external-link-alt"></i></span>。</p>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>一樣需要 <strong>node.js</strong> 需要至少 <strong>4.x</strong> 版本以上，不過現在官方網站都能下載到最新的，所以還沒安裝到官方網站下載就可以囉，<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">傳送門</a>。</p>
+<p><img alt="安裝完成" data-src="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png" class="lozad"></p>
+<p>-&gt; 安裝的時候會一併安裝 <strong>npm</strong>，不曉得這是什麼可以點我看我的文章介紹，<a href="https://rexhung0302.github.io/2019/06/18/20190618/" target="_blank" rel="noopener">[Tool Notes] — 關於Webpack</a>。</p>
+<p>關於爬蟲的套件可以參考 <a href="https://rexhung0302.github.io/2019/08/20/20190820/" target="_blank" rel="noopener">[Tool Notes] — 關於爬蟲</a>。</p>
 <hr>
 <h3 id="目錄"><a href="#目錄" class="headerlink" title="目錄"></a>目錄</h3><ol>
 <li><p>LINE Bot 基本介紹</p>
@@ -344,13 +47,13 @@
 <hr>
 <h3 id="LINE-Bot-基本介紹"><a href="#LINE-Bot-基本介紹" class="headerlink" title="LINE Bot 基本介紹"></a>LINE Bot 基本介紹</h3><h4 id="基本概念說明"><a href="#基本概念說明" class="headerlink" title="基本概念說明"></a>基本概念說明</h4><p><strong>LINE BOT</strong> 是 <strong>LINE</strong> 其中一個服務，原為『<strong>LINE@生活圈</strong>』或『<strong>LINE官方帳號</strong>』，不過 <strong>2019年4月18日</strong> 起，已經整合為  <strong>LINE官方帳號2.0</strong>，且原本的 <strong>LINE@生活圈 免費帳號</strong> 及 <strong>付費帳號</strong> 都會在 <strong>2019年10月1日</strong> 前完成帳號的自動升級。</p>
 <blockquote>
-<p>有興趣可以參考此篇文章 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tLzgtaW50ZXJhY3RpdmUvJUU4JUJGJThFJUU2JThFJUE1LWxpbmUtJUU1JUFFJTk4JUU2JTk2JUI5JUU1JUI4JUIzJUU4JTk5JTlGLTItMC0lRTUlODUlQTglRTklOUQlQTIlRTUlOEQlODclRTclQjQlOUEtJUU1JTg4JUIwJUU1JUJBJTk1JUU2JTlDJTg5JUU1JTkzJUFBJUU0JUJBJTlCJUU0JUJBJThCJUU2JTgzJTg1JUU2JTk0JUI5JUU4JUFFJThBJUU0JUJBJTg2LWE1NDMwNzhhZDIzZQ==">迎接 LINE 官方帳號 2.0 全面升級：到底有哪些事情改變了？<i class="fa fa-external-link-alt"></i></span></p>
+<p>有興趣可以參考此篇文章 <a href="https://medium.com/8-interactive/%E8%BF%8E%E6%8E%A5-line-%E5%AE%98%E6%96%B9%E5%B8%B3%E8%99%9F-2-0-%E5%85%A8%E9%9D%A2%E5%8D%87%E7%B4%9A-%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BA%8B%E6%83%85%E6%94%B9%E8%AE%8A%E4%BA%86-a543078ad23e" target="_blank" rel="noopener">迎接 LINE 官方帳號 2.0 全面升級：到底有哪些事情改變了？</a></p>
 </blockquote>
 <p>通常 <strong>LINE BOT</strong> 就像是你會在外面加的官方帳號，你需要加入他為好友，才能與之互動。</p>
 <blockquote>
 <p><strong>為什麼現在越來越多人會使用 **LINE Bot</strong> 呢？簡單說就是任何使用者及商家都能從0元無料上手，後台功能全部都開放，甚至API串接無需審核即可使用，現今不一定每一個人每天都會用 FaceBook 但是有使用智慧型手機的人幾乎都離開不通訊軟體，而台灣及日本就是 LINE 的最大使用客群。**</p>
 </blockquote>
-<p><img src="/images/20191201/LineBotImg_1.png" alt="LineBot"></p>
+<p><img alt="LineBot" data-src="/images/20191201/LineBotImg_1.png" class="lozad"></p>
 <h4 id="基本架構說明"><a href="#基本架構說明" class="headerlink" title="基本架構說明"></a>基本架構說明</h4><p>基本上如果沒有透過 <strong>LINE API</strong> 回應的話，就是從 <strong>LINE</strong> 的後台直接去做設定，就不會有 <strong>Client Server</strong> 這塊，那我們要做的事情很簡單，就是申請一個 <strong>LINE Bot</strong> 然後建立我們的 <strong>Client Server</strong>。</p>
 <p>大致上流程就是 <strong>LINE Users</strong> 會發起要求或回應，然後 <strong>LINE Server</strong> 會判斷要傳送訊息給哪一個 <strong>LINE Bot</strong>，並解確認是否有起用 <strong>Webhook URL</strong> 並且有設定 <strong>Webhook 網址目標</strong>，如果沒有就不會傳送訊息給任何伺服器。</p>
 <p>如果有設定 <strong>Webhook 目標網址</strong>，<strong>LINE Server</strong> 會將 <strong>LINE Users</strong> 的使用者訊息，傳送一個 <strong>HTTP POST Resquest</strong>，在 <strong>Resquest</strong> 中會定義使用者的訊息類型。</p>
@@ -364,12 +67,12 @@
 </blockquote>
 <p>最後在 <strong>Client Server</strong> 我們需要建立一個 <strong>Web API</strong> 服務的伺服器，接著收到不同類型的使用者訊息之後，需要回應(Response)<strong>HTTP OK</strong> 的狀態碼(<strong>ex:HTTP Status Code:200 註2</strong>)給 <strong>LINE Server</strong> 伺服器確認。</p>
 <p><strong>Client Server</strong> 就是我們可以設計程式的地方，可以把我們的爬蟲放這邊，透過 <strong>Messaging API</strong> 我們可以傳送各式各樣的訊息，譬如文字、圖片、選單…等等。</p>
-<p><img src="/images/20191201/stepImg.png" alt="大致架構"></p>
+<p><img alt="大致架構" data-src="/images/20191201/stepImg.png" class="lozad"></p>
 <blockquote>
-<p><em>註1: SHA256是SHA-2下細分出的一種演算法。SHA-2，名稱來自於安全雜湊演算法2（英語：Secure Hash Algorithm 2）的縮寫，一種密碼雜湊函式演算法標準，由美國國家安全域性研發，屬於SHA演算法之一，是SHA-1的後繼者。詳細可參考 <span class="exturl" data-url="aHR0cHM6Ly9jb2RlcnR3LmNvbS8lRTclQTglOEIlRTUlQkMlOEYlRTglQUElOUUlRTglQTglODAvNjAyNzc0Lw==">SHA256演算法原理詳解<i class="fa fa-external-link-alt"></i></span></em></p>
+<p><em>註1: SHA256是SHA-2下細分出的一種演算法。SHA-2，名稱來自於安全雜湊演算法2（英語：Secure Hash Algorithm 2）的縮寫，一種密碼雜湊函式演算法標準，由美國國家安全域性研發，屬於SHA演算法之一，是SHA-1的後繼者。詳細可參考 <a href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/602774/" target="_blank" rel="noopener">SHA256演算法原理詳解</a></em></p>
 </blockquote>
 <blockquote>
-<p><em>註2: 200為請求成功，相關代碼查詢可以參考 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvSFRUUC9TdGF0dXM=">HTTP 狀態碼<i class="fa fa-external-link-alt"></i></span></em></p>
+<p><em>註2: 200為請求成功，相關代碼查詢可以參考 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" target="_blank" rel="noopener">HTTP 狀態碼</a></em></p>
 </blockquote>
 <hr>
 <h3 id="LINE-Bot-申請"><a href="#LINE-Bot-申請" class="headerlink" title="LINE Bot 申請"></a>LINE Bot 申請</h3><h4 id="LINE-Bot-基本介紹-1"><a href="#LINE-Bot-基本介紹-1" class="headerlink" title="LINE Bot 基本介紹"></a>LINE Bot 基本介紹</h4><p>根據申請人的資格分為兩種帳號『<strong>一般帳號</strong>』與『<strong>認證帳號</strong>』還有最後一種是無法自行申請的『<strong>LINE企業帳號</strong>』，差別在下方。</p>
@@ -379,385 +82,90 @@
 <li>企業帳號</li>
 </ol>
 <p>-&gt; 透過LINE的邀請，通常會是在LINE上深度經營的帳戶。</p>
-<p><img src="/images/20191201/Line_difference.png" alt="Line差別"></p>
+<p><img alt="Line差別" data-src="/images/20191201/Line_difference.png" class="lozad"></p>
 <p>關於收費不再依照付費區分訊息使用量，改採用訊息發送數量，就是像發簡訊一樣，分成三種用量『<strong>低用量</strong>』、『<strong>入門版</strong>』、『<strong>進階版</strong>』三種，值得一提的是 <strong>2.0版本</strong> 沒有了好友的上限。</p>
-<p><img src="/images/20191201/Line_charge.png" alt="收費方案"></p>
-<h4 id="LINE-Bot-帳號申請"><a href="#LINE-Bot-帳號申請" class="headerlink" title="LINE Bot 帳號申請"></a>LINE Bot 帳號申請</h4><p>廢話說了一堆就開始拿起你的釣竿吧！首先我們要先申請一組 <strong>LINE Bot 帳號</strong>，進入 <span class="exturl" data-url="aHR0cHM6Ly93d3cubGluZWJpei5jb20v">LINE for Business<i class="fa fa-external-link-alt"></i></span> ，我們會申請一個低用量方案的 <strong>Messaging API</strong>。</p>
+<p><img alt="收費方案" data-src="/images/20191201/Line_charge.png" class="lozad"></p>
+<h4 id="LINE-Bot-帳號申請"><a href="#LINE-Bot-帳號申請" class="headerlink" title="LINE Bot 帳號申請"></a>LINE Bot 帳號申請</h4><p>廢話說了一堆就開始拿起你的釣竿吧！首先我們要先申請一組 <strong>LINE Bot 帳號</strong>，進入 <a href="https://www.linebiz.com/" target="_blank" rel="noopener">LINE for Business</a> ，我們會申請一個低用量方案的 <strong>Messaging API</strong>。</p>
 <p>點選右上方的『<strong>線上申請官方帳號</strong>』，進入後會要求登入 <strong>LINE帳號</strong>，或直接進入『<a href="https://manager.line.biz/" target="_blank" rel="noopener"><strong>LINE Official Account Manager</strong></a>』進入後點選 <strong>建立LINE官方帳號</strong>。</p>
-<p><img src="/images/20191201/LINE_SignIn.png" alt="點選 使用LINE帳號登入"></p>
+<p><img alt="點選 使用LINE帳號登入" data-src="/images/20191201/LINE_SignIn.png" class="lozad"></p>
 <p>基本上填寫『<strong>帳號名稱</strong>』、『<strong>電子郵件</strong>』與選擇『<strong>業種</strong>』，點擊確認之後再確認一次資訊然後點擊『<strong>提交</strong>』送出。</p>
 <blockquote>
 <p><em>LINE官方帳號是隨機ID，如果想購買專屬ID，可以到 <a href="https://manager.line.biz/" target="_blank" rel="noopener"><strong>LINE Official Account Manager</strong></a> 的『設定』-&gt;『帳務專區』-&gt;『專屬ID』。</em></p>
 </blockquote>
 <h4 id="LINE-Messaging-API-啟用"><a href="#LINE-Messaging-API-啟用" class="headerlink" title="LINE Messaging API 啟用"></a>LINE Messaging API 啟用</h4><p>在 <strong>LINE Official Account Manager</strong> 頁面左上角區域，可以看到目前官方帳號資訊。</p>
-<p><img src="/images/20191201/Line_Messaging_API.png" alt="點擊左上角 回應模式 再點左側 Messaging API"></p>
+<p><img alt="點擊左上角 回應模式 再點左側 Messaging API" data-src="/images/20191201/Line_Messaging_API.png" class="lozad"></p>
 <p>中間會有 <strong>狀態 未使用</strong>，點擊下方按鈕 <strong>啟用Messaging API</strong>，接著會跳出選擇提供者，目的在於讓企業或使用者管理多個聊天機器人，選取『<strong>建立使用者</strong>』，並且輸入新的『<strong>提供者名稱</strong>』，然後按下同意，<strong>設定隱私權政策</strong> 及 <strong>服務條款</strong> 可以跳過，最後確認資訊並點下確定啟用。</p>
 <p>接下來再回來看剛剛那個頁面，會發現需要填入 <strong>Channel資訊</strong> 及 <strong>Webhook網址</strong>。</p>
 <p>我們先進入 <a href="https://developers.line.biz/console/" target="_blank" rel="noopener"><strong>開發人員管理介面</strong></a>，前往 <strong>提供者列表</strong>(<strong>Provider List</strong>)，選擇剛剛建立的提供者。</p>
 <p>之後點擊 <strong>Create New Channel</strong> 進入，在選擇 <strong>Messaging API</strong>，另外兩個暫時不會用到。</p>
-<p><img src="Line_Messaging_API_2.png" alt="選擇 Messaging API"></p>
+<p><img alt="選擇 Messaging API" data-src="Line_Messaging_API_2.png" class="lozad"></p>
 <h4 id="Channel-Access-Token-頻道存取令牌"><a href="#Channel-Access-Token-頻道存取令牌" class="headerlink" title="Channel Access Token 頻道存取令牌"></a>Channel Access Token 頻道存取令牌</h4><p>還記得剛剛的 <strong>Channel資訊</strong> 都是空的嗎？在我們建立完新的 <strong>Messaging API</strong> 後，找到 <strong>Messaging API</strong> 的標頭點下去，往下滑動找到 <strong>Channel access token (long-lived)</strong> 然後點擊 <strong>Issue</strong> 按鈕產生一組新的 <strong>Channel access token</strong>(<strong>頻道存取令牌</strong>)，接著會跳出一個彈窗，選擇 <strong>0 hours</strong>，目的在於不讓這個頻道存取令牌過期。</p>
-<p><img src="/images/20191201/Line_Messaging_API_3.png" alt="點擊標頭切換頁面"></p>
+<p><img alt="點擊標頭切換頁面" data-src="/images/20191201/Line_Messaging_API_3.png" class="lozad"></p>
 <p>然後把這行複製更改掉原本空的 <strong>Channel資訊</strong> 的 <strong>Channel secret</strong>，在找到剛剛的頁面，複製標頭 <strong>Basic settings</strong> 裡的 <strong>Channel ID</strong> 貼到剛剛 <strong>Channel資訊</strong> 的 <strong>Channel ID</strong>。</p>
 <p>到此LINE Bot建置基本上到一個段落，接下來我們會直接透過 <strong>Heroku</strong> 架設一個伺服器。</p>
 <blockquote>
-<p><em>如果想要使用本機測試，可以嘗試使用 <span class="exturl" data-url="aHR0cHM6Ly9uZ3Jvay5jb20v">Ngrok<i class="fa fa-external-link-alt"></i></span>，詳細可以參考 <span class="exturl" data-url="aHR0cHM6Ly81eHJ1YnkudHcvcG9zdHMvZWFzeS1uZ3Jvay1ieS1uZ2lueC1zc2gtdHVubmVsLw==">ngrok 不求人：自己搭一個窮人版的 ngrok 服務<i class="fa fa-external-link-alt"></i></span> 搭建一個 <strong>本地 server</strong>，之後再把上方提到原本空的 <strong>Webhook網址</strong> 填入自己的 Ngrok 網址。之後如果有更新會再補上教學。</em></p>
+<p><em>如果想要使用本機測試，可以嘗試使用 <a href="https://ngrok.com/" target="_blank" rel="noopener">Ngrok</a>，詳細可以參考 <a href="https://5xruby.tw/posts/easy-ngrok-by-nginx-ssh-tunnel/" target="_blank" rel="noopener">ngrok 不求人：自己搭一個窮人版的 ngrok 服務</a> 搭建一個 <strong>本地 server</strong>，之後再把上方提到原本空的 <strong>Webhook網址</strong> 填入自己的 Ngrok 網址。之後如果有更新會再補上教學。</em></p>
 </blockquote>
 <hr>
-<p><img src="/images/20191201/herokuImg.png" alt="Heroku 雲平台"></p>
+<p><img alt="Heroku 雲平台" data-src="/images/20191201/herokuImg.png" class="lozad"></p>
 <h3 id="LINE-Bot-Webhook-伺服器-建置"><a href="#LINE-Bot-Webhook-伺服器-建置" class="headerlink" title="LINE Bot Webhook 伺服器 建置"></a>LINE Bot Webhook 伺服器 建置</h3><p>透過 <strong>Heroku</strong>(註3) 的免費方案可以執行一個伺服器，但是伺服器 <strong>30分鐘</strong> 內沒有任何連線，程式會進入休眠，不過再次連線只是需要一點等待時間即可。</p>
-<h4 id="Heroku-帳號申請"><a href="#Heroku-帳號申請" class="headerlink" title="Heroku 帳號申請"></a>Heroku 帳號申請</h4><p>首先進入 <span class="exturl" data-url="aHR0cHM6Ly9zaWdudXAuaGVyb2t1LmNvbS8=">Heroku 網站<i class="fa fa-external-link-alt"></i></span> 申請帳號，輸入紅色米字號的必要輸入資訊後送出，然後到信箱點擊驗證信件的網址驗證，最後到彈出的網頁輸入密碼，完成申請。</p>
-<h4 id="Heroku-Cli-安裝"><a href="#Heroku-Cli-安裝" class="headerlink" title="Heroku Cli 安裝"></a>Heroku Cli 安裝</h4><p>接著我們必須安裝 <strong>Heroku Cli</strong>，前往 <span class="exturl" data-url="aHR0cHM6Ly9kZXZjZW50ZXIuaGVyb2t1LmNvbS9hcnRpY2xlcy9oZXJva3UtY2xp">Heroku 網站 Cli 下載點<i class="fa fa-external-link-alt"></i></span>，依照你的作業系統下載安裝。</p>
-<h4 id="Git-版本控制軟體"><a href="#Git-版本控制軟體" class="headerlink" title="Git 版本控制軟體"></a>Git 版本控制軟體</h4><p>這邊就不多做 Git 安裝介紹，有興趣可以參考 <span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmVzc2Jhci50dy9wb3N0cy8x">進度條<i class="fa fa-external-link-alt"></i></span>。</p>
-<p><img src="/images/20191201/git.png" alt="Git"></p>
+<h4 id="Heroku-帳號申請"><a href="#Heroku-帳號申請" class="headerlink" title="Heroku 帳號申請"></a>Heroku 帳號申請</h4><p>首先進入 <a href="https://signup.heroku.com/" target="_blank" rel="noopener">Heroku 網站</a> 申請帳號，輸入紅色米字號的必要輸入資訊後送出，然後到信箱點擊驗證信件的網址驗證，最後到彈出的網頁輸入密碼，完成申請。</p>
+<h4 id="Heroku-Cli-安裝"><a href="#Heroku-Cli-安裝" class="headerlink" title="Heroku Cli 安裝"></a>Heroku Cli 安裝</h4><p>接著我們必須安裝 <strong>Heroku Cli</strong>，前往 <a href="https://devcenter.heroku.com/articles/heroku-cli" target="_blank" rel="noopener">Heroku 網站 Cli 下載點</a>，依照你的作業系統下載安裝。</p>
+<h4 id="Git-版本控制軟體"><a href="#Git-版本控制軟體" class="headerlink" title="Git 版本控制軟體"></a>Git 版本控制軟體</h4><p>這邊就不多做 Git 安裝介紹，有興趣可以參考 <a href="https://progressbar.tw/posts/1" target="_blank" rel="noopener">進度條</a>。</p>
+<p><img alt="Git" data-src="/images/20191201/git.png" class="lozad"></p>
 <blockquote>
 <p><em>註3: Heroku是一個支援多種程式語言的雲平台即服務。簡單說他就是一個伺服器，別人可以透過他給你的網址，執行你的程式；這個雲平台的優點是可以免費使用，所以你並不需要去自行架設或是擔心剛入門就要準備大量銀彈去繳學費。</em></p>
 </blockquote>
 <hr>
 <h3 id="LINE-Bot-與日幣爬蟲應用"><a href="#LINE-Bot-與日幣爬蟲應用" class="headerlink" title="LINE Bot 與日幣爬蟲應用"></a>LINE Bot 與日幣爬蟲應用</h3><p>在建立一個新專案之前，這邊必須要來套用上次的爬蟲應用，但是要怎麼跟 LINE 結合呢？這邊就需要用到 <strong>LIEN</strong> 官方的 <strong>Node.js SDK</strong>，官方其實提供了好幾種的程式語言版本，但我幾經思考後還是選擇了 <strong>Node.js</strong> 畢竟 <strong>JavaScript</strong> 還是能多少無痛上手嘛(笑…</p>
-<p>那怎麼引入套件可以參考之前的文章 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8wNi8xOC8yMDE5MDYxOC8jJUU5JUExJThDJUU1JUE0JTk2JUU4JUE5JUIxLW5vZGUtbW9kdWxlcy0lRTUlOUMlOTYlRTYlOUIlQjglRTklQTQlQTg=">[TOOL Notes]-關於Webpack<i class="fa fa-external-link-alt"></i></span>，這邊就不再次說明，直接上<strong>Code</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">const</span> line = <span class="built_in">require</span>(<span class="string">'@line/bot-sdk'</span>); <span class="comment">// line 的 sdk</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>); <span class="comment">// node.js 套件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> crawler = <span class="built_in">require</span>(<span class="string">'./crawler'</span>); <span class="comment">// 爬蟲的部分</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// LINE 的 ENV 設定</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,</span><br><span class="line">    channelSecret: process.env.CHANNEL_SECRET,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> line.Client(config);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line">app.post(<span class="string">'/callback'</span>, line.middleware(config), (req, res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">Promise</span></span><br><span class="line">        .all(req.body.events.map(handleEvent))</span><br><span class="line">        .then(<span class="function">(<span class="params">result</span>) =&gt;</span> res.json(result))</span><br><span class="line">        .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(err);</span><br><span class="line">            res.status(<span class="number">500</span>).end();</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 測試回應用</span></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.json(<span class="string">"ok"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleEvent</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判斷是否為 Webhook URL 測試</span></span><br><span class="line">    <span class="keyword">if</span> (event.replyToken === <span class="string">"00000000000000000000000000000000"</span> || event.replyToken === <span class="string">"ffffffffffffffffffffffffffffffff"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 設定關鍵字 查詢匯率</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (event.type === <span class="string">'message'</span> &amp;&amp; event.message.text === <span class="string">'告訴我日幣匯率'</span>) &#123;</span><br><span class="line">        <span class="comment">// 跑日幣的爬蟲程式碼</span></span><br><span class="line">        crawler.crawler(<span class="string">'JPY'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> msgToUser = &#123;</span><br><span class="line">                type: <span class="string">'text'</span>,</span><br><span class="line">                text: <span class="string">`日幣現金匯率為-&gt;<span class="subst">$&#123;res.cashSellExchange&#125;</span>, \n日幣即期匯率為-&gt;<span class="subst">$&#123;res.sightSellExchange&#125;</span>, \n詳細資訊請參考-&gt;<span class="subst">$&#123;res.webSideUrl&#125;</span>`</span>,</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> client.replyMessage(event.replyToken, msgToUser);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">3000</span>;</span><br><span class="line">app.listen(port, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`listening on <span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>那怎麼引入套件可以參考之前的文章 <a href="https://rexhung0302.github.io/2019/06/18/20190618/#%E9%A1%8C%E5%A4%96%E8%A9%B1-node-modules-%E5%9C%96%E6%9B%B8%E9%A4%A8" target="_blank" rel="noopener">[TOOL Notes]-關於Webpack</a>，這邊就不再次說明，直接上<strong>Code</strong>。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">const</span> line = <span class="built_in">require</span>(<span class="string">'@line/bot-sdk'</span>); <span class="comment">// line 的 sdk</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>); <span class="comment">// node.js 套件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> crawler = <span class="built_in">require</span>(<span class="string">'./crawler'</span>); <span class="comment">// 爬蟲的部分</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// LINE 的 ENV 設定</span></span><br><span class="line"><span class="keyword">const</span> config = {</span><br><span class="line">    channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN,</span><br><span class="line">    channelSecret: process.env.CHANNEL_SECRET,</span><br><span class="line">};</span><br><span class="line"><span class="keyword">const</span> client = <span class="keyword">new</span> line.Client(config);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line">app.post(<span class="string">'/callback'</span>, line.middleware(config), (req, res) =&gt; {</span><br><span class="line">    <span class="built_in">Promise</span></span><br><span class="line">        .all(req.body.events.map(handleEvent))</span><br><span class="line">        .then(<span class="function">(<span class="params">result</span>) =&gt;</span> res.json(result))</span><br><span class="line">        .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> {</span><br><span class="line">            <span class="built_in">console</span>.error(err);</span><br><span class="line">            res.status(<span class="number">500</span>).end();</span><br><span class="line">        });</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 測試回應用</span></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; {</span><br><span class="line">    res.json(<span class="string">"ok"</span>);</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleEvent</span>(<span class="params">event</span>) </span>{</span><br><span class="line">    <span class="comment">// 判斷是否為 Webhook URL 測試</span></span><br><span class="line">    <span class="keyword">if</span> (event.replyToken === <span class="string">"00000000000000000000000000000000"</span> || event.replyToken === <span class="string">"ffffffffffffffffffffffffffffffff"</span>) {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">null</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 設定關鍵字 查詢匯率</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (event.type === <span class="string">'message'</span> &amp;&amp; event.message.text === <span class="string">'告訴我日幣匯率'</span>) {</span><br><span class="line">        <span class="comment">// 跑日幣的爬蟲程式碼</span></span><br><span class="line">        crawler.crawler(<span class="string">'JPY'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> {</span><br><span class="line">            <span class="keyword">const</span> msgToUser = {</span><br><span class="line">                type: <span class="string">'text'</span>,</span><br><span class="line">                text: <span class="string">`日幣現金匯率為-&gt;<span class="subst">${res.cashSellExchange}</span>, \n日幣即期匯率為-&gt;<span class="subst">${res.sightSellExchange}</span>, \n詳細資訊請參考-&gt;<span class="subst">${res.webSideUrl}</span>`</span>,</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">return</span> client.replyMessage(event.replyToken, msgToUser);</span><br><span class="line">        });</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(<span class="literal">null</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">3000</span>;</span><br><span class="line">app.listen(port, () =&gt; {</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`listening on <span class="subst">${port}</span>`</span>);</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
-<p>這邊我們很快速的講解過去，首先是 <strong>use strict</strong> 嚴謹模式(有興趣可以參考我的 <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAxOS8xMC8wOS8yMDE5MTAwOS8=">JavaScript 系列<i class="fa fa-external-link-alt"></i></span>)，接下來引入 <strong>LINE SDK</strong> 及 <strong>Node.js express</strong> 框架，隨後引入 <strong>crawler</strong> 這隻檔案，讓 <strong>Code</strong> 可以比較乾淨，等一下會講解另一隻檔案如何讓現在的檔案吃到。</p>
+<p>這邊我們很快速的講解過去，首先是 <strong>use strict</strong> 嚴謹模式(有興趣可以參考我的 <a href="https://rexhung0302.github.io/2019/10/09/20191009/" target="_blank" rel="noopener">JavaScript 系列</a>)，接下來引入 <strong>LINE SDK</strong> 及 <strong>Node.js express</strong> 框架，隨後引入 <strong>crawler</strong> 這隻檔案，讓 <strong>Code</strong> 可以比較乾淨，等一下會講解另一隻檔案如何讓現在的檔案吃到。</p>
 <p>接著 <strong>config</strong> 就是設定 <strong>LINE</strong> 的環境變數，這邊等等也會做講解，在程式碼完成之後，要傳上 <strong>Heroku</strong> 之前，會把環境變數設定上去。</p>
 <p>最後在下面的 <strong>handleEvent</strong> 主要是判斷 <strong>event</strong> 的事件是，<br>接收到訊息該如何回應，裡面可以新增各式各樣的判斷，比如對方傳文字來或是圖片來，你應該要如何回應。在剛開始 <strong>LINE</strong> 那邊會有判斷是否為 <strong>Webhook URL</strong> 測試。在 Line Server 那邊會傳來 <strong>replyToken === “00000000000000000000000000000000”</strong> 或 <strong>replyToken === “ffffffffffffffffffffffffffffffff”</strong> 若收到這樣的訊息可以不做回應。</p>
 <p>接著就是 <strong>event.type === ‘message’</strong> 而且 <strong>event.message.text === ‘告訴我日幣匯率’</strong>；意思就是如果收到訊息且內容是『<strong>告訴我日幣匯率</strong>』，那就去跑另一個 <strong>JavaScript</strong> 檔案 <strong>crawler</strong> 的 <strong>Function -&gt; crawler()</strong>。</p>
 <p>不論結果如何，記得要 <strong>return Promise.resolve(null)</strong>;。</p>
-<h4 id="接下來會簡單講解一下另外一個頁面的程式碼"><a href="#接下來會簡單講解一下另外一個頁面的程式碼" class="headerlink" title="接下來會簡單講解一下另外一個頁面的程式碼"></a>接下來會簡單講解一下另外一個頁面的程式碼</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>); <span class="comment">// 抓整個 html</span></span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>); <span class="comment">// 用來抓 element 的 類似 JQuery 的選擇器</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抓取日幣的爬蟲</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">crawler</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        request(&#123;</span><br><span class="line">            url: <span class="string">"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"</span>,</span><br><span class="line">            method: <span class="string">"GET"</span></span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, response, body</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (error || !body) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="string">'nullnull'</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">const</span> $ = cheerio.load(body); <span class="comment">// 載入 body</span></span><br><span class="line">                <span class="keyword">const</span> tr = $(<span class="string">"tbody tr"</span>); <span class="comment">// 抓取每一行的 tr</span></span><br><span class="line">                <span class="keyword">const</span> result = []; <span class="comment">// 建立一個儲存結果的容器</span></span><br><span class="line">                <span class="keyword">const</span> bankDate = $(<span class="string">"#h1_small_id"</span>); <span class="comment">// 放台銀牌告匯率日期</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> JPY_cashSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放日幣現金匯率的</span></span><br><span class="line">                <span class="keyword">let</span> JPY_sightSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放日幣即期匯率的</span></span><br><span class="line">                <span class="keyword">let</span> AUD_cashSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放澳幣現金匯率的</span></span><br><span class="line">                <span class="keyword">let</span> AUD_sightSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放澳幣即期匯率的</span></span><br><span class="line">                <span class="keyword">let</span> webSideUrl = <span class="string">'http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm'</span>;</span><br><span class="line">                <span class="keyword">let</span> resDate = <span class="literal">null</span>; <span class="comment">// 用來放要回傳回去的匯率資訊</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tr.length; i++) &#123;</span><br><span class="line">                    <span class="keyword">const</span> coinType = tr.eq(i).find(<span class="string">'.hidden-phone.print_show'</span>).text().trim(); <span class="comment">// 幣別</span></span><br><span class="line">                    <span class="keyword">const</span> cashBuyExchange = tr.eq(i).children().eq(<span class="number">1</span>).text(); <span class="comment">// 現金匯率(銀行買入)</span></span><br><span class="line">                    <span class="keyword">const</span> cashSellExchange = tr.eq(i).children().eq(<span class="number">2</span>).text(); <span class="comment">// 現金匯率(銀行賣出)</span></span><br><span class="line">                    <span class="keyword">const</span> sightBuyExchange = tr.eq(i).children().eq(<span class="number">3</span>).text(); <span class="comment">// 即期匯率(銀行買入)</span></span><br><span class="line">                    <span class="keyword">const</span> sightSellExchange = tr.eq(i).children().eq(<span class="number">4</span>).text(); <span class="comment">// 即期匯率(銀行賣出)</span></span><br><span class="line">                    <span class="keyword">const</span> bankDateText = bankDate.text(); <span class="comment">// 當日日期</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 抓日圓</span></span><br><span class="line">                    <span class="keyword">if</span> (type === <span class="string">'JPY'</span> &amp;&amp; coinType === <span class="string">'日圓 (JPY)'</span>) &#123;</span><br><span class="line">                        <span class="comment">// 放進 JSON 檔</span></span><br><span class="line">                        result.push(<span class="built_in">Object</span>.assign(&#123; bankDateText, coinType, cashBuyExchange, cashSellExchange, sightBuyExchange, sightSellExchange &#125;));</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// 更新日幣變數</span></span><br><span class="line">                        JPY_cashSellExchange = cashSellExchange;</span><br><span class="line">                        JPY_sightSellExchange = sightSellExchange;</span><br><span class="line"></span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'跑爬蟲的 Function 裡面'</span>, <span class="string">'現金匯率-&gt;'</span>, JPY_cashSellExchange, <span class="string">'即期匯率-&gt;'</span>, JPY_sightSellExchange)</span><br><span class="line"></span><br><span class="line">                        resDate = &#123;</span><br><span class="line">                            cashSellExchange: JPY_cashSellExchange, <span class="comment">// 現金匯率</span></span><br><span class="line">                            sightSellExchange: JPY_sightSellExchange, <span class="comment">// 即期匯率</span></span><br><span class="line">                            webSideUrl: webSideUrl, <span class="comment">// 爬蟲網站</span></span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 抓澳幣</span></span><br><span class="line">                    <span class="keyword">if</span> (type === <span class="string">'AUD'</span> &amp;&amp; coinType === <span class="string">'澳幣 (AUD)'</span>) &#123;</span><br><span class="line">                        <span class="comment">// 放進 JSON 檔</span></span><br><span class="line">                        result.push(<span class="built_in">Object</span>.assign(&#123; bankDateText, coinType, cashBuyExchange, cashSellExchange, sightBuyExchange, sightSellExchange &#125;));</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// 更新日幣變數</span></span><br><span class="line">                        AUD_cashSellExchange = cashSellExchange;</span><br><span class="line">                        AUD_sightSellExchange = sightSellExchange;</span><br><span class="line"></span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'跑爬蟲的 Function 裡面'</span>, <span class="string">'現金匯率-&gt;'</span>, AUD_cashSellExchange, <span class="string">'即期匯率-&gt;'</span>, AUD_sightSellExchange)</span><br><span class="line"></span><br><span class="line">                        resDate = &#123;</span><br><span class="line">                            cashSellExchange: AUD_cashSellExchange, <span class="comment">// 現金匯率</span></span><br><span class="line">                            sightSellExchange: AUD_sightSellExchange, <span class="comment">// 即期匯率</span></span><br><span class="line">                            webSideUrl: webSideUrl, <span class="comment">// 爬蟲網站</span></span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 回傳資訊</span></span><br><span class="line">                resolve(resDate);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 輸出這個 JS</span></span><br><span class="line">exports.crawler = crawler;</span><br></pre></td></tr></table></figure>
+<h4 id="接下來會簡單講解一下另外一個頁面的程式碼"><a href="#接下來會簡單講解一下另外一個頁面的程式碼" class="headerlink" title="接下來會簡單講解一下另外一個頁面的程式碼"></a>接下來會簡單講解一下另外一個頁面的程式碼</h4><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>); <span class="comment">// 抓整個 html</span></span><br><span class="line"><span class="keyword">const</span> cheerio = <span class="built_in">require</span>(<span class="string">"cheerio"</span>); <span class="comment">// 用來抓 element 的 類似 JQuery 的選擇器</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抓取日幣的爬蟲</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">crawler</span>(<span class="params">type</span>) </span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'type'</span>, type);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> {</span><br><span class="line">        request({</span><br><span class="line">            url: <span class="string">"http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm"</span>,</span><br><span class="line">            method: <span class="string">"GET"</span></span><br><span class="line">        }, <span class="function"><span class="keyword">function</span>(<span class="params">error, response, body</span>) </span>{</span><br><span class="line">            <span class="keyword">if</span> (error || !body) {</span><br><span class="line">                <span class="keyword">return</span> <span class="string">'nullnull'</span>;</span><br><span class="line">            } <span class="keyword">else</span> {</span><br><span class="line">                <span class="keyword">const</span> $ = cheerio.load(body); <span class="comment">// 載入 body</span></span><br><span class="line">                <span class="keyword">const</span> tr = $(<span class="string">"tbody tr"</span>); <span class="comment">// 抓取每一行的 tr</span></span><br><span class="line">                <span class="keyword">const</span> result = []; <span class="comment">// 建立一個儲存結果的容器</span></span><br><span class="line">                <span class="keyword">const</span> bankDate = $(<span class="string">"#h1_small_id"</span>); <span class="comment">// 放台銀牌告匯率日期</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">let</span> JPY_cashSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放日幣現金匯率的</span></span><br><span class="line">                <span class="keyword">let</span> JPY_sightSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放日幣即期匯率的</span></span><br><span class="line">                <span class="keyword">let</span> AUD_cashSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放澳幣現金匯率的</span></span><br><span class="line">                <span class="keyword">let</span> AUD_sightSellExchange = <span class="literal">null</span>; <span class="comment">// 用來放澳幣即期匯率的</span></span><br><span class="line">                <span class="keyword">let</span> webSideUrl = <span class="string">'http://rate.bot.com.tw/Pages/Static/UIP003.zh-TW.htm'</span>;</span><br><span class="line">                <span class="keyword">let</span> resDate = <span class="literal">null</span>; <span class="comment">// 用來放要回傳回去的匯率資訊</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tr.length; i++) {</span><br><span class="line">                    <span class="keyword">const</span> coinType = tr.eq(i).find(<span class="string">'.hidden-phone.print_show'</span>).text().trim(); <span class="comment">// 幣別</span></span><br><span class="line">                    <span class="keyword">const</span> cashBuyExchange = tr.eq(i).children().eq(<span class="number">1</span>).text(); <span class="comment">// 現金匯率(銀行買入)</span></span><br><span class="line">                    <span class="keyword">const</span> cashSellExchange = tr.eq(i).children().eq(<span class="number">2</span>).text(); <span class="comment">// 現金匯率(銀行賣出)</span></span><br><span class="line">                    <span class="keyword">const</span> sightBuyExchange = tr.eq(i).children().eq(<span class="number">3</span>).text(); <span class="comment">// 即期匯率(銀行買入)</span></span><br><span class="line">                    <span class="keyword">const</span> sightSellExchange = tr.eq(i).children().eq(<span class="number">4</span>).text(); <span class="comment">// 即期匯率(銀行賣出)</span></span><br><span class="line">                    <span class="keyword">const</span> bankDateText = bankDate.text(); <span class="comment">// 當日日期</span></span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 抓日圓</span></span><br><span class="line">                    <span class="keyword">if</span> (type === <span class="string">'JPY'</span> &amp;&amp; coinType === <span class="string">'日圓 (JPY)'</span>) {</span><br><span class="line">                        <span class="comment">// 放進 JSON 檔</span></span><br><span class="line">                        result.push(<span class="built_in">Object</span>.assign({ bankDateText, coinType, cashBuyExchange, cashSellExchange, sightBuyExchange, sightSellExchange }));</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// 更新日幣變數</span></span><br><span class="line">                        JPY_cashSellExchange = cashSellExchange;</span><br><span class="line">                        JPY_sightSellExchange = sightSellExchange;</span><br><span class="line"></span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'跑爬蟲的 Function 裡面'</span>, <span class="string">'現金匯率-&gt;'</span>, JPY_cashSellExchange, <span class="string">'即期匯率-&gt;'</span>, JPY_sightSellExchange)</span><br><span class="line"></span><br><span class="line">                        resDate = {</span><br><span class="line">                            cashSellExchange: JPY_cashSellExchange, <span class="comment">// 現金匯率</span></span><br><span class="line">                            sightSellExchange: JPY_sightSellExchange, <span class="comment">// 即期匯率</span></span><br><span class="line">                            webSideUrl: webSideUrl, <span class="comment">// 爬蟲網站</span></span><br><span class="line">                        }</span><br><span class="line"></span><br><span class="line">                    }</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 抓澳幣</span></span><br><span class="line">                    <span class="keyword">if</span> (type === <span class="string">'AUD'</span> &amp;&amp; coinType === <span class="string">'澳幣 (AUD)'</span>) {</span><br><span class="line">                        <span class="comment">// 放進 JSON 檔</span></span><br><span class="line">                        result.push(<span class="built_in">Object</span>.assign({ bankDateText, coinType, cashBuyExchange, cashSellExchange, sightBuyExchange, sightSellExchange }));</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// 更新日幣變數</span></span><br><span class="line">                        AUD_cashSellExchange = cashSellExchange;</span><br><span class="line">                        AUD_sightSellExchange = sightSellExchange;</span><br><span class="line"></span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'跑爬蟲的 Function 裡面'</span>, <span class="string">'現金匯率-&gt;'</span>, AUD_cashSellExchange, <span class="string">'即期匯率-&gt;'</span>, AUD_sightSellExchange)</span><br><span class="line"></span><br><span class="line">                        resDate = {</span><br><span class="line">                            cashSellExchange: AUD_cashSellExchange, <span class="comment">// 現金匯率</span></span><br><span class="line">                            sightSellExchange: AUD_sightSellExchange, <span class="comment">// 即期匯率</span></span><br><span class="line">                            webSideUrl: webSideUrl, <span class="comment">// 爬蟲網站</span></span><br><span class="line">                        }</span><br><span class="line"></span><br><span class="line">                    }</span><br><span class="line"></span><br><span class="line">                }</span><br><span class="line">                <span class="comment">// 回傳資訊</span></span><br><span class="line">                resolve(resDate);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">    });</span><br><span class="line">};</span><br><span class="line"><span class="comment">// 輸出這個 JS</span></span><br><span class="line">exports.crawler = crawler;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>基本上與之前的程式碼大同小異，差別在於這次是把程式碼包進 <strong>new Promise</strong>，最後再靠 <strong>exports.crawler = crawler;</strong> 就能在其他檔案使用了。</p>
 <h4 id="一枝穿雲箭"><a href="#一枝穿雲箭" class="headerlink" title="一枝穿雲箭"></a>一枝穿雲箭</h4><p>最後這邊我們就可以把程式上傳了，在專案的目錄下，先輸入：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>heroku create 名稱(如不填 系統會隨機給一個名稱)</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>heroku create 名稱(如不填 系統會隨機給一個名稱)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>其中要小心一些 <strong>heroku</strong> 的規定，比如開頭不能大寫之類的。</p>
-<p><img src="/images/20191201/heroku-create-fail.png" alt="有錯誤"></p>
+<p><img alt="有錯誤" data-src="/images/20191201/heroku-create-fail.png" class="lozad"></p>
 <p>看到下方這張圖才代表成功。</p>
-<p><img src="/images/20191201/heroku-create-success.png" alt="成功創建"></p>
+<p><img alt="成功創建" data-src="/images/20191201/heroku-create-success.png" class="lozad"></p>
 <blockquote>
 <p><em>免費的方案似乎有專案的數量上限限制，目前創建到第五個以上就會被拒絕，如理解有誤敬請糾正，非常感謝。</em></p>
 </blockquote>
 <p>隨後執行下列幾行，然後等待： </p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> git init      <span class="comment">// git init 初始化專案</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> heroku git:remote -a &lt;Heroku 專案 名稱&gt;</span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> touch .gitingnore <span class="comment">// 這邊 把不要上傳的 檔案 資料夾 都寫入這裡面</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> git commit -am <span class="string">"init my chatBox"</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> git push heroku master</span><br></pre></td></tr></table></figure>
+<figure class="highlight gams"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> git init      <span class="comment">// git init 初始化專案</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> heroku git:remote -a &lt;Heroku 專案 名稱&gt;</span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> touch .gitingnore <span class="comment">// 這邊 把不要上傳的 檔案 資料夾 都寫入這裡面</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> git commit -am <span class="string">"init my chatBox"</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> git push heroku master</span><br></pre></td></tr></tbody></table></figure>
 
-<p>整個操作起來其實跟推上 <strong>GitHub</strong> 非常像；傳送上去之後如果要看到作品可以直接輸入 <span class="exturl" data-url="aHR0cHM6Ly9kYXNoYm9hcmQuaGVyb2t1LmNvbS9hcHBz">https://dashboard.heroku.com/apps<i class="fa fa-external-link-alt"></i></span> 進入後點擊創建的那個專案。</p>
-<p><img src="/images/20191201/heroku-index.png" alt="Heroku 首頁"></p>
+<p>整個操作起來其實跟推上 <strong>GitHub</strong> 非常像；傳送上去之後如果要看到作品可以直接輸入 <a href="https://dashboard.heroku.com/apps" target="_blank" rel="noopener">https://dashboard.heroku.com/apps</a> 進入後點擊創建的那個專案。</p>
+<p><img alt="Heroku 首頁" data-src="/images/20191201/heroku-index.png" class="lozad"></p>
 <p>接著到右上角點擊 <strong>Open app</strong>，就可以看到了，</p>
-<p><img src="/images/20191201/heroku-open-app.png" alt="Heroku Open APP"></p>
+<p><img alt="Heroku Open APP" data-src="/images/20191201/heroku-open-app.png" class="lozad"></p>
 <p>如果想看見程式的 <strong>log</strong> ，那就點擊右上角的 <strong>View logs</strong>，就可以查看你的程式碼有沒有錯誤了。</p>
 <h4 id="錯誤千軍萬馬來相見"><a href="#錯誤千軍萬馬來相見" class="headerlink" title="錯誤千軍萬馬來相見"></a>錯誤千軍萬馬來相見</h4><p>這時候你可能會發現錯誤，其實是因為前面我們有提到，程式碼剛開始有 <strong>config</strong> 但是我們沒有只接填寫，變成他會去抓 <strong>Heroku</strong> 的設定，如果沒設定就會出錯。</p>
 <p>輸入下面的程式碼(看情況自己增加)：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ heroku config:<span class="builtin-name">set</span> <span class="attribute">CHANNEL_ACCESS_TOKEN</span>=<span class="string">"&lt;Your LINE Bot Token&gt;"</span></span><br><span class="line"></span><br><span class="line">$ heroku config:<span class="builtin-name">set</span> <span class="attribute">CHANNEL_SECRET</span>=<span class="string">"&lt;Your LINE Bot Srcret&gt;"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ heroku config:<span class="builtin-name">set</span> <span class="attribute">CHANNEL_ACCESS_TOKEN</span>=<span class="string">"&lt;Your LINE Bot Token&gt;"</span></span><br><span class="line"></span><br><span class="line">$ heroku config:<span class="builtin-name">set</span> <span class="attribute">CHANNEL_SECRET</span>=<span class="string">"&lt;Your LINE Bot Srcret&gt;"</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>最後把 Open APP 打開後的網址貼到最上面我們提到的 <strong>Webhook網址</strong>，大功告成啦！</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實自己摸了好一陣子的 <strong>LINE</strong> 但是一直都沒有去瞭解過他怎麼執行還有流程是怎麼樣，這次剛好在玩爬蟲，就順水推舟連 <strong>Node.js</strong> 都一起研究研究，所以如果有講不好的地方還敬請歡迎指教。</p>
 <p><strong>LINE Bot</strong> 其實還有很多好玩的地方，這就等著大家自己去發掘啦～</p>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright" style="background: var(--card-bg-color);
-    border-left: 3px solid #ff2a2a;
-    list-style: none;
-    margin: 2em 0 0;
-    padding: 0.5em 1em;">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>RexHung
-  </li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/" title="[Tool Notes] — 關於爬蟲#2">https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
-  </li>
-</ul>
-</div>
-
-
-      <div>
-        
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
-    
-</div>
-        
-      </div>
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/Other/" rel="tag"><i class="fa fa-tag"></i> Other</a>
-              <a href="/tags/Crawler/" rel="tag"><i class="fa fa-tag"></i> Crawler</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/11/04/20191104/" rel="prev" title="Mac OS 使用 HomeBrew 建置 Web 開發環境">
-      <i class="fa fa-chevron-left"></i> Mac OS 使用 HomeBrew 建置 Web 開發環境
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/12/04/20191204/" rel="next" title="LINE TAIWAN TECHPULSE 2019">
-      LINE TAIWAN TECHPULSE 2019 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事前準備"><span class="nav-number">1.1.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目錄"><span class="nav-number">1.2.</span> <span class="nav-text">目錄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINE-Bot-基本介紹"><span class="nav-number">1.3.</span> <span class="nav-text">LINE Bot 基本介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念說明"><span class="nav-number">1.3.1.</span> <span class="nav-text">基本概念說明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本架構說明"><span class="nav-number">1.3.2.</span> <span class="nav-text">基本架構說明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINE-Bot-申請"><span class="nav-number">1.4.</span> <span class="nav-text">LINE Bot 申請</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LINE-Bot-基本介紹-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">LINE Bot 基本介紹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINE-Bot-帳號申請"><span class="nav-number">1.4.2.</span> <span class="nav-text">LINE Bot 帳號申請</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LINE-Messaging-API-啟用"><span class="nav-number">1.4.3.</span> <span class="nav-text">LINE Messaging API 啟用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Channel-Access-Token-頻道存取令牌"><span class="nav-number">1.4.4.</span> <span class="nav-text">Channel Access Token 頻道存取令牌</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINE-Bot-Webhook-伺服器-建置"><span class="nav-number">1.5.</span> <span class="nav-text">LINE Bot Webhook 伺服器 建置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Heroku-帳號申請"><span class="nav-number">1.5.1.</span> <span class="nav-text">Heroku 帳號申請</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Heroku-Cli-安裝"><span class="nav-number">1.5.2.</span> <span class="nav-text">Heroku Cli 安裝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git-版本控制軟體"><span class="nav-number">1.5.3.</span> <span class="nav-text">Git 版本控制軟體</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LINE-Bot-與日幣爬蟲應用"><span class="nav-number">1.6.</span> <span class="nav-text">LINE Bot 與日幣爬蟲應用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接下來會簡單講解一下另外一個頁面的程式碼"><span class="nav-number">1.6.1.</span> <span class="nav-text">接下來會簡單講解一下另外一個頁面的程式碼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一枝穿雲箭"><span class="nav-number">1.6.2.</span> <span class="nav-text">一枝穿雲箭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#錯誤千軍萬馬來相見"><span class="nav-number">1.6.3.</span> <span class="nav-text">錯誤千軍萬馬來相見</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/images/profile/profile_2.png">
-  <p class="site-author-name" itemprop="name">RexHung</p>
-  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">47</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fab twitter fa-fw"></i></span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fab facebook fa-fw"></i></span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="總字數">286k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="所需總閱讀時間">4:20</span>
-</div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://RexHung0302.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/";
-    this.page.identifier = "2019/12/01/20191201/";
-    this.page.title = "[Tool Notes] — 關於爬蟲#2";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://RexHung0302.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-
-  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/click-word.js"></script>
-</body>
-</html>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/">https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/Other/">Other    </a><a class="post-meta__tags" href="/tags/Crawler/">Crawler    </a></div><div class="post_share"><div class="social-share" data-image="/img/article_404.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/12/04/20191204/"><img class="prev_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>LINE TAIWAN TECHPULSE 2019</span></div></a></div><div class="next-post pull-right"><a href="/2019/11/04/20191104/"><img class="next_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Mac OS 使用 HomeBrew 建置 Web 開發環境</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2019/08/20/20190820/" title="[Tool Notes] — 關於爬蟲"><img class="relatedPosts_cover lozad"data-src="https://miro.medium.com/max/800/1*FP09e1_TGdIevDpzefJUNw.jpeg"><div class="relatedPosts_title">[Tool Notes] — 關於爬蟲</div></a></div><div class="relatedPosts_item"><a href="/2020/12/19/20201219/" title="LINE TAIWAN TECHPULSE 2020"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">LINE TAIWAN TECHPULSE 2020</div></a></div><div class="relatedPosts_item"><a href="/2019/12/04/20191204/" title="LINE TAIWAN TECHPULSE 2019"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">LINE TAIWAN TECHPULSE 2019</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/';
+  this.page.identifier = '2019/12/01/20191201/';
+  this.page.title = '[Tool Notes] — 關於爬蟲#2';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(LineBotImg_1.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>

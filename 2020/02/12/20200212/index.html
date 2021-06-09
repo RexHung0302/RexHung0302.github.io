@@ -1,324 +1,31 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="成果 &amp; 程式碼 Demo： 傳送門Code Source： 點我  Introduction &amp; 前言之前有寫一系列的地下城文章，原本其實在去年 The F2E 活動想要在最後打一篇文章結尾的，結果出了車禍Ｑ，也導致那時候很多版沒切完。接觸前端一年多了，每每看到有活動還是會想參與，雖然常常因為工作或是作息打斷，但我想在當中獲得的才是最珍貴的。 The F2E 的活動(註1)其實是">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/index.html">
-<meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="成果 &amp; 程式碼 Demo： 傳送門Code Source： 點我  Introduction &amp; 前言之前有寫一系列的地下城文章，原本其實在去年 The F2E 活動想要在最後打一篇文章結尾的，結果出了車禍Ｑ，也導致那時候很多版沒切完。接觸前端一年多了，每每看到有活動還是會想參與，雖然常常因為工作或是作息打斷，但我想在當中獲得的才是最珍貴的。 The F2E 的活動(註1)其實是">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://github.com/images/20200212/10WeekLogo.png">
-<meta property="og:image" content="https://github.com/images/20200212/10WeekCondition.png">
-<meta property="og:image" content="https://github.com/images/20200212/author.png">
-<meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/phoneRWD__1.jpg">
-<meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/phoneRWD__2.jpg">
-<meta property="og:image" content="https://github.com/images/20200212/google-maps-layers.png">
-<meta property="og:image" content="https://github.com/images/20200212/emptyMap.png">
-<meta property="og:image" content="https://github.com/images/20200212/markers.png">
-<meta property="article:published_time" content="2020-02-12T04:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:45:29.879Z">
-<meta property="article:author" content="RexHung">
-<meta property="article:tag" content="RexHung">
-<meta property="article:tag" content="CodeLife">
-<meta property="article:tag" content="HTML">
-<meta property="article:tag" content="CSS">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="HexSchool">
-<meta property="article:tag" content="Engineer">
-<meta property="article:tag" content="TheF2E">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/images/20200212/10WeekLogo.png">
-
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>[The F2E 2nd] — 10 Week Masks Map 口罩地圖 | RexHung's Blog</title>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[The F2E 2nd] — 10 Week Masks Map 口罩地圖 | RexHung's Blog</title><meta name="description" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><meta name="keywords" content="Code,HTML,CSS,JavaScript,HexSchool,TheF2E"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><meta name="twitter:description" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><meta name="twitter:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta property="og:type" content="article"><meta property="og:title" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[Blog Notes] - Hexo NexT 小筆記" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/03/19/20200319/"><link rel="next" title="LINE TAIWAN TECHPULSE 2019" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/12/04/20191204/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支持'
+  },
+  bookmark: {
+    title: '添加書籤',
+    message_prev: '按',
+    message_next: '鍵將本頁加入書籤'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">RexHung's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
-
-  </li>
-        <li class="menu-item menu-item-link">
-
-    <a href="/link/" rel="section"><i class="fa fa-link fa-fw"></i>link</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile/profile_2.png">
-      <meta itemprop="name" content="RexHung">
-      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RexHung's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          [The F2E 2nd] — 10 Week Masks Map 口罩地圖
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-02-12 12:00:00" itemprop="dateCreated datePublished" datetime="2020-02-12T12:00:00+08:00">2020-02-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-09 14:45:29" itemprop="dateModified" datetime="2021-06-09T14:45:29+08:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/TheF2E/" itemprop="url" rel="index"><span itemprop="name">TheF2E</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2020/02/12/20200212/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/12/20200212/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>4k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>4 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p><em>Demo： <span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vVGhlLUYyRS1DaGFsbGVuZ2UvbWFza3MtbWFwL2Rpc3QvaW5kZXguaHRtbCMvbWFza3NNYXAvaW5kZXg=">傳送門<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source： <a href="https://github.com/RexHung0302/The-F2E-Challenge/tree/master/masks-map">點我</a></em></p>
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#成果-amp-程式碼"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">成果 &amp; 程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Summary-amp-摘要"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">Summary &amp; 摘要</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於畫面"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">關於畫面</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於地圖"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">關於地圖</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#底盤要先穩"><span class="toc_mobile_items-number">3.2.1.</span> <span class="toc_mobile_items-text">底盤要先穩</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#開始著色吧"><span class="toc_mobile_items-number">3.2.2.</span> <span class="toc_mobile_items-text">開始著色吧</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">4.1.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#成果-amp-程式碼"><span class="toc-number">1.</span> <span class="toc-text">成果 &amp; 程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">2.</span> <span class="toc-text">Introduction &amp; 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-amp-摘要"><span class="toc-number">3.</span> <span class="toc-text">Summary &amp; 摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#關於畫面"><span class="toc-number">3.1.</span> <span class="toc-text">關於畫面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#關於地圖"><span class="toc-number">3.2.</span> <span class="toc-text">關於地圖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#底盤要先穩"><span class="toc-number">3.2.1.</span> <span class="toc-text">底盤要先穩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#開始著色吧"><span class="toc-number">3.2.2.</span> <span class="toc-text">開始著色吧</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">4.</span> <span class="toc-text">Conclusion &amp; 結論</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#參考網站"><span class="toc-number">4.1.</span> <span class="toc-text">參考網站</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/article_404.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[The F2E 2nd] — 10 Week Masks Map 口罩地圖</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2020-02-12<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/TheF2E/">TheF2E</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">1.9k</span><span class="post-meta__separator">|</span><span>閲讀時長: 6 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p><em>Demo： <a href="https://rexhung0302.github.io/The-F2E-Challenge/masks-map/dist/index.html#/masksMap/index" target="_blank" rel="noopener">傳送門</a><br><br>Code Source： <a href="https://github.com/RexHung0302/The-F2E-Challenge/tree/master/masks-map">點我</a></em></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>之前有寫一系列的地下城文章，原本其實在去年 <strong>The F2E</strong> 活動想要在最後打一篇文章結尾的，結果出了車禍Ｑ，也導致那時候很多版沒切完。接觸前端一年多了，每每看到有活動還是會想參與，雖然常常因為工作或是作息打斷，但我想在當中獲得的才是最珍貴的。</p>
-<p>The F2E 的活動(<strong>註1</strong>)其實是為期九週的一系列活動(<span class="exturl" data-url="aHR0cHM6Ly93d3cuaGV4c2Nob29sLmNvbS8yMDE5LzA2LzE0LzIwMTktMDYtMTQtdGhlX2YyZS8=">相關介紹請點我<i class="fa fa-external-link-alt"></i></span>)，去年是第二次舉辦了，那為什麼會有第10週呢？而且現在才出來。其實這都跟武漢肺炎有關，相信看到標題的人八成都能猜到為什麼有這一關卡了，當中其實也包含了<span class="exturl" data-url="aHR0cHM6Ly9mdXR1cmVjaXR5LmN3LmNvbS50dy9hcnRpY2xlLzEyMzk="> 科技防疫｜自製「超商口罩地圖」的工程師：地圖上線6小時，我收到60萬Google帳單<i class="fa fa-external-link-alt"></i></span>，當然還有最一開始發起黑客松活動得<span class="exturl" data-url="aHR0cHM6Ly9nMHYudHcvemgtVFcv">零時政府<i class="fa fa-external-link-alt"></i></span>…等。</p>
+<p>The F2E 的活動(<strong>註1</strong>)其實是為期九週的一系列活動(<a href="https://www.hexschool.com/2019/06/14/2019-06-14-the_f2e/" target="_blank" rel="noopener">相關介紹請點我</a>)，去年是第二次舉辦了，那為什麼會有第10週呢？而且現在才出來。其實這都跟武漢肺炎有關，相信看到標題的人八成都能猜到為什麼有這一關卡了，當中其實也包含了<a href="https://futurecity.cw.com.tw/article/1239" target="_blank" rel="noopener"> 科技防疫｜自製「超商口罩地圖」的工程師：地圖上線6小時，我收到60萬Google帳單</a>，當然還有最一開始發起黑客松活動得<a href="https://g0v.tw/zh-TW/" target="_blank" rel="noopener">零時政府</a>…等。</p>
 <a id="more"></a>
 
 <p>六角學院的校長為了方便大家投稿，就直接選定在這個平台推出第10關了，一看到想想能練習切版又能幫助人這機會難得，當下就打定主意這次絕對要完成，還好地圖之前有碰過一點點，雖然當中還是踩了幾個坑。</p>
@@ -326,7 +33,7 @@
 <blockquote>
 <p><em>註1：The F2E 第二屆是由 <strong>六角學院 x Adobe Xd Taiwan</strong> 聯名舉辦的活動，當中的前端 &amp; UI 修練精神時光屋其實和勇闖地下城差不多，特定的關卡都會有特定需要完成的條件，比較特別的是這邊最一開始你能選擇要在<strong>UI組</strong>出生還是<strong>前端工程</strong>出生，如果選擇後者，你就能等待<strong>UI組</strong>的畫面產出，然後擇一去切版，這個活動並沒有限制完成才能提交，所以單純只有切版也是可以過關的。</em></p>
 </blockquote>
-<p><img src="/images/20200212/10WeekLogo.png" alt="10 Week 口罩地圖"></p>
+<p><img alt="10 Week 口罩地圖" data-src="/images/20200212/10WeekLogo.png" class="lozad"></p>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>每關都有特定的條件需要達成，如果只有切完版面也是可以的。</p>
 <ol>
 <li><p>【特定技術】我可以在 Google Map 、或文字列表上看到所有賣口罩的廠商，以及廠商的休息時間。</p>
@@ -336,25 +43,25 @@
 <li><p>【特定技術】我可以看到頁面提醒，自己今天的身分證字號是否能買口罩，如下圖規則。</p>
 </li>
 </ol>
-<p><img src="/images/20200212/10WeekCondition.png" alt="圖片來至 衛生福利部"></p>
+<p><img alt="圖片來至 衛生福利部" data-src="/images/20200212/10WeekCondition.png" class="lozad"></p>
 <hr>
-<h3 id="關於畫面"><a href="#關於畫面" class="headerlink" title="關於畫面"></a>關於畫面</h3><p>這次沒有想太多就挑了一個版面來切，主要還是在地圖的部分，因為之前大概有做過地圖，稍微有點頭緒。雖然錯過六角的 <strong>The F2E</strong> 第十關直播，但是超佛的六角還是有把<span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1wVWl6dTYyZGxuWQ==">直播影片<i class="fa fa-external-link-alt"></i></span>及<span class="exturl" data-url="aHR0cHM6Ly9xdWlwLmNvbS92ZHFZQWlGSEhrYVY=">講義<i class="fa fa-external-link-alt"></i></span>上傳至Youtube，感恩SeaFood嘆讚SeaFood。</p>
-<p><img src="/images/20200212/author.png" alt="感謝作者 @Chrispy"><br><span class="exturl" data-url="aHR0cHM6Ly9jaGFsbGVuZ2UudGhlZjJlLmNvbS91c2VyLzI4NzI=">設計稿連結請點我<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="關於畫面"><a href="#關於畫面" class="headerlink" title="關於畫面"></a>關於畫面</h3><p>這次沒有想太多就挑了一個版面來切，主要還是在地圖的部分，因為之前大概有做過地圖，稍微有點頭緒。雖然錯過六角的 <strong>The F2E</strong> 第十關直播，但是超佛的六角還是有把<a href="https://www.youtube.com/watch?v=pUizu62dlnY" target="_blank" rel="noopener">直播影片</a>及<a href="https://quip.com/vdqYAiFHHkaV" target="_blank" rel="noopener">講義</a>上傳至Youtube，感恩SeaFood嘆讚SeaFood。</p>
+<p><img alt="感謝作者 @Chrispy" data-src="/images/20200212/author.png" class="lozad"><br><a href="https://challenge.thef2e.com/user/2872" target="_blank" rel="noopener">設計稿連結請點我</a></p>
 <blockquote>
 <p><del><em>這邊沒有做 RWD，應該會於日後補上…</em></del></p>
 </blockquote>
 <blockquote>
 <p><strong>2/13更：已經補上 RWD，但是目前手機版效能還是很差，還會想辦法改進Q，請有使用的大大們手下留情。</strong></p>
 </blockquote>
-<p><img src="phoneRWD__1.jpg" alt="手機畫面"></p>
-<p><img src="phoneRWD__2.jpg" alt="手機畫面"></p>
+<p><img alt="手機畫面" data-src="phoneRWD__1.jpg" class="lozad"></p>
+<p><img alt="手機畫面" data-src="phoneRWD__2.jpg" class="lozad"></p>
 <hr>
-<h3 id="關於地圖"><a href="#關於地圖" class="headerlink" title="關於地圖"></a>關於地圖</h3><p><img src="/images/20200212/google-maps-layers.png" alt="圖片轉至 Google"></p>
+<h3 id="關於地圖"><a href="#關於地圖" class="headerlink" title="關於地圖"></a>關於地圖</h3><p><img alt="圖片轉至 Google" data-src="/images/20200212/google-maps-layers.png" class="lozad"></p>
 <p>首先你必須了解地圖的一些概念，在上圖中你會看到，地圖其實是很多東西疊起來的，並不是一整張完好的地圖，在這邊我們會做到最基本的幾件事情。</p>
 <ol>
-<li><p>找到你的地圖套件，這邊使用 <span class="exturl" data-url="aHR0cHM6Ly92dWUyLWxlYWZsZXQubmV0bGlmeS5jb20v">Vue Leaflet<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>找到你的地圖套件，這邊使用 <a href="https://vue2-leaflet.netlify.com/" target="_blank" rel="noopener">Vue Leaflet</a></p>
 </li>
-<li><p>找到你要的圖資，這邊使用免費開源的 <span class="exturl" data-url="aHR0cHM6Ly93d3cub3BlbnN0cmVldG1hcC5vcmcvI21hcD04LzIzLjYxMS8xMjAuNzY4">Openstreetmap<i class="fa fa-external-link-alt"></i></span></p>
+<li><p>找到你要的圖資，這邊使用免費開源的 <a href="https://www.openstreetmap.org/#map=8/23.611/120.768" target="_blank" rel="noopener">Openstreetmap</a></p>
 </li>
 <li><p>帶入你的參數並且在地圖上顯示出資訊</p>
 </li>
@@ -363,347 +70,49 @@
 </ol>
 <hr>
 <h4 id="底盤要先穩"><a href="#底盤要先穩" class="headerlink" title="底盤要先穩"></a>底盤要先穩</h4><p>我們必須要先安裝 leafLet 套件，不管你是用 CDN 或是 NPM 都可以，這邊我使用 NPM 安裝，安裝完成後引入套件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入地圖</span></span><br><span class="line"><span class="keyword">import</span> L <span class="keyword">from</span> <span class="string">'leaflet'</span>;</span><br><span class="line"><span class="comment">// 引入地圖套件相關</span></span><br><span class="line"><span class="keyword">import</span> &#123; LMap, LTileLayer, LMarker, LPopup, LTooltip &#125; <span class="keyword">from</span> <span class="string">"vue2-leaflet"</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入地圖</span></span><br><span class="line"><span class="keyword">import</span> L <span class="keyword">from</span> <span class="string">'leaflet'</span>;</span><br><span class="line"><span class="comment">// 引入地圖套件相關</span></span><br><span class="line"><span class="keyword">import</span> { LMap, LTileLayer, LMarker, LPopup, LTooltip } <span class="keyword">from</span> <span class="string">"vue2-leaflet"</span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <p>之後在你的 HTML 上使用它。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"pug"</span>&gt;</span></span><br><span class="line">l-map(:zoom='zoom' :center='center' style='height: 100%' @ready="onReady" @locationfound="onLocationFound")</span><br><span class="line">  l-tile-layer(:url='url' :attribution='attribution')</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">lang</span>=<span class="string">"pug"</span>&gt;</span></span><br><span class="line">l-map(:zoom='zoom' :center='center' style='height: 100%' @ready="onReady" @locationfound="onLocationFound")</span><br><span class="line">  l-tile-layer(:url='url' :attribution='attribution')</span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>再來要到設定的地方加上你的圖資，可能會是 <strong>Openstreetmap</strong> 或是 <strong>Google Map</strong> 也可能是 <strong>mapbox</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    zoom: <span class="number">17</span>,</span><br><span class="line">    url: <span class="string">'https://&#123;s&#125;.tile.openstreetmap.org/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.png'</span>,</span><br><span class="line">    attribution:</span><br><span class="line">      <span class="string">'&amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data() {</span><br><span class="line">  <span class="keyword">return</span> {</span><br><span class="line">    zoom: <span class="number">17</span>,</span><br><span class="line">    url: <span class="string">'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'</span>,</span><br><span class="line">    attribution:</span><br><span class="line">      <span class="string">'&amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'</span>,</span><br><span class="line">  }</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure>
 
 <p><strong>url</strong> 就是我們要設定圖資的地方，另外其他相關的設定都可以使用 <strong>v-bind</strong> 綁在 <strong>component</strong> 上，這就是 <strong>Vue</strong> 的魅力啦～你只需要處理好資料部分就好了。</p>
-<p><img src="/images/20200212/emptyMap.png" alt="熱騰騰的地圖"></p>
+<p><img alt="熱騰騰的地圖" data-src="/images/20200212/emptyMap.png" class="lozad"></p>
 <p>然後你會看到一張地圖出來了，但是蝦咪都沒有，因為你還沒加上 Marker，或是一些套件。</p>
 <hr>
 <h4 id="開始著色吧"><a href="#開始著色吧" class="headerlink" title="開始著色吧"></a>開始著色吧</h4><p>接下來就可以開始加上標籤，<strong>Vue</strong> 的使用方式比較簡單，就是在 <strong>HTML</strong> 加上一個 <strong>Tag</strong> 之後使用 <strong>v-for</strong> 就可以把 <strong>Marker</strong> 印上去了，不過這邊不知道是我的問題還是拿到的 <strong>API</strong> 經緯度本來就是對調的，在我打 <strong>API</strong> 拿到資料後自己又透過 <strong>reverse()</strong> 去把他對調回來，不然座標就全都跑到北極去了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=<span class="string">"pug"</span>&gt;</span><br><span class="line">l-map(:zoom=<span class="string">'zoom'</span> :center=<span class="string">'center'</span> style=<span class="string">'height: 100%'</span> @ready=<span class="string">"onReady"</span> @locationfound=<span class="string">"onLocationFound"</span>)</span><br><span class="line">  l-tile-layer(:url=<span class="string">'url'</span> :attribution=<span class="string">'attribution'</span>)</span><br><span class="line">  <span class="comment">//- 這邊開始加上 Marker</span></span><br><span class="line">  l-marker(v-<span class="keyword">for</span>=<span class="string">"(store,index) in storeList"</span> :lat-lng=<span class="string">"store.geometry.coordinates"</span> :icon=<span class="string">"icon"</span> :visible=<span class="string">"true"</span>)</span><br><span class="line">    l-popup</span><br><span class="line">      span 這邊開始可以放點擊後打開視窗的內容</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=<span class="string">"pug"</span>&gt;</span><br><span class="line">l-map(:zoom=<span class="string">'zoom'</span> :center=<span class="string">'center'</span> style=<span class="string">'height: 100%'</span> @ready=<span class="string">"onReady"</span> @locationfound=<span class="string">"onLocationFound"</span>)</span><br><span class="line">  l-tile-layer(:url=<span class="string">'url'</span> :attribution=<span class="string">'attribution'</span>)</span><br><span class="line">  <span class="comment">//- 這邊開始加上 Marker</span></span><br><span class="line">  l-marker(v-<span class="keyword">for</span>=<span class="string">"(store,index) in storeList"</span> :lat-lng=<span class="string">"store.geometry.coordinates"</span> :icon=<span class="string">"icon"</span> :visible=<span class="string">"true"</span>)</span><br><span class="line">    l-popup</span><br><span class="line">      span 這邊開始可以放點擊後打開視窗的內容</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>要特別注意的是官方有提到必須到 Main.js 加上下面的程式碼，以防預設圖片跑掉。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* leaflet icon */</span></span><br><span class="line"><span class="keyword">delete</span> L.Icon.Default.prototype._getIconUrl;</span><br><span class="line">L.Icon.Default.mergeOptions(&#123;</span><br><span class="line">   iconRetinaUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-icon-2x.png'</span>),</span><br><span class="line">   iconUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-icon.png'</span>),</span><br><span class="line">   shadowUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-shadow.png'</span>),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* leaflet icon */</span></span><br><span class="line"><span class="keyword">delete</span> L.Icon.Default.prototype._getIconUrl;</span><br><span class="line">L.Icon.Default.mergeOptions({</span><br><span class="line">   iconRetinaUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-icon-2x.png'</span>),</span><br><span class="line">   iconUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-icon.png'</span>),</span><br><span class="line">   shadowUrl: <span class="built_in">require</span>(<span class="string">'leaflet/dist/images/marker-shadow.png'</span>),</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
 <p>但是這邊我們可以使用自己的圖片，然後可以在 HTML 上用三元運算去判斷目前要給哪一張圖片。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    zoom: <span class="number">17</span>,</span><br><span class="line">    url: <span class="string">'https://&#123;s&#125;.tile.openstreetmap.org/&#123;z&#125;/&#123;x&#125;/&#123;y&#125;.png'</span>,</span><br><span class="line">    attribution:</span><br><span class="line">      <span class="string">'&amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'</span>,</span><br><span class="line">    <span class="comment">// 上面一樣 下面開始替換 Marker Icon</span></span><br><span class="line">    icon_hasAllMask: L.icon(&#123;</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_green.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">    icon_onlyOneMask: L.icon(&#123;</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_orange.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">    icon_noMask: L.icon(&#123;</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_red.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">data() {</span><br><span class="line">  <span class="keyword">return</span> {</span><br><span class="line">    zoom: <span class="number">17</span>,</span><br><span class="line">    url: <span class="string">'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'</span>,</span><br><span class="line">    attribution:</span><br><span class="line">      <span class="string">'&amp;copy; &lt;a href="http://osm.org/copyright"&gt;OpenStreetMap&lt;/a&gt; contributors'</span>,</span><br><span class="line">    <span class="comment">// 上面一樣 下面開始替換 Marker Icon</span></span><br><span class="line">    icon_hasAllMask: L.icon({</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_green.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    }),</span><br><span class="line">    icon_onlyOneMask: L.icon({</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_orange.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    }),</span><br><span class="line">    icon_noMask: L.icon({</span><br><span class="line">      iconUrl: <span class="built_in">require</span>(<span class="string">"@/assets/images/Icon_location_red.svg"</span>),</span><br><span class="line">      iconSize: [<span class="number">70</span>, <span class="number">100</span>],</span><br><span class="line">      iconAnchor: [<span class="number">22</span>, <span class="number">94</span>]</span><br><span class="line">    }),</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="/images/20200212/markers.png" alt="三種 Icon 一次滿足"></p>
+<p><img alt="三種 Icon 一次滿足" data-src="/images/20200212/markers.png" class="lozad"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實這次的地圖沒有什麼大太的難處，主要就是研究套件然後加上套件，但是往往最不怎麼樣的東西，卻能幫助最大，希望在大家慌亂的時候，能用自己所學，幫助其他人。就像<strong>Howard</strong>大大說的『<strong>資訊愈透明，民眾的恐慌就愈低</strong>』。</p>
 <p>在參加 <strong>The F2E</strong> 的時候其實好幾關都偷懶了，切完版面而已，最近雖然工作變忙了，但是能在工作中找到自己的興趣並且能讓自己成長就算熬夜也要完成。這次花了兩個半夜，雖然口罩已經搶到翻，而且換成衛生紙跟衛生棉，但還是不能錯過這個練習又能幫助人的好時機，已經天亮了，該去補眠了。</p>
 <p>最後讓我們一起祈禱並且盡自己最大的能力幫助彼此，渡過這一次的難關，加油，不管是任何正在努力付出的人，我們一起加油！</p>
 <p><strong>然後還是要呼籲！不要囤積口罩衛生紙衛生棉，大腦是很好的東西，拜託！</strong></p>
 <h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9xdWlwLmNvbS92ZHFZQWlGSEhrYVY=">六角講義<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly92dWUyLWxlYWZsZXQubmV0bGlmeS5jb20v">Vue2Leaflet<i class="fa fa-external-link-alt"></i></span></li>
-<li>qweghj1245大大 — <span class="exturl" data-url="aHR0cHM6Ly9xd2VnaGoxMjQ1LmdpdGh1Yi5pby9tYXNrLWFwcC8=">賣罩地圖<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2FtZXIuY29tLnR3L2luZGV4Mi5waHA/YWQ9Tg==">*巴哈姆特 舒壓用<i class="fa fa-external-link-alt"></i></span>*</li>
+<li><a href="https://quip.com/vdqYAiFHHkaV" target="_blank" rel="noopener">六角講義</a></li>
+<li><a href="https://vue2-leaflet.netlify.com/" target="_blank" rel="noopener">Vue2Leaflet</a></li>
+<li>qweghj1245大大 — <a href="https://qweghj1245.github.io/mask-app/" target="_blank" rel="noopener">賣罩地圖</a><br><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener">*巴哈姆特 舒壓用</a>*</li>
 </ul>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright" style="background: var(--card-bg-color);
-    border-left: 3px solid #ff2a2a;
-    list-style: none;
-    margin: 2em 0 0;
-    padding: 0.5em 1em;">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>RexHung
-  </li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖">https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
-  </li>
-</ul>
-</div>
-
-
-      <div>
-        
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
-    
-</div>
-        
-      </div>
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
-              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
-              <a href="/tags/TheF2E/" rel="tag"><i class="fa fa-tag"></i> TheF2E</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/12/04/20191204/" rel="prev" title="LINE TAIWAN TECHPULSE 2019">
-      <i class="fa fa-chevron-left"></i> LINE TAIWAN TECHPULSE 2019
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/19/20200319/" rel="next" title="[Blog Notes] - Hexo NexT 小筆記">
-      [Blog Notes] - Hexo NexT 小筆記 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-number">1.</span> <span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關於畫面"><span class="nav-number">3.1.</span> <span class="nav-text">關於畫面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於地圖"><span class="nav-number">3.2.</span> <span class="nav-text">關於地圖</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#底盤要先穩"><span class="nav-number">3.2.1.</span> <span class="nav-text">底盤要先穩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#開始著色吧"><span class="nav-number">3.2.2.</span> <span class="nav-text">開始著色吧</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#參考網站"><span class="nav-number">4.1.</span> <span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/images/profile/profile_2.png">
-  <p class="site-author-name" itemprop="name">RexHung</p>
-  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">47</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fab twitter fa-fw"></i></span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fab facebook fa-fw"></i></span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="總字數">286k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="所需總閱讀時間">4:20</span>
-</div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://RexHung0302.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/";
-    this.page.identifier = "2020/02/12/20200212/";
-    this.page.title = "[The F2E 2nd] — 10 Week Masks Map 口罩地圖";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://RexHung0302.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-
-  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/click-word.js"></script>
-</body>
-</html>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/">https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/HTML/">HTML    </a><a class="post-meta__tags" href="/tags/CSS/">CSS    </a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript    </a><a class="post-meta__tags" href="/tags/HexSchool/">HexSchool    </a><a class="post-meta__tags" href="/tags/TheF2E/">TheF2E    </a></div><div class="post_share"><div class="social-share" data-image="/img/article_404.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/19/20200319/"><img class="prev_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[Blog Notes] - Hexo NexT 小筆記</span></div></a></div><div class="next-post pull-right"><a href="/2019/12/04/20191204/"><img class="next_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>LINE TAIWAN TECHPULSE 2019</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/07/29/20200729/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60</div></a></div><div class="relatedPosts_item"><a href="/2020/06/07/20200607/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30</div></a></div><div class="relatedPosts_item"><a href="/2019/06/25/20190625/" title="[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖"><img class="relatedPosts_cover lozad"data-src="https://cdn-images-1.medium.com/max/2000/1*iupAX0LSU9ne0n5AZDzcqg.png"><div class="relatedPosts_title">[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2020/02/12/20200212/';
+  this.page.identifier = '2020/02/12/20200212/';
+  this.page.title = '[The F2E 2nd] — 10 Week Masks Map 口罩地圖';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(/img/article_404.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>

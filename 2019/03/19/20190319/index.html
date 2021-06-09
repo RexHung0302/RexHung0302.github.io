@@ -1,329 +1,31 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
-  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/index.html">
-<meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！">
-<meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2052/1*9vvaxIWXy-irN7VsNjjFAw.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*JAiK0vdc-tyWJFLQHZ34OQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*seP_S6pzv27alP48JXaUfQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2066/1*jyjX1zeYOz0uZ1JgWdJw5Q.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*J_9Cj_53nTXCFVoonq2gLA.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*7DlBd3T5oNZgKeAtyFGR4Q.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*BO0Js3hAdDHzgzDO2LYYNg.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*cosnIXYu9v2IYC11cIBXTQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*bBdw5fqQ9UFfFQhzAXsYPQ.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*ckBh_yTkJNHyBUKp_OoGOA.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2330/1*sLfEzkq92_cVdVBt8sSYdA.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2330/1*TuSeKiSqY4sHURtRNDHTQg.png">
-<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*un0teQDlE0jAJ3hbDm2yMw.png">
-<meta property="article:published_time" content="2019-03-19T04:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-09T06:46:04.489Z">
-<meta property="article:author" content="RexHung">
-<meta property="article:tag" content="RexHung">
-<meta property="article:tag" content="CodeLife">
-<meta property="article:tag" content="HTML">
-<meta property="article:tag" content="CSS">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="HexSchool">
-<meta property="article:tag" content="Engineer">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png">
-
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-TW'
-  };
-</script>
-
-  <title>[Hero Of UnderGround 地下城] — 7F Canvas 畫板 | RexHung's Blog</title>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Hero Of UnderGround 地下城] — 7F Canvas 畫板 | RexHung's Blog</title><meta name="description" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板"><meta name="keywords" content="Code,HTML,CSS,JavaScript,HexSchool"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板"><meta name="twitter:description" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板"><meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png"><meta property="og:type" content="article"><meta property="og:title" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Hero Of UnderGround 地下城] — 7F Canvas 畫板"><meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[Vue Notes] — Vue-Cli #1 初次見面" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190325/"><link rel="next" title="[Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/13/20190313/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支持'
+  },
+  bookmark: {
+    title: '添加書籤',
+    message_prev: '按',
+    message_next: '鍵將本頁加入書籤'
+  },
+  runtime_unit: '天',
+  copyright: undefined,
+  copy_copyright_js: false
   
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切換導航欄">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">RexHung's Blog</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
-
-  </li>
-        <li class="menu-item menu-item-link">
-
-    <a href="/link/" rel="section"><i class="fa fa-link fa-fw"></i>link</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜尋..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile/profile_2.png">
-      <meta itemprop="name" content="RexHung">
-      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="RexHung's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          [Hero Of UnderGround 地下城] — 7F Canvas 畫板
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2019-03-19 12:00:00" itemprop="dateCreated datePublished" datetime="2019-03-19T12:00:00+08:00">2019-03-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-09 14:46:04" itemprop="dateModified" datetime="2021-06-09T14:46:04+08:00">2021-06-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/03/19/20190319/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/19/20190319/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="文章字數">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">文章字數：</span>
-              <span>5.8k</span>
-            </span>
-            <span class="post-meta-item" title="所需閱讀時間">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>5 分鐘</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItN0YvaW5kZXguaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a></p>
+}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#成果-amp-程式碼"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">成果 &amp; 程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Summary-amp-摘要"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">Summary &amp; 摘要</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#額外條件"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">額外條件</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#萬事起頭難…-嗎？"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">萬事起頭難…..嗎？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#畫下第一筆"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text">畫下第一筆</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於擴充功能"><span class="toc_mobile_items-number">3.5.</span> <span class="toc_mobile_items-text">關於擴充功能</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Canvas-的學習過程"><span class="toc_mobile_items-number">3.6.</span> <span class="toc_mobile_items-text">Canvas 的學習過程</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#為什麼要用-Canvas？"><span class="toc_mobile_items-number">3.7.</span> <span class="toc_mobile_items-text">為什麼要用 Canvas？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="toc_mobile_items-number">3.8.</span> <span class="toc_mobile_items-text">03&#x2F;19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#gradient-讓你的人生有起有落"><span class="toc_mobile_items-number">3.9.</span> <span class="toc_mobile_items-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#我的其他範例"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">我的其他範例</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#成果-amp-程式碼"><span class="toc-number">1.</span> <span class="toc-text">成果 &amp; 程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">2.</span> <span class="toc-text">Introduction &amp; 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-amp-摘要"><span class="toc-number">3.</span> <span class="toc-text">Summary &amp; 摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#額外條件"><span class="toc-number">3.1.</span> <span class="toc-text">額外條件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#萬事起頭難…-嗎？"><span class="toc-number">3.2.</span> <span class="toc-text">萬事起頭難…..嗎？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#畫下第一筆"><span class="toc-number">3.3.</span> <span class="toc-text">畫下第一筆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="toc-number">3.4.</span> <span class="toc-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#關於擴充功能"><span class="toc-number">3.5.</span> <span class="toc-text">關於擴充功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Canvas-的學習過程"><span class="toc-number">3.6.</span> <span class="toc-text">Canvas 的學習過程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#為什麼要用-Canvas？"><span class="toc-number">3.7.</span> <span class="toc-text">為什麼要用 Canvas？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="toc-number">3.8.</span> <span class="toc-text">03&#x2F;19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gradient-讓你的人生有起有落"><span class="toc-number">3.9.</span> <span class="toc-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">4.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我的其他範例"><span class="toc-number">5.</span> <span class="toc-text">我的其他範例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考網站"><span class="toc-number">6.</span> <span class="toc-text">參考網站</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[Hero Of UnderGround 地下城] — 7F Canvas 畫板</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-03-19<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/">HeroOfUnground[地下城]</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">2.8k</span><span class="post-meta__separator">|</span><span>閲讀時長: 9 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-7F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>自從接觸 JS 後一直不敢觸碰的一塊，還記得前陣子碰到朋友在做抽抽樂轉盤，那時候便是看她用 Canvas 做出來的，狹路相逢(誤)，出來混總是要還的，這次的大魔王就是 Canvas 了！</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png" alt="7F的大魔王- Canvas畫板遊戲"></p>
+<p><img alt="7F的大魔王- Canvas畫板遊戲" data-src="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png" class="lozad"></p>
 <a id="more"></a>
 
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有二 項。</p>
@@ -347,87 +49,87 @@
 </li>
 </ol>
 <hr>
-<p><img src="https://cdn-images-1.medium.com/max/2052/1*9vvaxIWXy-irN7VsNjjFAw.png" alt="原諒我字醜，重寫了三小時"></p>
-<h3 id="萬事起頭難…-嗎？"><a href="#萬事起頭難…-嗎？" class="headerlink" title="萬事起頭難…..嗎？"></a>萬事起頭難…..嗎？</h3><p>起頭難不難，其實要先感謝 <a href="https://github.com/HuiyuLiz/vue-canvas-drawing-app">Huiyu</a> 大大，因為很多東西都算是菜雞我第一次接觸，所以會先去爬文看看其他大佬們如何起手。這邊參考了一位國外大神的 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj04WkdBekowZHJsMA==">Youtube<i class="fa fa-external-link-alt"></i></span> ，教你如何創造出簡單的畫布。<br>這次切版也用到比較多的動畫，順便訓練一下流暢性，還有順便解決 BOSS 的第一個弱點知一 d 。但搞切版就花了半天去了，原諒我菜TAT，比較特別的部分就是前面多位大大提過的 input color 了，後面的部分會提到。</p>
+<p><img alt="原諒我字醜，重寫了三小時" data-src="https://cdn-images-1.medium.com/max/2052/1*9vvaxIWXy-irN7VsNjjFAw.png" class="lozad"></p>
+<h3 id="萬事起頭難…-嗎？"><a href="#萬事起頭難…-嗎？" class="headerlink" title="萬事起頭難…..嗎？"></a>萬事起頭難…..嗎？</h3><p>起頭難不難，其實要先感謝 <a href="https://github.com/HuiyuLiz/vue-canvas-drawing-app">Huiyu</a> 大大，因為很多東西都算是菜雞我第一次接觸，所以會先去爬文看看其他大佬們如何起手。這邊參考了一位國外大神的 <a href="https://www.youtube.com/watch?v=8ZGAzJ0drl0" target="_blank" rel="noopener">Youtube</a> ，教你如何創造出簡單的畫布。<br>這次切版也用到比較多的動畫，順便訓練一下流暢性，還有順便解決 BOSS 的第一個弱點知一 d 。但搞切版就花了半天去了，原諒我菜TAT，比較特別的部分就是前面多位大大提過的 input color 了，後面的部分會提到。</p>
 <blockquote>
 <p>讚嘆感嘆便利的網路還有多位大神無私奉獻，現在很多東西其實不難了。</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> *<span class="attr">id</span>*=<span class="string">"drawing_board"</span> *<span class="attr">width</span>*=<span class="string">'800'</span> *<span class="attr">height</span>*=<span class="string">'800'</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> *<span class="attr">id</span>*=<span class="string">"drawing_board"</span> *<span class="attr">width</span>*=<span class="string">'800'</span> *<span class="attr">height</span>*=<span class="string">'800'</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>Canvas 可以說是一張畫布，而你想要在上面幹啥都行，別想歪。</p>
 <blockquote>
-<p>預設的畫布大小是 300px * 150px（寬 * 高）。但你也可以透過 HTML 寬、高屬性（<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9hdHRyaWJ1dGU=">attribute<i class="fa fa-external-link-alt"></i></span>）自訂。<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvQVBJL0NhbnZhc19BUEkvVHV0b3JpYWw=">*點我<i class="fa fa-external-link-alt"></i></span>前往文章*</p>
+<p>預設的畫布大小是 300px * 150px（寬 * 高）。但你也可以透過 HTML 寬、高屬性（<a href="https://developer.mozilla.org/en-US/docs/Glossary/attribute" target="_blank" rel="noopener">attribute</a>）自訂。<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="noopener">*點我</a>前往文章*</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'drawing_board'</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'drawing_board'</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br></pre></td></tr></tbody></table></figure>
 
 <p>這可以說是只要寫到 <strong>Canvas</strong> 就一定會寫到的，給他的一個變數名稱，然後指定你是要用 <strong>2d</strong> 還是 <strong>3d</strong> 來作畫，這邊我們用到 <strong>2d</strong> 就夠了。之後給他寬高，還有畫筆，畫筆顏色…等等</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight;</span><br><span class="line"><span class="comment">// 畫筆的顏色粗細等等</span></span><br><span class="line">ctx.strokeStyle = <span class="string">'black'</span>;  <span class="comment">// 色筆顏色</span></span><br><span class="line">ctx.lineJoin = <span class="string">'round'</span>;     <span class="comment">// 兩條線交會的地方，是圓角</span></span><br><span class="line">ctx.lineCap = <span class="string">'round'</span>;      <span class="comment">// 繪製結束的線帽</span></span><br><span class="line">ctx.lineWidth = <span class="number">10</span>;         <span class="comment">// 色筆大小</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">canvas.width = <span class="built_in">window</span>.innerWidth;</span><br><span class="line">canvas.height = <span class="built_in">window</span>.innerHeight;</span><br><span class="line"><span class="comment">// 畫筆的顏色粗細等等</span></span><br><span class="line">ctx.strokeStyle = <span class="string">'black'</span>;  <span class="comment">// 色筆顏色</span></span><br><span class="line">ctx.lineJoin = <span class="string">'round'</span>;     <span class="comment">// 兩條線交會的地方，是圓角</span></span><br><span class="line">ctx.lineCap = <span class="string">'round'</span>;      <span class="comment">// 繪製結束的線帽</span></span><br><span class="line">ctx.lineWidth = <span class="number">10</span>;         <span class="comment">// 色筆大小</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>設定完成後我們還需要做到幾件事情，既然我們要做畫板，就必須讓筆掌握在使用者手中，所以我們必須判斷使用者何時下手何時停手畫畫，然後給使用者 一個移動的監聽事件 ， 一個按下滑鼠的監聽事件 ， 一個放開滑鼠的監聽事件 ， 最後一個滑鼠離開的監聽事件。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判斷是不是點下滑鼠了</span></span><br><span class="line"><span class="keyword">let</span> isDrawing = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 設定滑鼠座標</span></span><br><span class="line"><span class="keyword">let</span> lastX = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> lastY = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠移動的監聽事件</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, draw);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判斷是不是點下滑鼠了</span></span><br><span class="line"><span class="keyword">let</span> isDrawing = <span class="literal">false</span>;</span><br><span class="line"><span class="comment">// 設定滑鼠座標</span></span><br><span class="line"><span class="keyword">let</span> lastX = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> lastY = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠移動的監聽事件</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, draw);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">e</span>) </span>{</span><br><span class="line"><span class="built_in">console</span>(e);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*JAiK0vdc-tyWJFLQHZ34OQ.png" alt="滑鼠監聽事件顯示出滑鼠座標"></p>
+<p><img alt="滑鼠監聽事件顯示出滑鼠座標" data-src="https://cdn-images-1.medium.com/max/2000/1*JAiK0vdc-tyWJFLQHZ34OQ.png" class="lozad"></p>
 <hr>
 <h3 id="畫下第一筆"><a href="#畫下第一筆" class="headerlink" title="畫下第一筆"></a>畫下第一筆</h3><p>完成了鼠標的座標抓取後，我們就可以來判斷何時該畫畫了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 滑鼠按下後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, (e) =&gt; &#123;</span><br><span class="line">  isDrawing = <span class="literal">true</span>;   <span class="comment">// 判斷是否正在畫畫</span></span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠放開後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mouseup'</span>, (e) =&gt; &#123;</span><br><span class="line">  push();             <span class="comment">// 跑進計算步數的 function 後面會提到</span></span><br><span class="line">  isDrawing = <span class="literal">false</span>;  <span class="comment">// 判斷是否正在畫畫</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠離開後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mouseout'</span>, () =&gt; isDrawing = <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 畫畫得 function 可以改為</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isDrawing) <span class="keyword">return</span>; <span class="comment">// 沒有點擊時不回覆座標</span></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  <span class="comment">// 開始</span></span><br><span class="line">  ctx.moveTo(lastX, lastY);</span><br><span class="line">  <span class="comment">// 結束</span></span><br><span class="line">  ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">  <span class="comment">// 畫圖</span></span><br><span class="line">  ctx.stroke();</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 滑鼠按下後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mousedown'</span>, (e) =&gt; {</span><br><span class="line">  isDrawing = <span class="literal">true</span>;   <span class="comment">// 判斷是否正在畫畫</span></span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠放開後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mouseup'</span>, (e) =&gt; {</span><br><span class="line">  push();             <span class="comment">// 跑進計算步數的 function 後面會提到</span></span><br><span class="line">  isDrawing = <span class="literal">false</span>;  <span class="comment">// 判斷是否正在畫畫</span></span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠離開後</span></span><br><span class="line">canvas.addEventListener(<span class="string">'mouseout'</span>, () =&gt; isDrawing = <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 畫畫得 function 可以改為</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params">e</span>) </span>{</span><br><span class="line">  <span class="keyword">if</span> (!isDrawing) <span class="keyword">return</span>; <span class="comment">// 沒有點擊時不回覆座標</span></span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  <span class="comment">// 開始</span></span><br><span class="line">  ctx.moveTo(lastX, lastY);</span><br><span class="line">  <span class="comment">// 結束</span></span><br><span class="line">  ctx.lineTo(e.offsetX, e.offsetY);</span><br><span class="line">  <span class="comment">// 畫圖</span></span><br><span class="line">  ctx.stroke();</span><br><span class="line">  [lastX, lastY] = [e.offsetX, e.offsetY];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <hr>
-<h3 id="使用-toDataURL-達到-UNDO-REDO"><a href="#使用-toDataURL-達到-UNDO-REDO" class="headerlink" title="使用 toDataURL() 達到 UNDO REDO"></a>使用 toDataURL() 達到 UNDO REDO</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> step = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">let</span> userhistory = [];</span><br></pre></td></tr></table></figure>
+<h3 id="使用-toDataURL-達到-UNDO-REDO"><a href="#使用-toDataURL-達到-UNDO-REDO" class="headerlink" title="使用 toDataURL() 達到 UNDO REDO"></a>使用 toDataURL() 達到 UNDO REDO</h3><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> step = <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">let</span> userhistory = [];</span><br></pre></td></tr></tbody></table></figure>
 
 <p>首先我們必須設定兩個變數，一個用來計算步數，一個用來裝轉成 Base64 編碼的圖片字串，用陣列來放，讓我們靠  <strong>Step</strong> 就能達到上一步，下一步的功能，每畫一筆，我們就跑一次 <strong>Push</strong> 的 <strong>function</strong> 讓 <strong>Step++，並把圖片的字串放進陣列裡，讓讀取的時候能取出並蓋上畫布</strong> ，反之上一步就是 <strong>−−</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  step++;</span><br><span class="line">  <span class="keyword">if</span> (step &lt; userhistory.length - <span class="number">1</span>) &#123;</span><br><span class="line">    userhistory.length = step + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  userhistory.push(canvas.toDataURL()); <span class="comment">// 當前影像存成 Base64 編碼的字串並放入陣列</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params"></span>) </span>{</span><br><span class="line">  step++;</span><br><span class="line">  <span class="keyword">if</span> (step &lt; userhistory.length - <span class="number">1</span>) {</span><br><span class="line">    userhistory.length = step + <span class="number">1</span></span><br><span class="line">  }</span><br><span class="line">  userhistory.push(canvas.toDataURL()); <span class="comment">// 當前影像存成 Base64 編碼的字串並放入陣列</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>這邊需要特別提到，因為一開始布數從 -1開始，為的是讓他可以符合陣列的特定，從 <strong>0</strong>開始算，這樣讀取時才能讀到資料，但是我們的上一步條件必須 <strong>Step &gt; 0</strong>，所以一開始我們就必須讓 <strong>Step+1</strong> ，不然會變成我一樣，苦惱好幾小時，為什麼第一筆畫都不能 <strong>UNDO</strong> …… 這邊感謝 <strong>7F</strong> 前端之碑主 <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2phdmFzY3JpcHRkZXVnb25jaGFsbGVuZ2UvanNkZXVnb24wNy0yYmRhNTIyMTQ3NGY=">陳顯然<i class="fa fa-external-link-alt"></i></span> 大大的解答。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上一步的function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">undo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (step &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  step--;</span><br><span class="line">  <span class="keyword">let</span> canvaspic = <span class="keyword">new</span> Image(); <span class="comment">//建立新的 Image</span></span><br><span class="line">  canvaspic.src = userhistory[step]; <span class="comment">//載入剛剛存放的影像</span></span><br><span class="line">  canvaspic.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">      ctx.drawImage(canvaspic, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">//匯出影像並從座標 x:0 y:0 開始</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 最後這邊是讓上一步下一步可以在不能使用時顯示灰色及更改鼠標，可以不加</span></span><br><span class="line">  <span class="keyword">if</span> (step &lt; userhistory.length &amp;&amp; step &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    $(<span class="string">'.next-step'</span>).removeClass(<span class="string">'disable-btn'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這邊需要特別提到，因為一開始布數從 -1開始，為的是讓他可以符合陣列的特定，從 <strong>0</strong>開始算，這樣讀取時才能讀到資料，但是我們的上一步條件必須 <strong>Step &gt; 0</strong>，所以一開始我們就必須讓 <strong>Step+1</strong> ，不然會變成我一樣，苦惱好幾小時，為什麼第一筆畫都不能 <strong>UNDO</strong> …… 這邊感謝 <strong>7F</strong> 前端之碑主 <a href="https://medium.com/javascriptdeugonchallenge/jsdeugon07-2bda5221474f" target="_blank" rel="noopener">陳顯然</a> 大大的解答。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上一步的function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">undo</span>(<span class="params"></span>) </span>{</span><br><span class="line">  <span class="keyword">if</span> (step &gt; <span class="number">0</span>) {</span><br><span class="line">  step--;</span><br><span class="line">  <span class="keyword">let</span> canvaspic = <span class="keyword">new</span> Image(); <span class="comment">//建立新的 Image</span></span><br><span class="line">  canvaspic.src = userhistory[step]; <span class="comment">//載入剛剛存放的影像</span></span><br><span class="line">  canvaspic.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{</span><br><span class="line">      ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">      ctx.drawImage(canvaspic, <span class="number">0</span>, <span class="number">0</span>) <span class="comment">//匯出影像並從座標 x:0 y:0 開始</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="comment">// 最後這邊是讓上一步下一步可以在不能使用時顯示灰色及更改鼠標，可以不加</span></span><br><span class="line">  <span class="keyword">if</span> (step &lt; userhistory.length &amp;&amp; step &gt; <span class="number">0</span>) {</span><br><span class="line">    $(<span class="string">'.next-step'</span>).removeClass(<span class="string">'disable-btn'</span>);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上一步的做法跟下一步的做法相反而已，另外剛開始寫完這段的時候怎麼試都無法上一步，一直到最後加了 <strong>ctx.clearRect</strong> 後才有了反應，這邊不知道是不是有大大說的 <strong>Canvas</strong> 不吃 <strong>CSS</strong> 的問題，會再進一步探討並研究的。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"save"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">download</span>=<span class="string">"我的偉大創作"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"save"</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">download</span>=<span class="string">"我的偉大創作"</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 儲存畫布的function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">position</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> dataURL = canvas.toDataURL(<span class="string">'image/png'</span>) <span class="comment">// 把影像轉成指定格式的 URL 字串</span></span><br><span class="line">  position.href = dataURL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 儲存畫布的function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span>(<span class="params">position</span>) </span>{</span><br><span class="line">  <span class="keyword">const</span> dataURL = canvas.toDataURL(<span class="string">'image/png'</span>) <span class="comment">// 把影像轉成指定格式的 URL 字串</span></span><br><span class="line">  position.href = dataURL;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>另外儲存的部分在 <strong>html</strong> 上使用 <strong>href</strong> 去裝我們的字串，<strong>download</strong> 則是下載後的檔案名稱。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*seP_S6pzv27alP48JXaUfQ.png" alt="存在字串裡的 64base 圖片字串"></p>
+<p><img alt="存在字串裡的 64base 圖片字串" data-src="https://cdn-images-1.medium.com/max/2000/1*seP_S6pzv27alP48JXaUfQ.png" class="lozad"></p>
 <hr>
 <h3 id="關於擴充功能"><a href="#關於擴充功能" class="headerlink" title="關於擴充功能"></a>關於擴充功能</h3><p>由於對 <strong>Canvas</strong> 是第一次接觸，所以就把各位大大做的功能拿來練手，畢竟菜雞腳程慢，到 7F 時各位大佬都已經飛天啦…這邊我選的功能是 <strong>橡皮擦、上傳圖片、顏色選擇器…</strong></p>
-<p><img src="https://cdn-images-1.medium.com/max/2066/1*jyjX1zeYOz0uZ1JgWdJw5Q.png" alt="八土地下城(誤"></p>
+<p><img alt="八土地下城(誤" data-src="https://cdn-images-1.medium.com/max/2066/1*jyjX1zeYOz0uZ1JgWdJw5Q.png" class="lozad"></p>
 <p>先說說簡單的 橡皮擦 其實就是把畫筆顏色改成背景顏色，然後看起來就像是擦掉了。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*J_9Cj_53nTXCFVoonq2gLA.png" alt="顏色選擇器"></p>
+<p><img alt="顏色選擇器" data-src="https://cdn-images-1.medium.com/max/2000/1*J_9Cj_53nTXCFVoonq2gLA.png" class="lozad"></p>
 <blockquote>
 <p>Input Color 对象是 HTML5 新增的，Input Color 對象代表了使用 type=”color”属性的 HTML <input> 元素 。</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"color"</span> <span class="attr">id</span>=<span class="string">"myColor"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"color"</span> <span class="attr">id</span>=<span class="string">"myColor"</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>隨後是我覺得超酷的功能，顏色選擇器，其實也很簡單，只是修改它的外觀比較麻煩。在 <strong>html</strong> 上加上這個之後，你會看見一個長方形的 <strong>input</strong> 但是點下去你就能選顏色了，透過 <strong>change</strong> 事件 <strong>input.value()</strong> 你就能取得使用者選擇的顏色了。然後就讓你的 <strong>ctx.strokeStyle</strong> 畫筆顏色 = <strong>input.value()</strong> 吧！</p>
 <p>這邊非常感謝 <a href="https://github.com/simpsons01/HexSchoolChallenge/blob/master/Week7/index.html">汶穎大大</a> 。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*7DlBd3T5oNZgKeAtyFGR4Q.png" alt="圖片上傳"></p>
+<p><img alt="圖片上傳" data-src="https://cdn-images-1.medium.com/max/2000/1*7DlBd3T5oNZgKeAtyFGR4Q.png" class="lozad"></p>
 <p>其中比較麻煩的應該就是上傳功能了，不過簡單理解下，就是透過 <strong>html</strong> 的 <strong>input files</strong> 上傳後，一樣透過 <strong>toDataURL()</strong> 把它轉成字串，然後用 <strong>Canvas</strong> 的 <strong>drawImage</strong> 把它畫出來。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">class</span>=<span class="string">"form-control-file photo-up rounded"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span> <span class="attr">id</span>=<span class="string">"photo_up"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">class</span>=<span class="string">"form-control-file photo-up rounded"</span> <span class="attr">style</span>=<span class="string">"display: none;"</span> <span class="attr">id</span>=<span class="string">"photo_up"</span> /&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*BO0Js3hAdDHzgzDO2LYYNg.png" alt="必須使用Change事件"></p>
+<p><img alt="必須使用Change事件" data-src="https://cdn-images-1.medium.com/max/2000/1*BO0Js3hAdDHzgzDO2LYYNg.png" class="lozad"></p>
 <p>需要注意的就是必須使用 <strong>Change</strong> 事件，不然圖片還沒選到，就會跑進裡面讀你的陣列有沒有圖片，會造成錯誤。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*cosnIXYu9v2IYC11cIBXTQ.png" alt="不要像我一樣傻傻地用Click搞了好幾小時"></p>
+<p><img alt="不要像我一樣傻傻地用Click搞了好幾小時" data-src="https://cdn-images-1.medium.com/max/2000/1*cosnIXYu9v2IYC11cIBXTQ.png" class="lozad"></p>
 <h3 id="Canvas-的學習過程"><a href="#Canvas-的學習過程" class="headerlink" title="Canvas 的學習過程"></a>Canvas 的學習過程</h3><p>這次可以說是踩雷踩了又踩，看別人寫的 <strong>Code</strong> 像是數學老師解題一樣，自己寫出來又是一回事，不過就正式這樣才有成長，從剛開始什麼都不懂，現在至少能畫個圓形和直線出來…噗</p>
-<h3 id="為什麼要用-Canvas？"><a href="#為什麼要用-Canvas？" class="headerlink" title="為什麼要用 Canvas？"></a>為什麼要用 Canvas？</h3><p><img src="https://cdn-images-1.medium.com/max/2000/1*bBdw5fqQ9UFfFQhzAXsYPQ.png" alt="Canvas歷史由來- 取至維基百科"></p>
+<h3 id="為什麼要用-Canvas？"><a href="#為什麼要用-Canvas？" class="headerlink" title="為什麼要用 Canvas？"></a>為什麼要用 Canvas？</h3><p><img alt="Canvas歷史由來- 取至維基百科" data-src="https://cdn-images-1.medium.com/max/2000/1*bBdw5fqQ9UFfFQhzAXsYPQ.png" class="lozad"></p>
 <p><strong>Canvas</strong> 除了能做到畫畫 還能做出非常具有特色的<strong>3D遊戲</strong>，及<strong>動畫</strong>，重點是方便且快速，所以非常多人使用，必且在大神的學習在釋出的寶貴經驗之中， <strong>Canvas</strong> 甚至被做成了非常方便的套件。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*ckBh_yTkJNHyBUKp_OoGOA.png" alt="成果出爐了"></p>
+<p><img alt="成果出爐了" data-src="https://cdn-images-1.medium.com/max/2000/1*ckBh_yTkJNHyBUKp_OoGOA.png" class="lozad"></p>
 <hr>
-<h3 id="03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><a href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走" class="headerlink" title="03/19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走"></a>03/19更新 — 熟用 fillStyle 及 <strong>fillRect 別讓背景離家出走</strong></h3><p>由於沒注意到下載後背景的顏色，造成一開始背景是透明的，讓我大驚失色。詳細顏色設定請<span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24vdGFncy9jYW52YXNfZmlsbHN0eWxlLmFzcA==">點我<i class="fa fa-external-link-alt"></i></span></p>
-<p><img src="https://cdn-images-1.medium.com/max/2330/1*sLfEzkq92_cVdVBt8sSYdA.png" alt="Canvas預設背景是透明的"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">firstpush</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  ctx.fillStyle = <span class="string">'#E8E8E8'</span>; <span class="comment">// 讓第一次進來跑 function 的時候就加上背景顏色</span></span><br><span class="line">  ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height)</span><br><span class="line">  push();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 因為 canvas.width = window.innerWidth;</span></span><br></pre></td></tr></table></figure>
+<h3 id="03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><a href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走" class="headerlink" title="03/19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走"></a>03/19更新 — 熟用 fillStyle 及 <strong>fillRect 別讓背景離家出走</strong></h3><p>由於沒注意到下載後背景的顏色，造成一開始背景是透明的，讓我大驚失色。詳細顏色設定請<a href="http://www.w3school.com.cn/tags/canvas_fillstyle.asp" target="_blank" rel="noopener">點我</a></p>
+<p><img alt="Canvas預設背景是透明的" data-src="https://cdn-images-1.medium.com/max/2330/1*sLfEzkq92_cVdVBt8sSYdA.png" class="lozad"></p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">firstpush</span>(<span class="params"></span>) </span>{</span><br><span class="line">  ctx.fillStyle = <span class="string">'#E8E8E8'</span>; <span class="comment">// 讓第一次進來跑 function 的時候就加上背景顏色</span></span><br><span class="line">  ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height)</span><br><span class="line">  push();</span><br><span class="line">}</span><br><span class="line"><span class="comment">// 因為 canvas.width = window.innerWidth;</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>還記得一開始說我們的** Step** 預設是 -1 對吧，一開始我們進來必須設定一個 <strong>function</strong> 去讓它加一，我們就可以在裡面加上背景顏色，<strong>fillStyle</strong> 其實就是設定要填滿的顏色，記得要配上 <strong>fillRect *<em>服用，它是 用於填充繪圖的顏色、漸變或模式，預設是黑色，你也可以設定一定的大小範圍去填滿它，例如 *</em>ctx.fillRect(20,20,150,100)</strong>。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2330/1*TuSeKiSqY4sHURtRNDHTQg.png" alt="明顯了許多，背景回家了"></p>
+<p><img alt="明顯了許多，背景回家了" data-src="https://cdn-images-1.medium.com/max/2330/1*TuSeKiSqY4sHURtRNDHTQg.png" class="lozad"></p>
 <hr>
 <h3 id="gradient-讓你的人生有起有落"><a href="#gradient-讓你的人生有起有落" class="headerlink" title="gradient 讓你的人生有起有落"></a><em>gradient 讓你的人生有起有落</em></h3><p>配上 <strong>gradient</strong> 或 <strong>pattern</strong> 服用，可以創造出漸層，也可以使用後者讓你的圖片填充你的畫布。</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*un0teQDlE0jAJ3hbDm2yMw.png" alt="取自W3School [點我](https://www.w3schools.com/TAgs/tryit.asp?filename=tryhtml5_canvas_createlineargradient)看文章"><em>取自W3School <span class="exturl" data-url="aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNvbS9UQWdzL3RyeWl0LmFzcD9maWxlbmFtZT10cnlodG1sNV9jYW52YXNfY3JlYXRlbGluZWFyZ3JhZGllbnQ=">點我<i class="fa fa-external-link-alt"></i></span>看文章</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 起手式</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 四個參數設定下方會解釋</span></span><br><span class="line"><span class="keyword">var</span> grd = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">170</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 起始顏色(這邊為黑色)</span></span><br><span class="line">grd.addColorStop(<span class="number">0</span>, <span class="string">"black"</span>);</span><br><span class="line"><span class="comment">// 結束顏色(這邊為白色)</span></span><br><span class="line">grd.addColorStop(<span class="number">1</span>, <span class="string">"white"</span>);</span><br><span class="line"><span class="comment">// 填充的顏色改為漸層Gradient方式</span></span><br><span class="line">ctx.fillStyle = grd;</span><br><span class="line"><span class="comment">// 繪畫的座標及範圍大小</span></span><br><span class="line">ctx.fillRect(<span class="number">20</span>, <span class="number">20</span>, <span class="number">150</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<p><img alt="取自W3School [點我](https://www.w3schools.com/TAgs/tryit.asp?filename=tryhtml5_canvas_createlineargradient)看文章" data-src="https://cdn-images-1.medium.com/max/2000/1*un0teQDlE0jAJ3hbDm2yMw.png" class="lozad"><em>取自W3School <a href="https://www.w3schools.com/TAgs/tryit.asp?filename=tryhtml5_canvas_createlineargradient" target="_blank" rel="noopener">點我</a>看文章</em></p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 起手式</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"myCanvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 四個參數設定下方會解釋</span></span><br><span class="line"><span class="keyword">var</span> grd = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">170</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 起始顏色(這邊為黑色)</span></span><br><span class="line">grd.addColorStop(<span class="number">0</span>, <span class="string">"black"</span>);</span><br><span class="line"><span class="comment">// 結束顏色(這邊為白色)</span></span><br><span class="line">grd.addColorStop(<span class="number">1</span>, <span class="string">"white"</span>);</span><br><span class="line"><span class="comment">// 填充的顏色改為漸層Gradient方式</span></span><br><span class="line">ctx.fillStyle = grd;</span><br><span class="line"><span class="comment">// 繪畫的座標及範圍大小</span></span><br><span class="line">ctx.fillRect(<span class="number">20</span>, <span class="number">20</span>, <span class="number">150</span>, <span class="number">100</span>);</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
 <p>ctx.createLinearGradient(漸變開始點的 x 座標,<br>漸變開始點的 y 座標,漸變結束點的 x 座標,漸變結束的 y 座標)</p>
 </blockquote>
-<p><strong>詳細說明請<span class="exturl" data-url="aHR0cDovL3d3dy5ydW5vb2IuY29tL2pzcmVmL21ldC1jYW52YXMtY3JlYXRlbGluZWFyZ3JhZGllbnQuaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span>查看</strong></p>
+<p><strong>詳細說明請<a href="http://www.runoob.com/jsref/met-canvas-createlineargradient.html" target="_blank" rel="noopener">點我</a>查看</strong></p>
 <hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>我想這次的 <strong>7F</strong> 不算破關，是靠著眾多前人智慧以及萬能谷歌大神，讓我學到了寶貴的一課，關於 <strong>Canvas</strong> 還有很多值得我去探討，這是較不容易學會卻是非常好用的東西之一，身為一位勇者，就是必須一直嘗試跌倒在嘗試啊。<br>雖然每一層樓都有主要的目標 <strong>BOSS</strong> 在，但卻會常常在路上學到其他壯大自己的知識，比如這次意外學習到 <strong>ES6</strong> 的 <strong>模板源文本（template strings</strong> ，有興趣可以<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BkZDA0MjUvamF2YXNjcmlwdC1lczYtdGVtcGxhdGUtc3RyaW5ncy03YjhhZGRjOTdlYTY=">點我<i class="fa fa-external-link-alt"></i></span>查看，最後除了繼續努力之外還是要列出檢討的地方，然後朝下一關繼續加油，完畢。（這次真的需要好好加油呀…</p>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>我想這次的 <strong>7F</strong> 不算破關，是靠著眾多前人智慧以及萬能谷歌大神，讓我學到了寶貴的一課，關於 <strong>Canvas</strong> 還有很多值得我去探討，這是較不容易學會卻是非常好用的東西之一，身為一位勇者，就是必須一直嘗試跌倒在嘗試啊。<br>雖然每一層樓都有主要的目標 <strong>BOSS</strong> 在，但卻會常常在路上學到其他壯大自己的知識，比如這次意外學習到 <strong>ES6</strong> 的 <strong>模板源文本（template strings</strong> ，有興趣可以<a href="https://medium.com/@dd0425/javascript-es6-template-strings-7b8addc97ea6" target="_blank" rel="noopener">點我</a>查看，最後除了繼續努力之外還是要列出檢討的地方，然後朝下一關繼續加油，完畢。（這次真的需要好好加油呀…</p>
 <ul>
 <li><p>JS</p>
 </li>
@@ -442,354 +144,57 @@
 <h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
 <li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
 <blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMUYvaW5kZXguaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
 <blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMkYvY2xvY2suaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
 <blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItM0YvaW5kZXguaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 4F World Clock 各國時區</strong></p>
 <blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNEYvaW5kZXguaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNGYtd29ybGQtY2xvY2stJUU1JTkwJTg0JUU1JTlDJThCJUU2JTk5JTgyJUU1JThEJTgwLTIzNTY3ODZmM2RmYQ==">點我<i class="fa fa-external-link-alt"></i></span></p>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa" target="_blank" rel="noopener">點我</a></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 5F AQI 全台空氣指標儀表板</strong></p>
 <blockquote>
-<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNUYvaW5kZXguaHRtbA==">*點我<i class="fa fa-external-link-alt"></i></span>*<br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNWYtYXFpLSVFNSU4NSVBOCVFNSU4RiVCMCVFNyVBOSVCQSVFNiVCMCVBMyVFNiU4QyU4NyVFNiVBOCU5OSVFNSU4NCU4MCVFOCVBMSVBOCVFNiU5RCVCRi1jMDYwZmJlNTg0NTQ=">點我<i class="fa fa-external-link-alt"></i></span>*</p>
+<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-5F/index.html" target="_blank" rel="noopener">*點我</a>*<br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454" target="_blank" rel="noopener">點我</a>*</p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 6F SECONDS CHALLENGE 倒數遊戲</strong></p>
 <blockquote>
-<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNkYvaW5kZXguaHRtbA==">點我<i class="fa fa-external-link-alt"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNmYtc2Vjb25kcy1jaGFsbGVuZ2UtJUU1JTgwJTkyJUU2JTk1JUI4JUU5JTgxJThBJUU2JTg4JUIyLWY3MWMwYjY4MGZkYg==">點我<i class="fa fa-external-link-alt"></i></span></em></p>
+<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-6F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb" target="_blank" rel="noopener">點我</a></em></p>
 </blockquote>
 </li>
 </ul>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL2phdmFzY3JpcHRkZXVnb25jaGFsbGVuZ2UvanNkZXVnb24wNy0yYmRhNTIyMTQ3NGY=">陳顯然大大的<i class="fa fa-external-link-alt"></i></span> — Canvas畫版</li>
+<li><a href="https://medium.com/javascriptdeugonchallenge/jsdeugon07-2bda5221474f" target="_blank" rel="noopener">陳顯然大大的</a> — Canvas畫版</li>
 <li><a href="https://github.com/HuiyuLiz/vue-canvas-drawing-app">HuiyuLiz大大的</a> — GitHub</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BkZDA0MjUvamF2YXNjcmlwdC1lczYtdGVtcGxhdGUtc3RyaW5ncy03YjhhZGRjOTdlYTY=">Dosmanthus大大<i class="fa fa-external-link-alt"></i></span> — ES6 — Template Strings</li>
-<li><span class="exturl" data-url="aHR0cDovL3d3dy53M3NjaG9vbC5jb20uY24v">W3school 教學網站<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cDovL3d3dy5ydW5vb2IuY29tL2pzcmVmL2RvbS1vYmotY29sb3IuaHRtbA==">Runoob<i class="fa fa-external-link-alt"></i></span> — input color</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvemgtVFcvZG9jcy9XZWIvQVBJL0NhbnZhc19BUEkvVHV0b3JpYWwvVXNpbmdfaW1hZ2Vz">MDN<i class="fa fa-external-link-alt"></i></span> — Canvas</li>
+<li><a href="https://medium.com/@dd0425/javascript-es6-template-strings-7b8addc97ea6" target="_blank" rel="noopener">Dosmanthus大大</a> — ES6 — Template Strings</li>
+<li><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">W3school 教學網站</a></li>
+<li><a href="http://www.runoob.com/jsref/dom-obj-color.html" target="_blank" rel="noopener">Runoob</a> — input color</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Canvas_API/Tutorial/Using_images" target="_blank" rel="noopener">MDN</a> — Canvas</li>
 <li><a href="https://github.com/simpsons01/HexSchoolChallenge/blob/master/Week7/index.html">汶穎大大 </a>— 圖片上傳</li>
 <li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
 </ul>
-
-    </div>
-
-    
-    
-    
-        
-
-<div>
-<ul class="post-copyright" style="background: var(--card-bg-color);
-    border-left: 3px solid #ff2a2a;
-    list-style: none;
-    margin: 2em 0 0;
-    padding: 0.5em 1em;">
-  <li class="post-copyright-author">
-    <strong>作者： </strong>RexHung
-  </li>
-  <li class="post-copyright-link">
-    <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/" title="[Hero Of UnderGround 地下城] — 7F Canvas 畫板">https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
-  </li>
-</ul>
-</div>
-
-
-      <div>
-        
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
-    
-</div>
-        
-      </div>
-
-      <footer class="post-footer">
-          
-          <div class="post-tags">
-              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
-              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
-              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/03/13/20190313/" rel="prev" title="[Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲">
-      <i class="fa fa-chevron-left"></i> [Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/03/26/20190326/" rel="next" title="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲">
-      [Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目錄
-        </li>
-        <li class="sidebar-nav-overview">
-          本站概要
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-number">1.</span> <span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#額外條件"><span class="nav-number">3.1.</span> <span class="nav-text">額外條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#萬事起頭難…-嗎？"><span class="nav-number">3.2.</span> <span class="nav-text">萬事起頭難…..嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#畫下第一筆"><span class="nav-number">3.3.</span> <span class="nav-text">畫下第一筆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-toDataURL-達到-UNDO-REDO"><span class="nav-number">3.4.</span> <span class="nav-text">使用 toDataURL() 達到 UNDO REDO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於擴充功能"><span class="nav-number">3.5.</span> <span class="nav-text">關於擴充功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-的學習過程"><span class="nav-number">3.6.</span> <span class="nav-text">Canvas 的學習過程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#為什麼要用-Canvas？"><span class="nav-number">3.7.</span> <span class="nav-text">為什麼要用 Canvas？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-19更新-—-熟用-fillStyle-及-fillRect-別讓背景離家出走"><span class="nav-number">3.8.</span> <span class="nav-text">03&#x2F;19更新 — 熟用 fillStyle 及 fillRect 別讓背景離家出走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gradient-讓你的人生有起有落"><span class="nav-number">3.9.</span> <span class="nav-text">gradient 讓你的人生有起有落</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-number">5.</span> <span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-number">6.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/images/profile/profile_2.png">
-  <p class="site-author-name" itemprop="name">RexHung</p>
-  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">53</span>
-          <span class="site-state-item-name">文章</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">38</span>
-        <span class="site-state-item-name">分類</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">47</span>
-        <span class="site-state-item-name">標籤</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab github fa-fw"></i></a>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fab twitter fa-fw"></i></span>
-      </span>
-      <span class="links-of-author-item">
-        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fab facebook fa-fw"></i></span>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2020 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="總字數">286k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="所需總閱讀時間">4:20</span>
-</div>
-  <div class="powered-by">由 <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl theme-link" data-url="aHR0cHM6Ly9waXNjZXMudGhlbWUtbmV4dC5vcmc=">NexT.Pisces</span> 強力驅動
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://RexHung0302.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/";
-    this.page.identifier = "2019/03/19/20190319/";
-    this.page.title = "[Hero Of UnderGround 地下城] — 7F Canvas 畫板";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://RexHung0302.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
-
-
-  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/click-word.js"></script>
-</body>
-</html>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/">https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/HTML/">HTML    </a><a class="post-meta__tags" href="/tags/CSS/">CSS    </a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript    </a><a class="post-meta__tags" href="/tags/HexSchool/">HexSchool    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/03/26/20190325/"><img class="prev_cover lozad" data-src="https://cdn-images-1.medium.com/max/2840/1*PNlbgb05IwSxOhAz0aA2rg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[Vue Notes] — Vue-Cli #1 初次見面</span></div></a></div><div class="next-post pull-right"><a href="/2019/03/13/20190313/"><img class="next_cover lozad" data-src="https://cdn-images-1.medium.com/max/2000/1*LW8w2CbsdB4LvSkG_Bl-QQ.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[Hero Of UnderGround 地下城] — 6F SECONDS CHALLENGE 倒數遊戲</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/07/29/20200729/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60</div></a></div><div class="relatedPosts_item"><a href="/2020/06/07/20200607/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30</div></a></div><div class="relatedPosts_item"><a href="/2020/02/12/20200212/" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[The F2E 2nd] — 10 Week Masks Map 口罩地圖</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/03/19/20190319/';
+  this.page.identifier = '2019/03/19/20190319/';
+  this.page.title = '[Hero Of UnderGround 地下城] — 7F Canvas 畫板';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*LnEeafX9QlQNCJ6wbNNrWA.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>
