@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2019-11-04T15:59:59.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:47:17.360Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.192Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="PHP">
@@ -256,7 +256,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:47:17" itemprop="dateModified" datetime="2021-06-15T11:47:17+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -302,7 +302,7 @@
 <blockquote>
 <p><em>這一樣是一篇用來筆記的文章，以防日後需要重新建置環境時忘記怎麼設定。</em></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/MacbookPro15.png" alt="香！!"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/MacbookPro15.png" alt="香！!"></p>
 <span id="more"></span>
 
 <hr>
@@ -319,27 +319,27 @@
 <h3 id="安裝-PHP7-2"><a href="#安裝-PHP7-2" class="headerlink" title="安裝 PHP7.2"></a>安裝 PHP7.2</h3><p>首先安裝一定會用到的 <strong>PHP</strong>，目前最穩定版本為 <strong>7.2</strong> 所以輸入以下指令開始安裝：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install php72</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/step1.png" alt="安裝中"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/step2.png" alt="輸入 brew services start php@7.2 啟動"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/step1.png" alt="安裝中"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/step2.png" alt="輸入 brew services start php@7.2 啟動"></p>
 <h4 id="PHP-環境變數設定"><a href="#PHP-環境變數設定" class="headerlink" title="PHP 環境變數設定"></a>PHP 環境變數設定</h4><p>接下來把 <strong>PHP</strong> 的環境變數加到 ~/.zshrc 或 ~/.bashrc</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vi ~/.zshrc</span><br><span class="line"># 使用 brew 安裝的 php (這行是註解)</span><br><span class="line">export PATH=/usr/local/opt/php@7.2/bin:$PATH;</span><br></pre></td></tr></table></figure>
 
 <p>確定有無安裝成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -v // 確認安裝成功 (7.2.24 或 更高)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/php-v.png" alt="輸入 php -v 可以查看是否安裝成功"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/php-v.png" alt="輸入 php -v 可以查看是否安裝成功"></p>
 <h4 id="修改-php-fpm-設定"><a href="#修改-php-fpm-設定" class="headerlink" title="修改 php-fpm 設定"></a>修改 php-fpm 設定</h4><p>先輸入下面這行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/local/etc/php/7.2/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
 
 <p>接著更新內容：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 這邊的 user 及 listen.owner 改為自已的 Mac user</span><br><span class="line">user = rexhung</span><br><span class="line">group = staff</span><br><span class="line"></span><br><span class="line">listen.owner = rexhung</span><br><span class="line">listen.group = staff</span><br><span class="line">listen.mode = 0660</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/php-form-1.png" alt="看到 user 的地方記得修改"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/php-form-2.png" alt="看到 user 的地方記得修改"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/php-form-1.png" alt="看到 user 的地方記得修改"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/php-form-2.png" alt="看到 user 的地方記得修改"></p>
 <p>修改結束後執行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 php fpm</span><br><span class="line">$ brew services start php72</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">$ brew services list</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/startPHP.png" alt="brew services start php72"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/startPHP.png" alt="brew services start php72"></p>
 <hr>
 <h3 id="安裝-MYSQL5-7"><a href="#安裝-MYSQL5-7" class="headerlink" title="安裝 MYSQL5.7"></a>安裝 MYSQL5.7</h3><p>一樣在終端機輸入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install mysql@5.7</span><br></pre></td></tr></table></figure>
@@ -350,11 +350,11 @@
 <p>接著修改完後輸入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 mysql5.7</span><br><span class="line">$ brew services start mysql@5.7</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">$ brew services list</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/startMySQL.png" alt="brew services start mysql@5.7 這個有小數點要記得"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/startMySQL.png" alt="brew services start mysql@5.7 這個有小數點要記得"></p>
 <h4 id="修改-MYSQL-密碼"><a href="#修改-MYSQL-密碼" class="headerlink" title="修改 MYSQL 密碼"></a>修改 MYSQL 密碼</h4><p>剛安裝完成後的 <strong>MYSQL</strong> 密碼預設都是空白的，需要更改只需要輸入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p # 登入 mysql</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/useMySQL.png" alt="登入MySQL"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/useMySQL.png" alt="登入MySQL"></p>
 <p>接著進去後輸入下方指令修改密碼：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 登入 mysql 後執行</span><br><span class="line">$ set password for &#x27;使用者帳號&#x27;@&#x27;localhost&#x27;=password(&#x27;新密碼&#x27;);</span><br></pre></td></tr></table></figure>
 
@@ -365,7 +365,7 @@
 <h3 id="安裝-Nginx"><a href="#安裝-Nginx" class="headerlink" title="安裝 Nginx"></a>安裝 Nginx</h3><p>接著輸入下方指令安裝 <strong>Nginx</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install nginx</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/installNginx.png" alt="install nginx"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/installNginx.png" alt="install nginx"></p>
 <blockquote>
 <p><em>設定檔位置在 /usr/local/etc/nginx/</em></p>
 </blockquote>
@@ -375,7 +375,7 @@
 <blockquote>
 <p><em>之後如果有新的站，就要加 nginx conf. 到 /usr/local/etc/nginx/sites-enabled/</em></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/sites-enabled.png" alt="步驟一個一個來"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/sites-enabled.png" alt="步驟一個一個來"></p>
 <p><del><strong>詳細 Nginx 歡迎參考 <a target="_blank" rel="noopener" href="https://blog.ariby.tw/article/47cc456a-3614-411e-aa39-804c47b92f63">Arriby大神</a> 的 Blog.</strong></del></p>
 <blockquote>
 <p>大神已關站</p>
@@ -384,12 +384,12 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod 777 檔案名稱</span><br></pre></td></tr></table></figure>
 
 <p>最後輸入 ls -al 可以查看所有賦予權限的檔案。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/chmod777.png" alt="chmod7777777777"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/chmod777.png" alt="chmod7777777777"></p>
 <h4 id="執行-Nginx"><a href="#執行-Nginx" class="headerlink" title="執行 Nginx"></a>執行 Nginx</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 nginx</span><br><span class="line">$brew services start nginx</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">$ brew services list</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/startNginx.png" alt="brew services start nginx"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/startNginx.png" alt="brew services start nginx"></p>
 <h4 id="檢查狀態"><a href="#檢查狀態" class="headerlink" title="檢查狀態"></a>檢查狀態</h4><p>在這邊你可以輸入 <strong>brew services list</strong> 檢查上面安裝的三個東西有沒有順利進行起來。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/brewList.png" alt="brew services list"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/brewList.png" alt="brew services list"></p>
 <p>如果像上方有出現黃色的字代表沒有成功啟動，記得可以關掉再重啟，或是輸入下方程式碼，不用整個關掉再啟動：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -s reload</span><br></pre></td></tr></table></figure>
 
@@ -399,11 +399,11 @@
 <p>這時候只要鍵入 <strong>pecl</strong> 就會正常輸出：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 順便連 xdebug 一起安裝，版本可見 https://pecl.php.net/package/xdebug</span><br><span class="line">pecl install xdebug-2.8.0</span><br><span class="line"># 安裝 Igbinary，版本可見 https://pecl.php.net/package/igbinary</span><br><span class="line">pecl install igbinary-3.0.1﻿﻿</span><br><span class="line"># 使用 brew 安裝 Redis</span><br><span class="line">brew install redis</span><br><span class="line"># 安裝 phpredis，版本可見 https://pecl.php.net/package/redis</span><br><span class="line"># 會被詢問兩個問題</span><br><span class="line">#﻿ enable igbinary serializer support? [no]: yes</span><br><span class="line"># ﻿enable lzf compression support? [no]: no</span><br><span class="line"># enable zstd compression support? [no] : no</span><br><span class="line">pecl install redis-5.1.0</span><br><span class="line">﻿</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/PHPRedisInstall.png" alt="Install 成功！"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/PHPRedisInstall.png" alt="Install 成功！"></p>
 <h4 id="修改-php-ini-設定檔"><a href="#修改-php-ini-設定檔" class="headerlink" title="修改 php.ini 設定檔"></a>修改 php.ini 設定檔</h4><p>接著到 <strong>php.ini</strong> 檔最上方查看會發現多了幾行：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">extension=&quot;redis.so&quot;</span><br><span class="line">extension=&quot;igbinary.so&quot;</span><br><span class="line">zend_extension=&quot;xdebug.so&quot;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/oldSetting.png" alt="舊的設定"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/oldSetting.png" alt="舊的設定"></p>
 <p>接著把這三行刪除掉(dd掉)，鍵入下方的程式碼：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">; CUSTOM variables</span><br><span class="line">short_open_tag = Off</span><br><span class="line">expose_php = Off</span><br><span class="line"></span><br><span class="line">error_reporting = E_ALL &amp; ~E_STRICT</span><br><span class="line">display_errors = On</span><br><span class="line">error_log = &quot;/usr/local/log/php/php_errors.log&quot; # php log 位置</span><br><span class="line"></span><br><span class="line">upload_tmp_dir = &quot;/tmp/&quot;</span><br><span class="line">allow_url_fopen = on</span><br><span class="line"></span><br><span class="line">[xdebug]</span><br><span class="line">zend_extension=&quot;xdebug.so&quot;</span><br><span class="line">xdebug.remote_enable=1</span><br><span class="line">xdebug.remote_autostart=1</span><br><span class="line">xdebug.remote_host=localhost</span><br><span class="line">xdebug.remote_handler=dbgp</span><br><span class="line">xdebug.remote_port=9000</span><br><span class="line"></span><br><span class="line">[redis]</span><br><span class="line">extension=&quot;igbinary.so&quot;</span><br><span class="line">extension=&quot;redis.so&quot;</span><br><span class="line"># 如果 session 要用 redis</span><br><span class="line"># session.save_handler = &quot;redis&quot;</span><br><span class="line"># session.save_path = &quot;tcp://127.0.0.1:6379?weight=1&amp;timeout=2.5&quot;</span><br></pre></td></tr></table></figure>
 
@@ -411,7 +411,7 @@
 <h3 id="確認安裝完成"><a href="#確認安裝完成" class="headerlink" title="確認安裝完成"></a>確認安裝完成</h3><p>最後輸入下方指令檢查 phpinfo 有沒有 redis ，有則成功！</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 開始背景執行 redis</span><br><span class="line">$ brew services start redis</span><br><span class="line"># 列出目前所有使用 brew 執行的 services</span><br><span class="line">$ brew services list</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/11/04/20191104/startPHPRedis.png" alt="brew services start redis"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191104/startPHPRedis.png" alt="brew services start redis"></p>
 <p>在最後輸入 <strong>brew services list</strong> 之後你應該至少會看見三個程式在執行當中。</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是這次環境建置的小筆記，比上次的省略還多，圖片方面還在想辦法找圖床上傳，目前上傳至 <strong>Hexo</strong> 所以載入會比較慢，文字部分就加減參考囉，如果有什麼問題也歡迎留言告知我～</p>

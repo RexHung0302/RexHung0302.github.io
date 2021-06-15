@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-03-20T18:16:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:46:47.178Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.299Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -245,7 +245,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:46:47" itemprop="dateModified" datetime="2021-06-15T11:46:47+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,7 +294,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/babel_logo.png" alt="Webpack又來啦！"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200321/babel_logo.png" alt="Webpack又來啦！"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 <strong>Laravel</strong> 底下，新專案是用 <strong>Vue Cli3</strong> 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-polyfill">babel/polyfill</a> ，研究時 <strong>Vue Cli3</strong> 爆出一些警告訊息(內容就先不討論了)，這時候想到了前陣子摸過的 <strong>Webpack</strong>。</p>
 <p>相較於這次的專案，之前許多頁面都是單純<del>SPA</del>一頁式的網頁 ( <strong>HTML CSS JavaScript</strong> )，而且只有在手機上跑，不會到萬惡的 <strong>Bug Maker IE</strong> 跑，所以基本上不是非常舊的東西還是都支援。但最後還是碰到了有手機不能跑的問題，其實會發現這種不能跑的情況是從一個拿 <strong>Iphone6 IOS9</strong> 的同事身上開始…</p>
 <span id="more"></span>
@@ -303,7 +303,7 @@
 <p>溫馨提醒：強烈建議還沒看過 關於Webpack #1 的同學們去看看<a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a></p>
 </blockquote>
 <p>因為發生了這種狀況，所以 <strong>JavaScript</strong> 能不用 (註1)<strong>ES6</strong> 就盡量避免，但其實在那時候就決定要再回來用 <strong>Webpack</strong> 了，無奈最近時程真的是被壓縮壓縮超級壓縮呀…(苦笑</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
 <p>近期六角開了一堂特別的線上直播課程，<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/web-layout-training-1st.html">網頁切版直播班</a>，因為覺得自己基本功不是很穩，近期切版時程太趕，希望自己能快速且精準又能寫出乾淨程式碼的情況下，就報名了，哎…<strong>出來寫前端，總是要還的，而且是別人說的倍數成長呀</strong>。</p>
 <p>因為課程開始前有新手任務，剛好要切一個版，就打算拿那個版面來練習，不過這篇文章不會介紹怎麼切，而是要先介紹怎麼編譯 <strong>ES6 =&gt; ES5</strong> ，因為目前 <strong>ES5</strong> 的支援度還是比 <strong>ES6</strong> 高。</p>
 <blockquote>
@@ -340,16 +340,16 @@
 <p>接著之後到 <code>/src/js/index.js</code> 裡面輸入下面程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- ES6 Example</span></span><br><span class="line"><span class="keyword">const</span> habit = [<span class="string">&quot;Write Code&quot;</span>, <span class="string">&quot;Watch Udemy&quot;</span>, <span class="string">&quot;DeBug&quot;</span>, <span class="string">&quot;Sleep&quot;</span>];</span><br><span class="line"></span><br><span class="line">habit.forEach(</span><br><span class="line">  <span class="function">(<span class="params">item, index</span>) =&gt;</span> <span class="built_in">console</span>.log( <span class="string">`<span class="subst">$&#123;index&#125;</span> =&gt; <span class="subst">$&#123;item&#125;</span>`</span> )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/example_code.png" alt="範例程式碼"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/example_code.png" alt="範例程式碼"></p>
 <p>這邊使用了 ES6 常見的幾個語法，包含 const、字串模板、箭頭函式…等等，有興趣可以詳見 <a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/">ES6 武功秘籍大全</a>，語法糖真的香！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/good.gif" alt="真甜真好吃"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/good.gif" alt="真甜真好吃"></p>
 <p>隨後輸入下面程式碼編譯：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build:dev 或 npm run build</span><br></pre></td></tr></table></figure>
 
 <p>接著打開 <code>dist/index.html</code> 成功的話會在 <strong>console.log</strong> 裡看見下面這張圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/success_console.png" alt="勝利的果實"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/success_console.png" alt="勝利的果實"></p>
 <p>你會好奇真的編譯成功了嗎？可以打開 <code>dist/main.bundle.js(或你編譯的檔案名稱)</code>，發現最下面有已經編譯好的程式碼：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/finishImg.png" alt="請忽略箭頭"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/finishImg.png" alt="請忽略箭頭"></p>
 <p>仔細瞧瞧原本的 <strong>Const</strong> 已經替換成 <strong>var</strong>， 原本的 “<strong>=&gt;</strong>“ 箭頭函式也被編譯為 <strong>function</strong> 也有多了 <strong>return</strong>，真的是很貼心！</p>
 <blockquote>
 <p>P.S: <strong>那個箭頭並非 ES6 的箭頭函式哦！</strong></p>
@@ -357,7 +357,7 @@
 <hr>
 <h3 id="然後呢？"><a href="#然後呢？" class="headerlink" title="然後呢？"></a>然後呢？</h3><p>然後就完成了，就這麼簡單！其實 <strong>Babel</strong> 幫我們做了很多事情，自己也並非真的深入地摸索過，但至少看到 <strong>ES6</strong> 能成功的編譯成 <strong>ES5</strong> 讓我安心不少。</p>
 <p>如果你想瞧瞧到底有沒有編譯成功，可以試著把 <strong>babel-loader</strong> 下一行的 <strong>options</strong> 內容註解掉，再跑一次編譯，然後再打開編譯後的 <strong>JS</strong> 檔案，你會發現內容真的沒有編譯過：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/03/21/20200321/notCompiler.png" alt="並沒有成功編譯"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/notCompiler.png" alt="並沒有成功編譯"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次並沒有做太深入的研究，時間上其實也挺有限的，不過說實在的，有編譯過真的讓人放心不少，而且 <strong>Webpack</strong> 真的可以把容量壓縮在最小卻能發揮最大效能這點，真的是推薦每一位前端真的都要玩玩看，期待之後還有繼續摸 <strong>Webpack</strong> 還會繼續 <strong>#3</strong>。</p>
 <p>接下來四月要為期八週的切版訓練，希望自己能練得更扎實，這邊推薦給可能在貧頸或是迷途的你，不管你是不是正在寫程式，我想找到你有興趣且會讓你有成就感的目標，是讓你過得快樂且會成長的有效方法之一！</p>

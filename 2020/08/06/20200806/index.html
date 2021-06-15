@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-08-06T15:59:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:44:27.905Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.327Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="Back-end">
@@ -241,7 +241,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:44:27" itemprop="dateModified" datetime="2021-06-15T11:44:27+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -286,12 +286,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/08/06/20200806/nodejs-logo.png" alt="NodeJS"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200806/nodejs-logo.png" alt="NodeJS"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>接觸程式近一年半多，常常想一虧後端的樣貌，想知道整個程式流程是怎麼跑的，甚至想要試試看寫出從前到後的 <strong>Side Project</strong>，如果你也對後端有點興趣，就跟著筆者一起往下學習吧！這是筆者接觸的 <strong>第一個後端語言</strong>，所以不會有太過艱深的研究或是內容。</p>
 <span id="more"></span>
 
 <hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/08/06/20200806/hexschoolNodeJSLogo.jpg" alt="六角學院課程"></p>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200806/hexschoolNodeJSLogo.jpg" alt="六角學院課程"></p>
 <p>沒有錯！這次也是照著六角學院線上課程 <a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/nodejs.html">NodeJS 前後端開發實戰</a> 學習筆記，好處是隨時想進行就進行學習，缺點也顯而易見就是太懶惰可能會讓課程擺著生灰塵(有興趣參考 線上課程 vs 直播課程 <a href="https://rexhung0302.github.io/2020/06/06/20200606/">八週總結心得</a> )，鑑於以往筆記過長，這系列會使用簡短且重點筆記。</p>
 <hr>
 <h2 id="簡短介紹"><a href="#簡短介紹" class="headerlink" title="簡短介紹"></a>簡短介紹</h2><p><strong>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.</strong></p>
@@ -311,7 +311,7 @@
 <hr>
 <h3 id="模組介紹"><a href="#模組介紹" class="headerlink" title="模組介紹"></a>模組介紹</h3><p>原生的 <strong>NodeJS</strong> 其實裡面幫我們包含了很多東西，可以想像成 <strong>JS</strong> 有很多原生用法，比方說原生的 <strong>JS</strong> 可以直接使用 <code>console.log()</code> 或是 <code>new Date()</code>，可以參考 <a target="_blank" rel="noopener" href="https://github.com/nodejs/node/tree/master/lib">node git lib</a>。</p>
 <h4 id="全域物件"><a href="#全域物件" class="headerlink" title="全域物件"></a>全域物件</h4><p>值得先提的是關於全域這件事情，在 <strong>JS</strong> 裡面最外層是 <strong>window</strong>，而 <strong>NodeJS</strong> 因為下面可能會有好幾個 <strong>JS</strong> ，所以最外層則是 <strong>global</strong>，如果你在檔案 A 想要檔案 Ｂ 吃得到這個變數，就必須要用 <strong>global</strong>，如下圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/08/06/20200806/globalVSwindow.png" alt="環境介紹"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200806/globalVSwindow.png" alt="環境介紹"></p>
 <h4 id="檔案橋樑"><a href="#檔案橋樑" class="headerlink" title="檔案橋樑"></a>檔案橋樑</h4><p>那如何讓檔案能相互溝通了，就必須依靠 <code>require()</code> 及 <code>module.exports</code> 或 <code>exports</code>，當一隻檔案要讓另一隻檔案引入的時候必須要先指定這隻檔案要輸出什麼東西，比如下方(B.js)：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myName = <span class="string">&#x27;王小明&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.name = myName;</span><br></pre></td></tr></table></figure>
 
@@ -333,7 +333,7 @@
 <p>接著打開終端機，在跟 <strong>App.js</strong> 同一層的情況下輸入 <code>node app.js</code>，然後打開網頁輸入 <code>http://127.0.0.1:8080</code>，就會看到 **Hello Node.js!!**。</p>
 </blockquote>
 <h4 id="整體流程"><a href="#整體流程" class="headerlink" title="整體流程"></a>整體流程</h4><p>在上面 <code>createServer()</code> 裡面的 <code>request</code> 可以取得不少使用者的資訊，比方說 <strong>request.url</strong>，而這時候就可以透過 <strong>url</strong> 去實作 <strong>router</strong> 的分配，到這邊有沒有感覺已經踏上後端之路了呢？</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/08/06/20200806/how_backend_work.png" alt="後端流程"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200806/how_backend_work.png" alt="後端流程"></p>
 <blockquote>
 <p>上圖省略了去資料庫拿資料及資料呈現是交由前端或是後端 **SSR(Server-Side Rendering)**，但整個 <strong>要求(request)</strong> 跟 <strong>回應(response)</strong> 差不多是這麼一回事。</p>
 </blockquote>
@@ -344,7 +344,7 @@
 <blockquote>
 <p>注意！上方的資訊只是把你輸入的路徑分析出來，如果後方輸入不存在的檔案，也是會有結果的，如下圖。</p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/08/06/20200806/example.png" alt="不存在的檔案"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200806/example.png" alt="不存在的檔案"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這邊只是簡短的紀錄並介紹 <strong>Node.js</strong>，而 <strong>Node.js</strong> 其實強大且豐富，不是三言兩語就能介紹完畢，由於原生的方法沒辦法滿足所有情況，所以在開源的情況下，大家又會各自開發功能並且發布出去，使得 <strong>Node.js</strong> 越來越豐富，類似於前端的套件，前端只需要 <strong>CDN</strong> 就可以使用，而後端一定要 <strong>npm install</strong>(關於 <strong>npm</strong> 介紹可參考 <a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a>) 後並且使用起手式 <strong>require</strong> 才能使用；你可能會想，每次建立後端都這麼麻煩嗎？後面我們將會繼續提到如何快速建立後端環境、如何應用。</p>
 <blockquote>

@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-09-13T12:56:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:44:12.128Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.332Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -261,7 +261,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:44:12" itemprop="dateModified" datetime="2021-06-15T11:44:12+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,13 +306,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_logo.png" alt="GA"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_logo.png" alt="GA"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>前陣子拖工作專案之福，碰到了 <a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/#/">Google Analytics(以下簡稱GA)</a>，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 <strong>GA</strong> 及 <strong>GTM</strong> 可以做什麼，及如何設定。</p>
 <span id="more"></span>
 
 <p>本篇將會使用 <strong>Vue Cli</strong> 來做示範，並且搭配 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 使用，如果是普通的 <strong>HTML</strong> 也可以輕易上手，沒毛病！</p>
 <hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/marketing.png" alt="關於行銷"></p>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200913/marketing.png" alt="關於行銷"></p>
 <p><strong>GA</strong> 是用於 <strong>行銷、宣傳、分析</strong> 的利器，如果你正需要知道 <strong>GA</strong> 怎麼設定，以及如何查看報表設定等等，可以參考此篇，不過這邊只會淺談，不會過度深入研究。</p>
 <p><strong>GTM</strong> 是用來設定 觸發事件、條件、一些相關設定，緊接著會把相關參數傳送給第三方服務，例如 <strong>GA</strong>。</p>
 <blockquote>
@@ -334,7 +334,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="關於GTM"><a href="#關於GTM" class="headerlink" title="關於GTM"></a>關於GTM</h3><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_logo.png" alt="GTM"></p>
+<h3 id="關於GTM"><a href="#關於GTM" class="headerlink" title="關於GTM"></a>關於GTM</h3><p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_logo.png" alt="GTM"></p>
 <p>上面說了 <strong>GA</strong> 這邊也要簡短的介紹一下 **Google Tag Manager(以下簡稱GTM)**，這是一個類似中介站的東西，需要事先在 <strong>GTM</strong> 設定好相關的參數及觸發方法等等，然後再將這些資訊傳送到第三方服務，比方說 <strong>Google AdWords、FB Pixel、Bing</strong> 和 上方提到的 <strong>GA</strong>。</p>
 <blockquote>
 <p><strong>GTM</strong> 介紹很簡短吧，本篇將會簡短介紹如何設定 <strong>GTM</strong>。</p>
@@ -342,8 +342,8 @@
 <hr>
 <h3 id="前菜不用了"><a href="#前菜不用了" class="headerlink" title="前菜不用了"></a>前菜不用了</h3><p>前面說了這麼多，這邊要教你如何進入 <strong>GA</strong> 及 <strong>GTM</strong> 的世界才是本篇的重點，本次我們將透過 <strong>Vue Cli</strong> 來實作一個分析專案。</p>
 <p>如果你是使用 HTML ，可以再申請 <strong>GTM</strong> 及 <strong>GA</strong> 之後到 <strong>GTM</strong> 的管理後台，點擊右上角的 10個英文數字組合的代碼，在跳出視窗之後按照上面的方法埋入 <strong>GTM</strong> 代碼。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_step1.png" alt="點擊 GTM 右上角的代號"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_step2.png" alt="按照彈窗的指示"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_step1.png" alt="點擊 GTM 右上角的代號"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_step2.png" alt="按照彈窗的指示"></p>
 <p>之後再按照本篇下方的 <strong>GA</strong> <a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">設定教學</a> 即可。</p>
 <hr>
 <h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <a href="https://rexhung0302.github.io/2019/03/26/20190325/">[Vue Notes] — Vue-Cli #1 初次見面</a>。</p>
@@ -351,38 +351,38 @@
 <p><em>由於當初有消息 <strong>Vue3</strong> 即將釋出，所以只寫了一篇就停止了，之後等 <strong>Vue3</strong> 正式釋出會再繼續研究。</em></p>
 </blockquote>
 <p>安裝好 <strong>Vue-cli</strong> 之後就緊接著安裝我們需要用到的 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a>，輸入 <code>npm i vue-gtm -S</code>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/install-gtm.gif" alt="按照彈窗的指示"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/install-gtm.gif" alt="按照彈窗的指示"></p>
 <blockquote>
 <p>*如果您已經會設定 <strong>GTM</strong>，可以跳至 **<a href="#%E9%A0%90%E8%A6%BD%E8%A8%AD%E5%AE%9A">預覽設定</a>*<em>。</em></p>
 </blockquote>
 <hr>
 <h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>在我們安裝好套件或使用 <strong>HTML</strong> 掛載好 <strong>GTM</strong> 追蹤碼之後，緊接著要來設定 <strong>GTM</strong>，這兩者之間的關係可以透過下圖來解釋。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_GA_Content.png" alt="流程介紹"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_GA_Content.png" alt="流程介紹"></p>
 <p>我們先到 <strong>GTM</strong> 建立一個帳戶，如下圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM-apply-step1.png" alt="申請步驟1"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM-apply-step2.png" alt="申請步驟2"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM-apply-step1.png" alt="申請步驟1"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM-apply-step2.png" alt="申請步驟2"></p>
 <p>在上面申請的內容，分別為 **帳戶(Account)、容器(Container)**，這兩個可以用下圖來簡單說明：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_info.png" alt="GTM簡單介紹"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_info.png" alt="GTM簡單介紹"></p>
 <p>一個帳戶底下可以有好幾個容器，而容器通常會對應一個網址，接著在每個容器裡面會放進相關的觸發條件，最後再把觸發的結果相關參數傳送至第三方服務，比如 <strong>GA</strong>。</p>
 <hr>
 <h3 id="開始設定"><a href="#開始設定" class="headerlink" title="開始設定"></a>開始設定</h3><p>大致了解運作流程後我們就開始設定吧，這邊我們先設定使用者瀏覽的事件，先到 <strong>GTM</strong> 左方的 <strong>觸發條件</strong>，新增一個 <strong>自訂事件</strong>，我們先取名為 <strong>click-event</strong>，並且選擇部分 <strong>自訂事件</strong>，要剛好 <strong>有事件發生且這些條件全都符合時，啟用這個觸發條件</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/click_event.png" alt="第一個自訂事件"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/click_event.png" alt="第一個自訂事件"></p>
 <p>接著先到 <strong>GA</strong> 去<a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/?authuser=0#provision/SignUp/">申請</a>一個分析，填完內容及同意事項後會出現 <strong>追蹤ID</strong> 保存下來！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_apply.png" alt="建立新的GA"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_info.png" alt="複製追蹤ID"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_apply.png" alt="建立新的GA"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_info.png" alt="複製追蹤ID"></p>
 <p>然後到 <strong>GTM</strong> 左方的變數新增一個變數，變數類型選擇 <strong>Google Analytics(分析)設定</strong>，然後填上剛剛的追蹤編號，這樣就可以和 <strong>GA</strong> 連結了。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_triggerID.png" alt="新增變數"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_triggerID.png" alt="新增變數"></p>
 <p>然後在順便新增一個 <strong>變數類型</strong> 為 <strong>資料層變數</strong> 的 <strong>userID</strong>，這將會是我們在專案觸發條件之後傳送進來的Key，可以先把這邊的變數想像成 <strong>JavaScript</strong> 的 <strong>全域變數</strong>，而這邊就是宣告一個 <code>var userID;</code>。</p>
 <p>最後再選擇 <strong>GTM</strong> 左方的 <strong>代碼</strong>，然後新增一個 **Google Analytics(分析)設定：通用 Analytics(分析)**，追蹤類型選擇 <strong>事件</strong>，然後再分別填上 <strong>類別、動作、標籤、值</strong>，剛剛我們設定的變數就在這邊起作用了，我們可以直接帶入變數的 <strong>Key</strong>，點擊像 <strong>積木的Icon</strong> 後如下圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_variable.png" alt="帶入變數"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_variable.png" alt="帶入變數"></p>
 <p>關於上面提到的 <strong>類別、動作、標籤、值</strong> 將會是在埋入 <strong>GTM</strong> 的地方會傳送過來的幾個值，如果想要傳送更多的變數，比如 <strong>userID</strong> 或是 <strong>url</strong> 等等，可能光靠上面幾個欄位放不下，這時候就可以勾選 <strong>在這個代碼啟用覆寫設定</strong>，然後填入剛剛拿到的 <strong>追蹤編號</strong>，之後打開下面的 <strong>更多設定</strong>，然後在打開 <strong>要設定的欄位</strong>，然後填入更多的變數。</p>
 <hr>
 <h3 id="預覽設定"><a href="#預覽設定" class="headerlink" title="預覽設定"></a>預覽設定</h3><p>到這時候其實可以先去看看我們的 <strong>GTM</strong> 有無掛載成功，如果你是使用普通的 <strong>HTMl</strong> 再貼上剛剛一開始提示的彈窗那些程式碼，應該就可以先預覽了，如果是 <strong>Vue-cli</strong> 可以接著使用下面的步驟。</p>
 <p>在安裝完 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 之後，按照 <strong>Document</strong> 的教學把套件掛進去專案裡。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_install_on_vue.png" alt="掛載GTM"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_install_on_vue.png" alt="掛載GTM"></p>
 <p>上面的步驟就像是在申請完 <strong>GTM</strong> 或是點擊 <strong>GTM</strong> 右上角的十個英文數字編號出現的彈窗，埋入代碼之後一樣的動作。</p>
 <p>在做好的埋 <strong>Code</strong> 或是設定 <strong>vue-gtm</strong> 之後點擊 <strong>GTM</strong> 上方的預覽，再到你埋程式碼的網站，就會看見下方彈出 <strong>GTM</strong> 的預覽 <strong>Debug</strong> 視窗，就代表成功啦。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_debug_preview.png" alt="GTM的開發者工具"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_debug_preview.png" alt="GTM的開發者工具"></p>
 <hr>
 <h3 id="觸發設定"><a href="#觸發設定" class="headerlink" title="觸發設定"></a>觸發設定</h3><p>確定我們有掛載成功之後，別急著把剛剛設定的那些 <strong>GTM</strong> 提交出去，我們一樣可以先透過預覽查看是否有把事件正確的傳送到 <strong>GTM</strong>。</p>
 <p>先到程式碼那邊，埋下我們的事件，因為我們前面選擇自訂事件，所這邊在我們想觸發的地方埋下我們的事件。筆者這邊放了一個按鈕，在使用者點擊之後會發送事件到 <strong>GTM</strong>：</p>
@@ -394,10 +394,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//當使用者觸發 會發送 類別:導覽清單 ,動作:點擊 ,標籤:註冊會員 , 價值:200</span></span><br><span class="line">ga(<span class="string">&#x27;send&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">hitType</span>: <span class="string">&#x27;click-event&#x27;</span>,</span><br><span class="line">  <span class="attr">eventCategory</span>: <span class="string">&#x27;點擊事件&#x27;</span>, <span class="comment">// 類別 字元(必填)</span></span><br><span class="line">  <span class="attr">eventAction</span>: <span class="string">&#x27;click&#x27;</span>, <span class="comment">// 動作 字元(必填)</span></span><br><span class="line">  <span class="attr">eventLabel</span>: vm.userID <span class="comment">// 標籤 字元(選填)</span></span><br><span class="line">  <span class="attr">eventValue</span>: <span class="literal">null</span> <span class="comment">// 標籤 數字(選填)</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 簡化寫法</span></span><br><span class="line">ga(<span class="string">&#x27;send&#x27;</span>, <span class="string">&#x27;click-event&#x27;</span>, <span class="string">&#x27;點擊事件&#x27;</span>, <span class="string">&#x27;click&#x27;</span>, vm.userID);</span><br></pre></td></tr></table></figure>
 
 <p>之後去點擊看看你的按鈕吧，會發現 Debug 視窗出現一個新的事件，如果打開後你的事件出現在 <strong>Tags Fired</strong> 代表是成功的，如果是出現在 <strong>Tags Not Fired</strong> 代表是失敗的，點擊 <strong>Tags Fired</strong> 成功的事件進入後也會發現事件名稱旁邊會出現一個成功的小勾勾。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_debug_event_send.png" alt="GTM的開發者工具"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_debug_event_send.png" alt="GTM的開發者工具"></p>
 <hr>
 <h3 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h3><p>最後我們來到 <strong>GA</strong>，因為剛剛有綁定 <strong>資料層 Data Layer</strong>，因為有填寫追蹤編號，所以在 <strong>GA</strong> 這邊會出現現在有什麼事件，以及有幾個人在線上等等，相關的數據統計都可以在這邊找到。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GA_event_success.png" alt="成功追蹤事件了"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_event_success.png" alt="成功追蹤事件了"></p>
 <blockquote>
 <p><em>請別介意畫面有一邊黑色的，因為電腦截圖出現 <strong>Bug</strong> 所以卡住了。</em></p>
 </blockquote>

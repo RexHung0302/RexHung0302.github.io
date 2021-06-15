@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-07-28T16:00:01.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:44:38.522Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.319Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -240,7 +240,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:44:38" itemprop="dateModified" datetime="2021-06-15T11:44:38+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/JS60.png" alt="60天特訓"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200607/JS60.png" alt="60天特訓"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>結束八週切版直播版，接著 <strong>六角學院</strong> 開了一門關於 <strong>JavaScript(下稱JS)</strong> 的新課程。</p>
 <p>雖然筆者沒有報名參加，但是 <strong>六角學院</strong> 為了銜接上課程舉辦了為期 <strong>60天的 JS 學徒試煉</strong>。</p>
 <p>這篇文章將紀錄 <strong>60天的練習</strong>，自己也會出一些新的題目，有興趣的朋友們也可以試著解題，或是在下方留言一起討論。</p>
@@ -389,7 +389,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;王小明&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...掠過千百行 JS</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&#x27;王大錘&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// &#x27;王大錘&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>雖然 <code>var</code> 會被全域污染，但要記得 <code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，下面再畫一張圖好理解：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/Day37.png" alt="關於 var 的奧秘"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200607/Day37.png" alt="關於 var 的奧秘"></p>
 <p>圖上可以很清楚看到有 <strong>三個紅色的 var</strong>，<code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，所以三個 <code>console.log()</code> 分別為 <strong>1.王大錘 2.王小明 3.陳小王</strong>。</p>
 <p>上述舉了一個簡單的例子，可能剛開始我們定義好 <strong>全域變數</strong>，但在我們寫了幾百幾千行 <strong>JS</strong> 之後可能早已經忘了取過什麼變數了(沒有使用 <strong>前端開發工具</strong>、<strong>前端框架</strong> 的情況下單支 <strong>JS</strong> 都會露露長)，然後可能中途某個 <strong>function</strong> 你就這麼剛好的重複使用了這個變數，這時候全域變數就會被污染。</p>
 <p>然而 <code>ES6</code> 的 <code>let</code> 出現拯救了這個問題(雖然同時也會有缺點，後面會提到)，<code>let</code> 屬於 **區塊(Block)**，它並不會依附在 <strong>window</strong> 上，所以下述情況會發生：</p>

@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2021-06-09T05:40:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:43:05.961Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.360Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:43:05" itemprop="dateModified" datetime="2021-06-15T11:43:05+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +289,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/06/09/20210609/github_page_logo.png" alt="GitHub Page"></p>
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20210609/github_page_logo.png" alt="GitHub Page"></p>
 <p>使用 <code>GitHub Page</code> 展示你的前端作品，如果你剛好碰上畫面打開一片空白，可以參考此篇筆記。</p>
 <span id="more"></span>
 
@@ -297,9 +297,9 @@
 <p>因為步驟滿簡單的，這邊就簡短敘述了(<del>但過程踩了很久的坑</del>)。</p>
 </blockquote>
 <hr>
-<h3 id="建立-Repository"><a href="#建立-Repository" class="headerlink" title="建立 Repository"></a>建立 Repository</h3><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/06/09/20210609/repositiories.png" alt="Your Repositiories"></p>
+<h3 id="建立-Repository"><a href="#建立-Repository" class="headerlink" title="建立 Repository"></a>建立 Repository</h3><p><img src="/images/others/loading.gif" data-original="/images/20210609/repositiories.png" alt="Your Repositiories"></p>
 <p>首先進入 <strong><a target="_blank" rel="noopener" href="https://github.com/">GitHub</a></strong> 後點擊右上角的人像圖片，然後再點擊 <strong>Your repositiories</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/06/09/20210609/new.png" alt="New Repositiory"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210609/new.png" alt="New Repositiory"></p>
 <p>接著點擊綠色按鈕 <strong>New</strong> 一個新的 <strong>Repositiory</strong>。</p>
 <p>接著建立好之後就把你的專案 <strong>Init</strong> 然後 <strong>git remote</strong> 到你的 <strong>Repositiory</strong>，這邊就不詳加贅述了。</p>
 <h3 id="建立-Vue-config-js"><a href="#建立-Vue-config-js" class="headerlink" title="建立 Vue.config.js"></a>建立 Vue.config.js</h3><p>接著看你的 <strong>Vue Cli</strong> 版本：</p>
@@ -321,7 +321,7 @@
 <blockquote>
 <p>注意：如果之後到 GitHub Page 上查看是一片空白，可以再試著修改一下這邊的路由，試試看把 <strong><code>&#39;/請替換這邊為 Repositiory 的名稱/&#39;</code></strong> 修改為 <strong><code>&#39;./&#39;</code></strong></p>
 </blockquote>
-<h3 id="Vue3-確保-Vue-router-的模式正常"><a href="#Vue3-確保-Vue-router-的模式正常" class="headerlink" title="Vue3 確保 Vue router 的模式正常"></a>Vue3 確保 Vue router 的模式正常</h3><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/06/09/20210609/vue-router.png" alt="Vue Router"></p>
+<h3 id="Vue3-確保-Vue-router-的模式正常"><a href="#Vue3-確保-Vue-router-的模式正常" class="headerlink" title="Vue3 確保 Vue router 的模式正常"></a>Vue3 確保 Vue router 的模式正常</h3><p><img src="/images/others/loading.gif" data-original="/images/20210609/vue-router.png" alt="Vue Router"></p>
 <p>如果你是 <strong>Vue3</strong> 請確定這隻檔案 <code>/src/router/index.ts</code> 裡面的一段程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = createRouter(&#123;</span><br><span class="line">  <span class="attr">history</span>: createWebHistory(process.env.BASE_URL),</span><br><span class="line">  routes,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 

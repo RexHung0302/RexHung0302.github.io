@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-12-11T18:22:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:48:17.758Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.343Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="Note">
@@ -239,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:48:17" itemprop="dateModified" datetime="2021-06-15T11:48:17+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -292,13 +292,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/12/20201212/shell-banner.png" alt="Shell Script?"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20201212/shell-banner.png" alt="Shell Script?"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>寫了一陣子的程式碼，你有沒有曾經想過，有時候我們能像 <code>git pull</code>、<code>git push</code>…這樣輸入完指令就完成所有你預期內的步驟嗎？</p>
 <p>這篇文章將帶你簡單入們一鍵指令，就可以完成你需要完成的任務。</p>
 <span id="more"></span>
 
 <hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/12/20201212/env-preview.png" alt="ENV"></p>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201212/env-preview.png" alt="ENV"></p>
 <p>開始前先說說為何有寫這篇文章的動機；起因為筆者在工作上目前會有好幾個專案用到同一份專案的程式碼，簡單說就是好幾個不同家的廠商(A端)會打同一個專案的 API(Ｂ端)。</p>
 <p>而在開發時我們本地只會留一個 B端 專案，上線才會一個專案(A端)配一個 API 專案(B端)，而在本地我們就是靠切換 API(B端)的 ENV 去切換目前需要用到哪個會用到的資訊，像是<strong>資料庫</strong>。</p>
 <p>但這篇文章最主要還是作為自己的筆記使用，記錄下如何透過 <strong>Shell Script</strong> 去一鍵執行我需要的任務。</p>
@@ -343,7 +343,7 @@
 <p>好在我們可以對 <strong>echo</strong> 設定顏色，加入的指令為：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\033[30m文字字串\033[0m&quot;   --&gt; 黑色字</span><br><span class="line">echo -e &quot;\033[31m文字字串 \033[0m&quot;   --&gt; 紅色字</span><br><span class="line">echo -e &quot;\033[32m文字字串 \033[0m&quot;   --&gt; 綠色字</span><br><span class="line">echo -e &quot;\033[33m文字字串 \033[0m&quot;   --&gt; 黃色字</span><br><span class="line">echo -e &quot;\033[34m文字字串 \033[0m&quot;   --&gt; 藍色字</span><br><span class="line">echo -e &quot;\033[35m文字字串 \033[0m&quot;   --&gt; 紫色字</span><br><span class="line">echo -e &quot;\033[36m文字字串 \033[0m&quot;   --&gt; 天藍字</span><br><span class="line">echo -e &quot;\033[37m文字字串 \033[0m&quot;   --&gt; 白色字</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[40;37m文字字串\033[0m&quot;   --&gt; 黑底白字</span><br><span class="line">echo -e &quot;\033[41;37m文字字串\033[0m&quot;   --&gt; 紅底白字</span><br><span class="line">echo -e &quot;\033[42;37m文字字串\033[0m&quot;   --&gt; 綠底白字</span><br><span class="line">echo -e &quot;\033[43;37m文字字串\033[0m&quot;   --&gt; 黃底白字</span><br><span class="line">echo -e &quot;\033[44;37m文字字串\033[0m&quot;   --&gt; 藍底白字</span><br><span class="line">echo -e &quot;\033[45;37m文字字串\033[0m&quot;   --&gt; 紫底白字</span><br><span class="line">echo -e &quot;\033[46;37m文字字串\033[0m&quot;   --&gt; 天藍底白字</span><br><span class="line">echo -e &quot;\033[47;30m文字字串\033[0m&quot;   --&gt; 白底黑字</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/12/20201212/echo-color-preview.png" alt="Echo Color"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201212/echo-color-preview.png" alt="Echo Color"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這邊文章簡短的介紹如何使用快捷鍵一鍵更換 <strong>ENV</strong>，這次在工作上托同事的福又學了一招，趁記憶猶新趕緊記錄下來，這會是一個實用的功能！</p>
 <hr>

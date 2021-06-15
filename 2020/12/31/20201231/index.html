@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-12-31T05:27:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:43:39.657Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.346Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Note">
 <meta property="article:tag" content="Third party service">
@@ -252,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:43:39" itemprop="dateModified" datetime="2021-06-15T11:43:39+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -305,13 +305,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/logo.png" alt="AWS S3"></p>
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20201231/logo.png" alt="AWS S3"></p>
 <p>今年最後一篇文章就獻給 <strong>AWS S3</strong>(下稱 <strong>S3</strong>) 了，這篇文章用來記錄如何將自己的圖片上傳至第三方儲存空間，並且可以取得瀏覽網址。</p>
 <span id="more"></span>
 
 <p>這篇對於 <strong>S3</strong> 不會有太深的介紹以及講解，主要用來介紹並且筆記，如果你也在思考自己的專案想要將圖片放在哪裡，是專案主機呢？還是 <strong>S3</strong>？這邊並不會做過多的討論以及比較，但如果你已經確定要將圖片放置在 <strong>S3</strong> 那就可以參考接下來的內容！</p>
 <hr>
-<h3 id="什麼是-AWS-Amazon-Simple-Storage-Service-S3"><a href="#什麼是-AWS-Amazon-Simple-Storage-Service-S3" class="headerlink" title="什麼是 AWS(Amazon Simple Storage Service) S3"></a>什麼是 AWS(Amazon Simple Storage Service) S3</h3><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/cloud.png" alt="雲"></p>
+<h3 id="什麼是-AWS-Amazon-Simple-Storage-Service-S3"><a href="#什麼是-AWS-Amazon-Simple-Storage-Service-S3" class="headerlink" title="什麼是 AWS(Amazon Simple Storage Service) S3"></a>什麼是 AWS(Amazon Simple Storage Service) S3</h3><p><img src="/images/others/loading.gif" data-original="/images/20201231/cloud.png" alt="雲"></p>
 <p>相信會看到這篇文章的，有 <strong>87%</strong> 大概都知道 <strong>S3</strong> 是什麼了，但這邊還是在稍微再提一下。</p>
 <p><strong>S3</strong> 就是一個儲存服務，也是雲端服務，好處在於該設定以及安全性問題，<strong>AWS</strong> 都已經幫你想好了，你只需要上傳檔案，以及使用他們現有的 <strong>API</strong>，比如 **瀏覽檔案、刪除檔案…**等等，由 <strong>亞馬遜網路服務公司(Amazon Web Services)</strong> 推出的服務。</p>
 <p>你可能會想單純檔案瀏覽上傳並下載其實我們放到 <strong>imgur.com</strong> 就好了呀，其實使用 <strong>S3</strong> 的好處還有在 <strong>存取權授</strong> 這邊，也是在 <strong>S3</strong> 上設定即可，也可以設定開發人員，透過指派的方式，可給予每個指派人員唯一金鑰去做存取動作。</p>
@@ -324,27 +324,27 @@
 <h3 id="開始使用-S3-服務"><a href="#開始使用-S3-服務" class="headerlink" title="開始使用 S3 服務"></a>開始使用 S3 服務</h3><h4 id="S3-憑證"><a href="#S3-憑證" class="headerlink" title="S3 憑證"></a>S3 憑證</h4><p>如同 <strong>Google Analytics</strong> 一樣，<strong>S3</strong> 只是 <strong>AWS</strong> 的眾多服務之一，您必須先到 <strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/free">AWS</a></strong> 去註冊帳號密碼。</p>
 <p>註冊結束後進入 **<a target="_blank" rel="noopener" href="https://ap-northeast-1.console.aws.amazon.com/console/home">AWS 管理控制台</a>**，</p>
 <p>這和其他第三方服務一樣，您需要有 <strong>Token</strong> 這類的東西才能夠使用它們的服務，而 <strong>AWS</strong> 需要 <strong>訪問密鑰ID(Access ID)</strong> 和 <strong>私有訪問密鑰(Secret Access key)</strong> 您才能使用這項服務。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/console.png" alt="AWS 管理控制台"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/console.png" alt="AWS 管理控制台"></p>
 <p>點選 <strong>My Security Credentials</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/create_new_token.png" alt="創建新的訪問密鑰"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/create_new_token.png" alt="創建新的訪問密鑰"></p>
 <p>點選 <strong>訪問密鑰(訪問密鑰 ID 和秘密訪問密鑰)(Access keys(access key ID and secret access key))</strong> 之後緊接著點選 **創建新的訪問密鑰(Create New Access Key)**。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/store_result.png" alt="拿到新的 Access ID 及 Access Key"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/store_result.png" alt="拿到新的 Access ID 及 Access Key"></p>
 <p>跳出彈窗代表您已經建立成功，然後將您的 <strong>訪問密鑰ID(Access ID)</strong> 和 <strong>私有訪問密鑰(Secret Access key)</strong> 記下或是點選 <strong>下載密鑰文件(Download Key File)</strong> 下載 <strong>.csv</strong> 文件。</p>
-<h4 id="新增一個-Bucket"><a href="#新增一個-Bucket" class="headerlink" title="新增一個 Bucket"></a>新增一個 Bucket</h4><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/select_S3.png" alt="S3"></p>
+<h4 id="新增一個-Bucket"><a href="#新增一個-Bucket" class="headerlink" title="新增一個 Bucket"></a>新增一個 Bucket</h4><p><img src="/images/others/loading.gif" data-original="/images/20201231/select_S3.png" alt="S3"></p>
 <p>接下然我們要創建一個 <strong>S3</strong> 的 <strong>服務儲存桶</strong>，點選左上角的 <strong>Services</strong> 你會發現 <strong>AWS</strong> 的眾多服務，看到左邊第一排的 <strong>S3</strong> 點進去。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/s3_bucket.png" alt="點擊新增S3儲存桶"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/s3_bucket.png" alt="點擊新增S3儲存桶"></p>
 <p>然後點選新**增儲存桶(Create New Bucket)**。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/create_new_bucket.png" alt="地區選擇"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/create_new_bucket.png" alt="地區選擇"></p>
 <p>之後輸入 <strong>儲存桶(Bucket)</strong> 的名稱，然後地區建議選擇離你當下比較近的位子，像筆者住在台灣，所以就會選擇 <strong>亞太地區(東京)ap-northeast-1</strong> 或 <strong>亞太地區(新加坡)ap-southeast-1</strong> 其中之一，有道是越近越快。不過這邊不討論這個問題。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/cancel_prohibit_setting.gif" alt="阻止公有訪問設定"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/cancel_prohibit_setting.gif" alt="阻止公有訪問設定"></p>
 <p>然後下方的 <strong>阻止公有訪問設定</strong> 請一定要勾掉，不然之後圖片上傳完成後，如果想要訪問，就會出現下方的內容。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/access_denied.png" alt="Access 權限錯誤"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/access_denied.png" alt="Access 權限錯誤"></p>
 <p>如果忘記勾選掉，之後進去儲存桶後也可以到 <strong>權限</strong> 去點選編輯然後勾掉。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/cancel_prohibit_way_2.png" alt="阻止公有訪問設定 權限設定"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/cancel_prohibit_way_2.png" alt="阻止公有訪問設定 權限設定"></p>
 <p>因為我們只是要上傳圖片，並且讓所有人都能看見，所以這邊必須勾掉！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/upload_image.png" alt="上傳圖片"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/upload_image.png" alt="上傳圖片"></p>
 <p>最後就可以上傳圖片啦，上傳完成後就可以點擊圖片名稱，</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/preview_img.png" alt="預覽圖片"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/preview_img.png" alt="預覽圖片"></p>
 <blockquote>
 <p><strong>儲存桶進入後還可以在資料夾，檔案就可以分類了。</strong></p>
 </blockquote>
@@ -362,7 +362,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i aws-sdk multer --save</span><br></pre></td></tr></table></figure>
 
 <h4 id="抓取上傳檔案"><a href="#抓取上傳檔案" class="headerlink" title="抓取上傳檔案"></a>抓取上傳檔案</h4><p>其實官方教學已經寫得差不多，但這次我把抓取檔案的流程寫在 <strong>Middleware</strong>，一來方便管理，二來乾淨清爽。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/middleware.png" alt="中介層"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/middleware.png" alt="中介層"></p>
 <p>然後在裡面謝上相關程式碼：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">&#x27;multer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圖片上傳</span></span><br><span class="line"><span class="keyword">const</span> profileUpload = multer(&#123;</span><br><span class="line">  <span class="attr">limit</span>: &#123;</span><br><span class="line">    <span class="comment">// 限制上傳檔案的大小為 1MB</span></span><br><span class="line">    <span class="attr">fileSize</span>: <span class="number">1000000</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">fileFilter</span>(<span class="params">req, file, cb</span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 只接受三種圖片格式</span></span><br><span class="line">    <span class="keyword">if</span> (!file.originalname.match(<span class="regexp">/\.(jpg|jpeg|png)$/</span>)) &#123;</span><br><span class="line">      cb(<span class="literal">null</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    cb(<span class="literal">null</span>, <span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  profileUpload</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -381,7 +381,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> params = &#123;</span><br><span class="line">  <span class="attr">Bucket</span>: <span class="string">&#x27;test-bucket/user-image&#x27;</span>, <span class="comment">// 相簿位子</span></span><br><span class="line">  <span class="attr">Key</span>: <span class="string">&#x27;test-1&#x27;</span>, <span class="comment">// 你希望儲存在 S3 上的檔案名稱</span></span><br><span class="line">  <span class="attr">Body</span>: req.file.buffer, <span class="comment">// 檔案</span></span><br><span class="line">  <span class="attr">ACL</span>: <span class="string">&#x27;public-read&#x27;</span>, <span class="comment">// 檔案權限</span></span><br><span class="line">  <span class="attr">ContentType</span>: req.file.mimetype <span class="comment">// 副檔名</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">s3.upload(params, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="built_in">console</span>.log(err, err.stack);</span><br><span class="line">  <span class="keyword">else</span> <span class="built_in">console</span>.log(<span class="string">&#x27;Bucket Created Successfully&#x27;</span>, data.Location);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>請記得關於 <strong>儲存桶(Bucket)</strong> 的資料夾呼叫還有使用方式，都是加上斜線，像上面的範例就是 <code>test-bucket</code> 這個 <strong>儲存桶(Bucket)</strong> 裡面的資料夾 <code>user-image</code>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/12/31/20201231/success_upload_img.png" alt="上傳成功"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/success_upload_img.png" alt="上傳成功"></p>
 <blockquote>
 <p>上傳成功後如果 <code>console.log(data)</code> 可以看見更多資訊，只是 <strong>data.Location</strong> 就是我們要用來預覽的檔案，如果點選網址變成下載，請記得一定要檢查你的副檔名稱是不是正確的(Ex:.jpg|.jpeg|.png)。</p>
 </blockquote>

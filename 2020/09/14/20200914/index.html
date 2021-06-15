@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-09-14T02:46:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:44:07.032Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.334Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="Back-end">
@@ -249,7 +249,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:44:07" itemprop="dateModified" datetime="2021-06-15T11:44:07+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -294,19 +294,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/express_logo.jpg" alt="Express"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200914/express_logo.jpg" alt="Express"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>今天會提到關於 <strong>Nodejs</strong> 的 <strong>Template</strong>，如果你在前端有使用過 **Pug(Jade)**，會比較好理解一些，如果沒用過也沒關係，跟著這篇一起練習吧。</p>
 <span id="more"></span>
 
 <p><strong>Nodejs</strong> 的 <strong>Template</strong> 有許多種，這邊示範的為 <strong>EJS</strong>。</p>
 <hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/EJS_logo.png" alt="EJS Template"></p>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200914/EJS_logo.png" alt="EJS Template"></p>
 <p>在前面的文章 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 我們開啟了全端之路，在入門如何安裝及使用 <strong>Nodejs</strong> 之後這篇文章就要簡短講解如何快速建立後端環境，並且規劃簡單的架構及使用模板建立多頁面。</p>
 <hr>
 <h3 id="老樣子"><a href="#老樣子" class="headerlink" title="老樣子"></a>老樣子</h3><p>按照慣例文章開頭還是要講一下什麼是 <strong>Express</strong>。</p>
 <p>跟前端一樣，<strong>Nodejs</strong> 也有三個比較流行的框架，分別為 <strong>Express、Koa</strong> 及 <strong>Hapi</strong>，但你可能會有點疑問，我安裝了這些框架但他們好像沒有幫我弄好環境？</p>
 <p>沒有錯，這些框架和前端那些框架有些異曲同工之妙，這三個框架提供了一些更方便的 <strong>API</strong> 可以使用，但環境必須要自行建立，如果你不想要手動建立環境的話別擔心，可以考慮研究一下 **<a target="_blank" rel="noopener" href="https://github.com/expressjs/generator">Express Generator</a>(註1)**，但這邊推薦新手先自行從 0 開始建立環境才能比較了解為什麼 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/generator">Express Generator</a></strong> 要幫我把環境這樣放。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/three_logo.png" alt="Nodejs 框架三劍客"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/three_logo.png" alt="Nodejs 框架三劍客"></p>
 <p>關於三個框架的好壞這邊稍微提一下(不是專業的分析，有誤還請各路大神見諒)，詳細可參考 **<a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/tech/gj9rkay.html">如何正確選擇Node框架：Express、Koa還是Hapi</a>**：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://github.com/expressjs/express">Express</a> </li>
@@ -342,7 +342,7 @@
 <h3 id="起手式一"><a href="#起手式一" class="headerlink" title="起手式一"></a>起手式一</h3><p>首先建立一個新專案資料夾，然後進入這個專案資料夾：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir express-example</span><br><span class="line"></span><br><span class="line">$ cd express-example</span><br><span class="line"></span><br><span class="line">$ npm init/init -y // 加上 -y 快速建立</span><br><span class="line"></span><br><span class="line">$ npm i express -S // 安裝 express</span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/package_example.png" alt="目前的資料夾"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/package_example.png" alt="目前的資料夾"></p>
 <p>到目前為止在專案資料夾應該會出現 <strong>node_modules package.json package-lock.json</strong>(註2)。</p>
 <blockquote>
 <p>註2：<em>關於 <strong>node_modules package.json package-lock.json</strong> 前面文章提到過很多次，這邊再稍微講一下，*<em>node_modules</em></em> 是放各種套件的地方，<strong>package.json</strong> 則是紀錄你這個專案使用了什麼套件，所以之後把專案上傳可以不用上傳 <strong>node_modules</strong> 只需要讓下一個人拿到 <strong>package.json</strong> 即可安裝你之前安裝過的所有套件，最後 <strong>package-lock.json</strong> 則是紀錄套件使用的版本號。*</p>
@@ -352,16 +352,16 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">  response.send(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>之後在終端機輸入 <code>node app.js</code> 就可以看見終端機的訊息：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/example_nodejs_express_start.png" alt="成功跑在 3000 port"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/example_nodejs_express_start.png" alt="成功跑在 3000 port"></p>
 <p>接著在網址上輸入 <code>http://localhost:3000/</code> 就會出現下面的訊息：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/success_on_web.png" alt="成功啟動"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/success_on_web.png" alt="成功啟動"></p>
 <h4 id="起手式二-補充"><a href="#起手式二-補充" class="headerlink" title="起手式二 - 補充"></a>起手式二 - 補充</h4><p>上面我們可以成功在網頁上顯示 <strong>Hello Express!</strong> 聰明的你一定想得到是透過 <code>response.send()</code> 這個方法，這邊就要講解關於 <code>request</code> 及 <code>response</code>。</p>
 <p><code>request</code> 為 從使用者那邊發送過來的請求，<code>response</code> 為服務器這端發送回去的回應，我們可以透過 <code>request</code> 拿到一些使用者的請求及資訊，比方說 <code>request.route</code>、<code>req.param(&#39;key&#39;)</code> 及 <code>req.body.xxx</code> 等等。</p>
 <p>這邊試著將 <strong>app.js</strong> 的程式碼改為以下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(request);</span><br><span class="line">  response.send(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>你會看見 <code>request</code> 有許多資訊可以拿取：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/req_info.png" alt="許多資訊"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/req_info.png" alt="許多資訊"></p>
 <blockquote>
 <p><em>後面會再提到如何顯示 <strong>HTML</strong> 在頁面上。</em></p>
 </blockquote>
@@ -369,7 +369,7 @@
 <h3 id="規劃及準備"><a href="#規劃及準備" class="headerlink" title="規劃及準備"></a>規劃及準備</h3><p>前面了解到基本路由的概念，這時候我們就要開始規劃怎麼更改我們的專案架構，可以想像我們之後會有很多路由，我們可以把路由另外放一個資料夾，然後再透過 <strong>app.js</strong> 引入進來。</p>
 <p>先在專案建立資料夾 <strong>routes(放路徑)</strong> 然後在資料夾內在建立 <strong>index.js</strong>。</p>
 <p>這時候你的架構會長這樣：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/framework_example.png" alt="目前的架構"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/framework_example.png" alt="目前的架構"></p>
 <p>接著打開 <code>/routes/index.js</code> 之後把內容改為以下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">    response.send(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/detail&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>)</span>&#123;</span><br><span class="line">    response.send(<span class="string">&#x27;This is detail page!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
 
@@ -383,7 +383,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/index&#x27;</span>); <span class="comment">// 引入 index 的所有路由</span></span><br><span class="line"><span class="keyword">var</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/user&#x27;</span>); <span class="comment">// 引入 user 的所有路由</span></span><br><span class="line"></span><br><span class="line">app.use(<span class="string">&#x27;/&#x27;</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">&#x27;/user&#x27;</span>, userRouter);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>緊接著在終端機輸入 <code>node app.js</code> 啟動網頁，分別輸入網址 <code>http://localhost:3000/</code>、<code>http://localhost:3000/detail</code>、<code>http://localhost:3000/user</code> 及 <code>http://localhost:3000/user/user-edit</code>：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/router_info.png" alt="架構概念"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/router_info.png" alt="架構概念"></p>
 <p>懶人包：建立 <strong>routes</strong> 資料夾，每次要新增一個路由分類時，先到 <strong>routes</strong> 資料夾底下新增，例：<strong>user</strong>、<strong>member</strong> 或 <strong>login</strong> 等等，然後再到 <strong>app.js</strong> 分別引入，例：<code>var indexRouter = require(&#39;./routes/index&#39;);</code> 或 <code>var userRouter = require(&#39;./routes/user&#39;);</code> 然後在使用路由 <code>app.use(&#39;/&#39;, indexRouter);</code> 及 <code>app.use(&#39;/user&#39;, userRouter);</code>。</p>
 <hr>
 <h3 id="EJS"><a href="#EJS" class="headerlink" title="EJS"></a>EJS</h3><h4 id="快速導覽"><a href="#快速導覽" class="headerlink" title="快速導覽"></a>快速導覽</h4><p>學玩怎麼使用 <strong>router</strong> 之後這邊就要提到，後端寫好一支 <strong>API</strong> 可能是吐回一段文字，可能是直接渲染一個畫面，也可能是一段 <strong>JSON</strong>，前面我們使用的 <code>response.send(&#39;xxx&#39;);</code> 這個意思就是吐一段文字回去給瀏覽器，</p>
@@ -404,7 +404,7 @@
 
 <p>上面的 <strong>path</strong> 就是 <strong>nodejs</strong> 原始的 <strong>API</strong>，而 <strong>__dirname</strong> 我們在前面的 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 有提到，這邊大概的意思就是當我使用 <code>response.render(&#39;index&#39;)</code> 的時候，會自動幫我抓路徑 <code>response.render(&#39;index&#39;) =&gt; response.render(&#39;目前路徑/views/index&#39;)</code>，最後一行則是把目前的 <strong>view</strong> 引擎設定為 <strong>ejs</strong>。</p>
 <p>現在停止終端機的指令，重新輸入 <code>node app.js</code> 打開瀏覽器輸入 <code>http://localhost:3000/</code> 吧，會出現下面的畫面就代表成功了：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/ejs_example.png" alt="成功渲染"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_example.png" alt="成功渲染"></p>
 <blockquote>
 <p>註3：<em>這邊建議安裝 <strong><a target="_blank" rel="noopener" href="https://github.com/randometc/ejs-locals">ejs-locals</a></strong> 而非 <strong><a target="_blank" rel="noopener" href="https://github.com/mde/ejs">ejs</a></strong> 因為前者多了更多的 <strong>API</strong> 可以使用</em></p>
 </blockquote>
@@ -416,12 +416,12 @@
 
 <p>聰明的你會立馬發現 <code>&lt;%= username %&gt;</code> 這個新寫法，其實這就是模板的原理，在要替換的地方使用變數，再透過更新資料去觸發畫面更動，這也是 <strong>Vue</strong> 的原理，像六角學院校長說的，並非魔術！</p>
 <p>接下來重新啟動終端機輸入 <code>node app.js</code> 一樣打開瀏覽器輸入 <code>http://localhost:3000/user</code> 你會發現神奇的大雄被帶進來了，如下圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/ejs_user_example.png" alt="user頁面成功渲染"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_user_example.png" alt="user頁面成功渲染"></p>
 <h4 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h4><p>另外 <strong>ejs</strong> 可以跟 <strong>pug</strong> 一樣寫 <strong>js</strong> 在上面，所以我們也可以寫判斷，把 <code>/views/user.ejs</code> 改寫為下列內容：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /views/user.ejs --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello Express By index.ejs.</span><br><span class="line"></span><br><span class="line">    &lt;% if(show)&#123; %&gt;</span><br><span class="line">        &lt;% for(var i = 0; i &lt; user_arr.length; i++) &#123; %&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>username： &lt;%= user_arr[i].username %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>age： &lt;%= user_arr[i].age %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>接著一樣重新啟動終端西，執行 <code>node app.js</code> 之後打開瀏覽器輸入 <code>http://localhost:3000/user/user-edit</code> 會出現下面的內容：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/ejs_user_edit_example.png" alt="user頁面成功渲染"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_user_edit_example.png" alt="user頁面成功渲染"></p>
 <p>我們可以在參數使用 <strong>Boolean</strong> 然後在渲染時依靠 <strong>true/false</strong> 去決定是否顯示內容，也可以用迴圈的方式把資料給渲染出來，這和我們使用 <strong>JS</strong> 來渲染畫面到 <strong>HTML</strong> 是大同小異的。</p>
 <blockquote>
 <p><em>關於更多的 <strong>ejs</strong> 用法可以參考 <strong><a target="_blank" rel="noopener" href="https://ejs.co/#docs">ejs docs</a></strong></em></p>

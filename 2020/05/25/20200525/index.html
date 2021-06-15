@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-05-25T01:10:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:46:02.630Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.313Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:46:02" itemprop="dateModified" datetime="2021-06-15T11:46:02+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +289,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/week_7_classLogo.png" alt="第七週的練習"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200525/week_7_classLogo.png" alt="第七週的練習"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>你在看網頁時肯定看過東西突然浮出來會是跳出來，在沒有肯定也看過蘋果官網。</p>
 <p>這週就是要來學學怎麼實作視差滾動，而且！而且！而且！<strong>可以不寫任何一行 JS</strong>！</p>
 <span id="more"></span>
@@ -357,7 +357,7 @@
 <p><em>有興趣可以參考 <strong><a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css3_pr_animation.asp">W3C</a></strong> 的用法介紹，更多詳細動畫這邊就不做介紹，有篇文章這邊狠力推，筆者剛開始學動畫就是參考<a target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201803/css-animation.html">這篇文章</a>。</em></p>
 </blockquote>
 <h3 id="自動派"><a href="#自動派" class="headerlink" title="自動派"></a>自動派</h3><p>上面有提到雖然我們可以手動設定，但是有許多人會覺得這一堆 <code>@keyframes</code> 超亂的啊！而且我想要一制性、效率性，沒問題這邊就先介紹一個筆者很常使用的套件，而且也是目前全世界最多人使用的動畫套件！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/animateCSSWebSite.gif" alt="tada!"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200525/animateCSSWebSite.gif" alt="tada!"></p>
 <blockquote>
 <p><em>其實筆者中間有一段時間沒有用，沒發現官網改版了。</em></p>
 </blockquote>
@@ -372,7 +372,7 @@
 <h3 id="我全都要？"><a href="#我全都要？" class="headerlink" title="我全都要？"></a>我全都要？</h3><p>雖然上方提到有手動設定也有自動設定，但你可能這時候會想：</p>
 <p>Ｑ：我加上去動畫就自己開始跑了呀，有時候我想要畫面滑動到特定的地方在播放，我總不可能去算使用者多久滑到那個地方，然後延遲吧？</p>
 <p>Ａ：當然是的，所以這時候你就必須全都要了！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/NickYoung.jpg" alt="哪泥？"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200525/NickYoung.jpg" alt="哪泥？"></p>
 <p>雖然上方提到一行 <strong>JS</strong> 都不用寫，但其實還是至少要寫幾行套件設定啦！(<del>這不算吧</del></p>
 <p>這邊先介紹另一個套件 **<a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS.js</a>**，其實這個套件和<br><strong><a target="_blank" rel="noopener" href="https://animate.style/">animate.css</a></strong> 差不多，引入套件後，在想要加上動畫得元素加上 <code>data-aos=&quot;動畫名稱&quot;</code> 就可以了。</p>
 <p>但是差別是什麼呢？**<a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS.js</a>** 並不會在網頁一載入就跑動畫，而是會偵測你的網頁滑動到該播放動畫的元素那的時候才會播放，這也是為什麼這個套件要多引入一個 <strong>.js</strong> 檔(雖然提到不用寫任何一行 <strong>JS</strong> 但是這個套件必須初始化，所以必須在 <strong>JS</strong> 加上 <code>AOS.init();</code>，僅此一行)。</p>
@@ -382,9 +382,9 @@
 </iframe>
 
 <p>知道了怎麼用之後，這個套件也可以加上手幹的那些設定，加上的方法也是在想跑動畫的元素上加上 <code>data-aos-offset</code>、<code>data-aos-duration</code>…等等，詳細可參考**<a target="_blank" rel="noopener" href="https://github.com/michalsnik/aos#2-set-animation-using-data-aos-attribute">官方文件</a>**。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/aosAttributes.png" alt="詳細可參考官方指南"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200525/aosAttributes.png" alt="詳細可參考官方指南"></p>
 <p>這個套件大概的原理就是他會偵測你網頁的視窗底部，在接近你想加上動畫的元素時，會去抓 <strong>data</strong> 的 <strong>attribute</strong>，然後把裡面的動畫名稱加上 <code>Class Name</code> 裡。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/IWantAll.jpg" alt="我全都要"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200525/IWantAll.jpg" alt="我全都要"></p>
 <p>講到這邊你大概就懂了，我全都要是要什麼東西，簡單說就是移到要播放動畫的地方，加上 <strong><a target="_blank" rel="noopener" href="https://animate.style/">animate.css</a></strong> 的動畫，這個要怎麼辦到呢？前面有提到 <strong><a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS.js</a></strong> 會在畫面移到特定的地方加上 <strong>data-attribute</strong> 的名稱，那我們把裡面替換成 <strong><a target="_blank" rel="noopener" href="https://animate.style/">animate.css</a></strong> 的名稱就可以了，但是設定就必須還是要自己上去改。</p>
 <p>關於怎麼合併這邊就直接示範一個範例：</p>
 <iframe height="265" style="width: 100%;" scrolling="no" title="2020春季網頁切版直播班 - 第七週作業範例 - AOS ft. Animate.css" src="https://codepen.io/rexhung0302/embed/GRpLmzr?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
@@ -397,7 +397,7 @@
 <h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>其實本週其實可以套用前幾週的版面直接做練習，但因為自己初衷是想練習切版，所以還是切新的版面並且套上套件。</p>
 <p>過程其實切版還算順利，只是最後套上套件碰到了個雷，因為套件跑動畫會先卡在邊邊(看得到的狀況，然後再跑動畫進來，所以當下有在 <code>body</code>，下了一個 <code>overflow-x: hidden;</code>，導致全部的動畫都隱藏了，連跑都沒有跑，還好同組的同學 <strong>Alex</strong> 幫忙發現解決了。</p>
 <p>除此之外沒有太大的問題，就繼續往下週邁進了！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/25/20200525/homeworkExample.gif" alt="原諒這週沒有 RWD 設計稿所以沒有做 RWD"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200525/homeworkExample.gif" alt="原諒這週沒有 RWD 設計稿所以沒有做 RWD"></p>
 <hr>
 <h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一：請每個小組討論成員，試著用本週教的視差效果，並套用在自己的版型上，彼此協助除錯，並提交到任務系統上。"><a href="#任務一：請每個小組討論成員，試著用本週教的視差效果，並套用在自己的版型上，彼此協助除錯，並提交到任務系統上。" class="headerlink" title="任務一：請每個小組討論成員，試著用本週教的視差效果，並套用在自己的版型上，彼此協助除錯，並提交到任務系統上。"></a>任務一：請每個小組討論成員，試著用本週教的視差效果，並套用在自己的版型上，彼此協助除錯，並提交到任務系統上。</h4><hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>記得在切第一週的版型就有看見同學使用 **<a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS.js</a>**，當下覺得挺酷的想等課程結束研究看看，沒想到一直到這週就提到了。一直以來切版常常使用動畫，因為自己覺得動畫對使用者體驗提升許多，但是過多的動畫又會困擾使用者，所以真的要斟酌呢！</p>

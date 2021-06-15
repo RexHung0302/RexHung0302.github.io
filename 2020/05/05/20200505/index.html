@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-05-04T17:36:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:46:22.626Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.309Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -248,7 +248,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:46:22" itemprop="dateModified" datetime="2021-06-15T11:46:22+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,7 +293,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/week_4_classLogo.png" alt="第四週的練習"></p>
+        <p><img src="/images/others/loading.gif" data-original="/images/20200505/week_4_classLogo.png" alt="第四週的練習"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><strong>RWD</strong> 地獄訓練第二週，搭配 <strong>Gulp</strong> 專車，一起來看看本週出了什麼菜吧！</p>
 <span id="more"></span>
 
@@ -334,7 +334,7 @@
 <p>在我們做多個頁面的時候，大致上表頭表尾都會差不多，主要都是替換內容，這時候剛開始切版的你包括我，都會想說那我就切 <strong>index.html</strong>、<strong>index_2.html</strong>、<strong>index_3.html</strong>…等等，如果只是一般的形象官網可能還好，但如果今天是電商網頁呢？</p>
 <p>舉個例子，你可能每一隻檔案都有自己的 <strong>CSS</strong>，可能都會有黑色的顏色樣式 <code>color: #000000;</code>，假使今天你要改為藍色、黃色，豈不是要改幾十次甚至幾百次呢？</p>
 <p>所以慢慢的我們會從一個 <strong>HTML</strong> 進化成替換裡面的 <strong>contents</strong>，這該如何做到呢？就有賴 <strong>Gulp</strong> 了。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/layout_example.png" alt="Layout觀念"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/layout_example.png" alt="Layout觀念"></p>
 <p>可能你會有疑問，我手動建立 <strong>HTML</strong> 複製貼上是最簡單的方式，既快又不用花時間研究 <strong>Gulp</strong>，但是誰叫我們是<del>勤奮的工程師</del>呢？</p>
 <p>使用 <strong>Layout</strong> 除了改 <strong>Code</strong> 快之外，在最後產出的檔案，就可以直接整包丟給後端工程師，然後讓他們更方便的串接 <strong>API</strong> 及修改，他們不用在一個檔案一個檔案串接起來。</p>
 <blockquote>
@@ -348,7 +348,7 @@
 <p>沒有錯的，除了你能把 <strong>CSS</strong> 拆成 <strong>CSS_1 CSS_2</strong> 像是 <strong>HTML</strong> 拆開那樣，你不學也至少要聽過現今絕大數人都在用的 <strong>SCSS</strong>。</p>
 <h4 id="預處理器怎麼來的？"><a href="#預處理器怎麼來的？" class="headerlink" title="預處理器怎麼來的？"></a>預處理器怎麼來的？</h4><p>你一定聽過網頁三寶，<strong>HTML CSS JavaScript</strong>，網頁基本只認識這三種東西寫出來的語法，但是這三種語法的核心架構有時候滿足不了我們，比方說 <strong>HTML</strong> 拆成好幾個的 <strong>Layout</strong> 功能，或是 <strong>CSS</strong> 加上變數的功能(現在<strong>CSS</strong>有支援了)…等等。</p>
 <p>所以厲害的各路大神們就開始研發各種更好寫更方便的框架或是擴充，而這些擴充的東西被稱為預處理器，意思為編譯成網頁三寶前的預備處理器，而這些預處理器可以做到許多原本網頁三寶做不到的事情。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/sass-logo.png" alt="SASS?SCSS?"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/sass-logo.png" alt="SASS?SCSS?"></p>
 <h4 id="到底是-SASS-還是-SCSS-呢？"><a href="#到底是-SASS-還是-SCSS-呢？" class="headerlink" title="到底是 SASS 還是 SCSS 呢？"></a>到底是 SASS 還是 SCSS 呢？</h4><p>最少誕生的為 <strong>SASS</strong>，當時 <strong>SASS</strong> 採用 <strong>Ruby</strong> 語言編寫，為了配合 <strong>HAML(縮排式的 HTML 模版語法)</strong> 所以 <strong>SASS</strong> 寫法不寫大括號即分號，這是最大的特色，例如下方：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span></span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>:</span><br><span class="line">  .header</span><br><span class="line">    background-color: red;</span><br></pre></td></tr></table></figure>
 
@@ -367,7 +367,7 @@
 <p>而關於 <strong>SASS</strong> 該如何命名可以參考六角卡斯伯老師的文章，<a target="_blank" rel="noopener" href="https://wcc723.github.io/css/2016/12/20/sass-folder/">鐵人賽 20 - Sass 資料夾結構</a>，有效的分類並且管理真的是讓人看 <strong>Code</strong> 看得很舒服啊！</p>
 <hr>
 <h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一-請組員們彼此間確認-Gulp-環境是否都有安裝成功，並成功能看到範例七截圖，若有環境安裝問題，還請組員們彼此透過-ZOOM-分享螢幕協助排錯"><a href="#任務一-請組員們彼此間確認-Gulp-環境是否都有安裝成功，並成功能看到範例七截圖，若有環境安裝問題，還請組員們彼此透過-ZOOM-分享螢幕協助排錯" class="headerlink" title="任務一 - 請組員們彼此間確認 Gulp 環境是否都有安裝成功，並成功能看到範例七截圖，若有環境安裝問題，還請組員們彼此透過 ZOOM 分享螢幕協助排錯"></a>任務一 - 請組員們彼此間確認 Gulp 環境是否都有安裝成功，並成功能看到<a target="_blank" rel="noopener" href="https://hackmd.io/yWpLNMPRT2yvIR4Zq_idGw?both">範例七</a>截圖，若有環境安裝問題，還請組員們彼此透過 ZOOM 分享螢幕協助排錯</h4><p>安裝成功後截圖：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/gulp_success.png" alt="安裝成功圖"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/gulp_success.png" alt="安裝成功圖"></p>
 <h4 id="任務二：請試著找出以下網站，哪些區塊是屬於-Layout-環節，找出三個網站並回報截圖"><a href="#任務二：請試著找出以下網站，哪些區塊是屬於-Layout-環節，找出三個網站並回報截圖" class="headerlink" title="任務二：請試著找出以下網站，哪些區塊是屬於 Layout 環節，找出三個網站並回報截圖"></a>任務二：請試著找出以下網站，哪些區塊是屬於 Layout 環節，找出三個網站並回報截圖</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://www.hexschool.com/">六角學院</a></li>
 <li><a target="_blank" rel="noopener" href="https://wcc723.github.io/">卡斯伯技術部落格</a></li>
@@ -375,18 +375,18 @@
 <li><a target="_blank" rel="noopener" href="https://www.inside.com.tw/">INSIDE 硬塞的網路趨勢觀察</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.gamer.com.tw/">巴哈姆特</a></li>
 </ul>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_1.png" alt="六角學院頁頭"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_2.png" alt="六角學院頁尾"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_1.png" alt="六角學院頁頭"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_2.png" alt="六角學院頁尾"></p>
 <blockquote>
 <p>六角官網為常見的頁頭跟頁尾</p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_3.png" alt="卡斯伯技術部落格頁頭 及 SideBar"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_4.png" alt="卡斯伯技術部落格頁尾"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_3.png" alt="卡斯伯技術部落格頁頭 及 SideBar"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_4.png" alt="卡斯伯技術部落格頁尾"></p>
 <blockquote>
 <p>卡斯伯技術部落格除了頁頭及頁尾還多的 SideBar</p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_5.png" alt="巴哈姆特頁頭"></p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/05/05/20200505/example_6.png" alt="巴哈姆特頁尾"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_5.png" alt="巴哈姆特頁頭"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200505/example_6.png" alt="巴哈姆特頁尾"></p>
 <blockquote>
 <p>每天必上的網站還是要練習一下的，除了 TOP-bh 及 BH-menu-path 為頁頭外 BH-footer 為頁尾</p>
 </blockquote>

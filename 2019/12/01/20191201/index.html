@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2019-12-01T15:59:59.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:47:11.897Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.221Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="Other">
@@ -252,7 +252,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:47:11" itemprop="dateModified" datetime="2021-06-15T11:47:11+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,7 +300,7 @@
         <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>繼上一篇爬蟲之後這次決定繼續研究爬蟲，一方面當興趣玩，一方面了解 <strong>LINE</strong> 的機器人及繼續了解 <strong>Node.js</strong>。這次一樣是透過上次完成的爬蟲機器人將日幣資訊傳送至 <strong>LINE</strong> 上，文章將不會過多涉略到太難的 <strong>LINE API</strong>。</p>
 <span id="more"></span>
 
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Node.js_logo.png"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/Node.js_logo.png"></p>
 <hr>
 <h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>一樣需要 <strong>node.js</strong> 需要至少 <strong>4.x</strong> 版本以上，不過現在官方網站都能下載到最新的，所以還沒安裝到官方網站下載就可以囉，<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">傳送門</a>。</p>
 <p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*8a9ra6jgkwacL-JiACSclQ.png" alt="安裝完成"></p>
@@ -329,7 +329,7 @@
 <blockquote>
 <p><strong>為什麼現在越來越多人會使用 <strong>LINE Bot</strong> 呢？簡單說就是任何使用者及商家都能從0元無料上手，後台功能全部都開放，甚至API串接無需審核即可使用，現今不一定每一個人每天都會用 FaceBook 但是有使用智慧型手機的人幾乎都離開不通訊軟體，而台灣及日本就是 LINE 的最大使用客群。</strong></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/LineBotImg_1.png" alt="LineBot"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/LineBotImg_1.png" alt="LineBot"></p>
 <h4 id="基本架構說明"><a href="#基本架構說明" class="headerlink" title="基本架構說明"></a>基本架構說明</h4><p>基本上如果沒有透過 <strong>LINE API</strong> 回應的話，就是從 <strong>LINE</strong> 的後台直接去做設定，就不會有 <strong>Client Server</strong> 這塊，那我們要做的事情很簡單，就是申請一個 <strong>LINE Bot</strong> 然後建立我們的 <strong>Client Server</strong>。</p>
 <p>大致上流程就是 <strong>LINE Users</strong> 會發起要求或回應，然後 <strong>LINE Server</strong> 會判斷要傳送訊息給哪一個 <strong>LINE Bot</strong>，並解確認是否有起用 <strong>Webhook URL</strong> 並且有設定 <strong>Webhook 網址目標</strong>，如果沒有就不會傳送訊息給任何伺服器。</p>
 <p>如果有設定 <strong>Webhook 目標網址</strong>，<strong>LINE Server</strong> 會將 <strong>LINE Users</strong> 的使用者訊息，傳送一個 <strong>HTTP POST Resquest</strong>，在 <strong>Resquest</strong> 中會定義使用者的訊息類型。</p>
@@ -343,7 +343,7 @@
 </blockquote>
 <p>最後在 <strong>Client Server</strong> 我們需要建立一個 <strong>Web API</strong> 服務的伺服器，接著收到不同類型的使用者訊息之後，需要回應(Response)<strong>HTTP OK</strong> 的狀態碼(<strong>ex:HTTP Status Code:200 註2</strong>)給 <strong>LINE Server</strong> 伺服器確認。</p>
 <p><strong>Client Server</strong> 就是我們可以設計程式的地方，可以把我們的爬蟲放這邊，透過 <strong>Messaging API</strong> 我們可以傳送各式各樣的訊息，譬如文字、圖片、選單…等等。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/stepImg.png" alt="大致架構"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/stepImg.png" alt="大致架構"></p>
 <blockquote>
 <p><em>註1: SHA256是SHA-2下細分出的一種演算法。SHA-2，名稱來自於安全雜湊演算法2（英語：Secure Hash Algorithm 2）的縮寫，一種密碼雜湊函式演算法標準，由美國國家安全域性研發，屬於SHA演算法之一，是SHA-1的後繼者。詳細可參考 <a target="_blank" rel="noopener" href="https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/602774/">SHA256演算法原理詳解</a></em></p>
 </blockquote>
@@ -358,37 +358,37 @@
 <li>企業帳號</li>
 </ol>
 <p>-&gt; 透過LINE的邀請，通常會是在LINE上深度經營的帳戶。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_difference.png" alt="Line差別"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/Line_difference.png" alt="Line差別"></p>
 <p>關於收費不再依照付費區分訊息使用量，改採用訊息發送數量，就是像發簡訊一樣，分成三種用量『<strong>低用量</strong>』、『<strong>入門版</strong>』、『<strong>進階版</strong>』三種，值得一提的是 <strong>2.0版本</strong> 沒有了好友的上限。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_charge.png" alt="收費方案"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/Line_charge.png" alt="收費方案"></p>
 <h4 id="LINE-Bot-帳號申請"><a href="#LINE-Bot-帳號申請" class="headerlink" title="LINE Bot 帳號申請"></a>LINE Bot 帳號申請</h4><p>廢話說了一堆就開始拿起你的釣竿吧！首先我們要先申請一組 <strong>LINE Bot 帳號</strong>，進入 <a target="_blank" rel="noopener" href="https://www.linebiz.com/">LINE for Business</a> ，我們會申請一個低用量方案的 <strong>Messaging API</strong>。</p>
 <p>點選右上方的『<strong>線上申請官方帳號</strong>』，進入後會要求登入 <strong>LINE帳號</strong>，或直接進入『<a target="_blank" rel="noopener" href="https://manager.line.biz/"><strong>LINE Official Account Manager</strong></a>』進入後點選 <strong>建立LINE官方帳號</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/LINE_SignIn.png" alt="點選 使用LINE帳號登入"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/LINE_SignIn.png" alt="點選 使用LINE帳號登入"></p>
 <p>基本上填寫『<strong>帳號名稱</strong>』、『<strong>電子郵件</strong>』與選擇『<strong>業種</strong>』，點擊確認之後再確認一次資訊然後點擊『<strong>提交</strong>』送出。</p>
 <blockquote>
 <p><em>LINE官方帳號是隨機ID，如果想購買專屬ID，可以到 <a target="_blank" rel="noopener" href="https://manager.line.biz/"><strong>LINE Official Account Manager</strong></a> 的『設定』-&gt;『帳務專區』-&gt;『專屬ID』。</em></p>
 </blockquote>
 <h4 id="LINE-Messaging-API-啟用"><a href="#LINE-Messaging-API-啟用" class="headerlink" title="LINE Messaging API 啟用"></a>LINE Messaging API 啟用</h4><p>在 <strong>LINE Official Account Manager</strong> 頁面左上角區域，可以看到目前官方帳號資訊。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_Messaging_API.png" alt="點擊左上角 回應模式 再點左側 Messaging API"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/Line_Messaging_API.png" alt="點擊左上角 回應模式 再點左側 Messaging API"></p>
 <p>中間會有 <strong>狀態 未使用</strong>，點擊下方按鈕 <strong>啟用Messaging API</strong>，接著會跳出選擇提供者，目的在於讓企業或使用者管理多個聊天機器人，選取『<strong>建立使用者</strong>』，並且輸入新的『<strong>提供者名稱</strong>』，然後按下同意，<strong>設定隱私權政策</strong> 及 <strong>服務條款</strong> 可以跳過，最後確認資訊並點下確定啟用。</p>
 <p>接下來再回來看剛剛那個頁面，會發現需要填入 <strong>Channel資訊</strong> 及 <strong>Webhook網址</strong>。</p>
 <p>我們先進入 <a target="_blank" rel="noopener" href="https://developers.line.biz/console/"><strong>開發人員管理介面</strong></a>，前往 <strong>提供者列表</strong>(<strong>Provider List</strong>)，選擇剛剛建立的提供者。</p>
 <p>之後點擊 <strong>Create New Channel</strong> 進入，在選擇 <strong>Messaging API</strong>，另外兩個暫時不會用到。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_Messaging_API_2.png" alt="選擇 Messaging API"></p>
+<p><img src="/images/others/loading.gif" data-original="/2019/12/01/20191201/Line_Messaging_API_2.png" alt="選擇 Messaging API"></p>
 <h4 id="Channel-Access-Token-頻道存取令牌"><a href="#Channel-Access-Token-頻道存取令牌" class="headerlink" title="Channel Access Token 頻道存取令牌"></a>Channel Access Token 頻道存取令牌</h4><p>還記得剛剛的 <strong>Channel資訊</strong> 都是空的嗎？在我們建立完新的 <strong>Messaging API</strong> 後，找到 <strong>Messaging API</strong> 的標頭點下去，往下滑動找到 <strong>Channel access token (long-lived)</strong> 然後點擊 <strong>Issue</strong> 按鈕產生一組新的 <strong>Channel access token</strong>(<strong>頻道存取令牌</strong>)，接著會跳出一個彈窗，選擇 <strong>0 hours</strong>，目的在於不讓這個頻道存取令牌過期。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/Line_Messaging_API_3.png" alt="點擊標頭切換頁面"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/Line_Messaging_API_3.png" alt="點擊標頭切換頁面"></p>
 <p>然後把這行複製更改掉原本空的 <strong>Channel資訊</strong> 的 <strong>Channel secret</strong>，在找到剛剛的頁面，複製標頭 <strong>Basic settings</strong> 裡的 <strong>Channel ID</strong> 貼到剛剛 <strong>Channel資訊</strong> 的 <strong>Channel ID</strong>。</p>
 <p>到此LINE Bot建置基本上到一個段落，接下來我們會直接透過 <strong>Heroku</strong> 架設一個伺服器。</p>
 <blockquote>
 <p>*如果想要使用本機測試，可以嘗試使用 <a target="_blank" rel="noopener" href="https://ngrok.com/">Ngrok</a>，詳細可以參考 <a target="_blank" rel="noopener" href="https://5xruby.tw/posts/easy-ngrok-by-nginx-ssh-tunnel/">ngrok 不求人：自己搭一個窮人版的 ngrok 服務</a> 搭建一個 <strong>本地 server</strong>，之後再把上方提到原本空的 <strong>Webhook網址</strong> 填入自己的 Ngrok 網址。之後如果有更新會再補上教學。*</p>
 </blockquote>
 <hr>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/herokuImg.png" alt="Heroku 雲平台"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/herokuImg.png" alt="Heroku 雲平台"></p>
 <h3 id="LINE-Bot-Webhook-伺服器-建置"><a href="#LINE-Bot-Webhook-伺服器-建置" class="headerlink" title="LINE Bot Webhook 伺服器 建置"></a>LINE Bot Webhook 伺服器 建置</h3><p>透過 <strong>Heroku</strong>(註3) 的免費方案可以執行一個伺服器，但是伺服器 <strong>30分鐘</strong> 內沒有任何連線，程式會進入休眠，不過再次連線只是需要一點等待時間即可。</p>
 <h4 id="Heroku-帳號申請"><a href="#Heroku-帳號申請" class="headerlink" title="Heroku 帳號申請"></a>Heroku 帳號申請</h4><p>首先進入 <a target="_blank" rel="noopener" href="https://signup.heroku.com/">Heroku 網站</a> 申請帳號，輸入紅色米字號的必要輸入資訊後送出，然後到信箱點擊驗證信件的網址驗證，最後到彈出的網頁輸入密碼，完成申請。</p>
 <h4 id="Heroku-Cli-安裝"><a href="#Heroku-Cli-安裝" class="headerlink" title="Heroku Cli 安裝"></a>Heroku Cli 安裝</h4><p>接著我們必須安裝 <strong>Heroku Cli</strong>，前往 <a target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/heroku-cli">Heroku 網站 Cli 下載點</a>，依照你的作業系統下載安裝。</p>
 <h4 id="Git-版本控制軟體"><a href="#Git-版本控制軟體" class="headerlink" title="Git 版本控制軟體"></a>Git 版本控制軟體</h4><p>這邊就不多做 Git 安裝介紹，有興趣可以參考 <a target="_blank" rel="noopener" href="https://progressbar.tw/posts/1">進度條</a>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/git.png" alt="Git"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/git.png" alt="Git"></p>
 <blockquote>
 <p><em>註3: Heroku是一個支援多種程式語言的雲平台即服務。簡單說他就是一個伺服器，別人可以透過他給你的網址，執行你的程式；這個雲平台的優點是可以免費使用，所以你並不需要去自行架設或是擔心剛入門就要準備大量銀彈去繳學費。</em></p>
 </blockquote>
@@ -409,9 +409,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ heroku create 名稱(如不填 系統會隨機給一個名稱)</span><br></pre></td></tr></table></figure>
 
 <p>其中要小心一些 <strong>heroku</strong> 的規定，比如開頭不能大寫之類的。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/heroku-create-fail.png" alt="有錯誤"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/heroku-create-fail.png" alt="有錯誤"></p>
 <p>看到下方這張圖才代表成功。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/heroku-create-success.png" alt="成功創建"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/heroku-create-success.png" alt="成功創建"></p>
 <blockquote>
 <p><em>免費的方案似乎有專案的數量上限限制，目前創建到第五個以上就會被拒絕，如理解有誤敬請糾正，非常感謝。</em></p>
 </blockquote>
@@ -419,9 +419,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git init      // git init 初始化專案</span><br><span class="line"></span><br><span class="line">$ heroku git:remote -a &lt;Heroku 專案 名稱&gt;</span><br><span class="line"></span><br><span class="line">$ touch .gitingnore // 這邊 把不要上傳的 檔案 資料夾 都寫入這裡面</span><br><span class="line"></span><br><span class="line">$ git commit -am &quot;init my chatBox&quot;</span><br><span class="line"></span><br><span class="line">$ git push heroku master</span><br></pre></td></tr></table></figure>
 
 <p>整個操作起來其實跟推上 <strong>GitHub</strong> 非常像；傳送上去之後如果要看到作品可以直接輸入 <a target="_blank" rel="noopener" href="https://dashboard.heroku.com/apps">https://dashboard.heroku.com/apps</a> 進入後點擊創建的那個專案。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/heroku-index.png" alt="Heroku 首頁"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/heroku-index.png" alt="Heroku 首頁"></p>
 <p>接著到右上角點擊 <strong>Open app</strong>，就可以看到了，</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2019/12/01/20191201/heroku-open-app.png" alt="Heroku Open APP"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191201/heroku-open-app.png" alt="Heroku Open APP"></p>
 <p>如果想看見程式的 <strong>log</strong> ，那就點擊右上角的 <strong>View logs</strong>，就可以查看你的程式碼有沒有錯誤了。</p>
 <h4 id="錯誤千軍萬馬來相見"><a href="#錯誤千軍萬馬來相見" class="headerlink" title="錯誤千軍萬馬來相見"></a>錯誤千軍萬馬來相見</h4><p>這時候你可能會發現錯誤，其實是因為前面我們有提到，程式碼剛開始有 <strong>config</strong> 但是我們沒有只接填寫，變成他會去抓 <strong>Heroku</strong> 的設定，如果沒設定就會出錯。</p>
 <p>輸入下面的程式碼(看情況自己增加)：</p>

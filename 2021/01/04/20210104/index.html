@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2021-01-03T16:46:00.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:48:18.513Z">
+<meta property="article:modified_time" content="2021-06-15T03:49:24.348Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Note">
 <meta property="article:tag" content="Third party service">
@@ -248,7 +248,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-15 11:48:18" itemprop="dateModified" datetime="2021-06-15T11:48:18+08:00">2021-06-15</time>
+                <time title="修改時間：2021-06-15 11:49:24" itemprop="dateModified" datetime="2021-06-15T11:49:24+08:00">2021-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,13 +297,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/logo.png" alt="Linode"></p>
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20210104/logo.png" alt="Linode"></p>
 <p>先說這篇文章僅用於筆記，如果您剛好、恰巧有專案是 <strong>前端 VUE 後端 NODE</strong> 想佈上虛擬主機上，不管是給客戶看還是自己當作品用，都可以接著往下看，亦或許您會在文章中圖找到一樣的問題，還有我怎麼蹶誒的。</p>
 <span id="more"></span>
 
 <p>這邊也不會去探討哪台虛擬主機比較好，但我會跟你說說為什麼我從 <strong>DigitalOcean</strong> 跳到 <strong>Linode</strong> 使用。</p>
 <hr>
-<h3 id="當程式完成後的下一步"><a href="#當程式完成後的下一步" class="headerlink" title="當程式完成後的下一步"></a>當程式完成後的下一步</h3><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/banner.png" alt="滿滿程式碼"></p>
+<h3 id="當程式完成後的下一步"><a href="#當程式完成後的下一步" class="headerlink" title="當程式完成後的下一步"></a>當程式完成後的下一步</h3><p><img src="/images/others/loading.gif" data-original="/images/20210104/banner.png" alt="滿滿程式碼"></p>
 <p>相信不管你學什麼前端，什麼後端，寫完程式碼後，下一步就是想要想辦法把作品呈現出來，雖然我們平常可以使用 GitHub+Heroku 其實就可以簡單呈現一個小作品，但缺點是 Heroku 太久沒動靜，需要一點時間喚醒，加上免費專案只能有五個。</p>
 <p>基於上面的問題加上筆者最近剛好在幫家人做 <strong>Side Project</strong> 預約系統，目前已經到了完成一個小階段，需要呈現給家人看，最後決定使用虛擬主機來放置我的專案。</p>
 <p>考量到以後可能還會有其他 <strong>Side Project</strong> 所以就挑選了便宜的主機來用。</p>
@@ -357,11 +357,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum upgrade</span><br></pre></td></tr></table></figure>
 
 <h4 id="安裝-Nginx"><a href="#安裝-Nginx" class="headerlink" title="安裝 Nginx"></a>安裝 Nginx</h4><p>這邊要講解為什麼要安裝 <strong>Nginx</strong>，但不會深入討論，有興趣可以參考 <a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/avkxqnx.html">淺談Nginx之反向代理</a> 中介紹反向代理，亦或是 <a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/code/oeaerko.html">深度詳解Nginx正向代理與反向代理？</a>。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/dns.png" alt="DNS"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/dns.png" alt="DNS"></p>
 <p>先看看上方這張圖，通常我們會在網路輸入一串網址，比如 <strong>fonts.google.com</strong> 或 <strong>translate.google.com</strong>，通常我們一個網域可能會有好幾個需要呈現的不同專案，就可以使用 <strong>主網域</strong> 及 <strong>子網域</strong> 來實現，很清楚我們可以看到 google 就是主網域，<strong>fonts</strong> 及 <strong>translate</strong> 就是子網域。</p>
 <p>但你會想，一台主機一個 <strong>IPv4</strong> 會對應到一個子網域，那我是不是一個專案只能放一台機器呢？</p>
 <p>其實我們靠 <strong>Nginx</strong> 就可以達到，輸入一串網址，網址子網域都對到同一個 <strong>IPv4</strong>，然後再依靠 <strong>Nginx</strong> 去找尋對應網域名稱的專案。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/how_nginx_work.png" alt="DNS"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/how_nginx_work.png" alt="DNS"></p>
 <p>找到對應專案的設定欓，會把設定檔裡面的 <strong>root</strong> 路徑的檔案顯示出來，這樣就能達成輸入什麼網址會顯示什麼內容出來了。</p>
 <p>知道後廢話不多說我們開始安裝，使用 yum 裝 Nginx：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install nginx</span><br></pre></td></tr></table></figure>
@@ -376,18 +376,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable nginx</span><br></pre></td></tr></table></figure>
 
 <p>這時候進入網頁輸入 <strong>IPv4</strong> 或是已經掛載上 <strong>Godady</strong> 的網域，應該就可以看到。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/nginx_default.png" alt="Nginx 預設頁面"></p>
 <blockquote>
 <p><em>PS: 如果進入網頁看到類似下面的網頁 <strong>無法連上這個網站</strong> 的話，有三種情況，第一個是有可能是你的防火牆沒打開，請記得打開防火牆，第二個是需要修改 <code>/etc/firewalld/firewalld.conf</code> 文件，最後則是需要輸入 <code>sudo firewall-cmd --permanent --add-service=https</code> 可能你沒開啟 <strong>https</strong> 服務</em></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/cant_content_website.png" alt="無法連上這個網站"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/cant_content_website.png" alt="無法連上這個網站"></p>
 <p>第一種情況解決方式，輸入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-cmd --add-service=dns --permanent</span><br><span class="line"></span><br><span class="line">$ sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
 <p>之後就能成功了！</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/firewall_open.png" alt="打開防火牆"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/firewall_open.png" alt="打開防火牆"></p>
 <p>第二種情況解決放是，輸入 <code>systemctl status firewalld</code> 查看有無報錯，如果有問題會出現下圖情況：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/allowZoneDriftingErr.png" alt="防火牆出錯"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/allowZoneDriftingErr.png" alt="防火牆出錯"></p>
 <p>這種情形請輸入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/firewalld/firewalld.conf</span><br><span class="line"></span><br><span class="line">// 在命令模式(不是輸入的時候，點擊ESC退出輸入模式)輸入 /AllowZoneDrifting 搜索</span><br><span class="line">// 接著將 AllowZoneDrifting=yes 改為 AllowZoneDrifting=no</span><br></pre></td></tr></table></figure>
 
@@ -424,7 +424,7 @@
 <blockquote>
 <p><em>加上 <code>vi /etc/nginx/nginx.conf</code> 是為了能讓你專案的設定欓被吃到，不然還是會找不到你專案的位子。</em></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/nginx_config.png" alt="include"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/nginx_config.png" alt="include"></p>
 <p>檢查完確定 <strong>nginx</strong> 的設定欓就可以開始動手建立自己專案的設定欓了(記得通常是一個專案一個設定欓)。</p>
 <p>範例程式碼可以複製這邊，或是上 <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tools/nginx">Digitalocean NGINXConfig</a> 試著配置出一份，通常都大同小異，只是內部有一些細微更改：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen   443 http2 ssl; ## listen for ipv4; this line is default and implied</span><br><span class="line">    #listen   [::]:80 default ipv6only=on; ## listen for ipv6</span><br><span class="line">    # Make site accessible from http://localhost/</span><br><span class="line">    server_name frontend.abc.com; # 前面說的對應的網域就是設定在這</span><br><span class="line"></span><br><span class="line">    root /var/www/frontend/dist; # 你要渲染出來檔案的位子，這邊是 Vue 所以吃 dist</span><br><span class="line">    index index.php index.html index.htm; # 這邊會去抓結尾符合的檔案</span><br><span class="line"></span><br><span class="line">    # ssl_certificate ＃等等補上; </span><br><span class="line">    # ssl_certificate_key ＃等等補上;</span><br><span class="line"></span><br><span class="line">    # Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html</span><br><span class="line">    sendfile on;</span><br><span class="line">    client_max_body_size 10M;</span><br><span class="line"></span><br><span class="line">    error_log /var/log/nginx/error.log;</span><br><span class="line">    access_log /var/log/nginx/access.log;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        # proxy_pass http://127.0.0.1:1337; # 後端專案才需要使用，改為自己對應的 Port</span><br><span class="line">        # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # 後端專案才需要使用</span><br><span class="line">        try_files $uri $uri/ /index.html; # Vue 如果使用 History 模式請一定要加這行</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">    location = /404.html &#123;</span><br><span class="line">        root /var/www/errors;</span><br><span class="line">        internal;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # pass the PHP scripts to FastCGI server listening on socket</span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        try_files $uri =404;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.+)$;</span><br><span class="line">        # fastcgi_pass unix:/var/run/php-fpm.sock;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_param SCRIPT_NAME $fastcgi_script_name;</span><br><span class="line">        fastcgi_index index.php;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~* \.(jpg|jpeg|gif|png|css|js|ico|webp|tiff|ttf|svg)$ &#123;</span><br><span class="line">        expires           5d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # deny access to . files, for security</span><br><span class="line">    #</span><br><span class="line">    location ~ /\. &#123;</span><br><span class="line">        log_not_found off;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ^~ /.well-known &#123;</span><br><span class="line">        allow all;</span><br><span class="line">        auth_basic off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -566,7 +566,7 @@
 
 <p>然後再次輸入剛剛的 <code>semanage port --list</code> 就會看見了！</p>
 <h4 id="Vue-Build-出現錯誤"><a href="#Vue-Build-出現錯誤" class="headerlink" title="Vue Build 出現錯誤"></a>Vue Build 出現錯誤</h4><p>如果在使用 <code>npm build</code> 或 <code>yarn build</code> 的時候出現類似下圖錯誤：</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/node_err.png" alt="Node 錯誤"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/node_err.png" alt="Node 錯誤"></p>
 <p>代表你的 <strong>Node</strong> 版本有問題，筆者發生這問題是因為自己的 <strong>Node</strong> 版本太新了，舊的某些套件不支援，所以必須要改變版本或是更新套件，筆者安裝和自己本地一樣的舊版本就解決了。</p>
 <p>如果使用 <strong>nvm</strong> 的話，可以先使用 <strong>Node -v</strong> 查看自己本地的版本，然後再使用 <strong>nvm ls-remote</strong> 查看可安裝版本，接著使用 <strong>nvm install 版本號</strong> 安裝指定版本，最後可以使用 <strong>nvm ls</strong> 查看目前可使用的版本！</p>
 <p>使用 <strong>nvm</strong> 安裝得好處就不多說了，主要可以想成就是拿來管理 <strong>Node</strong> 版本的管理工具，推薦安裝一下。</p>
@@ -575,7 +575,7 @@
 <p>雖然嘴裡常常在寫不出程式碼時不時的咒罵，但其實親身體會一次才是最好的學習，並且會有滿滿德成就感。</p>
 <p>最後要說說，上面有提到為什麼後來改用 <strong>Linode</strong> 了，因為筆者在 DigitalOcean 第一次更改環境時，最後輸入了 <strong>Reboot</strong> 想重啟機器，但關掉之後就再也連不進去，連 <strong>Console</strong> 也不行，最後整個砍掉重新在建立一次。</p>
 <p>就在今天弄了一天之後筆者在安裝 Mysql 的過程卡住了，索性關閉機器，再度重啟時，又出現了下面這張圖，網站的 <strong>Console</strong> 也不能開啟，一氣之下就改用其他家主機了。</p>
-<p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2021/01/04/20210104/DigitalOcean_connect_err.png" alt="怎麼也連不上了"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210104/DigitalOcean_connect_err.png" alt="怎麼也連不上了"></p>
 <p>這邊真的要再度感謝幫助我的各路大神，沒有你們我沒辦法走這麼遠，謝謝你們！</p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
