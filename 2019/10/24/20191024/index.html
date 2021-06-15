@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
+  <link rel="mask-icon" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/RexHung0302/RexHung0302.github.io/css/main.css">
+
+
+<link rel="stylesheet" href="/RexHung0302/RexHung0302.github.io/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/RexHung0302/RexHung0302.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言這系列章節來到預計的一半，慢慢開始會記錄自己比較不熟悉的一些筆記，如果有誤還請各位不吝嗇盡情指教。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[JavaScript Notes] — 淺談 JavaScript #3">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言這系列章節來到預計的一半，慢慢開始會記錄自己比較不熟悉的一些筆記，如果有誤還請各位不吝嗇盡情指教。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://github.com/images/others/loading.gif">
+<meta property="og:image" content="https://github.com/images/others/loading.gif">
+<meta property="og:image" content="https://github.com/images/others/loading.gif">
+<meta property="article:published_time" content="2019-10-24T04:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-15T01:33:40.846Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/others/loading.gif">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
+  <title>[JavaScript Notes] — 淺談 JavaScript #3 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/RexHung0302/RexHung0302.github.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/RexHung0302/RexHung0302.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/RexHung0302/RexHung0302.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/RexHung0302/RexHung0302.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/RexHung0302/RexHung0302.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/RexHung0302/RexHung0302.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/RexHung0302/RexHung0302.github.io/link/" rel="section"><i class="fas fa-link fa-fw"></i>link</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/RexHung0302/RexHung0302.github.io/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [JavaScript Notes] — 淺談 JavaScript #3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-10-24 12:00:00" itemprop="dateCreated datePublished" datetime="2019-10-24T12:00:00+08:00">2019-10-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-15 09:33:40" itemprop="dateModified" datetime="2021-06-15T09:33:40+08:00">2021-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/Note/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這系列章節來到預計的一半，慢慢開始會記錄自己比較不熟悉的一些筆記，如果有誤還請各位不吝嗇盡情指教。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>接下來的每一章，不免俗的都會來一句：</p>
+</blockquote>
+<blockquote>
+<p>本篇文章一切皆為筆記作用，有任何錯誤及問題，歡迎理性指教及討論，詳情請查閱公開課程說明書。</p>
+</blockquote>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>本系列將會淺談 <strong>JavaScript</strong> ，希望給未來自己當作筆記以及剛接觸 <strong>JavaScript</strong> 的夥伴們，甚至能帶點不一樣觀點或您沒聽過的觀點給大家，所以不會太過深入的討論。</p>
+</blockquote>
+<p>關於淺談的主題將會大致分為下列幾項，<strong>項目可能會做更動</strong>。</p>
+<ol>
+<li><p><strong><a target="_blank" rel="noopener" href="https://rexhung0302.github.io/2019/10/09/20191009/">JavaScript 執行環境及作用域</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://rexhung0302.github.io/2019/10/15/20191015/">運算子、型別與文法</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://rexhung0302.github.io/2019/10/24/20191024/">物件</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://rexhung0302.github.io/2019/10/28/20191028/">關於 This 那些事</a></strong></p>
+</li>
+</ol>
+<p>本章討論的幾個關鍵標題為下列幾項。</p>
+<ol>
+<li><p><a href="#81d2">物件實字</a></p>
+</li>
+<li><p><a href="#ee36">物件的宣告與刪除</a></p>
+</li>
+<li><p><a href="#66f8">臨門來一腳</a></p>
+</li>
+<li><p><a href="#5799">物件的參考特性</a></p>
+</li>
+<li><p><a href="#7b5a">關於參考位置</a></p>
+</li>
+<li><p><a href="#6f06">影分身之術？</a></p>
+</li>
+<li><p><a href="#2560">額外補充</a></p>
+</li>
+</ol>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2520/1*lglXyJz6puM2OL5Wd1wEUw.png" alt="圖片取至 https://stackoverflow.com/questions/42801598/how-to-render-a-js-object-with-underscore-templates"></p>
+<h3 id="物件實字"><a href="#物件實字" class="headerlink" title="物件實字"></a>物件實字</h3><p>前面兩個章節我們都談過 <strong>JavaScript</strong> 的基礎，這邊依然要說 <strong>JavaScript</strong> 的基礎 — <strong>”物件“</strong>。在 <strong>JavaScript</strong> 上常用的種類可以大概的分為兩項，一為 <strong>物件</strong>，二為 <strong>Function</strong>，兩者我們都會很常碰見，但是最常做資料處理的就是物件，所以把物件的一些眉眉角角搞清楚也是很重要的！</p>
+<p>首先要先說物件的讀取方式，通常物件的讀取方式有兩種，一種是 <strong>點</strong>，一種是 <strong>中括號</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;123&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(aaa.name);    -&gt; 第一種讀取方式 點</span><br><span class="line"><span class="built_in">console</span>.log(aaa[<span class="string">&#x27;name&#x27;</span>]); -&gt; 第二種讀取方式 中括號</span><br></pre></td></tr></table></figure>
+
+<p>那你肯定會問，兩種都可以讀取差別在哪呢？其實之前菜雞如我一直也都不知道，傻傻的想能讀到值就好啦，一直到這次開始做筆記才發現兩者的不同。兩者的差別如下：</p>
+<p><strong>點的特性：</strong></p>
+<ol>
+<li><p>只能單純讀取字串。</p>
+</li>
+<li><p>能讀取的用法比較有限。</p>
+</li>
+</ol>
+<p><strong>中括號的特性：</strong></p>
+<ol>
+<li><p>可以用變數作為屬性名或訪問，而點方法不可以。</p>
+</li>
+<li><p>可以用數字作為屬性名，而點語法不可以。</p>
+</li>
+<li><p>可以動態訪問的屬性名，可以在程式執行時建立和修改屬性，點操作符就不行。</p>
+</li>
+<li><p>如果屬性名中包含會導致語法錯誤的字元，或者屬性名是關鍵字或者保留字，也可以使用方括號表示法 ( 比如 空格[‘first name’] )。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = &#123;&#125;;</span><br><span class="line">aaa.name = <span class="string">&#x27;小明&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> myName = <span class="string">&#x27;Rex&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(aaa.myName);  <span class="comment">// undefined 訪問不到對應的屬性</span></span><br><span class="line"><span class="built_in">console</span>.log(aaa[myName]); <span class="comment">// 小明</span></span><br></pre></td></tr></table></figure>
+
+<p>簡單來說，中括號可運用範圍較大，點的方法通常只能用來呼叫字串。上方有提到 <strong>JavaScript</strong> 常用的種類第二種是 <strong>Function</strong> ，所以如果要執行一段函式我們會這樣呼叫：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = &#123;</span><br><span class="line">  <span class="attr">run</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;123&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 點的呼叫方式-&gt;</span></span><br><span class="line">aaa.run();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中括號的呼叫方式-&gt;</span></span><br><span class="line">aaa[<span class="string">&#x27;run&#x27;</span>]();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="物件的宣告與刪除"><a href="#物件的宣告與刪除" class="headerlink" title="物件的宣告與刪除"></a>物件的宣告與刪除</h3><p>上方我們講解了使用，但是物件其實還有宣告及與變數刪除，下方就用Code解說怎麼使用吧！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aaa = &#123;&#125;;</span><br><span class="line"><span class="comment">// 新增用法</span></span><br><span class="line">aaa.name = <span class="string">&#x27;我是後來加上的名字&#x27;</span>;</span><br><span class="line">aaa[<span class="string">&#x27;habit&#x27;</span>] = <span class="string">&#x27;寫Code&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(aaa.name); <span class="comment">// 會得到 &#x27;我是後來加上的名字&#x27;;</span></span><br><span class="line"><span class="comment">// 刪除用法</span></span><br><span class="line"><span class="keyword">delete</span> aaa.name;</span><br></pre></td></tr></table></figure>
+
+<p>雖然物件的變數可以刪除，但是這邊有個小地方需要注意，<strong>變數無法被刪除 屬性才可以</strong>，甚至你可以使用 <strong>delete</strong> 來刪除全域變數，不過通常我們不會這樣做。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;123&#x27;</span>;</span><br><span class="line">b = <span class="string">&#x27;456&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> a; <span class="comment">// 變數 a 無法被刪除</span></span><br><span class="line"><span class="keyword">delete</span> b; <span class="comment">// 變數 b 屬性可以被刪除</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>詳細可參考 MDN <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Obsolete_Pages/Obsolete_Pages/Obsolete_Pages/%E6%96%B0%E7%89%A9%E4%BB%B6%E7%9A%84%E5%BB%BA%E7%AB%8B/%E5%B1%AC%E6%80%A7%E7%9A%84%E5%88%AA%E9%99%A4">傳送門</a></p>
+</blockquote>
+<blockquote>
+<h4 id="小提示：console-dir-可以看到物件的所有型別，陣列也算物件型別-可以自由新增屬性，Function-也算物件型別下的子型別，-Function-的屬性無法覆蓋-只能新增不同名稱。"><a href="#小提示：console-dir-可以看到物件的所有型別，陣列也算物件型別-可以自由新增屬性，Function-也算物件型別下的子型別，-Function-的屬性無法覆蓋-只能新增不同名稱。" class="headerlink" title="小提示：console.dir(); 可以看到物件的所有型別，陣列也算物件型別 可以自由新增屬性，Function 也算物件型別下的子型別， Function 的屬性無法覆蓋 只能新增不同名稱。"></a><em>小提示：console.dir(); 可以看到物件的所有型別，陣列也算物件型別 可以自由新增屬性，Function 也算物件型別下的子型別， Function 的屬性無法覆蓋 只能新增不同名稱。</em></h4></blockquote>
+<hr>
+<h3 id="臨門來一腳"><a href="#臨門來一腳" class="headerlink" title="臨門來一腳"></a>臨門來一腳</h3><p>有時候我們會碰到 <strong>undefined</strong> 未定義物件的情況 ，這種情況一種處理方式是 一開始就給物件預設的名稱，後面給空物件或陣列或是後來再給物件或陣列。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解決方法一</span></span><br><span class="line"><span class="keyword">var</span> aaa = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">  <span class="attr">habit</span>: &#123;     &lt;-- 一開始就給預設屬性</span><br><span class="line">    // ...  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 解決方法二</span><br><span class="line">aaa.habit = &#123;  &lt;-- 第二種方式</span><br><span class="line">  // ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="物件的參考特性"><a href="#物件的參考特性" class="headerlink" title="物件的參考特性"></a>物件的參考特性</h3><p>這個地方就要講到我們的記憶體了，相信很多文章常常會說到這個。你有想過宣告的變數都跑去哪了嗎？還有為何宣告後其他的地方可以使用這個變數？改變了另一個變數的屬性，為何上一個相同的變數屬性會跟著改變呢？這就要說到 <strong>傳值與傳參考</strong> (<strong>值傳過去後就沒什麼關聯性</strong>)，傳什麼值又傳什麼參考呢？只要先記得，傳得值基本是下面五項，傳的參考呢，就是 Function。</p>
+<blockquote>
+<p><strong>1.布林 Boolean、空 Null(註2)、未定義 Undefined、數值 Number、字串 String — &gt; 傳值</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>2.function</strong> — &gt; 傳參考</p>
+</blockquote>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*5FqxBv_nFG-ovBruchDjrQ.png"></p>
+<h3 id="關於參考位置"><a href="#關於參考位置" class="headerlink" title="關於參考位置"></a>關於參考位置</h3><p>講到這邊就常常會想起上方那張圖，當我們在宣告一個變數的時候，在前面章節說到的創建階段電腦會先幫我們的變數找一個記憶體位置存放，而當後面我們把存放完成的變數拿來賦予到其他值上的時候，那個值的記憶體位置就會指向原本儲存過的記憶體位置，這樣就能解省電腦的記憶體空間。</p>
+<blockquote>
+<p>小筆記：求值策略</p>
+</blockquote>
+<blockquote>
+<p>傳參照呼叫(Call by reference) 傳值是傳實際參數 不是拷貝的 (ex: C語言)</p>
+</blockquote>
+<blockquote>
+<p>傳共用物件呼叫(Call by sharing) 如果被呼叫者修改了物件，呼叫者可以看見變化 (ex:JavaScript)</p>
+</blockquote>
+<blockquote>
+<p>更詳細的解說可以參考 Alex 宅幹嘛 — <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sxe-oahUARI&list=PLEfh-m_KG4dYbxVoYDyT_fmXZHnuKg2Fq&index=14">[ Alex 宅幹嘛 ] 👨‍💻 深入淺出 Javascript30 快速導覽 | Day 14：JavaScript References VS Copying</a></p>
+</blockquote>
+<h3 id="影分身之術？"><a href="#影分身之術？" class="headerlink" title="影分身之術？"></a>影分身之術？</h3><p>講到複製就必須要提到 <strong>深拷貝</strong> 及 <strong>淺拷貝</strong>，如果傳參考更改值都會影響到前一個，那要怎麼辦呢？就必須脫離前一個參考，自己另立門戶，所以深拷貝簡單說就是在創造一個看似一模一樣，但是已經是Ａ貨等級的山寨品，跟原本的值八杆子打不著，下面就來看看怎麼深拷貝 及 淺拷貝吧。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先說說淺層複製 如果要把 aaa 的變數都加進新的陣列裡 這種方法會是 淺拷貝</span></span><br><span class="line"><span class="keyword">var</span> aaa = &#123;</span><br><span class="line">  name = <span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">  habit = &#123;</span><br><span class="line">    <span class="attr">sing</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">dance</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> newArr = &#123;&#125;;</span><br><span class="line"><span class="comment">// 第一種方式</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> aaa)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key); -&gt; name, habit</span><br><span class="line">  newArr[key] = aaa[key];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第二種 及 第三種方式 都是 JQuery</span></span><br><span class="line"><span class="keyword">var</span> bbb = jQuery.extend(&#123;&#125;, family);</span><br><span class="line"><span class="keyword">var</span> ccc = jQuery.Object.assign(&#123;&#125;, family);</span><br><span class="line"><span class="comment">// 這邊必須提一下 Object.assign 是 ES6(註1) 的新函式，&#123;&#125;的地方意思是先建立一個空物件，然後所有的屬性複製過去新的陣列 ccc，雖然第一層能順利地指向不同的記憶體位置，但是第二層開始又是一樣指向原本的記憶體位置，無法做到真正的深拷貝。</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有興趣可以參考這篇文章 <a target="_blank" rel="noopener" href="https://larry850806.github.io/2016/09/20/shallow-vs-deep-copy/">傳送門</a></p>
+</blockquote>
+<p>關於淺拷貝的問題就是，他傳值過來，你跟原本的變數指向的記憶體位置都是同一個地方，就如上方那張圖，所以改了值，原本的變數的屬性也會跟著變動，那解決方式就是下方的深拷貝了！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 目前最快的深拷貝方式 缺點是無法轉 Function</span></span><br><span class="line"><span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringfy(<span class="string">&#x27;666&#x27;</span>)); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 如果使用 jQuery 可以使用 jQuery 的語法</span></span><br><span class="line"><span class="keyword">var</span> obj2 = $.extend(<span class="literal">true</span>, &#123;&#125;, obj1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. lodash 這是目前我最常用的 有興趣可以參考文件 [傳送門](https://lodash.com/)</span></span><br><span class="line">_.cloneDeep();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="額外補充"><a href="#額外補充" class="headerlink" title="額外補充"></a>額外補充</h3><p>關於陣列塞值，如果新增的變數有跳號，中間沒有 <strong>value</strong> 得值會自動補上 <strong>empty</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Arr = [</span><br><span class="line">  <span class="number">0</span>: <span class="number">1</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">Arr[<span class="string">&#x27;1&#x27;</span>] = <span class="number">1</span>;</span><br><span class="line">Arr[<span class="string">&#x27;3&#x27;</span>] = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Arr[&#x27;2&#x27;] = empty</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*pqS9YUzSx4A4ZYc7dF_FiA.png" alt="JavaScript 發展歷程 圖片擷取至 https://zhuanlan.zhihu.com/p/22733283"></p>
+<blockquote>
+<p><em>註1：*<em>ES</em></em> 又稱 <strong>ECMAScript</strong>，<strong>Script</strong> 代表著腳本，而 <strong>ECMAScript</strong> 提供了腳本語言需要遵守的規則、細節和規範， <strong>JavaScript</strong> 是實現 <strong>ECMAScript</strong> 的規範後所誕生出來的語言。簡單點來說就是一些可以讓你更簡單做事情的 Function 及 一些寫 Code 規範，更詳細的發展歷程可以點 <strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22733283">傳送門</a></strong> 查看。*</p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本次章節的內容雖然也是短短的，但是這卻是學了好一陣子才慢慢開始發現的知識，有些地方也是埋了滿滿的雷，像是深拷貝及淺拷貝，如果沒有處理好，一不小心就會噴錯；而最近常常在處理資料的轉換，對於物件好像又像從新認識一番，既熟悉又陌生的感覺，我想也是需要再加油的地方，不過這次寫了一點筆記，感覺又熟悉了一點呢，繼續努力的往前進！加油。</p>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>六角學院 — <a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/js-core.html?utm_source=LINE&utm_medium=message&utm_campaign=0807LINE_message#recommend">JavaScript 核心篇</a></li>
+<li>ITREAD — <a target="_blank" rel="noopener" href="https://www.itread01.com/content/1546844402.html">JavaScript中物件屬性通過點(.)和方括號([])取值的不同之處</a></li>
+<li>MDN — <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Obsolete_Pages/Obsolete_Pages/Obsolete_Pages/%E6%96%B0%E7%89%A9%E4%BB%B6%E7%9A%84%E5%BB%BA%E7%AB%8B/%E5%B1%AC%E6%80%A7%E7%9A%84%E5%88%AA%E9%99%A4">屬性的刪除</a></li>
+<li>[ Alex 宅幹嘛 ] — 👨‍💻 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sxe-oahUARI&list=PLEfh-m_KG4dYbxVoYDyT_fmXZHnuKg2Fq&index=14">深入淺出 Javascript30 快速導覽 | Day 14：JavaScript References VS Copying</a></li>
+<li>Loadsh —<a target="_blank" rel="noopener" href="https://lodash.com/"> index</a></li>
+<li>鐵人幫<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20111948/ironman">AndyChen</a>大大 —<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10206587"> JS版本差異！ES5、ES6</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    <div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet Share</div>
+        <div class="facebook">FB Share</div>
+        <div class="linkedin">Link Share</div>
+        <div class="gplus">Plus Share</div>
+        <div class="vkontakte">vkontakte Share</div>
+        <div class="odnoklassniki">Class Share</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/RexHung0302/RexHung0302.github.io/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>RexHung
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/" title="[JavaScript Notes] — 淺談 JavaScript #3">https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/RexHung0302/RexHung0302.github.io/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/RexHung0302/RexHung0302.github.io/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/RexHung0302/RexHung0302.github.io/2019/10/15/20191015/" rel="prev" title="[JavaScript Notes] — 淺談 JavaScript #2">
+      <i class="fa fa-chevron-left"></i> [JavaScript Notes] — 淺談 JavaScript #2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/RexHung0302/RexHung0302.github.io/2019/10/28/20191028/" rel="next" title="[JavaScript Notes] — 淺談 JavaScript #4">
+      [JavaScript Notes] — 淺談 JavaScript #4 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E5%AF%A6%E5%AD%97"><span class="nav-number">2.1.</span> <span class="nav-text">物件實字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E7%9A%84%E5%AE%A3%E5%91%8A%E8%88%87%E5%88%AA%E9%99%A4"><span class="nav-number">2.2.</span> <span class="nav-text">物件的宣告與刪除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%8F%90%E7%A4%BA%EF%BC%9Aconsole-dir-%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E7%89%A9%E4%BB%B6%E7%9A%84%E6%89%80%E6%9C%89%E5%9E%8B%E5%88%A5%EF%BC%8C%E9%99%A3%E5%88%97%E4%B9%9F%E7%AE%97%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5-%E5%8F%AF%E4%BB%A5%E8%87%AA%E7%94%B1%E6%96%B0%E5%A2%9E%E5%B1%AC%E6%80%A7%EF%BC%8CFunction-%E4%B9%9F%E7%AE%97%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5%E4%B8%8B%E7%9A%84%E5%AD%90%E5%9E%8B%E5%88%A5%EF%BC%8C-Function-%E7%9A%84%E5%B1%AC%E6%80%A7%E7%84%A1%E6%B3%95%E8%A6%86%E8%93%8B-%E5%8F%AA%E8%83%BD%E6%96%B0%E5%A2%9E%E4%B8%8D%E5%90%8C%E5%90%8D%E7%A8%B1%E3%80%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">小提示：console.dir(); 可以看到物件的所有型別，陣列也算物件型別 可以自由新增屬性，Function 也算物件型別下的子型別， Function 的屬性無法覆蓋 只能新增不同名稱。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%A8%E9%96%80%E4%BE%86%E4%B8%80%E8%85%B3"><span class="nav-number">2.3.</span> <span class="nav-text">臨門來一腳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%A9%E4%BB%B6%E7%9A%84%E5%8F%83%E8%80%83%E7%89%B9%E6%80%A7"><span class="nav-number">2.4.</span> <span class="nav-text">物件的參考特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%8F%83%E8%80%83%E4%BD%8D%E7%BD%AE"><span class="nav-number">2.5.</span> <span class="nav-text">關於參考位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%B1%E5%88%86%E8%BA%AB%E4%B9%8B%E8%A1%93%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">影分身之術？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%8D%E5%A4%96%E8%A3%9C%E5%85%85"><span class="nav-number">2.7.</span> <span class="nav-text">額外補充</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/RexHung0302/RexHung0302.github.io/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/RexHung0302/RexHung0302.github.io/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/RexHung0302/RexHung0302.github.io/categories/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/RexHung0302/RexHung0302.github.io/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="總字數">300k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">4:33</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/RexHung0302/RexHung0302.github.io/lib/anime.min.js"></script>
+  <script src="/RexHung0302/RexHung0302.github.io/lib/velocity/velocity.min.js"></script>
+  <script src="/RexHung0302/RexHung0302.github.io/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/RexHung0302/RexHung0302.github.io/js/utils.js"></script>
+
+<script src="/RexHung0302/RexHung0302.github.io/js/motion.js"></script>
+
+
+<script src="/RexHung0302/RexHung0302.github.io/js/schemes/pisces.js"></script>
+
+
+<script src="/RexHung0302/RexHung0302.github.io/js/next-boot.js"></script>
+
+<script src="/RexHung0302/RexHung0302.github.io/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/RexHung0302/RexHung0302.github.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://github.com/RexHung0302/RexHung0302.github.io/2019/10/24/20191024/",
+      identifier: "2019/10/24/20191024/",
+      title     : "[JavaScript Notes] — 淺談 JavaScript #3",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+  <!-- 页面点击特效(參考:http://blog.xhyeax.com/2018/11/30/click-word/) -->
+  <script type="text/javascript" src="/js/jquery/3.6.0/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/click-word.js"></script>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
