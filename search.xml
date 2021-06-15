@@ -572,6 +572,139 @@
       </tags>
   </entry>
   <entry>
+    <title>[CSS Notes] - CSS模組化</title>
+    <url>/2019/05/30/20190530/</url>
+    <content><![CDATA[<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>記得剛接觸 <strong>CSS</strong> 的時候覺得就是替東西加上屬性，沒有什麼特別的困難，因為都是一頁式的頁面，只要一支 <strong>all.css</strong> 就搞定，所以愛怎麼取名字愛怎麼給屬性就寫，慢慢的頁面多了，<strong>all.css</strong> 慢慢開始千行起跳了 ( 誤…，這時候開始思考 <strong>CSS</strong> 是否也能有自己的架構。</p>
+<span id="more"></span>
+
+<h3 id="為什麼要模組化？"><a href="#為什麼要模組化？" class="headerlink" title="為什麼要模組化？"></a>為什麼要模組化？</h3><p>一個有規劃有邏輯的專案，不管是一頁式或是大型專案，都需要有自己個規則還有規範，其中好處之一是自己過了一陣子回來看 <strong>Code</strong> 亦或是其他人接手案子後也能馬上清楚明白整體的架構及方便改寫，另外就是對於網頁的效能上或多或少都能有所幫助，除此之外還能減少你的工程時間。</p>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>因為一直對於 <strong>CSS</strong> 算是一知半解，加上曾經被說過 <strong>CSS</strong> 命名跟管理很糟糕，最近在自己亂玩 <strong>Webpack</strong> 時就胡亂爬文學習 <strong>Sass</strong> 了，用了一陣子剛好碰上六角學院的 <strong>Sass</strong> 課程在特價(<a href="https://www.udemy.com/sasssecret/">點我選購XD</a>)，瞥見課程說明 <strong>懂得設計出一手好 CSS 命名</strong> 二話不說就買了，剛好課程內提到模組化，深深覺得很有幫助，就索性紀錄下來，偶爾在 <strong>CSS</strong> 上碰到難處還能回來看看文章。( 所以有寫錯的地方還請大神們手下留情…</p>
+</blockquote>
+<p>在這邊將會主要提到三個架構，你可以都不用，也可以只用其中一個，重點還是看你自己怎麼樣覺得方便。</p>
+<ol>
+<li><p><strong>SMACSS</strong> — 偏向整個專案架構的分類及模組化你的 <strong>CSS</strong></p>
+</li>
+<li><p><strong>OOCSS</strong> — 使用物件導向方式管理 <strong>CSS</strong> 的 <strong>Style</strong></p>
+</li>
+<li><p><strong>BEM</strong> — 關於 <strong>Class</strong>的命名方式</p>
+</li>
+</ol>
+<p>不管哪一個類別，其實其中他們都有相似的地方，因為其中某些觀念都是相似的，所以有重疊的地方是正常的，如果你有自己的規範也能試著使用自己的方式，主要還是自己方便且好維護為主，主要<strong>記得四大要點</strong>：</p>
+<ol>
+<li><p><strong>可預測性( Predictable )</strong></p>
+</li>
+<li><p><strong>可重複使用性( Reusable )</strong></p>
+</li>
+<li><p><strong>易維護性( Maintainable )</strong></p>
+</li>
+<li><p><strong>可擴充性( Scalable )</strong></p>
+</li>
+</ol>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*gDTN1PJcvC0T_9tskgCzuQ.png" alt="SMACSS — 易擴展及模組化"></p>
+<h2 id="首先談談-SMACSS"><a href="#首先談談-SMACSS" class="headerlink" title="首先談談 SMACSS"></a><strong>首先談談 SMACSS</strong></h2><blockquote>
+<p>全名為( <strong>Scalable and Modular Architecture for CSS</strong> ) ，顧名思義是可模組化且具結構分類有命名規則的方式，其中的精神就是<strong>容易擴展及模組化</strong>。<br>官方網站的介紹是免費的，<a href="http://smacss.com/">傳送門</a>在此 ( 建議詳讀</p>
+</blockquote>
+<p>基本上的結構分為 <strong>Base、Layout、Module、State、Theme</strong>。</p>
+<p>・<strong>Base</strong> — 網頁基本樣式，還有 <strong>CSS Reset</strong>。</p>
+<p>・<strong>Layout</strong> — 像是網頁的 <strong>hader、footer、sidebar</strong>，如果是唯一的區塊可以使用 <strong>id</strong> 取名；如果是重複出現一樣使用 <strong>Class</strong></p>
+<p>・<strong>Module</strong> — 類似 <strong>component</strong> ，或是常常出現的區塊內容，比如 <strong>.list-li</strong></p>
+<p>・<strong>State</strong> — 元件的狀態，例如 <strong>.list-li active</strong> 最後的 <strong>active</strong></p>
+<p>・<strong>Theme</strong> — 樣式，例如 <strong>bootstrap</strong> 裡的 <strong>btn-dark</strong></p>
+<p>看完結構後，就能知道怎麼命名，命名規則是在前面加上前綴，透過命名我們可以快速找到 <strong>CSS</strong> 是什麼類別，並且在大型專案中可以迅速找到在哪個文件中。例如 <strong>layout</strong> 使用 <strong>l-</strong> 為開頭，<strong>State</strong> 的部分則使用 <strong>is-</strong> 作為前綴，<strong>Module</strong> 則沒有主要的命名規則，因為 <strong>Module</strong> 名字太長， <strong>SMACSS</strong> 建議直接使用 <strong>Module</strong> 的名稱去命名。</p>
+<p>講了這麼多架構，你其實只需要明白兩個步驟。</p>
+<p>先把你需要常用到的樣式給一個初始值，這邊用 <strong>btn</strong> 舉例。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>:white;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之後其他地方需要用到 <strong>button</strong> 時，可以再給他第二層的客製樣式。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.btn-danger</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>:red;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-lg</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要用到客製化的地方在加上後面的 <strong>.btn-danger class</strong></p>
+<p>這樣一來能有效管理你的  <strong>css</strong> 命名之外，也不會造成 <strong>css</strong> 檔案過肥。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*xBk9hrcsltCmW1HP8mkTFg.png" alt="子模組"></p>
+<p>但是在 <strong>SMACSS</strong> 上還是有許多模糊的界線在，其實善用子模組，能讓你的 <strong>Class</strong> 清楚且少了重複命名的機率產生。</p>
+<blockquote>
+<p><strong>更詳細的介紹可以參考此網站：<a href="https://codingluka.com/making-a-button-by-using-sass/">傳送門</a></strong></p>
+</blockquote>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*WDLVkUOAOXEjNBCOjJI7zQ.png" alt="結構、樣式、容器、內容 — 層層分離"></p>
+<h3 id="再來談談-OOCSS"><a href="#再來談談-OOCSS" class="headerlink" title="再來談談 OOCSS"></a>再來談談 OOCSS</h3><blockquote>
+<p><em>( <strong>Object Oriented CSS</strong> )有兩項基本的原則，結構與樣式分離，容器與內容分離。<br>OOCSS官方網站：<a href="http://oocss.org/">傳送門</a></em></p>
+</blockquote>
+<p>其實基本上跟 <strong>SMASS</strong> 很相近，最好的範例就是 <strong><a href="https://bootstrap.hexschool.com/">bootstrap</a></strong> 或是 <strong><a href="https://960.gs/">960 Grid</a><strong>。</strong>OOCSS</strong> 的基本概念在盡量把樣式( <strong>CSS</strong> )從結構( <strong>ul、li、span…</strong> )中抽離出來，在把容器( <strong>body、container…</strong> )跟內容( <strong>list-group、page-box…</strong> )分開。主要要讓你的 <strong>CSS</strong>重複使用性拉高，減少網頁效能上過度渲染造成的速度緩慢後果。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*MqA-4K2N1j_9GyNOIJFz2Q.png" alt="結構與樣式分離"></p>
+<h4 id="結構與樣式分離"><a href="#結構與樣式分離" class="headerlink" title="結構與樣式分離"></a>結構與樣式分離</h4><p>假設我們有一個表單，一般我們給予 <strong>span css</strong> 的方法會這樣下。但是有一個問題是，今天如果我們要在另一個區塊的  <strong>span</strong> 導入一樣的 <strong>css</strong>， 勢必要在下一次 <strong>css</strong>，亦或者今天結構變動，我不要  <strong>li</strong>  了，<strong>css</strong> 勢必會吃不到。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.content</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">span</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>:blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*ZbilxKPjqKFdZIZdEC9H8Q.png" alt="把樣式抽離出來 盡量不使用到 HTML Tag"></p>
+<p>如果我們把這個樣式抽離出來，並且取個名字，盡量不去使用 <strong>HTML Tag</strong> 這樣就是 <strong>結構與樣式分離</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*yGA_64rCbjIuJMGFfMnxqg.png" alt="容器與內容分離"></p>
+<h4 id="容器與內容分離"><a href="#容器與內容分離" class="headerlink" title="容器與內容分離"></a>容器與內容分離</h4><p>這個就比較好懂了，也是盡量避免使用 <strong>.left-bar .list-group li span</strong> 去命名，除了會造成網頁在渲染時造成效能問題外，如我網頁結構需要變動，那真的是傷透腦筋。</p>
+<p>按造上面的取名方法，假如今天 <strong>right-bar</strong> 需要使用到一樣的 <strong>css</strong> 我只需要幫他們的 <strong>class</strong> 加上對應的 <strong>css</strong> 就好了。</p>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2952/1*aBQ0yxa00h44S8jkqtWTrg.png" alt="Block、Element、Modifier"></p>
+<h3 id="最後來談談-BEM"><a href="#最後來談談-BEM" class="headerlink" title="最後來談談 BEM"></a>最後來談談 BEM</h3><blockquote>
+<p>*這是我覺得最有用也最讓人一目瞭然的方式，你可以不嘗試 <strong>SMACSS</strong> 可以不嘗試 <strong>OOCSS</strong>，但你一定要試看看 <strong>BEM</strong>。**Block( 區塊 )、Element( 元素 )、Modifier( 修飾符 )*<em>。</em><br>BEM 理念上強調完全使用 <strong>Class Selector</strong> 並且以功能導向命名。<br>BEM官方網站：<a href="https://en.bem.info/methodology/quick-start/">傳送門</a></p>
+</blockquote>
+<p><strong>Block</strong> — 通常表示可獨立的元件，也可以存在於其他 <strong>Block</strong> 當中。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*DQaLNfP5RN3SFCaAPUUGCg.png" alt="介紹圖"></p>
+<p><strong>Element</strong> — 這是存在於 <strong>Block</strong> 之中的小元件，並且不可單獨分離出來，命名也是功能導向，在自己的前方跟 <strong>Block</strong>銜接的地方用兩個下底線分開，在自己的名稱斷點使用一個分隔號隔開。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">--&gt; Block-name__Element-name // 命名規則</span><br><span class="line"></span><br><span class="line">--&gt; list-from__content       // 範例</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Element</strong> 可以存在於 <strong>Element</strong>裡面，但是必須依賴在 <strong>Block</strong> 之下。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*rnByI1QQdBSN0GdDd6qbzA.png" alt="Element"></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;list-from&quot;</span>&gt;</span></span><br><span class="line">  // 必須依附在 list-from 這個 Block 之下</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list-from__content&quot;</span>&gt;</span></span><br><span class="line">    // 可以存在 content 這個 Element 之下</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;list-from__input&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*dxoxUxZ_C-OgOj4s7iHbvg.png" alt="Modifier"></p>
+<p><strong>Modifier</strong> — 這是表述組建的狀態或行為，命名規則上以單底線_或兩橫線- - 。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;list-from&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list-from__content&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;list-from__input&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span--active&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span--pink&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>關於 <strong>BEM</strong> 官方有一套 <strong>CSS</strong> 分類方式，每一個 <strong>Block</strong> 都會有自己的資料夾路徑，並且裡面有這個 <strong>Block</strong> 的專屬 <strong>CSS</strong> 及 <strong>JS</strong>。裡面還會有這個 <strong>Block</strong> 下方 <strong>Element</strong> 的資料夾，並且開頭為 __ 。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">list-from/</span><br><span class="line">  list-from.css</span><br><span class="line">  list-from.js</span><br><span class="line">  __content/</span><br><span class="line">      list-from__content.css</span><br><span class="line">      list-from__content.js</span><br><span class="line">  __input/</span><br><span class="line">      list-from__input.css</span><br><span class="line">      list-from__input.js</span><br><span class="line">  __span/</span><br><span class="line">      list-from__span.css</span><br><span class="line">      list-from__span.js</span><br><span class="line">  _theme/</span><br><span class="line">      list-from__span--active.css</span><br><span class="line">      list-from__span--pink.css</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>詳細可以拜讀此篇文章：<a href="http://sj82516-blog.logdown.com/posts/1077348/finish-css-intro-oocss-smacss-bem">傳送門</a></p>
+</blockquote>
+<p>幾個重點整理：</p>
+<ol>
+<li><p><strong>Block</strong> 對應一個資料夾，命名相同，每個 <strong>Block</strong> 資料夾下面都有獨立的 <strong>JS</strong> 及<strong>CSS</strong> 檔案。</p>
+</li>
+<li><p><strong>Element</strong> 的資料夾命名採 <strong>雙底線</strong> 開頭，但是檔案命名一樣要加上 <strong>Block</strong> 名稱。</p>
+</li>
+<li><p><strong>Modifier</strong> 採單底線，並且 <strong>Modifier</strong> 下通常只有 <strong>CSS</strong> 檔案。</p>
+</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2216/1*flD2R09jNtJdJQBOVa3Bow.jpeg" alt="學習小筆記"></p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>在學 <strong>Code</strong> 時矇懞懂懂，一開始也不知道有什麼規範規則，這次拜六角學院課程所賜，索性研究了一下關於 <strong>CSS</strong> 的架構，在之後的練習及專案都會試著導入 <strong>SMACSS OOCSS BEM</strong> 等等的架構，並且試著找尋最適合自己的方式。</p>
+<p>還是那句老話『<strong>沒有最好，只有最適合</strong>』，希望在成長的這一路上或多或少能幫助到某些在困惑的人，也照著自己最初寫 <strong>Blog</strong> 的初衷，用 <strong>Blog</strong> 紀錄自己的成長及缺點，再一段時間之後再回來檢討自己，也希望成長後的我，能幫助到剛開始成長的你。</p>
+<p>從最剛開始的六角地下城開始，慢慢的練習 <strong>JS</strong> 到 <strong>Vue.js</strong> ，誤打誤撞研究 <strong>Webpack</strong> 之後現在慢慢學習 <strong>Sass</strong>，近期內的目標就是能用所學的這些，做出一個類似電商的網站，期許自己的成長，衝吧！</p>
+<blockquote>
+<p><em>( 會在努力吸取新知更新 CSS 系列的</em></p>
+</blockquote>
+<p>最後這邊提供一個自己練習照著 <strong>SMACSS OOCSS BEM</strong> 架構練習的 <strong>Source Code</strong>，因為是自己第一次練習寫，還能希望有大神能不吝嗇指教。</p>
+<p><a href="https://github.com/RexHung0302/Hexschool-project">傳送門在此</a></p>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>Segmentfault — <a href="https://segmentfault.com/a/1190000000389838">CSS设计模式：OOCSS 和 SMACSS</a></li>
+<li><a href="https://cythilya.github.io/">Summer。桑莫。夏天</a> — CSS 的模組化方法：OOCSS、SMACSS、BEM、CSS Modules、CSS in JS</li>
+<li>W3C — <a href="https://www.w3cplus.com/css/bem-definitions.html">BEM的定义</a></li>
+<li>六角學院 —<a href="https://www.udemy.com/sasssecret/">Sass 實戰全攻略 — 成為前 1% 的 CSS 頂尖好手</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Note</category>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>HTML</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果</title>
     <url>/2019/06/03/20190603/</url>
     <content><![CDATA[<h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
@@ -717,139 +850,6 @@
         <tag>CSS</tag>
         <tag>JavaScript</tag>
         <tag>HexSchool</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[CSS Notes] - CSS模組化</title>
-    <url>/2019/05/30/20190530/</url>
-    <content><![CDATA[<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>記得剛接觸 <strong>CSS</strong> 的時候覺得就是替東西加上屬性，沒有什麼特別的困難，因為都是一頁式的頁面，只要一支 <strong>all.css</strong> 就搞定，所以愛怎麼取名字愛怎麼給屬性就寫，慢慢的頁面多了，<strong>all.css</strong> 慢慢開始千行起跳了 ( 誤…，這時候開始思考 <strong>CSS</strong> 是否也能有自己的架構。</p>
-<span id="more"></span>
-
-<h3 id="為什麼要模組化？"><a href="#為什麼要模組化？" class="headerlink" title="為什麼要模組化？"></a>為什麼要模組化？</h3><p>一個有規劃有邏輯的專案，不管是一頁式或是大型專案，都需要有自己個規則還有規範，其中好處之一是自己過了一陣子回來看 <strong>Code</strong> 亦或是其他人接手案子後也能馬上清楚明白整體的架構及方便改寫，另外就是對於網頁的效能上或多或少都能有所幫助，除此之外還能減少你的工程時間。</p>
-<hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
-<p>因為一直對於 <strong>CSS</strong> 算是一知半解，加上曾經被說過 <strong>CSS</strong> 命名跟管理很糟糕，最近在自己亂玩 <strong>Webpack</strong> 時就胡亂爬文學習 <strong>Sass</strong> 了，用了一陣子剛好碰上六角學院的 <strong>Sass</strong> 課程在特價(<a href="https://www.udemy.com/sasssecret/">點我選購XD</a>)，瞥見課程說明 <strong>懂得設計出一手好 CSS 命名</strong> 二話不說就買了，剛好課程內提到模組化，深深覺得很有幫助，就索性紀錄下來，偶爾在 <strong>CSS</strong> 上碰到難處還能回來看看文章。( 所以有寫錯的地方還請大神們手下留情…</p>
-</blockquote>
-<p>在這邊將會主要提到三個架構，你可以都不用，也可以只用其中一個，重點還是看你自己怎麼樣覺得方便。</p>
-<ol>
-<li><p><strong>SMACSS</strong> — 偏向整個專案架構的分類及模組化你的 <strong>CSS</strong></p>
-</li>
-<li><p><strong>OOCSS</strong> — 使用物件導向方式管理 <strong>CSS</strong> 的 <strong>Style</strong></p>
-</li>
-<li><p><strong>BEM</strong> — 關於 <strong>Class</strong>的命名方式</p>
-</li>
-</ol>
-<p>不管哪一個類別，其實其中他們都有相似的地方，因為其中某些觀念都是相似的，所以有重疊的地方是正常的，如果你有自己的規範也能試著使用自己的方式，主要還是自己方便且好維護為主，主要<strong>記得四大要點</strong>：</p>
-<ol>
-<li><p><strong>可預測性( Predictable )</strong></p>
-</li>
-<li><p><strong>可重複使用性( Reusable )</strong></p>
-</li>
-<li><p><strong>易維護性( Maintainable )</strong></p>
-</li>
-<li><p><strong>可擴充性( Scalable )</strong></p>
-</li>
-</ol>
-<hr>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*gDTN1PJcvC0T_9tskgCzuQ.png" alt="SMACSS — 易擴展及模組化"></p>
-<h2 id="首先談談-SMACSS"><a href="#首先談談-SMACSS" class="headerlink" title="首先談談 SMACSS"></a><strong>首先談談 SMACSS</strong></h2><blockquote>
-<p>全名為( <strong>Scalable and Modular Architecture for CSS</strong> ) ，顧名思義是可模組化且具結構分類有命名規則的方式，其中的精神就是<strong>容易擴展及模組化</strong>。<br>官方網站的介紹是免費的，<a href="http://smacss.com/">傳送門</a>在此 ( 建議詳讀</p>
-</blockquote>
-<p>基本上的結構分為 <strong>Base、Layout、Module、State、Theme</strong>。</p>
-<p>・<strong>Base</strong> — 網頁基本樣式，還有 <strong>CSS Reset</strong>。</p>
-<p>・<strong>Layout</strong> — 像是網頁的 <strong>hader、footer、sidebar</strong>，如果是唯一的區塊可以使用 <strong>id</strong> 取名；如果是重複出現一樣使用 <strong>Class</strong></p>
-<p>・<strong>Module</strong> — 類似 <strong>component</strong> ，或是常常出現的區塊內容，比如 <strong>.list-li</strong></p>
-<p>・<strong>State</strong> — 元件的狀態，例如 <strong>.list-li active</strong> 最後的 <strong>active</strong></p>
-<p>・<strong>Theme</strong> — 樣式，例如 <strong>bootstrap</strong> 裡的 <strong>btn-dark</strong></p>
-<p>看完結構後，就能知道怎麼命名，命名規則是在前面加上前綴，透過命名我們可以快速找到 <strong>CSS</strong> 是什麼類別，並且在大型專案中可以迅速找到在哪個文件中。例如 <strong>layout</strong> 使用 <strong>l-</strong> 為開頭，<strong>State</strong> 的部分則使用 <strong>is-</strong> 作為前綴，<strong>Module</strong> 則沒有主要的命名規則，因為 <strong>Module</strong> 名字太長， <strong>SMACSS</strong> 建議直接使用 <strong>Module</strong> 的名稱去命名。</p>
-<p>講了這麼多架構，你其實只需要明白兩個步驟。</p>
-<p>先把你需要常用到的樣式給一個初始值，這邊用 <strong>btn</strong> 舉例。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>:white;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之後其他地方需要用到 <strong>button</strong> 時，可以再給他第二層的客製樣式。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.btn-danger</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>:red;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn-lg</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>需要用到客製化的地方在加上後面的 <strong>.btn-danger class</strong></p>
-<p>這樣一來能有效管理你的  <strong>css</strong> 命名之外，也不會造成 <strong>css</strong> 檔案過肥。</p>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*xBk9hrcsltCmW1HP8mkTFg.png" alt="子模組"></p>
-<p>但是在 <strong>SMACSS</strong> 上還是有許多模糊的界線在，其實善用子模組，能讓你的 <strong>Class</strong> 清楚且少了重複命名的機率產生。</p>
-<blockquote>
-<p><strong>更詳細的介紹可以參考此網站：<a href="https://codingluka.com/making-a-button-by-using-sass/">傳送門</a></strong></p>
-</blockquote>
-<hr>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*WDLVkUOAOXEjNBCOjJI7zQ.png" alt="結構、樣式、容器、內容 — 層層分離"></p>
-<h3 id="再來談談-OOCSS"><a href="#再來談談-OOCSS" class="headerlink" title="再來談談 OOCSS"></a>再來談談 OOCSS</h3><blockquote>
-<p><em>( <strong>Object Oriented CSS</strong> )有兩項基本的原則，結構與樣式分離，容器與內容分離。<br>OOCSS官方網站：<a href="http://oocss.org/">傳送門</a></em></p>
-</blockquote>
-<p>其實基本上跟 <strong>SMASS</strong> 很相近，最好的範例就是 <strong><a href="https://bootstrap.hexschool.com/">bootstrap</a></strong> 或是 <strong><a href="https://960.gs/">960 Grid</a><strong>。</strong>OOCSS</strong> 的基本概念在盡量把樣式( <strong>CSS</strong> )從結構( <strong>ul、li、span…</strong> )中抽離出來，在把容器( <strong>body、container…</strong> )跟內容( <strong>list-group、page-box…</strong> )分開。主要要讓你的 <strong>CSS</strong>重複使用性拉高，減少網頁效能上過度渲染造成的速度緩慢後果。</p>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*MqA-4K2N1j_9GyNOIJFz2Q.png" alt="結構與樣式分離"></p>
-<h4 id="結構與樣式分離"><a href="#結構與樣式分離" class="headerlink" title="結構與樣式分離"></a>結構與樣式分離</h4><p>假設我們有一個表單，一般我們給予 <strong>span css</strong> 的方法會這樣下。但是有一個問題是，今天如果我們要在另一個區塊的  <strong>span</strong> 導入一樣的 <strong>css</strong>， 勢必要在下一次 <strong>css</strong>，亦或者今天結構變動，我不要  <strong>li</strong>  了，<strong>css</strong> 勢必會吃不到。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.content</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">span</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>:blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*ZbilxKPjqKFdZIZdEC9H8Q.png" alt="把樣式抽離出來 盡量不使用到 HTML Tag"></p>
-<p>如果我們把這個樣式抽離出來，並且取個名字，盡量不去使用 <strong>HTML Tag</strong> 這樣就是 <strong>結構與樣式分離</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*yGA_64rCbjIuJMGFfMnxqg.png" alt="容器與內容分離"></p>
-<h4 id="容器與內容分離"><a href="#容器與內容分離" class="headerlink" title="容器與內容分離"></a>容器與內容分離</h4><p>這個就比較好懂了，也是盡量避免使用 <strong>.left-bar .list-group li span</strong> 去命名，除了會造成網頁在渲染時造成效能問題外，如我網頁結構需要變動，那真的是傷透腦筋。</p>
-<p>按造上面的取名方法，假如今天 <strong>right-bar</strong> 需要使用到一樣的 <strong>css</strong> 我只需要幫他們的 <strong>class</strong> 加上對應的 <strong>css</strong> 就好了。</p>
-<hr>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2952/1*aBQ0yxa00h44S8jkqtWTrg.png" alt="Block、Element、Modifier"></p>
-<h3 id="最後來談談-BEM"><a href="#最後來談談-BEM" class="headerlink" title="最後來談談 BEM"></a>最後來談談 BEM</h3><blockquote>
-<p>*這是我覺得最有用也最讓人一目瞭然的方式，你可以不嘗試 <strong>SMACSS</strong> 可以不嘗試 <strong>OOCSS</strong>，但你一定要試看看 <strong>BEM</strong>。**Block( 區塊 )、Element( 元素 )、Modifier( 修飾符 )*<em>。</em><br>BEM 理念上強調完全使用 <strong>Class Selector</strong> 並且以功能導向命名。<br>BEM官方網站：<a href="https://en.bem.info/methodology/quick-start/">傳送門</a></p>
-</blockquote>
-<p><strong>Block</strong> — 通常表示可獨立的元件，也可以存在於其他 <strong>Block</strong> 當中。</p>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*DQaLNfP5RN3SFCaAPUUGCg.png" alt="介紹圖"></p>
-<p><strong>Element</strong> — 這是存在於 <strong>Block</strong> 之中的小元件，並且不可單獨分離出來，命名也是功能導向，在自己的前方跟 <strong>Block</strong>銜接的地方用兩個下底線分開，在自己的名稱斷點使用一個分隔號隔開。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">--&gt; Block-name__Element-name // 命名規則</span><br><span class="line"></span><br><span class="line">--&gt; list-from__content       // 範例</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>Element</strong> 可以存在於 <strong>Element</strong>裡面，但是必須依賴在 <strong>Block</strong> 之下。</p>
-</blockquote>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*rnByI1QQdBSN0GdDd6qbzA.png" alt="Element"></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;list-from&quot;</span>&gt;</span></span><br><span class="line">  // 必須依附在 list-from 這個 Block 之下</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list-from__content&quot;</span>&gt;</span></span><br><span class="line">    // 可以存在 content 這個 Element 之下</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;list-from__input&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*dxoxUxZ_C-OgOj4s7iHbvg.png" alt="Modifier"></p>
-<p><strong>Modifier</strong> — 這是表述組建的狀態或行為，命名規則上以單底線_或兩橫線- - 。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;list-from&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list-from__content&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;list-from__input&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span--active&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;list-from__span--pink&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>關於 <strong>BEM</strong> 官方有一套 <strong>CSS</strong> 分類方式，每一個 <strong>Block</strong> 都會有自己的資料夾路徑，並且裡面有這個 <strong>Block</strong> 的專屬 <strong>CSS</strong> 及 <strong>JS</strong>。裡面還會有這個 <strong>Block</strong> 下方 <strong>Element</strong> 的資料夾，並且開頭為 __ 。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">list-from/</span><br><span class="line">  list-from.css</span><br><span class="line">  list-from.js</span><br><span class="line">  __content/</span><br><span class="line">      list-from__content.css</span><br><span class="line">      list-from__content.js</span><br><span class="line">  __input/</span><br><span class="line">      list-from__input.css</span><br><span class="line">      list-from__input.js</span><br><span class="line">  __span/</span><br><span class="line">      list-from__span.css</span><br><span class="line">      list-from__span.js</span><br><span class="line">  _theme/</span><br><span class="line">      list-from__span--active.css</span><br><span class="line">      list-from__span--pink.css</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>詳細可以拜讀此篇文章：<a href="http://sj82516-blog.logdown.com/posts/1077348/finish-css-intro-oocss-smacss-bem">傳送門</a></p>
-</blockquote>
-<p>幾個重點整理：</p>
-<ol>
-<li><p><strong>Block</strong> 對應一個資料夾，命名相同，每個 <strong>Block</strong> 資料夾下面都有獨立的 <strong>JS</strong> 及<strong>CSS</strong> 檔案。</p>
-</li>
-<li><p><strong>Element</strong> 的資料夾命名採 <strong>雙底線</strong> 開頭，但是檔案命名一樣要加上 <strong>Block</strong> 名稱。</p>
-</li>
-<li><p><strong>Modifier</strong> 採單底線，並且 <strong>Modifier</strong> 下通常只有 <strong>CSS</strong> 檔案。</p>
-</li>
-</ol>
-<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2216/1*flD2R09jNtJdJQBOVa3Bow.jpeg" alt="學習小筆記"></p>
-<hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>在學 <strong>Code</strong> 時矇懞懂懂，一開始也不知道有什麼規範規則，這次拜六角學院課程所賜，索性研究了一下關於 <strong>CSS</strong> 的架構，在之後的練習及專案都會試著導入 <strong>SMACSS OOCSS BEM</strong> 等等的架構，並且試著找尋最適合自己的方式。</p>
-<p>還是那句老話『<strong>沒有最好，只有最適合</strong>』，希望在成長的這一路上或多或少能幫助到某些在困惑的人，也照著自己最初寫 <strong>Blog</strong> 的初衷，用 <strong>Blog</strong> 紀錄自己的成長及缺點，再一段時間之後再回來檢討自己，也希望成長後的我，能幫助到剛開始成長的你。</p>
-<p>從最剛開始的六角地下城開始，慢慢的練習 <strong>JS</strong> 到 <strong>Vue.js</strong> ，誤打誤撞研究 <strong>Webpack</strong> 之後現在慢慢學習 <strong>Sass</strong>，近期內的目標就是能用所學的這些，做出一個類似電商的網站，期許自己的成長，衝吧！</p>
-<blockquote>
-<p><em>( 會在努力吸取新知更新 CSS 系列的</em></p>
-</blockquote>
-<p>最後這邊提供一個自己練習照著 <strong>SMACSS OOCSS BEM</strong> 架構練習的 <strong>Source Code</strong>，因為是自己第一次練習寫，還能希望有大神能不吝嗇指教。</p>
-<p><a href="https://github.com/RexHung0302/Hexschool-project">傳送門在此</a></p>
-<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>Segmentfault — <a href="https://segmentfault.com/a/1190000000389838">CSS设计模式：OOCSS 和 SMACSS</a></li>
-<li><a href="https://cythilya.github.io/">Summer。桑莫。夏天</a> — CSS 的模組化方法：OOCSS、SMACSS、BEM、CSS Modules、CSS in JS</li>
-<li>W3C — <a href="https://www.w3cplus.com/css/bem-definitions.html">BEM的定义</a></li>
-<li>六角學院 —<a href="https://www.udemy.com/sasssecret/">Sass 實戰全攻略 — 成為前 1% 的 CSS 頂尖好手</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Code</category>
-        <category>Note</category>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>Code</tag>
-        <tag>HTML</tag>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -2355,6 +2355,84 @@
       </tags>
   </entry>
   <entry>
+    <title>[Blog Notes] - Hexo NexT 小筆記</title>
+    <url>/2020/03/19/20200319/</url>
+    <content><![CDATA[<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這是一篇用來筆記 Hexo 的小攻略，內容是如何修改一些配置設定，日後會不定時的增加，算是給自己一個筆記也給要使用的人一些參考。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/hexo_slogan.png" alt="Hexo"></p>
+<span id="more"></span>
+
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>內容會提及下列幾項：</p>
+<ol>
+<li><p>如何在網頁加入 <strong>Fork Me on GitHub(GitHub Corners)</strong></p>
+</li>
+<li><p>如何加入 <strong>版權聲明</strong></p>
+</li>
+<li><p>如何在頁尾加入 <strong>本文结束感謝您的閱讀</strong></p>
+</li>
+<li><p>如何修改頁尾的 <strong>Tag</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><a href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners" class="headerlink" title="如何在網頁加入 Fork Me on GitHub(GitHub Corners)"></a>如何在網頁加入 Fork Me on GitHub(GitHub Corners)</h3><p>首先到這個網頁挑選喜歡的樣式 -&gt; <a href="http://tholman.com/github-corners/">傳送門</a></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_style.png" alt="挑一個你愛的樣式吧"></p>
+<p>以第一個白底黑貓為例子，複製後先貼到空白處，然後要修改掉那串程式碼最前面的 <strong>href</strong> 內的 <strong><a href="https://your-url/">https://your-url</a></strong> ，內容替換成你的 GitHub 頁面網址。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;https://your-url&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;github-corner&quot;</span> aria-label=<span class="string">&quot;View source on GitHub&quot;</span>&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&quot;80&quot;</span> <span class="attr">height</span>=<span class="string">&quot;80&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 250 250&quot;</span> <span class="attr">style</span>=<span class="string">&quot;fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;&quot;</span> <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span>...略<span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span> </span><br><span class="line"><span class="comment">// ...略</span></span><br></pre></td></tr></table></figure>
+
+<p>隨後把下代碼複製貼至 <strong>/themes/next/layout/_layout.swig</strong> 文件中 <strong>div</strong> 的 <strong>class name</strong> 為 <strong>headband</strong> 的下面。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;headband&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_dec.png" alt="我最愛圖文了 簡單又清楚"></p>
+<p>再回去看看就會出現啦！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
+<hr>
+<h3 id="如何加入-版權聲明"><a href="#如何加入-版權聲明" class="headerlink" title="如何加入 版權聲明"></a>如何加入 版權聲明</h3><p>原本的做法比較複雜，需要自己去新建文件(<a href="https://theme-next.org/next-6-6-0-released/">詳情可見主題文件</a>)，不過在 <strong>NexT 6.6.0</strong> 開始直接到 <strong>/themes/next/_config.yml</strong> 裡搜尋 <strong>creative_commons</strong> 然後修改要顯示在 <strong>sidebar</strong> 還是 <strong>post</strong> 還是<strong>全都要</strong>就可以了，如下設定：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line"></span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language: deed.zh_TW</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/copy_right_show.png" alt="然後你就會發現左邊的 sidebar 跟文章內都會出現啦"></p>
+<p>順帶一提，<strong>language</strong> 並非文字在<strong>文章</strong>內顯示的語言喔！而是你導向 <strong>creative commons</strong> 網址時，你的版權聲明顯示的語言，預設是英文，如果改成 <strong>deed.zh_TW</strong> 就會顯示中文，如何看你的語言呢？在<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">版權聲明網站</a>內中間有一個語言 <strong>select</strong> 下拉後在看網址最後帶的是什麼，·比如說中文是 <strong>deed.zh_TW</strong> 而日文就是 <strong>deed.ja</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/copy_right_language_select_show.png" alt="隨意更改其他語言就能找到相對應的代號了"></p>
+<hr>
+<h3 id="如何在頁尾加入-本文结束感謝您的閱讀"><a href="#如何在頁尾加入-本文结束感謝您的閱讀" class="headerlink" title="如何在頁尾加入 本文结束感謝您的閱讀"></a>如何在頁尾加入 本文结束感謝您的閱讀</h3><p>先到 <strong>/themes/next/layout/_macro</strong> 下查看有無 <strong>passage-end-tag.swig</strong> 這隻檔案，沒有就自己手動建立一個，隨後在內文貼上下列程式碼：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;text-align:center;color: #ccc;font-size:14px;&quot;</span>&gt;</span>-------------本文结束<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-paw&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>感謝您的閱讀-------------<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>之後至 <strong>/themes/next/layout/_macro/post.swig</strong> 文件中 <strong>div</strong> 的 <strong>class name</strong> 為 <strong>post-footer</strong> 內有中括弧 <strong>%- endfor %</strong> 的下面貼上下列程式碼：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">// 貼在這整段的下面</span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">class</span>=<span class="string">&quot;post-footer&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// ...略</span><br><span class="line">&#123;%- endfor %&#125;</span><br><span class="line"></span><br><span class="line">// 程式碼貼在這邊 -&gt;</span><br><span class="line">&#123;&#123; partial(&#x27;_partials/post/post-footer.swig&#x27;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line"></span><br><span class="line">// ...略</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/thx_to_read_position.png" alt="還不了解就看圖吧"></p>
+<p>再回去看看就會出現啦！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/thx_to_read_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
+<hr>
+<h3 id="如何修改頁尾的-Tag"><a href="#如何修改頁尾的-Tag" class="headerlink" title="如何修改頁尾的 Tag"></a>如何修改頁尾的 <strong>Tag</strong></h3><p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_before.png" alt="美化前樣式"></p>
+<p>舊版的設定比較麻煩，必須自己到 <code>/themes/next/layout/_macro/post.swig</code> 內修改 <code>#</code> 為 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 但是當到這個文件查看時，會發現上面是帶有判斷式的，有中括弧的 <code>%- if theme.tag_icon %</code> ，而且 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 也已經在程式碼內。</p>
+<p>現在你唯一需要做的事情只有一樣，就是到 <code>/themes/next/_config.yml</code> 裡搜尋 <code>tag_icon</code> 並且將它改為 <code>tag_icon: true</code> ，結果將會為下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_after.png" alt="美化後樣式"></p>
+<p>因為只是多了個 icon ，身為有強迫症的前端，還是想要美化一下，原本想要弄個書籤樣式，但怕做壞了，就用最簡單的美化方式吧。</p>
+<p>找到 <code>/themes/next/source/css/_common/components/post/post-tags.styl</code> 這隻檔案，把下面程式碼蓋上去：</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.post-tags</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-size-smaller</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//- 客製化CSS</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">2px</span> <span class="number">2px</span> <span class="number">3px</span> <span class="number">1px</span> <span class="number">#757575</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1px</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all .<span class="number">3s</span> linear;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">:not</span>(:last-child) &#123;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="number">5px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//- 客製化CSS</span></span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: scale(<span class="number">1.1</span>);</span><br><span class="line">      <span class="attribute">box-shadow</span>: <span class="number">3px</span> <span class="number">4px</span> <span class="number">5px</span> <span class="number">1px</span> <span class="number">#757575</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_hover.gif" alt="成果展示"></p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是接觸 <strong>Hexo</strong> 的第二個主題 <strong>NexT</strong>，其實最一開始是使用 <strong><a href="https://jerryc.me/">hexo-theme-archer</a></strong> 這個主題，我想第一次用 <strong>Hexo</strong> 都會想找炫一點的主題，但是有些比較算獨立維護的，可能功能上就沒有那麼齊全，像是很多設定，在 <strong>NexT</strong> 的 <strong>_config.yml</strong> 裡面就有了，你只需要改成 <strong>true</strong> 其實就能用了，但是比較冷門的主題或是沒有那麼多人維護的主題就必須要自己建立檔案，或是東加西加，這也是為什麼後來我選用 <strong>NexT</strong>。 的原因。</p>
+<p>因為之前換過主題中間也加了一些東西導致 <strong>Hexo</strong> 爆開(<strong>真心建議新手不要亂動文件 也記得勤於備份</strong>)，所以重新用了三四次，所以寫篇文章把一些功能記下來，希望日後能快速找到方法不用再到處去爬文了，也希望這篇文章能幫助到您，之後也會不定時的加一些筆記進來。</p>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li><a href="https://hexo.io/zh-tw/">Hexo 官網文件</a></li>
+<li><a href="https://theme-next.org/">NexT 主題 Blog</a></li>
+<li><a href="http://tholman.com/github-corners/">GitHub Corners</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>Life</tag>
+        <tag>Note</tag>
+        <tag>Hexo</tag>
+        <tag>NexT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[Tool Notes] — 關於Webpack #2 - Babel？</title>
     <url>/2020/03/21/20200321/</url>
     <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20200321/babel_logo.png" alt="Webpack又來啦！"></p>
@@ -2462,84 +2540,6 @@
         <tag>CSS</tag>
         <tag>JavaScript</tag>
         <tag>Webpack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[Blog Notes] - Hexo NexT 小筆記</title>
-    <url>/2020/03/19/20200319/</url>
-    <content><![CDATA[<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這是一篇用來筆記 Hexo 的小攻略，內容是如何修改一些配置設定，日後會不定時的增加，算是給自己一個筆記也給要使用的人一些參考。</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/hexo_slogan.png" alt="Hexo"></p>
-<span id="more"></span>
-
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>內容會提及下列幾項：</p>
-<ol>
-<li><p>如何在網頁加入 <strong>Fork Me on GitHub(GitHub Corners)</strong></p>
-</li>
-<li><p>如何加入 <strong>版權聲明</strong></p>
-</li>
-<li><p>如何在頁尾加入 <strong>本文结束感謝您的閱讀</strong></p>
-</li>
-<li><p>如何修改頁尾的 <strong>Tag</strong></p>
-</li>
-</ol>
-<hr>
-<h3 id="如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners"><a href="#如何在網頁加入-Fork-Me-on-GitHub-GitHub-Corners" class="headerlink" title="如何在網頁加入 Fork Me on GitHub(GitHub Corners)"></a>如何在網頁加入 Fork Me on GitHub(GitHub Corners)</h3><p>首先到這個網頁挑選喜歡的樣式 -&gt; <a href="http://tholman.com/github-corners/">傳送門</a></p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_style.png" alt="挑一個你愛的樣式吧"></p>
-<p>以第一個白底黑貓為例子，複製後先貼到空白處，然後要修改掉那串程式碼最前面的 <strong>href</strong> 內的 <strong><a href="https://your-url/">https://your-url</a></strong> ，內容替換成你的 GitHub 頁面網址。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;https://your-url&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;github-corner&quot;</span> aria-label=<span class="string">&quot;View source on GitHub&quot;</span>&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&quot;80&quot;</span> <span class="attr">height</span>=<span class="string">&quot;80&quot;</span> <span class="attr">viewBox</span>=<span class="string">&quot;0 0 250 250&quot;</span> <span class="attr">style</span>=<span class="string">&quot;fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;&quot;</span> <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">&quot;M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">path</span>&gt;</span>...略<span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span> </span><br><span class="line"><span class="comment">// ...略</span></span><br></pre></td></tr></table></figure>
-
-<p>隨後把下代碼複製貼至 <strong>/themes/next/layout/_layout.swig</strong> 文件中 <strong>div</strong> 的 <strong>class name</strong> 為 <strong>headband</strong> 的下面。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;headband&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_dec.png" alt="我最愛圖文了 簡單又清楚"></p>
-<p>再回去看看就會出現啦！</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/github_fork_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
-<hr>
-<h3 id="如何加入-版權聲明"><a href="#如何加入-版權聲明" class="headerlink" title="如何加入 版權聲明"></a>如何加入 版權聲明</h3><p>原本的做法比較複雜，需要自己去新建文件(<a href="https://theme-next.org/next-6-6-0-released/">詳情可見主題文件</a>)，不過在 <strong>NexT 6.6.0</strong> 開始直接到 <strong>/themes/next/_config.yml</strong> 裡搜尋 <strong>creative_commons</strong> 然後修改要顯示在 <strong>sidebar</strong> 還是 <strong>post</strong> 還是<strong>全都要</strong>就可以了，如下設定：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Creative Commons 4.0 International License.</span><br><span class="line"># See: https://creativecommons.org/share-your-work/licensing-types-examples</span><br><span class="line"># Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero</span><br><span class="line"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span><br><span class="line"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span><br><span class="line"></span><br><span class="line">creative_commons:</span><br><span class="line">  license: by-nc-sa</span><br><span class="line">  sidebar: true</span><br><span class="line">  post: true</span><br><span class="line">  language: deed.zh_TW</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/copy_right_show.png" alt="然後你就會發現左邊的 sidebar 跟文章內都會出現啦"></p>
-<p>順帶一提，<strong>language</strong> 並非文字在<strong>文章</strong>內顯示的語言喔！而是你導向 <strong>creative commons</strong> 網址時，你的版權聲明顯示的語言，預設是英文，如果改成 <strong>deed.zh_TW</strong> 就會顯示中文，如何看你的語言呢？在<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW">版權聲明網站</a>內中間有一個語言 <strong>select</strong> 下拉後在看網址最後帶的是什麼，·比如說中文是 <strong>deed.zh_TW</strong> 而日文就是 <strong>deed.ja</strong>。</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/copy_right_language_select_show.png" alt="隨意更改其他語言就能找到相對應的代號了"></p>
-<hr>
-<h3 id="如何在頁尾加入-本文结束感謝您的閱讀"><a href="#如何在頁尾加入-本文结束感謝您的閱讀" class="headerlink" title="如何在頁尾加入 本文结束感謝您的閱讀"></a>如何在頁尾加入 本文结束感謝您的閱讀</h3><p>先到 <strong>/themes/next/layout/_macro</strong> 下查看有無 <strong>passage-end-tag.swig</strong> 這隻檔案，沒有就自己手動建立一個，隨後在內文貼上下列程式碼：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% if not is_index %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;text-align:center;color: #ccc;font-size:14px;&quot;</span>&gt;</span>-------------本文结束<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-paw&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>感謝您的閱讀-------------<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>之後至 <strong>/themes/next/layout/_macro/post.swig</strong> 文件中 <strong>div</strong> 的 <strong>class name</strong> 為 <strong>post-footer</strong> 內有中括弧 <strong>%- endfor %</strong> 的下面貼上下列程式碼：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">// 貼在這整段的下面</span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">class</span>=<span class="string">&quot;post-footer&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// ...略</span><br><span class="line">&#123;%- endfor %&#125;</span><br><span class="line"></span><br><span class="line">// 程式碼貼在這邊 -&gt;</span><br><span class="line">&#123;&#123; partial(&#x27;_partials/post/post-footer.swig&#x27;, &#123;&#125;, &#123;cache: theme.cache.enable&#125;) &#125;&#125;</span><br><span class="line"></span><br><span class="line">// ...略</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/thx_to_read_position.png" alt="還不了解就看圖吧"></p>
-<p>再回去看看就會出現啦！</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/thx_to_read_show.png" alt="喜歡記得訂閱按讚加開啟小鈴鐺"></p>
-<hr>
-<h3 id="如何修改頁尾的-Tag"><a href="#如何修改頁尾的-Tag" class="headerlink" title="如何修改頁尾的 Tag"></a>如何修改頁尾的 <strong>Tag</strong></h3><p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_before.png" alt="美化前樣式"></p>
-<p>舊版的設定比較麻煩，必須自己到 <code>/themes/next/layout/_macro/post.swig</code> 內修改 <code>#</code> 為 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 但是當到這個文件查看時，會發現上面是帶有判斷式的，有中括弧的 <code>%- if theme.tag_icon %</code> ，而且 <code>&lt;i class=&quot;fa fa-tag&quot;&gt;&lt;/i&gt;</code> 也已經在程式碼內。</p>
-<p>現在你唯一需要做的事情只有一樣，就是到 <code>/themes/next/_config.yml</code> 裡搜尋 <code>tag_icon</code> 並且將它改為 <code>tag_icon: true</code> ，結果將會為下圖。</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_after.png" alt="美化後樣式"></p>
-<p>因為只是多了個 icon ，身為有強迫症的前端，還是想要美化一下，原本想要弄個書籤樣式，但怕做壞了，就用最簡單的美化方式吧。</p>
-<p>找到 <code>/themes/next/source/css/_common/components/post/post-tags.styl</code> 這隻檔案，把下面程式碼蓋上去：</p>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.post-tags</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="variable">$font-size-smaller</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//- 客製化CSS</span></span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">2px</span> <span class="number">2px</span> <span class="number">3px</span> <span class="number">1px</span> <span class="number">#757575</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1px</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">transition</span>: all .<span class="number">3s</span> linear;</span><br><span class="line"></span><br><span class="line">    &amp;<span class="selector-pseudo">:not</span>(:last-child) &#123;</span><br><span class="line">      <span class="attribute">margin-right</span>: <span class="number">5px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//- 客製化CSS</span></span><br><span class="line">    &amp;<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">      <span class="attribute">transform</span>: scale(<span class="number">1.1</span>);</span><br><span class="line">      <span class="attribute">box-shadow</span>: <span class="number">3px</span> <span class="number">4px</span> <span class="number">5px</span> <span class="number">1px</span> <span class="number">#757575</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/others/loading.gif" data-original="/images/20200319/tag_hover.gif" alt="成果展示"></p>
-<hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是接觸 <strong>Hexo</strong> 的第二個主題 <strong>NexT</strong>，其實最一開始是使用 <strong><a href="https://jerryc.me/">hexo-theme-archer</a></strong> 這個主題，我想第一次用 <strong>Hexo</strong> 都會想找炫一點的主題，但是有些比較算獨立維護的，可能功能上就沒有那麼齊全，像是很多設定，在 <strong>NexT</strong> 的 <strong>_config.yml</strong> 裡面就有了，你只需要改成 <strong>true</strong> 其實就能用了，但是比較冷門的主題或是沒有那麼多人維護的主題就必須要自己建立檔案，或是東加西加，這也是為什麼後來我選用 <strong>NexT</strong>。 的原因。</p>
-<p>因為之前換過主題中間也加了一些東西導致 <strong>Hexo</strong> 爆開(<strong>真心建議新手不要亂動文件 也記得勤於備份</strong>)，所以重新用了三四次，所以寫篇文章把一些功能記下來，希望日後能快速找到方法不用再到處去爬文了，也希望這篇文章能幫助到您，之後也會不定時的加一些筆記進來。</p>
-<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
-<li><a href="https://hexo.io/zh-tw/">Hexo 官網文件</a></li>
-<li><a href="https://theme-next.org/">NexT 主題 Blog</a></li>
-<li><a href="http://tholman.com/github-corners/">GitHub Corners</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Code</category>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Code</tag>
-        <tag>Life</tag>
-        <tag>Note</tag>
-        <tag>Hexo</tag>
-        <tag>NexT</tag>
       </tags>
   </entry>
   <entry>
