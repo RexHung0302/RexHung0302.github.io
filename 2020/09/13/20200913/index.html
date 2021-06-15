@@ -5,47 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico">
-  <link rel="mask-icon" href="/RexHung0302/RexHung0302.github.io/images/favicon.ico" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
 
-<link rel="stylesheet" href="/RexHung0302/RexHung0302.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/RexHung0302/RexHung0302.github.io/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"github.com","root":"/RexHung0302/RexHung0302.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Introduction &amp; 前言前陣子拖工作專案之福，碰到了 Google Analytics(以下簡稱GA)，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 GA 及 GTM 可以做什麼，及如何設定。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？">
-<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/index.html">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/09/13/20200913/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
 <meta property="og:description" content="Introduction &amp; 前言前陣子拖工作專案之福，碰到了 Google Analytics(以下簡稱GA)，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 GA 及 GTM 可以做什麼，及如何設定。">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
-<meta property="og:image" content="https://github.com/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2020-09-13T12:56:00.000Z">
 <meta property="article:modified_time" content="2021-06-15T03:44:12.128Z">
 <meta property="article:author" content="RexHung">
@@ -59,9 +59,9 @@
 <meta property="article:tag" content="Google Tag Manager">
 <meta property="article:tag" content="GTM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/images/others/loading.gif">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 
-<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/">
+<link rel="canonical" href="https://rexhung0302.github.io/2020/09/13/20200913/">
 
 
 <script id="page-configurations">
@@ -111,7 +111,7 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <a target="_blank" rel="noopener" href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
@@ -125,7 +125,7 @@
 
   <div class="site-meta">
 
-    <a href="/RexHung0302/RexHung0302.github.io/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">RexHung's Blog</h1>
       <span class="logo-line-after"><i></i></span>
@@ -147,32 +147,32 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/RexHung0302/RexHung0302.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/RexHung0302/RexHung0302.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/RexHung0302/RexHung0302.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/RexHung0302/RexHung0302.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/RexHung0302/RexHung0302.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
 
   </li>
         <li class="menu-item menu-item-link">
 
-    <a href="/RexHung0302/RexHung0302.github.io/link/" rel="section"><i class="fas fa-link fa-fw"></i>link</a>
+    <a href="/link/" rel="section"><i class="fas fa-link fa-fw"></i>link</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -231,10 +231,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/09/13/20200913/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/RexHung0302/RexHung0302.github.io/images/profile/profile_2.png">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
       <meta itemprop="name" content="RexHung">
       <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
     </span>
@@ -269,15 +269,15 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/RexHung0302/RexHung0302.github.io/categories/Code/Note/Google/" itemprop="url" rel="index"><span itemprop="name">Google</span></a>
+                  <a href="/categories/Code/Note/Google/" itemprop="url" rel="index"><span itemprop="name">Google</span></a>
                 </span>
             </span>
 
@@ -310,7 +310,7 @@
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>前陣子拖工作專案之福，碰到了 <a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/#/">Google Analytics(以下簡稱GA)</a>，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 <strong>GA</strong> 及 <strong>GTM</strong> 可以做什麼，及如何設定。</p>
 <span id="more"></span>
 
-<p>本篇將會使用 <strong>Vue Cli</strong> 來做示範，並且搭配 <a href="https://github.com/mib200/vue-gtm">vue-gtm</a> 使用，如果是普通的 <strong>HTML</strong> 也可以輕易上手，沒毛病！</p>
+<p>本篇將會使用 <strong>Vue Cli</strong> 來做示範，並且搭配 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 使用，如果是普通的 <strong>HTML</strong> 也可以輕易上手，沒毛病！</p>
 <hr>
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/marketing.png" alt="關於行銷"></p>
 <p><strong>GA</strong> 是用於 <strong>行銷、宣傳、分析</strong> 的利器，如果你正需要知道 <strong>GA</strong> 怎麼設定，以及如何查看報表設定等等，可以參考此篇，不過這邊只會淺談，不會過度深入研究。</p>
@@ -346,11 +346,11 @@
 <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_step2.png" alt="按照彈窗的指示"></p>
 <p>之後再按照本篇下方的 <strong>GA</strong> <a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">設定教學</a> 即可。</p>
 <hr>
-<h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <a target="_blank" rel="noopener" href="https://rexhung0302.github.io/2019/03/26/20190325/">[Vue Notes] — Vue-Cli #1 初次見面</a>。</p>
+<h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <a href="https://rexhung0302.github.io/2019/03/26/20190325/">[Vue Notes] — Vue-Cli #1 初次見面</a>。</p>
 <blockquote>
 <p><em>由於當初有消息 <strong>Vue3</strong> 即將釋出，所以只寫了一篇就停止了，之後等 <strong>Vue3</strong> 正式釋出會再繼續研究。</em></p>
 </blockquote>
-<p>安裝好 <strong>Vue-cli</strong> 之後就緊接著安裝我們需要用到的 <a href="https://github.com/mib200/vue-gtm">vue-gtm</a>，輸入 <code>npm i vue-gtm -S</code>。</p>
+<p>安裝好 <strong>Vue-cli</strong> 之後就緊接著安裝我們需要用到的 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a>，輸入 <code>npm i vue-gtm -S</code>。</p>
 <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/install-gtm.gif" alt="按照彈窗的指示"></p>
 <blockquote>
 <p>*如果您已經會設定 <strong>GTM</strong>，可以跳至 **<a href="#%E9%A0%90%E8%A6%BD%E8%A8%AD%E5%AE%9A">預覽設定</a>*<em>。</em></p>
@@ -378,7 +378,7 @@
 <p>關於上面提到的 <strong>類別、動作、標籤、值</strong> 將會是在埋入 <strong>GTM</strong> 的地方會傳送過來的幾個值，如果想要傳送更多的變數，比如 <strong>userID</strong> 或是 <strong>url</strong> 等等，可能光靠上面幾個欄位放不下，這時候就可以勾選 <strong>在這個代碼啟用覆寫設定</strong>，然後填入剛剛拿到的 <strong>追蹤編號</strong>，之後打開下面的 <strong>更多設定</strong>，然後在打開 <strong>要設定的欄位</strong>，然後填入更多的變數。</p>
 <hr>
 <h3 id="預覽設定"><a href="#預覽設定" class="headerlink" title="預覽設定"></a>預覽設定</h3><p>到這時候其實可以先去看看我們的 <strong>GTM</strong> 有無掛載成功，如果你是使用普通的 <strong>HTMl</strong> 再貼上剛剛一開始提示的彈窗那些程式碼，應該就可以先預覽了，如果是 <strong>Vue-cli</strong> 可以接著使用下面的步驟。</p>
-<p>在安裝完 <a href="https://github.com/mib200/vue-gtm">vue-gtm</a> 之後，按照 <strong>Document</strong> 的教學把套件掛進去專案裡。</p>
+<p>在安裝完 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 之後，按照 <strong>Document</strong> 的教學把套件掛進去專案裡。</p>
 <p><img src="/images/others/loading.gif" data-original="/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/GTM_install_on_vue.png" alt="掛載GTM"></p>
 <p>上面的步驟就像是在申請完 <strong>GTM</strong> 或是點擊 <strong>GTM</strong> 右上角的十個英文數字編號出現的彈窗，埋入代碼之後一樣的動作。</p>
 <p>在做好的埋 <strong>Code</strong> 或是設定 <strong>vue-gtm</strong> 之後點擊 <strong>GTM</strong> 上方的預覽，再到你埋程式碼的網站，就會看見下方彈出 <strong>GTM</strong> 的預覽 <strong>Debug</strong> 視窗，就代表成功啦。</p>
@@ -403,7 +403,7 @@
 </blockquote>
 <hr>
 <h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊也會放上範例，但是使用者還是必須自己去申請 <strong>GTM</strong> 及 <strong>GA</strong> 了，但可以直接把專案的 <code>main.js</code> <strong>vue-gtm id</strong> 改為自己的。</p>
-<p>GitHub: <a href="https://github.com/RexHung0302/GA-GTM-example">傳送門</a></p>
+<p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/GA-GTM-example">傳送門</a></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實 <strong>GTM</strong> 及 <strong>GA</strong> 還有很多可以設定，這邊先大致介紹一下如何入門使用，更多的可以再慢慢摸索，拖工作的福，這次摸了好久也有一些概念了，希望能幫到其他人，也順便筆記一下，之後自己忘記還能回來爬文。</p>
 <blockquote>
@@ -419,7 +419,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://ga.awoo.com.tw/data-layer/">資料層 Data Layer, 存放各種訪客、網頁行為數據的地方</a></p>
 </li>
-<li><p><a href="https://github.com/mib200/vue-gtm">vue-gtm</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a></p>
 </li>
 </ul>
 
@@ -449,7 +449,7 @@
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="/RexHung0302/RexHung0302.github.io/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
         <p>比特幣</p>
       </div>
 
@@ -465,7 +465,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>文章連結：</strong>
-    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/" title="[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？">https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/</a>
+    <a href="https://rexhung0302.github.io/2020/09/13/20200913/" title="[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？">https://rexhung0302.github.io/2020/09/13/20200913/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
@@ -477,15 +477,15 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/RexHung0302/RexHung0302.github.io/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/Google/" rel="tag"><i class="fa fa-tag"></i> Google</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/Google-Analytics/" rel="tag"><i class="fa fa-tag"></i> Google Analytics</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/GA/" rel="tag"><i class="fa fa-tag"></i> GA</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/Google-Tag-Manager/" rel="tag"><i class="fa fa-tag"></i> Google Tag Manager</a>
-              <a href="/RexHung0302/RexHung0302.github.io/tags/GTM/" rel="tag"><i class="fa fa-tag"></i> GTM</a>
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Google/" rel="tag"><i class="fa fa-tag"></i> Google</a>
+              <a href="/tags/Google-Analytics/" rel="tag"><i class="fa fa-tag"></i> Google Analytics</a>
+              <a href="/tags/GA/" rel="tag"><i class="fa fa-tag"></i> GA</a>
+              <a href="/tags/Google-Tag-Manager/" rel="tag"><i class="fa fa-tag"></i> Google Tag Manager</a>
+              <a href="/tags/GTM/" rel="tag"><i class="fa fa-tag"></i> GTM</a>
           </div>
 
         
@@ -494,11 +494,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/RexHung0302/RexHung0302.github.io/2020/08/11/20200811/" rel="prev" title="[JavaScript Notes] — 關於 Url 轉址及 取得參數">
+    <a href="/2020/08/11/20200811/" rel="prev" title="[JavaScript Notes] — 關於 Url 轉址及 取得參數">
       <i class="fa fa-chevron-left"></i> [JavaScript Notes] — 關於 Url 轉址及 取得參數
     </a></div>
       <div class="post-nav-item">
-    <a href="/RexHung0302/RexHung0302.github.io/2020/09/14/20200914/" rel="next" title="[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談">
+    <a href="/2020/09/14/20200914/" rel="next" title="[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談">
       [NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -573,27 +573,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="RexHung"
-      src="/RexHung0302/RexHung0302.github.io/images/profile/profile_2.png">
+      src="/images/profile/profile_2.png">
   <p class="site-author-name" itemprop="name">RexHung</p>
   <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/RexHung0302/RexHung0302.github.io/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/RexHung0302/RexHung0302.github.io/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/RexHung0302/RexHung0302.github.io/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">標籤</span></a>
@@ -602,7 +602,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fab fa-github fa-fw"></i></a>
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
         <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
@@ -666,32 +666,32 @@
   </div>
 
   
-  <script src="/RexHung0302/RexHung0302.github.io/lib/anime.min.js"></script>
-  <script src="/RexHung0302/RexHung0302.github.io/lib/velocity/velocity.min.js"></script>
-  <script src="/RexHung0302/RexHung0302.github.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/RexHung0302/RexHung0302.github.io/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/RexHung0302/RexHung0302.github.io/js/motion.js"></script>
-
-
-<script src="/RexHung0302/RexHung0302.github.io/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/RexHung0302/RexHung0302.github.io/js/next-boot.js"></script>
-
-<script src="/RexHung0302/RexHung0302.github.io/js/bookmark.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
+<script src="/js/next-boot.js"></script>
 
-
-  
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
-<script src="/RexHung0302/RexHung0302.github.io/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -718,7 +718,7 @@ NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
       api       : '' || 'https://disqus.com/api/',
       apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
       shortname : 'rexhung0302',
-      url       : "https://github.com/RexHung0302/RexHung0302.github.io/2020/09/13/20200913/",
+      url       : "https://rexhung0302.github.io/2020/09/13/20200913/",
       identifier: "2020/09/13/20200913/",
       title     : "[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？",
     });
