@@ -4143,6 +4143,135 @@
       </tags>
   </entry>
   <entry>
+    <title>[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List</title>
+    <url>/2020/10/13/20201013/</url>
+    <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20201013/todo_list_banner.png" alt="Todo List"></p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這一篇文章會快速介紹一下筆者在上 <strong><a href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a></strong> 課程時，章節練習的小作業，透過 <strong>Nodejs</strong> 及 <strong>Firebase</strong> 寫一個菜鳥都必須要練習過的題目 <strong>Todo List</strong>。</p>
+<span id="more"></span>
+
+<p>本次 <strong>Nodejs</strong> 的 <strong>Template</strong> 使用為 **PUG(Jade)**。</p>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201013/demo.gif" alt="Demo"></p>
+<p>有興趣跟筆者一起從後端窺探可以參考前幾篇文章 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 及 **<a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a>**。</p>
+<p>本次作業練習將會使用 <strong>Express</strong> 及 <strong>Firebase</strong> 實作。</p>
+<hr>
+<h3 id="整體規劃"><a href="#整體規劃" class="headerlink" title="整體規劃"></a>整體規劃</h3><p>其實這次作業是希望我們做形象官網，但想了一下還是想從待辦清單下手，也可以串接 <strong>Firebase</strong> 的登入驗證，不需要在自己寫一個會員系統。</p>
+<p>而這次路由也規劃拆成 <code>routes -&gt; controllers -&gt; models</code>**(MVC架構)**，一方面好維護，一方面檔案也不會那麼亂，比較清爽。</p>
+<p>在前篇文章 <strong><a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a></strong> 有提到如何使用 <strong>Express</strong> 快速建立一個專案環境，但資料夾架構怎麼放就是看個人了，這邊筆者拆成自己比較容易理解且好處理的架構。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/framework.png" alt="大致架構"></p>
+<p>由上至下大概為：</p>
+<ol>
+<li><p>config -&gt; 放第三方服務的設定</p>
+</li>
+<li><p>controllers -&gt; <strong>Models</strong> 及 <strong>Router</strong> 的橋樑</p>
+</li>
+<li><p>middleware -&gt; 中介層(可用來驗證…等等)</p>
+</li>
+<li><p>models -&gt; 與資料庫的橋樑</p>
+</li>
+<li><p>node_modules -&gt; 套件庫</p>
+</li>
+<li><p>public -&gt; 靜態資源放置區</p>
+</li>
+<li><p>routes -&gt; 路由</p>
+</li>
+<li><p>views -&gt; 靜態頁面</p>
+</li>
+<li><p>env -&gt; 環境變數</p>
+</li>
+</ol>
+<blockquote>
+<p><em>還有一些常見到的就不特別介紹了</em></p>
+</blockquote>
+<hr>
+<h3 id="大致功能"><a href="#大致功能" class="headerlink" title="大致功能"></a>大致功能</h3><p>這次筆者做一個比較簡單的待辦事項，可以簡單新增編輯刪除，其實這些透過 <strong>Firebase</strong> 都可以很輕易地做到，而路由安排也是簡單的指定並渲染，其中有使用到 <a href="https://github.com/jaredhanson/connect-flash">connect-flash</a>，這是可以將一些資訊暫存在 <strong>session</strong>，好處是刷新後只會顯示一次，之後就會消失，不會再留存在我們的記憶體內，省空間！</p>
+<p>使用方式也很簡單，路由需要用到的地方，只要使用以下方法即可：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 這個方法會將 &#x27;錯誤資訊&#x27; 暫時存放再 session</span></span><br><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>, <span class="string">&#x27;錯誤資訊&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過這個方法可將剛剛暫存的資料拿出來，但也將會消失在暫存中</span></span><br><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="模板題外話"><a href="#模板題外話" class="headerlink" title="模板題外話"></a>模板題外話</h3><p>此外這邊透過 <strong>pug</strong> 渲染，在之前前端使用 <strong>pug</strong> 時幾乎不會用到變數這功能，而這次接觸到了怎麼將變數渲染到頁面上，在後端透過下列方式將值放進變數裡：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 111行</span></span><br><span class="line">res.render(<span class="string">&#x27;editTask&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;Edit Task&#x27;</span>,</span><br><span class="line">    <span class="attr">error</span>: req.flash(<span class="string">&#x27;error&#x27;</span>),</span><br><span class="line">    <span class="attr">title_val</span>: title,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>接著在前端頁面使用下面的方式渲染出來：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- /views/editTask.pug 36行</span><br><span class="line">input#email.form-control(</span><br><span class="line">    type=&#x27;text&#x27;, </span><br><span class="line">    name=&quot;title&quot;,</span><br><span class="line">    placeholder=&quot;Title&quot;,</span><br><span class="line">    autocomplete,</span><br><span class="line">    value=`$&#123;title_val ? title_val : &#x27;&#x27;&#125;`</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>而如果碰到陣列要渲染就透過下面的方式渲染：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- /views/editTask.pug 13行</span><br><span class="line">if error</span><br><span class="line">    each val,index in error</span><br><span class="line">        .alert.alert-danger.alert-dismissible.fade.show.animate__animated.animate__shakeX(</span><br><span class="line">            role=&quot;alert&quot;</span><br><span class="line">        )</span><br><span class="line">            strong= val.msg</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="關於驗證"><a href="#關於驗證" class="headerlink" title="關於驗證"></a>關於驗證</h3><h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>這邊使用 <strong><a href="https://express-validator.github.io/docs/">express-validator-v6.6.1</a></strong> 作為驗證，一般驗證我們不止透過前端驗證，後端也需要驗證，而這邊使用這個套件也提供了很簡單的驗證方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安裝套件</span><br><span class="line">$ npm install express-validator</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入套件 </span></span><br><span class="line"><span class="keyword">const</span> &#123; check, body, cookie, header, param  &#125; = <span class="built_in">require</span>(<span class="string">&#x27;express-validator&#x27;</span>)</span><br><span class="line"><span class="comment">// 更多引入方法可查看 https://express-validator.github.io/docs/check-api.html</span></span><br></pre></td></tr></table></figure>
+
+<p>套件提供了幾種在後端驗證資料的讀取方式：</p>
+<ol>
+<li>check([field, message])</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- 驗證的欄位為 email</span><br><span class="line">input(type=&quot;email&quot;, name=&quot;email&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>這個方法會從 <code>req.body、req.cookies、req.headers、req.param、req.query</code> 去尋找這個名稱的欄位資料，如果有重複的名稱，則都會驗證！</p>
+</blockquote>
+<ol start="2">
+<li>check 剩下其他的驗證函示</li>
+</ol>
+<p>其他的驗證函示用法幾乎差不多，只是在尋找這個欄位的地方會不一樣，<code>body</code> 只會從 <code>req.body</code> 尋找、<code>header</code> 只會從 <code>req.headers</code> 尋找…等等</p>
+<h4 id="簡單的功能"><a href="#簡單的功能" class="headerlink" title="簡單的功能"></a>簡單的功能</h4><p>其實我們最主要會用到的功能為 <code>notEmpty()</code>，檢查是否為空，而用法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /routes/index.js 24行</span></span><br><span class="line">router.post(<span class="string">&#x27;/editTask/:id&#x27;</span>, checkAuth.verifyAuth, [</span><br><span class="line">    check(<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;Title is required&#x27;</span>).notEmpty(),</span><br><span class="line">    check(<span class="string">&#x27;expiry&#x27;</span>, <span class="string">&#x27;Expiry is required&#x27;</span>).notEmpty(),</span><br><span class="line">    check(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;Content is required&#x27;</span>).notEmpty(),</span><br><span class="line">], indexController.postEditTask);</span><br></pre></td></tr></table></figure>
+
+<p>上方會尋找各個欄位名稱為 <code>title</code>、<code>expiry</code> 及 <code>content</code> 的值，檢查是否為空，如果為空就返回提示文字，更多方法可查看 <a href="https://github.com/validatorjs/validator.js">validator.js</a>。</p>
+<h4 id="回傳錯誤訊息"><a href="#回傳錯誤訊息" class="headerlink" title="回傳錯誤訊息"></a>回傳錯誤訊息</h4><p>而我們如何將錯誤訊息回傳呢？在我們驗證錯誤之後，可以在驗證的檔案最上方引入 <code>const &#123; validationResult &#125; = require(&#39;express-validator&#39;);</code>，接著向下方的方式即可拿到錯誤資訊：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = validationResult(req);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣即可拿到錯誤資訊，如果是空的呢？就是沒有檢查到錯誤，接著透過上面提到的 <strong><a href="https://github.com/jaredhanson/connect-flash">connect-flash</a></strong> 將錯誤資訊放在暫存中：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = validationResult(req);</span><br><span class="line">    <span class="keyword">const</span> &#123; title, expiry, content &#125; = req.body;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!errors.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// 如果有錯誤</span></span><br><span class="line">        req.flash(<span class="string">&#x27;error&#x27;</span>, errors.errors);</span><br><span class="line">        req.flash(<span class="string">&#x27;title_val&#x27;</span>, title);</span><br><span class="line">        req.flash(<span class="string">&#x27;expiry_val&#x27;</span>, expiry);</span><br><span class="line">        req.flash(<span class="string">&#x27;content_val&#x27;</span>, content);</span><br><span class="line">        res.redirect(<span class="string">&#x27;/newTask&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(errors.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// 如果沒錯誤 Do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上方可以看到筆者也在 <code>req.body</code> 拿出了相關資訊，因為我們可能會在某一個欄位輸入錯誤，但其他欄位可能是正確的，這時候就必須將原本的值帶回，提升使用者體驗！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/error_msg.png" alt="錯誤提示"></p>
+<hr>
+<h3 id="中介層"><a href="#中介層" class="headerlink" title="中介層"></a>中介層</h3><p>這次的練習也透過 <strong><a href="https://github.com/expressjs/session#readme">express-session</a></strong> 將登入權杖存在 <strong>session</strong> 並且前端無法透過開發者工具取得，另外也把登入後 <strong>Firebase</strong> 的相關資訊存在 <strong>session</strong>，方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app.js 5行</span></span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>確保有引入套件後在使用下面的方法拿取 Token：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app.js 24行</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  <span class="attr">secret</span>: <span class="string">&#x27;todo list&#x27;</span>,</span><br><span class="line">  <span class="attr">resave</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">rolling</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">saveUninitialized</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">cookie</span>: &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">maxAge</span>: <span class="number">10</span>*<span class="number">10</span>*<span class="number">10000</span> <span class="comment">// 過期時間</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>接著在登入完成後將相關的資訊存在 session：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/user.js 32行</span></span><br><span class="line">req.session.auth = &#123;</span><br><span class="line">    <span class="attr">uid</span>: response.user.uid,</span><br><span class="line">    <span class="attr">email</span>: response.user.email</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後再寫一支中介層檔案，內容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /middleware/auth.js 1行</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">verifyAuth</span>: <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!req.sessionID || !req.session.auth || !req.session.auth.uid || !req.session.auth.email) &#123;</span><br><span class="line">      res.redirect(<span class="string">&#x27;users/login&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣一來就能在想要驗證的路由上使用了，先在要使用的地方引入中介層檔案 <code>const checkAuth = require(&#39;../middleware/auth&#39;);</code>，接著即可使用：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/checkAuth.png" alt="中介層"></p>
+<p>如果有通過驗證才會 <code>next()</code> 其他會倒回登入頁面！</p>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
+<p>GitHub: <a href="https://github.com/RexHung0302/node-todos">傳送門</a></p>
+<p>Demo: <a href="https://express-todos-list.herokuapp.com/users/login">傳送門</a></p>
+<blockquote>
+<p><em>因為是使用 Heroku 免費方案，如果太久沒有人打開網頁，打開需要點時間喚醒，請見諒</em></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實沒有什麼技術成分在，但純分享一下自己小作業做出來的成果，我想還有許多需要改進，**<a href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a>** 課程也還沒完成，這邊要在繼續惡補了！</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E6%8A%8A%E7%8E%A9-express-validator-%E5%9C%A8%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%AB%AF%E5%81%9A%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89-797342aab2d3">[筆記] 把玩 express-validator 在伺服器端做表單驗證</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Back-end</category>
+        <category>NodeJS</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>Back-end</tag>
+        <tag>NodeJS</tag>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？</title>
     <url>/2020/09/13/20200913/</url>
     <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_logo.png" alt="GA"></p>
@@ -4277,135 +4406,6 @@
         <tag>GA</tag>
         <tag>Google Tag Manager</tag>
         <tag>GTM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List</title>
-    <url>/2020/10/13/20201013/</url>
-    <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20201013/todo_list_banner.png" alt="Todo List"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這一篇文章會快速介紹一下筆者在上 <strong><a href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a></strong> 課程時，章節練習的小作業，透過 <strong>Nodejs</strong> 及 <strong>Firebase</strong> 寫一個菜鳥都必須要練習過的題目 <strong>Todo List</strong>。</p>
-<span id="more"></span>
-
-<p>本次 <strong>Nodejs</strong> 的 <strong>Template</strong> 使用為 **PUG(Jade)**。</p>
-<hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201013/demo.gif" alt="Demo"></p>
-<p>有興趣跟筆者一起從後端窺探可以參考前幾篇文章 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 及 **<a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a>**。</p>
-<p>本次作業練習將會使用 <strong>Express</strong> 及 <strong>Firebase</strong> 實作。</p>
-<hr>
-<h3 id="整體規劃"><a href="#整體規劃" class="headerlink" title="整體規劃"></a>整體規劃</h3><p>其實這次作業是希望我們做形象官網，但想了一下還是想從待辦清單下手，也可以串接 <strong>Firebase</strong> 的登入驗證，不需要在自己寫一個會員系統。</p>
-<p>而這次路由也規劃拆成 <code>routes -&gt; controllers -&gt; models</code>**(MVC架構)**，一方面好維護，一方面檔案也不會那麼亂，比較清爽。</p>
-<p>在前篇文章 <strong><a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a></strong> 有提到如何使用 <strong>Express</strong> 快速建立一個專案環境，但資料夾架構怎麼放就是看個人了，這邊筆者拆成自己比較容易理解且好處理的架構。</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20201013/framework.png" alt="大致架構"></p>
-<p>由上至下大概為：</p>
-<ol>
-<li><p>config -&gt; 放第三方服務的設定</p>
-</li>
-<li><p>controllers -&gt; <strong>Models</strong> 及 <strong>Router</strong> 的橋樑</p>
-</li>
-<li><p>middleware -&gt; 中介層(可用來驗證…等等)</p>
-</li>
-<li><p>models -&gt; 與資料庫的橋樑</p>
-</li>
-<li><p>node_modules -&gt; 套件庫</p>
-</li>
-<li><p>public -&gt; 靜態資源放置區</p>
-</li>
-<li><p>routes -&gt; 路由</p>
-</li>
-<li><p>views -&gt; 靜態頁面</p>
-</li>
-<li><p>env -&gt; 環境變數</p>
-</li>
-</ol>
-<blockquote>
-<p><em>還有一些常見到的就不特別介紹了</em></p>
-</blockquote>
-<hr>
-<h3 id="大致功能"><a href="#大致功能" class="headerlink" title="大致功能"></a>大致功能</h3><p>這次筆者做一個比較簡單的待辦事項，可以簡單新增編輯刪除，其實這些透過 <strong>Firebase</strong> 都可以很輕易地做到，而路由安排也是簡單的指定並渲染，其中有使用到 <a href="https://github.com/jaredhanson/connect-flash">connect-flash</a>，這是可以將一些資訊暫存在 <strong>session</strong>，好處是刷新後只會顯示一次，之後就會消失，不會再留存在我們的記憶體內，省空間！</p>
-<p>使用方式也很簡單，路由需要用到的地方，只要使用以下方法即可：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 這個方法會將 &#x27;錯誤資訊&#x27; 暫時存放再 session</span></span><br><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>, <span class="string">&#x27;錯誤資訊&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過這個方法可將剛剛暫存的資料拿出來，但也將會消失在暫存中</span></span><br><span class="line">req.flash(<span class="string">&#x27;error&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="模板題外話"><a href="#模板題外話" class="headerlink" title="模板題外話"></a>模板題外話</h3><p>此外這邊透過 <strong>pug</strong> 渲染，在之前前端使用 <strong>pug</strong> 時幾乎不會用到變數這功能，而這次接觸到了怎麼將變數渲染到頁面上，在後端透過下列方式將值放進變數裡：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 111行</span></span><br><span class="line">res.render(<span class="string">&#x27;editTask&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;Edit Task&#x27;</span>,</span><br><span class="line">    <span class="attr">error</span>: req.flash(<span class="string">&#x27;error&#x27;</span>),</span><br><span class="line">    <span class="attr">title_val</span>: title,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>接著在前端頁面使用下面的方式渲染出來：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- /views/editTask.pug 36行</span><br><span class="line">input#email.form-control(</span><br><span class="line">    type=&#x27;text&#x27;, </span><br><span class="line">    name=&quot;title&quot;,</span><br><span class="line">    placeholder=&quot;Title&quot;,</span><br><span class="line">    autocomplete,</span><br><span class="line">    value=`$&#123;title_val ? title_val : &#x27;&#x27;&#125;`</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>而如果碰到陣列要渲染就透過下面的方式渲染：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- /views/editTask.pug 13行</span><br><span class="line">if error</span><br><span class="line">    each val,index in error</span><br><span class="line">        .alert.alert-danger.alert-dismissible.fade.show.animate__animated.animate__shakeX(</span><br><span class="line">            role=&quot;alert&quot;</span><br><span class="line">        )</span><br><span class="line">            strong= val.msg</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="關於驗證"><a href="#關於驗證" class="headerlink" title="關於驗證"></a>關於驗證</h3><h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>這邊使用 <strong><a href="https://express-validator.github.io/docs/">express-validator-v6.6.1</a></strong> 作為驗證，一般驗證我們不止透過前端驗證，後端也需要驗證，而這邊使用這個套件也提供了很簡單的驗證方式。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安裝套件</span><br><span class="line">$ npm install express-validator</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入套件 </span></span><br><span class="line"><span class="keyword">const</span> &#123; check, body, cookie, header, param  &#125; = <span class="built_in">require</span>(<span class="string">&#x27;express-validator&#x27;</span>)</span><br><span class="line"><span class="comment">// 更多引入方法可查看 https://express-validator.github.io/docs/check-api.html</span></span><br></pre></td></tr></table></figure>
-
-<p>套件提供了幾種在後端驗證資料的讀取方式：</p>
-<ol>
-<li>check([field, message])</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//- 驗證的欄位為 email</span><br><span class="line">input(type=&quot;email&quot;, name=&quot;email&quot;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>這個方法會從 <code>req.body、req.cookies、req.headers、req.param、req.query</code> 去尋找這個名稱的欄位資料，如果有重複的名稱，則都會驗證！</p>
-</blockquote>
-<ol start="2">
-<li>check 剩下其他的驗證函示</li>
-</ol>
-<p>其他的驗證函示用法幾乎差不多，只是在尋找這個欄位的地方會不一樣，<code>body</code> 只會從 <code>req.body</code> 尋找、<code>header</code> 只會從 <code>req.headers</code> 尋找…等等</p>
-<h4 id="簡單的功能"><a href="#簡單的功能" class="headerlink" title="簡單的功能"></a>簡單的功能</h4><p>其實我們最主要會用到的功能為 <code>notEmpty()</code>，檢查是否為空，而用法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /routes/index.js 24行</span></span><br><span class="line">router.post(<span class="string">&#x27;/editTask/:id&#x27;</span>, checkAuth.verifyAuth, [</span><br><span class="line">    check(<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;Title is required&#x27;</span>).notEmpty(),</span><br><span class="line">    check(<span class="string">&#x27;expiry&#x27;</span>, <span class="string">&#x27;Expiry is required&#x27;</span>).notEmpty(),</span><br><span class="line">    check(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;Content is required&#x27;</span>).notEmpty(),</span><br><span class="line">], indexController.postEditTask);</span><br></pre></td></tr></table></figure>
-
-<p>上方會尋找各個欄位名稱為 <code>title</code>、<code>expiry</code> 及 <code>content</code> 的值，檢查是否為空，如果為空就返回提示文字，更多方法可查看 <a href="https://github.com/validatorjs/validator.js">validator.js</a>。</p>
-<h4 id="回傳錯誤訊息"><a href="#回傳錯誤訊息" class="headerlink" title="回傳錯誤訊息"></a>回傳錯誤訊息</h4><p>而我們如何將錯誤訊息回傳呢？在我們驗證錯誤之後，可以在驗證的檔案最上方引入 <code>const &#123; validationResult &#125; = require(&#39;express-validator&#39;);</code>，接著向下方的方式即可拿到錯誤資訊：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = validationResult(req);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這樣即可拿到錯誤資訊，如果是空的呢？就是沒有檢查到錯誤，接著透過上面提到的 <strong><a href="https://github.com/jaredhanson/connect-flash">connect-flash</a></strong> 將錯誤資訊放在暫存中：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = validationResult(req);</span><br><span class="line">    <span class="keyword">const</span> &#123; title, expiry, content &#125; = req.body;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!errors.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// 如果有錯誤</span></span><br><span class="line">        req.flash(<span class="string">&#x27;error&#x27;</span>, errors.errors);</span><br><span class="line">        req.flash(<span class="string">&#x27;title_val&#x27;</span>, title);</span><br><span class="line">        req.flash(<span class="string">&#x27;expiry_val&#x27;</span>, expiry);</span><br><span class="line">        req.flash(<span class="string">&#x27;content_val&#x27;</span>, content);</span><br><span class="line">        res.redirect(<span class="string">&#x27;/newTask&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(errors.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// 如果沒錯誤 Do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上方可以看到筆者也在 <code>req.body</code> 拿出了相關資訊，因為我們可能會在某一個欄位輸入錯誤，但其他欄位可能是正確的，這時候就必須將原本的值帶回，提升使用者體驗！</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20201013/error_msg.png" alt="錯誤提示"></p>
-<hr>
-<h3 id="中介層"><a href="#中介層" class="headerlink" title="中介層"></a>中介層</h3><p>這次的練習也透過 <strong><a href="https://github.com/expressjs/session#readme">express-session</a></strong> 將登入權杖存在 <strong>session</strong> 並且前端無法透過開發者工具取得，另外也把登入後 <strong>Firebase</strong> 的相關資訊存在 <strong>session</strong>，方法如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app.js 5行</span></span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>確保有引入套件後在使用下面的方法拿取 Token：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// app.js 24行</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">  <span class="attr">secret</span>: <span class="string">&#x27;todo list&#x27;</span>,</span><br><span class="line">  <span class="attr">resave</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">rolling</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">saveUninitialized</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">cookie</span>: &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">maxAge</span>: <span class="number">10</span>*<span class="number">10</span>*<span class="number">10000</span> <span class="comment">// 過期時間</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
-
-<p>接著在登入完成後將相關的資訊存在 session：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /controllers/user.js 32行</span></span><br><span class="line">req.session.auth = &#123;</span><br><span class="line">    <span class="attr">uid</span>: response.user.uid,</span><br><span class="line">    <span class="attr">email</span>: response.user.email</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然後再寫一支中介層檔案，內容如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// /middleware/auth.js 1行</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">verifyAuth</span>: <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!req.sessionID || !req.session.auth || !req.session.auth.uid || !req.session.auth.email) &#123;</span><br><span class="line">      res.redirect(<span class="string">&#x27;users/login&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這樣一來就能在想要驗證的路由上使用了，先在要使用的地方引入中介層檔案 <code>const checkAuth = require(&#39;../middleware/auth&#39;);</code>，接著即可使用：</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20201013/checkAuth.png" alt="中介層"></p>
-<p>如果有通過驗證才會 <code>next()</code> 其他會倒回登入頁面！</p>
-<hr>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
-<p>GitHub: <a href="https://github.com/RexHung0302/node-todos">傳送門</a></p>
-<p>Demo: <a href="https://express-todos-list.herokuapp.com/users/login">傳送門</a></p>
-<blockquote>
-<p><em>因為是使用 Heroku 免費方案，如果太久沒有人打開網頁，打開需要點時間喚醒，請見諒</em></p>
-</blockquote>
-<hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實沒有什麼技術成分在，但純分享一下自己小作業做出來的成果，我想還有許多需要改進，**<a href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a>** 課程也還沒完成，這邊要在繼續惡補了！</p>
-<hr>
-<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><a href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E6%8A%8A%E7%8E%A9-express-validator-%E5%9C%A8%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%AB%AF%E5%81%9A%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89-797342aab2d3">[筆記] 把玩 express-validator 在伺服器端做表單驗證</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Code</category>
-        <category>Back-end</category>
-        <category>NodeJS</category>
-      </categories>
-      <tags>
-        <tag>Code</tag>
-        <tag>Back-end</tag>
-        <tag>NodeJS</tag>
-        <tag>Express</tag>
       </tags>
   </entry>
   <entry>
@@ -6581,178 +6581,6 @@
       </tags>
   </entry>
   <entry>
-    <title>[NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫</title>
-    <url>/2020/11/09/20201109/</url>
-    <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20201109/MySQL_logo.png" alt="MySQL"></p>
-<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>好久不見，在開始後端之路之後進度雖然緩慢，但發現一路上的確挺有趣的，經歷過了 <a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a> 透過 <strong>NodeJS</strong> 重頭開始認識後端，一直到 <a href="https://rexhung0302.github.io/2020/10/13/20201013/">[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List</a> 我們透過了三篇文章介紹如何轉職為全端勇者。</p>
-<p>在今天這篇文章將來探討如何串接 **MySQL(資料庫)**，而非上次透過 <strong>Firebase</strong> 快速串接，這次將會是有趣的一篇文章(<del>才怪</del>)！</p>
-<span id="more"></span>
-
-<hr>
-<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201109/nodeToMysql.png" alt="Connect"></p>
-<p>在前一章筆者實作了陽春版本的 <a href="https://express-todos-list.herokuapp.com/users/login">TODO List</a>，提到後端就不得不提資料庫，而在 <a href="https://express-todos-list.herokuapp.com/users/login">TODO List</a> 之中我們使用的是 <strong>Google Firebase</strong> 的資料庫，雖然都是資料庫但是和我們要使用的 <strong>MySQL</strong> 是不相同的。</p>
-<p>本篇文章會談到幾個點：</p>
-<ol>
-<li><p>資料庫差異</p>
-</li>
-<li><p>何謂 ORM</p>
-</li>
-<li><p>如何串接資料庫</p>
-</li>
-<li><p>快速上手 Sequelize</p>
-</li>
-<li><p>完成人生第一個後端資料</p>
-</li>
-</ol>
-<hr>
-<h3 id="資料庫差異"><a href="#資料庫差異" class="headerlink" title="資料庫差異"></a>資料庫差異</h3><p><strong>『<a href="https://tw.alphacamp.co/blog/sql-nosql-database-dbms-introduction">SQL(Structured Query Language 結構化查詢語言) 是一種專門用來管理與查詢關聯式資料庫(Relational database)的程式語言</a>』</strong> 在某些網站都能看見對關於 <strong>SQL</strong> 的介紹文，這邊講太多太細的東西大家肯定也記不住，既然我們是幼幼班上手，就從好記得來。</p>
-<h4 id="關聯式資料庫（Relational-database）"><a href="#關聯式資料庫（Relational-database）" class="headerlink" title="關聯式資料庫（Relational database）"></a>關聯式資料庫（Relational database）</h4><p>首先來說說 <strong>關聯式資料庫</strong> 的幾個特點：</p>
-<ol>
-<li><p>資料是一個或多個資料表方式存放</p>
-</li>
-<li><p>資料之間有關聯性</p>
-</li>
-<li><p>以 SQL 語言操作</p>
-</li>
-</ol>
-<p><img src="/images/others/loading.gif" data-original="/images/20201109/relational_db.png" alt="關連式資料庫"></p>
-<p>關連式資料庫會把每一個表格集合起來，而每一個表格裡面都是一筆一筆的資料，不同資料表可能會互相關聯著，比如 **會員小明(Table -&gt; Users)訂購了(Table -&gt; Orders)一支Iphone 12 pro max(Table -&gt; Goods)**，這之間的表格都互有關連，在前端發送出請求一直到後端時，後端可以透過 <strong>SQL(註1)</strong> 語法去將資料庫裡的資料進行收集、排序，亦或是新增刪除。</p>
-<p><em>註1: SQL語法拿來在操作關聯式資料庫時使用，例如 <code>SELECT * FROM Users Where age=1</code>(將表格 Users 裡面，符合條件 age = 1 的資料取出)</em></p>
-<h4 id="非關聯式資料庫-NoSQL"><a href="#非關聯式資料庫-NoSQL" class="headerlink" title="非關聯式資料庫(NoSQL)"></a>非關聯式資料庫(NoSQL)</h4><p>照字面上的意思應該就能懂八十七層；因為現今網路應用程式流量越來越大幅成長，對於關聯式資料庫在存取大量資料時，會比較慢，你能想像在使用 <strong>Youtube</strong> 及 <strong>Facebook</strong> 時，跑個資料就跑好幾分鐘的感覺嗎？我想應該連幾秒都不太想等待吧！</p>
-<p>而在需要快速取得資料的情況下人們開始做取捨，不需要即時同步且精準無誤的取得某些特定資料，所以 <strong>NoSQL</strong> 就這樣熱門了起來。</p>
-<p><strong>NoSQL</strong> 的全名為 <strong>Not Only SQL</strong>，在 <strong>NoSQL</strong> 上並不支持 <strong>SQL</strong> 語法，且更關注於資料的變動，舉例來說 <strong>Youtube</strong> 的瀏覽數及訂閱數量在某些百萬級 <strong>Youtube</strong> 會是數萬甚至數十萬筆，這時候點開我們並不需要先去確認誰先訂閱，或是誰比較晚訂閱，只需要注重最後的結果，最後統計是多少的訂閱數量，這就是適合使用 <strong>NoSQL</strong> 達到的，相反的如果需要在乎於邏輯上，比如說電商網站，先刷卡、確定扣款後、商品才能寄出，這時候適合什麼應該很清楚了吧！</p>
-<p>最後 <strong>NoSQL</strong> 有一個最特別的點，所有資料都會被用 <strong>JSON</strong> 方式存放起來，每一筆資料都是 <strong>Key:Value(name: ‘王小明’)</strong> 的方式，而這些資料則會被存放在 <strong>Documents</strong>，最後一堆一堆的 <strong>Documents</strong> 則會被放在 <strong>Collections</strong> 裡。</p>
-<hr>
-<h3 id="何謂-ORM"><a href="#何謂-ORM" class="headerlink" title="何謂 ORM"></a>何謂 ORM</h3><p>在開始講如何串接資料庫前這邊必須在提到 <strong>ORM</strong>，簡單來說在上方我們有提到 <strong>SQL</strong> 語法，而你會想這樣我不就要再多學一個語言嗎！</p>
-<p>別擔心已經有人幫你想好了，俗話說的好，學會一個語言再去學另一個語言會很快，那如果我們學好一個語言再用這個語言的邏輯去學另一個語言，是不是又再縮短一半的時間了呢？</p>
-<p>舉個例子來說，我們已經會 <strong>Javascript</strong> 了，我們在使用 <strong>Javascript</strong> 去學習 <strong>NodeJS</strong>，而我們認識了 <strong>NodeJS</strong> 了，再透過 <strong>Javascript</strong> 去學習 <strong>SQL</strong>，有沒有一種健達出奇蛋的感覺呢？買了一顆健達出奇蛋(<strong>Javascript</strong>)，滿足你三種願望(<strong>Vue、NodeJS、SQL</strong>)！</p>
-<blockquote>
-<p>我知道比喻很爛別揍我</p>
-</blockquote>
-<p>而 <strong>ORM</strong> 就是有開發者透過程式語言的物件去包裝 <strong>SQL</strong>，讓你可以透過你熟悉的程式語言(<strong>Javascript、PHP</strong>)去簡單呼叫層層包裝過的方法；只是有一點要特別注意，上方提到的 <strong>關聯式資料庫</strong> 及 <strong>非關聯式資料庫</strong>，前者透過 <strong>ORM</strong> 技術，後者透過 <strong>ODM</strong>。</p>
-<p><em>例如： <code>UsersDB.findAll()</code> -&gt; <code>SELECT * FROM USERS;</code></em></p>
-<hr>
-<h3 id="如何串接資料庫"><a href="#如何串接資料庫" class="headerlink" title="如何串接資料庫"></a>如何串接資料庫</h3><p>終於到我們的重點了，這邊會先示範如何串接資料庫不透過 <strong>ORM</strong>，首先輸入下列內容到後端專案裡。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i mysql2 -S</span><br></pre></td></tr></table></figure>
-
-<p>接著在後端入口(app.js)，引用資料庫並且連接資料庫。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> mysql      = <span class="built_in">require</span>(<span class="string">&#x27;mysql2&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  <span class="attr">host</span>     : <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="attr">user</span>     : <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span> : <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">  <span class="attr">database</span> : <span class="string">&#x27;users&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">connection.connect();</span><br><span class="line"> </span><br><span class="line">connection.query(<span class="string">&#x27;SELECT * FROM users&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;The Users is: &#x27;</span>, results);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>完工！雖然這樣就能簡單的連上了，但東西都塞在入口檔案，和我們想要的 <strong>MVC</strong> 環境架構還有 <strong>87%</strong> 遠，而你也不會想要每次建立後端專案就手幹一次吧，所以接著們要提到本日重頭戲了。</p>
-<hr>
-<h3 id="快速上手-Sequelize"><a href="#快速上手-Sequelize" class="headerlink" title="快速上手 Sequelize"></a>快速上手 Sequelize</h3><h4 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h4><p><strong>Sequelize</strong> 就是剛剛上方提到的 <strong>ORM</strong>，而他也具備了幫我們初始化環境的功能，我們按照步驟來吧。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i sequelize sequelize-cli mysql2 -S // 安裝相關套件</span><br><span class="line"></span><br><span class="line">$ npm i sequelize-cli -g // 全域安裝 ORM Cli</span><br></pre></td></tr></table></figure>
-
-<p>雖然 <strong>sequelize</strong> 作為類似套件方式使用，安裝在專案裡面，但跟 <strong>Gulp</strong> 及 <strong>Vue-cli</strong> 一樣，我們可以透過 <strong>cli</strong> 來使用某些特定的功能；緊接著輸入下面的內容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize init</span><br></pre></td></tr></table></figure>
-
-<p>這時候你會看見專案裡面多個幾個資料夾，分別為</p>
-<ul>
-<li><p>config</p>
-</li>
-<li><p>models</p>
-</li>
-<li><p>migrations</p>
-</li>
-<li><p>seeders</p>
-</li>
-</ul>
-<p>這時候這個套件已經幫我們把 <strong>MVC</strong> 分別分類出來了。</p>
-<h4 id="環境介紹"><a href="#環境介紹" class="headerlink" title="環境介紹"></a>環境介紹</h4><p>筆者個人認為這個框架對新手算是友善的，因為你可以透過這個框架認識 <strong>MVC</strong> 架構如何分，也可以再透過這個框架去操作資料庫。</p>
-<p>讓我們先看到 <strong>config</strong> 資料夾裡面的 <strong>config.json</strong>。</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;development&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_development&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;test&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_test&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;production&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_production&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這邊便是我們要讓 Sequelize 知道在什麼情況下該與什麼資料庫連接，由最上開始分別為 <strong>開發、測試</strong> 及 <strong>正式</strong>，而我們目前只會先用到開發，所以我們先把最上面的 <strong>development</strong> 做點更動。</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;development&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...下略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然後我們再看到 <strong>model</strong> 資料夾下的 <strong>index.js</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">&#x27;sequelize&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> basename = path.basename(__filename);</span><br><span class="line"><span class="keyword">const</span> env = process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(__dirname + <span class="string">&#x27;/../config/config.json&#x27;</span>)[env];</span><br><span class="line"><span class="keyword">const</span> db = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sequelize;</span><br><span class="line"><span class="keyword">if</span> (config.use_env_variable) &#123;</span><br><span class="line">  sequelize = <span class="keyword">new</span> Sequelize(process.env[config.use_env_variable], config);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  sequelize = <span class="keyword">new</span> Sequelize(config.database, config.username, config.password, config);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fs</span><br><span class="line">  .readdirSync(__dirname)</span><br><span class="line">  .filter(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (file.indexOf(<span class="string">&#x27;.&#x27;</span>) !== <span class="number">0</span>) &amp;&amp; (file !== basename) &amp;&amp; (file.slice(-<span class="number">3</span>) === <span class="string">&#x27;.js&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> model = sequelize[<span class="string">&#x27;import&#x27;</span>](path.join(__dirname, file));</span><br><span class="line">    db[model.name] = model;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(db).forEach(<span class="function"><span class="params">modelName</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (db[modelName].associate) &#123;</span><br><span class="line">    db[modelName].associate(db);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">db.sequelize = sequelize;</span><br><span class="line">db.Sequelize = Sequelize;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = db;</span><br></pre></td></tr></table></figure>
-
-<p>這邊大致上可以看過，如果有興趣可以在深入研究，基本上這邊就是在利用同目錄底下的其他 <strong>.js</strong> 檔案的 <strong>model.name</strong> 當作索引，接著放到 <strong>db</strong> 物件裡，執行時 <strong>model</strong> 的 <strong>define</strong> 將資料表與 <strong>js</strong> 對應上。</p>
-<p>在簡單的說就是之後我們建立在 <strong>model</strong> 資料架內的任何 <strong>.js</strong> 檔案，都會建立好關聯，在需要呼叫 <strong>DB</strong> 的時候只需要使用 <code>const Users = require(&#39;./model&#39;).Users;</code> 或 <code>const Goods = require(&#39;./model&#39;).Goods;</code> 這樣就能呼叫了。</p>
-<h4 id="小整理"><a href="#小整理" class="headerlink" title="小整理"></a>小整理</h4><p>介紹完前面兩個資料夾後，我們先整理一下：</p>
-<ul>
-<li><p>config - 設定什麼環境應該連接什麼資料庫的地方</p>
-</li>
-<li><p>models - 存放各個 DB 表格的地方，需要使用到可以直接透過 <code>const Users = require(&#39;./model&#39;).Users;</code> 方式呼叫</p>
-</li>
-</ul>
-<h4 id="migrations"><a href="#migrations" class="headerlink" title="migrations"></a>migrations</h4><p>講到這個可能剛接觸後端是第一次看見，但如果有與後端合作過，可能會聽見後端請你跑類似 <code>php artisan migration</code> 的東西，你就會發現資料庫內的表格都神奇地被建立好了。</p>
-<p>這邊我們需要先使用下面語法去產生我們的 <strong>DB</strong> 然後把要新增上資料庫的表格，先一併存放在 <strong>model</strong> 資料夾裡。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize model:generate --name users --attributes mobile:string,email:string,birthday:time,sex:tinyint</span><br></pre></td></tr></table></figure>
-
-<p>上方 <strong>–name</strong> 後方為表的名稱，而最後面的就是要建立的 <strong>key</strong> 及 <strong>value</strong> 的種類。</p>
-<p>這樣就會在 <strong>model</strong> 資料夾內建立我們的第一個表，仔細看看 <code>models/users.js</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  Model</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;sequelize&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">sequelize, DataTypes</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">users</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Helper method for defining associations.</span></span><br><span class="line"><span class="comment">     * This method is not a part of Sequelize lifecycle.</span></span><br><span class="line"><span class="comment">     * The `models/index` file will call this method automatically.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">associate</span>(<span class="params">models</span>)</span> &#123;</span><br><span class="line">      <span class="comment">// define association here</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  users.init(&#123;</span><br><span class="line">    <span class="attr">mobile</span>: DataTypes.STRING,</span><br><span class="line">    <span class="attr">email</span>: DataTypes.STRING,</span><br><span class="line">    <span class="attr">birthday</span>: DataTypes.TIME,</span><br><span class="line">    <span class="attr">sex</span>: DataTypes.TINYINT</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    sequelize,</span><br><span class="line">    <span class="attr">modelName</span>: <span class="string">&#x27;users&#x27;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> users;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>然後 <strong>migration</strong> 資料夾也新增了一個檔案 <strong>2020XXXXXXXXXX-default-users</strong>：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UUIDV4 = <span class="built_in">require</span>(<span class="string">&#x27;uuid/v4&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">up</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> queryInterface.createTable(<span class="string">&#x27;users&#x27;</span>, &#123;</span><br><span class="line">      <span class="attr">id</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">primaryKey</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.UUID,</span><br><span class="line">        <span class="attr">defaultValue</span>: UUIDV4</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">mobile</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.STRING,</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;手機號碼&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">email</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.STRING</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">birthday</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE,</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;生日&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">sex</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.ENUM,</span><br><span class="line">        <span class="attr">values</span>: [</span><br><span class="line">          <span class="string">&#x27;boy&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;girl&#x27;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;性別為男=boy, 女=girl&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">createdAt</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">updatedAt</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">down</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> queryInterface.dropTable(<span class="string">&#x27;users&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>先解釋為什麼會引入 <code>uuid/v4</code>，一般的主鍵都是 <strong>+1+1</strong> 往上疊加上去，而這邊我想要給使用者一串亂數，例如 <code>22a59k20-dff5-9285-1023-0u3a99ca6773</code>，好處是不容易被破解，但因為想塞入這種亂碼就必須藉助套件去產生亂碼，所以想使用這個記得要另外安裝 **<a href="https://github.com/uuidjs/uuid#readme">uuid</a>**，之後 <strong>users</strong> 的主鍵就能獲得獨一無二的亂碼。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i uuid -S</span><br></pre></td></tr></table></figure>
-
-<p>上方的 <strong>type</strong> 即為種類，像是單純 <strong>字串</strong> 、 <strong>Radio</strong> 或 <strong>日期</strong>，其中裡面還能設定 <strong>備註</strong> 等等，可以上 <a href="https://sequelize.org/master/identifiers.html">Sequelize</a> 的官網查看更詳細的種類。</p>
-<p>介紹完之後就輸入 <code>sequelize db:migrate</code> 然後進入資料庫看看是不是有新增成功。</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20201109/table_after_migrate.png" alt="新增成功"></p>
-<p>我們會發現多了一個 <strong>SequelizeMeta</strong> 及 <strong>users</strong>，前者就是用來紀錄你跑過多少個 <strong>migrate</strong> 的紀錄，後者為你剛剛上方設定的 <strong>Table</strong> 內容。</p>
-<blockquote>
-<p><em>如果新增錯誤，想要重新來過，可以在輸入 <code>sequelize db:migrate:undo</code></em> 就會跑回去上一個步驟了，執行的內容為 <code>migrations/2020XXXXXXXXXX-create-users.js</code> 內的 <code>function down()</code>。</p>
-</blockquote>
-<h4 id="seeders"><a href="#seeders" class="headerlink" title="seeders"></a>seeders</h4><p>說完建立 <strong>Table</strong> 當然就是要塞入預設假資料啦，不然每次開發你都要先手動填寫資料或是等到前端自己帶入資料才發現出問題就麻煩了。</p>
-<p>而 <strong>seeders</strong> 的檔案也可以依靠指令產出來：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize seed:generate --name default-users</span><br></pre></td></tr></table></figure>
-
-<p>執行結束後會發現 <strong>seeders</strong> 的資料夾下多了一個檔案，就是剛剛上方指令命名的 <strong>2020XXXXXXXXXX-default-users.js</strong>，接著裡面就必須自己輸入了，但套件很貼心的還是有範例在上方：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">v4</span>: uuidv4 &#125; = <span class="built_in">require</span>(<span class="string">&#x27;uuid&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">up</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add seed commands here.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Example:</span></span><br><span class="line"><span class="comment">     * await queryInterface.bulkInsert(&#x27;People&#x27;, [&#123;</span></span><br><span class="line"><span class="comment">     *   name: &#x27;John Doe&#x27;,</span></span><br><span class="line"><span class="comment">     *   isBetaMember: false</span></span><br><span class="line"><span class="comment">     * &#125;], &#123;&#125;);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">await</span> queryInterface.bulkInsert(<span class="string">&#x27;users&#x27;</span>, [&#123;</span><br><span class="line">      <span class="attr">id</span>: uuidv4(),</span><br><span class="line">      <span class="attr">mobile</span>: <span class="string">&#x27;0900000000&#x27;</span>,</span><br><span class="line">      <span class="attr">email</span>: <span class="string">&#x27;test@admin.com&#x27;</span>,</span><br><span class="line">      <span class="attr">birthday</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1995-08-08 08:08:08&#x27;</span>),</span><br><span class="line">      <span class="attr">sex</span>: <span class="string">&#x27;boy&#x27;</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      <span class="attr">updatedAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: uuidv4(),</span><br><span class="line">      <span class="attr">mobile</span>: <span class="string">&#x27;0911111111&#x27;</span>,</span><br><span class="line">      <span class="attr">email</span>: <span class="string">&#x27;test2@admin.com&#x27;</span>,</span><br><span class="line">      <span class="attr">birthday</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1904-05-20 12:49:00&#x27;</span>),</span><br><span class="line">      <span class="attr">sex</span>: <span class="string">&#x27;girl&#x27;</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      <span class="attr">updatedAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    &#125;], &#123;&#125;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">down</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add commands to revert seed here.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Example:</span></span><br><span class="line"><span class="comment">     * await queryInterface.bulkDelete(&#x27;People&#x27;, null, &#123;&#125;);</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">await</span> queryInterface.bulkDelete(<span class="string">&#x27;users&#x27;</span>, <span class="literal">null</span>, &#123;&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>和 <strong>migrate</strong> 一樣，我們必須透過指令來啟動它，輸入 <code>sequelize db:seed:all</code> 或是 <code>sequelize db:seed:users</code> 來指令要跑的種子即可塞入假資料，如果不想要預設資料了想清掉，就跑 <code>sequelize db:seed:undo:all</code> 就可以清掉所有的預設資料，或是指定目標清除預設資料 <code>sequelize db:seed:undo:users</code>。</p>
-<h4 id="再度小整理"><a href="#再度小整理" class="headerlink" title="再度小整理"></a>再度小整理</h4><ul>
-<li><p>config - 設定什麼環境應該連接什麼資料庫的地方</p>
-</li>
-<li><p>models - 存放各個 DB 表格的地方，需要使用到可以直接透過 <code>const Users = require(&#39;./model&#39;).Users;</code> 方式呼叫</p>
-</li>
-<li><p>migrations - 存放要初始化 Table 的資料夾</p>
-</li>
-<li><p>seeders - 存放對應 Table 的預設資料</p>
-</li>
-</ul>
-<hr>
-<h3 id="完成人生第一個後端資料"><a href="#完成人生第一個後端資料" class="headerlink" title="完成人生第一個後端資料"></a>完成人生第一個後端資料</h3><p>都完成後這時候可以到後端 <strong>routers</strong> 裡面，使用上方說的方式：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> UsersDB = <span class="built_in">require</span>(<span class="string">&#x27;../models&#x27;</span>).users;</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  (<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> users = <span class="keyword">await</span> UsersDB.findAll();</span><br><span class="line"></span><br><span class="line">    res.json(&#123;</span><br><span class="line">      <span class="attr">status</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">      users</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>執行結果為下，大功告成！</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Executing (default): SELECT `id`, `mobile`, `email`, `birthday`, `sex`, `createdAt`, `updatedAt` FROM `users` AS `users`;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次是筆者第一次從 0 開始連接資料庫，然後寫上 <strong>migrate</strong> 及 <strong>seeders</strong>，不得不說真的是滿滿成就感，不過需要學習的地方還是好多，雖然上面提到使用 <strong>ORM</strong> 等於是用自己熟悉的語言再去學習另一個語言，且被包裝過比起原生的 <strong>SQL</strong> 語法方便許多，但其實不論如何，碰到新的語言都還是要重新適應，畢竟這都是人家包裝過的東西，你就必須跟著作者的思路走，跟著作者的方法走。</p>
-<p>最近對於程式的怠惰感及厭倦感又有點上升了，但絕非討厭程式，我想就跟運動一樣吧，剛開始滿懷熱血，但是持續了一陣子之後就會開始疲勞，這時候無非就是要自己尋找出自己的興趣，讓這件事情不再是單調枯燥乏味，希望在幾個月之後回頭看自己，能再有所成長。</p>
-<p>剩下幾個月 <strong>2020</strong> 就要結束了，雖然今年很鳥，很多遺憾的實情發生了，但既然還活在當下就要好好把握，趁這段時間好好衝刺充實自己，期許正在看文章的人或是幾個月後的自己，都還是能對程式滿懷動力，並且讓自己越來越好。</p>
-<hr>
-<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><a href="https://medium.com/@mengchiang000/nodejs-orm-tool-sequelize-2-cli%E7%AF%87-4d6c0789230e">Nodejs ORM tool: Sequelize(2) CLI篇</a></p>
-</li>
-<li><p><a href="https://dotblogs.com.tw/explooosion/2016/07/18/010601">Node.js - Express + MySQL</a></p>
-</li>
-<li><p><a href="https://tw.alphacamp.co/blog/mysql-and-mongodb-comparison">該用 MySQL 或 MongoDB？選擇資料庫前你該了解的事</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Code</category>
-        <category>Back-end</category>
-        <category>NodeJS</category>
-        <category>MySQL</category>
-        <category>ORM</category>
-        <category>Sequelize</category>
-      </categories>
-      <tags>
-        <tag>Code</tag>
-        <tag>Back-end</tag>
-        <tag>NodeJS</tag>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LINE TAIWAN TECHPULSE 2020</title>
     <url>/2020/12/19/20201219/</url>
     <content><![CDATA[<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20201219/LINE_TECHPULSE_2020.gif" alt="LINE TAIWAN TECHPULSE 2020"></p>
@@ -6961,6 +6789,178 @@
         <tag>Life</tag>
         <tag>LINE</tag>
         <tag>TECHPULSE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫</title>
+    <url>/2020/11/09/20201109/</url>
+    <content><![CDATA[<p><img src="/images/others/loading.gif" data-original="/images/20201109/MySQL_logo.png" alt="MySQL"></p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>好久不見，在開始後端之路之後進度雖然緩慢，但發現一路上的確挺有趣的，經歷過了 <a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a> 透過 <strong>NodeJS</strong> 重頭開始認識後端，一直到 <a href="https://rexhung0302.github.io/2020/10/13/20201013/">[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List</a> 我們透過了三篇文章介紹如何轉職為全端勇者。</p>
+<p>在今天這篇文章將來探討如何串接 **MySQL(資料庫)**，而非上次透過 <strong>Firebase</strong> 快速串接，這次將會是有趣的一篇文章(<del>才怪</del>)！</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201109/nodeToMysql.png" alt="Connect"></p>
+<p>在前一章筆者實作了陽春版本的 <a href="https://express-todos-list.herokuapp.com/users/login">TODO List</a>，提到後端就不得不提資料庫，而在 <a href="https://express-todos-list.herokuapp.com/users/login">TODO List</a> 之中我們使用的是 <strong>Google Firebase</strong> 的資料庫，雖然都是資料庫但是和我們要使用的 <strong>MySQL</strong> 是不相同的。</p>
+<p>本篇文章會談到幾個點：</p>
+<ol>
+<li><p>資料庫差異</p>
+</li>
+<li><p>何謂 ORM</p>
+</li>
+<li><p>如何串接資料庫</p>
+</li>
+<li><p>快速上手 Sequelize</p>
+</li>
+<li><p>完成人生第一個後端資料</p>
+</li>
+</ol>
+<hr>
+<h3 id="資料庫差異"><a href="#資料庫差異" class="headerlink" title="資料庫差異"></a>資料庫差異</h3><p><strong>『<a href="https://tw.alphacamp.co/blog/sql-nosql-database-dbms-introduction">SQL(Structured Query Language 結構化查詢語言) 是一種專門用來管理與查詢關聯式資料庫(Relational database)的程式語言</a>』</strong> 在某些網站都能看見對關於 <strong>SQL</strong> 的介紹文，這邊講太多太細的東西大家肯定也記不住，既然我們是幼幼班上手，就從好記得來。</p>
+<h4 id="關聯式資料庫（Relational-database）"><a href="#關聯式資料庫（Relational-database）" class="headerlink" title="關聯式資料庫（Relational database）"></a>關聯式資料庫（Relational database）</h4><p>首先來說說 <strong>關聯式資料庫</strong> 的幾個特點：</p>
+<ol>
+<li><p>資料是一個或多個資料表方式存放</p>
+</li>
+<li><p>資料之間有關聯性</p>
+</li>
+<li><p>以 SQL 語言操作</p>
+</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20201109/relational_db.png" alt="關連式資料庫"></p>
+<p>關連式資料庫會把每一個表格集合起來，而每一個表格裡面都是一筆一筆的資料，不同資料表可能會互相關聯著，比如 **會員小明(Table -&gt; Users)訂購了(Table -&gt; Orders)一支Iphone 12 pro max(Table -&gt; Goods)**，這之間的表格都互有關連，在前端發送出請求一直到後端時，後端可以透過 <strong>SQL(註1)</strong> 語法去將資料庫裡的資料進行收集、排序，亦或是新增刪除。</p>
+<p><em>註1: SQL語法拿來在操作關聯式資料庫時使用，例如 <code>SELECT * FROM Users Where age=1</code>(將表格 Users 裡面，符合條件 age = 1 的資料取出)</em></p>
+<h4 id="非關聯式資料庫-NoSQL"><a href="#非關聯式資料庫-NoSQL" class="headerlink" title="非關聯式資料庫(NoSQL)"></a>非關聯式資料庫(NoSQL)</h4><p>照字面上的意思應該就能懂八十七層；因為現今網路應用程式流量越來越大幅成長，對於關聯式資料庫在存取大量資料時，會比較慢，你能想像在使用 <strong>Youtube</strong> 及 <strong>Facebook</strong> 時，跑個資料就跑好幾分鐘的感覺嗎？我想應該連幾秒都不太想等待吧！</p>
+<p>而在需要快速取得資料的情況下人們開始做取捨，不需要即時同步且精準無誤的取得某些特定資料，所以 <strong>NoSQL</strong> 就這樣熱門了起來。</p>
+<p><strong>NoSQL</strong> 的全名為 <strong>Not Only SQL</strong>，在 <strong>NoSQL</strong> 上並不支持 <strong>SQL</strong> 語法，且更關注於資料的變動，舉例來說 <strong>Youtube</strong> 的瀏覽數及訂閱數量在某些百萬級 <strong>Youtube</strong> 會是數萬甚至數十萬筆，這時候點開我們並不需要先去確認誰先訂閱，或是誰比較晚訂閱，只需要注重最後的結果，最後統計是多少的訂閱數量，這就是適合使用 <strong>NoSQL</strong> 達到的，相反的如果需要在乎於邏輯上，比如說電商網站，先刷卡、確定扣款後、商品才能寄出，這時候適合什麼應該很清楚了吧！</p>
+<p>最後 <strong>NoSQL</strong> 有一個最特別的點，所有資料都會被用 <strong>JSON</strong> 方式存放起來，每一筆資料都是 <strong>Key:Value(name: ‘王小明’)</strong> 的方式，而這些資料則會被存放在 <strong>Documents</strong>，最後一堆一堆的 <strong>Documents</strong> 則會被放在 <strong>Collections</strong> 裡。</p>
+<hr>
+<h3 id="何謂-ORM"><a href="#何謂-ORM" class="headerlink" title="何謂 ORM"></a>何謂 ORM</h3><p>在開始講如何串接資料庫前這邊必須在提到 <strong>ORM</strong>，簡單來說在上方我們有提到 <strong>SQL</strong> 語法，而你會想這樣我不就要再多學一個語言嗎！</p>
+<p>別擔心已經有人幫你想好了，俗話說的好，學會一個語言再去學另一個語言會很快，那如果我們學好一個語言再用這個語言的邏輯去學另一個語言，是不是又再縮短一半的時間了呢？</p>
+<p>舉個例子來說，我們已經會 <strong>Javascript</strong> 了，我們在使用 <strong>Javascript</strong> 去學習 <strong>NodeJS</strong>，而我們認識了 <strong>NodeJS</strong> 了，再透過 <strong>Javascript</strong> 去學習 <strong>SQL</strong>，有沒有一種健達出奇蛋的感覺呢？買了一顆健達出奇蛋(<strong>Javascript</strong>)，滿足你三種願望(<strong>Vue、NodeJS、SQL</strong>)！</p>
+<blockquote>
+<p>我知道比喻很爛別揍我</p>
+</blockquote>
+<p>而 <strong>ORM</strong> 就是有開發者透過程式語言的物件去包裝 <strong>SQL</strong>，讓你可以透過你熟悉的程式語言(<strong>Javascript、PHP</strong>)去簡單呼叫層層包裝過的方法；只是有一點要特別注意，上方提到的 <strong>關聯式資料庫</strong> 及 <strong>非關聯式資料庫</strong>，前者透過 <strong>ORM</strong> 技術，後者透過 <strong>ODM</strong>。</p>
+<p><em>例如： <code>UsersDB.findAll()</code> -&gt; <code>SELECT * FROM USERS;</code></em></p>
+<hr>
+<h3 id="如何串接資料庫"><a href="#如何串接資料庫" class="headerlink" title="如何串接資料庫"></a>如何串接資料庫</h3><p>終於到我們的重點了，這邊會先示範如何串接資料庫不透過 <strong>ORM</strong>，首先輸入下列內容到後端專案裡。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i mysql2 -S</span><br></pre></td></tr></table></figure>
+
+<p>接著在後端入口(app.js)，引用資料庫並且連接資料庫。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> mysql      = <span class="built_in">require</span>(<span class="string">&#x27;mysql2&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> connection = mysql.createConnection(&#123;</span><br><span class="line">  <span class="attr">host</span>     : <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="attr">user</span>     : <span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">  <span class="attr">password</span> : <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line">  <span class="attr">database</span> : <span class="string">&#x27;users&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">connection.connect();</span><br><span class="line"> </span><br><span class="line">connection.query(<span class="string">&#x27;SELECT * FROM users&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error, results, fields</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;The Users is: &#x27;</span>, results);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>完工！雖然這樣就能簡單的連上了，但東西都塞在入口檔案，和我們想要的 <strong>MVC</strong> 環境架構還有 <strong>87%</strong> 遠，而你也不會想要每次建立後端專案就手幹一次吧，所以接著們要提到本日重頭戲了。</p>
+<hr>
+<h3 id="快速上手-Sequelize"><a href="#快速上手-Sequelize" class="headerlink" title="快速上手 Sequelize"></a>快速上手 Sequelize</h3><h4 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h4><p><strong>Sequelize</strong> 就是剛剛上方提到的 <strong>ORM</strong>，而他也具備了幫我們初始化環境的功能，我們按照步驟來吧。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i sequelize sequelize-cli mysql2 -S // 安裝相關套件</span><br><span class="line"></span><br><span class="line">$ npm i sequelize-cli -g // 全域安裝 ORM Cli</span><br></pre></td></tr></table></figure>
+
+<p>雖然 <strong>sequelize</strong> 作為類似套件方式使用，安裝在專案裡面，但跟 <strong>Gulp</strong> 及 <strong>Vue-cli</strong> 一樣，我們可以透過 <strong>cli</strong> 來使用某些特定的功能；緊接著輸入下面的內容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize init</span><br></pre></td></tr></table></figure>
+
+<p>這時候你會看見專案裡面多個幾個資料夾，分別為</p>
+<ul>
+<li><p>config</p>
+</li>
+<li><p>models</p>
+</li>
+<li><p>migrations</p>
+</li>
+<li><p>seeders</p>
+</li>
+</ul>
+<p>這時候這個套件已經幫我們把 <strong>MVC</strong> 分別分類出來了。</p>
+<h4 id="環境介紹"><a href="#環境介紹" class="headerlink" title="環境介紹"></a>環境介紹</h4><p>筆者個人認為這個框架對新手算是友善的，因為你可以透過這個框架認識 <strong>MVC</strong> 架構如何分，也可以再透過這個框架去操作資料庫。</p>
+<p>讓我們先看到 <strong>config</strong> 資料夾裡面的 <strong>config.json</strong>。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;development&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_development&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;test&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_test&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">&quot;production&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;database_production&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊便是我們要讓 Sequelize 知道在什麼情況下該與什麼資料庫連接，由最上開始分別為 <strong>開發、測試</strong> 及 <strong>正式</strong>，而我們目前只會先用到開發，所以我們先把最上面的 <strong>development</strong> 做點更動。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;development&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;username&quot;</span>: <span class="string">&quot;root&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;password&quot;</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;database&quot;</span>: <span class="string">&quot;test&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;host&quot;</span>: <span class="string">&quot;127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;dialect&quot;</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;operatorsAliases&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...下略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後我們再看到 <strong>model</strong> 資料夾下的 <strong>index.js</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">&#x27;sequelize&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> basename = path.basename(__filename);</span><br><span class="line"><span class="keyword">const</span> env = process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(__dirname + <span class="string">&#x27;/../config/config.json&#x27;</span>)[env];</span><br><span class="line"><span class="keyword">const</span> db = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sequelize;</span><br><span class="line"><span class="keyword">if</span> (config.use_env_variable) &#123;</span><br><span class="line">  sequelize = <span class="keyword">new</span> Sequelize(process.env[config.use_env_variable], config);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  sequelize = <span class="keyword">new</span> Sequelize(config.database, config.username, config.password, config);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fs</span><br><span class="line">  .readdirSync(__dirname)</span><br><span class="line">  .filter(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (file.indexOf(<span class="string">&#x27;.&#x27;</span>) !== <span class="number">0</span>) &amp;&amp; (file !== basename) &amp;&amp; (file.slice(-<span class="number">3</span>) === <span class="string">&#x27;.js&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> model = sequelize[<span class="string">&#x27;import&#x27;</span>](path.join(__dirname, file));</span><br><span class="line">    db[model.name] = model;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(db).forEach(<span class="function"><span class="params">modelName</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (db[modelName].associate) &#123;</span><br><span class="line">    db[modelName].associate(db);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">db.sequelize = sequelize;</span><br><span class="line">db.Sequelize = Sequelize;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = db;</span><br></pre></td></tr></table></figure>
+
+<p>這邊大致上可以看過，如果有興趣可以在深入研究，基本上這邊就是在利用同目錄底下的其他 <strong>.js</strong> 檔案的 <strong>model.name</strong> 當作索引，接著放到 <strong>db</strong> 物件裡，執行時 <strong>model</strong> 的 <strong>define</strong> 將資料表與 <strong>js</strong> 對應上。</p>
+<p>在簡單的說就是之後我們建立在 <strong>model</strong> 資料架內的任何 <strong>.js</strong> 檔案，都會建立好關聯，在需要呼叫 <strong>DB</strong> 的時候只需要使用 <code>const Users = require(&#39;./model&#39;).Users;</code> 或 <code>const Goods = require(&#39;./model&#39;).Goods;</code> 這樣就能呼叫了。</p>
+<h4 id="小整理"><a href="#小整理" class="headerlink" title="小整理"></a>小整理</h4><p>介紹完前面兩個資料夾後，我們先整理一下：</p>
+<ul>
+<li><p>config - 設定什麼環境應該連接什麼資料庫的地方</p>
+</li>
+<li><p>models - 存放各個 DB 表格的地方，需要使用到可以直接透過 <code>const Users = require(&#39;./model&#39;).Users;</code> 方式呼叫</p>
+</li>
+</ul>
+<h4 id="migrations"><a href="#migrations" class="headerlink" title="migrations"></a>migrations</h4><p>講到這個可能剛接觸後端是第一次看見，但如果有與後端合作過，可能會聽見後端請你跑類似 <code>php artisan migration</code> 的東西，你就會發現資料庫內的表格都神奇地被建立好了。</p>
+<p>這邊我們需要先使用下面語法去產生我們的 <strong>DB</strong> 然後把要新增上資料庫的表格，先一併存放在 <strong>model</strong> 資料夾裡。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize model:generate --name users --attributes mobile:string,email:string,birthday:time,sex:tinyint</span><br></pre></td></tr></table></figure>
+
+<p>上方 <strong>–name</strong> 後方為表的名稱，而最後面的就是要建立的 <strong>key</strong> 及 <strong>value</strong> 的種類。</p>
+<p>這樣就會在 <strong>model</strong> 資料夾內建立我們的第一個表，仔細看看 <code>models/users.js</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  Model</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;sequelize&#x27;</span>);</span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function">(<span class="params">sequelize, DataTypes</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">users</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Helper method for defining associations.</span></span><br><span class="line"><span class="comment">     * This method is not a part of Sequelize lifecycle.</span></span><br><span class="line"><span class="comment">     * The `models/index` file will call this method automatically.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">associate</span>(<span class="params">models</span>)</span> &#123;</span><br><span class="line">      <span class="comment">// define association here</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  users.init(&#123;</span><br><span class="line">    <span class="attr">mobile</span>: DataTypes.STRING,</span><br><span class="line">    <span class="attr">email</span>: DataTypes.STRING,</span><br><span class="line">    <span class="attr">birthday</span>: DataTypes.TIME,</span><br><span class="line">    <span class="attr">sex</span>: DataTypes.TINYINT</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    sequelize,</span><br><span class="line">    <span class="attr">modelName</span>: <span class="string">&#x27;users&#x27;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> users;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然後 <strong>migration</strong> 資料夾也新增了一個檔案 <strong>2020XXXXXXXXXX-default-users</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UUIDV4 = <span class="built_in">require</span>(<span class="string">&#x27;uuid/v4&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">up</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> queryInterface.createTable(<span class="string">&#x27;users&#x27;</span>, &#123;</span><br><span class="line">      <span class="attr">id</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">primaryKey</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.UUID,</span><br><span class="line">        <span class="attr">defaultValue</span>: UUIDV4</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">mobile</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.STRING,</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;手機號碼&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">email</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.STRING</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">birthday</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE,</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;生日&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">sex</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: Sequelize.ENUM,</span><br><span class="line">        <span class="attr">values</span>: [</span><br><span class="line">          <span class="string">&#x27;boy&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;girl&#x27;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">comment</span>: <span class="string">&#x27;性別為男=boy, 女=girl&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">createdAt</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">updatedAt</span>: &#123;</span><br><span class="line">        <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">type</span>: Sequelize.DATE</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">down</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> queryInterface.dropTable(<span class="string">&#x27;users&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>先解釋為什麼會引入 <code>uuid/v4</code>，一般的主鍵都是 <strong>+1+1</strong> 往上疊加上去，而這邊我想要給使用者一串亂數，例如 <code>22a59k20-dff5-9285-1023-0u3a99ca6773</code>，好處是不容易被破解，但因為想塞入這種亂碼就必須藉助套件去產生亂碼，所以想使用這個記得要另外安裝 **<a href="https://github.com/uuidjs/uuid#readme">uuid</a>**，之後 <strong>users</strong> 的主鍵就能獲得獨一無二的亂碼。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm i uuid -S</span><br></pre></td></tr></table></figure>
+
+<p>上方的 <strong>type</strong> 即為種類，像是單純 <strong>字串</strong> 、 <strong>Radio</strong> 或 <strong>日期</strong>，其中裡面還能設定 <strong>備註</strong> 等等，可以上 <a href="https://sequelize.org/master/identifiers.html">Sequelize</a> 的官網查看更詳細的種類。</p>
+<p>介紹完之後就輸入 <code>sequelize db:migrate</code> 然後進入資料庫看看是不是有新增成功。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201109/table_after_migrate.png" alt="新增成功"></p>
+<p>我們會發現多了一個 <strong>SequelizeMeta</strong> 及 <strong>users</strong>，前者就是用來紀錄你跑過多少個 <strong>migrate</strong> 的紀錄，後者為你剛剛上方設定的 <strong>Table</strong> 內容。</p>
+<blockquote>
+<p><em>如果新增錯誤，想要重新來過，可以在輸入 <code>sequelize db:migrate:undo</code></em> 就會跑回去上一個步驟了，執行的內容為 <code>migrations/2020XXXXXXXXXX-create-users.js</code> 內的 <code>function down()</code>。</p>
+</blockquote>
+<h4 id="seeders"><a href="#seeders" class="headerlink" title="seeders"></a>seeders</h4><p>說完建立 <strong>Table</strong> 當然就是要塞入預設假資料啦，不然每次開發你都要先手動填寫資料或是等到前端自己帶入資料才發現出問題就麻煩了。</p>
+<p>而 <strong>seeders</strong> 的檔案也可以依靠指令產出來：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sequelize seed:generate --name default-users</span><br></pre></td></tr></table></figure>
+
+<p>執行結束後會發現 <strong>seeders</strong> 的資料夾下多了一個檔案，就是剛剛上方指令命名的 <strong>2020XXXXXXXXXX-default-users.js</strong>，接著裡面就必須自己輸入了，但套件很貼心的還是有範例在上方：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">v4</span>: uuidv4 &#125; = <span class="built_in">require</span>(<span class="string">&#x27;uuid&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">up</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add seed commands here.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Example:</span></span><br><span class="line"><span class="comment">     * await queryInterface.bulkInsert(&#x27;People&#x27;, [&#123;</span></span><br><span class="line"><span class="comment">     *   name: &#x27;John Doe&#x27;,</span></span><br><span class="line"><span class="comment">     *   isBetaMember: false</span></span><br><span class="line"><span class="comment">     * &#125;], &#123;&#125;);</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">await</span> queryInterface.bulkInsert(<span class="string">&#x27;users&#x27;</span>, [&#123;</span><br><span class="line">      <span class="attr">id</span>: uuidv4(),</span><br><span class="line">      <span class="attr">mobile</span>: <span class="string">&#x27;0900000000&#x27;</span>,</span><br><span class="line">      <span class="attr">email</span>: <span class="string">&#x27;test@admin.com&#x27;</span>,</span><br><span class="line">      <span class="attr">birthday</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1995-08-08 08:08:08&#x27;</span>),</span><br><span class="line">      <span class="attr">sex</span>: <span class="string">&#x27;boy&#x27;</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      <span class="attr">updatedAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: uuidv4(),</span><br><span class="line">      <span class="attr">mobile</span>: <span class="string">&#x27;0911111111&#x27;</span>,</span><br><span class="line">      <span class="attr">email</span>: <span class="string">&#x27;test2@admin.com&#x27;</span>,</span><br><span class="line">      <span class="attr">birthday</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1904-05-20 12:49:00&#x27;</span>),</span><br><span class="line">      <span class="attr">sex</span>: <span class="string">&#x27;girl&#x27;</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      <span class="attr">updatedAt</span>: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    &#125;], &#123;&#125;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">down</span>: <span class="keyword">async</span> (queryInterface, Sequelize) =&gt; &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add commands to revert seed here.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Example:</span></span><br><span class="line"><span class="comment">     * await queryInterface.bulkDelete(&#x27;People&#x27;, null, &#123;&#125;);</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">await</span> queryInterface.bulkDelete(<span class="string">&#x27;users&#x27;</span>, <span class="literal">null</span>, &#123;&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>和 <strong>migrate</strong> 一樣，我們必須透過指令來啟動它，輸入 <code>sequelize db:seed:all</code> 或是 <code>sequelize db:seed:users</code> 來指令要跑的種子即可塞入假資料，如果不想要預設資料了想清掉，就跑 <code>sequelize db:seed:undo:all</code> 就可以清掉所有的預設資料，或是指定目標清除預設資料 <code>sequelize db:seed:undo:users</code>。</p>
+<h4 id="再度小整理"><a href="#再度小整理" class="headerlink" title="再度小整理"></a>再度小整理</h4><ul>
+<li><p>config - 設定什麼環境應該連接什麼資料庫的地方</p>
+</li>
+<li><p>models - 存放各個 DB 表格的地方，需要使用到可以直接透過 <code>const Users = require(&#39;./model&#39;).Users;</code> 方式呼叫</p>
+</li>
+<li><p>migrations - 存放要初始化 Table 的資料夾</p>
+</li>
+<li><p>seeders - 存放對應 Table 的預設資料</p>
+</li>
+</ul>
+<hr>
+<h3 id="完成人生第一個後端資料"><a href="#完成人生第一個後端資料" class="headerlink" title="完成人生第一個後端資料"></a>完成人生第一個後端資料</h3><p>都完成後這時候可以到後端 <strong>routers</strong> 裡面，使用上方說的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> UsersDB = <span class="built_in">require</span>(<span class="string">&#x27;../models&#x27;</span>).users;</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">&#x27;/&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  (<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> users = <span class="keyword">await</span> UsersDB.findAll();</span><br><span class="line"></span><br><span class="line">    res.json(&#123;</span><br><span class="line">      <span class="attr">status</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">msg</span>: <span class="string">&#x27;success&#x27;</span>,</span><br><span class="line">      users</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>執行結果為下，大功告成！</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Executing (default): SELECT `id`, `mobile`, `email`, `birthday`, `sex`, `createdAt`, `updatedAt` FROM `users` AS `users`;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次是筆者第一次從 0 開始連接資料庫，然後寫上 <strong>migrate</strong> 及 <strong>seeders</strong>，不得不說真的是滿滿成就感，不過需要學習的地方還是好多，雖然上面提到使用 <strong>ORM</strong> 等於是用自己熟悉的語言再去學習另一個語言，且被包裝過比起原生的 <strong>SQL</strong> 語法方便許多，但其實不論如何，碰到新的語言都還是要重新適應，畢竟這都是人家包裝過的東西，你就必須跟著作者的思路走，跟著作者的方法走。</p>
+<p>最近對於程式的怠惰感及厭倦感又有點上升了，但絕非討厭程式，我想就跟運動一樣吧，剛開始滿懷熱血，但是持續了一陣子之後就會開始疲勞，這時候無非就是要自己尋找出自己的興趣，讓這件事情不再是單調枯燥乏味，希望在幾個月之後回頭看自己，能再有所成長。</p>
+<p>剩下幾個月 <strong>2020</strong> 就要結束了，雖然今年很鳥，很多遺憾的實情發生了，但既然還活在當下就要好好把握，趁這段時間好好衝刺充實自己，期許正在看文章的人或是幾個月後的自己，都還是能對程式滿懷動力，並且讓自己越來越好。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a href="https://medium.com/@mengchiang000/nodejs-orm-tool-sequelize-2-cli%E7%AF%87-4d6c0789230e">Nodejs ORM tool: Sequelize(2) CLI篇</a></p>
+</li>
+<li><p><a href="https://dotblogs.com.tw/explooosion/2016/07/18/010601">Node.js - Express + MySQL</a></p>
+</li>
+<li><p><a href="https://tw.alphacamp.co/blog/mysql-and-mongodb-comparison">該用 MySQL 或 MongoDB？選擇資料庫前你該了解的事</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Back-end</category>
+        <category>NodeJS</category>
+        <category>MySQL</category>
+        <category>ORM</category>
+        <category>Sequelize</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>Back-end</tag>
+        <tag>NodeJS</tag>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
