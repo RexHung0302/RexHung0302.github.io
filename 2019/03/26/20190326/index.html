@@ -1,31 +1,326 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲 | RexHung's Blog</title><meta name="description" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲"><meta name="keywords" content="Code,HTML,CSS,JavaScript,HexSchool"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲"><meta name="twitter:description" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲"><meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png"><meta property="og:type" content="article"><meta property="og:title" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲"><meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/05/18/20190518/"><link rel="next" title="[Vue Notes] — Vue-Cli #1 初次見面" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190325/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
-  highlight_copy: 'true',
-  highlight_lang: 'true',
-  highlight_shrink: 'false',
-  copy: {
-    success: '複製成功',
-    error: '複製錯誤',
-    noSupport: '瀏覽器不支持'
-  },
-  bookmark: {
-    title: '添加書籤',
-    message_prev: '按',
-    message_next: '鍵將本頁加入書籤'
-  },
-  runtime_unit: '天',
-  copyright: undefined,
-  copy_copyright_js: false
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言時間一晃又過了一個禮拜，這次晃到8樓一看嚇了一下，好像剩沒幾個人，不管了還是抱持著自己的原則，硬幹就對了。另外這次算滿大的挑戰也收穫滿滿，因為首次嘗試用 Vue 挑戰(所以有寫不好的地方請見諒…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言時間一晃又過了一個禮拜，這次晃到8樓一看嚇了一下，好像剩沒幾個人，不管了還是抱持著自己的原則，硬幹就對了。另外這次算滿大的挑戰也收穫滿滿，因為首次嘗試用 Vue 挑戰(所以有寫不好的地方請見諒…">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*Gg_XxwzrCJGxoGO6Cefw5Q.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*_oMCLN0X8yUUnuLi-fysgg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*wWP78mXgYYGKH44jlAFRfg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*wz2vDEL64uSnWTAUXxnhvw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*F9a46v9nfpEpHTjiHqybFA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*Z09J0HEYsd3-MZfGJCxFlA.gif">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*BaMIJ9AY1wJj5hTwNotTuQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*vacWwEkimneEezzPsc4dFg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*0SdJC9zdBDvzUB1DbZb_GQ.gif">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*0kv3Aa93Qxye_fjfc81rgA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*Xbyn2dQPEb-z1DjQAS3jeg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*7dUzdFkz_yBHR660lhuaJw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*JcAkmJ9kzFrKK0_JCpwZSA.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*fmxaNOkkTKjhkY_c7Na31g.png">
+<meta property="article:published_time" content="2019-03-26T04:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-09T06:46:01.217Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="RexHung">
+<meta property="article:tag" content="CodeLife">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Engineer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲 | RexHung's Blog</title>
   
-}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#成果-amp-程式碼"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">成果 &amp; 程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Summary-amp-摘要"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">Summary &amp; 摘要</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#畫面製作"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">畫面製作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#CSS-之-before-amp-after-之有更好得做法？"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">CSS 之 before &amp; after 之有更好得做法？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#串起你的世界-Vue-router"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text">串起你的世界 Vue-router</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#開始攻略"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text">開始攻略</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#讓你的畫面活起來"><span class="toc_mobile_items-number">3.5.</span> <span class="toc_mobile_items-text">讓你的畫面活起來</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#各種methods"><span class="toc_mobile_items-number">3.6.</span> <span class="toc_mobile_items-text">各種methods</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於三元運算"><span class="toc_mobile_items-number">3.7.</span> <span class="toc_mobile_items-text">關於三元運算</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#輸或贏？"><span class="toc_mobile_items-number">3.8.</span> <span class="toc_mobile_items-text">輸或贏？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#平手怎麼辦？"><span class="toc_mobile_items-number">3.9.</span> <span class="toc_mobile_items-text">平手怎麼辦？</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#重新開始遊戲"><span class="toc_mobile_items-number">3.10.</span> <span class="toc_mobile_items-text">重新開始遊戲</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#打造新手遊"><span class="toc_mobile_items-number">3.11.</span> <span class="toc_mobile_items-text">打造新手遊</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#名留青史善用-LocalStorage"><span class="toc_mobile_items-number">3.12.</span> <span class="toc_mobile_items-text">名留青史善用 LocalStorage</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於-GitHub-的那點小事"><span class="toc_mobile_items-number">3.13.</span> <span class="toc_mobile_items-text">關於 GitHub 的那點小事</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#我的其他範例"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">我的其他範例</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">5.1.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#成果-amp-程式碼"><span class="toc-number">1.</span> <span class="toc-text">成果 &amp; 程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">2.</span> <span class="toc-text">Introduction &amp; 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-amp-摘要"><span class="toc-number">3.</span> <span class="toc-text">Summary &amp; 摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#畫面製作"><span class="toc-number">3.1.</span> <span class="toc-text">畫面製作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-之-before-amp-after-之有更好得做法？"><span class="toc-number">3.2.</span> <span class="toc-text">CSS 之 before &amp; after 之有更好得做法？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#串起你的世界-Vue-router"><span class="toc-number">3.3.</span> <span class="toc-text">串起你的世界 Vue-router</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開始攻略"><span class="toc-number">3.4.</span> <span class="toc-text">開始攻略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#讓你的畫面活起來"><span class="toc-number">3.5.</span> <span class="toc-text">讓你的畫面活起來</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#各種methods"><span class="toc-number">3.6.</span> <span class="toc-text">各種methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#關於三元運算"><span class="toc-number">3.7.</span> <span class="toc-text">關於三元運算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#輸或贏？"><span class="toc-number">3.8.</span> <span class="toc-text">輸或贏？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#平手怎麼辦？"><span class="toc-number">3.9.</span> <span class="toc-text">平手怎麼辦？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重新開始遊戲"><span class="toc-number">3.10.</span> <span class="toc-text">重新開始遊戲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打造新手遊"><span class="toc-number">3.11.</span> <span class="toc-text">打造新手遊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#名留青史善用-LocalStorage"><span class="toc-number">3.12.</span> <span class="toc-text">名留青史善用 LocalStorage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#關於-GitHub-的那點小事"><span class="toc-number">3.13.</span> <span class="toc-text">關於 GitHub 的那點小事</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">4.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我的其他範例"><span class="toc-number">5.</span> <span class="toc-text">我的其他範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#參考網站"><span class="toc-number">5.1.</span> <span class="toc-text">參考網站</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-03-26<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/">HeroOfUnground[地下城]</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">3.4k</span><span class="post-meta__separator">|</span><span>閲讀時長: 11 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-8F/dist/index.html#/" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-8F">點我</a></p>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/link/" rel="section"><i class="fa fa-fw fa-link"></i>link</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-03-26 12:00:00" itemprop="dateCreated datePublished" datetime="2019-03-26T12:00:00+08:00">2019-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-09 14:46:01" itemprop="dateModified" datetime="2021-06-09T14:46:01+08:00">2021-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/03/26/20190326/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/26/20190326/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>6 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItOEYvZGlzdC9pbmRleC5odG1sIy8=" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-8F/dist/index.html#/">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-8F">點我</a></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>時間一晃又過了一個禮拜，這次晃到8樓一看嚇了一下，好像剩沒幾個人，不管了還是抱持著自己的原則，硬幹就對了。另外這次算滿大的挑戰也收穫滿滿，因為首次嘗試用 <strong>Vue</strong> 挑戰(所以有寫不好的地方請見諒…</p>
-<p><img alt="8F大魔王 — 井字遊戲" data-src="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png" alt="8F大魔王 — 井字遊戲"></p>
 <a id="more"></a>
 
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有五項。</p>
@@ -50,32 +345,32 @@
 <p>以往的額外條件書寫BLOG這次是其中一個 <strong>BOSS</strong> 弱點了(笑</p>
 </blockquote>
 <hr>
-<p><img alt="START加上hover效果之截圖滑鼠消失了" data-src="https://cdn-images-1.medium.com/max/2000/1*Gg_XxwzrCJGxoGO6Cefw5Q.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Gg_XxwzrCJGxoGO6Cefw5Q.png" alt="START加上hover效果之截圖滑鼠消失了"></p>
 <h3 id="畫面製作"><a href="#畫面製作" class="headerlink" title="畫面製作"></a>畫面製作</h3><p>第一次嘗試使用 <strong>Vue</strong> 切畫面，就可以直接把 <strong>display:none</strong> 扔了（誤，這邊我用了兩個 <strong>Views</strong>，一個是遊戲開始前畫面，一個是遊戲中加上結束畫面，其實看見其他大神似乎還能把畫面在拉出去個別當 <strong>Componemt</strong> 不過還不熟的 <strong>Vue</strong> 菜雞我就先能走再說跑了。</p>
-<p><img alt="切版第一個挑戰點" data-src="https://cdn-images-1.medium.com/max/2000/1*_oMCLN0X8yUUnuLi-fysgg.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*_oMCLN0X8yUUnuLi-fysgg.png" alt="切版第一個挑戰點"></p>
 <h3 id="CSS-之-before-amp-after-之有更好得做法？"><a href="#CSS-之-before-amp-after-之有更好得做法？" class="headerlink" title="CSS 之 before &amp; after 之有更好得做法？"></a>CSS 之 before &amp; after 之有更好得做法？</h3><p>剛開始看見有框的叉叉後直覺是使用 after 跟 before 來做，在上面使用兩塊黑色的偽元素去蓋住它，但是我發現其他大神有更容易的做法。</p>
-<p><img alt="第二個頁面立馬碰上" data-src="https://cdn-images-1.medium.com/max/2000/1*wWP78mXgYYGKH44jlAFRfg.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*wWP78mXgYYGKH44jlAFRfg.png" alt="第二個頁面立馬碰上"></p>
 <p>在第二個頁面又碰到了需要白邊的字，爬了一下文後發現了救星，那就是：</p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">text-stroke</span>: <span class="selector-class">.3rem</span> <span class="selector-id">#fff</span>;</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">text-stroke</span>: <span class="selector-class">.3rem</span> <span class="selector-id">#fff</span>;</span><br></pre></td></tr></table></figure>
 
 <p>加上去後就不需要再用一個 <strong>before</strong> 或 <strong>after</strong> 去覆蓋他這麼麻煩了。</p>
 <hr>
 <h3 id="串起你的世界-Vue-router"><a href="#串起你的世界-Vue-router" class="headerlink" title="串起你的世界 Vue-router"></a>串起你的世界 Vue-router</h3><p>想起上一層還在 <strong>display:none</strong> 來 <strong>none</strong> 去，不僅程式碼露露長也容易造成使用者直接 <strong>F12</strong> 查看你隱藏的東西，自從接觸 <strong>Vue-router</strong> 之後考試都考一百分(誤。</p>
-<p>關於如何從零到 <strong>Vue-cli UI</strong> 介面可以看我的 Vue<a href="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa" target="_blank" rel="noopener">系列文章</a> — <strong>Vue-Cli #1 初次見面</strong>(後續加載中)，或是直接把 <strong>Vue-cli</strong> 升級到 3x 版本後直接在終端機上輸入 <strong>vue ui</strong>。</p>
-<p><img alt="Vue-cli 3x 版本後 UI 介面超方便啊" data-src="https://cdn-images-1.medium.com/max/2000/1*wz2vDEL64uSnWTAUXxnhvw.png" class="lozad"></p>
+<p>關於如何從零到 <strong>Vue-cli UI</strong> 介面可以看我的 Vue<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvdnVlLW5vdGVzLXZ1ZS1jbGktMS0lRTUlODglOUQlRTYlQUMlQTElRTglQTYlOEIlRTklOUQlQTItZTJkODY4ZWUwNGFh" title="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa">系列文章<i class="fa fa-external-link"></i></span> — <strong>Vue-Cli #1 初次見面</strong>(後續加載中)，或是直接把 <strong>Vue-cli</strong> 升級到 3x 版本後直接在終端機上輸入 <strong>vue ui</strong>。</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*wz2vDEL64uSnWTAUXxnhvw.png" alt="Vue-cli 3x 版本後 UI 介面超方便啊"></p>
 <p>點選添加 <strong>Vue-router</strong> 之後你的src資料夾內會多出 <strong>View</strong> 資料夾及 <strong>router.js</strong>，可以把 <strong>View</strong> 資料夾內的檔案 <strong>About.vue Home.vue</strong> 當作 <strong>Componemt</strong> 的概念。</p>
-<p><img alt="主要在 router 內 import 你需要導的頁面" data-src="https://cdn-images-1.medium.com/max/2000/1*F9a46v9nfpEpHTjiHqybFA.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*F9a46v9nfpEpHTjiHqybFA.png" alt="主要在 router 內 import 你需要導的頁面"></p>
 <p>然後新增或修改你要的頁面就好了，因為這篇主要不是要介紹 <strong>Vue-cli</strong> 之後會放到 <strong>Vue</strong>系列文章去做介紹。</p>
-<p><img alt="成功畫面" data-src="https://cdn-images-1.medium.com/max/2000/1*Z09J0HEYsd3-MZfGJCxFlA.gif" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Z09J0HEYsd3-MZfGJCxFlA.gif" alt="成功畫面"></p>
 <hr>
 <h3 id="開始攻略"><a href="#開始攻略" class="headerlink" title="開始攻略"></a>開始攻略</h3><p>對於資料的處理 <strong>Vue</strong> 一直很拿手，直接把需要用到的資料丟進 <strong>data</strong> 內，我們需要的有局數、玩家、九個格子的陣列、判斷贏的陣列、分數、四個畫面的變數。</p>
-<p><img alt="徹底愛上 Vue" data-src="https://cdn-images-1.medium.com/max/2000/1*BaMIJ9AY1wJj5hTwNotTuQ.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*BaMIJ9AY1wJj5hTwNotTuQ.png" alt="徹底愛上 Vue"></p>
 <p>其實還能再縮減，這完全看寫程式的人邏輯，菜雞如我邏輯超級爛，連出門都會迷路…</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"play-area d-flex flex-wrap"</span> <span class="attr">v-if</span>=<span class="string">"play_area"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grids row justify-content-center"</span> <span class="attr">v-for</span>=<span class="string">"(grid,id) in grids"</span> <span class="attr">:key</span>=<span class="string">"id"</span> @<span class="attr">click</span>=<span class="string">"set(id)"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"text-show"</span>&gt;</span><span class="tag">&lt;<span class="name">font-awesome-icon</span> <span class="attr">v-if</span>=<span class="string">"grid === 1"</span> <span class="attr">:icon</span>=<span class="string">"CrossIcon"</span> <span class="attr">style</span>=<span class="string">"color:white;"</span>/&gt;</span><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"text-show"</span>&gt;</span><span class="tag">&lt;<span class="name">font-awesome-icon</span> <span class="attr">v-if</span>=<span class="string">"grid === -1"</span> <span class="attr">:icon</span>=<span class="string">"CircleIcon"</span>/&gt;</span><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span> // transition的部分下面會介紹</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"play-area d-flex flex-wrap"</span> <span class="attr">v-if</span>=<span class="string">"play_area"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"grids row justify-content-center"</span> <span class="attr">v-for</span>=<span class="string">"(grid,id) in grids"</span> <span class="attr">:key</span>=<span class="string">"id"</span> @<span class="attr">click</span>=<span class="string">"set(id)"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"text-show"</span>&gt;</span><span class="tag">&lt;<span class="name">font-awesome-icon</span> <span class="attr">v-if</span>=<span class="string">"grid === 1"</span> <span class="attr">:icon</span>=<span class="string">"CrossIcon"</span> <span class="attr">style</span>=<span class="string">"color:white;"</span>/&gt;</span><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"text-show"</span>&gt;</span><span class="tag">&lt;<span class="name">font-awesome-icon</span> <span class="attr">v-if</span>=<span class="string">"grid === -1"</span> <span class="attr">:icon</span>=<span class="string">"CircleIcon"</span>/&gt;</span><span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span> // transition的部分下面會介紹</span><br></pre></td></tr></table></figure>
 
 <p>利用  <strong>v-for</strong> 造出九宮格，<strong>v-for=”(grid,id) in grids”</strong> 第一個 <strong>grid</strong> 代表用於迭代的元素，第二個 <strong>id</strong> 代表 <strong>索引值(optional)</strong>。後面使用 <strong>v-bind</strong> 加上 <strong>:key=”id”</strong>，目的是確保每個元素的唯一性，當元素更新，例如改變順序時，有可識別唯一性的 <strong>key</strong> 來確保重新渲染。</p>
 <h3 id="讓你的畫面活起來"><a href="#讓你的畫面活起來" class="headerlink" title="讓你的畫面活起來"></a>讓你的畫面活起來</h3><p><strong>Vue</strong> 可以在新增、更新或移除 <strong>DOM</strong> 時使用 <strong>CSS</strong> 顯示動畫，讓你的畫面更精彩，使用方式也很簡單，先來了解一下 <strong>Vue</strong> 提供的特殊 <strong>Class</strong>名稱。</p>
-<p><img alt="流程圖" data-src="https://cdn-images-1.medium.com/max/2000/1*vacWwEkimneEezzPsc4dFg.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*vacWwEkimneEezzPsc4dFg.png" alt="流程圖"></p>
 <ol>
 <li><p><strong>v-enter</strong>：元素一開始的狀態。在元素被新增時觸發，在下一個影格立即移除。</p>
 </li>
@@ -90,60 +385,60 @@
 <li><p><strong>v-leave-to</strong>：元素刪除狀態的結束。在元素被刪除後觸發，在 <strong>v-leave-active</strong> 動畫結束後移除。這是 v2.1.8 新增的狀態，原有的 <strong>v-leave</strong> 被它取代。</p>
 </li>
 </ol>
-<p>最前面的 v 替換成自己命名的 class 名稱，舉個例子，寫好<strong><transition name="”test”"></transition></strong> 後，到 <strong>css</strong> 去。</p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.test-enter-active</span> {</span><br><span class="line"></span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">8s</span>;</span><br><span class="line"></span><br><span class="line">}   // 元素新增前加入動畫並在整個動畫內使用它</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.test-enter</span></span><br><span class="line"><span class="selector-class">.test-leave-to</span> {</span><br><span class="line"></span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最前面的 v 替換成自己命名的 class 名稱，舉個例子，寫好<strong><transition name=”test”></strong> 後，到 <strong>css</strong> 去。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.test-enter-active</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">8s</span>;</span><br><span class="line"></span><br><span class="line">&#125;   // 元素新增前加入動畫並在整個動畫內使用它</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.test-enter</span></span><br><span class="line"><span class="selector-class">.test-leave-to</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img alt="可以搭上 Animation 讓畫面更靈活" data-src="https://cdn-images-1.medium.com/max/2000/1*0SdJC9zdBDvzUB1DbZb_GQ.gif" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*0SdJC9zdBDvzUB1DbZb_GQ.gif" alt="可以搭上 Animation 讓畫面更靈活"></p>
 <p>關於 Animation 的導入也會在 Vue 系列文章中提到，之後會再更新。</p>
 <hr>
-<h3 id="各種methods"><a href="#各種methods" class="headerlink" title="各種methods"></a>各種methods</h3><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(id){</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 判斷如果格子是否被點過 ＆ 判斷局數是否在九局內</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.grids[id] !== <span class="number">0</span> || <span class="keyword">this</span>.step &gt; <span class="number">9</span>)<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 局數增加</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.step ++;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果是除2是於0代表X下手，反之Ｏ下手</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.step % <span class="number">2</span> !== <span class="number">0</span> ? (<span class="keyword">this</span>.player = <span class="number">1</span>) : (<span class="keyword">this</span>.player = <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 替換掉grids內的數值</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.$<span class="keyword">set</span>(this.grids,id,this.player);</span><br><span class="line"></span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="各種methods"><a href="#各種methods" class="headerlink" title="各種methods"></a>各種methods</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(id)&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 判斷如果格子是否被點過 ＆ 判斷局數是否在九局內</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.grids[id] !== <span class="number">0</span> || <span class="keyword">this</span>.step &gt; <span class="number">9</span>)<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 局數增加</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.step ++;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果是除2是於0代表X下手，反之Ｏ下手</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.step % <span class="number">2</span> !== <span class="number">0</span> ? (<span class="keyword">this</span>.player = <span class="number">1</span>) : (<span class="keyword">this</span>.player = <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 替換掉grids內的數值</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.$<span class="keyword">set</span>(this.grids,id,this.player);</span><br><span class="line"></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
 <p>使用 <strong>＠click=”set(id)”</strong> 讓每一個格子的 <strong>id</strong> 傳回來，並且判斷這個格子有沒有被按過，以及步數是否在九步內，如果不符合就不進判斷式，如果符合的話就讓步數增加，並且利用三元運算，去判斷這次是誰下手的，我們一開始的 <strong>player</strong> 預設是叉叉先，所以除 <strong>2</strong>於 <strong>0</strong> 的都是叉叉下手，反之圈圈下手。</p>
 <p>在我們的 <strong>template</strong> 裡我們使用 <strong>v-if</strong> 去判斷現在是誰下手，然後該出現圈圈還是叉叉，這邊剛開始有使用 <strong>1 &amp; 2</strong> ， 但是發生悲劇，因為後面判斷輸贏是用格子的 <strong>id</strong> 加總去判斷，如果一個圈跟叉就會發生 <strong>1+2=3</strong>，但是使用 <strong>1 &amp; -1</strong> 的話加總只有 <strong>-3 -1 1 3</strong> 這四種可能，其中前後兩個就可以拿去判斷贏或輸。</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v-if="grid === 1"</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">v-if="grid === -1"</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v-if="grid === 1"</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">v-if="grid === -1"</span><br></pre></td></tr></table></figure>
 
 <p>最後用 <strong>$set()</strong> 去替換掉 <strong>grids</strong> 內的值，用剛剛判斷的現在是哪一個 <strong>player 去替換</strong></p>
 <h3 id="關於三元運算"><a href="#關於三元運算" class="headerlink" title="關於三元運算"></a>關於三元運算</h3><p>三元運算其實很簡單，並且有效減少你的程式碼，也是這次的收穫之一。看看下方例子就知道超簡單啦！</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 三元運算</span></span><br><span class="line"></span><br><span class="line">a &gt; b ? <span class="keyword">do</span> something : <span class="keyword">do</span> something2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 翻譯蒟蒻</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( a &gt; b ){</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> something</span><br><span class="line"></span><br><span class="line">} <span class="keyword">else</span> { </span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> something2 </span><br><span class="line">  </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 三元運算</span></span><br><span class="line"></span><br><span class="line">a &gt; b ? <span class="keyword">do</span> something : <span class="keyword">do</span> something2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 翻譯蒟蒻</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>( a &gt; b )&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> something</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> something2 </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="輸或贏？"><a href="#輸或贏？" class="headerlink" title="輸或贏？"></a>輸或贏？</h3><p>剛開始的想法是放在 <strong>computed</strong> 內，因為在學習 <strong>Vue</strong> 時查看了一下文件，這是一個專門做運算的計算屬性，但是 <strong>computed</strong> 是根據相依的資料改變時才做計算，不像 <strong>method</strong> 是不管有無相依都會計算，而且在我打在 <strong>computed</strong> 的期間，只要 <strong>run</strong> 專案，就會有警告出現，而且資料並不會即時更新，獲勝後必須去使用 <strong>Vue devtolls</strong> 才會更新資料，我想應該是渲染問題，這部分會在研究更新。</p>
 <p>到這算是踩了一個坑，不過想了一下改了一個作法，既然 <strong>computed</strong> 不用呼叫就會進去跑，那我也可以退而求其次使用 <strong>watch</strong> 監聽我的局數，從第二步開始就去看有沒有贏家。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">watch:{</span><br><span class="line">  step(){</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step &gt;= <span class="number">2</span> &amp;&amp; <span class="keyword">this</span>.step &lt; <span class="number">9</span>){</span><br><span class="line">      <span class="keyword">this</span>.checkwinner();</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">watch:&#123;</span><br><span class="line">  step()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step &gt;= <span class="number">2</span> &amp;&amp; <span class="keyword">this</span>.step &lt; <span class="number">9</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.checkwinner();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>檢查的部分使用迴圈去跑，檢查八條線的贏法，在上面我們已經先把贏法存在陣列裡。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">checkwinner(){</span><br><span class="line">  <span class="comment">// 檢查八種贏法</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span> ; i++){</span><br><span class="line">    <span class="keyword">const</span> [a, b, c] = <span class="keyword">this</span>.Lines[i];</span><br><span class="line">    <span class="keyword">const</span> sum = <span class="keyword">this</span>.grids[a] + <span class="keyword">this</span>.grids[b] + <span class="keyword">this</span>.grids[c];</span><br><span class="line">    <span class="keyword">if</span>(sum === <span class="number">3</span>){</span><br><span class="line">      <span class="keyword">this</span>.Xscore ++;                            <span class="comment">// 叉叉贏加分</span></span><br><span class="line">      localStorage.setItem(<span class="string">"Xwin"</span>, <span class="keyword">this</span>.Xscore); <span class="comment">// localStorage下方說明</span></span><br><span class="line">      <span class="keyword">this</span>.play_area = <span class="literal">false</span>;                    <span class="comment">// 隱藏遊戲區</span></span><br><span class="line">      <span class="keyword">this</span>.Xwin = <span class="literal">true</span>;                          <span class="comment">// 顯示叉叉贏的畫面</span></span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span>(sum === <span class="number">-3</span>){</span><br><span class="line">      <span class="keyword">this</span>.Oscore ++;</span><br><span class="line">      localStorage.setItem(<span class="string">"Owin"</span>, <span class="keyword">this</span>.Oscore); <span class="comment">// localStorage下方說明</span></span><br><span class="line">      <span class="keyword">this</span>.play_area = <span class="literal">false</span>;                    <span class="comment">// 隱藏遊戲區</span></span><br><span class="line">      <span class="keyword">this</span>.Owin = <span class="literal">true</span>;                          <span class="comment">// 顯示圈圈贏的畫面</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">checkwinner()&#123;</span><br><span class="line">  <span class="comment">// 檢查八種贏法</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span> ; i++)&#123;</span><br><span class="line">    <span class="keyword">const</span> [a, b, c] = <span class="keyword">this</span>.Lines[i];</span><br><span class="line">    <span class="keyword">const</span> sum = <span class="keyword">this</span>.grids[a] + <span class="keyword">this</span>.grids[b] + <span class="keyword">this</span>.grids[c];</span><br><span class="line">    <span class="keyword">if</span>(sum === <span class="number">3</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.Xscore ++;                            <span class="comment">// 叉叉贏加分</span></span><br><span class="line">      localStorage.setItem(<span class="string">"Xwin"</span>, <span class="keyword">this</span>.Xscore); <span class="comment">// localStorage下方說明</span></span><br><span class="line">      <span class="keyword">this</span>.play_area = <span class="literal">false</span>;                    <span class="comment">// 隱藏遊戲區</span></span><br><span class="line">      <span class="keyword">this</span>.Xwin = <span class="literal">true</span>;                          <span class="comment">// 顯示叉叉贏的畫面</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(sum === <span class="number">-3</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.Oscore ++;</span><br><span class="line">      localStorage.setItem(<span class="string">"Owin"</span>, <span class="keyword">this</span>.Oscore); <span class="comment">// localStorage下方說明</span></span><br><span class="line">      <span class="keyword">this</span>.play_area = <span class="literal">false</span>;                    <span class="comment">// 隱藏遊戲區</span></span><br><span class="line">      <span class="keyword">this</span>.Owin = <span class="literal">true</span>;                          <span class="comment">// 顯示圈圈贏的畫面</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
 <h3 id="平手怎麼辦？"><a href="#平手怎麼辦？" class="headerlink" title="平手怎麼辦？"></a>平手怎麼辦？</h3><p>因為沒有使用 <strong>computed</strong> 所以沒有 <strong>return</strong> 的值讓你去判斷，但我們可以自己寫一個 <strong>checkdraw()</strong> ，並在 <strong>watch</strong> 判斷內直接寫上，並在 <strong>methods</strong> 內加上式子，顯示平手畫面等等。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">watch(){</span><br><span class="line">  step(){</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step &gt;= <span class="number">2</span> &amp;&amp; <span class="keyword">this</span>.step &lt; <span class="number">9</span>){</span><br><span class="line">      <span class="keyword">this</span>.checkwinner();</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 第九步直接判斷為平手</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step === <span class="number">9</span>){</span><br><span class="line">      <span class="keyword">this</span>.checkdraw(); <span class="comment">// 直接在watch內新增上判斷</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line">methods:{</span><br><span class="line">  checkdraw(){</span><br><span class="line">    <span class="comment">// 第九步直接判斷為平手</span></span><br><span class="line">    localStorage.setItem(<span class="string">"DRAW!!"</span>, <span class="keyword">this</span>.drawtimes);</span><br><span class="line">    <span class="keyword">this</span>.drawtimes ++;</span><br><span class="line">    <span class="keyword">this</span>.play_area = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>.draw = <span class="literal">true</span>;</span><br><span class="line">  },</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">watch()&#123;</span><br><span class="line">  step()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step &gt;= <span class="number">2</span> &amp;&amp; <span class="keyword">this</span>.step &lt; <span class="number">9</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.checkwinner();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第九步直接判斷為平手</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.step === <span class="number">9</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.checkdraw(); <span class="comment">// 直接在watch內新增上判斷</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line">  checkdraw()&#123;</span><br><span class="line">    <span class="comment">// 第九步直接判斷為平手</span></span><br><span class="line">    localStorage.setItem(<span class="string">"DRAW!!"</span>, <span class="keyword">this</span>.drawtimes);</span><br><span class="line">    <span class="keyword">this</span>.drawtimes ++;</span><br><span class="line">    <span class="keyword">this</span>.play_area = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>.draw = <span class="literal">true</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="重新開始遊戲"><a href="#重新開始遊戲" class="headerlink" title="重新開始遊戲"></a>重新開始遊戲</h3><figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">restart(){</span><br><span class="line">  <span class="keyword">this</span>.player = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">this</span>.grids = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>];</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="重新開始遊戲"><a href="#重新開始遊戲" class="headerlink" title="重新開始遊戲"></a>重新開始遊戲</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">restart()&#123;</span><br><span class="line">  <span class="keyword">this</span>.player = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">this</span>.grids = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在按鈕上加上 <strong>@click=”restart” 後</strong>，這邊很簡單的只做初始化遊戲。</p>
-<p><img alt="RESTART Btn" data-src="https://cdn-images-1.medium.com/max/2000/1*0kv3Aa93Qxye_fjfc81rgA.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*0kv3Aa93Qxye_fjfc81rgA.png" alt="RESTART Btn"></p>
 <hr>
-<h3 id="打造新手遊"><a href="#打造新手遊" class="headerlink" title="打造新手遊"></a>打造新手遊</h3><p><img alt="遊戲帶出門" data-src="https://cdn-images-1.medium.com/max/2000/1*Xbyn2dQPEb-z1DjQAS3jeg.png" class="lozad"></p>
+<h3 id="打造新手遊"><a href="#打造新手遊" class="headerlink" title="打造新手遊"></a>打造新手遊</h3><p><img src="https://cdn-images-1.medium.com/max/2000/1*Xbyn2dQPEb-z1DjQAS3jeg.png" alt="遊戲帶出門"></p>
 <p>現在越來越多版需要符合手機大小，這邊使用  <strong>＠Media</strong> 的方式，另外也可以搭上 <strong>Boostrap</strong> 的 <strong>col</strong> 去做排版，可以省的手機版還要調大小呢。</p>
-<p><img alt="學會善用咪低壓" data-src="https://cdn-images-1.medium.com/max/2000/1*7dUzdFkz_yBHR660lhuaJw.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*7dUzdFkz_yBHR660lhuaJw.png" alt="學會善用咪低壓"></p>
 <p>因為  <strong>BOSS</strong> 的弱點必須至少在 <strong>iPhone SE iPhone 8 iPhone PLUS</strong> 可以遊玩，這幾個此吋都介於差不多之間，就把他們一起編輯了，當然詳細的手機畫面還是要放到手機看比較清楚，因為網頁的跟手機的畫面高度差一小截呢，菜雞可是踩過幾次坑。</p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">320px</span>) and (max-width: <span class="number">576px</span>) {</span><br><span class="line">  <span class="selector-class">.yourClassName</span> <span class="selector-tag">or</span> <span class="selector-id">#id</span>{</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (min-width: <span class="number">320px</span>) and (max-width: <span class="number">576px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.yourClassName</span> <span class="selector-tag">or</span> <span class="selector-id">#id</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="名留青史善用-LocalStorage"><a href="#名留青史善用-LocalStorage" class="headerlink" title="名留青史善用 LocalStorage"></a>名留青史善用 LocalStorage</h3><p><img alt="LocalStorage" data-src="https://cdn-images-1.medium.com/max/2000/1*JcAkmJ9kzFrKK0_JCpwZSA.png" class="lozad"></p>
+<h3 id="名留青史善用-LocalStorage"><a href="#名留青史善用-LocalStorage" class="headerlink" title="名留青史善用 LocalStorage"></a>名留青史善用 LocalStorage</h3><p><img src="https://cdn-images-1.medium.com/max/2000/1*JcAkmJ9kzFrKK0_JCpwZSA.png" alt="LocalStorage"></p>
 <p>這是一個 <strong>HTML5</strong> 提供的 <strong>web storage</strong>，擁有 <strong>5MB</strong> 大小，但是無法跨域使用，但是你可以存一些資訊在上面，好比我們的戰績，或是購物網站常用的，短時間內你關掉網頁不用再重新登入。</p>
 <p><strong>localStorage</strong> 是以 key-value 儲存資料，所以我們可以給他一個 <strong>item name</strong> 還有一個 <strong>value</strong>，使用方式也很簡單，始用 <strong>setItem</strong> 給他一個 ( <strong>name , value</strong> ) 就存進去啦，之後除非你去手動清除或者程式設計者執行 <strong>clear</strong> ，否則會一直存在，甚至重開機。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">"Xwin"</span>, <span class="keyword">this</span>.Xscore);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(<span class="string">"Xwin"</span>, <span class="keyword">this</span>.Xscore);</span><br></pre></td></tr></table></figure>
 
 <p>在我們每次載入遊戲頁面的時候，使用 <strong>created</strong> 去取得 <strong>localStorage</strong> 的資料，說到 <strong>created</strong> 就會提到 <strong>Vue</strong> 的生命週期，之後也會在 <strong>Vue</strong>系列介紹，這邊先讓我們取出你的戰績吧。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">created() {</span><br><span class="line">  <span class="keyword">this</span>.Xscore = localStorage.getItem(<span class="string">"Xwin"</span>) ? localStorage.getItem(<span class="string">"Xwin"</span>) : <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">this</span>.Oscore = localStorage.getItem(<span class="string">"Owin"</span>) ? localStorage.getItem(<span class="string">"Owin"</span>) : <span class="number">0</span>;</span><br><span class="line">  },</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.Xscore = localStorage.getItem(<span class="string">"Xwin"</span>) ? localStorage.getItem(<span class="string">"Xwin"</span>) : <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">this</span>.Oscore = localStorage.getItem(<span class="string">"Owin"</span>) ? localStorage.getItem(<span class="string">"Owin"</span>) : <span class="number">0</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="關於-GitHub-的那點小事"><a href="#關於-GitHub-的那點小事" class="headerlink" title="關於 GitHub 的那點小事"></a>關於 GitHub 的那點小事</h3><p>由於以往都是單純 <strong>HTML</strong> 的檔案上傳，這次第一次使用專案方式整包上傳，所以造成網址讀不到，可以收尋 <strong>webpack baseUrl</strong> 爬文看看。<br>現在這情況下可以先到根目錄下創建一個 <strong>vue.config.js</strong> 檔案，並且在內打上：</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = {</span><br><span class="line"></span><br><span class="line">  baseUrl: <span class="string">""</span></span><br><span class="line"></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  baseUrl: <span class="string">""</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>之後重新 <strong>Build</strong> 一次專案，然後在網址後面加上 <strong>dist/index.html#/</strong>，就能跑出來了。</p>
-<p><img alt="終於見到作品啦" data-src="https://cdn-images-1.medium.com/max/2000/1*fmxaNOkkTKjhkY_c7Na31g.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*fmxaNOkkTKjhkY_c7Na31g.png" alt="終於見到作品啦"></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次花了幾天的時間在看 <strong>Vue</strong> 文件，最後抱著跟當初勇闖地下城的心態一樣，先做了再說，許多時候都是這樣跌跌撞撞再成長，對菜雞我這種人來說只是一昧的看文件是看不懂的，加上現在地下城有許多 <strong>Vue</strong> 大神在勇闖，我想這不失為一個學習的好機會。</p>
 <p>一直想加強自己的邏輯概念，這次 <strong>Vue</strong> 正好是一個磨練的好時機，雖然越高樓層越來越難，不過抱著就算是成長 <strong>0.1</strong> 也要往上衝的態度，我想幾年後回頭看看自己現在，一定有所收穫，最後除了繼續努力之外還是要列出檢討的地方，然後朝下一關繼續加油，完畢。</p>
@@ -161,58 +456,348 @@
 <h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a><em>我的其他範例</em></h2><ul>
 <li><p><strong><em>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-1F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItMUYvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-1F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-1F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 2F Clock 時鐘</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-2F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItMkYvY2xvY2suaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-2F/clock.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-2F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 3F Calculator 計算機</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-3F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-3F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItM0YvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-3F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-3F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 4F World Clock 各國時區</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-4F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItNEYvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-4F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-4F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNGYtd29ybGQtY2xvY2stJUU1JTkwJTg0JUU1JTlDJThCJUU2JTk5JTgyJUU1JThEJTgwLTIzNTY3ODZmM2RmYQ==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 5F AQI 全台空氣指標儀表板</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-5F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-5F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItNUYvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-5F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-5F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNWYtYXFpLSVFNSU4NSVBOCVFNSU4RiVCMCVFNyVBOSVCQSVFNiVCMCVBMyVFNiU4QyU4NyVFNiVBOCU5OSVFNSU4NCU4MCVFOCVBMSVBOCVFNiU5RCVCRi1jMDYwZmJlNTg0NTQ=" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 6F SECONDS CHALLENGE 倒數遊戲</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-6F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-6F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItNkYvaW5kZXguaHRtbA==" title="https://rexhung0302.github.io/JS-and-Fighter-6F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-6F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNmYtc2Vjb25kcy1jaGFsbGVuZ2UtJUU1JTgwJTkyJUU2JTk1JUI4JUU5JTgxJThBJUU2JTg4JUIyLWY3MWMwYjY4MGZkYg==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong><em>Hero Of UnderGround — 7F Canvas 畫板</em></strong></p>
 <blockquote>
-<p><em>Demo：<a href="https://rexhung0302.github.io/JS-and-Fighter-7F/" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-7F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-7f-canvas-%E7%95%AB%E6%9D%BF-fca0a17ae652" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSlMtYW5kLUZpZ2h0ZXItN0Yv" title="https://rexhung0302.github.io/JS-and-Fighter-7F/">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter-7F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtN2YtY2FudmFzLSVFNyU5NSVBQiVFNiU5RCVCRi1mY2EwYTE3YWU2NTI=" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-7f-canvas-%E7%95%AB%E6%9D%BF-fca0a17ae652">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 </ul>
 <h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
-<li><a href="https://medium.com/@q503433/%E6%96%B0%E6%89%8B-js-%E5%9C%B0%E4%B8%8B%E5%9F%8E-8f-%E4%BA%95%E5%AD%97%E9%81%8A%E6%88%B2-e7dd97f6cb5a" target="_blank" rel="noopener">高郁涵大神</a> — 新手 JS 地下城-8f 井字遊戲</li>
-<li><a href="http://techaride.blogspot.com/2012/07/javascript-localstorage.html" target="_blank" rel="noopener">TECH A RIDE </a>— localStorage 介紹與使用</li>
-<li><a href="https://cythilya.github.io/2017/04/15/vue-computed/" target="_blank" rel="noopener">Summer。桑莫 </a>— Vue.js:計算屬性 Computed</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0BxNTAzNDMzLyVFNiU5NiVCMCVFNiU4OSU4Qi1qcy0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtOGYtJUU0JUJBJTk1JUU1JUFEJTk3JUU5JTgxJThBJUU2JTg4JUIyLWU3ZGQ5N2Y2Y2I1YQ==" title="https://medium.com/@q503433/%E6%96%B0%E6%89%8B-js-%E5%9C%B0%E4%B8%8B%E5%9F%8E-8f-%E4%BA%95%E5%AD%97%E9%81%8A%E6%88%B2-e7dd97f6cb5a">高郁涵大神<i class="fa fa-external-link"></i></span> — 新手 JS 地下城-8f 井字遊戲</li>
+<li><span class="exturl" data-url="aHR0cDovL3RlY2hhcmlkZS5ibG9nc3BvdC5jb20vMjAxMi8wNy9qYXZhc2NyaXB0LWxvY2Fsc3RvcmFnZS5odG1s" title="http://techaride.blogspot.com/2012/07/javascript-localstorage.html">TECH A RIDE <i class="fa fa-external-link"></i></span>— localStorage 介紹與使用</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jeXRoaWx5YS5naXRodWIuaW8vMjAxNy8wNC8xNS92dWUtY29tcHV0ZWQv" title="https://cythilya.github.io/2017/04/15/vue-computed/">Summer。桑莫 <i class="fa fa-external-link"></i></span>— Vue.js:計算屬性 Computed</li>
 <li><a href="https://github.com/moojing/hex-underground/tree/master/8f_ooxx/src">moojing </a>— 井字遊戲 GitHub</li>
 <li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
 </ul>
-</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/">https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/HTML/">HTML    </a><a class="post-meta__tags" href="/tags/CSS/">CSS    </a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript    </a><a class="post-meta__tags" href="/tags/HexSchool/">HexSchool    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/05/18/20190518/"><img class="prev_cover lozad" data-src="https://cdn-images-1.medium.com/max/2000/1*iupAX0LSU9ne0n5AZDzcqg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器</span></div></a></div><div class="next-post pull-right"><a href="/2019/03/26/20190325/"><img class="next_cover lozad" data-src="https://cdn-images-1.medium.com/max/2840/1*PNlbgb05IwSxOhAz0aA2rg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[Vue Notes] — Vue-Cli #1 初次見面</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/07/29/20200729/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60</div></a></div><div class="relatedPosts_item"><a href="/2020/06/07/20200607/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30</div></a></div><div class="relatedPosts_item"><a href="/2020/02/12/20200212/" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[The F2E 2nd] — 10 Week Masks Map 口罩地圖</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
-var disqus_config = function () {
-  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/';
-  this.page.identifier = '2019/03/26/20190326/';
-  this.page.title = '[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲';
-}
-var d = document, s = d.createElement('script');
-s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
-s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*pG8Su_6Y-Nl9c_s01E4MlQ.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
 
-</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-observer.observe();
-</script></body></html>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright" style="background: var(--card-bg-color);
+    border-left: 3px solid #ff2a2a;
+    list-style: none;
+    margin: 2em 0 0;
+    padding: 0.5em 1em;">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>RexHung
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/" title="[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲">https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/19/20190319/" rel="prev" title="[Hero Of UnderGround 地下城] — 7F Canvas 畫板">
+      <i class="fa fa-chevron-left"></i> [Hero Of UnderGround 地下城] — 7F Canvas 畫板
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/26/20190325/" rel="next" title="[Vue Notes] — Vue-Cli #1 初次見面">
+      [Vue Notes] — Vue-Cli #1 初次見面 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-number">1.</span> <span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#畫面製作"><span class="nav-number">3.1.</span> <span class="nav-text">畫面製作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-之-before-amp-after-之有更好得做法？"><span class="nav-number">3.2.</span> <span class="nav-text">CSS 之 before &amp; after 之有更好得做法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串起你的世界-Vue-router"><span class="nav-number">3.3.</span> <span class="nav-text">串起你的世界 Vue-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開始攻略"><span class="nav-number">3.4.</span> <span class="nav-text">開始攻略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#讓你的畫面活起來"><span class="nav-number">3.5.</span> <span class="nav-text">讓你的畫面活起來</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各種methods"><span class="nav-number">3.6.</span> <span class="nav-text">各種methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於三元運算"><span class="nav-number">3.7.</span> <span class="nav-text">關於三元運算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#輸或贏？"><span class="nav-number">3.8.</span> <span class="nav-text">輸或贏？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平手怎麼辦？"><span class="nav-number">3.9.</span> <span class="nav-text">平手怎麼辦？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新開始遊戲"><span class="nav-number">3.10.</span> <span class="nav-text">重新開始遊戲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打造新手遊"><span class="nav-number">3.11.</span> <span class="nav-text">打造新手遊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名留青史善用-LocalStorage"><span class="nav-number">3.12.</span> <span class="nav-text">名留青史善用 LocalStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-GitHub-的那點小事"><span class="nav-number">3.13.</span> <span class="nav-text">關於 GitHub 的那點小事</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-number">5.</span> <span class="nav-text">我的其他範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#參考網站"><span class="nav-number">5.1.</span> <span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fa fa-fw fa-twitter"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fa fa-fw fa-facebook"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="總字數">286k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">4:20</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://RexHung0302.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/03/26/20190326/";
+    this.page.identifier = "2019/03/26/20190326/";
+    this.page.title = "[Hero Of UnderGround 地下城] — 8F Tic-Tac-Toe 井字遊戲";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://RexHung0302.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

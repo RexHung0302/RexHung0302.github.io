@@ -1,28 +1,316 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果 | RexHung's Blog</title><meta name="description" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果"><meta name="keywords" content="Code,HTML,CSS,JavaScript,HexSchool"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果"><meta name="twitter:description" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果"><meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png"><meta property="og:type" content="article"><meta property="og:title" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果"><meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[Tool Notes] — 關於Webpack #1 - 第一次就上手" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/18/20190618/"><link rel="next" title="[CSS Notes] - CSS模組化" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/05/30/20190530/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
-  highlight_copy: 'true',
-  highlight_lang: 'true',
-  highlight_shrink: 'false',
-  copy: {
-    success: '複製成功',
-    error: '複製錯誤',
-    noSupport: '瀏覽器不支持'
-  },
-  bookmark: {
-    title: '添加書籤',
-    message_prev: '按',
-    message_next: '鍵將本頁加入書籤'
-  },
-  runtime_unit: '天',
-  copyright: undefined,
-  copy_copyright_js: false
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言不小心又直接往 11F 邁進了，原本說好的 9F 要完成看來要一陣子了，卡了不少問題 ( 汗…  另外這次特地整理了一下 GitHub，如果想參考之前樓層的介紹以及 Source Code 可以來坐坐喔哈。   傳送門：請點我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="成果 &amp; 程式碼 Demo：點我Code Source：點我  Introduction &amp; 前言不小心又直接往 11F 邁進了，原本說好的 9F 要完成看來要一陣子了，卡了不少問題 ( 汗…  另外這次特地整理了一下 GitHub，如果想參考之前樓層的介紹以及 Source Code 可以來坐坐喔哈。   傳送門：請點我">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*rD2NgBBBAswj41rOO0Wvfg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*BXCAmWQq-OUJaH7Kivlvsg.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*brYTDD2-DaYDMzCbnjFC2w.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*nYG_hFzcxSEkYOUzZkeEOw.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*aSQ-Qp1Su2zDHFetCI6A_A.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*PWh8QK-rtLB3uP0tQtJZEA.gif">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2000/1*svckH6-f_Kj8iLnFISy5eQ.png">
+<meta property="article:published_time" content="2019-06-03T04:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-09T06:45:55.590Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="RexHung">
+<meta property="article:tag" content="CodeLife">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Engineer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果 | RexHung's Blog</title>
   
-}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#成果-amp-程式碼"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">成果 &amp; 程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Summary-amp-摘要"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">Summary &amp; 摘要</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#畫面製作"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">畫面製作</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#關於-RWD"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">關於 RWD</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#格線系統是老大"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text">格線系統是老大</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#拋棄-JS-框架"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text">拋棄 JS 框架</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#切換燈片"><span class="toc_mobile_items-number">3.5.</span> <span class="toc_mobile_items-text">切換燈片</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#我的其他範例"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">我的其他範例</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Vue系列-—"><span class="toc_mobile_items-number">5.1.</span> <span class="toc_mobile_items-text">Vue系列 —</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#CSS系列-—"><span class="toc_mobile_items-number">5.2.</span> <span class="toc_mobile_items-text">CSS系列 —</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#成果-amp-程式碼"><span class="toc-number">1.</span> <span class="toc-text">成果 &amp; 程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">2.</span> <span class="toc-text">Introduction &amp; 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-amp-摘要"><span class="toc-number">3.</span> <span class="toc-text">Summary &amp; 摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#畫面製作"><span class="toc-number">3.1.</span> <span class="toc-text">畫面製作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#關於-RWD"><span class="toc-number">3.2.</span> <span class="toc-text">關於 RWD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格線系統是老大"><span class="toc-number">3.3.</span> <span class="toc-text">格線系統是老大</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拋棄-JS-框架"><span class="toc-number">3.4.</span> <span class="toc-text">拋棄 JS 框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切換燈片"><span class="toc-number">3.5.</span> <span class="toc-text">切換燈片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">4.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我的其他範例"><span class="toc-number">5.</span> <span class="toc-text">我的其他範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue系列-—"><span class="toc-number">5.1.</span> <span class="toc-text">Vue系列 —</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS系列-—"><span class="toc-number">5.2.</span> <span class="toc-text">CSS系列 —</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考網站"><span class="toc-number">6.</span> <span class="toc-text">參考網站</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2019-06-03<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/">HeroOfUnground[地下城]</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">1.4k</span><span class="post-meta__separator">|</span><span>閲讀時長: 4 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
-<p>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-11F/html/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-11F">點我</a></p>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/link/" rel="section"><i class="fa fa-fw fa-link"></i>link</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-06-03 12:00:00" itemprop="dateCreated datePublished" datetime="2019-06-03T12:00:00+08:00">2019-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-09 14:45:55" itemprop="dateModified" datetime="2021-06-09T14:45:55+08:00">2021-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/06/03/20190603/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/03/20190603/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="成果-amp-程式碼"><a href="#成果-amp-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMTFGL2h0bWwvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-11F/html/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-11F">點我</a></p>
 </blockquote>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>不小心又直接往 <strong>11F</strong> 邁進了，原本說好的 <strong>9F</strong> 要完成看來要一陣子了，卡了不少問題 ( 汗…</p>
 <blockquote>
@@ -31,7 +319,7 @@
 <blockquote>
 <p>傳送門：<strong><a href="https://github.com/RexHung0302/JS-and-Fighter">請點我</a></strong></p>
 </blockquote>
-<p><img alt="11F大魔王 — 燈箱效果" data-src="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png" alt="11F大魔王 — 燈箱效果"></p>
 <a id="more"></a>
 
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有三項。</p>
@@ -45,33 +333,33 @@
 </ol>
 <hr>
 <h3 id="畫面製作"><a href="#畫面製作" class="headerlink" title="畫面製作"></a>畫面製作</h3><p>這次的關卡其實也沒有特別難的地方，就是響應式的地方麻煩了一點。還有這關卡主要是考驗切版技巧，在切版的時候必須特別考慮到 <strong>RWD</strong> 的時候怎麼呈現，還有斷點必須自己去抓，是說關卡的 <strong>BOSS</strong> 弱點雖然越來越少了，可是越來越不簡單了。</p>
-<p><img alt="不小心就會破版" data-src="https://cdn-images-1.medium.com/max/2000/1*rD2NgBBBAswj41rOO0Wvfg.png" class="lozad"></p>
-<p><img alt="沒辦法用框架有點想念 v-if 了 ( 誤" data-src="https://cdn-images-1.medium.com/max/2000/1*BXCAmWQq-OUJaH7Kivlvsg.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*rD2NgBBBAswj41rOO0Wvfg.png" alt="不小心就會破版"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*BXCAmWQq-OUJaH7Kivlvsg.png" alt="沒辦法用框架有點想念 v-if 了 ( 誤"></p>
 <p>在顯示的 <strong>lightBox</strong> 調整上花了一點時間，主要是主要的頁面跟燈箱頁面的高度對不上，主要頁面在響應式的時候會直接把高度撐高，但是燈箱頁面不會跟著拉高，剛開始主要是用 <strong>position:absolute</strong>，後來索性改用 <strong>fixed</strong> 解決。</p>
-<p><img alt="解決方法" data-src="https://cdn-images-1.medium.com/max/2000/1*brYTDD2-DaYDMzCbnjFC2w.png" class="lozad"></p>
-<p><img alt="正常了" data-src="https://cdn-images-1.medium.com/max/2000/1*nYG_hFzcxSEkYOUzZkeEOw.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*brYTDD2-DaYDMzCbnjFC2w.png" alt="解決方法"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*nYG_hFzcxSEkYOUzZkeEOw.png" alt="正常了"></p>
 <hr>
 <h3 id="關於-RWD"><a href="#關於-RWD" class="headerlink" title="關於 RWD"></a>關於 RWD</h3><p>在前陣子剛好上了六角的 <strong>Sass</strong> 課程，這次就剛好自己寫了 <strong>CSS</strong> 的規範練習，不過犯了新手常犯的錯，<strong>過度命名。</strong></p>
 <p>原本想照著 <strong>BEM</strong> 的規範去命名資料夾，雖然不是一定要照著規範走，主要還是看自己寫得順為主，但是沒想到其實最好的做法是把常用的工具抽離出來，模組化，或是工具化，其實才是最好的做法，這邊自己還要再精進加油呢。</p>
 <blockquote>
-<p><em>有興趣參考 CSS 命名的可以看我的這篇文章：<a href="https://medium.com/@zehung860486/css-notes-css%E6%A8%A1%E7%B5%84%E5%8C%96-3bb03e72523e" target="_blank" rel="noopener">[CSS Notes] — 談談CSS模組化</a></em></p>
+<p><em>有興趣參考 CSS 命名的可以看我的這篇文章：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvY3NzLW5vdGVzLWNzcyVFNiVBOCVBMSVFNyVCNSU4NCVFNSU4QyU5Ni0zYmIwM2U3MjUyM2U=" title="https://medium.com/@zehung860486/css-notes-css%E6%A8%A1%E7%B5%84%E5%8C%96-3bb03e72523e">[CSS Notes] — 談談CSS模組化<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
-<p><img alt="一個命名失敗就造成架構過於複雜" data-src="https://cdn-images-1.medium.com/max/2000/1*aSQ-Qp1Su2zDHFetCI6A_A.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*aSQ-Qp1Su2zDHFetCI6A_A.png" alt="一個命名失敗就造成架構過於複雜"></p>
 <hr>
 <h3 id="格線系統是老大"><a href="#格線系統是老大" class="headerlink" title="格線系統是老大"></a>格線系統是老大</h3><p>雖然這次命名還有很大進步空間，但是在之前課程吸取最大的經驗且最好在實戰中拿來實用的就是時時提醒自己切版一定要有自己的格線系統。</p>
 <p>有了隔線系統能少寫好幾行的 <strong>Code</strong>，甚至能重組網頁也沒問題，今天我要把 <strong>header</strong> 的內容拿去 <strong>footer</strong> 內，沒問題！今天要把 <strong>Sidebar</strong> 的內容拿去 <strong>article</strong> 內，沒問題！</p>
-<p><img alt="這次直接使用 Bootstrap 的格線系統，斷點在自行訂製" data-src="https://cdn-images-1.medium.com/max/2000/1*PWh8QK-rtLB3uP0tQtJZEA.gif" class="lozad"></p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">mixin</span> pad {</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">991px</span>) {</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">@mixin md-mobile {</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">767px</span>) {</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line">// 搭配 mixin 天衣無縫</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*PWh8QK-rtLB3uP0tQtJZEA.gif" alt="這次直接使用 Bootstrap 的格線系統，斷點在自行訂製"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">mixin</span> pad &#123;</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">991px</span>) &#123;</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@mixin md-mobile &#123;</span><br><span class="line">    @<span class="keyword">media</span> screen and (max-width: <span class="number">767px</span>) &#123;</span><br><span class="line">      @<span class="keyword">content</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 搭配 mixin 天衣無縫</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="拋棄-JS-框架"><a href="#拋棄-JS-框架" class="headerlink" title="拋棄 JS 框架"></a>拋棄 JS 框架</h3><p>從剛開始的地下層朋友建議用 <strong>JQuery</strong> 實作，剛開始還傻傻地覺得怎麼不從 <strong>Javascript</strong> 開始邊學呢，後來用慣了突然不能用 <strong>JS</strong> 框架還真有點困擾呢，就像是沒有了 <strong>v-bind v-if</strong>，不過勇者的精神就是衝就對了，哈。</p>
 <p>這次必較麻煩的點是要判斷目前點的是哪張圖片，剛開始不知道 <strong>li</strong> 能直接去抓排序，還傻傻的以為 <strong>javascript</strong> 也能使用 <strong>div.index()</strong> 這類的語法，最後解決方法還是用最笨的方式給他一個 <strong>Class Name</strong>，然後再用變數去裝，最後 <strong>split</strong> 它。</p>
-<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抓取 Class 的名稱來判斷是第幾個</span></span><br><span class="line"><span class="keyword">var</span> imgClass_Name = e.target.className.split(<span class="string">" "</span>);</span><br><span class="line">now_imgIndex = <span class="built_in">parseInt</span>(imgClass_Name[<span class="number">2</span>].split(<span class="string">"-"</span>)[<span class="number">2</span>]);</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抓取 Class 的名稱來判斷是第幾個</span></span><br><span class="line"><span class="keyword">var</span> imgClass_Name = e.target.className.split(<span class="string">" "</span>);</span><br><span class="line">now_imgIndex = <span class="built_in">parseInt</span>(imgClass_Name[<span class="number">2</span>].split(<span class="string">"-"</span>)[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="切換燈片"><a href="#切換燈片" class="headerlink" title="切換燈片"></a>切換燈片</h3><p>這邊反而比較容易解決，在剛開始就先把幻燈片丟進陣列，再靠上面判斷的數字去 <strong>+1</strong> 或 <strong>-1</strong>，如果碰到 -1 或大於幻燈片圖片的時候再把它改為第 <strong>0</strong> 個，或是 <strong>now_imgIndex.length-1</strong>。</p>
 <p>在按鈕的部分也可以直接給他們一個相同的 <strong>Class</strong> 然後再點選的時候靠 <strong>Switch</strong> 事件去判斷現在點的是哪一個，可以減少寫 <strong>Code</strong> 的行數。</p>
-<p><img alt="" data-src="https://cdn-images-1.medium.com/max/2000/1*svckH6-f_Kj8iLnFISy5eQ.png" class="lozad"></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*svckH6-f_Kj8iLnFISy5eQ.png" alt=""></p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次的關卡算是很快的解決，不過要改進的地方還是很多，每每切這種基本功版的時候就能知道自己的基礎打得夠不夠穩，我想還是需要加油的。</p>
 <p>最近是接觸前端滿半年的時間了，說長不長說短不短，在自己胡亂完了一些東西後，發現好多東西都息息相關，不過跟練功一樣，急不得，所以有練功機會就要抓著練習。</p>
@@ -90,79 +378,369 @@
 <h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
 <li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMUYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItMkYvY2xvY2suaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItM0YvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 4F World Clock 各國時區</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNEYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNGYtd29ybGQtY2xvY2stJUU1JTkwJTg0JUU1JTlDJThCJUU2JTk5JTgyJUU1JThEJTgwLTIzNTY3ODZmM2RmYQ==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 5F AQI 全台空氣指標儀表板</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-5F/index.html" target="_blank" rel="noopener">*點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNUYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-5F/index.html">*點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNWYtYXFpLSVFNSU4NSVBOCVFNSU4RiVCMCVFNyVBOSVCQSVFNiVCMCVBMyVFNiU4QyU4NyVFNiVBOCU5OSVFNSU4NCU4MCVFOCVBMSVBOCVFNiU5RCVCRi1jMDYwZmJlNTg0NTQ=" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 6F SECONDS CHALLENGE 倒數遊戲</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-6F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItNkYvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-6F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtNmYtc2Vjb25kcy1jaGFsbGVuZ2UtJUU1JTgwJTkyJUU2JTk1JUI4JUU5JTgxJThBJUU2JTg4JUIyLWY3MWMwYjY4MGZkYg==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 7F Canvas 畫板</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-7F/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-7f-canvas-%E7%95%AB%E6%9D%BF-fca0a17ae652" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItN0YvaW5kZXguaHRtbA==" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-7F/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtN2YtY2FudmFzLSVFNyU5NSVBQiVFNiU5RCVCRi1mY2EwYTE3YWU2NTI=" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-7f-canvas-%E7%95%AB%E6%9D%BF-fca0a17ae652">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 <li><p><strong>Hero Of UnderGround — 8F Tic-Tac-Toe 井字遊戲</strong></p>
 <blockquote>
-<p><em>Demo：<a href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-8F/dist/index.html" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-8F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-8f-tic-tac-toe-%E4%BA%95%E5%AD%97%E9%81%8A%E6%88%B2-e5b3d95dd2cb" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Demo：<span class="exturl" data-url="aHR0cDovL3JleGh1bmcubWUvSlMtYW5kLUZpZ2h0ZXIvSlMtYW5kLUZpZ2h0ZXItOEYvZGlzdC9pbmRleC5odG1s" title="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-8F/dist/index.html">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-8F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtOGYtdGljLXRhYy10b2UtJUU0JUJBJTk1JUU1JUFEJTk3JUU5JTgxJThBJUU2JTg4JUIyLWU1YjNkOTVkZDJjYg==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-8f-tic-tac-toe-%E4%BA%95%E5%AD%97%E9%81%8A%E6%88%B2-e5b3d95dd2cb">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
-<li><p><strong>Hero Of UnderGround — 10F <a href="https://chrome.google.com/webstore/category/extensions?hl=zh-TW" target="_blank" rel="noopener">Chrome extension</a> 幹話生產器</strong></p>
+<li><p><strong>Hero Of UnderGround — 10F <span class="exturl" data-url="aHR0cHM6Ly9jaHJvbWUuZ29vZ2xlLmNvbS93ZWJzdG9yZS9jYXRlZ29yeS9leHRlbnNpb25zP2hsPXpoLVRX" title="https://chrome.google.com/webstore/category/extensions?hl=zh-TW">Chrome extension<i class="fa fa-external-link"></i></span> 幹話生產器</strong></p>
 <blockquote>
-<p><em>Zip ： <a href="https://drive.google.com/file/d/1FBsq1g7ztFDNLX6OwiKKJCiiQxwuUFHE/view?usp=sharing" target="_blank" rel="noopener">點我</a><br><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-10F">點我</a><br><br>Blog：<a href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-10f-chrome-extension-%E5%B9%B9%E8%A9%B1%E7%94%9F%E7%94%A2%E5%99%A8-7c9f36a68bc7" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Zip ： <span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xRkJzcTFnN3p0RkROTFg2T3dpS0tKQ2lpUXh3dVVGSEUvdmlldz91c3A9c2hhcmluZw==" title="https://drive.google.com/file/d/1FBsq1g7ztFDNLX6OwiKKJCiiQxwuUFHE/view?usp=sharing">點我<i class="fa fa-external-link"></i></span><br/><br>Code Source：<a href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-10F">點我</a><br/><br>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvaGVyby1vZi11bmRlcmdyb3VuZC0lRTUlOUMlQjAlRTQlQjglOEIlRTUlOUYlOEUtMTBmLWNocm9tZS1leHRlbnNpb24tJUU1JUI5JUI5JUU4JUE5JUIxJUU3JTk0JTlGJUU3JTk0JUEyJUU1JTk5JUE4LTdjOWYzNmE2OGJjNw==" title="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-10f-chrome-extension-%E5%B9%B9%E8%A9%B1%E7%94%9F%E7%94%A2%E5%99%A8-7c9f36a68bc7">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 </ul>
 <h3 id="Vue系列-—"><a href="#Vue系列-—" class="headerlink" title="Vue系列 —"></a>Vue系列 —</h3><ul>
 <li><strong>[Vue Notes] — Vue-Cli #1 初次見面</strong><blockquote>
-<p><em>Blog：<a href="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvdnVlLW5vdGVzLXZ1ZS1jbGktMS0lRTUlODglOUQlRTYlQUMlQTElRTglQTYlOEIlRTklOUQlQTItZTJkODY4ZWUwNGFh" title="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 </ul>
 <h3 id="CSS系列-—"><a href="#CSS系列-—" class="headerlink" title="CSS系列 —"></a>CSS系列 —</h3><ul>
 <li><strong>[CSS Notes] — 談談CSS模組化</strong><blockquote>
-<p><em>Blog：<a href="https://medium.com/@zehung860486/css-notes-css%E6%A8%A1%E7%B5%84%E5%8C%96-3bb03e72523e" target="_blank" rel="noopener">點我</a></em></p>
+<p><em>Blog：<span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0B6ZWh1bmc4NjA0ODYvY3NzLW5vdGVzLWNzcyVFNiVBOCVBMSVFNyVCNSU4NCVFNSU4QyU5Ni0zYmIwM2U3MjUyM2U=" title="https://medium.com/@zehung860486/css-notes-css%E6%A8%A1%E7%B5%84%E5%8C%96-3bb03e72523e">點我<i class="fa fa-external-link"></i></span></em></p>
 </blockquote>
 </li>
 </ul>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li>只是想不到名子大大 — <a href="https://medium.com/s3267920/js%E5%9C%B0%E4%B8%8B%E5%9F%8E-11f-lightbox-68f6c744a198" target="_blank" rel="noopener">JS地下城 🏰 11F — Lightbox</a></li>
-<li>六角學院 — <a href="https://www.udemy.com/sasssecret/" target="_blank" rel="noopener">Sass 實戰全攻略 — 成為前 1% 的 CSS 頂尖好手</a></li>
+<li>只是想不到名子大大 — <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL3MzMjY3OTIwL2pzJUU1JTlDJUIwJUU0JUI4JThCJUU1JTlGJThFLTExZi1saWdodGJveC02OGY2Yzc0NGExOTg=" title="https://medium.com/s3267920/js%E5%9C%B0%E4%B8%8B%E5%9F%8E-11f-lightbox-68f6c744a198">JS地下城 🏰 11F — Lightbox<i class="fa fa-external-link"></i></span></li>
+<li>六角學院 — <span class="exturl" data-url="aHR0cHM6Ly93d3cudWRlbXkuY29tL3Nhc3NzZWNyZXQv" title="https://www.udemy.com/sasssecret/">Sass 實戰全攻略 — 成為前 1% 的 CSS 頂尖好手<i class="fa fa-external-link"></i></span></li>
 <li><a href="https://www.gamer.com.tw/index2.php?ad=N" target="_blank" rel="noopener"><em>巴哈姆特 舒壓用</em></a></li>
 </ul>
-</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/">https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/HTML/">HTML    </a><a class="post-meta__tags" href="/tags/CSS/">CSS    </a><a class="post-meta__tags" href="/tags/JavaScript/">JavaScript    </a><a class="post-meta__tags" href="/tags/HexSchool/">HexSchool    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/06/18/20190618/"><img class="prev_cover lozad" data-src="https://cdn-images-1.medium.com/max/2000/1*XUK4XE1-j9ju7qWVzcIsYg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[Tool Notes] — 關於Webpack #1 - 第一次就上手</span></div></a></div><div class="next-post pull-right"><a href="/2019/05/30/20190530/"><img class="next_cover lozad" data-src="https://cdn-images-1.medium.com/max/2000/1*gDTN1PJcvC0T_9tskgCzuQ.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[CSS Notes] - CSS模組化</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/07/29/20200729/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60</div></a></div><div class="relatedPosts_item"><a href="/2020/06/07/20200607/" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30</div></a></div><div class="relatedPosts_item"><a href="/2020/02/12/20200212/" title="[The F2E 2nd] — 10 Week Masks Map 口罩地圖"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[The F2E 2nd] — 10 Week Masks Map 口罩地圖</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
-var disqus_config = function () {
-  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/';
-  this.page.identifier = '2019/06/03/20190603/';
-  this.page.title = '[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果';
-}
-var d = document, s = d.createElement('script');
-s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
-s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(https://cdn-images-1.medium.com/max/2000/1*5nzGLmRb3Byaq14pVTeDnQ.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
 
-</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-observer.observe();
-</script></body></html>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright" style="background: var(--card-bg-color);
+    border-left: 3px solid #ff2a2a;
+    list-style: none;
+    margin: 2em 0 0;
+    padding: 0.5em 1em;">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>RexHung
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/" title="[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果">https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/30/20190530/" rel="prev" title="[CSS Notes] - CSS模組化">
+      <i class="fa fa-chevron-left"></i> [CSS Notes] - CSS模組化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/18/20190618/" rel="next" title="[Tool Notes] — 關於Webpack #1 - 第一次就上手">
+      [Tool Notes] — 關於Webpack #1 - 第一次就上手 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#成果-amp-程式碼"><span class="nav-number">1.</span> <span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#畫面製作"><span class="nav-number">3.1.</span> <span class="nav-text">畫面製作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#關於-RWD"><span class="nav-number">3.2.</span> <span class="nav-text">關於 RWD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格線系統是老大"><span class="nav-number">3.3.</span> <span class="nav-text">格線系統是老大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拋棄-JS-框架"><span class="nav-number">3.4.</span> <span class="nav-text">拋棄 JS 框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切換燈片"><span class="nav-number">3.5.</span> <span class="nav-text">切換燈片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的其他範例"><span class="nav-number">5.</span> <span class="nav-text">我的其他範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue系列-—"><span class="nav-number">5.1.</span> <span class="nav-text">Vue系列 —</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS系列-—"><span class="nav-number">5.2.</span> <span class="nav-text">CSS系列 —</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-number">6.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fa fa-fw fa-twitter"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fa fa-fw fa-facebook"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="總字數">286k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">4:20</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://RexHung0302.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2019/06/03/20190603/";
+    this.page.identifier = "2019/06/03/20190603/";
+    this.page.title = "[Hero Of UnderGround 地下城] — 11F LightBox 燈箱效果";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://RexHung0302.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

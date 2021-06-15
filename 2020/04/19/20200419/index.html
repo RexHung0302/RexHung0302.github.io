@@ -1,27 +1,310 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術 | RexHung's Blog</title><meta name="description" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"><meta name="keywords" content="Code,HTML,CSS,HexSchool,Web-Layout-Training"><meta name="author" content="RexHung"><meta name="copyright" content="RexHung"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/newFavicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"><meta name="twitter:description" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"><meta name="twitter:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta property="og:type" content="article"><meta property="og:title" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"><meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/"><meta property="og:site_name" content="RexHung's Blog"><meta property="og:description" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"><meta property="og:image" content="https://github.com/RexHung0302/RexHung0302.github.io/img/article_404.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="[Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/29/20200429/"><link rel="next" title="[Hexschool Web Layout Training] — Week_1 個人履歷" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/12/20200412/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
-  highlight_copy: 'true',
-  highlight_lang: 'true',
-  highlight_shrink: 'false',
-  copy: {
-    success: '複製成功',
-    error: '複製錯誤',
-    noSupport: '瀏覽器不支持'
-  },
-  bookmark: {
-    title: '添加書籤',
-    message_prev: '按',
-    message_next: '鍵將本頁加入書籤'
-  },
-  runtime_unit: '天',
-  copyright: undefined,
-  copy_copyright_js: false
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script> window._izq = window._izq || []; window._izq.push(["init" ]); </script> <script src="https://cdn.izooto.com/scripts/802b14e3cb22d00ff0ecc3f0d0cfad15799a987a.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":true,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己愛玩（誤 這週的直播其實有點卡，不知道是不是 Zoom 太多人導致還是其他原因，總之最後到了今天才看重播影片。 這週的重頭戲就是常常聽到的 Flex 了！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術">
+<meta property="og:url" content="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己愛玩（誤 這週的直播其實有點卡，不知道是不是 Zoom 太多人導致還是其他原因，總之最後到了今天才看重播影片。 這週的重頭戲就是常常聽到的 Flex 了！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://github.com/images/20200419/week_2_classLogo.png">
+<meta property="og:image" content="https://github.com/images/20200419/rank.png">
+<meta property="og:image" content="https://github.com/images/20200419/question2.png">
+<meta property="article:published_time" content="2020-04-19T13:24:00.000Z">
+<meta property="article:modified_time" content="2021-06-09T06:45:18.698Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="RexHung">
+<meta property="article:tag" content="CodeLife">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Engineer">
+<meta property="article:tag" content="Web-Layout-Training">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/20200419/week_2_classLogo.png">
+
+<link rel="canonical" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術 | RexHung's Blog</title>
   
-}</script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
-</head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">RexHung's Blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://avatars2.githubusercontent.com/u/45451039?s=460&amp;v=4" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">標籤</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分類</div><div class="length_num">38</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 更多</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 相簿</span></a></li><li><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友鏈</span></a></li><li><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 關於</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目錄</div><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Introduction-amp-前言"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">Introduction &amp; 前言</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Summary-amp-摘要"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">Summary &amp; 摘要</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#關卡目標"><span class="toc_mobile_items-number">2.0.1.</span> <span class="toc_mobile_items-text">關卡目標</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#課程心得"><span class="toc_mobile_items-number">2.1.</span> <span class="toc_mobile_items-text">課程心得</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#練習心得"><span class="toc_mobile_items-number">2.2.</span> <span class="toc_mobile_items-text">練習心得</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#小組任務"><span class="toc_mobile_items-number">2.3.</span> <span class="toc_mobile_items-text">小組任務</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#任務一-玩-Flexbox-遊戲"><span class="toc_mobile_items-number">2.3.1.</span> <span class="toc_mobile_items-text">任務一 - 玩 Flexbox 遊戲</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#任務二-幫實習生復原完美六角-LOGO"><span class="toc_mobile_items-number">2.3.2.</span> <span class="toc_mobile_items-text">任務二 - 幫實習生復原完美六角 LOGO</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-5"><a class="toc_mobile_items-link" href="#修改限制"><span class="toc_mobile_items-number">2.3.2.1.</span> <span class="toc_mobile_items-text">修改限制</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-5"><a class="toc_mobile_items-link" href="#解答"><span class="toc_mobile_items-number">2.3.2.2.</span> <span class="toc_mobile_items-text">解答</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-4"><a class="toc_mobile_items-link" href="#任務三-討論第二週版型該怎麼做"><span class="toc_mobile_items-number">2.3.3.</span> <span class="toc_mobile_items-text">任務三 - 討論第二週版型該怎麼做</span></a></li></ol></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Conclusion-amp-結論"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">Conclusion &amp; 結論</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Demo-amp-成果程式碼"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">Demo &amp; 成果程式碼</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#參考網站"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">參考網站</span></a></li></ol></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目錄</div><div class="sidebar-toc__progress"><span class="progress-notice">你已經讀了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction-amp-前言"><span class="toc-number">1.</span> <span class="toc-text">Introduction &amp; 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary-amp-摘要"><span class="toc-number">2.</span> <span class="toc-text">Summary &amp; 摘要</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#關卡目標"><span class="toc-number">2.0.1.</span> <span class="toc-text">關卡目標</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#課程心得"><span class="toc-number">2.1.</span> <span class="toc-text">課程心得</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#練習心得"><span class="toc-number">2.2.</span> <span class="toc-text">練習心得</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小組任務"><span class="toc-number">2.3.</span> <span class="toc-text">小組任務</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#任務一-玩-Flexbox-遊戲"><span class="toc-number">2.3.1.</span> <span class="toc-text">任務一 - 玩 Flexbox 遊戲</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#任務二-幫實習生復原完美六角-LOGO"><span class="toc-number">2.3.2.</span> <span class="toc-text">任務二 - 幫實習生復原完美六角 LOGO</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#修改限制"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">修改限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解答"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">解答</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#任務三-討論第二週版型該怎麼做"><span class="toc-number">2.3.3.</span> <span class="toc-text">任務三 - 討論第二週版型該怎麼做</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-amp-結論"><span class="toc-number">3.</span> <span class="toc-text">Conclusion &amp; 結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-amp-成果程式碼"><span class="toc-number">4.</span> <span class="toc-text">Demo &amp; 成果程式碼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考網站"><span class="toc-number">5.</span> <span class="toc-text">參考網站</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/article_404.png)"><div id="post-info"><div id="post-title"><div class="posttitle">[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 發表於 2020-04-19<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新於 2021-06-09</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/">Code</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/">前端</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/">Hexschool-Web-Layout-Training[六角網頁切版直播班]</a></span><div class="post-meta-wordcount"><span>字數總計: </span><span class="word-count">1k</span><span class="post-meta__separator">|</span><span>閲讀時長: 3 分鐘</span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><p><img alt="第二週的練習" data-src="/images/20200419/week_2_classLogo.png" class="lozad"></p>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="RexHung's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a href="https://github.com/RexHung0302" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">RexHung's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+        <li class="menu-item menu-item-link">
+
+    <a href="/link/" rel="section"><i class="fa fa-fw fa-link"></i>link</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-19 21:24:00" itemprop="dateCreated datePublished" datetime="2020-04-19T21:24:00+08:00">2020-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-09 14:45:18" itemprop="dateModified" datetime="2021-06-09T14:45:18+08:00">2021-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/04/19/20200419/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/19/20200419/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>1 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/20200419/week_2_classLogo.png" alt="第二週的練習"></p>
 <h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己<del>愛玩</del>（誤</p>
 <p>這週的直播其實有點卡，不知道是不是 <strong>Zoom</strong> 太多人導致還是其他原因，總之最後到了今天才看重播影片。</p>
 <p>這週的重頭戲就是常常聽到的 <strong>Flex</strong> 了！</p>
@@ -31,13 +314,13 @@
 <h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
 <p><em>本篇文章將會以三個角度來紀錄， <strong>課程心得(上課後的心得整理)</strong>、<strong>練習心得(做完作業後的心得整理))</strong> 及 <strong>小組任務(每週會有一項小組任務，寫完後的心得)</strong>。</em></p>
 </blockquote>
-<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<a href="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w" target="_blank" rel="noopener">練習菜單</a>，及額外的一項打字練習。</p>
+<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<span class="exturl" data-url="aHR0cHM6Ly9oYWNrbWQuaW8vQFltY01nby1OU0tPcWdUR0FqbF81dGcvSEpwSms4QUJVLyUyRmlFNm14b2hPUy11aktVMzk4RXdrMXc=" title="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w">練習菜單<i class="fa fa-external-link"></i></span>，及額外的一項打字練習。</p>
 <ol>
 <li><p><strong>熟悉三個編輯器熱鍵</strong></p>
 </li>
-<li><p><strong>幾乎全程使用 <a href="https://docs.emmet.io/cheat-sheet/" target="_blank" rel="noopener">emmet</a> 開發</strong></p>
+<li><p><strong>幾乎全程使用 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmVtbWV0LmlvL2NoZWF0LXNoZWV0Lw==" title="https://docs.emmet.io/cheat-sheet/">emmet<i class="fa fa-external-link"></i></span> 開發</strong></p>
 </li>
-<li><p><strong><a href="http://keybr.com/" target="_blank" rel="noopener">英打速度</a></strong> 練習</p>
+<li><p><strong><span class="exturl" data-url="aHR0cDovL2tleWJyLmNvbS8=" title="http://keybr.com/">英打速度<i class="fa fa-external-link"></i></span></strong> 練習</p>
 </li>
 </ol>
 <h4 id="關卡目標"><a href="#關卡目標" class="headerlink" title="關卡目標"></a>關卡目標</h4><ol>
@@ -51,54 +334,344 @@
 </li>
 </ol>
 <hr>
-<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>第二週的直播課程開跑，這週主題為 <strong>Flex</strong>，但本篇不會過多的著墨在介紹，因為之前在直播課程開始前有個切版練習就是要使用 <strong>Flex</strong>，詳細可參考<a href="https://rexhung0302.github.io/2020/03/23/20200323/#more" target="_blank" rel="noopener">此篇文章</a>。</p>
+<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>第二週的直播課程開跑，這週主題為 <strong>Flex</strong>，但本篇不會過多的著墨在介紹，因為之前在直播課程開始前有個切版練習就是要使用 <strong>Flex</strong>，詳細可參考<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMy8yMDIwMDMyMy8jbW9yZQ==" title="https://rexhung0302.github.io/2020/03/23/20200323/#more">此篇文章<i class="fa fa-external-link"></i></span>。</p>
 <p>校長在課程上講到了幾個網站，並且實際的用 <strong>Skitch</strong> 預先切圖看怎麼排版，其中提到了，雖然 <strong>Flex</strong> 好用，但是千萬不要因為好像就隨意下 <strong>Flex</strong>，有些地方可以下 <code>text-align: center;</code> 就不要在另外下 <strong>Flex</strong> 了！</p>
 <blockquote>
 <p>這就叫做 <strong>不要亂加語法買保險</strong></p>
 </blockquote>
 <hr>
-<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>本次練習一樣使用 <strong><a href="https://docs.emmet.io/cheat-sheet/" target="_blank" rel="noopener">emmet</a></strong> 來寫，對於需要常常寫道諸如 <code>justify-content: space-between;</code>, <code>align-items: center;</code>… 等等 這種漏漏長的語法真的節省超多時間，還不會的朋友推薦你一定要盡快入坑使用啊！</p>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>本次練習一樣使用 <strong><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmVtbWV0LmlvL2NoZWF0LXNoZWV0Lw==" title="https://docs.emmet.io/cheat-sheet/">emmet<i class="fa fa-external-link"></i></span></strong> 來寫，對於需要常常寫道諸如 <code>justify-content: space-between;</code>, <code>align-items: center;</code>… 等等 這種漏漏長的語法真的節省超多時間，還不會的朋友推薦你一定要盡快入坑使用啊！</p>
 <p>整體切版 <strong>Flex</strong> 使用上沒有大礙，只是排版是不是要多塞一個 <strong>Div</strong> 或是該不該把 <strong>CSS</strong> 抽離出來下個別的 <strong>Class Name</strong>，這邊都還是需要另外做練習。 </p>
 <hr>
 <h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><p>本週小組任務有三個：</p>
 <h4 id="任務一-玩-Flexbox-遊戲"><a href="#任務一-玩-Flexbox-遊戲" class="headerlink" title="任務一 - 玩 Flexbox 遊戲"></a>任務一 - 玩 Flexbox 遊戲</h4><p>之前記得在六角的 Slick 就有釋出過<strong>海盜船遊戲</strong>，那時候有試著玩了幾關，但沒有去玩排名模式，對於不會或不熟的朋友真的非常推薦可以使用<strong>海盜船遊戲</strong>。</p>
 <p>這邊挑選海盜船來遊玩，青蛙之前也有玩過，聽說海盜船是以青蛙為藍本做出來的遊戲，兩個都可以挑來玩看看。</p>
-<p><img alt="海盜船" data-src="/images/20200419/rank.png" class="lozad"></p>
-<h4 id="任務二-幫實習生復原完美六角-LOGO"><a href="#任務二-幫實習生復原完美六角-LOGO" class="headerlink" title="任務二 - 幫實習生復原完美六角 LOGO"></a>任務二 - 幫實習生復原完美六角 LOGO</h4><p><img alt="哪個實習生給我出來？！" data-src="/images/20200419/question2.png" class="lozad"></p>
+<p><img src="/images/20200419/rank.png" alt="海盜船"></p>
+<h4 id="任務二-幫實習生復原完美六角-LOGO"><a href="#任務二-幫實習生復原完美六角-LOGO" class="headerlink" title="任務二 - 幫實習生復原完美六角 LOGO"></a>任務二 - 幫實習生復原完美六角 LOGO</h4><p><img src="/images/20200419/question2.png" alt="哪個實習生給我出來？！"></p>
 <h5 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h5><ul>
 <li>可以修改 HTML li 裡面的圖片路徑</li>
 <li>CSS 只能在既有的 ul 與 img 標籤加上語法，不能額外加上選擇器</li>
 </ul>
 <h5 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h5><p>先替 <code>ul</code> 加上 <code>flex-wrap: wrap;</code> 才不會擠在同一行，接著把第二第三張圖片互換，最後在替 <strong>img</strong> 加上 <code>display: block;</code> 清掉多餘的 <strong>2px-3px</strong>。</p>
-<p>解答傳送門：<a href="https://codepen.io/rexhung0302/pen/bGVeOwq" target="_blank" rel="noopener">點我</a></p>
+<p>解答傳送門：<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcGVuLmlvL3JleGh1bmcwMzAyL3Blbi9iR1ZlT3dx" title="https://codepen.io/rexhung0302/pen/bGVeOwq">點我<i class="fa fa-external-link"></i></span></p>
 <h4 id="任務三-討論第二週版型該怎麼做"><a href="#任務三-討論第二週版型該怎麼做" class="headerlink" title="任務三 - 討論第二週版型該怎麼做"></a>任務三 - 討論第二週版型該怎麼做</h4><p>小組討論為週二，待週二討論完後補上！</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次直播好像滿多人都說很卡，聽說校長下週要開兩個直播平台直播，只希望別再這麼卡了。</p>
 <p>這週有點像是複習自己的 <strong>Flex</strong>，但是最基礎往往最致命也是最關鍵，寫完這週練習後有去看過幾個同學的程式碼，突然發現自己還是需要很大的加油啊ＱＱＱ。</p>
-<p>這篇沒有提到太多的 Flex 使用方法，如果想知道可以參考我的前幾篇文章 -&gt; <strong><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more" target="_blank" rel="noopener">[CSS Notes] - 第一次 Flex 就上手</a></strong></p>
+<p>這篇沒有提到太多的 Flex 使用方法，如果想知道可以參考我的前幾篇文章 -&gt; <strong><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMy8yMDIwMDMyMy8jbW9yZQ==" title="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手<i class="fa fa-external-link"></i></span></strong></p>
 <hr>
 <h2 id="Demo-amp-成果程式碼"><a href="#Demo-amp-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>Source Code：<a href="https://github.com/RexHung0302/Hexschool-web-layout-training/tree/master/Week_2">點我</a></p>
-<p>Demo：<a href="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_2/index.html" target="_blank" rel="noopener">點我</a></p>
+<p>Demo：<span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vSGV4c2Nob29sLXdlYi1sYXlvdXQtdHJhaW5pbmcvV2Vla18yL2luZGV4Lmh0bWw=" title="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_2/index.html">點我<i class="fa fa-external-link"></i></span></p>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
-<li><p><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more" target="_blank" rel="noopener">[CSS Notes] - 第一次 Flex 就上手</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9yZXhodW5nMDMwMi5naXRodWIuaW8vMjAyMC8wMy8yMy8yMDIwMDMyMy8jbW9yZQ==" title="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手<i class="fa fa-external-link"></i></span></p>
 </li>
-<li><p><a href="https://hexschool.github.io/flexbox-pirate/index.html#/" target="_blank" rel="noopener">海盜船 Flex 遊戲</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9oZXhzY2hvb2wuZ2l0aHViLmlvL2ZsZXhib3gtcGlyYXRlL2luZGV4Lmh0bWwjLw==" title="https://hexschool.github.io/flexbox-pirate/index.html#/">海盜船 Flex 遊戲<i class="fa fa-external-link"></i></span></p>
 </li>
-<li><p><a href="https://flexboxfroggy.com/#zh-tw" target="_blank" rel="noopener">青蛙 Flex 遊戲</a></p>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9mbGV4Ym94ZnJvZ2d5LmNvbS8jemgtdHc=" title="https://flexboxfroggy.com/#zh-tw">青蛙 Flex 遊戲<i class="fa fa-external-link"></i></span></p>
 </li>
 </ul>
-</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">RexHung</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章鏈接: </span><span class="post-copyright-info"><a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/">https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版權聲明: </span><span class="post-copyright-info">本博客所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="https://github.com/RexHung0302/RexHung0302.github.io" target="_blank">RexHung's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Code/">Code    </a><a class="post-meta__tags" href="/tags/HTML/">HTML    </a><a class="post-meta__tags" href="/tags/CSS/">CSS    </a><a class="post-meta__tags" href="/tags/HexSchool/">HexSchool    </a><a class="post-meta__tags" href="/tags/Web-Layout-Training/">Web-Layout-Training    </a></div><div class="post_share"><div class="social-share" data-image="/img/article_404.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> 打賞<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">這個不能用</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">這也是示意圖</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/29/20200429/"><img class="prev_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>[Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術</span></div></a></div><div class="next-post pull-right"><a href="/2020/04/12/20200412/"><img class="next_cover lozad" data-src="/img/article_404.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>[Hexschool Web Layout Training] — Week_1 個人履歷</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相關推薦</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/06/06/20200606/" title="[Hexschool Web Layout Training] — 八週總結"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool Web Layout Training] — 八週總結</div></a></div><div class="relatedPosts_item"><a href="/2020/06/05/20200605/" title="[Hexschool Web Layout Training] — Week_8 CSS 模組化管理"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool Web Layout Training] — Week_8 CSS 模組化管理</div></a></div><div class="relatedPosts_item"><a href="/2020/05/25/20200525/" title="[Hexschool Web Layout Training] — Week_7 視差滾動"><img class="relatedPosts_cover lozad"data-src="/img/article_404.png"><div class="relatedPosts_title">[Hexschool Web Layout Training] — Week_7 視差滾動</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 評論</span></div><div id="disqus_thread"></div><script>var unused = null;
-var disqus_config = function () {
-  this.page.url = 'https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/';
-  this.page.identifier = '2020/04/19/20200419/';
-  this.page.title = '[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術';
-}
-var d = document, s = d.createElement('script');
-s.src = "https://" + 'http://rexhung0302.disqus.com/count.js' +".disqus.com/embed.js";
-s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);</script></div></div></div><footer style="background-image: url(/img/article_404.png)"><div id="footer"><div class="copyright">&copy;2019 - 2021 By RexHung</div><div class="framework-info"><span>Power by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">尊重 友善 包容！</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="閲讀模式"></i><i class="fa fa-plus" id="font_plus" title="放大字體"></i><i class="fa fa-minus" id="font_minus" title="縮小字體"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="簡繁轉換">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="夜間模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="設置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直達評論"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目錄" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到頂部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
 
-</script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-observer.observe();
-</script></body></html>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright" style="background: var(--card-bg-color);
+    border-left: 3px solid #ff2a2a;
+    list-style: none;
+    margin: 2em 0 0;
+    padding: 0.5em 1em;">
+  <li class="post-copyright-author">
+    <strong>作者： </strong>RexHung
+  </li>
+  <li class="post-copyright-link">
+    <strong>文章連結：</strong>
+    <a href="https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/" title="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術">https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+
+      <div>
+        
+          <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw" style="padding: 0 5px;"></i>感謝您的閱讀-------------</div>
+    
+</div>
+        
+      </div>
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"><i class="fa fa-tag"></i> Web-Layout-Training</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/12/20200412/" rel="prev" title="[Hexschool Web Layout Training] — Week_1 個人履歷">
+      <i class="fa fa-chevron-left"></i> [Hexschool Web Layout Training] — Week_1 個人履歷
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/29/20200429/" rel="next" title="[Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術">
+      [Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-前言"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-摘要"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#關卡目標"><span class="nav-number">2.0.1.</span> <span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#課程心得"><span class="nav-number">2.1.</span> <span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#練習心得"><span class="nav-number">2.2.</span> <span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小組任務"><span class="nav-number">2.3.</span> <span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任務一-玩-Flexbox-遊戲"><span class="nav-number">2.3.1.</span> <span class="nav-text">任務一 - 玩 Flexbox 遊戲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務二-幫實習生復原完美六角-LOGO"><span class="nav-number">2.3.2.</span> <span class="nav-text">任務二 - 幫實習生復原完美六角 LOGO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#修改限制"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">修改限制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解答"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#任務三-討論第二週版型該怎麼做"><span class="nav-number">2.3.3.</span> <span class="nav-text">任務三 - 討論第二週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-結論"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-成果程式碼"><span class="nav-number">4.</span> <span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考網站"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aZWVlX0h1bmc=" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung"><i class="fa fa-fw fa-twitter"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3plLmh1bmc=" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung"><i class="fa fa-fw fa-facebook"></i></span>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpoX1RX"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="總字數">286k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">4:20</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://RexHung0302.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/RexHung0302/RexHung0302.github.io/2020/04/19/20200419/";
+    this.page.identifier = "2020/04/19/20200419/";
+    this.page.title = "[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://RexHung0302.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
