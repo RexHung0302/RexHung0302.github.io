@@ -8401,6 +8401,11 @@
 <p>這邊就是第二個重點，這邊必須帶入的是 <strong>route</strong> 的 <strong>children</strong>，畫面才能渲染出來。</p>
 <hr>
 <h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次因為剛接觸 <strong>React</strong> 其實滿多地方還不是很熟悉，這邊先練習比較基本的 <strong>React Router</strong>，看起來這潭水還很深？！雖然剛開始沒有 <strong>v-for, v-if, v-model</strong> 很不習慣，但我想各自框架都有各自的優點，未來會努力再學到更多的知識再繼續補筆記上來。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210618/react-router-practice.gif" alt="React Router Practice"></p>
+<p>最後的最後這邊補上<a href="https://github.com/RexHung0302/react-router-practice">範例程式碼</a>，但因為練習時有特別在拆一個首頁目錄，所以會跟上面的程式碼有些許差別，但大致上的用法都差不多。</p>
+<ul>
+<li><a href="https://github.com/RexHung0302/react-router-practice">範例程式碼請點我</a></li>
+</ul>
 <hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><p><a href="https://pjchender.blogspot.com/2018/11/react-react-router-dynamic-breadcrumb.html">[React] 搭配 React Router 打造一個動態麵包屑（dynamic breadcrumb）</a></p>
 ]]></content>
