@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言 這是一篇教學如何美化 git commit 及客製化檢查程式碼還有檢查 git commit 內容的文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟">
+<meta property="og:url" content="https://rexhung0302.github.io/2022/03/30/20220330/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 這是一篇教學如何美化 git commit 及客製化檢查程式碼還有檢查 git commit 內容的文章。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2022-03-30T15:08:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.539Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Solidity">
+<meta property="article:tag" content="NFT">
+<meta property="article:tag" content="Mint">
+<meta property="article:tag" content="OpenSea">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2022/03/30/20220330/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2022/03/30/20220330/","path":"2022/03/30/20220330/","title":"[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commitizen-%E7%9A%84%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Commitizen 的安裝及使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commitlint-%E7%9A%84%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">Commitlint 的安裝及使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Husky-%E7%9A%84%E5%AE%89%E8%A3%9D%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">Husky 的安裝及使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E4%BC%B8%E6%87%89%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">延伸應用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%97%A5%E8%AA%8C"><span class="nav-number">6.1.</span> <span class="nav-text">更新日誌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coding-Style-Check"><span class="nav-number">6.2.</span> <span class="nav-text">Coding Style Check</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">7.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">8.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2022/03/30/20220330/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-03-30 23:08:00" itemprop="dateCreated datePublished" datetime="2022-03-30T23:08:00+08:00">2022-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>3 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20220330/git_banner.png" alt="Git"></p>
+<p>這是一篇教學如何美化 <strong>git commit</strong> 及客製化檢查程式碼還有檢查 <strong>git commit</strong> 內容的文章。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>這篇文章將會透過 <strong>Husky</strong> 及 <strong>Commitizen</strong> 格式化 <strong>git Commit</strong> 佐 <strong>Commitlint</strong> 檢查 <strong>git Commit</strong> 是否符合格式</p>
+<hr>
+<h2 id="Commitizen-的安裝及使用流程"><a href="#Commitizen-的安裝及使用流程" class="headerlink" title="Commitizen 的安裝及使用流程"></a>Commitizen 的安裝及使用流程</h2><p><img src="/images/others/loading.gif" data-original="/images/20220330/commitizen_logo.png" alt="Commitizen"></p>
+<ol>
+<li><p>安裝 <strong>Commitizen</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install commitizen</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line"></span><br><span class="line"><span class="variable">$yarn</span> add commitizen</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>設定 <strong>Commitizen</strong></p>
+<p> 在 <strong>package.json</strong> 加上下面的設定</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// package.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;config&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;commitizen&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;path&quot;</span>: <span class="string">&quot;cz-conventional-changelog&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> (如果沒設定，之後輸入 <code>git cz</code> 會一樣以預設的 <code>git commit</code> 執行)</p>
+<blockquote>
+<p><em>如果有報錯找不到 <code>cz-conventional-changelog</code> 請輸入 <code>npm install cz-conventional-changelog</code> 或 <code>yarn add cz-conventional-changelog</code> 。</em></p>
+</blockquote>
+</li>
+<li><p>輸入 <code>git cz</code> 就能出現預設的問答</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220330/git_cz.png" alt="git cz"></p>
+<blockquote>
+<p><em>全部輸入完可以在輸入 <code>git log</code> 查看剛剛建立的 commit</em></p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="Commitlint-的安裝及使用流程"><a href="#Commitlint-的安裝及使用流程" class="headerlink" title="Commitlint 的安裝及使用流程"></a>Commitlint 的安裝及使用流程</h2><p>如果需要定義 <strong>commit</strong> 的規範及格式，可以透過使用 <em><a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint">Commitlint</a></em> 來客製化需要規範的 <strong>commit</strong> 條件，例如敘述不可以小於五個字等等；基本上有使用 <code>git cz</code> 的話都大致能符合基本格式，除非提交者直接使用 <code>git commit</code>，並且輸入了不符合規範的格式。</p>
+<blockquote>
+<p>如果不安裝使用 <strong>Commitlint</strong>，只有使用 <strong>Commitizen</strong> 將會讓這個統一規範的功能形同虛設，建議還是連同 <strong>Commitlint</strong> 一起安裝。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20220330/commitlint_logo.png" alt="Commitlint GitHub"></p>
+<ol>
+<li><p>安裝 <strong>commitlint-cli</strong> 及 <strong>config-conventional</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npm</span> install --save-dev @commitlint/&#123;config-conventional,cli&#125;</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line"></span><br><span class="line"><span class="variable">$yarn</span> add --save-dev @commitlint/&#123;config-conventional,cli&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>產生 <strong>commitlint.config.js</strong> 並寫入設定</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;module.exports = &#123;extends: [&#x27;@commitlint/config-conventional&#x27;]&#125;&quot;</span> &gt; commitlint.config.js</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>更多規範可參考 commitlint 的 Document → <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/commitlint#config">Config</a></em></p>
+</blockquote>
+</li>
+<li><p>使用 <strong>commitlint</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;add commitlint first&quot;</span> | npx commitlint</span><br><span class="line">&gt; ✖   subject may not be empty [subject-empty]</span><br><span class="line">&gt; ✖   <span class="built_in">type</span> may not be empty [type-empty]</span><br></pre></td></tr></table></figure>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220330/use_commitlint.png" alt="使用 Commitlint 檢查 git commit"></p>
+<blockquote>
+<p><em>如果 commit 不符合規範就會跳出錯誤，規範可參考 <a target="_blank" rel="noopener" href="https://www.conventionalcommits.org/en/v1.0.0/#summary">Conventional Commits</a></em></p>
+</blockquote>
+</li>
+<li><p>試試 <code>echo &quot;fix(package.json): add commitlint first&quot; | npx commitlint</code> 就不會報錯了</p>
+</li>
+</ol>
+<blockquote>
+<p>這邊建議繼續往下看，如果已經裝了  <strong>Commitizen</strong> 及 <strong>Commitlint</strong>，當然不能少了 <strong>Pre-commit</strong> 的檢查，請一併安裝 <strong>Husky</strong> 吧！</p>
+</blockquote>
+<hr>
+<h2 id="Husky-的安裝及使用流程"><a href="#Husky-的安裝及使用流程" class="headerlink" title="Husky 的安裝及使用流程"></a>Husky 的安裝及使用流程</h2><p><img src="/images/others/loading.gif" data-original="/images/20220330/husky_logo.png" alt="Husky Logo"></p>
+<p><strong>Husky</strong> 聽起來很可愛，就像一隻可靠忠心的狗狗。</p>
+<p>這隻狗狗可以讓開發者在不同的 <strong>git hook</strong> 執行不同的動作，例如建立 <strong>commit(pre-commit)</strong> 前執行 <strong>commit message</strong> 的檢查，或者 <strong>ESLint</strong> 的檢查。</p>
+<ol>
+<li><p>安裝 Husky</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npx</span> husky-init &amp;&amp; npm install</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line"><span class="variable">$npx</span> husky-init &amp;&amp; yarn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果有使用 <strong>commitlint</strong> 的話可以搭配下面指令</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$npx</span> husky add .husky/commit-msg <span class="string">&#x27;npx --no-install commitlint --edit $1&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><em>這個指令會產生一支檔案 <code>.husky/commit-msg</code>，這個指令可以在 <strong>commit(pre-commit)</strong> 前執行檢查 <strong>commit message</strong> 有無符合 <strong>conventional commit</strong> 的規範。</em></p>
+</blockquote>
+<p> 使用 <strong>create-react-app</strong> 記得把 <code>.husky/pre-commit</code> 裡面的 <code>npm test</code> 改為 <code>npm test -- --watchAll=false</code> ，不然輸入 <code>git commit</code> 後會卡在下圖(因為 <strong>create-react-app</strong> 預設是執行 <strong>watch mode</strong>)：</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220330/test_error.png" alt="Test 的錯誤"></p>
+<p> 修改後，成功的話會出現下圖(如果有寫 <strong>Test</strong> 的話才會跑出綠色或紅色 <strong>Icon</strong>)：</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220330/test_success.png" alt="Test 成功"></p>
+</li>
+<li><p>這時候輸入 <code>git commit</code>，接著在 <strong>commit</strong> 隨意輸入 <code>fix</code>，接著送出：</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220330/commit_fix.png" alt="輸入隨意的 commit message"></p>
+</li>
+</ol>
+<p>在這邊會在建立 <strong>commit message</strong> 的時候自動使用 <strong>commitlint</strong> 去檢查格式是否正確，錯誤的話就會如下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220330/commit_error.png" alt="Commit 格式錯誤"></p>
+<blockquote>
+<p>*如果沒有裝 <strong>commitlint</strong> 的話也只會跑 <strong>test</strong> 而已，並不會去檢查你的 <strong>commit message</strong>。*</p>
+</blockquote>
+<hr>
+<h2 id="延伸應用"><a href="#延伸應用" class="headerlink" title="延伸應用"></a>延伸應用</h2><h3 id="更新日誌"><a href="#更新日誌" class="headerlink" title="更新日誌"></a>更新日誌</h3><p><img src="/images/others/loading.gif" data-original="/images/20220330/conventional_changelog_logo.png" alt="Conventional Changelog Github"></p>
+<p>如果對於 <strong>git</strong> 需要更多紀錄可以使用 <strong>conventional-changelog</strong> 及 <strong>standard version</strong>，前者是紀錄所有 <strong>commit</strong> 的詳細記錄，後者則是可以產生版號紀錄，這些紀錄皆會記錄在 <code>CHANGELOG.md</code>。</p>
+<h3 id="Coding-Style-Check"><a href="#Coding-Style-Check" class="headerlink" title="Coding Style Check"></a>Coding Style Check</h3><p>如果需要使用 <strong>commit</strong> 前檢查 <strong>ESLint</strong> 的一些排版，可以安裝 <strong>ESLint</strong> 搭上 <strong>Husky</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220330/lint_staged_logo.png" alt="Lint Staged GitHub"></p>
+<ol>
+<li><p>安裝 <strong>lint-staged</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install husky lint-staged</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line"></span><br><span class="line">$ yarn add husky lint-staged</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果<em>已經裝了 husky 就不用再裝一次了，輸入 <code>npm install lint-staged</code> 即可</em></p>
+</blockquote>
+</li>
+<li><p>根目錄創建 <code>.huskyrc.json</code> 然後輸入</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;hooks&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;pre-commit&quot;</span>: <span class="string">&quot;lint-staged&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根目錄創建 <code>.lintstagedrc.json</code> 然後輸入</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;*.+(js|jsx)&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;eslint --fix&quot;</span>,</span><br><span class="line">    <span class="string">&quot;git add&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;*.+(json|css|md)&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;prettier --write&quot;</span>,</span><br><span class="line">    <span class="string">&quot;git add&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 這樣符合規範通過檢查的檔案就會被 <code>git add</code>，如果不符合就不會。</p>
+</li>
+</ol>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>前份工作因為常常只有一個前端開發一個專案，所以分支很簡單，主分支、開發分支…不會有很多額外分支。因為最近工作上碰到多人開發，而且需要發 <strong>PR</strong> 及定期開 <strong>UAT、Prod</strong> 的分支，所以大家的 <strong>Git Commit</strong> 都亂成一團，剛好想起之前有研究過 <strong>Husky</strong>，這次就一起整理成一份筆記。</p>
+<p>主要還是透過 <strong>Commitlint</strong> 去檢查我們定義好的 <strong>Git Commit</strong> 格式是否正確，然後透過 <strong>Commitizen</strong> 去快速的產生符合規範格式，最後透過 <strong>Husky</strong> 在推出 <strong>commit</strong> 之前先行進行格式檢查。</p>
+<p>如果有興趣的話也可以搭配延伸應用，一起檢查 <strong>ESLint</strong> 是否有符合規範，整套下來相信整個團隊都整齊一致，但最重要的還是要符合團隊的開發特性，還是那句話，沒有最厲害最好的程式碼及工具，只有最符合當下情況的語言及工具。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2021/07/git-commit-message.html">透過工具建立有規範的 git commit message 吧</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Solidity/" rel="tag"># Solidity</a>
+              <a href="/tags/NFT/" rel="tag"># NFT</a>
+              <a href="/tags/Mint/" rel="tag"># Mint</a>
+              <a href="/tags/OpenSea/" rel="tag"># OpenSea</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/03/10/20220310/" rel="prev" title="[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT">
+                  <i class="fa fa-angle-left"></i> [Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/05/20220405/" rel="next" title="[Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！">
+                  [Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！ <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言筆記系列終於寫到了 JavaScript，想想接觸程式跟前端已經快滿一年了，這一年剛開始的時候很著急想要盡可能地快點學會點什麼，後來發現真的是跟練功一模一樣，除非你是萬中選一的寫 Code 奇才，不穩紮穩打，就會摔得很慘啊！  註：因為前陣子出車禍加上滿多事情突然席捲而來，筆記停了好久，*The F2E 原本也想要寫篇心得文，以至於都沒完成，在寫 Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[JavaScript Note] — 淺談 JavaScript #1">
+<meta property="og:url" content="https://rexhung0302.github.io/2019/10/09/20191009/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言筆記系列終於寫到了 JavaScript，想想接觸程式跟前端已經快滿一年了，這一年剛開始的時候很著急想要盡可能地快點學會點什麼，後來發現真的是跟練功一模一樣，除非你是萬中選一的寫 Code 奇才，不穩紮穩打，就會摔得很慘啊！  註：因為前陣子出車禍加上滿多事情突然席捲而來，筆記停了好久，*The F2E 原本也想要寫篇心得文，以至於都沒完成，在寫 Code">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2019-10-09T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.533Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2019/10/09/20191009/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2019/10/09/20191009/","path":"2019/10/09/20191009/","title":"[JavaScript Note] — 淺談 JavaScript #1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[JavaScript Note] — 淺談 JavaScript #1 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E8%AB%87%E8%AB%87-JavaScript-%E5%9F%B7%E8%A1%8C%E7%92%B0%E5%A2%83%E5%8F%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.</span> <span class="nav-text">首先談談 JavaScript 執行環境及作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%80%E4%BB%A5%E5%88%B0%E5%BA%95%E8%A9%B2%E6%80%8E%E9%BA%BC%E5%AF%AB-JavaScript%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">所以到底該怎麼寫 JavaScript？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E7%94%9F%E9%83%BD%E6%9C%89%E7%AC%AC%E4%B8%80%E6%AC%A1"><span class="nav-number">2.3.</span> <span class="nav-text">人生都有第一次</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BE%E4%B8%8B%E4%BD%A0%E7%9A%84%E9%AD%9A-%E9%96%8B%E5%A7%8B%E6%8B%BF%E9%87%A3%E7%AB%BF"><span class="nav-number">2.4.</span> <span class="nav-text">放下你的魚 開始拿釣竿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%8F%9C%E4%B8%BB%E9%A4%90%E9%BB%9E%E5%BF%83"><span class="nav-number">2.5.</span> <span class="nav-text">前菜主餐點心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E7%AF%84%E5%9C%8D%E9%8D%8A"><span class="nav-number">2.6.</span> <span class="nav-text">關於範圍鍊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%AA%E5%A5%BD%E7%9A%84%E9%A0%86%E5%BA%8F%E5%91%A2%EF%BC%9F"><span class="nav-number">2.7.</span> <span class="nav-text">說好的順序呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%AA%E5%AE%8C%E8%A8%98%E6%86%B6%E9%AB%94%E4%BE%86%E8%AB%87%E8%AB%87%E5%90%8C%E6%AD%A5%E8%88%87%E9%9D%9E%E5%90%8C%E6%AD%A5"><span class="nav-number">2.8.</span> <span class="nav-text">說完記憶體來談談同步與非同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2019/10/09/20191009/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[JavaScript Note] — 淺談 JavaScript #1 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [JavaScript Note] — 淺談 JavaScript #1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-10-09 12:00:00" itemprop="dateCreated datePublished" datetime="2019-10-09T12:00:00+08:00">2019-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>4 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>筆記系列終於寫到了 <strong>JavaScript</strong>，想想接觸程式跟前端已經快滿一年了，這一年剛開始的時候很著急想要盡可能地快點學會點什麼，後來發現真的是跟練功一模一樣，除非你是萬中選一的寫 <strong>Code</strong> 奇才，不穩紮穩打，就會摔得很慘啊！</p>
+<blockquote>
+<p><em>註：因為前陣子出車禍加上滿多事情突然席捲而來，筆記停了好久，*<em>The F2E</em></em> 原本也想要寫篇心得文，以至於都沒完成，在寫 <strong>Code</strong> 的路上慢慢能體會別人說的，這是一件很需要耐心及毅力的事情；你熱愛它，它即熱愛你。*</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*Hu1IAfpJ4GKDlLWp-7rOQw.png" alt="沒完賽 真羞愧"></p>
+<span id="more"></span>
+
+<p>剛接觸程式的時候連 <strong>Java</strong> 跟 <strong>JavaScript</strong> 都傻傻搞不清楚，就一臉萌逼的亂摸亂玩下去了，一路上還是很感謝身邊的人不嫌棄的指導；在剛接觸程式的不久，剛好碰到六角學院舉辦的地下城活動 (沒錯就是上方那張圖)，這活動真的幫助自己的 <strong>JavaScript</strong> 很多，其中自己跌跌撞撞玩了一些東西，發現好多東西都跟 <strong>JavaScript</strong> 脫離不了關係，直到最近六角學院剛好推出了 **<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/js-core.html?utm_source=LINE&utm_medium=message&utm_campaign=0807LINE_message#recommend">JavaScript 核心篇</a>**，當下思考了不到三秒就下訂了 (<strong>放心本篇不是業配 也沒這麼爛的業配 xD</strong>)。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2836/1*94kGdqJpA3tbahQYxIXvvA.png" alt="購買 [傳送門](https://www.hexschool.com/courses/js-core.html?utm_source=LINE&amp;utm_medium=message&amp;utm_campaign=0807LINE_message#recommend)"></p>
+<blockquote>
+<p><em>接下來就是本篇的出產原因，不免俗的要來一句：</em></p>
+</blockquote>
+<blockquote>
+<p>*<strong>本篇文章一切皆為筆記作用，有任何錯誤及問題，歡迎理性指教及討論，詳情請查閱公開課程說明書。</strong></p>
+</blockquote>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>本系列將會淺談 <strong>JavaScript</strong> ，希望給未來自己當作筆記以及剛接觸 <strong>JavaScript</strong> 的夥伴們，甚至能帶點不一樣觀點或您沒聽過的觀點給大家，所以不會太過深入的討論。</p>
+</blockquote>
+<p>關於淺談的主題將會大致分為下列幾項，<strong>項目可能會做更動</strong>。</p>
+<ol>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/09/20191009/">JavaScript 執行環境及作用域</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/15/20191015/">運算子、型別與文法</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/24/20191024/">物件</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/28/20191028/">關於 This 那些事</a></strong></p>
+</li>
+</ol>
+<p>再次補充，其中大多做為筆記作用，並非一定絕對，也希望錯誤之處各位高手能高台貴手，必且不吝嗇的進行指教。</p>
+<p>本章討論的主題為下列幾項。</p>
+<ol>
+<li><p><strong><a href="#340f">JavaScript 執行環境及作用域</a></strong></p>
+</li>
+<li><p><strong><a href="#46e6">到底該怎麼寫 JavaScript？</a></strong></p>
+</li>
+<li><p><strong><a href="#de0d">人生都有第一次 — 錯誤</a></strong></p>
+</li>
+<li><p><strong><a href="#0d98">作用域</a></strong></p>
+</li>
+<li><p><strong><a href="#8d2d">執行堆疊</a></strong></p>
+</li>
+<li><p><strong><a href="#7d64">範圍鍊</a></strong></p>
+</li>
+<li><p><strong><a href="#a9c2">提升</a></strong></p>
+</li>
+<li><p><strong><a href="#53ac">同步與非同步</a></strong></p>
+</li>
+</ol>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*xf-vmylN6htlr_C-lx9B4Q.png" alt="程式的起點 Hello world."></p>
+<h3 id="首先談談-JavaScript-執行環境及作用域"><a href="#首先談談-JavaScript-執行環境及作用域" class="headerlink" title="首先談談 JavaScript 執行環境及作用域"></a><strong>首先談談 JavaScript 執行環境及作用域</strong></h3><p>再接觸程式之前你或多或少都會聽說過 <strong>HTML CSS JavaScript</strong> 三寶，你也知道  <strong>HTML</strong> 是網頁瀏覽器可以讀懂的語言，<strong>CSS</strong> 則是拿來美化網頁的語言，那  <strong>JavaScript</strong> 呢？剩下你想得到複雜的功能其實都是靠 <strong>JavaScript</strong> 做出來的。</p>
+<p>而 <strong>JavaScript</strong> 是直譯式語言，這種類型的程式語言，會透過 <strong>直譯器(註1)</strong> 將程式碼一句一句直接執行，不會事先透過 <strong>編譯器</strong> 編譯成 **機器碼(註2)**，才能執行，優點是彈性高，缺點是往往都要執行後才能發現錯誤，像是透過只要接觸  <strong>JavaScript</strong> 這輩子一定擺脫不了的 **console.log()**，後面會提到。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*2itO_V8DzQ_Bgb1pxEu0lA.png"></p>
+<blockquote>
+<p><em>註1：關於直譯器可參考 <a target="_blank" rel="noopener" href="https://esprima.org/demo/parse.html">傳送門</a>，電腦並非那麼聰明，舉個例子來說 <strong>var abc = ‘Hello World’;</strong> 電腦其實看不懂你要把 <strong>Hello World</strong> 放到 <strong>abc</strong> 上，所以必須透過直譯器來一個一個給他型別、用途，電腦才會知道這個要做什麼，詳見下圖。</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*X9-GuQWYIt51HBakIV173A.png" alt="直譯器編譯過程"></p>
+<blockquote>
+<p>註2：機器碼指的即是機器語言( <strong>machine language</strong> )，簡單說就是 01010101010。</p>
+</blockquote>
+<hr>
+<h3 id="所以到底該怎麼寫-JavaScript？"><a href="#所以到底該怎麼寫-JavaScript？" class="headerlink" title="所以到底該怎麼寫 JavaScript？"></a>所以到底該怎麼寫 JavaScript？</h3><p>講了這麼多，所以我該怎麼開始寫 <strong>JavaScript</strong> 呢？ <strong>JavaScript</strong> 的應用非常的多，前端寫到後端都可以使用。這邊是淺談的原因，先列舉最簡單的使用方式，直接在 <strong>HTML</strong> 引入 <strong>JavaScript</strong> 或是 <strong>.js</strong> 檔。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*Ks9ISStI9EyBXkMBMKLBIQ.png" alt="不囉唆 上菜"></p>
+<p>值得注意的是， <strong>JavaScript</strong> 跟 <strong>CSS</strong> 一樣，會有順序問題，越下面的，就會把上面的給蓋掉，這點對剛開始接觸程式的我常常踩雷啊。引入的方式就很簡·單兩種，在 <strong>HTML</strong> 裡面直接使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;我是 JavaScript 內容&lt;<span class="regexp">/script&gt;** /</span><span class="regexp">/ 包起來，或是透過 </span></span><br><span class="line"><span class="regexp">&lt;script src=”你的 .js 檔路徑”&gt;&lt;/</span>script&gt; <span class="comment">// 來引入 JavaScript</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="人生都有第一次"><a href="#人生都有第一次" class="headerlink" title="人生都有第一次"></a>人生都有第一次</h3><p>我們前面說到 <strong>JavaScript</strong> 是直譯式語言，所以錯誤往往都是最後才會知道，寫上我們下面的範例，然後打開你以後寫程式的另一半 <strong>F12</strong>，點到 <strong>console</strong> 會發現下圖的 ** eft-hand(註3)** 錯誤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;Hello World&#x27;</span> = <span class="number">666</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*OYHQLFvhXPUBVxO9T-WVgQ.png" alt="錯誤就是這麼顯眼"></p>
+<blockquote>
+<p>*註3：典型的錯誤有 <strong>LHS( left-hand side)</strong> 及 <strong>RHS( right-hand side ) 錯誤</strong>，即是賦值到左邊變數上 及 取直來自右邊變數上的錯誤。直得一提的是 RHS 並不會提示在 <strong>F12</strong> 的 <strong>console</strong> 上，如下圖。*</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*KoSjWekwGhCEw5grji4CZw.png" alt="錯誤就是這麼顯眼且枯燥"></p>
+<hr>
+<h3 id="放下你的魚-開始拿釣竿"><a href="#放下你的魚-開始拿釣竿" class="headerlink" title="放下你的魚 開始拿釣竿"></a>放下你的魚 開始拿釣竿</h3><p>前面講了一堆，這邊就開始，首先你必須先知道 <strong>JavaScript</strong> 使用時常常要先宣告，宣告什麼呢？這就跟 <strong>語法作用域</strong> 有關係了。我們必須要了解 <strong>JavaScript</strong> 是 **靜態作用域(註4)**，基本上 <strong>JavaScript</strong> 都是由很多函式組成的，如下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*GqD8SwuoJil6vWKgAie1Gw.png" alt="**語法作用域**"></p>
+<p>這邊你必須先懂的兩樣東西，一個是宣告變數的方式 **var let const(後面會解說有什麼不同)**，一個是 **function 名稱()**，請見範例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> abc = <span class="string">&#x27;Hello World&#x27;</span>;  <span class="comment">// 全域</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;            <span class="comment">// 函式區域 (a 是你決定要使用時用來呼叫的名稱， 例: a();)</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> def = <span class="string">&#x27;Hello JavaScript&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(abc);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(def);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a();                      <span class="comment">// 呼叫並使用 function</span></span><br></pre></td></tr></table></figure>
+
+<p>通常我們會透過 <strong>var</strong> 宣告一個變數去裝東西，然後會有很多 <strong>function</strong> 去寫我們要做什麼事情，比如說這個 <strong>function</strong> 我要用來新增錢包的零錢，這個 <strong>function</strong> 我要用來刪除錢包… 等等，那變數放的位子就很重要了，基本上在函式執行階段如果找不到那個變數(例： <strong>abc</strong>)，它就會往外找，如果還是找不到就會出現上方的紅色錯誤提示</p>
+<p>你或許會問，那如果我宣告兩個一樣的變數呢？別急！後面會告訴你。</p>
+<blockquote>
+<p><em>註4：上方有說到直譯式語言及編譯式語言，那 靜態作用域 就是語法在解析的時候就已經確定作用域，不會再做改變， <strong>JavaScript</strong> 就是屬於這一種。動態作用域則是變數的作用域在函式調用的時候才決定。</em></p>
+</blockquote>
+<hr>
+<h3 id="前菜主餐點心"><a href="#前菜主餐點心" class="headerlink" title="前菜主餐點心"></a>前菜主餐點心</h3><p>正所謂吃飯有先後(有嗎？)，在 <strong>JavaScript</strong> 的執行也有先後順序，在電腦的執行序裡程式都是一樣一樣要排好隊，一個一個來，那我們怎麼知道這個順序呢？記得前面提到的 <strong>function</strong> 嗎？在我們執行裡，這些 <strong>function</strong> 就像要一個一個走近一間餐廳，只是這間餐廳只有入口，先來的人先吃，最後進來的人雖然最晚吃，但是它享有先離開的權利。</p>
+<blockquote>
+<p>為什麼要說到先後順序呢？因為在寫程式時，我們必須時刻了解到你的程式現在會怎麼跑，該怎麼跑。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*Zr8XmlTQpS1MkRgB8ffeYQ.png" alt="圖解執行堆疊"></p>
+<p>這時候你可能會有個疑問，那如果我寫了了 <strong>b()</strong> 緊接著 <strong>a()</strong> 呢？會怎麼跑呢？我們有個好夥伴，在寫程式的漫漫之路上雖然寂寞，但是它卻會陪著你一直走下去，沒錯，就是<strong>開發者除錯工具 F12</strong>，創建好你的練習題目，然後按下 <strong>F12</strong> 吧。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*Ef42Kc-rwCOFPwTPeov8ww.png" alt="F12"></p>
+<blockquote>
+<p>按下 <strong>F12</strong> 然後點到 <strong>Sources</strong>，在點擊右邊的暫停按鈕，之後重新整理，你會發現現在程式碼會停止在你觸發的那行程式碼上。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*s8Sj-NKa_m33Fbc5PUpzew.png" alt="在這邊你就能清楚地知道執行堆疊啦"></p>
+<blockquote>
+<p>依序的按往下的箭頭下一步或是往上的箭頭上一部了解整個運作過程。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*kv85A-q8mqKQW56x8vrn7g.gif" alt="透過 Call Stack 及 Scope 清楚看見執行堆疊"></p>
+<hr>
+<h3 id="關於範圍鍊"><a href="#關於範圍鍊" class="headerlink" title="關於範圍鍊"></a>關於範圍鍊</h3><p>為什麼上方會說到執行堆疊呢？因為在寫 <strong>JavaScript</strong> 的時候，還有一點我們必須非常注意，就是我的程式碼影響的範圍多遠？下方的示意圖簡單地表示，雖然我們有宣告兩個一樣的變數 <strong>abc</strong> ，但是 <strong>在哪裡</strong> 使用它會得到不同的結果，像是在 <strong>function a</strong> 的時候因為它在 <strong>function a</strong> 的範圍內找不到 <strong>abc</strong> 所以他會直接向外面那層搜尋 <strong>abc</strong> ，最後結果即是 <strong>66666</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*cC1zMmManfuruemFQXY0TA.png"></p>
+<hr>
+<h3 id="說好的順序呢？"><a href="#說好的順序呢？" class="headerlink" title="說好的順序呢？"></a>說好的順序呢？</h3><p>前面說了堆疊順序，但總會讓人覺得，好像毫無順序可言，而且其實我把要呼叫的程式碼隨便丟，似乎都會正常的跑。其實這跟本篇會說到的重點之一有關，就是<strong>提升</strong>(<strong>Hoisting</strong>)。</p>
+<p>在上方我們有提到 <strong>執行堆疊</strong>，那在執行環境中其實程式已經幫我們做了兩件事情，其中一個是 <strong>創造</strong>，一個是 <strong>執行</strong>，簡單說創造的時候它已經幫你把程式順序把整理好了。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*R2wLE619874j8W_rViKMUA.png"></p>
+<p>在前面如果你有試著用 <strong>F12</strong> 工具去執行會發現，執行到宣告的地方，變數沒有立即的被賦值，卻出現了 <strong>undefined</strong>，這是為什麼呢？說到這邊就要講講關於記憶體的部分。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*ZzaeHcftemdP5g_SPFklVg.png" alt="創造階段"></p>
+<p>再創造階段時變數都會先被記錄下來，但是值都是 <strong>undefined(註5)</strong> ，比較不同的是 <strong>函式陳述式</strong> 會被完整的先記錄下來並且做提升。一直到執行階段，變數才會賦值上去。</p>
+<blockquote>
+<p><em>註5：關於 undefined 及 not defined 的差別要注意，一個是已經在創造階段宣告變數名稱但是沒有賦值，一個是在創造階段沒有宣告變數名稱也沒有賦值。</em></p>
+</blockquote>
+<h3 id="說完記憶體來談談同步與非同步"><a href="#說完記憶體來談談同步與非同步" class="headerlink" title="說完記憶體來談談同步與非同步"></a>說完記憶體來談談同步與非同步</h3><p>上方我們有提到 <strong>執行堆疊</strong>，那在 JavaScript 中如果你要讓某個程式碼晚一點在執行就必須靠非同步來執行，直接來看下面一張圖。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*ObKobMAi41s_KKTzfnknZg.png" alt="事件佇列"><em>事件佇列</em></p>
+<p>因為 <strong>Javascript</strong> 是 單執行緒，一次只能做一件事情，如果你想要讓它依照你的順序去執行，就必須靠事件佇列來解決，所有非同步內容丟進事件佇列內，最後執行完本次的執行環境才會執行事件佇列的內容。</p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實應該算本章的小結論，這次筆記其實想記錄很多東西，但是有些又覺得不需要特別去紀錄，所以整理起來或許會有點亂，但是在寫文章的過程或多或少又能整理到自己一些思緒，我覺得這次收穫最大的。</p>
+<p>在寫這篇文章的時候突然想起，剛接觸程式時不懂 **Javascript(雖然現在也不懂)**，胡亂寫一通，竟然還是跑得起來，某些程式碼也沒有離預期太遠，不過俗話說的好，基礎沒打穩，等你上戰場後就會原形畢露，這段時間覺得自己還是應該好好再次精進 <strong>Javascript</strong> 的能力。</p>
+<p>關於 <strong>Javascript</strong> 還有很多會慢慢寫筆記，最近常常有種怠惰的感覺，或許是剛開始什麼都不會，進步得很快，但是像那句老話，你學的越多你就越不懂，也或許碰到了學習階段的檻。學習急不得，我會告訴自己努力加油還要保持自己的初衷。<strong>To be continued.</strong></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>六角學院 — <a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/js-core.html?utm_source=LINE&utm_medium=message&utm_campaign=0807LINE_message#recommend">JavaScript 核心篇</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/20/20190820/" rel="prev" title="[Tool Note] — 關於爬蟲">
+                  <i class="fa fa-angle-left"></i> [Tool Note] — 關於爬蟲
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/10/15/20191015/" rel="next" title="[JavaScript Note] — 淺談 JavaScript #2">
+                  [JavaScript Note] — 淺談 JavaScript #2 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

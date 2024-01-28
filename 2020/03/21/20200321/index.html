@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 Laravel 底下，新專案是用 Vue Cli3 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 babel&#x2F;polyfill ，研究時 Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note] — 關於Webpack #2 - Babel？">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/03/21/20200321/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 Laravel 底下，新專案是用 Vue Cli3 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 babel&#x2F;polyfill ，研究時 Vue">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-03-20T18:16:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.534Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/03/21/20200321/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2020/03/21/20200321/","path":"2020/03/21/20200321/","title":"[Tool Note] — 關於Webpack #2 - Babel？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Tool Note] — 關於Webpack #2 - Babel？ | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%96%AE%E5%88%80%E7%9B%B4%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">單刀直入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%B4%E5%88%A5%E5%A1%94%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">巴別塔？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%8B%95%E4%BA%86"><span class="nav-number">1.3.</span> <span class="nav-text">開動了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%B6%E5%BE%8C%E5%91%A2%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">然後呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">3.</span> <span class="nav-text">參考網站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%8C%E5%A4%96%E8%A9%B1"><span class="nav-number">3.1.</span> <span class="nav-text">題外話</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/03/21/20200321/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Tool Note] — 關於Webpack #2 - Babel？ | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note] — 關於Webpack #2 - Babel？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-03-21 02:16:00" itemprop="dateCreated datePublished" datetime="2020-03-21T02:16:00+08:00">2020-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/Webpack/" itemprop="url" rel="index"><span itemprop="name">Webpack</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/Webpack/Babel/" itemprop="url" rel="index"><span itemprop="name">Babel</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>3 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="/images/others/loading.gif" data-original="/images/20200321/babel_logo.png" alt="Webpack又來啦！"></p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近這陣子剛好公司新的專案必須從頭開始，終於前後端分離，之前都是依附在 <strong>Laravel</strong> 底下，新專案是用 <strong>Vue Cli3</strong> 寫的，最近老闆猛然一提，才思考到舊手機支援問題，當下心整個懸在空中，糊塗的自己只顧著因為第一次自己從頭開始一個前端專案很興奮的心情，竟然忘了顧及支援度的問題，所以在今天上班時趕緊研究 <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-polyfill">babel/polyfill</a> ，研究時 <strong>Vue Cli3</strong> 爆出一些警告訊息(內容就先不討論了)，這時候想到了前陣子摸過的 <strong>Webpack</strong>。</p>
+<p>相較於這次的專案，之前許多頁面都是單純<del>SPA</del>一頁式的網頁 ( <strong>HTML CSS JavaScript</strong> )，而且只有在手機上跑，不會到萬惡的 <strong>Bug Maker IE</strong> 跑，所以基本上不是非常舊的東西還是都支援。但最後還是碰到了有手機不能跑的問題，其實會發現這種不能跑的情況是從一個拿 <strong>Iphone6 IOS9</strong> 的同事身上開始…</p>
+<span id="more"></span>
+
+<blockquote>
+<p>溫馨提醒：強烈建議還沒看過 關於Webpack #1 的同學們去看看<a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a></p>
+</blockquote>
+<p>因為發生了這種狀況，所以 <strong>JavaScript</strong> 能不用 (註1)<strong>ES6</strong> 就盡量避免，但其實在那時候就決定要再回來用 <strong>Webpack</strong> 了，無奈最近時程真的是被壓縮壓縮超級壓縮呀…(苦笑</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/six_logo.png" alt="基礎打得穩 切版沒煩惱"></p>
+<p>近期六角開了一堂特別的線上直播課程，<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/web-layout-training-1st.html">網頁切版直播班</a>，因為覺得自己基本功不是很穩，近期切版時程太趕，希望自己能快速且精準又能寫出乾淨程式碼的情況下，就報名了，哎…<strong>出來寫前端，總是要還的，而且是別人說的倍數成長呀</strong>。</p>
+<p>因為課程開始前有新手任務，剛好要切一個版，就打算拿那個版面來練習，不過這篇文章不會介紹怎麼切，而是要先介紹怎麼編譯 <strong>ES6 =&gt; ES5</strong> ，因為目前 <strong>ES5</strong> 的支援度還是比 <strong>ES6</strong> 高。</p>
+<blockquote>
+<p>謎之音：如果 ES5 也不支援怎麼辦呢？</p>
+<p>答：解決有 ES 看不到問題的人就@&amp;^*$&amp;)(#*@)…</p>
+</blockquote>
+<blockquote>
+<p>*註1:  <strong>ES</strong> 為 <strong>ECMAScript</strong>，他制定了瀏覽器腳本語言的標準，而 <strong>JavaScript</strong> 算是 <strong>ECMAScript</strong> 最著名的實現。<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10209809">詳情請點我</a>*</p>
+</blockquote>
+<hr>
+<h3 id="單刀直入"><a href="#單刀直入" class="headerlink" title="單刀直入"></a>單刀直入</h3><p>廢話說了很多，這邊我們繼續說！這篇主要會提到 <strong>Babel</strong>，這就是前言提到的，新的 <strong>ES6</strong> 如果舊手機舊瀏覽器吃不到怎麼辦？那你就必須透過加工廠(<strong>Babel</strong>)加工把東西弄的適合<del>過時</del>的東西吃。</p>
+<p>這邊假設 <strong>if</strong> ( 您已經看過 <a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a> ) <strong>else if</strong> ( 或已經具備基本的 <strong>Webpack</strong> 概念 ) ，<strong>else</strong> ( 請看看就好尊重友善包容手下留情感激不盡，這邊就不在介紹如何初始化一個 <strong>Webpack</strong> 專案 ) 。</p>
+<p>上一篇提過 <strong>module</strong> 及 <strong>plugins</strong> 在 <strong>webpack.config.js</strong> 裡的差別，前者是專們放 <strong>xxx-loader</strong> 的，後者顧名思義是專們放 <strong>plugins</strong>，沒錯，今天的主角 <strong>Babel</strong> 是要放在 <strong>module</strong> 裡的，有點像我們使用 <strong>pug</strong> 或是 <strong>scss</strong> 的預處理器，靠 <strong>loader</strong> 幫我們編譯成網頁看得懂的語言。</p>
+<hr>
+<h3 id="巴別塔？"><a href="#巴別塔？" class="headerlink" title="巴別塔？"></a>巴別塔？</h3><p>首先在 <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/">官方網站</a> 會看見其實 Babel 底下還有很多 Plugins，我們需要幾項東西。</p>
+<ol>
+<li><p><strong>babel-loader</strong>       =&gt; 最基本的橋樑, 透過它來讀取在 <strong>Webpack</strong> 上 <strong>ES6</strong> 的語言</p>
+</li>
+<li><p><strong>@babel/core</strong>       =&gt; 最多人的疑惑，他說穿了就是幫你把你文件的字串透過 <strong>transform</strong> 方法轉為新的字符串，再返回給你，所以編譯時只帶入 <strong>babel-loader</strong> 及 <strong>@babel/core</strong> 你會發現編譯過後東西原封不動地吐給你</p>
+</li>
+<li><p><strong>@babel/preset-env</strong>  =&gt; <strong>Babel</strong> 怎麼編譯呢？在  <strong>Webpack</strong> 的 <strong>Loader</strong> 裡面其實也有自己專屬的 <strong>Plugins</strong>，透過這個 <strong>Plugin</strong> 就能編譯</p>
+</li>
+</ol>
+<hr>
+<h3 id="開動了"><a href="#開動了" class="headerlink" title="開動了"></a>開動了</h3><p>首先我們拿上次的範例繼續做，需要的可以 <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/WebpackPractice">這邊</a> 下載，建立好之後我們需要安裝 Babel，輸入下面程式碼安裝：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install babel-loader @babel/core @babel/preset-env --save-dev</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>再次複習 =&gt; <strong>–save</strong> 和 <strong>–save-dev</strong> 都是將模塊安裝到項目目錄下，差別在前者是在 dependencies 寫入依賴，後者是在 <strong>devDependencies</strong> 寫入依賴。 寫入 <strong>dependencies</strong> 內的套件是您打包後在發布環境下還會用到的套件，而 <strong>devDependencies</strong> 則是開發環境下會用到的套件。</em></p>
+</blockquote>
+<p>隨後到 <strong>Webpack.config.js</strong> 內在 <strong>module</strong> 裡新增 <code>test: /\.(js)$/</code> 幾行程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          <span class="string">&#x27;style-loader&#x27;</span>, <span class="comment">// 這個會後執行</span></span><br><span class="line">          <span class="string">&#x27;css-loader&#x27;</span> <span class="comment">// 這個會先執行</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">//- ...略</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">//- ...略</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">//- 新增這幾行</span></span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.(js)$/</span>,</span><br><span class="line">      exclude: <span class="regexp">/(node_modules)/</span>,</span><br><span class="line">      use: &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">          <span class="attr">options</span>: &#123;</span><br><span class="line">            <span class="attr">presets</span>: [<span class="string">&#x27;@babel/preset-env&#x27;</span>]</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>接著之後到 <code>/src/js/index.js</code> 裡面輸入下面程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- ES6 Example</span></span><br><span class="line"><span class="keyword">const</span> habit = [<span class="string">&quot;Write Code&quot;</span>, <span class="string">&quot;Watch Udemy&quot;</span>, <span class="string">&quot;DeBug&quot;</span>, <span class="string">&quot;Sleep&quot;</span>];</span><br><span class="line"></span><br><span class="line">habit.forEach(</span><br><span class="line">  <span class="function">(<span class="params">item, index</span>) =&gt;</span> <span class="built_in">console</span>.log( <span class="string">`<span class="subst">$&#123;index&#125;</span> =&gt; <span class="subst">$&#123;item&#125;</span>`</span> )</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/example_code.png" alt="範例程式碼"></p>
+<p>這邊使用了 ES6 常見的幾個語法，包含 const、字串模板、箭頭函式…等等，有興趣可以詳見 <a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/">ES6 武功秘籍大全</a>，語法糖真的香！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/good.gif" alt="真甜真好吃"></p>
+<p>隨後輸入下面程式碼編譯：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run build:dev 或 npm run build</span><br></pre></td></tr></table></figure>
+
+<p>接著打開 <code>dist/index.html</code> 成功的話會在 <strong>console.log</strong> 裡看見下面這張圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/success_console.png" alt="勝利的果實"></p>
+<p>你會好奇真的編譯成功了嗎？可以打開 <code>dist/main.bundle.js(或你編譯的檔案名稱)</code>，發現最下面有已經編譯好的程式碼：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/finishImg.png" alt="請忽略箭頭"></p>
+<p>仔細瞧瞧原本的 <strong>Const</strong> 已經替換成 <strong>var</strong>， 原本的 “<strong>=&gt;</strong>“ 箭頭函式也被編譯為 <strong>function</strong> 也有多了 <strong>return</strong>，真的是很貼心！</p>
+<blockquote>
+<p>P.S: <strong>那個箭頭並非 ES6 的箭頭函式哦！</strong></p>
+</blockquote>
+<hr>
+<h3 id="然後呢？"><a href="#然後呢？" class="headerlink" title="然後呢？"></a>然後呢？</h3><p>然後就完成了，就這麼簡單！其實 <strong>Babel</strong> 幫我們做了很多事情，自己也並非真的深入地摸索過，但至少看到 <strong>ES6</strong> 能成功的編譯成 <strong>ES5</strong> 讓我安心不少。</p>
+<p>如果你想瞧瞧到底有沒有編譯成功，可以試著把 <strong>babel-loader</strong> 下一行的 <strong>options</strong> 內容註解掉，再跑一次編譯，然後再打開編譯後的 <strong>JS</strong> 檔案，你會發現內容真的沒有編譯過：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200321/notCompiler.png" alt="並沒有成功編譯"></p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次並沒有做太深入的研究，時間上其實也挺有限的，不過說實在的，有編譯過真的讓人放心不少，而且 <strong>Webpack</strong> 真的可以把容量壓縮在最小卻能發揮最大效能這點，真的是推薦每一位前端真的都要玩玩看，期待之後還有繼續摸 <strong>Webpack</strong> 還會繼續 <strong>#3</strong>。</p>
+<p>接下來四月要為期八週的切版訓練，希望自己能練得更扎實，這邊推薦給可能在貧頸或是迷途的你，不管你是不是正在寫程式，我想找到你有興趣且會讓你有成就感的目標，是讓你過得快樂且會成長的有效方法之一！</p>
+<p>最後這邊會再上傳一份更新過的 <strong>Webpack</strong> 到之前的 <strong>GitHub</strong> 上，有興趣的可以抓下來玩玩，也歡迎各路 <strong>Webpack</strong> 高手中手低手 或 有興趣的人一起來交流，但記得<strong>友善尊重包容</strong>，謝謝～</p>
+<blockquote>
+<p><strong>範例傳送門 =&gt; <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/WebpackPractice">點我</a></strong></p>
+</blockquote>
+<blockquote>
+<p><em><strong>2020/04/12 後更： 上傳了新版的 Webpack 程式碼，內容包含 Vue 打包，請至<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/WebpackPractice2.0">此處</a>觀看。</strong></em></p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>Babel 官網 — <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/">Babel</a></li>
+<li>ES6 寶典 — <a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/">ESMAScript 6 入門</a></li>
+<li>Mike 大大 — <a target="_blank" rel="noopener" href="https://medium.com/i-am-mike/webpack%E6%95%99%E5%AD%B8-%E5%9B%9B-javascript-%E8%88%87-babel-1d7acd911e63">Webpack教學 (四)：JavaScript 與 Babel</a></li>
+<li>Rex — <a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a></li>
+<li>Chris 技術筆記 — <a target="_blank" rel="noopener" href="https://dwatow.github.io/2018/03-08-babel-cli/">Babel 第一次接觸</a></li>
+<li>小蘑菇小哥 — <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/43249121">一口（很长的）气了解 babel</a></li>
+<li><del>在線梗圖</del> — <a target="_blank" rel="noopener" href="https://sorry.xuty.tk/wangjingze/">愿你出走半生，归来仍是少年</a></li>
+</ul>
+<hr>
+<h3 id="題外話"><a href="#題外話" class="headerlink" title="題外話"></a>題外話</h3><p>最近安裝 <strong>npm</strong> 套件突然一直出現下列錯誤：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">No receipt for &#x27;com.apple.pkg.CLTools_Executables&#x27; found at &#x27;/&#x27;.</span><br><span class="line"></span><br><span class="line">No receipt for &#x27;com.apple.pkg.DeveloperToolsCLILeo&#x27; found at &#x27;/&#x27;.</span><br><span class="line"></span><br><span class="line">No receipt for &#x27;com.apple.pkg.DeveloperToolsCLI&#x27; found at &#x27;/&#x27;.</span><br><span class="line"></span><br><span class="line">gyp: No Xcode or CLT version detected!</span><br></pre></td></tr></table></figure>
+
+<p>上網爬<a target="_blank" rel="noopener" href="https://juejin.im/post/5e3cc3fce51d45270c276f7f">相關文章</a>過後都說要輸入下面兩行指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf $(xcode-select -print-path)</span><br><span class="line">$ xcode-select --install</span><br></pre></td></tr></table></figure>
+
+<p>但是好像沒有用，20點跪求大神解答…</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/03/19/20200319/" rel="prev" title="[Blog Note] - Hexo NexT 小筆記">
+                  <i class="fa fa-angle-left"></i> [Blog Note] - Hexo NexT 小筆記
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/03/23/20200323/" rel="next" title="[CSS Note] - 第一次 Flex 就上手">
+                  [CSS Note] - 第一次 Flex 就上手 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

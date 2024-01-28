@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言 你是否接觸過 React 呢？在 JavaScript 裡面寫 HTML 的格式已經很習慣了吧！ 如果你正在接觸 Vue 但是苦惱怎麼在 Script 裡寫 JSX，可以參考一下這篇文章。  如果你正初學 Vue.js 或者還沒接觸框架也可以參考一下，後續會介紹 JSX 是什麼。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Vue Note] - Vue 佐 JSX&#x2F;TSX，在 JS 中切版吧">
+<meta property="og:url" content="https://rexhung0302.github.io/2023/04/18/20230418/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 你是否接觸過 React 呢？在 JavaScript 裡面寫 HTML 的格式已經很習慣了吧！ 如果你正在接觸 Vue 但是苦惱怎麼在 Script 裡寫 JSX，可以參考一下這篇文章。  如果你正初學 Vue.js 或者還沒接觸框架也可以參考一下，後續會介紹 JSX 是什麼。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2023-04-18T10:45:50.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.540Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="FrameWork">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="JSX">
+<meta property="article:tag" content="TSX">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2023/04/18/20230418/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2023/04/18/20230418/","path":"2023/04/18/20230418/","title":"[Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BD%95%E8%A6%81%E5%AF%AB%E9%80%99%E7%AF%87"><span class="nav-number">2.1.</span> <span class="nav-text">為何要寫這篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98-JSX-TSX"><span class="nav-number">2.2.</span> <span class="nav-text">基礎認識 JSX&#x2F;TSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-Vue-%E8%A3%A1%E4%BD%BF%E7%94%A8-JSX-TSX"><span class="nav-number">2.3.</span> <span class="nav-text">在 Vue 裡使用 JSX&#x2F;TSX</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%8F%8A%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.3.1.</span> <span class="nav-text">安裝及設定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2023/04/18/20230418/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2023-04-18 18:45:50" itemprop="dateCreated datePublished" datetime="2023-04-18T18:45:50+08:00">2023-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>6.2k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>6 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20230418/logo.png" alt="CASL 權限管理系統"></p>
+<p>你是否接觸過 <strong>React</strong> 呢？在 <strong>JavaScript</strong> 裡面寫 <strong>HTML</strong> 的格式已經很習慣了吧！</p>
+<p>如果你正在接觸 <strong>Vue</strong> 但是苦惱怎麼在 <strong>Script</strong> 裡寫 <strong>JSX</strong>，可以參考一下這篇文章。</p>
+<blockquote>
+<p><em><strong>如果你正初學 Vue.js 或者還沒接觸框架也可以參考一下，後續會介紹 JSX 是什麼。</strong></em></p>
+</blockquote>
+<span id="more"></span>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>你好，世界！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>『這個有趣的標籤語法不是一個字串也不是 HTML。』- React Document</strong></p>
+</blockquote>
+<p>在 <strong>React</strong> 文件裡是這麼介紹的，讓我偷懶引用一下</p>
+<blockquote>
+<p><em>這個語法叫做 JSX，是一個 JavaScript 的語法擴充。我們推薦你在寫 React 的時候透過這個語法來描述使用者介面的外觀。 JSX 可能為讓你想到一些樣板語言，但不一樣的地方是 JSX 允許你使用 JavaScript 所有的功能。</em></p>
+</blockquote>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>需要會創建及使用 Vue (了解基本的用法)</li>
+<li>需要會 Npm 用法</li>
+<li>需要了解 JSX 是什麼</li>
+</ul>
+<p>本篇文章將會學到：</p>
+<ol>
+<li>基礎認識 JSX/TSX</li>
+<li>在 Vue 裡使用 JSX/TSX</li>
+</ol>
+<p><em><strong>備註：如果你真的不了解 JSX 是什麼，下面會簡單介紹，但如果你已經了解了，可以跳過基礎認識</strong></em></p>
+<hr>
+<h3 id="為何要寫這篇"><a href="#為何要寫這篇" class="headerlink" title="為何要寫這篇"></a>為何要寫這篇</h3><p>筆者約莫在幾年前斷斷續續的利用閒暇時間做自己的 <strong>Side Project</strong>，在這期間經歷了換工作的時期，因為第一份工作筆者最早接觸的框架是 <strong>Vue.js</strong>，所以在筆者想好好了解前後端怎麼運作的時候，決定前端框架使用 <strong>Vue.js</strong>。</p>
+<p>筆者在結束第一份工作後，當時大部分的工程師普遍都認為 <strong>Vue.js</strong> 易學好入門，但是大部分大公司都還是採用 <strong>React.js</strong>，所以業界大部分其實還是後者框架居多。</p>
+<p>在筆者進入第二份工作時，也被告知公司是會採用 <strong>React.js</strong>，所以筆者其實後來就一直處在使用 <strong>React.js</strong> 的時間居多，剛開始著實不太習慣，但寫久了也能慢慢抓到兩個框架各自的優點。</p>
+<p>這邊不討論兩者框架的優缺點，普遍使用 <strong>React.js</strong> 的人應該(絕對吧？)都不能避免接觸 <strong>JSX</strong>。</p>
+<p>就在筆者學習了一陣子 React.js 後回頭來繼續完成 <strong>Side Project</strong> 時，想要客製化自己的 <strong>Components</strong>，並且傳入 <strong>HTML</strong>，這時候筆者發現以前寫了兩年多的 <strong>Vue.js</strong>，我竟然從來沒有這樣傳遞過，霎那間覺得 <strong>Vue.js</strong> 可以在 <strong>Script</strong> 裡面寫 <strong>HTML</strong> 該有多好啊！</p>
+<p>顧這篇文章就用來記錄我怎麼在 <strong>Vue.js</strong> 使用 <strong>JSX</strong> 的吧，老樣子希望能幫到你。</p>
+<blockquote>
+<p><em><strong>備註：JSX 及 TSX 是一樣的東西，差別在於後者加入了 TypeScript，如果不了解 TypeScript 是什麼可以參考 <a target="_blank" rel="noopener" href="https://willh.gitbook.io/typescript-tutorial/">TypeScript 新手指南</a>，簡單說 TypeScript 就是 JavaScript 的超集，JavaScript 屬於弱型別，當今天我們賦予一個變數字串，我們可以隨時把這個變數改為數字型別，但如果今天使用了 TypeScript 就會報錯。</strong></em></p>
+</blockquote>
+<hr>
+<h3 id="基礎認識-JSX-TSX"><a href="#基礎認識-JSX-TSX" class="headerlink" title="基礎認識 JSX/TSX"></a>基礎認識 JSX/TSX</h3><p><img src="/images/others/loading.gif" data-original="/images/20230418/jsx-compiler-step.png" alt="JSX 編譯過遲"></p>
+<p>這邊我們借用 <strong>React.js</strong> 的渲染過程來解釋，大部分的人接觸到 <strong>JSX</strong> 應該都是從接觸 <strong>React.js</strong> 開始，但為什麼我們要使用 <strong>JSX</strong> 呢？</p>
+<ol>
+<li>關注點分離</li>
+</ol>
+<p>在 <strong>React.js</strong> 的<a target="_blank" rel="noopener" href="https://zh-hant.legacy.reactjs.org/docs/introducing-jsx.html">介紹文章</a>有提到，以往我們前端開發都是 <strong>HTML、JS、CSS</strong> 去做開發，但 <strong>React.js</strong> 是以 <strong>components</strong> 做為開發核心，每一個 <strong>components</strong> 包含這些東西，內容可以是純字串，也可以是包含邏輯的。</p>
+<p>剛開始接觸或者還沒接觸 <strong>React.js</strong> 的人可能不能接受將標籤與法寫在 <strong>JavaScript</strong> 裡面，但確實這種包再一起的方式可以讓你把關注點鎖在商業邏輯內。</p>
+<p>舉例來說下面一段 <strong>React.js</strong> 程式碼就是在寫一個 <strong>component</strong>，裡面包涵畫面的呈現，這個 <strong>component</strong> 主要用於顯示使用者的資訊。</p>
+<blockquote>
+<p><em>不了解下面程式碼的用法沒關係，只要瀏覽過知道為什麼要用 TSX 就行。</em></p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface IUser &#123;</span><br><span class="line">  <span class="attr">name</span>: string;</span><br><span class="line">  age: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserComponent = <span class="function">(<span class="params">&#123;</span></span></span><br><span class="line"><span class="params"><span class="function">  userInfo</span></span></span><br><span class="line"><span class="params"><span class="function">&#125;: IUser</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>User Info:<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>name: &#123;userInfo.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>age: &#123;userInfo.age&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上面的這串 <strong>TSX</strong> 會被編譯為下面程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; jsx <span class="keyword">as</span> _jsx &#125; <span class="keyword">from</span> <span class="string">&quot;react/jsx-runtime&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; jsxs <span class="keyword">as</span> _jsxs &#125; <span class="keyword">from</span> <span class="string">&quot;react/jsx-runtime&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserComponent = <span class="function">(<span class="params">&#123;</span></span></span><br><span class="line"><span class="params"><span class="function">  userInfo</span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="comment">/*#__PURE__*/</span>_jsxs(<span class="string">&quot;div&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">children</span>: [<span class="comment">/*#__PURE__*/</span>_jsx(<span class="string">&quot;h2&quot;</span>, &#123;</span><br><span class="line">      <span class="attr">children</span>: <span class="string">&quot;User Info:&quot;</span></span><br><span class="line">    &#125;), <span class="comment">/*#__PURE__*/</span>_jsxs(<span class="string">&quot;ul&quot;</span>, &#123;</span><br><span class="line">      <span class="attr">children</span>: [<span class="comment">/*#__PURE__*/</span>_jsxs(<span class="string">&quot;li&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">children</span>: [<span class="string">&quot;name: &quot;</span>, userInfo.name]</span><br><span class="line">      &#125;), <span class="comment">/*#__PURE__*/</span>_jsxs(<span class="string">&quot;li&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">children</span>: [<span class="string">&quot;age: &quot;</span>, userInfo.age]</span><br><span class="line">      &#125;)]</span><br><span class="line">    &#125;)]</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em><strong>編譯網站可參考 <a target="_blank" rel="noopener" href="https://babeljs.io/repl/#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=JYOwLgpgTgZghgYwgAgJIFUDO1kG8BQyyIcAthAFzKZhSgDmA3IcnPZcQK6kBG0zAX3z4EAexA1kWaAGFRpAA7iI4ZAF5kACgJFO2KKhAxR-AVQz6AlOoB8eFsKJQIYTlBBaWRADwATYABuNl5EyN4AFgBMNtJQaEaiFN4A9FHBoaHenAA26RmZ2cA2JORUuHrQhsYAdCUQAimFeflhTWwc5fpVotXtDclNIT7JOc1hyf5BLJamjEA&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=react%2Ctypescript&prettier=false&targets=&version=7.22.9&externalPlugins=&assumptions=%7B%7D">Babeljs.io</a></strong></em></p>
+</blockquote>
+<p>你能發現我們只要專注在處理 <strong>顯示使用者資訊</strong> 這件事情上即可，雖然剛開始你會納悶為什麼東西都塞成一大包，但透過上面的轉譯我們能知道 <strong>TSX</strong> 幫我們處理了 <strong>JavaScript</strong> 的這一段，如果你曾經寫過原生 <strong>JavaScript</strong>，一定不能忘記頻繁的操作 <strong>DOM</strong> 吧 (淚！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userBox = <span class="built_in">document</span>.getElementById(<span class="string">&quot;userBox&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Rex&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">userBox.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;ul&gt;</span></span><br><span class="line"><span class="string">    &lt;li&gt;name: <span class="subst">$&#123;user.name&#125;</span>&lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;li&gt;age: <span class="subst">$&#123;user.age&#125;</span>&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">`</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>別忘了寫完 <strong>Javascript</strong> 邏輯你還要去處理 <strong>HTML</strong> 畫面呢…</em></p>
+</blockquote>
+<ol start="2">
+<li>提供更加語意化且易懂的標籤</li>
+</ol>
+<p>一般我們處理一些顯示邏輯，會像下方使用 <strong>命令式(Imperative)</strong> 去做判斷：</p>
+<blockquote>
+<p><em>假如我們需要判斷使用者成年沒去相對應顯示一些適合的東西</em></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (userIsAdult(user)) &#123;</span><br><span class="line">  canSeeSomeExcitingThing();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  showYouNotAToughGuy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20230418/exciting.png" alt="比遊戲還刺激"></p>
+<p>但如果我們透過 <strong>聲明式(Declarative)</strong> 則是：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">this</span>.state.userIsAdult) &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">ExcitingComponent</span> /&gt;</span></span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">ChildrenComponent</span> /&gt;</span></span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>是不是更佳清晰易懂了呢？</p>
+<ol start="3">
+<li>與 JavaScript 語法碰出新滋味</li>
+</ol>
+<p><strong>JSX</strong> 非一種全新的語言，而是一種語法糖，有點類似 <strong>ES6/7/8</strong> 那種語法糖，如果你寫過 <strong>Vue.js</strong>，可以想像今天你在使用 <strong>v-for、v-if</strong> 的概念，你能處理畫面的同時，又能處理商業邏輯。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> users = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Rex&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Mike&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">32</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Joanne&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">24</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">interface IUser &#123;</span><br><span class="line">  <span class="attr">id</span>: number;</span><br><span class="line">  name: string;</span><br><span class="line">  age: number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserComponent = <span class="function">(<span class="params">&#123;</span></span></span><br><span class="line"><span class="params"><span class="function">  users</span></span></span><br><span class="line"><span class="params"><span class="function">&#125;: IUser[]</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Users Info:<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">        &#123;</span></span><br><span class="line"><span class="xml">          users.map((user) =&gt; (</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Fragment</span> <span class="attr">key</span>=<span class="string">&#123;user.id&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>name: &#123;user.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">li</span>&gt;</span>age: &#123;user.age&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/&gt;</span></span></span><br><span class="line"><span class="xml">          ))</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>說了這麼多也許你還不能體驗到優點，沒關係我們就開始安裝使用吧！</p>
+<hr>
+<h3 id="在-Vue-裡使用-JSX-TSX"><a href="#在-Vue-裡使用-JSX-TSX" class="headerlink" title="在 Vue 裡使用 JSX/TSX"></a>在 Vue 裡使用 JSX/TSX</h3><p>想在 <strong>Vue.js</strong> 裡面使用 <strong>JSX/TSX</strong> 其實很簡單，甚至在一般的 <strong>HTML</strong> 你也能使用，不過我們先來講講今天的重點 <strong>Vue.js</strong> 如何使用吧。</p>
+<p>一般的 <code>.vue</code> 檔案內容大概會長這樣：</p>
+<blockquote>
+<p><em><strong>這邊容許我使用 Vue3 作為示範，但不會影響我們使用的過程及結果</strong></em></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>我是內容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">import</span> &#123; defineComponent &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span></span></span><br><span class="line"><span class="javascript"><span class="xml"><span class="keyword">export</span> <span class="keyword">default</span> defineComponent(&#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="attr">name</span>: <span class="string">&#x27;line-message-template-preview&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  <span class="function"><span class="title">setup</span>(<span class="params"></span>)</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">      <span class="attr">user</span>: &#123;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">name</span>: <span class="string">&#x27;Rex&#x27;</span>,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">        <span class="attr">age</span>: <span class="number">18</span></span></span></span><br><span class="line"><span class="javascript"><span class="xml">      &#125;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">    &#125;;</span></span></span><br><span class="line"><span class="javascript"><span class="xml">  &#125;,</span></span></span><br><span class="line"><span class="javascript"><span class="xml">&#125;);</span></span></span><br><span class="line"><span class="javascript"><span class="xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>普通的邏輯處理都還能順利的書寫，但今天我們想要從 <strong>script</strong> 處取得 <strong>API</strong> 資訊後，把拿到的資訊包含畫面邏輯再放回 <strong>template</strong> 渲染呢？</p>
+<p>舉例來說，我們今天透過 <strong>age</strong> 取得使用者的資訊後，我們想要依照使用者的年齡去渲染相對應的畫面顯示，這時候就會有點棘手(其實應該是說要多寫一些程式碼去處理渲染的邏輯部分)。</p>
+<p>我們先來看看下面這張圖，這張圖使用的是 <strong>Vue + Element-plus</strong>：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230418/element-plus-formatter-demo.png" alt="渲染排序邏輯"></p>
+<blockquote>
+<p><em>這段程式碼的範例可以參考 Element-plus 的 <a target="_blank" rel="noopener" href="https://element-plus.org/zh-CN/component/table.html#%E6%8E%92%E5%BA%8F">Table Document</a></em></p>
+</blockquote>
+<p>你可以觀察到 <code>el-table-column</code> 提供了一個 <strong>formatter</strong> 的方法，裡面可以傳入客製化的內容，但一般的 <strong>vue</strong> 沒有安裝 <strong>JSX</strong> 套件下我們只能傳入字串。</p>
+<p>像是範例中透過 <code>function formatter()</code> 去做的事情。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formatter = <span class="function">(<span class="params">row: User, column: TableColumnCtx&lt;User&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> row.address</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但假如今天我的邏輯想要傳入一些 <strong>UI Component</strong> 呢？例如我想要加上 <a target="_blank" rel="noopener" href="https://element-plus.org/zh-CN/component/tag.html">Tag UI</a>。</p>
+<p>這時候如果你把上面的 <strong>formatter()</strong> 改為這樣可是會出錯的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formatter = <span class="function">(<span class="params">row: User, column: TableColumnCtx&lt;User&gt;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">el-tag</span>&gt;</span>&#123;row.address&#125;<span class="tag">&lt;/<span class="name">el-tag</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>別急，讓我們來安裝 <strong>JSX/TSX</strong> 吧！</p>
+<h4 id="安裝及設定"><a href="#安裝及設定" class="headerlink" title="安裝及設定"></a>安裝及設定</h4><ol>
+<li>安裝套件</li>
+</ol>
+<p>使用 <strong>Vue2</strong> 請在專案輸入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @vue/babel-preset-jsx @vue/babel-helper-vue-jsx-merge-props</span><br></pre></td></tr></table></figure>
+
+<p>使用 <strong>Vue3</strong> 請在專案輸入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install @vue/babel-plugin-jsx -D</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>設置套件</li>
+</ol>
+<p>打開專案根目錄的 <code>.babelrc(babel.config.js)</code>(沒有請自行創建)，並且加入配置：</p>
+<p>使用 <strong>Vue2</strong> 請配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">presets</span>: [</span><br><span class="line">    <span class="string">&#x27;@vue/cli-plugin-babel/preset&#x27;</span>,</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&#x27;@vue/babel-preset-jsx&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&#x27;injectH&#x27;</span>: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <strong>Vue3</strong> 請配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;@vue/babel-plugin-jsx&#x27;</span>],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用套件</li>
+</ol>
+<p>把 <strong>Vue</strong> 的 <code>&lt;script&gt;&lt;/script&gt;</code> 改為 <code>&lt;script lang=&quot;jsx&quot;&gt;&lt;/script&gt;</code>，如果使用 <strong>typescript</strong> 請改為 <code>&lt;script lang=&quot;tsx&quot;&gt;&lt;/script&gt;</code>。</p>
+<p>就是這麼簡單，之後你便可以正常地在 <strong>Script</strong> 裡面寫一些 <strong>UI</strong> 邏輯了。</p>
+<blockquote>
+<p>關於 Vue2 的套件可以參考 <a target="_blank" rel="noopener" href="https://github.com/vuejs/babel-preset-vue">babel-preset-vue</a></p>
+<p>關於 Vue3 的套件可以參考 <a target="_blank" rel="noopener" href="https://github.com/vuejs/babel-plugin-jsx">babel-plugin-jsx</a></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>雖然文章漏漏長，但大多是想解釋一下 <strong>JSX/TSX</strong> 是什麼，其實安裝過程簡單到不需要幾分鐘，使用也是很簡單，主要都是透過 <strong>Babel</strong> 去編譯的，和 <strong>ESLint</strong> 差不多，其實只要專案有吃到設定，基本上都能正常編譯使用。</p>
+<p>上面有提到一些範例，可能不是那麼好懂也不是那麼適合，希望各路前輩包含，也希望這篇文章能幫助到需要的人。</p>
+<p>最後想提一下如果今天想在 HTML 裡面使用 JSX/TSX 的話，可以參考 <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2016/04/21/react-jsx-introduction/">一看就懂的 JSX 簡明入門教學指南</a> 一文的 <strong>二、用法摘要</strong>，裡面介紹的滿詳細的。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2016/04/21/react-jsx-introduction/">一看就懂的 JSX 簡明入門教學指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040712149">手把手教你在 Vue 中使用 JSX，不怕学不会！【建议收藏】</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/FrameWork/" rel="tag"># FrameWork</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/JSX/" rel="tag"># JSX</a>
+              <a href="/tags/TSX/" rel="tag"># TSX</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/25/20230325/" rel="prev" title="[Next Note] - 在 Next/React 使用 CASL 執行乾淨俐落的權限管理方案">
+                  <i class="fa fa-angle-left"></i> [Next Note] - 在 Next/React 使用 CASL 執行乾淨俐落的權限管理方案
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/11/20230811/" rel="next" title="[Life Note] - WebConf Taiwan 2023 技術研討會">
+                  [Life Note] - WebConf Taiwan 2023 技術研討會 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

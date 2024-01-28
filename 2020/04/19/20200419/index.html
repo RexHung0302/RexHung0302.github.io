@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己愛玩（誤 這週的直播其實有點卡，不知道是不是 Zoom 太多人導致還是其他原因，總之最後到了今天才看重播影片。 這週的重頭戲就是常常聽到的 Flex 了！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/04/19/20200419/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己愛玩（誤 這週的直播其實有點卡，不知道是不是 Zoom 太多人導致還是其他原因，總之最後到了今天才看重播影片。 這週的重頭戲就是常常聽到的 Flex 了！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-04-19T13:24:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.535Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Web-Layout-Training">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/04/19/20200419/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2020/04/19/20200419/","path":"2020/04/19/20200419/","title":"[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E5%8D%A1%E7%9B%AE%E6%A8%99"><span class="nav-number">2.0.1.</span> <span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E5%BF%83%E5%BE%97"><span class="nav-number">2.1.</span> <span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E5%BF%83%E5%BE%97"><span class="nav-number">2.2.</span> <span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%B5%84%E4%BB%BB%E5%8B%99"><span class="nav-number">2.3.</span> <span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%B8%80-%E7%8E%A9-Flexbox-%E9%81%8A%E6%88%B2"><span class="nav-number">2.3.1.</span> <span class="nav-text">任務一 - 玩 Flexbox 遊戲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%BA%8C-%E5%B9%AB%E5%AF%A6%E7%BF%92%E7%94%9F%E5%BE%A9%E5%8E%9F%E5%AE%8C%E7%BE%8E%E5%85%AD%E8%A7%92-LOGO"><span class="nav-number">2.3.2.</span> <span class="nav-text">任務二 - 幫實習生復原完美六角 LOGO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%99%90%E5%88%B6"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">修改限制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A7%A3%E7%AD%94"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">解答</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%B8%89-%E8%A8%8E%E8%AB%96%E7%AC%AC%E4%BA%8C%E9%80%B1%E7%89%88%E5%9E%8B%E8%A9%B2%E6%80%8E%E9%BA%BC%E5%81%9A"><span class="nav-number">2.3.3.</span> <span class="nav-text">任務三 - 討論第二週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-amp-%E6%88%90%E6%9E%9C%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/04/19/20200419/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-04-19 21:24:00" itemprop="dateCreated datePublished" datetime="2020-04-19T21:24:00+08:00">2020-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>1 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><img src="/images/others/loading.gif" data-original="/images/20200419/week_2_classLogo.png" alt="第二週的練習"></p>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>緊接著來到第二週的直播課程了，拖到了週日才練習作業跟寫部落格，絕對不是因為自己<del>愛玩</del>（誤</p>
+<p>這週的直播其實有點卡，不知道是不是 <strong>Zoom</strong> 太多人導致還是其他原因，總之最後到了今天才看重播影片。</p>
+<p>這週的重頭戲就是常常聽到的 <strong>Flex</strong> 了！</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>*本篇文章將會以三個角度來紀錄， <strong>課程心得(上課後的心得整理)<strong>、</strong>練習心得(做完作業後的心得整理))</strong> 及 **小組任務(每週會有一項小組任務，寫完後的心得)*<em>。</em></p>
+</blockquote>
+<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<a target="_blank" rel="noopener" href="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w">練習菜單</a>，及額外的一項打字練習。</p>
+<ol>
+<li><p><strong>熟悉三個編輯器熱鍵</strong></p>
+</li>
+<li><p><strong>幾乎全程使用 <a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">emmet</a> 開發</strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="http://keybr.com/">英打速度</a></strong> 練習</p>
+</li>
+</ol>
+<h4 id="關卡目標"><a href="#關卡目標" class="headerlink" title="關卡目標"></a>關卡目標</h4><ol>
+<li><p>背景處理</p>
+</li>
+<li><p>了解 Flex 排版技術</p>
+</li>
+<li><p>理解 inline、block、Flex 的使用時機</p>
+</li>
+<li><p>不要亂加語法買保險</p>
+</li>
+</ol>
+<hr>
+<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>第二週的直播課程開跑，這週主題為 <strong>Flex</strong>，但本篇不會過多的著墨在介紹，因為之前在直播課程開始前有個切版練習就是要使用 <strong>Flex</strong>，詳細可參考<a href="https://rexhung0302.github.io/2020/03/23/20200323/#more">此篇文章</a>。</p>
+<p>校長在課程上講到了幾個網站，並且實際的用 <strong>Skitch</strong> 預先切圖看怎麼排版，其中提到了，雖然 <strong>Flex</strong> 好用，但是千萬不要因為好像就隨意下 <strong>Flex</strong>，有些地方可以下 <code>text-align: center;</code> 就不要在另外下 <strong>Flex</strong> 了！</p>
+<blockquote>
+<p>這就叫做 <strong>不要亂加語法買保險</strong></p>
+</blockquote>
+<hr>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>本次練習一樣使用 <strong><a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">emmet</a></strong> 來寫，對於需要常常寫道諸如 <code>justify-content: space-between;</code>, <code>align-items: center;</code>… 等等 這種漏漏長的語法真的節省超多時間，還不會的朋友推薦你一定要盡快入坑使用啊！</p>
+<p>整體切版 <strong>Flex</strong> 使用上沒有大礙，只是排版是不是要多塞一個 <strong>Div</strong> 或是該不該把 <strong>CSS</strong> 抽離出來下個別的 <strong>Class Name</strong>，這邊都還是需要另外做練習。 </p>
+<hr>
+<h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><p>本週小組任務有三個：</p>
+<h4 id="任務一-玩-Flexbox-遊戲"><a href="#任務一-玩-Flexbox-遊戲" class="headerlink" title="任務一 - 玩 Flexbox 遊戲"></a>任務一 - 玩 Flexbox 遊戲</h4><p>之前記得在六角的 Slick 就有釋出過<strong>海盜船遊戲</strong>，那時候有試著玩了幾關，但沒有去玩排名模式，對於不會或不熟的朋友真的非常推薦可以使用<strong>海盜船遊戲</strong>。</p>
+<p>這邊挑選海盜船來遊玩，青蛙之前也有玩過，聽說海盜船是以青蛙為藍本做出來的遊戲，兩個都可以挑來玩看看。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200419/rank.png" alt="海盜船"></p>
+<h4 id="任務二-幫實習生復原完美六角-LOGO"><a href="#任務二-幫實習生復原完美六角-LOGO" class="headerlink" title="任務二 - 幫實習生復原完美六角 LOGO"></a>任務二 - 幫實習生復原完美六角 LOGO</h4><p><img src="/images/others/loading.gif" data-original="/images/20200419/question2.png" alt="哪個實習生給我出來？！"></p>
+<h5 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h5><ul>
+<li>可以修改 HTML li 裡面的圖片路徑</li>
+<li>CSS 只能在既有的 ul 與 img 標籤加上語法，不能額外加上選擇器</li>
+</ul>
+<h5 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h5><p>先替 <code>ul</code> 加上 <code>flex-wrap: wrap;</code> 才不會擠在同一行，接著把第二第三張圖片互換，最後在替 <strong>img</strong> 加上 <code>display: block;</code> 清掉多餘的 <strong>2px-3px</strong>。</p>
+<p>解答傳送門：<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/bGVeOwq">點我</a></p>
+<h4 id="任務三-討論第二週版型該怎麼做"><a href="#任務三-討論第二週版型該怎麼做" class="headerlink" title="任務三 - 討論第二週版型該怎麼做"></a>任務三 - 討論第二週版型該怎麼做</h4><p>小組討論為週二，待週二討論完後補上！</p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次直播好像滿多人都說很卡，聽說校長下週要開兩個直播平台直播，只希望別再這麼卡了。</p>
+<p>這週有點像是複習自己的 <strong>Flex</strong>，但是最基礎往往最致命也是最關鍵，寫完這週練習後有去看過幾個同學的程式碼，突然發現自己還是需要很大的加油啊ＱＱＱ。</p>
+<p>這篇沒有提到太多的 Flex 使用方法，如果想知道可以參考我的前幾篇文章 -&gt; <strong><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手</a></strong></p>
+<hr>
+<h2 id="Demo-amp-成果程式碼"><a href="#Demo-amp-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>Source Code：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-web-layout-training/tree/master/Week_2">點我</a></p>
+<p>Demo：<a href="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_2/index.html">點我</a></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://hexschool.github.io/flexbox-pirate/index.html#/">海盜船 Flex 遊戲</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://flexboxfroggy.com/#zh-tw">青蛙 Flex 遊戲</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"># HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"># Web-Layout-Training</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/04/12/20200412/" rel="prev" title="[Hexschool Web Layout Training] — Week_1 個人履歷">
+                  <i class="fa fa-angle-left"></i> [Hexschool Web Layout Training] — Week_1 個人履歷
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/04/29/20200429/" rel="next" title="[Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術">
+                  [Hexschool Web Layout Training] — Week_3 伸縮自如的 RWD 手機網頁排版術 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

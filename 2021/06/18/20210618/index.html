@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction &amp; 前言 初次入坑 React，首要任務為了解 React Router 所以就有這篇筆記的誕生，這篇文章會講解如何簡單運用及巢狀路由的運用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React Note] — React 初次見面之 React Router 淺入淺出">
+<meta property="og:url" content="https://rexhung0302.github.io/2021/06/18/20210618/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 初次入坑 React，首要任務為了解 React Router 所以就有這篇筆記的誕生，這篇文章會講解如何簡單運用及巢狀路由的運用。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2021-06-18T10:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.538Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="FrameWork">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2021/06/18/20210618/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2021/06/18/20210618/","path":"2021/06/18/20210618/","title":"[React Note] — React 初次見面之 React Router 淺入淺出"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[React Note] — React 初次見面之 React Router 淺入淺出 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-React-Router-%E5%8F%8A-React-Router-Dom"><span class="nav-number">2.1.</span> <span class="nav-text">關於 React Router 及 React Router Dom</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-Router-Dom-%E7%9A%84%E9%81%8B%E7%94%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">React Router Dom 的運用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E7%9A%84%E8%B7%AF%E7%94%B1%E9%81%8B%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">基礎的路由運用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E7%9A%84%E8%B7%AF%E7%94%B1%E9%81%8B%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">巢狀的路由運用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E9%81%8E-React-Router-Config-%E7%B5%B1%E4%B8%80%E7%AE%A1%E7%90%86%E5%8F%8A%E6%B8%B2%E6%9F%93%E7%95%AB%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">透過 React Router Config 統一管理及渲染畫面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2021/06/18/20210618/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[React Note] — React 初次見面之 React Router 淺入淺出 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [React Note] — React 初次見面之 React Router 淺入淺出
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-06-18 18:00:00" itemprop="dateCreated datePublished" datetime="2021-06-18T18:00:00+08:00">2021-06-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/Note/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>7.2k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>7 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20210618/react-router-logo.png" alt="React Router"></p>
+<p>初次入坑 <strong>React</strong>，首要任務為了解 <strong>React Router</strong> 所以就有這篇筆記的誕生，這篇文章會講解如何簡單運用及巢狀路由的運用。</p>
+<span id="more"></span>
+
+<p>因為最近工作需求，開始會接觸到 <strong>React</strong>，剛好先透過 <strong>React Router</strong> 來了解 <strong>React</strong>，如果你也剛好正想入門或是了解一下 <strong>React</strong> 的路由跟 <strong>Vue</strong> 有什麼不一樣，可以參考本篇紀錄。</p>
+<hr>
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>首先要先了解到 <strong>React Router</strong> 的基礎用法，可能會合印象中 <strong>Vue Router</strong> 就透過一個 <code>&lt;router-view&gt;&lt;/router-view&gt;</code> 即可渲染有點差異，所以這邊會分四個部分(第一部分為簡單介紹)。</p>
+<ol>
+<li><p>關於 React Router 及 React Router Dom</p>
+</li>
+<li><p>基礎的路由運用</p>
+</li>
+<li><p>巢狀的路由運用</p>
+</li>
+<li><p>透過 React Router Config 統一管理及渲染畫面</p>
+</li>
+</ol>
+<blockquote>
+<p>最後也會將範例檔放在 <strong>Github</strong> 上，有興趣的朋友都可以下載來玩看看，但需要事先提醒，因為目前筆者對 <strong>React</strong> 不是那麼熟悉，所以可能如<strong>樣式、檔案擺放或程式碼內容</strong>可能會有些許錯誤，如果有誤還請各路大神不見晾在下方留言。</p>
+</blockquote>
+<hr>
+<h3 id="關於-React-Router-及-React-Router-Dom"><a href="#關於-React-Router-及-React-Router-Dom" class="headerlink" title="關於 React Router 及 React Router Dom"></a>關於 React Router 及 React Router Dom</h3><p><img src="/images/others/loading.gif" data-original="/images/20210618/react-router-dom.png" alt="React Router Dom"></p>
+<p>如果您是後來才接觸，可能會滿疑惑為什麼網路上收尋 <strong><a target="_blank" rel="noopener" href="https://github.com/ReactTraining/react-router#readme">React Route</a>r</strong>，安裝後卻出現 <strong>React Router Dom</strong> 呢？其實 <strong>React Router Dom</strong> 就只是基於 <strong>React Route</strong> 更進階的套件，核心都還是 <strong>React Route</strong>，相同地，<strong>react-router-native</strong> 也是基於 <strong>React Route</strong> 更進階的套件。</p>
+<p>這邊我們需要知道 <strong>react-router</strong> 一些基礎用法及 <strong>react-router-dom</strong> 提供的用法，還有最後會了解 <strong>react-router-config</strong> 的用法。</p>
+<h4 id="React-Router-Dom-的運用"><a href="#React-Router-Dom-的運用" class="headerlink" title="React Router Dom 的運用"></a>React Router Dom 的運用</h4><p><strong>React Router Dom</strong> 其實只是多了四個 <strong>React Component</strong>：<strong>BrowserRouter、 HashRouter、Link、NavLink</strong>。</p>
+<blockquote>
+<p><em>關於 React Router 的運作就是建立在 <strong><a target="_blank" rel="noopener" href="https://github.com/ReactTraining/history">history</a></strong> 及 <strong>location</strong> 上，這邊因為是淺入淺出，就不多做探討，有興趣可以參考 <strong><a target="_blank" rel="noopener" href="https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/a-little-bit-of-react-router-dom-e5b809fcb127">React-router-dom | 原理解析</a></strong> 這篇文章。</em></p>
+</blockquote>
+<hr>
+<h3 id="基礎的路由運用"><a href="#基礎的路由運用" class="headerlink" title="基礎的路由運用"></a>基礎的路由運用</h3><p>首先需要先認識幾個元件，基本上認識這幾個元件後，就能建立基本的路由切換了。</p>
+<ul>
+<li><p>BrowserRouter</p>
+</li>
+<li><p>Switch</p>
+</li>
+<li><p>Link</p>
+</li>
+<li><p>Route</p>
+</li>
+</ul>
+<p>讓我們先初始化專案，然後進去專案在安裝需要的套件(因為筆者的範例程式碼有安裝 <strong>UI</strong> 框架，這邊可以自己取捨)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-react-app react-router-test</span><br><span class="line"></span><br><span class="line">$ cd react-router-test</span><br><span class="line"></span><br><span class="line">$ yarn i / npm i // 擇一</span><br><span class="line"></span><br><span class="line">$ npm i -S react-router-dom</span><br></pre></td></tr></table></figure>
+
+<p>接著將 <strong>App.js</strong> 改為下面的程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Switch, Route, Link &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createBrowserHistory &#125; <span class="keyword">from</span> <span class="string">&quot;history&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Component</span></span><br><span class="line"><span class="keyword">import</span> UsersComponent <span class="keyword">from</span> <span class="string">&#x27;./users.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">header</span> <span class="attr">className</span>=<span class="string">&quot;App-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>首頁<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/users&quot;</span>&gt;</span>使用者頁面<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">            </span></span><br><span class="line"><span class="xml">            &#123;/* 路由元件引入方式有兩種 第一種用 render */&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/home&quot;</span> <span class="attr">render</span>=<span class="string">&#123;()</span>=&gt;</span> (</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">            )&#125; /&gt;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">            &#123;/* 路由元件引入方式有兩種 第二種種用 component */&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/users&quot;</span> <span class="attr">component</span>=<span class="string">&#123;UsersComponent&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/:edit&quot;</span> <span class="attr">render</span>=<span class="string">&#123;()</span>=&gt;</span> (</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello Edit<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">            )&#125; /&gt;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>關於 <strong>Component</strong> 怎麼引入其實就看個人，通常會建議寫在外部在整合進來。</p>
+<ul>
+<li><p><strong>BrowserRouter</strong> - 上面我們先引入 <strong>BrowserRouter</strong> 然後使用 <strong>as</strong> 簡化成 <strong>Router</strong>，因為上面原理提過，路由的核心是 <strong>History</strong>，所以這邊必須用 <strong>BrowserRouter</strong> 把全部的程式碼包起來。</p>
+</li>
+<li><p><strong>Switch</strong> - 加不加這個其實都可以跑，但如果今天我們網址輸入 <code>/home</code>，其實也算是有匹配到 <code>/</code> 這個路由，這時候 <code>path=&quot;/:edit&quot;</code> 也會一起出現，這並不是我們所預期的，所以最快的方式就是加入 <strong>Switch</strong>，這個套件會預設幫你找最近且最符合資格的路由，例如 <code>/home</code>。</p>
+</li>
+<li><p><strong>Link</strong> - 這個你可以把它當成是 <code>&lt;router-link to=&quot;/home&quot;&gt;XXX&lt;/router-link&gt;</code>，最後會被轉為 <code>&lt;a&gt;&lt;/a&gt;</code> 標籤，然後可以讓使用者點擊後再轉倒頁面。</p>
+</li>
+<li><p><strong>Route</strong> - 這個你可以把它當成是 <code>&lt;router-view&gt;&lt;/router-view&gt;</code>，如果沒用過 <strong>Vue</strong> 沒關係，透過英文我們可以知道， <strong>Route</strong> 是路線、路徑的意思，所以意思就是拿來放顯示畫面的地方。</p>
+</li>
+</ul>
+<p><img src="/images/others/loading.gif" data-original="/images/20210618/react-error.png" alt="React Router Error"></p>
+<p>這邊你可能會問那 <code>&lt;React.Fragment&gt;&lt;/React.Fragment&gt;</code> 這個 <strong>Component</strong> 是在做什麼的呢？其實筆者這邊也很納悶，沒有加之前會噴紅，加了就不會了，希望有知道的大神可以在下方留言告訴筆者，感激不盡。</p>
+<hr>
+<h3 id="巢狀的路由運用"><a href="#巢狀的路由運用" class="headerlink" title="巢狀的路由運用"></a>巢狀的路由運用</h3><p>巢狀路由其實概念大致上都差不多，只是要注意幾個小地方，我們一樣拿上面的程式碼來改(樣式一樣請自己加上哦)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Switch, Route, Link &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createBrowserHistory &#125; <span class="keyword">from</span> <span class="string">&quot;history&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Component</span></span><br><span class="line"><span class="keyword">import</span> UsersComponent <span class="keyword">from</span> <span class="string">&#x27;./users.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">header</span> <span class="attr">className</span>=<span class="string">&quot;App-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>首頁<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/home/living-room&quot;</span>&gt;</span>首頁<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&quot;/users&quot;</span>&gt;</span>使用者頁面<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">            </span></span><br><span class="line"><span class="xml">            &#123;/* 路由元件引入方式有兩種 第一種用 render */&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">&quot;/home&quot;</span> <span class="attr">render</span>=<span class="string">&#123;()</span>=&gt;</span> (</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">            )&#125; /&gt;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">&quot;/home/living-room&quot;</span> <span class="attr">render</span>=<span class="string">&#123;()</span>=&gt;</span> (</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello Living Room<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">            )&#125; /&gt;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">            &#123;/* 路由元件引入方式有兩種 第二種種用 component */&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/users&quot;</span> <span class="attr">component</span>=<span class="string">&#123;UsersComponent&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">&quot;/:edit&quot;</span> <span class="attr">render</span>=<span class="string">&#123;()</span>=&gt;</span> (</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello Edit<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line"><span class="xml">            )&#125; /&gt;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>其實大致上都差不多，但如果你的路由有第二層，像是 <code>path=&quot;/home/living-room&quot;</code> 這樣，請記得在 <code>&lt;Route&gt;&lt;/Route&gt;</code> 這邊裡面加上 <strong>exact</strong> 這個屬性，如果沒有加上，你會發現透過 <code>&lt;Link&gt;&lt;/Link&gt;</code> 跳轉或是直接輸入網址導入到 <code>/home/living-room</code> 時，這時候 <code>/home/</code> 也會被渲染出來，因為路徑匹配到了，所以通常如果不是多頁面共用的元件建議都會改成像是 <code>&lt;Route exact path=&quot;/home/living-room&quot; /&gt;</code> 這樣。</p>
+<hr>
+<h3 id="透過-React-Router-Config-統一管理及渲染畫面"><a href="#透過-React-Router-Config-統一管理及渲染畫面" class="headerlink" title="透過 React Router Config 統一管理及渲染畫面"></a>透過 React Router Config 統一管理及渲染畫面</h3><p>最後你可能會滿納悶為什麼不能透過一隻檔案去統一管理路由，像是 <strong>Vue Router</strong> 那樣，最後再透過 <code>&lt;router-view&gt;&lt;/router-view&gt;</code> 渲染呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  <span class="attr">routes</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/user/:userId&#x27;</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: User</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>剛開始可能會想說把路由整理起來，再透過 <strong>map</strong> 去渲染出來，這是一個做法，但我們可以透過套件 <strong>react-router-config</strong> 來做到這件事情，這邊只需要兩個地方，下面會提到。</p>
+<p>首先我們先把路由整理起來：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Component 用 import 或是直接寫在這邊都可以</span></span><br><span class="line"><span class="keyword">const</span> home = <span class="function">() =&gt;</span> (</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">label</span>&gt;</span>Hello Home<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> user <span class="keyword">from</span> <span class="string">&#x27;./user.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> password <span class="keyword">from</span> <span class="string">&#x27;./profile.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> password <span class="keyword">from</span> <span class="string">&#x27;./password.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;首頁&#x27;</span>,</span><br><span class="line">    <span class="attr">exact</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">component</span>: home</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/user&#x27;</span>,</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;使用者資料&#x27;</span>,</span><br><span class="line">    <span class="attr">exact</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">component</span>: user,</span><br><span class="line">    <span class="attr">children</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/user/profile&#x27;</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;個人資訊&#x27;</span>,</span><br><span class="line">        <span class="attr">exact</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">component</span>: profile</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;/user/password&#x27;</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;密碼更改&#x27;</span>,</span><br><span class="line">        <span class="attr">exact</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">component</span>: password</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>然後回來 <code>App.js</code>，改寫下面程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Switch, Link &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createBrowserHistory &#125; <span class="keyword">from</span> <span class="string">&quot;history&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 這次主角</span></span><br><span class="line"><span class="keyword">import</span> &#123; renderRoutes &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-config&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">&#x27;./router.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Component</span></span><br><span class="line"><span class="keyword">import</span> UsersComponent <span class="keyword">from</span> <span class="string">&#x27;./users.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;App&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">header</span> <span class="attr">className</span>=<span class="string">&quot;App-header&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">              &#123;</span></span><br><span class="line"><span class="xml">                routes.map((route) =&gt; (</span></span><br><span class="line"><span class="xml">                  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&#123;route.path&#125;</span>&gt;</span>&#123;route.title&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">                  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                ))</span></span><br><span class="line"><span class="xml">              &#125;</span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123; renderRoutes(routes) &#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">header</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;/<span class="name">React.Fragment</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">Switch</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Router</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<p>透過上面的方法，可以用 <strong>map</strong> 渲染出路由，不管是我們要拿來用 <strong>Link</strong> 的，或是拿來渲染畫面用的，因為我們在路由內已經都設定好了。</p>
+<p><strong>這邊要注意，第一個重點！！</strong></p>
+<p><strong>renderRoutes()</strong> 只能渲染第一層的畫面，所以接下來我們在會經過第二層的父元件上，使用 <code>&#123;route&#125;</code> 這個參數再把子元件傳下去，馬上接著建立 <code>user.js</code>、<code>profile.js</code>、<code>password.js</code>，這三隻檔案，然後打開 <code>user.js</code> 這隻檔案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; renderRoutes &#125; <span class="keyword">from</span> <span class="string">&quot;react-router-config&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="function">(<span class="params">&#123; route &#125;</span>) =&gt;</span> (</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    &#123;</span></span><br><span class="line"><span class="xml">      routes.map((route) =&gt; (</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">          <span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">&#123;route.path&#125;</span>&gt;</span>&#123;route.title&#125;<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">      ))</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line">  &#123; renderRoutes(route.children) &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> user;</span><br></pre></td></tr></table></figure>
+
+<p>這邊就是第二個重點，這邊必須帶入的是 <strong>route</strong> 的 <strong>children</strong>，畫面才能渲染出來。</p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次因為剛接觸 <strong>React</strong> 其實滿多地方還不是很熟悉，這邊先練習比較基本的 <strong>React Router</strong>，看起來這潭水還很深？！雖然剛開始沒有 <strong>v-for, v-if, v-model</strong> 很不習慣，但我想各自框架都有各自的優點，未來會努力再學到更多的知識再繼續補筆記上來。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210618/react-router-practice.gif" alt="React Router Practice"></p>
+<p>最後的最後這邊補上<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/react-router-practice">範例程式碼</a>，但因為練習時有特別在拆一個首頁目錄，所以會跟上面的程式碼有些許差別，但大致上的用法都差不多。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/RexHung0302/react-router-practice">範例程式碼請點我</a></li>
+</ul>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>PJCHENder<br>那些沒告訴你的小細節 - <a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2018/11/react-react-router-dynamic-breadcrumb.html">[React] 搭配 React Router 打造一個動態麵包屑（dynamic breadcrumb）</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/FrameWork/" rel="tag"># FrameWork</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/09/20210609/" rel="prev" title="[Git Note] — Vue3 部署至 GitHub Page 超級淺入遷出">
+                  <i class="fa fa-angle-left"></i> [Git Note] — Vue3 部署至 GitHub Page 超級淺入遷出
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/29/20210729/" rel="next" title="[React Note] — 前端 Excel 匯出加上樣式之 xlsx-style 的踩坑深入淺出">
+                  [React Note] — 前端 Excel 匯出加上樣式之 xlsx-style 的踩坑深入淺出 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"rexhung0302.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="zip檔下載 &amp; 程式碼 Zip ： 點我Code Source：點我  Introduction &amp; 前言距離上次更新已經一段時間了，慚愧。這段時間其實一直卡在九樓，還有工作、偷學Webpack……等等東忙西忙，眼看時光流逝，覺得不能再拖，就直接上十樓打雙數的第一位 Boss 了。還好前面都還有勇者擋著，目前計畫這關打完，再回去繼續把九樓完成，請原諒我…（逃">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器">
+<meta property="og:url" content="https://rexhung0302.github.io/2019/05/18/20190518/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="zip檔下載 &amp; 程式碼 Zip ： 點我Code Source：點我  Introduction &amp; 前言距離上次更新已經一段時間了，慚愧。這段時間其實一直卡在九樓，還有工作、偷學Webpack……等等東忙西忙，眼看時光流逝，覺得不能再拖，就直接上十樓打雙數的第一位 Boss 了。還好前面都還有勇者擋著，目前計畫這關打完，再回去繼續把九樓完成，請原諒我…（逃">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2019-05-18T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-28T05:16:24.532Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+
+<link rel="canonical" href="https://rexhung0302.github.io/2019/05/18/20190518/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://rexhung0302.github.io/2019/05/18/20190518/","path":"2019/05/18/20190518/","title":"[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">RexHung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">HakuLaMaTaTa!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zip%E6%AA%94%E4%B8%8B%E8%BC%89-amp-%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">1.</span> <span class="nav-text">zip檔下載 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-amp-%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-%E6%91%98%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Chrome-Extension-%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">什麼是 Chrome Extension ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BA%95%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%81"><span class="nav-number">3.2.</span> <span class="nav-text">打底很重要！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E8%A9%B2%E6%80%8E%E9%BA%BC%E8%91%97%E6%89%8B%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">我該怎麼著手？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-%E7%9A%84%E9%83%A8%E5%88%86%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">HTML 的部分？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E8%A9%B2%E6%80%8E%E9%BA%BC%E4%BD%BF%E7%94%A8%EF%BC%9F"><span class="nav-number">3.5.</span> <span class="nav-text">我該怎麼使用？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code%E5%88%B0%E7%94%A8%E6%99%82%E6%96%B9%E6%81%A8%E5%B0%91%EF%BC%81"><span class="nav-number">4.</span> <span class="nav-text">Code到用時方恨少！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%A4%A7%E9%AD%94%E7%8E%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">4.1.</span> <span class="nav-text">關於大魔王同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%88%89%E5%80%8B%E4%BE%8B%E5%AD%90%E5%90%A7"><span class="nav-number">4.2.</span> <span class="nav-text">舉個例子吧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E6%A8%A3%E7%95%AB%E8%91%AB%E8%98%86"><span class="nav-number">4.3.</span> <span class="nav-text">依樣畫葫蘆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E8%A9%B2%E6%80%8E%E9%BA%BC%E5%A4%A7%E8%B3%A3%E6%88%91%E7%9A%84%E4%BD%9C%E5%93%81%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">我該怎麼大賣我的作品？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-amp-%E7%B5%90%E8%AB%96"><span class="nav-number">5.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E5%85%B6%E4%BB%96%E7%AF%84%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">我的其他範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E7%B3%BB%E5%88%97-%E2%80%94"><span class="nav-number">6.1.</span> <span class="nav-text">Vue系列 —</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">6.2.</span> <span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">73</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">49</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2019/05/18/20190518/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="RexHung">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="[Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器 | RexHung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 10F Chrome extension 幹話生產器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2019-05-18 12:00:00" itemprop="dateCreated datePublished" datetime="2019-05-18T12:00:00+08:00">2019-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-01-28 13:16:24" itemprop="dateModified" datetime="2024-01-28T13:16:24+08:00">2024-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="文章字數">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">文章字數：</span>
+      <span>5.6k</span>
+    </span>
+    <span class="post-meta-item" title="所需閱讀時間">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+      <span>5 分鐘</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="zip檔下載-amp-程式碼"><a href="#zip檔下載-amp-程式碼" class="headerlink" title="zip檔下載 &amp; 程式碼"></a>zip檔下載 &amp; 程式碼</h2><blockquote>
+<p>Zip ： <a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1FBsq1g7ztFDNLX6OwiKKJCiiQxwuUFHE/view?usp=sharing">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-10F">點我</a></p>
+</blockquote>
+<h2 id="Introduction-amp-前言"><a href="#Introduction-amp-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>距離上次更新已經一段時間了，慚愧。這段時間其實一直卡在九樓，還有工作、偷學Webpack……等等東忙西忙，眼看時光流逝，覺得不能再拖，就直接上十樓打雙數的第一位 <strong>Boss</strong> 了。還好前面都還有勇者擋著，目前計畫這關打完，再回去繼續把九樓完成，請原諒我…（逃</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*iupAX0LSU9ne0n5AZDzcqg.png" alt="10F — 第一位雙數大魔王"></p>
+<span id="more"></span>
+
+<h2 id="Summary-amp-摘要"><a href="#Summary-amp-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有六項。</p>
+<ol>
+<li><p>【特定技術】請開發 <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/category/extensions?hl=zh-TW">Chrome extension</a>，不需上架，投稿時請提供安裝檔放在雲端，以供 GM 下載測試。什麼？你說你想上架？嘛.. 人生想要什麼都嘗試，也是可以的啦。</p>
+</li>
+<li><p>【特定技術】打開 Chrome 新頁(tab)時，會隨機顯示你自己新增的語錄，或者是幹話。</p>
+</li>
+<li><p>【特定技術】可切換夜間/日間模式。</p>
+</li>
+</ol>
+<p>4.【特定技術】新增語錄時，有兩種方式新增，一種是在頁面裡新增，另一種是點選瀏覽器右上角 icon 來新增。</p>
+<p>5.【特定技術】背景插圖固定即可，目前的圖片只提供兩張，設計師本來很殘忍地說：「要不要也讓語錄也能新增客製化背景圖片？」，校長想了想，還是決定固定就好，不要太殘忍，當然你想試試看，校長也是不反對啦。</p>
+<p>6.【書寫能力】請寫一篇 BLOG 來介紹你的挑戰過程，目前 Chrome 插件的教學文尚嫌太少，曾經鐵人邦有寫過<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20079450/ironman/1149">一系列</a>教學文，但仍尚缺整個上架流程的文章，為了豐富網路上的各種攻略資源，這個重責大任就交給地下城的各位勇者們了！（拍肩</p>
+<blockquote>
+<p><em>好久沒有寫文章覺得都生疏了，不過本來初衷就是寫給自己複習的，應該也沒人會看啦，苦笑。</em></p>
+</blockquote>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2420/1*BB3srtpNVID3hEdmdi9HkQ.png" alt="Chrome Store"></p>
+<h3 id="什麼是-Chrome-Extension-？"><a href="#什麼是-Chrome-Extension-？" class="headerlink" title="什麼是 Chrome Extension ？"></a>什麼是 Chrome Extension ？</h3><blockquote>
+<p>*簡單來說就是屬於一種 <strong>外掛</strong>，可以想成是輔助程式。目前可以分成三大類，應用程式 (<strong>Chrome Apps</strong>)、擴充功能 (<strong>Chrome Extensions</strong>)、主題 (<strong>Chrome Themes</strong>)…等*</p>
+</blockquote>
+<p>我想第一次接觸的工程師通常比較關心的是，我該如何做出一個 <strong>Chrome Extension</strong> 呢？首先必須要會基本的 <strong>HTML CSS Javascript</strong> 這三項，除非你想做的是主題，這邊就先不討論這塊。</p>
+<h3 id="打底很重要！"><a href="#打底很重要！" class="headerlink" title="打底很重要！"></a>打底很重要！</h3><blockquote>
+<p><em>任何東西都有一定的規則在，*<em>Chrome Extension</em></em> 也不例外，它本身有自己的架構在。(拜讀了前人大神文章後從 <strong><a target="_blank" rel="noopener" href="https://medium.com/chris-chuang?source=logo-1048e5942f7a">Chris Chuang</a></strong> 大神那兒得知 <strong><a target="_blank" rel="noopener" href="https://tonytonyjan.net/2012/05/25/get-start-with-chrome-extension/">大兜</a></strong> 大神的文章 有興趣可自行拜讀)*</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*Ml68whAG7azEzwHMMsOJgA.png" alt="其實簡單的一隻 manifest.json 也能完成"></p>
+<p>．<strong>manifest.json</strong>：這是 <strong>Chrome Extension</strong> 的心臟，支撐整個架構的檔案，用來描述檔案內容及資源，好比 <strong>package.json</strong>。<br>．<strong>Background Pages</strong>：這是常駐的在背景的檔案，比如裡面可以寫 <strong>javascript</strong> 用來監聽你的頁面內容，也可以是 <strong>HTML</strong>。<br>．<strong>UI Pages</strong>：用來使用者互動的頁面，或是你可以新增好幾個分頁，比如後面會用到的 <strong>newtab.html</strong></p>
+<hr>
+<h3 id="我該怎麼著手？"><a href="#我該怎麼著手？" class="headerlink" title="我該怎麼著手？"></a><strong>我該怎麼著手？</strong></h3><p>由於這次也是第一次玩 <strong>Chrome Extension ，就照起手式先從 manifest.json 開始吧</strong></p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*oFZzBPVt9uKzBSIcDpXTMA.png" alt="來一張完整的結構圖 下方提供複製"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;manifest_version&quot;</span>: <span class="number">2</span>,</span><br><span class="line"><span class="string">&quot;name&quot;</span>: <span class="string">&quot;幹話產生器&quot;</span>,</span><br><span class="line"><span class="string">&quot;description&quot;</span>: <span class="string">&quot;[Hero Of UnderGround 地下城] — 10F Chrome extension（幹話生產器）&quot;</span>,</span><br><span class="line"><span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;author&quot;</span>: <span class="string">&quot;RexHung&quot;</span>,</span><br><span class="line"><span class="string">&quot;icons&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;16&quot;</span>: <span class="string">&quot;assets/icons/icon-16px.png&quot;</span>,</span><br><span class="line">  <span class="string">&quot;64&quot;</span>: <span class="string">&quot;assets/icons/icon-64px.png&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;browser_action&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;default_popup&quot;</span>: <span class="string">&quot;popup.html&quot;</span>,</span><br><span class="line">  <span class="string">&quot;default_icon&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;64&quot;</span>: <span class="string">&quot;assets/icons/icon-64px.png&quot;</span>,</span><br><span class="line">    <span class="string">&quot;128&quot;</span>: <span class="string">&quot;assets/icons/icon-128px.png&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;chrome_url_overrides&quot;</span>: &#123; <span class="string">&quot;newtab&quot;</span>: <span class="string">&quot;./newtab.html&quot;</span> &#125;,</span><br><span class="line"><span class="string">&quot;permissions&quot;</span>: [</span><br><span class="line">  <span class="string">&quot;activeTab&quot;</span>,</span><br><span class="line">  <span class="string">&quot;storage&quot;</span></span><br><span class="line">],</span><br><span class="line"><span class="string">&quot;content_security_policy&quot;</span>: <span class="string">&quot;script-src &#x27;self&#x27; &#x27;unsafe-eval&#x27;; object-src &#x27;self&#x27;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先 <strong>manifest_version</strong> 代表 <strong>manifest file</strong> 格式版本的整數，如果使用的是 <strong>Chrome 18</strong> 以上，則應該設定成 2。接下來後面則是<strong>名字</strong>、<strong>描述</strong>、<strong>版號</strong>、<strong>作者</strong>、<strong>圖標</strong>…等等。</p>
+<p>版號切記！最多由四個整數組成，並且用逗號(<strong>.</strong>)分開，數字必須介在 0 到 <strong>65535</strong> 之間，而且不可以 <strong>0</strong> 當開頭。</p>
+<p>隨後的 <strong>browser actions</strong> 可以在 <strong>chrome</strong> 上方工具條的右側增加一个圖標，並且點下後出現的頁面 <strong>“default_popup”: “popup.html”</strong> 就是這個了。後面的 <strong>default_icon</strong> 即是工具欄出現的 <strong>icon</strong> 及顯示在擴充工具裡的圖案。( 這邊的 <strong>browser actions</strong> 也可以使用 <strong>Page Action</strong> 差別在於前者是任何分頁下都可以點選工具欄上的 <strong>icon</strong> 後者是在特定頁面才能點選)</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*qRdaKOGW-15Jz_3hAIyI_A.png" alt="**browser actions 定義的頁面**"></p>
+<p>在下面的 <strong>“chrome_url_overrides”: { “newtab”: “./newtab.html” }</strong> 就是當使用者點選分頁的時候會出現的頁面。</p>
+<p><strong>permissions</strong> 則是聲明權限，這個很重要，由於我們這次想做到兩個頁面同步的效果( <strong>下拉的語錄和分頁的語錄算是兩個獨立頁面</strong> )，只靠本地的 <strong>localStorage</strong> 是很麻煩的。幸好 <strong>Google</strong> 提供了 <strong>chrome.storage</strong> 的 <strong>API</strong> ，它提供了 <strong>chrome.storage.sync、chrome.storage.local、chrome.storage.managed…</strong> 三種類型讓你儲存資料，有興趣可以<a target="_blank" rel="noopener" href="https://www.cnblogs.com/champagne/p/4826611.html">點我</a>拜讀文章。重點是在 <strong>manifest.json</strong> 內必須聲明。</p>
+<p>最後一個是 <strong>内容安全策略標頭</strong>，這邊先不討論這個。</p>
+<hr>
+<h3 id="HTML-的部分？"><a href="#HTML-的部分？" class="headerlink" title="HTML 的部分？"></a>HTML 的部分？</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> *<span class="attr">src</span>*=<span class="string">&quot;./assets/js/cover.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>記得有多少檔案想共用 <strong>chrome.storage</strong> 就要都引入同一隻 <strong>JS</strong> 喔！</p>
+<hr>
+<h3 id="我該怎麼使用？"><a href="#我該怎麼使用？" class="headerlink" title="我該怎麼使用？"></a>我該怎麼使用？</h3><p>很簡單，把你的整包檔案拉到 <strong><a href="chrome://extensions/">chrome://extensions/</a></strong> 內，他就會自己跑，如果有錯誤，也會提示，剛開始我也在 <strong>icon</strong> 上卡了好一下子呢！</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*_owrd7McCz_kXz6UhT9avw.png" alt="你的第一個外掛出現啦"></p>
+<h2 id="Code到用時方恨少！"><a href="#Code到用時方恨少！" class="headerlink" title="Code到用時方恨少！"></a><strong>Code到用時方恨少！</strong></h2><p>剛開始覺得不就一個類似 <strong>Todo-list</strong> 的東西嗎？後來實作後才發現有點兒麻煩，主要是我先切了一個頁面弄好功能後才去考慮到另一個頁面的同步問題，再次檢討自己，以後做事情前要先確認過啊，不然就會重複做好幾次工。</p>
+<p>基本上下拉的頁面跟分頁頁面切版不是主要難度，不過在分頁排版上這次算是第一次使用 <strong>transform: translateX(0%)</strong> 去弄成彈跳窗。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2752/1*CBOyqQXR3BQ3YC5UmI41fQ.gif" alt="自從 css 加上 *transition 整個流暢多不會死板板*"></p>
+<h3 id="關於大魔王同步"><a href="#關於大魔王同步" class="headerlink" title="關於大魔王同步"></a>關於大魔王同步</h3><blockquote>
+<p>還記得這次的挑戰做了兩天，前一天在切版的時候很開心弄一頁，同步也盤算好了，東西都塞到 <strong>localStorage</strong> 內了，結果發現到另外一頁會搞得很麻煩。結果算是又小翻修了一次 <strong>Code</strong>，那時候才發現 <strong>Google</strong> 有提供 <strong>StorageApi。</strong></p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> SwitchBtn = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#myonoffswitch&#x27;</span>); <span class="comment">// 滑動鈕</span></span><br><span class="line"></span><br><span class="line">chrome.storage.sync.get(<span class="literal">null</span>, <span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一開始會去讀你的 storage 內的資料</span></span><br><span class="line"></span><br><span class="line">  SwitchBtn.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 做什麼事情...</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  chrome.storage.onChanged.addListener(<span class="function"><span class="params">changes</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 當 chrome.storage 有變動的時候 就做什麼事情</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);;</span><br></pre></td></tr></table></figure>
+
+<p>苦惱了一下的問題其實全部靠著個就能迎刃而解，很簡單的，分成三部分。</p>
+<p>第一部分 <strong>chrome.storage</strong> 會去抓你的資料，我們放到最後處理。</p>
+<p>第二部分 <strong>addEventListener</strong> 用來判斷使用者點了什麼或是做了什麼你指定的地方然後你要它發生什麼預期內的事情，比方點了開關的 <strong>Button</strong> 後你要讓 <strong>storage</strong> 塞進一個 <strong>key</strong> : <strong>value</strong> 或是讓 <strong>Button</strong> 變色、或是跑其他 <strong>function</strong> 都可以。</p>
+<p>第三部分 <strong>addListener</strong> 用來監聽如果 <strong>chrome.storage</strong> 發生改變，就做什麼事情。這邊就要提到最常用的，<strong>chrome.storage.sync.set({ key : value})</strong> 了。</p>
+<p>我的做法是在第二部分塞入 <strong>chrome.storage.sync.set({ key : value})</strong> 後，只要陣列有更動，我就把要做的事情放到第三部分，這樣兩邊都會同步一起做事情。</p>
+<hr>
+<h3 id="舉個例子吧"><a href="#舉個例子吧" class="headerlink" title="舉個例子吧"></a>舉個例子吧</h3><p>就拿 <strong>開關燈</strong> 來做例子，首先先宣告，並且給 <strong>value</strong> 一個值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> SwitchBtn = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#myonoffswitch&#x27;</span>); <span class="comment">// 開關鈕</span></span><br><span class="line"><span class="keyword">let</span> value = <span class="number">1</span>; <span class="comment">// key的value</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*jLhKKdYmMzsEQRbjbp6ojA.png" alt="第二步驟"></p>
+<p>然後第二步加入事件，當我點下開關鈕就塞入一個 <strong>Value</strong> 到 <strong>chrome.storage</strong>，隨後判斷那個 <strong>Value</strong> 是多少。我的設定 <strong>1</strong> 是白色，<strong>0</strong> 是黑色，裡面加入判斷，並且更換陣列的值，引發第三步的監聽事件發生。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*rGgEQXPj114cKibDRKfQ2A.png" alt="第三步驟"></p>
+<p>第三步驟也很簡單，直接寫上你想要改變的事情，在這裏兩邊的 <strong>HTML</strong> 都吃得到，不過要記得，兩邊都要引入同一隻 <strong>JS</strong> 檔案。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2752/1*mYHW0FIrNjSHAub66ZhEtA.gif" alt="這大概是這關最難的點"></p>
+<h3 id="依樣畫葫蘆"><a href="#依樣畫葫蘆" class="headerlink" title="依樣畫葫蘆"></a>依樣畫葫蘆</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (changes.hasOwnProperty(<span class="string">&#x27;key&#x27;</span>)) &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>後面第三步驟加上這個，把 <strong>key</strong> 改成想監聽的事件，就基本上都完成啦！</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2752/1*lTwKETECadBVj7VdHn0gCQ.gif" alt="大功告成啦"></p>
+<hr>
+<h3 id="我該怎麼大賣我的作品？"><a href="#我該怎麼大賣我的作品？" class="headerlink" title="我該怎麼大賣我的作品？"></a>我該怎麼大賣我的作品？</h3><p>關於上架的部分，可以參考這篇<a target="_blank" rel="noopener" href="https://ephrain.net/chrome-extension-%E5%B0%87%E6%96%B0%E5%AF%AB%E7%9A%84-chrome-extension-%E6%93%B4%E5%85%85%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%9E%B6%E8%87%B3-chrome-web-store/">文章</a>。另外很重要的一點要提醒，要是你是第一次上架 <strong>chrome extension</strong> 的商品，必須收取 <strong>五塊美金</strong> 的費用，沒錯！就是 <strong>五塊美金</strong>，或許是多一道機制，讓大家不會胡亂上傳吧。</p>
+<p>如果下次你又突然想上傳 <strong>Android app</strong> 或是 <strong>Chromecast</strong> 的 <strong>app</strong> 都是要在另外付一次的喔。</p>
+<hr>
+<h2 id="Conclusion-amp-結論"><a href="#Conclusion-amp-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>部落格停擺了一個月了，這段時間一直卡在九樓，加上忙東忙西的，其實是自己小怠惰了🤫。這段時間也從研究 <strong>pug</strong> 摸到了 <strong>Webpack</strong>，有機會再說說，也摸了好一下子 <strong>canvas</strong>，不過我想最主要還是要把 <strong>JS</strong> 練好，眼看樓層越來越高，離的越來越遠，就要告訴自己不能怠惰了，雖然現在還都是超級菜鳥一枚，還是要抱著不怕摔的心情努力勇往向上。期許多年後的自己看到現在能感謝現在的自己。</p>
+<p>這次一開始其實沒有想到有這麼多地方可以用 <strong>Vue</strong> 簡單解決，所以就直接開了檔案直接硬幹了，沒想到又錯失一次練習機會，沒關係，我們11樓再見，最後除了繼續努力之外還是要列出檢討的地方，然後朝下一關繼續加油，完畢。(哎不對欸，九樓還沒好啊，誤</p>
+<ul>
+<li><p>JS</p>
+</li>
+<li><p>Vue</p>
+</li>
+<li><p>邏輯</p>
+</li>
+<li><p>文筆</p>
+</li>
+<li><p><del><em>體重</em></del></p>
+</li>
+</ul>
+<p>（慘了越來越多…</p>
+<hr>
+<h2 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h2><ul>
+<li><p><strong>Hero Of UnderGround — 1F Multiplicatio 九九乘法表</strong></p>
+<blockquote>
+<p>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-1F/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-1F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 2F Clock 時鐘</strong></p>
+<blockquote>
+<p>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-2F/clock.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-2F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 3F Calculator 計算機</strong></p>
+<blockquote>
+<p>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-3F/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-3F">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 4F World Clock 各國時區</strong></p>
+<blockquote>
+<p>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-4F/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-4F">點我</a><br/><br>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-4f-world-clock-%E5%90%84%E5%9C%8B%E6%99%82%E5%8D%80-2356786f3dfa">點我</a></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 5F AQI 全台空氣指標儀表板</strong></p>
+<blockquote>
+<p>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-5F/index.html">*點我</a><em><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-5F">*點我</a><br/><br>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-5f-aqi-%E5%85%A8%E5%8F%B0%E7%A9%BA%E6%B0%A3%E6%8C%87%E6%A8%99%E5%84%80%E8%A1%A8%E6%9D%BF-c060fbe58454">點我</a></em></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 6F SECONDS CHALLENGE 倒數遊戲</strong></p>
+<blockquote>
+<p><em>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-6F/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-6F">點我</a><br/><br>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-6f-seconds-challenge-%E5%80%92%E6%95%B8%E9%81%8A%E6%88%B2-f71c0b680fdb">點我</a></em></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 7F Canvas 畫板</strong></p>
+<blockquote>
+<p><em>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-7F/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-7F">點我</a><br/><br>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-7f-canvas-%E7%95%AB%E6%9D%BF-fca0a17ae652">點我</a></em></p>
+</blockquote>
+</li>
+<li><p><strong>Hero Of UnderGround — 8F Tic-Tac-Toe 井字遊戲</strong></p>
+<blockquote>
+<p><em>Demo：<a target="_blank" rel="noopener" href="http://rexhung.me/JS-and-Fighter/JS-and-Fighter-8F/dist/index.html">點我</a><br/><br>Code Source：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-8F">點我</a><br/><br>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/hero-of-underground-%E5%9C%B0%E4%B8%8B%E5%9F%8E-8f-tic-tac-toe-%E4%BA%95%E5%AD%97%E9%81%8A%E6%88%B2-e5b3d95dd2cb">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Vue系列-—"><a href="#Vue系列-—" class="headerlink" title="Vue系列 —"></a>Vue系列 —</h3><ul>
+<li><strong>[Vue Notes] — Vue-Cli #1 初次見面</strong><blockquote>
+<p><em>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li>Chris Chuang大神 — <a target="_blank" rel="noopener" href="https://medium.com/chris-chuang/%E5%88%9D%E6%8E%A2-chrome-extension-19688ab79ae0">初探 Chrome Extension</a></li>
+<li>大兜 —<a target="_blank" rel="noopener" href="https://tonytonyjan.net/2012/05/25/get-start-with-chrome-extension/"> Chrome Extension</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/champagne/">Chrome扩展开发极客</a> — ChromeApi相關</li>
+<li><a target="_blank" rel="noopener" href="https://ephrain.net/">EPH 的程式日記</a> —<a target="_blank" rel="noopener" href="https://ephrain.net/chrome-extension-%E5%B0%87%E6%96%B0%E5%AF%AB%E7%9A%84-chrome-extension-%E6%93%B4%E5%85%85%E5%8A%9F%E8%83%BD%E4%B8%8A%E6%9E%B6%E8%87%B3-chrome-web-store/"> Chrome extension 上架至 Chrome Web Store</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.gamer.com.tw/index2.php?ad=N"><em>巴哈姆特 舒壓用</em></a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"># Code</a>
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"># HexSchool</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/26/20190325/" rel="prev" title="[Vue Note] — Vue-Cli #1 初次見面">
+                  <i class="fa fa-angle-left"></i> [Vue Note] — Vue-Cli #1 初次見面
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/05/30/20190530/" rel="next" title="[CSS Note] - CSS模組化">
+                  [CSS Note] - CSS模組化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">RexHung</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="總字數">454k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="所需總閱讀時間">6:53</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
