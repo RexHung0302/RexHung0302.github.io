@@ -12327,7 +12327,7 @@
 <p><em>不確定 <strong>VSCode</strong> 是否有可以有相同的配置，如果可以還歡迎在下面留言，感謝。</em></p>
 </blockquote>
 <hr>
-<h3 id="享受成果"><a href="#享受成果" class="headerlink" title="享受成果"></a>享受成果</h3><p><img src="/images/others/loading.gif" data-original="/images/20240128/step-66.png" alt="Step 66"></p>
+<h3 id="享受成果"><a href="#享受成果" class="headerlink" title="享受成果"></a>享受成果</h3><p><img src="/images/others/loading.gif" data-original="/images/20240128/step-66.gif" alt="Step 66"></p>
 <p>現在你可以更改 <strong>lib &gt; main.dart</strong> 裡的 <code>home: const MyHomePage(title: &#39;Flutter Demo Home Page&#39;),</code>，將 <strong>title</strong> 改為 <strong>Hello World</strong> </p>
 <p>將會看到 <strong>Hot-reload</strong> 熱更新的效果，更改後立即見效。</p>
 <hr>
