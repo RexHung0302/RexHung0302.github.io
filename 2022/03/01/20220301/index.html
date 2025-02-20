@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 想要寫一個 Side Project 卻卡在後端建立很麻煩嗎？如果想要有一個 Side Project 需要資料庫，就算已經會 JavaScript 了，卻要在學習 Node.js、學習 ORM、學習建立資料庫、學習部署上機器… 等等，如果只是要練習 Side Project 不用這麼麻煩…趕緊來看看這篇文章吧！ 這篇文章適合什麼人？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note] — 透過 GAS 快速建立後端, 串接TG機器人佐 Google Excel">
+<meta property="og:url" content="https://rexhung0302.github.io/2022/03/01/20220301/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 想要寫一個 Side Project 卻卡在後端建立很麻煩嗎？如果想要有一個 Side Project 需要資料庫，就算已經會 JavaScript 了，卻要在學習 Node.js、學習 ORM、學習建立資料庫、學習部署上機器… 等等，如果只是要練習 Side Project 不用這麼麻煩…趕緊來看看這篇文章吧！ 這篇文章適合什麼人？">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2022-03-01T04:10:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.959Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Google">
+<meta property="article:tag" content="Google Excel">
+<meta property="article:tag" content="GAS">
+<meta property="article:tag" content="Google App Script">
+<meta property="article:tag" content="Telegram Bot">
+<meta property="article:tag" content="Telegram">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2022/03/01/20220301/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Tool Note] — 透過 GAS 快速建立後端, 串接TG機器人佐 Google Excel | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2022/03/01/20220301/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note] — 透過 GAS 快速建立後端, 串接TG機器人佐 Google Excel
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-03-01 12:10:00" itemprop="dateCreated datePublished" datetime="2022-03-01T12:10:00+08:00">2022-03-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Google/" itemprop="url" rel="index"><span itemprop="name">Google</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>9.5k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>9 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20220301/banner.png" alt="Google Apps Script"></p>
+<p>想要寫一個 <strong>Side Project</strong> 卻卡在後端建立很麻煩嗎？如果想要有一個 <strong>Side Project</strong> 需要資料庫，就算已經會 <strong>JavaScript</strong> 了，卻要在學習 <strong>Node.js</strong>、學習 <strong>ORM</strong>、學習建立資料庫、學習部署上機器…</p>
+<p>等等，如果只是要練習 <strong>Side Project</strong> 不用這麼麻煩…趕緊來看看這篇文章吧！</p>
+<p>這篇文章適合什麼人？</p>
+<span id="more"></span>
+
+<ul>
+<li>想快速建立出 <strong>Side Project</strong> 當作品的人(不是很建議，但至少能證明你會看文件串接，後續繼續說明)</li>
+<li>想知道如何串接通訊軟體機器人</li>
+<li>想知道如何不需要建立 <strong>DB(資料庫)</strong> 就可以存資料及撈資料**(並非透過 LocalStorage)**</li>
+<li>沒有程式碼經驗的小白也能輕鬆做出機器人</li>
+</ul>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇將會用建立 <strong>Telegram(下簡稱 TG)</strong> 機器人的範例來介紹如何透過 <strong>Google Apps Script(下簡稱 GAS)</strong> 快速建立後端。</p>
+<blockquote>
+<p><em>如果不知道 <strong>Telegram</strong> 詳細可以參考 <a target="_blank" rel="noopener" href="https://agirls.aotter.net/post/57085">專題｜為何大家開始用 Telegram？它有比 LINE 更好用嗎？</a> 簡單說就是像 <strong>LINE</strong> 的通訊軟體</em></p>
+</blockquote>
+<p>本篇文章預設學習前的基本條件需求</p>
+<ul>
+<li>會基本的 <strong>JavaScript</strong>(至少能會看懂)</li>
+<li>會安裝及使用 <strong>Telegram</strong></li>
+<li>會使用 <strong>Google Excel</strong></li>
+</ul>
+<p>這邊可以簡單分為六個小節：</p>
+<ol>
+<li>簡易基礎介紹 - 我們要做出什麼 <strong>Side Project</strong></li>
+<li>申請機器人 - <strong>Side Project</strong> 需要使用</li>
+<li>快速建立後端 - 不需要起一個後端服務快速建立後端</li>
+<li>串丸子般把所有東西串起來 - 料都準備好了，一起下鍋吧</li>
+<li>更新的一些小事 - 關於 <strong>GAS</strong> 需要注意的小事項</li>
+<li>延伸應用 - 如果需要作品的人，可以如何延伸創作？</li>
+</ol>
+<hr>
+<h3 id="簡易基礎介紹"><a href="#簡易基礎介紹" class="headerlink" title="簡易基礎介紹"></a>簡易基礎介紹</h3><p>看完上面一些條件後，聰明的你應該八九成能猜到我們要做什麼。這次我們要做一個簡易的機器人，可以幫我們建立一些資料，也可以把這些資料撈取出來給使用者。</p>
+<p>先說說什麼是通訊軟體的機器人，如果使用 <strong>LINE</strong> 來舉例(如下圖)，就像有個人再跟你互動。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/LINE_Bot.png" alt="LINE Bot"></p>
+<blockquote>
+<p><em>圖片來至 <a target="_blank" rel="noopener" href="https://www.ithome.com.tw/news/110573">Line開發者大會TechPulse來臺，整合5套開發套件，讓使用者開發聊天機器人應用</a></em></p>
+</blockquote>
+<p>而我們今天要使用的機器人是 <strong>TG</strong> 的機器人(<strong>不知道 TG 是什麼可以往上拉，有連結請參考</strong>)，大多的機器人概念圖都如下：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/botProcess.png" alt="機器人概念圖"></p>
+<p>我們需要做事的地方就在右邊的後端伺服器那塊，將我們的程式碼寫好後部署上去，然後再透過通訊軟體提供的方式設定，讓通訊軟體知道如何找到我們的部署上去的程式碼，通訊軟體就會在某些時機點丟一些資訊過來，這時候在我們的程式碼裡面可以做一些判斷然後操作資料，最後回吐一些通訊軟體定義好的格式回去，這時候通訊軟體就會繼續做接下來的事情，這邊講的比較不好明白，繼續看下去就會瞭解了。</p>
+<p>簡易來說，我們要做的事情很簡單：</p>
+<ol>
+<li>使用者輸入訊息給機器人</li>
+<li>通訊軟體接到訊息後傳送通知到我們的後端伺服器去</li>
+<li>經過我們部署到後端伺服器上的程式碼加工處理後回吐客製化訊息給通訊軟體</li>
+<li>通訊軟體告知使用者我們回吐的資訊</li>
+</ol>
+<p>在製作機器人之前我們需要先安裝及申請幾樣東西(跟著文章一步一步走可以)：</p>
+<ul>
+<li>Telegram 安裝及申請帳號</li>
+<li>Telegram 機器人申請</li>
+<li>Google Excel 申請</li>
+<li>Google App Script 專案建立</li>
+</ul>
+<hr>
+<h3 id="申請機器人"><a href="#申請機器人" class="headerlink" title="申請機器人"></a>申請機器人</h3><p>這次需要先安裝 <a target="_blank" rel="noopener" href="https://desktop.telegram.org/"><strong>TG</strong></a> 及申請帳號密碼，這邊就不詳細贅述了，接著需要申請一組機器人；至於為何要用 <strong>TG</strong> 而不用 <strong>LINE Bot</strong> 呢？因為 <strong>TG</strong> 真的容易很多。</p>
+<ol>
+<li><p>首先在 TG 的搜尋區輸入 <strong>@BotFather</strong>，就會看到一個藍勾勾的帳號，點選進去。</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/BotFather.png" alt="TG的機器人之父"></p>
+</li>
+<li><p>接著輸入 <code>/start</code>，輸入完會出現一些可以使用的指令，我們需要輸入 <code>/newbot</code> 來建立我們的第一隻機器人。</p>
+</li>
+<li><p>之後跟著指令輸入該輸入的資訊</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/newBot.png" alt="新增機器人"></p>
+</li>
+<li><p>建立結束後會拿到一串 Token，如果沒有記下來也沒關係，之後都還可以用 <strong>@BotFather</strong> 查詢到，輸入 <code>/mybots</code>，在點擊你想查詢的機器人。</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/myBot.png" alt="我的機器人"></p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/botToken.png" alt="機器人的 Token"></p>
+</li>
+<li><p>為了後面方便我們先將一些機器人的資訊輸入完成，點擊 <strong>Edit Bot</strong> 然後點擊要編輯的資訊，像是 <strong>Edit Name</strong> 或 <strong>Edit Description</strong>…等等</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/botInfo.png" alt="機器人資訊"></p>
+<ul>
+<li><p><strong>Name</strong> - 機器人的名稱</p>
+</li>
+<li><p><strong>Description</strong> - 機器人的敘述，會在搜尋後要加入機器人的時候出現在畫面上</p>
+<p>  <img src="/images/others/loading.gif" data-original="/images/20220301/botDescription.png" alt="機器人填寫 Description 後顯示的地方"></p>
+</li>
+<li><p><strong>About</strong> - 會出現在個人資料裡面的介紹</p>
+</li>
+<li><p><strong>Botpic</strong> - 機器人大頭貼</p>
+</li>
+<li><p><strong>Commands</strong> - 在機器人一對一或者有邀請該機器人的群組裡面輸入 “&#x2F;“ 後會出現的指令</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>另外如果有需要在群組裡面使用機器人，請記得點在機器人設定那邊點擊 <strong>BotSetting</strong> 然後把 <strong>Allow Groups</strong> 設定為 <strong>off</strong>，因為這次我們只有要自己使用，不需要打開。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/allowGroup.png" alt="允許在群組內使用"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/sample_db_bot.png" alt="搜尋自己的機器人"></p>
+<blockquote>
+<p><em>TG 的 Bot 申請設定都在通訊軟體裡面的 <strong>@BotFather</strong> 完成，比起其他通訊軟體的 <strong>Bot</strong> 相對方便許多。</em></p>
+</blockquote>
+<hr>
+<h3 id="快速建立後端"><a href="#快速建立後端" class="headerlink" title="快速建立後端"></a>快速建立後端</h3><p>申請好 <strong>TG Bot</strong> 之後，接下來我們要搭建我們的後端，這邊會需要一個紀錄資料的 <strong>DB</strong> 及 <strong>處理後端邏輯的地方</strong>。</p>
+<ol>
+<li><p>首先先創建一個 <strong><a target="_blank" rel="noopener" href="https://www.google.com.tw/intl/zh-TW/sheets/about/">Google Excel</a></strong>(這個就是我們的簡易資料庫了)，然後裡面打上下面的內容</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/googleExcel.png" alt="Google Excel"></p>
+<p> 下方的 <strong>工作表1</strong> 也請改名為 <strong>簡易記錄表</strong></p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/sampleSheet.png" alt="表格可以隨意命名，這邊先以圖示為例"></p>
+</li>
+<li><p>接著創建一個 <a target="_blank" rel="noopener" href="https://www.google.com/script/start/">Google Apps Script</a> 專案 </p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/newGAS.png" alt="新增 GAS 專案"></p>
+</li>
+<li><p>複製下面程式碼貼上(把原本的 <strong>function myFunction()</strong> 整個替換掉)</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doGet</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 取得試算表</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">SheetId</span> = <span class="string">&#x27;excel 的 Id&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">SheetName</span> = <span class="string">&#x27;簡易記錄表&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">SpreadSheet</span> = <span class="title class_">SpreadsheetApp</span>.<span class="title function_">openById</span>(<span class="title class_">SheetId</span>);</span><br><span class="line">	<span class="comment">// const Sheet = SpreadSheet.getSheets()[0]; // 指定第一張試算表</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Sheet</span> = <span class="title class_">SpreadSheet</span>.<span class="title function_">getSheetByName</span>(<span class="title class_">SheetName</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 取得資料</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">LastRow</span> = <span class="title class_">SpreadSheet</span>.<span class="title function_">getLastRow</span>(); <span class="comment">// 取得有資料的最後一欄</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">LastColumn</span> = <span class="title class_">SpreadSheet</span>.<span class="title function_">getLastColumn</span>(); <span class="comment">// 取得有資料的最後一列</span></span><br><span class="line"></span><br><span class="line">  <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="title class_">Sheet</span>.<span class="title function_">getSheetValues</span>(<span class="title class_">LastRow</span>, <span class="title class_">LastColumn</span>, <span class="number">1</span>, <span class="number">1</span>)); <span class="comment">// 取得 startRow、startColumn、numRows 和 numColumns 從「左上儲存格至右下儲存格」中間區域所包含的儲存格數值</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">ContentService</span></span><br><span class="line">    .<span class="title function_">createTextOutput</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">result</span>: <span class="string">&#x27;測試Get取得資訊成功&#x27;</span>, <span class="attr">version</span>: <span class="string">&#x27;1.0&#x27;</span> &#125;))</span><br><span class="line">        .<span class="title function_">setMimeType</span>(<span class="title class_">ContentService</span>.<span class="property">MimeType</span>.<span class="property">JSON</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>將 <strong>SheetId</strong> 後面的 <strong>Excel 的 Id</strong> 替換為你剛剛創建 <strong>Google Excel</strong> 的 <strong>ID</strong>，<strong>ID</strong> 哪裡拿呢？打開剛剛你創建的 <strong>Google Excel</strong>，然後看網址那邊。</p>
+<p> <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/167CxX5-SwaTDDK4u1QRaPWIIWGcpbBNKahJYYozY22A/edit?hl=zh-TW#gid=0"><code>https://docs.google.com/spreadsheets/d/167CxX5-SwaTDDK4u1QRaPWIIWGcpbBNKahJYYozY22A/edit?hl=zh-TW#gid=0</code></a></p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/excelID.png" alt="取得 Excel ID"></p>
+<blockquote>
+<p><em>取得中間那 <strong>d&#x2F;</strong> 後面開始一直到 <strong>&#x2F;edit</strong> 前面為止的範圍。</em></p>
+</blockquote>
+</li>
+<li><p>接著按下執行按鈕</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220301/startGAS.png" alt="執行 GAS"></p>
+<blockquote>
+<p><em>第一次執行會需要權限同意，這是正常的</em></p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/startGASProcess.gif" alt="執行過程"></p>
+<p>這邊很重要需要先解釋一下，<strong>GAS</strong> 預設兩種接收方式，我們在 <strong>GAS</strong> 寫完的程式碼發布後，會拿到一串網址，我們可以把這個當成 <strong>API</strong>，透過 <strong><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods"><em>HTTP Methods</em></a></strong> 可以觸發我們寫的程式碼，而 <strong>GAS</strong> 只能接受 <strong>HTTP GET</strong> 及 <strong>POST</strong>。</p>
+<p>而 <strong>GAS</strong> 最重要的兩點就寫在文件內，請參考 <em><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/guides/web">Web Apps - Requirements for web apps</a></em>，第一點就是剛剛提到的 <strong>doGet(e)</strong> 跟 <strong>doPost(e)</strong>，第二點就是該程式碼回傳的內容必須是 <a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/guides/html">**<em>HTML service</em></a> <em><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/html/html-output">HtmlOutput</a></em> Object** 或 <a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/guides/content">**<em>Content service</em></a> <em><a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/content/text-output">TextOutput</a></em> Object**。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/GASDoc.png" alt="GAS Document"></p>
+<blockquote>
+<p><em><strong>要提醒很重要的一件事情就是串接任何服務之前，文件一定要好好的看清楚規則及條件還有用法。</strong></em></p>
+</blockquote>
+<p>到這邊你已經可以撈取到 <strong>Excel</strong> 的內容了，這邊一行一行來解釋一下：</p>
+<ul>
+<li><code>const SheetId = &#39;excel 的 Id&#39;;</code> - 這行需要放入你的 <strong>Google Excel ID</strong></li>
+<li><code>const SheetName = &#39;簡易記錄表&#39;;</code> - 這行需要輸入你 <strong>Google Excel</strong> 的 <strong>Sheet</strong> 名稱，名稱就是 <strong>Google Excel</strong> 下方的工作表名稱。</li>
+<li><code>const SpreadSheet = SpreadsheetApp.openById(SheetId);</code> - 這行是透過 <strong>Google Excel</strong> 的 <strong>ID</strong> 取得你的 <strong>Google Excel</strong>，也可以使用 <code>openByUrl()</code></li>
+<li><code>const Sheet = SpreadSheet.getSheets()[0];</code> - 這行註解掉的原因是取得 <strong>Excel Sheet</strong> 的方式可以使用 <code>getSheetByName()</code> 或 <code>getSheets()[0]</code> 詳細可參考 <a target="_blank" rel="noopener" href="https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet#getSheetByName(String)"><em>Google App Script Api Doc</em></a></li>
+<li><code>const Sheet = SpreadSheet.getSheetByName(SheetName);</code> - 這行上面提過是取得你的 <strong>Excel Sheet</strong> 表格</li>
+<li><code>const LastRow = SpreadSheet.getLastRow();</code> - 這行是要取得有資料的最後那一欄</li>
+<li><code>const LastRow = SpreadSheet.getLastColumn();</code> - 這行是要取得有資料的最後那一列</li>
+<li><code>Logger.log(Sheet.getSheetValues(LastRow, LastColumn, 1, 1));</code> - 這行就是取得 <strong>startRow</strong>、<strong>startColumn</strong>、<strong>numRows</strong> 和 <strong>numColumns</strong>，最後的 1, 1 如果帶入其他數字可以取得一整個範圍的內容，例如 <code>Sheet.getSheetValues(1, 1, 2, 2);</code> 意思就是取得從 <strong>A1</strong> 到 <strong>B2</strong> 範圍的內容。</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="title class_">ContentService</span></span><br><span class="line">    .<span class="title function_">createTextOutput</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">result</span>: <span class="string">&#x27;測試Get取得資訊成功&#x27;</span>, <span class="attr">version</span>: <span class="string">&#x27;1.0&#x27;</span> &#125;))</span><br><span class="line">        .<span class="title function_">setMimeType</span>(<span class="title class_">ContentService</span>.<span class="property">MimeType</span>.<span class="property">JSON</span>); </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最後一行則是要回傳的資訊，這邊建議回傳都使用 <code>ContentService.createTextOutput();</code> 這種方式回傳</li>
+</ul>
+<hr>
+<h3 id="串丸子般把所有東西串起來"><a href="#串丸子般把所有東西串起來" class="headerlink" title="串丸子般把所有東西串起來"></a>串丸子般把所有東西串起來</h3><p>到這邊你已經建立好後端部分了，該準備的東西也都準備好了，我們開始來著手串接 <strong>TG Bot</strong> 吧。</p>
+<p>先把剛剛的程式碼修改一下，左側先新增三隻檔案，然後修改一下檔案名稱如下：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/GASFileSnapSHot.png" alt="目前所有檔案的快照"></p>
+<p><strong>app.gs</strong> 內容改為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">doGet</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 取得試算表</span></span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="title class_">Sheet</span>, <span class="title class_">SpreadSheet</span> &#125; = <span class="title function_">connectToSheet</span>(<span class="string">&#x27;Excel ID&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">SheetInfo</span> = <span class="title function_">getSheetInfo</span>(<span class="title class_">Sheet</span>, <span class="title class_">SpreadSheet</span>, &#123;</span><br><span class="line">    <span class="attr">startColumn</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">endColumn</span>: <span class="number">4</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">ContentService</span></span><br><span class="line">    .<span class="title function_">createTextOutput</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(<span class="title class_">SheetInfo</span>))</span><br><span class="line">        .<span class="title function_">setMimeType</span>(<span class="title class_">ContentService</span>.<span class="property">MimeType</span>.<span class="property">JSON</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收 TG 回應</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">doPost</span>(<span class="params">e</span>) &#123;</span><br><span class="line">	<span class="comment">// 取得試算表</span></span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="title class_">Sheet</span>, <span class="title class_">SpreadSheet</span> &#125; = <span class="title function_">connectToSheet</span>(<span class="string">&#x27;Google Excel 的 ID&#x27;</span>);</span><br><span class="line">  <span class="comment">// Token</span></span><br><span class="line">  <span class="keyword">const</span> bot_token = <span class="string">&quot;TG Bot Token&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 訊息來源</span></span><br><span class="line">  <span class="keyword">const</span> estringa = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">postData</span>.<span class="property">contents</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (estringa.<span class="property">message</span>.<span class="property">chat</span>.<span class="property">type</span> !== <span class="string">&#x27;private&#x27;</span>) <span class="keyword">return</span>; </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> newDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    id,</span><br><span class="line">    username,</span><br><span class="line">  &#125; = estringa.<span class="property">message</span>.<span class="property">chat</span>;</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    text,</span><br><span class="line">  &#125; = estringa.<span class="property">message</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setSheetInfo</span>(<span class="title class_">Sheet</span>, <span class="title class_">SpreadSheet</span>, [[newDate, username, id, text]])</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 整理要回覆給通訊軟體的內容</span></span><br><span class="line">  <span class="keyword">const</span> options = &#123;</span><br><span class="line">    <span class="string">&quot;method&quot;</span>: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">    <span class="string">&quot;contentType&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">    <span class="string">&quot;payload&quot;</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">        <span class="string">&quot;method&quot;</span>: <span class="string">&quot;sendMessage&quot;</span>,</span><br><span class="line">        <span class="string">&quot;chat_id&quot;</span>: estringa.<span class="property">message</span>.<span class="property">chat</span>.<span class="property">id</span>,</span><br><span class="line">        <span class="string">&quot;text&quot;</span>: estringa.<span class="property">message</span>.<span class="property">text</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;;</span><br><span class="line">   </span><br><span class="line">  <span class="title class_">UrlFetchApp</span>.<span class="title function_">fetch</span>(<span class="string">`https://api.telegram.org/bot<span class="subst">$&#123;bot_token&#125;</span>/sendMessage`</span>, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>connectToSheet.gs</strong> 內容改為:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 連結 Excel</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">connectToSheet</span>(<span class="params">SheetId</span>) &#123;</span><br><span class="line">  <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;start to connectToSheet&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">SpreadSheet</span> = <span class="title class_">SpreadsheetApp</span>.<span class="title function_">openById</span>(<span class="title class_">SheetId</span>);</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Sheet</span> = <span class="title class_">SpreadSheet</span>.<span class="title function_">getSheets</span>()[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (<span class="title class_">Sheet</span> != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;ConnectToSheet Success!&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="title class_">Sheet</span>,</span><br><span class="line">      <span class="title class_">SpreadSheet</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;ConnectToSheet Failed!&#x27;</span>);</span><br><span class="line">  <span class="keyword">throw</span> <span class="title class_">Error</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>getSheetInfo.gs</strong> 內容改為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得目標 Excel 的資料</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getSheetInfo</span>(<span class="params">Sheet, SpreadSheet, &#123;</span></span><br><span class="line"><span class="params">  startRow,</span></span><br><span class="line"><span class="params">  startColumn,</span></span><br><span class="line"><span class="params">  endRow = <span class="number">1</span>,</span></span><br><span class="line"><span class="params">  endColumn = <span class="number">1</span>,</span></span><br><span class="line"><span class="params">&#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Sheet</span> || !<span class="title class_">SpreadSheet</span>) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;Sheet Or SpreadSheet Not Found!&#x27;</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="title class_">Error</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> _startRow = startRow;</span><br><span class="line">  <span class="keyword">let</span> _startColumn = startColumn;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 取得資料</span></span><br><span class="line">  _startRow = startRow ? startRow : <span class="title class_">SpreadSheet</span>.<span class="title function_">getLastRow</span>(); <span class="comment">// 取得有資料的最後一欄</span></span><br><span class="line">  _startColumn = startColumn ? startColumn : <span class="title class_">SpreadSheet</span>.<span class="title function_">getLastColumn</span>(); <span class="comment">// 取得有資料的最後一行</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Sheet</span>.<span class="title function_">getSheetValues</span>(_startRow, _startColumn, endRow, endColumn); <span class="comment">// 取得 startRow、startColumn、numRows 和 numColumns 從「左上儲存格至右下儲存格」中間區域所包含的儲存格數值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>setSheetInfo.gs</strong> 內容改為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">setSheetInfo</span>(<span class="params">Sheet, SpreadSheet, values</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title class_">Sheet</span> || !<span class="title class_">SpreadSheet</span>) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;Sheet Or SpreadSheet Not Found!&#x27;</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="title class_">Error</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 取得資料範圍</span></span><br><span class="line">  <span class="keyword">const</span> range = <span class="title class_">Sheet</span>.<span class="title function_">getRange</span>(<span class="title class_">SpreadSheet</span>.<span class="title function_">getLastRow</span>() + <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!range) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;Range Not Found!&#x27;</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="title class_">Error</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (values[<span class="number">0</span>] &amp;&amp; <span class="title class_">Array</span>.<span class="title function_">isArray</span>(values[<span class="number">0</span>]) &amp;&amp; values[<span class="number">0</span>].<span class="property">length</span> === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="comment">// 寫入試算表</span></span><br><span class="line">    range.<span class="title function_">setValues</span>(values);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">log</span>(<span class="string">&#x27;Value is Not Array!&#x27;</span>);</span><br><span class="line">    <span class="keyword">throw</span> <span class="title class_">Error</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><strong>setSheetInfo.gs</strong> 原本想寫成跟 <strong>getSheetInfo.gs</strong> 一樣，透過 <strong>Props</strong> 帶入參數，動態的選擇要塞入多個內容或者單個，但因為這邊寫起來會很複雜，所以先固定寫死，如果有興趣的朋友，可以自行修改內容，如果還不太明白 <strong>JavaScript</strong> 可以先略過。*</li>
+</ul>
+</blockquote>
+<p>請記得先把上面該帶入的 <strong>Google Excel ID</strong> 及 <strong>TG Bot Token</strong> 填入，然後點選右上角 <strong>部署 &gt; 新增部署作業</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/addGASWork.png" alt="新增部署作業"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/GASWorkSetting.png" alt="部署作業設定"></p>
+<blockquote>
+<p><em>隨後請記得 <strong>選取類型</strong> 選擇 <strong>網頁應用程式</strong>，說明隨意輸入，執行身份選自己，誰可以存取選擇 <strong>所有人</strong>，然後點擊部署。</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/GASURL.png" alt="GAS 部署結果"></p>
+<blockquote>
+<p><em>最後會拿到一串網址，請把這串網址記下來</em></p>
+</blockquote>
+<p>這時候我們要開始把 <strong>TG Bog</strong> 跟 <strong>Google Script App</strong> 串接起來，請先記得幾個基本 <strong>API</strong>，最好使用 <strong>PostMan</strong> 記錄下來：</p>
+<ul>
+<li><code>https://api.telegram.org/bot&#123;&#123;bot_token&#125;&#125;/setWebhook?url=&#123;&#123;google_sheet&#125;&#125;</code></li>
+<li><code>https://api.telegram.org/bot&#123;&#123;bot_token&#125;&#125;/deleteWebhook</code></li>
+<li><code>https://api.telegram.org/bot&#123;&#123;bot_token&#125;&#125;/getMe</code></li>
+<li><code>https://api.telegram.org/bot&#123;&#123;bot_token&#125;&#125;/sendMessage</code></li>
+</ul>
+<blockquote>
+<p><em>我們需要使用第一個 <strong>API</strong> 去把我們的 <strong>TG Bot</strong> 跟 <strong>Google Apps Script</strong> 串接起來，哪天如果不想要使用了，請記得使用第二個 <strong>API</strong> 去把串接起來的機器人取消掉；第三個 <strong>API</strong> 則是可以取得目前機器人的一些設定，這個在 <strong>TG BotFather</strong> 其實也可以看到；第四個 <strong>API</strong> 可以透過 <strong>HTTP Post</strong> 發送一些訊息到 <strong>TG</strong>。</em></p>
+</blockquote>
+<p>使用前還是要先解釋一下，還記得上面那張圖嗎？使用者發送訊息給 <strong>TG Bot</strong>，而 <strong>TG Bot</strong> 會告知我們，這時候要取得這些通知有兩種方法，一種是 <strong>Long Polling</strong>，另一種則是 <strong>Webhook</strong>。</p>
+<p>前者是透過 <code>getUpdates()</code> 的方法去跟 <strong>TG Bot</strong> 要通知，後者則是 <strong>TG Bot</strong> 會自動透過設定好的 <strong>Webhook URL</strong> 去通知我們。</p>
+<blockquote>
+<p><em><strong>請記得第二種方法設定好之後，如果有設定成功，但是沒有 Return HTTP 200 給 TG Bot，TG 那邊預設會一直狂敲猛敲你的 Webhook URL，可能會造成流量問題，但目前我們這邊的範例不需要擔心(如果有誤還麻煩請幫忙指出，感激不盡)。</strong></em></p>
+</blockquote>
+<hr>
+<h3 id="設定-Webhook"><a href="#設定-Webhook" class="headerlink" title="設定 Webhook"></a>設定 Webhook</h3><p>這邊開始我們要來設定 <strong>Webhook</strong>，透過 <strong>PostMan</strong> 或者打開網頁，把那行 <strong>API</strong> 輸入上去，<code>https://api.telegram.org/bot&#123;&#123;bot_token&#125;&#125;/setWebhook?url=&#123;&#123;google_sheet&#125;`，請記得 **"&#123;&#123;&#125;&#125;&quot;** 要刪掉，範例為 </code><a target="_blank" rel="noopener" href="https://api.telegram.org/bot123456789:xxxx_xxx_xxx/setWebhook?url=https://script.google.com/macros/s/xxxxxxxx/exec%60">https://api.telegram.org/bot123456789:xxxx_xxx_xxx/setWebhook?url=https://script.google.com/macros/s/xxxxxxxx/exec`</a> 。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/setWebhookSuccess.png" alt="設定 Webhook"></p>
+<blockquote>
+<p><em>設定成功會出現 <code>&quot;description&quot;: &quot;Webhook was set&quot;</code> 。</em></p>
+</blockquote>
+<p>接著到 <strong>TG Bot</strong> 輸入隨意訊息 <code>哈摟你好嗎</code> ，如下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/botTest.png" alt="機器人測試"></p>
+<p>這時候到 <strong>Google Excel</strong> 查看會看到一筆紀錄：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/googleExcelGetBotResponse.png" alt="取得機器人回應"></p>
+<p>至此你已經會透過 <strong>GAS</strong> 串接 <strong>TG Bot</strong> 把資料從 <strong>Google Excel</strong> 塞進及取出。</p>
+<hr>
+<h3 id="更新的一些小事"><a href="#更新的一些小事" class="headerlink" title="更新的一些小事"></a>更新的一些小事</h3><p><img src="/images/others/loading.gif" data-original="/images/20220301/GASManager.png" alt="管理部署"></p>
+<p>發布後如果發現有需要更新內容，點擊 <strong>部署 &gt; 管理部屬作業</strong> 然後會彈出一個視窗，點擊右上角的編輯(<strong>一支筆</strong>)，接著點擊版本選擇 <strong>建立新版本</strong>，說明選填，然後點擊 <strong>部署</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220301/editGASWork.png" alt="編輯部署"></p>
+<p>這邊需要注意的是，透過 <strong>管理部屬作業</strong> 去部署的新程式碼，網頁應用程式那串網址結果都會是一樣的，不需要再去重新 <strong>setWebhook</strong> 給 <strong>TG Bot</strong>。如果需要保留舊的版本，請選擇 <strong>部署 &gt; 新增部署作業</strong>，這樣才會 <strong>既保留舊版本，又產生新的網頁應用程式網址</strong>。</p>
+<p>保留舊版本的好處是如果新的版本出問題了，可以快速換回舊版本；另外需要注意的是，確定沒有用的版本請記得封存，不然還是會算流量。</p>
+<hr>
+<h3 id="延伸應用"><a href="#延伸應用" class="headerlink" title="延伸應用"></a>延伸應用</h3><p>現在只要專心 <strong>Foucs</strong> 在前端即可，這幾乎是前端要做 <strong>Side Project</strong> 追求的，把重點放在前端部分。如果不需要串接 <strong>TG Bot</strong> 其實也可以寫一個簡易的訂單系統，有興趣可以參考這篇文章 <strong><a target="_blank" rel="noopener" href="https://ianccy.com/googleformapi/"><em>Google sheet 試算表表單串接api</em></a></strong>，這篇文章介紹如何透過 <strong>GAS</strong> 做一個鹹酥雞訂單系統。</p>
+<p>因為免除了從零開始建置後端的麻煩，只要是簡單的 <strong>CRUD</strong> 都可以輕鬆建立，串接其他機器人也都很輕鬆～</p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次會碰到這個應用是因為剛好工作上團隊都會點便當，但因為每次都需要透過打開網頁去 <strong>Google Excel</strong> 看需要付多少錢有點麻煩，想了一下平常團隊最常使用的軟體是 <strong>TG</strong>，所以就想想有沒有辦法可以透過串接機器人讓他告訴我現在要付多少錢，因為懶惰又學到了一些有趣的應用，果然這才是驅使工程師成長的推力。</p>
+<blockquote>
+<p><em>這個示範機器人會留著給大家試用，如果有興趣的話。但因為個資問題，會把 <strong>使用者名稱</strong> 及 <strong>Chat ID</strong> 改為 <strong>xxx</strong></em></p>
+</blockquote>
+<p><strong>TG Bot 機器人</strong> - <a target="_blank" rel="noopener" href="https://t.me/sample_db_bot"><em>加入好友連結</em></a></p>
+<p><strong>Google Excel 表單</strong> - <a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/167CxX5-SwaTDDK4u1QRaPWIIWGcpbBNKahJYYozY22A/edit#gid=0"><em>表單連結</em></a></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.wfublog.com/2017/01/google-apps-script-spreadsheet-write-data.html">用 Google Apps Script 操作試算表 (1)製作資料庫 + 寫入資料</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ianccy.com/googleformapi/">Google sheet 試算表表單串接api</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10247154?sc=hot">Day 20-Telegram 回聲機器人</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Google/" rel="tag"><i class="fa fa-tag"></i> Google</a>
+              <a href="/tags/Google-Excel/" rel="tag"><i class="fa fa-tag"></i> Google Excel</a>
+              <a href="/tags/GAS/" rel="tag"><i class="fa fa-tag"></i> GAS</a>
+              <a href="/tags/Google-App-Script/" rel="tag"><i class="fa fa-tag"></i> Google App Script</a>
+              <a href="/tags/Telegram-Bot/" rel="tag"><i class="fa fa-tag"></i> Telegram Bot</a>
+              <a href="/tags/Telegram/" rel="tag"><i class="fa fa-tag"></i> Telegram</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/18/20220218/" rel="prev" title="[React Note] — 前端 SEO 兩分鐘就上手">
+      <i class="fa fa-chevron-left"></i> [React Note] — 前端 SEO 兩分鐘就上手
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/10/20220310/" rel="next" title="[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT">
+      [Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B0%A1%E6%98%93%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9"><span class="nav-number">2.1.</span> <span class="nav-text">簡易基礎介紹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B3%E8%AB%8B%E6%A9%9F%E5%99%A8%E4%BA%BA"><span class="nav-number">2.2.</span> <span class="nav-text">申請機器人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E5%BE%8C%E7%AB%AF"><span class="nav-number">2.3.</span> <span class="nav-text">快速建立後端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B2%E4%B8%B8%E5%AD%90%E8%88%AC%E6%8A%8A%E6%89%80%E6%9C%89%E6%9D%B1%E8%A5%BF%E4%B8%B2%E8%B5%B7%E4%BE%86"><span class="nav-number">2.4.</span> <span class="nav-text">串丸子般把所有東西串起來</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Webhook"><span class="nav-number">2.5.</span> <span class="nav-text">設定 Webhook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E4%BA%8B"><span class="nav-number">2.6.</span> <span class="nav-text">更新的一些小事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%B6%E4%BC%B8%E6%87%89%E7%94%A8"><span class="nav-number">2.7.</span> <span class="nav-text">延伸應用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2022/03/01/20220301/",
+      identifier: "2022/03/01/20220301/",
+      title     : "[Tool Note] — 透過 GAS 快速建立後端, 串接TG機器人佐 Google Excel",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

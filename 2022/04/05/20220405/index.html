@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 如何部署一個可升級合約？如果我們發布了一版合約，突然想到有些漏洞或者需要進行修改，該如何不影響已經使用的 Dapp 重新部署呢？ 這邊筆記記錄如何部署一個可升級合約，當中也記錄一些筆者碰到的問題，希望能跟各位一起成長，如果內容有誤請盡情指出，謝謝。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！">
+<meta property="og:url" content="https://rexhung0302.github.io/2022/04/05/20220405/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 如何部署一個可升級合約？如果我們發布了一版合約，突然想到有些漏洞或者需要進行修改，該如何不影響已經使用的 Dapp 重新部署呢？ 這邊筆記記錄如何部署一個可升級合約，當中也記錄一些筆者碰到的問題，希望能跟各位一起成長，如果內容有誤請盡情指出，謝謝。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2022-04-05T09:20:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.990Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Solidity">
+<meta property="article:tag" content="NFT">
+<meta property="article:tag" content="Mint">
+<meta property="article:tag" content="OpenSea">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2022/04/05/20220405/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！ | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2022/04/05/20220405/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-04-05 17:20:00" itemprop="dateCreated datePublished" datetime="2022-04-05T17:20:00+08:00">2022-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>6.4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>6 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20220405/banner.png" alt="Proxy"></p>
+<p>如何部署一個可升級合約？如果我們發布了一版合約，突然想到有些漏洞或者需要進行修改，該如何不影響已經使用的 <strong>Dapp</strong> 重新部署呢？</p>
+<p>這邊筆記記錄如何部署一個可升級合約，當中也記錄一些筆者碰到的問題，希望能跟各位一起成長，如果內容有誤請盡情指出，謝謝。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>最基本的 <strong>Proxy</strong> 邏輯，可參考 <a target="_blank" rel="noopener" href="https://blog.openzeppelin.com/proxy-patterns/">Proxy Patterns</a>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/proxy_patterns.png" alt="Proxy 過程"></p>
+<ol>
+<li>資料存在 <strong>Proxy Contract(代理合約)</strong> 內 - <strong>Eternal Storage(資料永存)</strong></li>
+<li>邏輯存在 <strong>Logic Contract(邏輯合約)</strong> 內</li>
+</ol>
+<hr>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>要部署可升級合約需要準備三樣合約：</p>
+<ol>
+<li><p><strong>Implementation Contract(實例合約)</strong> - 又稱邏輯合約，放邏輯程式碼的地方，之後可能會有 v2 v3…等等，需注意的是新版本的變數不能更改，否則會造成合約崩潰。</p>
+</li>
+<li><p><strong>Proxy Admin(管理合約)</strong> - 存放代理合約的擁有者，只有 Owner 才可以進行合約升級，其實也是透過 <code>upgrade()</code> 去呼叫代理合約的 <code>upgradeTo()</code>，其中有 <code>onlyOwner</code> 的檢查。也提供了其他各種管理功能，相關可參考 <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/cli/2.8/contracts-architecture#proxyadmin.sol">Openzeppelin Contract Doc - ProxyAdmin</a>。</p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220405/upgrade.png" alt="更新的邏輯"></p>
+</li>
+<li><p><strong>Upgradeability Proxy(可升級代理合約)</strong> - 用來指向最新的 I<strong>mplementation Contract</strong> 地址，代理合約的地址永遠不變，所以可以達到升級合約的效果。</p>
+</li>
+</ol>
+<blockquote>
+<p><em>需注意邏輯合約內引入的其他合約必須是可升級合約，整份合約才可以變成可升級合約，如果是使用 <strong>Hardhat</strong> 或 <strong>Truffle</strong> 可以使用套件 <a target="_blank" rel="noopener" href="https://github.com/OpenZeppelin/openzeppelin-upgrades">OpenZeppelin&#x2F;openzeppelin-upgrades</a> 檢查可升級性。</em></p>
+</blockquote>
+<hr>
+<h3 id="如何達到資料永久化？"><a href="#如何達到資料永久化？" class="headerlink" title="如何達到資料永久化？"></a>如何達到資料永久化？</h3><p>變數的數值存在代理合約中，當中因為 <strong>Solidity</strong> 的 <strong>constructor</strong> 不是 <strong>runtime bytecode</strong> 的一部分，只會在部署的時候跑過一次，所以代理合約無法使用邏輯合約的 <strong>constructor</strong>，這邊需要使用 <code>Initializable.sol</code> 的 <code>initialize()</code>，這樣就可以在部署的時候使用，詳細可參考 <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#initializers">Writing Upgradeable Contracts - Initializers</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// contracts/MyContract.sol</span><br><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.6.0;</span><br><span class="line"></span><br><span class="line">import &quot;@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract MyContract is Initializable &#123;</span><br><span class="line">    uint256 public x;</span><br><span class="line"></span><br><span class="line">    function initialize(uint256 _x) public initializer &#123;</span><br><span class="line">        x = _x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="整體概念圖"><a href="#整體概念圖" class="headerlink" title="整體概念圖"></a>整體概念圖</h3><p>筆者在整理的時候整理了一下流程圖，如果內容有誤還請手下留情指出錯誤。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/full_process.jpg" alt="整體概念圖"></p>
+<hr>
+<h3 id="Remix-IDE-部署步驟"><a href="#Remix-IDE-部署步驟" class="headerlink" title="Remix IDE 部署步驟"></a>Remix IDE 部署步驟</h3><ol>
+<li>部署邏輯合約</li>
+</ol>
+<p>透過 <strong>Remix</strong> 可以實作一個小型的可升級合約，首先到 <strong>Remix</strong> 並且串連本地，相關串聯方法可參考 <a href="https://rexhung0302.github.io/2022/03/10/20220310/">[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT</a> 的 <strong>使用 Remix IDE</strong>。</p>
+<p>串連本地後新增一個新合約 <code>UpgradeContract.sol</code>，內容打上下面內容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.4;</span><br><span class="line"></span><br><span class="line">import &quot;@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract UpgradeableWhiteListContract is Initializable, OwnableUpgradeable &#123;</span><br><span class="line"></span><br><span class="line">    mapping(address =&gt; bool) private whiteList;</span><br><span class="line">    mapping(address =&gt; uint256) private mintLimit;</span><br><span class="line"></span><br><span class="line">    function initialize() public initializer &#123;&#125;</span><br><span class="line"></span><br><span class="line">    function SetWhiteList(address _address, uint256 _mintLimit) external &#123;</span><br><span class="line">        whiteList[_address] = true;</span><br><span class="line">        mintLimit[_address] = _mintLimit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function GetWhiteList(address _address) public view returns (bool, uint256)&#123;</span><br><span class="line">        return (whiteList[_address], mintLimit[_address]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 自毀合約 - 使用ownerRestricted修饰符来限定只有合约的所有者才能调用该函数</span><br><span class="line">    function destructContract(address payable target) public payable &#123;</span><br><span class="line">        selfdestruct(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中這份邏輯包含了 <strong>ProxyAdmin(管理合約)</strong>、<strong>TransparentUpgradeableProxy(代理合約)</strong>，之後選取邏輯合約後直接點擊部署，請部署在測試鏈上，不知道怎麼拿測試幣跟部署到測試鏈上一樣可參考 <a href="https://rexhung0302.github.io/2022/03/10/20220310/">[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT</a> 的 <strong>領取測試幣</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/step1.png" alt="發佈合約"></p>
+<blockquote>
+<p>部署結束後請把地址存下來，這邊筆者測試地址為在 <strong>Rinkeby</strong> 測試網 的 <code>0x991c4cfc4bcc06b40a94246cffa958239fc6ce1b</code>，<a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xb325aed97d2fc93200041d541e61bf8a22298863a1d5841ce6e98bc8bcdba515">Etherscan 傳送門</a></p>
+</blockquote>
+<ol start="2">
+<li>部署管理合約</li>
+</ol>
+<p>接下來必須把管理合約部署上去，一樣直接選取左邊的 <strong>CONTRACT</strong> 後，選擇 <code>ProxyAdmin.sol</code> 然後發布到測試鏈上。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/proxyAdmin.png" alt="發布管理合約"></p>
+<blockquote>
+<p>部署結束後一樣把地址記錄下來，這邊筆者測試地址為在 <strong>Rinkeby</strong> 測試網 的 <code>0x8d463795c20622ec2a4c53d3a2f9d5834c856eaf</code>，<a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xdd60734c47506a14e89df757b4e0e3e908142a8e2ffa3ff9b4f6fae30bc61928">Etherscan 傳送門</a></p>
+</blockquote>
+<p>請務必記得這個管理合約的地址，之後升級合約需要靠這個合約來升級，如果要轉移合約也必須靠著個合約。</p>
+<ol start="3">
+<li>部署代理合約</li>
+</ol>
+<p>最重要的合約就是我們的代理合約了，這邊代理合約只會在最初部署的時候使用一次，之後我們一律使用代理合約的地址就可以訪問到最新的邏輯合約。</p>
+<p>一樣直接選取左邊的 <strong>CONTRACT</strong> 後，選擇 <code>TransparentUpgradeableProxy.sol</code> 然後填寫該填寫的 <strong>DEPLOY</strong> 參數，最後發布到測試鏈上。</p>
+<ul>
+<li><strong>_LOGIC</strong> 請填入邏輯合約地址 <code>0x991c4cfc4bcc06b40a94246cffa958239fc6ce1b</code></li>
+<li><strong>ADMIN_</strong> 請填入管理合約地址 <code>0x8d463795c20622ec2a4c53d3a2f9d5834c856eaf</code></li>
+<li><strong>_DATA</strong> 為可帶入初始化的資料，這邊筆者不填寫都會出錯，故填上網路上大部分教學的 <code>0x8129fc1c</code> 二進制碼即可成功，待解。</li>
+</ul>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/upgradeableProxy.png" alt="部署代理合約"></p>
+<blockquote>
+<p>部署結束後一樣把地址記錄下來，這邊筆者測試地址為在 <strong>Rinkeby</strong> 測試網 的 <code>0x80d83e2b9bf263279319d2c90f17c8b86ce0c774</code>，<a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xa44f21d9555629746944c2aba7bcad56f7d4914a6e25e826921715edb7a19dab">Etherscan 傳送門</a></p>
+</blockquote>
+<ol start="4">
+<li>使用邏輯合約</li>
+</ol>
+<p>這邊開始要升級合約，升級前後我們必須知道差異，所以我們先把邏輯合約引入近來使用，請記得這邊是使用剛剛部署代理合約的地址 <code>0x80d83e2b9bf263279319d2c90f17c8b86ce0c774</code> 去引入合約來使用，並非用我們最一開始的合約。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/useUpgradeableProxy.png" alt="使用邏輯"></p>
+<p>把 <strong>CONTRACT</strong> 選中邏輯合約 <code>UpgradeableWhiteListContract.sol</code>，然後在 <strong>At Adress</strong> 輸入代理合約的位置，最下方就會出現新的一行，開啟後就是我們的邏輯合約可以用的 <strong>Function</strong>。</p>
+<blockquote>
+<p><em>再說一次很重要，這邊 <strong>At Adress</strong> 填入的是代理合約的地址，不可以直接使用我們部署的邏輯合約。</em></p>
+</blockquote>
+<p>打開剛剛新增的合約，使用 <code>SetWhiteList()</code> 填入我們狐狸錢包的地址 及 <code>_mintLimit：1</code>，最後送出。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/setWhiteList.png" alt="_mintLimit 參數輸入 1"></p>
+<blockquote>
+<p>*錢包地址往上拉可以看到 <strong>ACCOUNT</strong>，或者打開狐狸錢包目前選擇的當下錢包，可以直接複製地址；*這邊送出的內容紀錄可以在 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0x1d86c57fb2428d8750a1abb25e0a2e26eee1d6064d046a3fd391cf752796a137">Etherscan</a> 查詢到。</p>
+</blockquote>
+<p>過一段時間後使用 <code>GetWhiteList()</code>，填入剛剛 <code>SetWhiteList()</code> 填寫的地址，應該會看到自己已經在白名單內了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/getWhiteList.png" alt="取得參數"></p>
+<ol start="5">
+<li>部署邏輯合約v2</li>
+</ol>
+<p>在以往我們部署了合約就無法更動了，如果今天使用了可升級合約的方式，在我們修改合約後可以再度透過管理合約把代理合約指向的合約位置改掉。</p>
+<p>先讓我們把邏輯合約做一下修改， <code>GetWhiteList()</code> 請在後面加上 <strong>+99</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.4;</span><br><span class="line"></span><br><span class="line">import &quot;@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract UpgradeableWhiteListContract is Initializable, OwnableUpgradeable &#123;</span><br><span class="line"></span><br><span class="line">    mapping(address =&gt; bool) private whiteList;</span><br><span class="line">    mapping(address =&gt; uint256) private mintLimit;</span><br><span class="line"></span><br><span class="line">    function initialize() public initializer &#123;&#125;</span><br><span class="line"></span><br><span class="line">    function SetWhiteList(address _address, uint256 _mintLimit) external &#123;</span><br><span class="line">        whiteList[_address] = true;</span><br><span class="line">        mintLimit[_address] = _mintLimit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function GetWhiteList(address _address) public view returns (bool, uint256)&#123;</span><br><span class="line">        return (whiteList[_address], mintLimit[_address] + 99);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 使用ownerRestricted修饰符来限定只有合约的所有者才能调用该函数</span><br><span class="line">    function destructContract(address payable target) public payable &#123;</span><br><span class="line">        selfdestruct(target);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後一樣送出合約並且部署，這邊的合約我們簡稱 <strong>邏輯合約v2</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/logicSolV2.png" alt="邏輯合約v2"></p>
+<blockquote>
+<p>部署結束後一樣把地址記錄下來，這邊筆者測試地址為在 <strong>Rinkeby</strong> 測試網 的 <code>0x56e4f75ed087cc0f437ecc0f8099933891ed7083</code>，<a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xbfb124a698928fc5222adb753fa48e3aa3d55db6a81604e4e389b87f4c0dd0c4">Etherscan 傳送門</a></p>
+</blockquote>
+<ol start="6">
+<li>升級合約</li>
+</ol>
+<p>剛剛部署完 <strong>邏輯合約v2</strong>，接下來就要透過管理合約讓代理合約知道它要指向的目標合約從 <strong>邏輯合約</strong> 改為 <strong>邏輯合約v2</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/upgradeLogicSol.png" alt="升級合約"></p>
+<p>這邊使用剛開始不久部署 <code>ProxyAdmin(管理合約)</code> 的 <code>upgrade()</code> ，填入相關參數，最後送出。</p>
+<ul>
+<li>proxy：填入剛剛部署的代理合約地址 <code>0x80d83e2b9bf263279319d2c90f17c8b86ce0c774</code></li>
+<li>implementation：填入新的 <strong>邏輯合約v2</strong> 地址 <code>0x56e4f75ed087cc0f437ecc0f8099933891ed7083</code></li>
+</ul>
+<blockquote>
+<p><em>部署紀錄結果一樣可以在 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0x438744e8a8e0d70f61638d9c0d69589988d50f14a8e57565ea6d16fdc3ce13ae">Etherscan</a> 查詢到</em></p>
+</blockquote>
+<ol start="7">
+<li>使用升級合約</li>
+</ol>
+<p>過段時間等剛剛的動作上鏈後，再回去使用剛剛透過 <strong>At Address</strong> 帶入的代理合約的 <code>GetWhiteList()</code> 即可拿到 <strong>邏輯合約v2</strong> 返回的結果，這邊必須要特別注意，如果返回值是 <strong>99</strong> 就代表是使用了錯誤的合約，回傳的值必須是包含第一次我們操作結果的值，因為我們第一次操作 <code>SetWhiteList()</code> 的值是存在代理合約內，重新部署新的合約，並不會把我們變數的值給清掉。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220405/getWhiteListAgain.png" alt="再次取得參數"></p>
+<hr>
+<h3 id="疑問點"><a href="#疑問點" class="headerlink" title="疑問點"></a>疑問點</h3><p>因為先前沒有部署過任何可升級合約，目前也在研究這塊，有碰到幾個疑問點，希望能有前輩指導。</p>
+<ol>
+<li><p>通常合約上鏈發布後，會把源碼公開在 Etherscan 上，這邊的話我應該公布哪個合約？邏輯合約？代理合約？邏輯合約v2？</p>
+</li>
+<li><p>代理合約需要初始化的 data_ 除了 <code>0x8129fc1c</code> 一直填入失敗，想知道為什麼，且這邊也無法留空。</p>
+</li>
+<li><p>邏輯合約部署上鏈後其實還是可以直接被呼叫的，正常變數的值都存在代理合約內，想知道普通升級後的做法是會怎麼單除處理邏輯合約呢？</p>
+</li>
+<li><p>正常部署了新版邏輯合約會把舊版刪除嗎？</p>
+</li>
+<li><p>為何還需要透過 ProxyAdmin 合約去更新代理合約指向的邏輯合約地址呢？明明透過 <strong>ProxyAdmin</strong> 的 <code>upgrade()</code> 也是回去呼叫代理合約的 <code>upgradeTo()</code> </p>
+<p> <img src="/images/others/loading.gif" data-original="/images/20220405/upgrade.png" alt="更新 Function"></p>
+</li>
+</ol>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a><strong><strong>Conclusion &amp; 結論</strong></strong></h2><p>這是一篇練習使用可升級合約的紀錄，途中還有很多不懂的，需要慢慢理解，另外練習用的合約已經透過 <code>destructContract()</code> 刪除掉，所以可以不用嘗試呼叫範例合約。</p>
+<p>其實筆者一直認為與其叫升級合約不如叫替換合約，因為只是 <strong>Proxy</strong> 指向的地址換了，但最後想想，根據 <strong>openzeppelin</strong> 網站的升級限制條件指出，升級必須遵守幾點，所以把他稱為升級其實才是對的。</p>
+<ol>
+<li>不能改變變數的類型</li>
+<li>不能改變變數的順序</li>
+<li>不能在現有變數引入先的變數</li>
+<li>不能刪除現有變數</li>
+</ol>
+<blockquote>
+<p><em>詳細條件可參考 <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#modifying-your-contracts">Openzeppelin Upgrades Plugins - Modifying Your Contracts</a></em></p>
+</blockquote>
+<p>其實合約最重要的就是嚴謹，還有反覆測試後，確定沒有太嚴重的邏輯錯誤，標題雖然寫著 <code>合約有漏洞？要升級？要修改？怎麼辦？</code> 但其實升級合約還是必須遵守上面那些條件。</p>
+<p>另外合約裡面有設定 <strong>WhiteList</strong>，在下一篇我們將會講到怎麼設定白名單，以及目前大部分的人使用的設定方式，可以大量減少花費 <strong>ETH</strong>。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://fengbro.medium.com/%E5%BB%BA%E7%AB%8B%E5%8F%AF%E5%8D%87%E7%B4%9A%E7%9A%84%E4%BB%A3%E7%90%86%E5%90%88%E7%B4%84-%E4%BB%A5erc20%E7%82%BA%E4%BE%8B-upgrable-contract-proxy-contract-88769cf92be7">建立可升級的代理合約 以ERC20為例 Upgradable Contract &#x2F; Proxy Contract</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/learn/upgrading-smart-contracts">Openzeppelin - Upgrading smart contracts</a></li>
+<li><a target="_blank" rel="noopener" href="https://learnblockchain.cn/article/2758">手动部署OpenZeppelin可升级合约</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Solidity/" rel="tag"><i class="fa fa-tag"></i> Solidity</a>
+              <a href="/tags/NFT/" rel="tag"><i class="fa fa-tag"></i> NFT</a>
+              <a href="/tags/Mint/" rel="tag"><i class="fa fa-tag"></i> Mint</a>
+              <a href="/tags/OpenSea/" rel="tag"><i class="fa fa-tag"></i> OpenSea</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/30/20220330/" rel="prev" title="[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟">
+      <i class="fa fa-chevron-left"></i> [Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/11/20220411/" rel="next" title="[Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧">
+      [Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">2.1.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%94%E5%88%B0%E8%B3%87%E6%96%99%E6%B0%B8%E4%B9%85%E5%8C%96%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">如何達到資料永久化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E9%AB%94%E6%A6%82%E5%BF%B5%E5%9C%96"><span class="nav-number">2.3.</span> <span class="nav-text">整體概念圖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remix-IDE-%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%A9%9F"><span class="nav-number">2.4.</span> <span class="nav-text">Remix IDE 部署步驟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%96%91%E5%95%8F%E9%BB%9E"><span class="nav-number">2.5.</span> <span class="nav-text">疑問點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2022/04/05/20220405/",
+      identifier: "2022/04/05/20220405/",
+      title     : "[Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

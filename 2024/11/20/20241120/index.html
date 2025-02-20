@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言  小節作業於摘要第五點，如果只想參照作業的部分可以快轉跳至 小節作業：家具店的菜雞銷售奇遇記  隔了好一段時間沒有自我進修，趁著最近六角學院在特價課程，去摸一下後端世界的樣子。 接下來會有幾篇紀錄上課的過程，以及中間的一些心得、作業筆記。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Backend experience camp] — 資料庫體驗營">
+<meta property="og:url" content="https://rexhung0302.github.io/2024/11/20/20241120/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言  小節作業於摘要第五點，如果只想參照作業的部分可以快轉跳至 小節作業：家具店的菜雞銷售奇遇記  隔了好一段時間沒有自我進修，趁著最近六角學院在特價課程，去摸一下後端世界的樣子。 接下來會有幾篇紀錄上課的過程，以及中間的一些心得、作業筆記。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2024-11-20T12:24:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:06.047Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2024/11/20/20241120/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool Backend experience camp] — 資料庫體驗營 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2024/11/20/20241120/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Backend experience camp] — 資料庫體驗營
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-11-20 20:24:00" itemprop="dateCreated datePublished" datetime="2024-11-20T20:24:00+08:00">2024-11-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:06" itemprop="dateModified" datetime="2025-02-21T01:36:06+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>5 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20241120/banner.png" alt="Banner"></p>
+<blockquote>
+<p><em>小節作業於摘要第五點，如果只想參照作業的部分可以快轉跳至 <a href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%EF%BC%9A%E5%AE%B6%E5%85%B7%E5%BA%97%E7%9A%84%E8%8F%9C%E9%9B%9E%E9%8A%B7%E5%94%AE%E5%A5%87%E9%81%87%E8%A8%98">小節作業：家具店的菜雞銷售奇遇記</a></em></p>
+</blockquote>
+<p>隔了好一段時間沒有自我進修，趁著最近六角學院在特價課程，去摸一下後端世界的樣子。</p>
+<p>接下來會有幾篇紀錄上課的過程，以及中間的一些心得、作業筆記。</p>
+<span id="more"></span>
+
+<p><em><strong>整篇文章是筆者自己的心得，如果文內有錯誤的地方，還請盡情指出。</strong></em></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241120/schedule.png" alt="Schedule"></p>
+<p>課程總共會有四堂直播課，其中不包含學院已經上傳的課程影片，約莫 50 個小短片。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241120/videos.png" alt="Videos"></p>
+<p>本篇會從零開始記錄筆記，可能會分成幾篇紀錄，這篇會是前 25% 的部分。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>如果需要觀看小節作業，可以跳過前四章</p>
+<p>另外本篇文章還不會實際操作到真實 DB，可以先透過線上網站去練習：<a target="_blank" rel="noopener" href="https://pg-sql.com/">線上練習網站 PG SQL</a></p>
+</blockquote>
+<ol>
+<li>資料庫簡介</li>
+<li>建立 SQL 資料表</li>
+<li>資料的 CRUD</li>
+<li>資料庫註解</li>
+<li>小節作業：家具店的菜雞銷售奇遇記</li>
+</ol>
+<hr>
+<h2 id="資料庫簡介"><a href="#資料庫簡介" class="headerlink" title="資料庫簡介"></a>資料庫簡介</h2><p>資料庫組成可大致分為</p>
+<ul>
+<li>Table（資料表） -&gt; 整體資料，通常會是一個類型，如 users</li>
+<li>Columns（欄位） -&gt; 定義資料的屬性跟類型 Data Type</li>
+<li>Rows（資料列） -&gt; 是橫向單筆資料的集合，代表一整筆完整資料，例如 users 表，定義了 編號、用戶姓氏、名字、性別 等等四個欄位的 Data Type，那一整筆資料舉例就是 1, 王, 小明, 男</li>
+</ul>
+<p>操作資料庫可使用 SQL(Structured Query Language) 語法，全名是『結構化查詢語言』，目前較多人使用為</p>
+<ul>
+<li>PostgreSQL</li>
+<li>MySQL</li>
+<li>MS SQL Server</li>
+<li>Oracle</li>
+</ul>
+<hr>
+<h2 id="建立-SQL-資料表"><a href="#建立-SQL-資料表" class="headerlink" title="建立 SQL 資料表"></a>建立 SQL 資料表</h2><p>資料庫三劍客，透過下列方式，去定義出三劍客，就可以創建出資料表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">	name <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">	email <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">	age <span class="type">INTEGER</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>Note：可透過 <a target="_blank" rel="noopener" href="https://pg-sql.com/">線上練習網站 PG SQL</a> 嘗試建立</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241120/excel-example.png" alt="Excel Example"></p>
+<p>三劍客使用 <strong>Excel</strong> 舉例的話就是 <strong>Sheet</strong> 代表 <strong>Table</strong>，<strong>Column</strong> 跟 <strong>Row</strong> 的意思都一樣</p>
+<hr>
+<h2 id="資料的-CRUD"><a href="#資料的-CRUD" class="headerlink" title="資料的 CRUD"></a>資料的 CRUD</h2><p>資料庫執行順序為下</p>
+<blockquote>
+<ol>
+<li>FROM 資料表名稱 -&gt; 2. WHERE 篩選條件 -&gt; 3. SELECT 欄位名稱</li>
+</ol>
+</blockquote>
+<p>而資料庫類型 <strong>（Data Type）</strong> 常用有幾種</p>
+<table>
+<thead>
+<tr>
+<th>資料型態</th>
+<th>描述</th>
+<th>使用情境</th>
+<th>範例</th>
+<th>範例欄位</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>INTEGER</td>
+<td>整數</td>
+<td>ID、年齡、數量</td>
+<td>1, 20, 100</td>
+<td>age INTEGER</td>
+</tr>
+<tr>
+<td>VARCHAR(n)</td>
+<td>可辨長度字串</td>
+<td>名稱、描述、普通文字欄位</td>
+<td>“Rex Hung”</td>
+<td>name VARCHAR(50)</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>日期時間</td>
+<td>時間格式都適用</td>
+<td>‘2024-11-20 09:00:00</td>
+<td>created_at TIMESTAMP</td>
+</tr>
+<tr>
+<td>DECIMAL(p,s)</td>
+<td>精確小數</td>
+<td>金額、需要存放精確小數點的情況</td>
+<td>3.141596, 2014.11</td>
+<td>price DECIMAL(10,2)</td>
+</tr>
+<tr>
+<td>BOOLEAN</td>
+<td>真&#x2F;假值、布林</td>
+<td>狀態、開關</td>
+<td>true, false</td>
+<td>is_active BOOLEAN</td>
+</tr>
+<tr>
+<td>JSON</td>
+<td>JSON 資料</td>
+<td>彈性資料結構</td>
+<td>‘{“name”: “Rex”}’</td>
+<td>settings JSON</td>
+</tr>
+</tbody></table>
+<p>Note：更多可參考 <a target="_blank" rel="noopener" href="https://www.w3schools.com/sql/sql_datatypes.asp">w3school</a></p>
+<h3 id="INSERT-插入資料"><a href="#INSERT-插入資料" class="headerlink" title="INSERT 插入資料"></a>INSERT 插入資料</h3><p>字串需要單引號括起來</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users(name, email, age)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;王大明&#x27;</span>,<span class="string">&#x27;abc1@gmail.com&#x27;</span>,<span class="number">18</span>);</span><br></pre></td></tr></table></figure>
+
+<p>插入多筆資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users(name, email, age)</span><br><span class="line"><span class="keyword">VALUES</span></span><br><span class="line">  (<span class="string">&#x27;王大明&#x27;</span>,<span class="string">&#x27;abc1@gmail.com&#x27;</span>,<span class="number">18</span>),</span><br><span class="line">  (<span class="string">&#x27;張小明&#x27;</span>,<span class="string">&#x27;abc2@gmail.com&#x27;</span>,<span class="number">28</span>),</span><br><span class="line">  (<span class="string">&#x27;菜小明&#x27;</span>,<span class="string">&#x27;abc3@gmail.com&#x27;</span>,<span class="number">38</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="SELECT-查詢資料"><a href="#SELECT-查詢資料" class="headerlink" title="SELECT 查詢資料"></a>SELECT 查詢資料</h3><ol>
+<li>普通查詢</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">— 查詢所有欄位</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users;</span><br><span class="line">— 查詢特定欄位</span><br><span class="line"><span class="keyword">SELECT</span> name, age <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>別名查詢（AS）</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">— Columns 轉換為自定義別名查詢</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	name <span class="keyword">AS</span> 姓名,</span><br><span class="line">	age <span class="keyword">AS</span> 年齡</span><br><span class="line"><span class="keyword">FROM</span> users;</span><br><span class="line"></span><br><span class="line">— 透過 <span class="keyword">AS</span> 使用計算，最終新欄位會回傳計算結果</span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	name <span class="keyword">AS</span> 姓名,</span><br><span class="line">	age <span class="keyword">AS</span> 年齡,</span><br><span class="line">	<span class="number">100</span> <span class="operator">-</span> age <span class="keyword">AS</span> 距離成為人瑞年紀</span><br><span class="line"><span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>篩出想要的資料</li>
+</ol>
+<p>篩選資料（WHERE）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name,price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> category <span class="operator">=</span> <span class="string">&#x27;3C&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>比較運算值</p>
+<table>
+<thead>
+<tr>
+<th>運算子</th>
+<th>意義</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x3D;</td>
+<td>等於</td>
+<td>WHERE price &#x3D; 100</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大於</td>
+<td>WHERE price &gt; 100</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小於</td>
+<td>WHERE price &lt; 100</td>
+</tr>
+<tr>
+<td>&gt;&#x3D;</td>
+<td>大於等於</td>
+<td>WHERE price &gt;&#x3D; 100</td>
+</tr>
+<tr>
+<td>&lt;&#x3D;</td>
+<td>小於等於</td>
+<td>WHERE price &lt;&#x3D; 100</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> price <span class="operator">&lt;=</span> <span class="number">500</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Note: 更多比較運算子可參考 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/sql/t-sql/language-elements/comparison-operators-transact-sql?view=sql-server-ver16">Microsoft Ignite</a></p>
+<p>邏輯運算子</p>
+<p>運算子 | 意義 | 範例<br>AND | 且，兩個條件都要成立 | WHERE category &#x3D; ‘3C’ AND price &gt; 1000<br>OR | 或，其中一個條件成立 | WHERE category &#x3D; ‘3C’ OR category &#x3D; ‘配件’</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, price, stock </span><br><span class="line"><span class="keyword">FROM</span> products </span><br><span class="line"><span class="keyword">WHERE</span> status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span> </span><br><span class="line"><span class="keyword">AND</span> category <span class="operator">=</span> <span class="string">&#x27;3C&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Note: 更多邏輯運算子可參考 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/sql/t-sql/language-elements/logical-operators-transact-sql?view=sql-server-ver16">Microsoft Ignite</a></p>
+<p>邏輯運算子的延伸集合與範圍運算子</p>
+<table>
+<thead>
+<tr>
+<th>運算子</th>
+<th>意義</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BETWEEN</td>
+<td>在指定範圍內</td>
+<td>WHERE price BETWEEN 100 AND 500</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>包含在列出的值中</td>
+<td>WHERE category &#x3D; ‘3C’ OR category &#x3D; ‘配件’</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> discount_price <span class="keyword">BETWEEN</span> <span class="number">500</span> <span class="keyword">AND</span> <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UPDATE-更新欄位"><a href="#UPDATE-更新欄位" class="headerlink" title="UPDATE 更新欄位"></a>UPDATE 更新欄位</h3><p>UPDATE 資料表名稱 3<br>SET 欄位名稱 1<br>WHERE 篩選條件 2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> products</span><br><span class="line"><span class="keyword">SET</span></span><br><span class="line">	price <span class="operator">=</span> <span class="number">999999</span>,</span><br><span class="line">	name <span class="operator">=</span> ‘iPhone <span class="number">16</span> PLUS’</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;iPhone 16&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DELETE-刪除欄位"><a href="#DELETE-刪除欄位" class="headerlink" title="DELETE 刪除欄位"></a>DELETE 刪除欄位</h3><p>DELETE 資料表名稱 3<br>FROM 欄位名稱 1<br>WHERE 篩選條件 2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;iPad&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="資料庫註解"><a href="#資料庫註解" class="headerlink" title="資料庫註解"></a>資料庫註解</h2><p>資料庫可以透過使用兩個 - 去進行註解，就如同我們在 HTML 上也會使用註解一樣</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">— 這是一行註解，用來解釋以下這段 <span class="keyword">SQL</span> 在做什麼</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">/</span><span class="operator">/</span>...下略</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  這是一段多行註解，下面會說明一些事項</span></span><br><span class="line"><span class="comment">  1. 查詢xxx</span></span><br><span class="line"><span class="comment">  2. 計算 xxx</span></span><br><span class="line"><span class="comment">  3. 設定 xxx，需要注意 xxx</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">/</span><span class="operator">/</span>...下略</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="小節作業：家具店的菜雞銷售奇遇記"><a href="#小節作業：家具店的菜雞銷售奇遇記" class="headerlink" title="小節作業：家具店的菜雞銷售奇遇記"></a>小節作業：家具店的菜雞銷售奇遇記</h2><p><img src="/images/others/loading.gif" data-original="/images/20241120/discord-chat.png" alt="Discord Chat"></p>
+<p>因為小節內有作業，作業會回覆到六角學院的 <strong>Discord</strong>，也能對下一個同學發問，這邊先貼上小節作業的回答</p>
+<h3 id="小節作業回答"><a href="#小節作業回答" class="headerlink" title="小節作業回答"></a>小節作業回答</h3><p>情境 1：單品查詢<br>客人：「這張北歐風雙人沙發多少錢？」<br>小美想查：想找到這張沙發的價格和庫存</p>
+<p>A: 39900</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  name <span class="operator">=</span> <span class="string">&#x27;北歐風雙人沙發&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>情境 2：價格比較<br>客人：「請列出 5000 元以下的櫃子有哪些？」<br>小美想查：找出櫃子類且價格在 5000 以下的商品</p>
+<p>A: 簡約書櫃, 玄關鞋櫃</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  category <span class="keyword">IN</span>(<span class="string">&#x27;櫃子&#x27;</span>)</span><br><span class="line">  <span class="keyword">AND</span> price <span class="operator">&lt;</span> <span class="number">5000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>情境 3：庫存確認<br>客人：「日式雙人床架還有貨嗎？」<br>小美想查：確認日式雙人床架的庫存狀況</p>
+<p>A: 剩下 6 個</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  stock</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  name <span class="operator">=</span> <span class="string">&#x27;日式雙人床架&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>邏輯運算 AND：<br>情境 4：預算內的商品<br>客人：「想找 4 萬以下，而且有現貨的沙發」<br>小美想查：要同時符合：是沙發、4萬以下、有庫存</p>
+<p>A: 北歐風雙人沙發、工業風電視櫃、簡約書櫃、玄關鞋櫃、日式雙人床架、掀床五尺雙人床、電腦辦公椅、餐椅四入組、北歐風餐桌、實木咖啡桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price,</span><br><span class="line">  stock</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  price <span class="operator">&lt;</span> <span class="number">40000</span></span><br><span class="line">  <span class="keyword">AND</span> stock <span class="operator">&gt;</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>情境 5：特價且有貨<br>客人：「沙發有哪些特價且現貨的品項？」<br>小美想查：要找到沙發類且有特價（原價大於優惠價）且還有庫存的商品</p>
+<p>A: 北歐風雙人沙發、貓抓皮L型沙發、工業風電視櫃、日式雙人床架、掀床五尺雙人床、電腦辦公椅、餐椅四入組、北歐風餐桌、實木咖啡桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price,</span><br><span class="line">  discount_price,</span><br><span class="line">  stock</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  discount_price <span class="operator">&lt;</span> price</span><br><span class="line">  <span class="keyword">AND</span> stock <span class="operator">&gt;</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>邏輯運算 OR：<br>情境 6：多分類查詢<br>客人：「我要找櫃子或桌子」<br>小美想查：要找出櫃子類或桌子類的商品</p>
+<p>A: 工業風電視櫃、簡約書櫃、玄關鞋櫃、北歐風餐桌、實木咖啡桌、電競書桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  category</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  category <span class="keyword">IN</span>(<span class="string">&#x27;櫃子&#x27;</span>, <span class="string">&#x27;桌子&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>情境 7：指定商品<br>客人：「北歐風雙人沙發和貓抓皮L型沙發哪個還有貨？」<br>小美想查：要找出這兩張特定沙發的庫存狀況</p>
+<p>A:前者剩 3 個，後者勝 1 個，都有貨</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  stock</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  name <span class="keyword">IN</span>(<span class="string">&#x27;北歐風雙人沙發&#x27;</span>, <span class="string">&#x27;貓抓皮L型沙發&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>IN 運算：<br>情境 8：多分類查詢<br>客人：「客廳的家具有哪些？我要看沙發、櫃子跟桌子」<br>小美想查：要找出沙發、櫃子和桌子這三種分類的商品</p>
+<p>A: 北歐風雙人沙發、貓抓皮L型沙發、典雅三人座沙發、工業風電視櫃、簡約書櫃、玄關鞋櫃、北歐風餐桌、實木咖啡桌、電競書桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  category</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  category <span class="keyword">IN</span>(<span class="string">&#x27;沙發&#x27;</span>, <span class="string">&#x27;櫃子&#x27;</span>, <span class="string">&#x27;桌子&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>情境 9：特定商品<br>客人：「電腦辦公椅和餐椅四入組的價格是多少？」<br>小美想查：要找出這兩款椅子的價格</p>
+<p>A: 3900, 5200 折扣後價格</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price,</span><br><span class="line">  discount_price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  name <span class="keyword">IN</span>(<span class="string">&#x27;電腦辦公椅&#x27;</span>, <span class="string">&#x27;餐椅四入組&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>BETWEEN：<br>情境 10：價格區間<br>客人：「想找 10000 到 20000 之間的商品有哪些？」<br>小美想查：列出這個價格區間的所有商品</p>
+<p>A: 日式雙人床架、掀床五尺雙人床、北歐風餐桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  price <span class="keyword">BETWEEN</span> <span class="number">10000</span> <span class="keyword">AND</span> <span class="number">20000</span>;</span><br></pre></td></tr></table></figure>
+
+<p>情境 11：庫存區間<br>主管：「請列出庫存在 5 到 15 之間的商品」<br>小美想查：列出庫存數量在這個範圍的商品</p>
+<p>A: 典雅三人座沙發、工業風電視櫃、簡約書櫃、玄關鞋櫃、日式雙人床架、餐椅四入組、實木咖啡桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  stock <span class="keyword">BETWEEN</span> <span class="number">5</span> <span class="keyword">AND</span> <span class="number">15</span>;</span><br></pre></td></tr></table></figure>
+
+<p>NOT IN：<br>情境 12：排除商品<br>主管：「列出除了沙發和床架以外的商品」<br>小美想查：要找出不是沙發和床架的商品</p>
+<p>A: 工業風電視櫃、簡約書櫃、玄關鞋櫃、電腦辦公椅、餐椅四入組、北歐風餐桌、實木咖啡桌、電競書桌</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  name,</span><br><span class="line">  price</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  products</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  category <span class="keyword">NOT</span> <span class="keyword">IN</span>(<span class="string">&#x27;沙發&#x27;</span>, <span class="string">&#x27;床架&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>更新和刪除：<br>情境 13：調整價格<br>主管：「北歐風雙人沙發要調降 2000 元」<br>小美想查：要如何更新這張沙發的價格</p>
+<p>A: 37900</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> products</span><br><span class="line"><span class="keyword">SET</span> price <span class="operator">=</span> price <span class="operator">-</span> <span class="number">2000</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;北歐風雙人沙發&#x27;</span>; </span><br></pre></td></tr></table></figure>
+
+<p>情境 14：更新庫存<br>主管：「電腦辦公椅進了 5 張」<br>小美想查：要如何增加這款椅子的庫存數量</p>
+<p>A: 25</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> products</span><br><span class="line"><span class="keyword">SET</span> stock <span class="operator">=</span> stock <span class="operator">+</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;電腦辦公椅&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>情境 15：清除資料<br>主管：「要清掉兒童床架和電競書桌的資料」<br>小美想查：要如何刪除這兩項商品</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A: </span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">IN</span>(<span class="string">&#x27;兒童床架&#x27;</span>, <span class="string">&#x27;電競書桌&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="上一位同學的問題"><a href="#上一位同學的問題" class="headerlink" title="上一位同學的問題"></a>上一位同學的問題</h3><p><img src="/images/others/loading.gif" data-original="/images/20241120/question.png" alt="Question"></p>
+<p>上一位同學題目：庫存為0的商品，補貨數量10件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A:</span><br><span class="line"><span class="keyword">UPDATE</span> products</span><br><span class="line"><span class="keyword">SET</span> stock <span class="operator">=</span> stock <span class="operator">+</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">WHERE</span> stock <span class="operator">=</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="出給下位同學的問題"><a href="#出給下位同學的問題" class="headerlink" title="出給下位同學的問題"></a>出給下位同學的問題</h3><p>如果路過的朋友也可以嘗試回答看看哦</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q: 請找出所有存貨低於五件的商品，將折扣價提升至原價的 10%，並且這些商品種類不包含床架，再將存貨多於十件的商品狀態改為 inactive，請列出所有被更新過價格及更改過狀態的 商品名稱、庫存、狀態，最後將狀態為 inactive 的商品刪除。</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>雖然之前有胡亂摸過 <strong>Sequelize</strong>，但大致上都是透過 <strong>ORM</strong> 直接性的操作 <strong>SQL</strong>，並不是真的完全懂資料庫，希望能藉由這次的體驗營一虧資料庫的世界。</p>
+<p>這次的節奏還是很符合一貫的六角風格，進度緩慢但是能充分吸收，只是還是希望散落在各地的資訊可以統一整合，這過程除了要跑到直播平台網站去解任務，還要到 <strong>Discord</strong> 去鎖定訊息，另外分組也是臨時知道，過程中其實滿讓人會有焦慮感。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.hexschool.com/2024/10/02/2024-10-02-backend-database-camping/">【後端工程師 - 資料庫體驗營】 進入後端前的必備知識</a></li>
+<li><a target="_blank" rel="noopener" href="https://pg-sql.com/">線上 DB 操作練習網站</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3schools.com/sql/sql_datatypes.asp">w3School</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/sql/t-sql/language-elements/comparison-operators-transact-sql?view=sql-server-ver16">運算子文件</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/18/20240518/" rel="prev" title="[Flutter Note] - 串接 LINE, Facebook Login">
+      <i class="fa fa-chevron-left"></i> [Flutter Note] - 串接 LINE, Facebook Login
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/11/26/20241126/" rel="next" title="[Hexschool Backend experience camp] — 資料庫體驗營 #2">
+      [Hexschool Backend experience camp] — 資料庫體驗營 #2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E7%B0%A1%E4%BB%8B"><span class="nav-number">3.</span> <span class="nav-text">資料庫簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-SQL-%E8%B3%87%E6%96%99%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">建立 SQL 資料表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E7%9A%84-CRUD"><span class="nav-number">5.</span> <span class="nav-text">資料的 CRUD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT-%E6%8F%92%E5%85%A5%E8%B3%87%E6%96%99"><span class="nav-number">5.1.</span> <span class="nav-text">INSERT 插入資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-%E6%9F%A5%E8%A9%A2%E8%B3%87%E6%96%99"><span class="nav-number">5.2.</span> <span class="nav-text">SELECT 查詢資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE-%E6%9B%B4%E6%96%B0%E6%AC%84%E4%BD%8D"><span class="nav-number">5.3.</span> <span class="nav-text">UPDATE 更新欄位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE-%E5%88%AA%E9%99%A4%E6%AC%84%E4%BD%8D"><span class="nav-number">5.4.</span> <span class="nav-text">DELETE 刪除欄位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E8%A8%BB%E8%A7%A3"><span class="nav-number">6.</span> <span class="nav-text">資料庫註解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%EF%BC%9A%E5%AE%B6%E5%85%B7%E5%BA%97%E7%9A%84%E8%8F%9C%E9%9B%9E%E9%8A%B7%E5%94%AE%E5%A5%87%E9%81%87%E8%A8%98"><span class="nav-number">7.</span> <span class="nav-text">小節作業：家具店的菜雞銷售奇遇記</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%E5%9B%9E%E7%AD%94"><span class="nav-number">7.1.</span> <span class="nav-text">小節作業回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%80%E4%BD%8D%E5%90%8C%E5%AD%B8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">7.2.</span> <span class="nav-text">上一位同學的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%B5%A6%E4%B8%8B%E4%BD%8D%E5%90%8C%E5%AD%B8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">7.3.</span> <span class="nav-text">出給下位同學的問題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">8.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">9.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2024/11/20/20241120/",
+      identifier: "2024/11/20/20241120/",
+      title     : "[Hexschool Backend experience camp] — 資料庫體驗營",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

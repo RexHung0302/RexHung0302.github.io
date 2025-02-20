@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言  小節作業於摘要第六點，如果只想參照作業的部分可以快轉跳至 小節作業：Table 資料表管理  緊接著上週的練習，這週將剩下的影片看完了，把接著一些關於資料表怎麼建立多張，以及怎麼進行 SQL 函數使用 另外還有怎麼進行 Join 查詢、子查詢…等等，一起做筆記心得上來">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Backend experience camp] — 資料庫體驗營 #2">
+<meta property="og:url" content="https://rexhung0302.github.io/2024/11/26/20241126/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言  小節作業於摘要第六點，如果只想參照作業的部分可以快轉跳至 小節作業：Table 資料表管理  緊接著上週的練習，這週將剩下的影片看完了，把接著一些關於資料表怎麼建立多張，以及怎麼進行 SQL 函數使用 另外還有怎麼進行 Join 查詢、子查詢…等等，一起做筆記心得上來">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2024-11-26T15:20:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:06.050Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2024/11/26/20241126/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool Backend experience camp] — 資料庫體驗營 #2 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2024/11/26/20241126/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Backend experience camp] — 資料庫體驗營 #2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-11-26 23:20:00" itemprop="dateCreated datePublished" datetime="2024-11-26T23:20:00+08:00">2024-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:06" itemprop="dateModified" datetime="2025-02-21T01:36:06+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8.4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>8 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20241120/banner.png" alt="Banner"></p>
+<blockquote>
+<p><em>小節作業於摘要第六點，如果只想參照作業的部分可以快轉跳至 <a href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%EF%BC%9ATable%E8%B3%87%E6%96%99%E8%A1%A8%E7%AE%A1%E7%90%86">小節作業：Table 資料表管理</a></em></p>
+</blockquote>
+<p>緊接著上週的練習，這週將剩下的影片看完了，把接著一些關於資料表怎麼建立多張，以及怎麼進行 SQL 函數使用</p>
+<p>另外還有怎麼進行 Join 查詢、子查詢…等等，一起做筆記心得上來</p>
+<span id="more"></span>
+
+<p><em><strong>整篇文章是筆者自己的心得，如果文內有錯誤的地方，還請盡情指出。</strong></em></p>
+<p>本篇會從零開始記錄筆記，目前課程影片的心得在此處以及 <a href="https://rexhung0302.github.io/2024/11/20/20241120/#more">[Hexschool Backend experience camp] — 資料庫體驗營</a>，原本以為會有四篇錄影課程的心得紀錄，上一篇是 25%，這篇會多一點是後 75% 的部分。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>如果需要觀看小節作業，可以跳過前五章</p>
+<p>另外本篇文章還不會實際操作到真實 DB，可以先透過線上網站去練習：<a target="_blank" rel="noopener" href="https://pg-sql.com/">線上練習網站 PG SQL</a></p>
+</blockquote>
+<ol>
+<li>Tables 資料表管理</li>
+<li>跨資料表的撈取</li>
+<li>Join 合併資料表查詢</li>
+<li>Postgres 函式</li>
+<li>子查詢</li>
+<li>小節作業：Table資料表管理</li>
+</ol>
+<hr>
+<h2 id="Tables-資料表管理"><a href="#Tables-資料表管理" class="headerlink" title="Tables 資料表管理"></a>Tables 資料表管理</h2><blockquote>
+<p>張表的複雜度越來越高時，就可以進行拆分 Table，例如一張員工表，裡面含有員工屬於哪個部門</p>
+</blockquote>
+<p>| 員工編號 | 姓名 | 性別 | 出生年月日 | 薪資 | 部門 |<br>| — | — | — | — | — | — |<br>| 1 | 王小明 | 男 | 1995&#x2F;1&#x2F;1 | 45000 | 資訊部 |<br>| 2 | 張大帥 | 男 | 1975&#x2F;12&#x2F;31 | 22000 | 資訊部 |<br>| 3 | 陳小美 | 女 | 2000&#x2F;12&#x2F;15 | 55000 | 人資部 |</p>
+<p>這時候如果想要更改 資訊部 為 開發部，需要每一筆都進行更新，這種時候就可以把部門資訊另外拆出來用一張表去管理，一張表盡量放比較相關資訊的東西就好，如果太複雜會讓表格太難管理。</p>
+<p>此外也有可能在新增資料時，誤把 資訊部 打錯，打成 資訊「步」。</p>
+<p>這時候我們單獨再用一張表去管理</p>
+<p>| 部門編號 | 部門名稱 |<br>| — | — |<br>| 1 | 開發部 |<br>| 2 | 人事部 |</p>
+<p>原本的表格就可以把原本 FK(部門欄位) 對應到另一張表格的 PK (部門編號)</p>
+<p>| 員工編號[PK] | 姓名 | 性別 | 出生年月日 | 薪資 | 部門[FK] |<br>| — | — | — | — | — | — |<br>| 1 | 王小明 | 男 | 1995&#x2F;1&#x2F;1 | 45000 | 1 |<br>| 2 | 張大帥 | 男 | 1975&#x2F;12&#x2F;31 | 22000 | 1 |<br>| 3 | 陳小美 | 女 | 2000&#x2F;12&#x2F;15 | 55000 | 2 |</p>
+<p>之後如果需要修改部門名稱就簡單多了，從需要修改多筆資料，變成只需要更改一筆資料。</p>
+<h3 id="拆解規劃（一對多的資料表）"><a href="#拆解規劃（一對多的資料表）" class="headerlink" title="拆解規劃（一對多的資料表）"></a>拆解規劃（一對多的資料表）</h3><p>課程提到口訣是「多的要設定成外來鍵」，也可以理解為一對「多」的部分，可以額外拆出去做一張表管理。</p>
+<p>例如上面提到的部門表格，可以先思考兩個角度</p>
+<ol>
+<li>以「員工」角度：一個員工會有「多」個部門</li>
+<li>以「部門」角度：一個部門會有「多」個員工<br>如果不考慮複雜的情況，基本上會是第二點更為合理且常見，所以我們就可以找到「多」的部分去拆解 Table。</li>
+</ol>
+<p>以上的方式如果從部門的表格來看稱為「一對多的資料表」，如果從員工的表格來看稱為「多對一的資料表」。</p>
+<p>另外還有「多對多」或「一對一」…等等，詳細可參考 <a target="_blank" rel="noopener" href="https://notes.andywu.tw/2018/%E8%B3%87%E6%96%99%E5%BA%AB-%E9%97%9C%E8%81%AF%E4%BB%8B%E7%B4%B9-%E4%B8%80%E5%B0%8D%E4%B8%80%E3%80%81%E4%B8%80%E5%B0%8D%E5%A4%9A%E3%80%81%E5%A4%9A%E5%B0%8D%E5%A4%9A/">AndyWu’s 的部落格介紹資料庫關聯種類</a></p>
+<h3 id="關鍵欄位（主鍵、外來鍵）"><a href="#關鍵欄位（主鍵、外來鍵）" class="headerlink" title="關鍵欄位（主鍵、外來鍵）"></a>關鍵欄位（主鍵、外來鍵）</h3><ul>
+<li>主鍵 Primary Key（PK）<ul>
+<li>每張資料表都要有一個主鍵</li>
+<li>主鍵必須是唯一的，不能重複</li>
+<li>主鍵不能是 Null 值，但外來鍵可以是 Null 值</li>
+<li>設定後就不該再進行改動</li>
+</ul>
+</li>
+<li>外來鍵 Foreign Key（FK）<ul>
+<li>當資料需要關連到其他表格才會用到</li>
+<li>命名通常會用 <code>&#123;被參考的資料表名稱&#125;_id</code> 來命名</li>
+<li>外來鍵必須對應到被參考的資料表的主鍵</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>如果建立重複的 PK 或者 FK，則會出現 constraint 的錯誤提醒，例如 <code>duplicate key value violates unique constraint “資料表名稱”</code> 或 <code>insert or update on table “資料表名稱” violates foreign key constraint “資料表名稱”</code></p>
+</blockquote>
+<h3 id="主鍵設定方式、ID-自動遞增方法"><a href="#主鍵設定方式、ID-自動遞增方法" class="headerlink" title="主鍵設定方式、ID 自動遞增方法"></a>主鍵設定方式、ID 自動遞增方法</h3><blockquote>
+<p>PostgreSQL 的方式</p>
+</blockquote>
+<p>首先創建一張表格，id 設為主鍵，且是 SERIAL 會自動遞增的屬性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> users(</span><br><span class="line">	id SERIAL <span class="keyword">PRIMARY KEY</span>, <span class="comment">-- 員工編號，主鍵</span></span><br><span class="line">	name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 員工姓名</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>創建成功後再插入資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span></span><br><span class="line">  users(name)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;王小明&#x27;</span>),</span><br><span class="line">  (<span class="string">&#x27;陳小美&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="SERIAL-及-UUID-差異"><a href="#SERIAL-及-UUID-差異" class="headerlink" title="SERIAL 及 UUID 差異"></a>SERIAL 及 UUID 差異</h3><p>資料的建立如果使用 ID SERIAL 遞增的方式，很容易會被猜到值，並且進入頁面查看資訊，這時候我們就可以使用 UUID 方式替代</p>
+<p>有一些資料庫需要手動開啟 UUID 功能，如 PostgreSQL，使用 <code>CREATE EXTENSION IF NOT EXISTS &quot;uuid-ossp&quot;;</code> 可以開啟</p>
+<p>| 特性 | SERIAL | UUID |<br>| — | — | — |<br>| 格式 | 整數 (1, 2, 3…) | 32位元十六進制 (如：550e8400-e29b-41d4-a716-446655440000) |<br>| 生成方式 | 自動遞增 | 隨機生成 |<br>| 空間使用 | 小 | 大 |<br>| 優點 | 簡單、易讀、節省空間 | 全球唯一、安全性高 |<br>| 建立語法 | id SERIAL PRIMARY KEY | id UUID PRIMARY KEY DEFAULT gen_random_uuid() |<br>| 可預測性 | 容易預測下一個值 | 完全隨機，無法預測 |</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 建立員工資料表</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">   id UUID <span class="keyword">PRIMARY KEY</span> <span class="keyword">DEFAULT</span> gen_random_uuid(),</span><br><span class="line">   name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">   email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">   team_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NULL</span>, </span><br><span class="line">   salary <span class="type">INTEGER</span> <span class="keyword">NULL</span>        </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="資料庫建立流程"><a href="#資料庫建立流程" class="headerlink" title="資料庫建立流程"></a>資料庫建立流程</h3><p>由於實際情況我們在一開始就會先去思考資料表怎麼建立，不會在建立會員表格後才在想怎麼拆一個新的表格去放部門。</p>
+<p>這邊就應該要從部門表個先建立，流程會像底下這樣</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> teams(</span><br><span class="line">	id SERIAL <span class="keyword">PRIMARY KEY</span>, <span class="comment">-- 部門編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 部門名稱</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE TABLE</span> users(</span><br><span class="line">	id SERIAL <span class="keyword">PRIMARY KEY</span>, <span class="comment">-- 員工編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>), <span class="comment">-- 員工名稱</span></span><br><span class="line">  salary <span class="type">INTEGER</span>, <span class="comment">-- 員工薪水</span></span><br><span class="line">  team_id <span class="type">INTEGER</span>, <span class="comment">-- 外來鍵</span></span><br><span class="line">  <span class="keyword">FOREIGN KEY</span>(team_id) <span class="keyword">REFERENCES</span> teams(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="跨資料表的撈取"><a href="#跨資料表的撈取" class="headerlink" title="跨資料表的撈取"></a>跨資料表的撈取</h2><p>撈取資料時，我們會需要把一些資料表進行組合，我們先進行資料表的建立</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> teams(</span><br><span class="line">	id SERIAL <span class="keyword">PRIMARY KEY</span>, <span class="comment">-- 部門編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 部門名稱</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE TABLE</span> users(</span><br><span class="line">	id SERIAL <span class="keyword">PRIMARY KEY</span>, <span class="comment">-- 員工編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>), <span class="comment">-- 員工名稱</span></span><br><span class="line">  salary <span class="type">INTEGER</span>, <span class="comment">-- 員工薪水</span></span><br><span class="line">  team_id <span class="type">INTEGER</span>, <span class="comment">-- 外來鍵</span></span><br><span class="line">  <span class="keyword">FOREIGN KEY</span>(team_id) <span class="keyword">REFERENCES</span> teams(id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT INTO</span></span><br><span class="line">  users(name, salary, team_id)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;王小明&#x27;</span>,<span class="number">45000</span>,<span class="number">1</span>),(<span class="string">&#x27;陳小美&#x27;</span>,<span class="number">75000</span>,<span class="number">2</span>),(<span class="string">&#x27;富二代&#x27;</span>,<span class="number">99999</span>,<span class="number">1</span>),(<span class="string">&#x27;陳小玉&#x27;</span>,<span class="number">22000</span>,<span class="number">1</span>),(<span class="string">&#x27;王曉豪&#x27;</span>,<span class="number">5000</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這時候我們會想要撈出會員以及他所屬部門的資料，如果我們使用以下方式去撈取，會發現資料重複好幾筆。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	users.id,</span><br><span class="line">  users.name,</span><br><span class="line">  users.salary,</span><br><span class="line">  teams.name <span class="keyword">AS</span> 部門名稱</span><br><span class="line"><span class="keyword">FROM</span> users,teams;</span><br></pre></td></tr></table></figure>
+
+<p>以下我們就會使用幾種方式去做組合查詢</p>
+<h3 id="基本的-Where-組合查詢"><a href="#基本的-Where-組合查詢" class="headerlink" title="基本的 Where 組合查詢"></a>基本的 Where 組合查詢</h3><p>最基本的使用 Where 可以進行表格整合的查詢，主要關鍵在於 <code>WHERE &#123;條件&#125;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	users.id,</span><br><span class="line">  users.name,</span><br><span class="line">  users.salary,</span><br><span class="line">  teams.name <span class="keyword">AS</span> 部門名稱</span><br><span class="line"><span class="keyword">FROM</span> users,teams</span><br><span class="line"><span class="keyword">WHERE</span> users.team_id <span class="operator">=</span> teams.id;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Join-合併資料表查詢"><a href="#Join-合併資料表查詢" class="headerlink" title="Join 合併資料表查詢"></a>Join 合併資料表查詢</h2><h3 id="Inner-Join"><a href="#Inner-Join" class="headerlink" title="Inner Join"></a>Inner Join</h3><blockquote>
+<p>取得符合條件的交集資料</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20241126/inner-join.png" alt="Inner Join"></p>
+<p>如果想使用更簡易的方式去組合查詢，可以使用 Inner Join 的方式，主要關鍵在於 <code>INNER JOIN &#123;表格&#125; ON &#123;條件&#125;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	users.id,</span><br><span class="line">  users.name,</span><br><span class="line">  users.salary,</span><br><span class="line">  teams.name <span class="keyword">AS</span> 部門名稱</span><br><span class="line"><span class="keyword">FROM</span> users</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> teams <span class="keyword">ON</span> users.team_id <span class="operator">=</span> teams.id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Outer-Join"><a href="#Outer-Join" class="headerlink" title="Outer Join"></a>Outer Join</h3><p>除了 Inner Join 還有另外 Outer Join 的方法可以使用，其中包含</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241126/left-join.png" alt="Left Join"></p>
+<ul>
+<li>Left Join</li>
+</ul>
+<blockquote>
+<p>取得符合條件的交集資料，以及原本左側表格沒有符合的資料也保留</p>
+</blockquote>
+<p>基本上沒有符合條件的資料欄位都會使用 NULL 補上，左側的表有幾個欄位就會補上幾個欄位</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241126/right-join.png" alt="Right Join"></p>
+<ul>
+<li>Right Join</li>
+</ul>
+<blockquote>
+<p>取得符合條件的交集資料，以及原本右側表格沒有符合的資料也保留</p>
+</blockquote>
+<p>和 Left Join 相同的，兩張表會組合，相反的，不會保留原本沒有匹配到右邊表的資料，但是右邊表如果沒有匹配到左側表的則會留下來。</p>
+<p>透過這個 Left 或 Right 的方法去篩選完之後，我們也可以再加上 Where 去濾出我們想要的資料</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241126/full-join.png" alt="Full Join"></p>
+<ul>
+<li>Full Join</li>
+</ul>
+<blockquote>
+<p>取的符合條件的交集資料，甚至原本兩邊沒有符合的資料也一起保留</p>
+</blockquote>
+<p>基本就是 Left Join + Right Join</p>
+<hr>
+<h2 id="Postgres-函式"><a href="#Postgres-函式" class="headerlink" title="Postgres 函式"></a>Postgres 函式</h2><h3 id="NULL-欄位解析"><a href="#NULL-欄位解析" class="headerlink" title="NULL 欄位解析"></a>NULL 欄位解析</h3><p>對於設定 NOT NULL 的欄位如果想要直接塞入一筆資料，會報出錯誤，如下面示範</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> users(</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  salary INTEFER <span class="keyword">NULL</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT INTO</span> users(name) <span class="keyword">VALUES</span>(‘王小明’);</span><br></pre></td></tr></table></figure>
+
+<p>之後會得到 <code>null value in column “email” of relation “users” violates not-null constraint</code> 這種錯誤</p>
+<h3 id="COALESCE-函數"><a href="#COALESCE-函數" class="headerlink" title="COALESCE 函數"></a>COALESCE 函數</h3><blockquote>
+<p>用來檢查並處理 NULL 結果</p>
+</blockquote>
+<p>有些程式語言如果直接從資料庫回傳 null 可能會報錯，這時候可以使用 COALESCE 去把 null 替代成其他的值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	id,</span><br><span class="line">	name,</span><br><span class="line">	email,</span><br><span class="line">	<span class="built_in">COALESCE</span>(team_name, ‘待分配’) <span class="keyword">as</span> team_name,</span><br><span class="line">	<span class="built_in">COALESCE</span>(salary, <span class="number">0</span>) <span class="keyword">as</span> salary</span><br><span class="line"><span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<h3 id="透過-COALESCE-函數修整-Join-過的資料表"><a href="#透過-COALESCE-函數修整-Join-過的資料表" class="headerlink" title="透過 COALESCE 函數修整 Join 過的資料表"></a>透過 COALESCE 函數修整 Join 過的資料表</h3><p>透過 Join 的方式，或多或少都會出現 null 的資料，這時候就可以透過 COALESCE 去把 null 改為我們想要顯示的資料</p>
+<p>COALESCE 的使用方式為 COALESCE(欄位名稱, 要替換掉 null 的名稱)，基本上包裹起來的欄位如果有值，就會顯示 <code>欄位名稱</code> 的值，沒有就會改成顯示 <code>要替換掉 null 的名稱</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="built_in">COALESCE</span>(teams.name, ‘未分配’) <span class="keyword">AS</span> team_name,</span><br><span class="line">	<span class="built_in">COALESCE</span>(users.name, ‘無員工’) <span class="keyword">AS</span> user_name</span><br><span class="line"><span class="keyword">FROM</span> users</span><br><span class="line"><span class="keyword">FULL</span> <span class="keyword">JOIN</span> teams <span class="keyword">ON</span> users.team_id <span class="operator">=</span> teams.id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DISTINCT-不重複函數"><a href="#DISTINCT-不重複函數" class="headerlink" title="DISTINCT 不重複函數"></a>DISTINCT 不重複函數</h3><blockquote>
+<p>SQL 中用於去除重複資料的關鍵字</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> team_name <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<h3 id="COUNT-函數"><a href="#COUNT-函數" class="headerlink" title="COUNT 函數"></a>COUNT 函數</h3><blockquote>
+<p>計算出總數量</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> 學生總數 <span class="keyword">FROM</span> students;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 帶入 WHERE 條件</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> 三年一班的學生總數</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  students</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  class_id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="計算函數"><a href="#計算函數" class="headerlink" title="計算函數"></a>計算函數</h3><ul>
+<li>AVG(平均)</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary) <span class="keyword">AS</span> 員工平均薪資 <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>SUM(總和)</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(salary) <span class="keyword">AS</span> 員工總薪資 <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>MAX(最高)、MIN(最低)</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(salary) <span class="keyword">AS</span> 員工總薪資 <span class="keyword">FROM</span> users;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Order-By-排序"><a href="#Order-By-排序" class="headerlink" title="Order By 排序"></a>Order By 排序</h3><p>排序有三種方式</p>
+<ul>
+<li>ASC 從小到大</li>
+<li>DESC 從大到小</li>
+<li>Limit 筆數設定</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 從小到大排序</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  users</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">  salary <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 從大到小排序</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  users</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">  salary <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 只想顯示兩筆資料</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  users</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">  salary <span class="keyword">DESC</span></span><br><span class="line">LIMIT <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>實務上我們會有多個資料需要進行排序，例如我們想要先排序部門的 id，接著再找出部門內薪資最高到最低，就可以透過下面方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 多筆資料排序</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  users</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line">  team_id <span class="keyword">ASC</span>, salary <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Group-By-群組"><a href="#Group-By-群組" class="headerlink" title="Group By 群組"></a>Group By 群組</h3><p>透過 <strong>Group By</strong> 可以進行資料分組，再進行計算</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">  team_id <span class="keyword">AS</span> 部門ID,</span><br><span class="line">  <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> 人數</span><br><span class="line"><span class="keyword">FROM</span> users</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> team_id;</span><br></pre></td></tr></table></figure>
+
+<p>組合時也可以帶入 <strong>Join</strong> 或者 <strong>SUM</strong> 這種語法一起組合使用。</p>
+<h2 id="子查詢"><a href="#子查詢" class="headerlink" title="子查詢"></a>子查詢</h2><p>實務上可能會碰到我們需要先處理 <strong>A</strong> 查詢，查詢結束後再進行 <strong>B</strong> 查詢，例如我們想先查詢平均薪資，之後再查詢大於平均薪資的員工。</p>
+<blockquote>
+<p>SELECT … WHERE xxx &gt; (子查詢)</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 條件 A, 找出平均薪資(放入子查詢中先跑)</span></span><br><span class="line"><span class="comment">-- 條件 B, 找出大於平均薪資的人</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  users.id,</span><br><span class="line">  users.name,</span><br><span class="line">  users.salary,</span><br><span class="line">  teams.name <span class="keyword">AS</span> 部門</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  users</span><br><span class="line">  <span class="keyword">INNER</span> <span class="keyword">JOIN</span> teams <span class="keyword">ON</span> users.team_id <span class="operator">=</span> teams.id</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  salary <span class="operator">&gt;</span> (</span><br><span class="line">    <span class="keyword">SELECT</span></span><br><span class="line">      <span class="built_in">AVG</span>(salary)</span><br><span class="line">    <span class="keyword">FROM</span></span><br><span class="line">      users</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+
+<h3 id="子查詢-INSERT"><a href="#子查詢-INSERT" class="headerlink" title="子查詢 INSERT"></a>子查詢 INSERT</h3><p>當然我們也可以透過子查詢來塞入資料，假設有個情境是我們需要新增一個員工，但因為資料表內的 FK 都是數字，我們只知道員工要放到開發部，就可以用下面的方式去進行塞資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT INTO</span> users (name, email, salary, team_id) <span class="keyword">VALUES</span> </span><br><span class="line">(</span><br><span class="line">  <span class="string">&#x27;新同事&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;new@gmail.com&#x27;</span>,</span><br><span class="line">  <span class="number">50000</span>,</span><br><span class="line">  (<span class="keyword">SELECT</span> id <span class="keyword">FROM</span> teams <span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;開發部&#x27;</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="小節作業：Table資料表管理"><a href="#小節作業：Table資料表管理" class="headerlink" title="小節作業：Table資料表管理"></a>小節作業：Table資料表管理</h2><p><img src="/images/others/loading.gif" data-original="/images/20241126/home-work.png" alt="小節作業"></p>
+<p>因為小節內有作業，作業會回覆到六角學院的 <strong>Discord</strong>，也能對下一個同學發問，這邊先貼上小節作業的回答</p>
+<h3 id="小節作業回答"><a href="#小節作業回答" class="headerlink" title="小節作業回答"></a>小節作業回答</h3><p>Q1: 拯救明華國小的資料庫，哪個欄位適合變成外來鍵<br>A1: 班級及性別，依照以下兩個角度來思考，以班級角度來看更為適合</p>
+<ol>
+<li>以「學生」角度：一個學生會有「多」個班級</li>
+<li>以「班級」角度：一個班級會有「多」個學生</li>
+</ol>
+<p>Q2: 第一題的延伸，多了一個班級老師<br>A2: 班級跟老師都可以，因為兩者都會有多個學生</p>
+<p>以上兩題都適合使用以下方式建立表格，甚至性別都適合單獨拔出來當一個表格使用，可參考 <a target="_blank" rel="noopener" href="https://magic-panda-engineer.github.io/database/Design-datebase-do-not-use-boolean">在有與沒有之間–為什麼設計資料庫欄位時不建議用布林值</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> classes(</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,<span class="comment">-- 班級編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 班級名稱</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE TABLE</span> genders(</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,<span class="comment">-- 性別編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 性別名稱</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE TABLE</span> teachers(</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,<span class="comment">-- 老師編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="comment">-- 老師名稱</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE TABLE</span> students(</span><br><span class="line">  id SERIAL <span class="keyword">PRIMARY KEY</span>,<span class="comment">-- 學生編號</span></span><br><span class="line">  name <span class="type">VARCHAR</span>(<span class="number">50</span>), <span class="comment">-- 學生名稱</span></span><br><span class="line">  age <span class="type">INTEGER</span>, <span class="comment">-- 學生年齡</span></span><br><span class="line">  class_id <span class="type">INTEGER</span>, <span class="comment">-- 班級編號, 外來鍵</span></span><br><span class="line">  gender_id <span class="type">INTEGER</span>, <span class="comment">-- 性別編號, 外來鍵</span></span><br><span class="line">  teacher_id <span class="type">INTEGER</span>, <span class="comment">-- 老師編號, 外來鍵</span></span><br><span class="line">  <span class="keyword">FOREIGN KEY</span> (class_id) <span class="keyword">REFERENCES</span> classes(id),</span><br><span class="line">  <span class="keyword">FOREIGN KEY</span> (gender_id) <span class="keyword">REFERENCES</span> genders(id),</span><br><span class="line">  <span class="keyword">FOREIGN KEY</span> (teacher_id) <span class="keyword">REFERENCES</span> teachers(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>隨後再進行資料的塞入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span></span><br><span class="line"><span class="keyword">  INTO</span> genders(name)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;男&#x27;</span>),(<span class="string">&#x27;女&#x27;</span>),(<span class="string">&#x27;第三性別&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span></span><br><span class="line"><span class="keyword">	INTO</span> teachers(name)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;音樂王子洪老師&#x27;</span>),(<span class="string">&#x27;數學黃厚娜老師&#x27;</span>),(<span class="string">&#x27;體育林子強老師&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span></span><br><span class="line"><span class="keyword">	INTO</span> classes(name)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;三年一班&#x27;</span>),(<span class="string">&#x27;三年二班&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span></span><br><span class="line"><span class="keyword">	INTO</span> students(name,age,class_id,gender_id,teacher_id)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">&#x27;王小明’,10,1,1,1),(‘陳小美’,10,1,2,1),(‘張大帥’,12,2,1,3),(‘陳老伯(來重修的)’,60,2,1,2);</span></span><br></pre></td></tr></table></figure>
+
+<p>這時候如果需要撈取資料可以使用 Where 以及 Inner Join</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用 Where</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	students.id,</span><br><span class="line">  students.name,</span><br><span class="line">  classes.name <span class="keyword">AS</span> 班級名稱</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  students,</span><br><span class="line">  classes</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  students.class_id <span class="operator">=</span> classes.id;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 INNER JOIN</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  students.id,</span><br><span class="line">  students.name,</span><br><span class="line">  classes.name <span class="keyword">AS</span> 班級名稱</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  students</span><br><span class="line">  <span class="keyword">INNER</span> <span class="keyword">JOIN</span> classes <span class="keyword">ON</span> students.class_id <span class="operator">=</span> classes.id;</span><br></pre></td></tr></table></figure>
+
+<p>Q3: 小孩的家庭歸類資料庫，父母資料一直重複實在討厭（<del>父母一直生</del>）<br>A3: 其實這邊做法跟 Q2 一樣，就不再重複寫入，但可以另外到 <a target="_blank" rel="noopener" href="https://pg-sql.com/">PG SQL</a> 進行練習</p>
+<h3 id="上一位同學的問題"><a href="#上一位同學的問題" class="headerlink" title="上一位同學的問題"></a>上一位同學的問題</h3><p><img src="/images/others/loading.gif" data-original="/images/20241126/question.png" alt="Question"></p>
+<p>上一位同學題目：圖書館頒布新規定：”每人同時只能借一本書”，請通知重複借書的人進快還書</p>
+<blockquote>
+<p>因為上一個學生的 Notion 一直打不開，就直接拿上上一個學生的 <a target="_blank" rel="noopener" href="https://hackmd.io/@UTozxrWfQOuifpaAI_xvoQ/BkTTpefmke">hackmd</a> 來進行回答</p>
+</blockquote>
+<p>這邊預期問題應該是還沒有還書的人，因為實務上已經還書的人一定是可以借下一本書的</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  books.id <span class="keyword">AS</span> id,</span><br><span class="line">  books.name <span class="keyword">AS</span> 書本名稱,</span><br><span class="line">  borrowers.name <span class="keyword">AS</span> 借閱者,</span><br><span class="line">  books.checkout_date <span class="keyword">AS</span> 還書日期</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">  books</span><br><span class="line">  <span class="keyword">INNER</span> <span class="keyword">JOIN</span> borrowers <span class="keyword">ON</span> borrower_id <span class="operator">=</span> borrowers.id</span><br><span class="line"><span class="keyword">WHERE</span> books.checkout_date ISNULL</span><br><span class="line"><span class="keyword">AND</span> borrowers.id <span class="keyword">IN</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> borrower_id</span><br><span class="line">  <span class="keyword">FROM</span> books</span><br><span class="line">  <span class="keyword">WHERE</span> checkout_date <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> borrower_id</span><br><span class="line">  <span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>想了很久想不到怎麼可以濾出且保留重複的人的資料，之前課程內都是直接濾掉，只好去爬文一下爬到 HAVING 可以使用</p>
+<h3 id="出給下位同學的問題"><a href="#出給下位同學的問題" class="headerlink" title="出給下位同學的問題"></a>出給下位同學的問題</h3><p>如果路過的朋友也可以嘗試回答看看哦</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20241126/example-work-two.png" alt="Question"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Q: 請依照作業二，將年齡進行資料表拆分，最後請計算出平均年齡，年齡總和。</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次一口氣多教了很多 <strong>SQL</strong> 的函數，吸取了好多新的知識，但透過同學的任務突然要融會貫通還是需要一點時間，我想同學的問題應該有更好的解答，這邊會再嘗試進行修改。</p>
+<p>這次的影音課程內容都已經看完了，接下來還會有一個小作業，需要到 <strong>Github</strong> 進行 <strong>Fork</strong>，後續如果有整理出什麼心得在紀錄上來。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.hexschool.com/2024/10/02/2024-10-02-backend-database-camping/">【後端工程師 - 資料庫體驗營】 進入後端前的必備知識</a></li>
+<li><a target="_blank" rel="noopener" href="https://pg-sql.com/">線上 DB 操作練習網站</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.w3schools.com/sql/sql_datatypes.asp">w3School</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/sql/t-sql/language-elements/comparison-operators-transact-sql?view=sql-server-ver16">運算子文件</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/20/20241120/" rel="prev" title="[Hexschool Backend experience camp] — 資料庫體驗營">
+      <i class="fa fa-chevron-left"></i> [Hexschool Backend experience camp] — 資料庫體驗營
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/11/27/20241127/" rel="next" title="[Hexschool Backend experience camp] — 資料庫體驗營 每日任務串">
+      [Hexschool Backend experience camp] — 資料庫體驗營 每日任務串 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tables-%E8%B3%87%E6%96%99%E8%A1%A8%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">Tables 資料表管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%86%E8%A7%A3%E8%A6%8F%E5%8A%83%EF%BC%88%E4%B8%80%E5%B0%8D%E5%A4%9A%E7%9A%84%E8%B3%87%E6%96%99%E8%A1%A8%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">拆解規劃（一對多的資料表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E9%8D%B5%E6%AC%84%E4%BD%8D%EF%BC%88%E4%B8%BB%E9%8D%B5%E3%80%81%E5%A4%96%E4%BE%86%E9%8D%B5%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">關鍵欄位（主鍵、外來鍵）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%8D%B5%E8%A8%AD%E5%AE%9A%E6%96%B9%E5%BC%8F%E3%80%81ID-%E8%87%AA%E5%8B%95%E9%81%9E%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">主鍵設定方式、ID 自動遞增方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERIAL-%E5%8F%8A-UUID-%E5%B7%AE%E7%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">SERIAL 及 UUID 差異</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E5%BB%BA%E7%AB%8B%E6%B5%81%E7%A8%8B"><span class="nav-number">3.5.</span> <span class="nav-text">資料庫建立流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E8%B3%87%E6%96%99%E8%A1%A8%E7%9A%84%E6%92%88%E5%8F%96"><span class="nav-number">4.</span> <span class="nav-text">跨資料表的撈取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84-Where-%E7%B5%84%E5%90%88%E6%9F%A5%E8%A9%A2"><span class="nav-number">4.1.</span> <span class="nav-text">基本的 Where 組合查詢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Join-%E5%90%88%E4%BD%B5%E8%B3%87%E6%96%99%E8%A1%A8%E6%9F%A5%E8%A9%A2"><span class="nav-number">5.</span> <span class="nav-text">Join 合併資料表查詢</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inner-Join"><span class="nav-number">5.1.</span> <span class="nav-text">Inner Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outer-Join"><span class="nav-number">5.2.</span> <span class="nav-text">Outer Join</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Postgres-%E5%87%BD%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">Postgres 函式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NULL-%E6%AC%84%E4%BD%8D%E8%A7%A3%E6%9E%90"><span class="nav-number">6.1.</span> <span class="nav-text">NULL 欄位解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COALESCE-%E5%87%BD%E6%95%B8"><span class="nav-number">6.2.</span> <span class="nav-text">COALESCE 函數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E9%81%8E-COALESCE-%E5%87%BD%E6%95%B8%E4%BF%AE%E6%95%B4-Join-%E9%81%8E%E7%9A%84%E8%B3%87%E6%96%99%E8%A1%A8"><span class="nav-number">6.3.</span> <span class="nav-text">透過 COALESCE 函數修整 Join 過的資料表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DISTINCT-%E4%B8%8D%E9%87%8D%E8%A4%87%E5%87%BD%E6%95%B8"><span class="nav-number">6.4.</span> <span class="nav-text">DISTINCT 不重複函數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COUNT-%E5%87%BD%E6%95%B8"><span class="nav-number">6.5.</span> <span class="nav-text">COUNT 函數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%88%E7%AE%97%E5%87%BD%E6%95%B8"><span class="nav-number">6.6.</span> <span class="nav-text">計算函數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Order-By-%E6%8E%92%E5%BA%8F"><span class="nav-number">6.7.</span> <span class="nav-text">Order By 排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-By-%E7%BE%A4%E7%B5%84"><span class="nav-number">6.8.</span> <span class="nav-text">Group By 群組</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%A9%A2"><span class="nav-number">7.</span> <span class="nav-text">子查詢</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%A9%A2-INSERT"><span class="nav-number">7.1.</span> <span class="nav-text">子查詢 INSERT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%EF%BC%9ATable%E8%B3%87%E6%96%99%E8%A1%A8%E7%AE%A1%E7%90%86"><span class="nav-number">8.</span> <span class="nav-text">小節作業：Table資料表管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%AF%80%E4%BD%9C%E6%A5%AD%E5%9B%9E%E7%AD%94"><span class="nav-number">8.1.</span> <span class="nav-text">小節作業回答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%80%E4%BD%8D%E5%90%8C%E5%AD%B8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">8.2.</span> <span class="nav-text">上一位同學的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%B5%A6%E4%B8%8B%E4%BD%8D%E5%90%8C%E5%AD%B8%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">8.3.</span> <span class="nav-text">出給下位同學的問題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">9.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">10.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2024/11/26/20241126/",
+      identifier: "2024/11/26/20241126/",
+      title     : "[Hexschool Backend experience camp] — 資料庫體驗營 #2",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

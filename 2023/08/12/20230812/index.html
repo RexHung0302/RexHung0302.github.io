@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 經歷了十年，Webconf 又重啟了一次會議，這次場地在 台北張榮發國際會議中心，這是一個什麼會議呢？ 『WebConf 不僅僅關注過去，還關注網頁的未來趨勢和新興技術，並提供業界趨勢及發展方向，以協助企業更好地了解未來網頁發展的方向。』 - 引述官方網站的話，基本就是介紹這數十年以及現在還有未來網頁相關的議題。 接下來筆者將會將所聽到一些比較有趣的內心">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Life Note] - WebConf Taiwan 2023 技術研討會 Part 2">
+<meta property="og:url" content="https://rexhung0302.github.io/2023/08/12/20230812/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 經歷了十年，Webconf 又重啟了一次會議，這次場地在 台北張榮發國際會議中心，這是一個什麼會議呢？ 『WebConf 不僅僅關注過去，還關注網頁的未來趨勢和新興技術，並提供業界趨勢及發展方向，以協助企業更好地了解未來網頁發展的方向。』 - 引述官方網站的話，基本就是介紹這數十年以及現在還有未來網頁相關的議題。 接下來筆者將會將所聽到一些比較有趣的內心">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2023-08-12T11:40:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:06.028Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Other">
+<meta property="article:tag" content="Life">
+<meta property="article:tag" content="WebConf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2023/08/12/20230812/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Life Note] - WebConf Taiwan 2023 技術研討會 Part 2 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2023/08/12/20230812/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Life Note] - WebConf Taiwan 2023 技術研討會 Part 2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-08-12 19:40:00" itemprop="dateCreated datePublished" datetime="2023-08-12T19:40:00+08:00">2023-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:06" itemprop="dateModified" datetime="2025-02-21T01:36:06+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/WebConf/" itemprop="url" rel="index"><span itemprop="name">WebConf</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>8 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20230812/banner.png" alt="Webconf Logo"></p>
+<p>經歷了十年，Webconf 又重啟了一次會議，這次場地在 <strong>台北張榮發國際會議中心</strong>，這是一個什麼會議呢？</p>
+<p>『WebConf 不僅僅關注過去，還關注網頁的未來趨勢和新興技術，並提供業界趨勢及發展方向，以協助企業更好地了解未來網頁發展的方向。』 - 引述官方網站的話，基本就是介紹這數十年以及現在還有未來網頁相關的議題。</p>
+<p>接下來筆者將會將所聽到一些比較有趣的內心紀錄在此處，有興趣的歡迎繼續看下去。</p>
+<blockquote>
+<p><em><strong>這篇是第二天的心得紀錄</strong></em></p>
+</blockquote>
+<span id="more"></span>
+
+<p>由於議程的進行方式為一個時段為四十到四十五分鐘不等，一個時段同時會有三個講者，所以只能挑一個議題進去聆聽，下面筆者會說自己挑了哪些議程進去聽，主要偏前端。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本次紀錄不會太過詳細紀錄每個講者講過的話及內容，但會把筆者覺得有意思的點記錄下來，更詳細的內容可以直接參考官方提供的 『<a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FwHBNj8NPQamxPecU9VXoHQ?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">共筆</a>』</p>
+<p>會議也有提到這次有跟講者們討論過後，決定以不論影的方式進行，故後續只有共筆紀錄演講過程。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/scheduleOne.png" alt="scheduleOne"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/scheduleTwo.png" alt="scheduleTwo"></p>
+<blockquote>
+<p><em>筆者將有去聽的議程用紅框圍起來，如果有同步聯播的，就會三廳的人一起聽到，不會分場次。</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>時間</th>
+<th>議程內容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>09:00-09:45</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FL5K9cqp6S0-7549MXXSb_g?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">淺談 Vue.js 的狀態管理模式</a></td>
+</tr>
+<tr>
+<td>09:55-10:05</td>
+<td>引言</td>
+</tr>
+<tr>
+<td>09:55-10:40</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FSVsZ1haXR-2bUhfcf_OYnA?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">鳳‧極意？！</a></td>
+</tr>
+<tr>
+<td>10:50-11:35</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FCZTO4WGbRcuCcQfWgGkuig?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">從零打造前端效能監測系統</a></td>
+</tr>
+<tr>
+<td>11:45-12:30</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FB9EywGzUTzicd9WTaFvyNg?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞</a></td>
+</tr>
+<tr>
+<td></td>
+<td>午餐時間</td>
+</tr>
+<tr>
+<td>13:30-14:15</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FhUfiJkrySvqn9ptbjSOSgA?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容</a></td>
+</tr>
+<tr>
+<td>14:25-15:10</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FdHqj5RnATgOFO_0F8JWq8g?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">無密碼時代降臨！使用 Passkeys 打造無密碼驗證服務</a></td>
+</tr>
+<tr>
+<td>15:20-16:05</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2F-mWY8npJSIaaxLrYaQ0Nvg?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">酷！玩！啥鬼CSS！</a></td>
+</tr>
+<tr>
+<td>16:15-17:00</td>
+<td><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2Fpk7crlHPTQumx2NzjWTdBQ?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">Beyond Technology 技術之外 - 從個人身心安頓到人類福祉追求</a></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="淺談-Vue-js-的狀態管理模式"><a href="#淺談-Vue-js-的狀態管理模式" class="headerlink" title="淺談 Vue.js 的狀態管理模式"></a>淺談 Vue.js 的狀態管理模式</h3><p>今天第一場選的 <strong>Kuro</strong> 大的 <strong>Vue.js</strong>，相信這位講者是大多人接觸甚至沒接觸過 <strong>Vue.js</strong> 都可能會聽到的名子。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/pinia.png" alt="鳳梨"></p>
+<p>這場內容主要談的是<a target="_blank" rel="noopener" href="https://pinia.vuejs.org/">鳳梨(Pinia)</a>，為什麼會叫 <strong>Pinia</strong> 呢？可以參考官方網站的<a target="_blank" rel="noopener" href="https://pinia.vuejs.org/introduction.html#Why-Pinia">介紹</a>：</p>
+<blockquote>
+<p><em>Pinia (pronounced &#x2F;piːnjʌ&#x2F;, like “peenya” in English) is the closest word to piña (pineapple in Spanish) that is a valid package name. A pineapple is in reality a group of individual flowers that join together to create a multiple fruit. Similar to stores, each one is born individually, but they are all connected at the end. It’s also a delicious tropical fruit indigenous to South America.</em></p>
+</blockquote>
+<p><strong>Vue3</strong> 其實也出來一陣子了，雖然可以向下相容 <strong>Vue2</strong>，但有許多的工具也在推陳出新，這次 <strong>Kuro</strong> 帶來的是 <strong>Pinia</strong> 這套工具的介紹。</p>
+<blockquote>
+<p><em>說 Kuro 是傳教士真的不為過，每次來都要推銷東西啊</em></p>
+</blockquote>
+<p>如果有使用過 <strong>VueX</strong> 或者寫 <strong>React.js</strong> 的夥伴有使用過 <strong>Redux(聽說也漸漸式微了？！)</strong>，可能可以比較好理解，這套就是一個狀態管理庫。</p>
+<p>其中要解決幾點問題</p>
+<ul>
+<li>props與events 一層一層傳遞</li>
+<li>event-bus 跨元件事件傳遞(請忘記它)</li>
+<li>project-inject 跨層級傳遞(必須在同一條元件樹上)</li>
+</ul>
+<blockquote>
+<p><em>Project-inject <strong>依賴注入</strong> 或 <strong>提供注入</strong> 可以參考<a target="_blank" rel="noopener" href="https://cn.vuejs.org/guide/components/provide-inject.html#provide">官方文章</a></em><br>使用 React.js 的夥伴可以理解為 useHook，的改念</p>
+</blockquote>
+<p>而 <strong>Pinia</strong> 也想要解決一些 <strong>VueX</strong> 的痛點，例如 <strong>TypeScript</strong> 的額外設定比較麻煩，<strong>VueX</strong> 的 <strong>Store</strong> 也無法直接使用 <strong>Composable</strong></p>
+<hr>
+<h3 id="鳳‧極意？！"><a href="#鳳‧極意？！" class="headerlink" title="鳳‧極意？！"></a>鳳‧極意？！</h3><blockquote>
+<p><strong>鳳 也就是 html form</strong></p>
+</blockquote>
+<p>這位講者滿厲害的，光看他的<a target="_blank" rel="noopener" href="https://blog.lalacube.com/mei/Reveal_phoenix_the_gokui.php">簡報</a>就可以發現。</p>
+<blockquote>
+<p><em>小吐槽，用 Chrome 無法正常開啟 QQ</em></p>
+</blockquote>
+<p>內容講了很多，但都是關於 <strong>Form</strong> 的應用，甚至是使用者體驗都可以透過很基本的原生 <strong>JS</strong> 或者 <strong>HTML</strong> 達到，簡單介紹 <strong>Form element</strong>，<code>&lt;input /&gt;(date, rang, checkbox, radio)</code> 的檢查及方便的使用，原生支援。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/UseCaseOne.png" alt="Use Case One"></p>
+<p>首先講者用了兩個簡單的 <strong>Use Case</strong> 來介紹怎麼透過 <strong>Form</strong> 就能做到這些強大功能，第一個為圓餅圖，第二個則是 <strong>Video</strong> 的 <strong>Control bar</strong> 透過 <strong>range input</strong>。</p>
+<p>而我們大部分的人做網頁應該都會用到 <code>:hover</code>，其實可以先透過 <code>@media (hover: hover)</code> 來判斷裝置是否支援，像是行動裝置就不需要，這時候就不會吃到裡面的變數。</p>
+<p><code>@media (prefers-color-schema: dark)</code> 也能快速做到黑暗模式；<code>focus-visible vs focus:</code> 前者是只有在用鍵盤操作 <strong>tab</strong> 去 <strong>focus</strong> 時才會觸發；最後我們應該盡量避免做出合成獸這種東西，像是 <strong>checkRadio</strong> 或是 <strong>radioButton</strong>。</p>
+<p>在一些 <strong>Input</strong> 我們也會放上 <strong>Icon</strong> 去讓使用者點擊後跳出像是日曆或者顏色選擇器之類的東西，我們可以透過 <strong>showPicker()</strong> 去達到，有更好的使用者體驗。</p>
+<p>在數字輸入框我們可能會透過框架的幫助取對數字加一減一，但如果原生我們可以透過 <code>stepUp()</code> 及 <code>stepDown()</code> 去達到，不需要再用 <strong>document</strong> 的語法去取出值變化後再塞回去。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/attribute.png" alt="Attribute"></p>
+<p>最後需要善用 <strong>attribute</strong> 的方式去檢查輸入內容是否正確，<strong>input</strong> 有許多的 <strong>attribute</strong> 可以使用，詳細可以參考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN</a>。</p>
+<blockquote>
+<p>以前 PM 可能滿常會提 Input 我要帶有搜尋功能，現在透過 <code>input(type=“list”)</code> 可以輕鬆達到。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/recap.png" alt="重點節錄"></p>
+<p>重點節錄</p>
+<hr>
+<h4 id="從零打造前端效能監測系統"><a href="#從零打造前端效能監測系統" class="headerlink" title="從零打造前端效能監測系統"></a>從零打造前端效能監測系統</h4><p><img src="/images/others/loading.gif" data-original="/images/20230812/fromZeroTest.png" alt="從零打造前端效能測試"></p>
+<p>這場內容非常之精實，我覺得應該直接貼上 <strong>Summer</strong> 大的<a target="_blank" rel="noopener" href="https://www.cythilya.tw/2023/08/12/build-front-end-performance-monitoring-mechanism-from-scratch-webconf-tw-2023/">逐字稿</a>給大家看。</p>
+<p>離題想說一下， <strong>Summer大</strong> 跟 <strong>莫大</strong> 是我來這次講座一直非常想聽的講者之一，原因不外乎自己一路一直都是純前端工作者，工作內容離不開切版串接 <strong>API</strong> 太遠，但時常的會讓我自己想到我還會什麼？像是奶綠茶大提到的，如果今天 <strong>JS</strong> 像 <strong>Flash</strong> 一樣，說掰掰就掰掰了呢？</p>
+<p>故對於切版串 <strong>API</strong> 之外，又不會離前端太遠的東西我都非常有興趣，而這次講者提到的內容也讓我有了一些方向可以去研究。</p>
+<p>會碰測試的人不外乎寫程式一陣子開始會注重到效能或者功能是否正常的人，講者則是提了之前在 <strong>Loading</strong> 太久的例子當作開場白。</p>
+<p>講者提到我們會有一系列的各種 <strong>unit test</strong>、<strong>integration test</strong> 或 <strong>e2e test</strong> 的自動化測試的 <strong>test case</strong>，但我們不會將效能測試放入其中，也可能我們每次修改功能或 <strong>Bug</strong> 後又出現了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/howToTest.png" alt="如何做測試"></p>
+<p>如果要將效能測試融入其中，這是講者覺得最合適的方式。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/sentry.png" alt="Sentry"></p>
+<p>這套測試就是講者這次會提到的核心內容，主要能監控兩種我們可衡量的效能指標</p>
+<ul>
+<li>Loading Performance 載入效能</li>
+<li>Rendering Performance 渲染效能</li>
+</ul>
+<p>該套件也提供了 <strong>API</strong> 甚至介面可以讓使用者得知一些效能指標。</p>
+<p>遺憾的是前面有提到理想情況是發生事情可以發出通知即時告訴我們，而這項功能在 <strong>Sentry</strong> 是需要付費的，但是講者提到另一套工具可以做到通知的功能且免費。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/sentryVsNewRelic.png" alt="Sentry VS New Relic"></p>
+<p><strong>New Relic</strong> 比較像是 <strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/what-is/application-performance-monitoring/">APM (application performance monitoring)</a></strong>，它還提供來自不同 <strong>region</strong> 存取網站的選項。</p>
+<blockquote>
+<p><em>突然發現，Relic 一直存在我手機的頁籤裡面，但是一直沒有去深入研究過，實在是像是 Ruddy 老師說的，囤積知識啊…</em></p>
+</blockquote>
+<hr>
+<h3 id="藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞"><a href="#藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞" class="headerlink" title="藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞"></a>藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/wuCheYu.png" alt="吳哲宇"></p>
+<p>這場是由 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCHX_XMhPrtvOmgGOnA2eTmA">老闆來點寇汀</a> 的吳哲宇來演講的，其中技術層面沒有深入提到太多，但講者有說了滿多他之前的作品。</p>
+<p>由前端延伸到藝術去也是講者一直在思考前端還能應用在哪些東西上面，所以中間說了滿多應用層面的東西。</p>
+<p>而在講者稱自己為生成式藝術家之前，在許久之前就在網路上教學很多前端互動框架及庫了，例如 <strong>p5.js、Canvas</strong> 甚至透過 <strong>WebSocket</strong> 實作出可以與人互動的藝術裝置。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/wuQRCode.png" alt="Profile"></p>
+<p>有興趣的夥伴可以直接到講者的 <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCHX_XMhPrtvOmgGOnA2eTmA">Youtube</a> 去看看看，滿精彩的！</p>
+<hr>
+<h3 id="午餐時間"><a href="#午餐時間" class="headerlink" title="午餐時間"></a>午餐時間</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/bandon.png" alt="便當"></p>
+<p>中午便當</p>
+<ul>
+<li>疲勞 -1</li>
+<li>飢餓程度 -1</li>
+<li>快樂 +1</li>
+</ul>
+<hr>
+<h3 id="資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容"><a href="#資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容" class="headerlink" title="資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容"></a>資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/DDDBanner.png" alt="資訊架構投影片"></p>
+<p>時常畫面與需求都是我們開始一個專案或者功能的起頭，而大部分的循環都會卡在 <strong>PM</strong> 請你先弄畫面，而你想先確認功能是什麼，才能做出有邏輯的畫面。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/fight.png" alt="討論與爭鬥"></p>
+<p>上面圖片有些許被擋住了，但應該其實大家都看過這個梗圖；其實大部分時候我們需要的是輔助討論的圖像溝通方法而非精美畫面。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/kitchen.png" alt="架構需求"></p>
+<p>講者使用餐廳比喻，我們需要食材、工具，之後經過加工流程，才能誕生出結果；有時候討論會專注在功能需求方面，但往往我們卻很少討論內容(資訊)哪裡來，需要為什麼需要？</p>
+<h4 id="需求膨脹會成為資訊垃圾場"><a href="#需求膨脹會成為資訊垃圾場" class="headerlink" title="需求膨脹會成為資訊垃圾場"></a>需求膨脹會成為資訊垃圾場</h4><p>要有一個好的廚房流程，我們需要先整理我們的餐具，我們總不能使用各種不同的餐具去承裝我們要供應給客人的食物吧？</p>
+<p>用餐具來比喻 <strong>資訊收納（關於分類、收納、整理）</strong>：</p>
+<ul>
+<li>資訊整理 先從觀察基本單位開始，準備餐具</li>
+<li>再開始收納餐具</li>
+<li>舉例會場擺設，把收納好的一整組餐具開始擺設</li>
+</ul>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/container.png" alt="長榮海運我沒買到"></p>
+<p>好的分類像是海運貨櫃一樣，可以省掉許多不必要的成本。</p>
+<h4 id="釐清需求及具體化需求"><a href="#釐清需求及具體化需求" class="headerlink" title="釐清需求及具體化需求"></a>釐清需求及具體化需求</h4><p><img src="/images/others/loading.gif" data-original="/images/20230812/useCaseForUIUX.png" alt="具體化需求"></p>
+<p>使用案例預約訂位來示範怎麼具體化需求（規劃時需要一位對專案是比較熟的），我們需要熟悉需求的人來跟我們討論，而我們可以將需求具體化，方便確定後續我們都在同一個頻道上對話。</p>
+<p>內容模型的討論情境，請對方回答一些細節情境，順便看一下過程合不合理；我們也可以特用真實的假資料，假資料拿來測試設計的架構對不對。</p>
+<p>最後沒有畫出 <strong>Mock-up</strong> 就能產出需求圖，但其實重點一直都是需求方需要有想法，沒有明確想法的想法，只是一個飄渺的目標，你怎麼做客戶都不會滿意的啦！</p>
+<p>畫出架構圖是重要的（例如類似 <strong>DB</strong> 的設計圖），情境的方案探討是很重要的，我們可以從簡單的情境延伸到複雜的情境。</p>
+<hr>
+<h3 id="無密碼時代降臨！使用-Passkeys-打造無密碼驗證服務"><a href="#無密碼時代降臨！使用-Passkeys-打造無密碼驗證服務" class="headerlink" title="無密碼時代降臨！使用 Passkeys 打造無密碼驗證服務"></a>無密碼時代降臨！使用 Passkeys 打造無密碼驗證服務</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/keypassBanner.png" alt="PassKeys"></p>
+<p>這場非常實用，有興趣的夥伴可以看看講者的<a target="_blank" rel="noopener" href="https://www.slideshare.net/ssuser35b57e/passkeys-259810514">簡報</a>。</p>
+<p>現今我們使用的服務越來越多，也會產生出無數服務有無數密碼需要記憶，但這麼多密碼，真的安全嗎？</p>
+<h4 id="WebAuthn-Web-Authentication"><a href="#WebAuthn-Web-Authentication" class="headerlink" title="WebAuthn(Web Authentication)"></a>WebAuthn(Web Authentication)</h4><p><img src="/images/others/loading.gif" data-original="/images/20230812/webAuthn.png" alt="WebAuthn"></p>
+<p>這是 <strong>FIDO</strong> 聯盟與 <strong>W3C</strong> 聯合提出的驗證標準，利用非對稱金鑰的方式進行驗證，類似於我們在 <strong>Git</strong> 上使用的 <strong>SSH</strong> 密鑰。</p>
+<p>五分鐘小教室不囉唆直接上圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/authnOne.png" alt="教學一"><br><img src="/images/others/loading.gif" data-original="/images/20230812/authnTwo.png" alt="教學二"><br><img src="/images/others/loading.gif" data-original="/images/20230812/authnThree.png" alt="教學三"></p>
+<p>這種方式優點是密鑰會直接存在你的裝置上，在登入時你還是需要開發商提供的方式去驗證，例如 <strong>iPhone</strong> 就是 <strong>FaceID</strong>、<strong>Mac</strong> 使用 <strong>TouchID</strong>…等等。</p>
+<p>而且使用了這種方式，像是微軟就比較激進一點，他會直接把你的密碼從 <strong>DB</strong> 移除，而 <strong>Apple</strong> 及 <strong>Google</strong> 還是會存一份，防止你的私鑰真的不見。</p>
+<p>缺點顯而易見，就是裝置壞了或是不見了，你密碼就不見了，但相對的，以往我們太多密碼也會寫下來或者存在硬碟裡，不見就不見了，筆者自己的長輩就是如此，通常密碼都不會記得的。</p>
+<h3 id="SigUp-及-SignIn"><a href="#SigUp-及-SignIn" class="headerlink" title="SigUp 及 SignIn"></a>SigUp 及 SignIn</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/webAuthnSignUp.png" alt="註冊"></p>
+<p>我們可以透過簡單的程式碼做到註冊裝置，讓我們的網站也能存有使用者的 <strong>Public Key</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> publicKeyCredentialCreationOptions = &#123;</span><br><span class="line">  <span class="attr">challenge</span>: <span class="title class_">Uint8Array</span>.<span class="title function_">from</span>(</span><br><span class="line">    <span class="string">&quot;challenge from server&quot;</span>, <span class="function">(<span class="params">c</span>) =&gt;</span> c.<span class="title function_">charCodeAt</span>(<span class="number">0</span>)</span><br><span class="line">  ), <span class="comment">// 從伺服器產生的隨機字串，避免[重播攻擊](https://zh.wikipedia.org/zh-hk/%E9%87%8D%E6%94%BE%E6%94%BB%E5%87%BB)</span></span><br><span class="line">  <span class="attr">rp</span>: &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;FullStackLadder&quot;</span>,</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&quot;fullstackladder.dev&quot;</span></span><br><span class="line">  &#125;, <span class="comment">// relying party 資訊，通常也就是驗證伺服器的資訊，id 需要與網域名稱相符，避免釣魚網站的攻擊</span></span><br><span class="line">  <span class="attr">user</span>: &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title class_">Uint8Array</span>.<span class="title function_">from</span>(<span class="string">&quot;User Id&quot;</span>, <span class="function">(<span class="params">c</span>) =&gt;</span> c.<span class="property">charCodeAt</span> (<span class="number">0</span>)), <span class="attr">name</span>: <span class="string">&quot;mike@fullstackladder.dev&quot;</span>,</span><br><span class="line">    <span class="attr">displayName</span>: <span class="string">&quot;Mike Huang&quot;</span>,</span><br><span class="line">  &#125; <span class="comment">// 目前要註冊裝置的使用者資訊</span></span><br><span class="line">  <span class="attr">pubKeyCredParams</span>: [&#123; <span class="attr">alg</span>: -<span class="number">7</span>, <span class="attr">type</span>: <span class="string">&quot;public-key&quot;</span> &#125;], <span class="comment">// 指定允許使用的簽章演算法，目前有幾種演算法可以拿取你的私鑰去算出是不是正確的，為 -8(Ed25519) -7(ES256) -257(RS256)</span></span><br><span class="line">  <span class="attr">authenticatorSelection</span>: &#123;</span><br><span class="line">    <span class="attr">authenticatorAttachment</span>: <span class="string">&quot;cross-platform&quot;</span></span><br><span class="line">  &#125;, <span class="comment">// (非必要)用來限定可以使用的驗證氣來源</span></span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">60000</span>, <span class="comment">// 註冊流程到期時間(毫秒)</span></span><br><span class="line">  <span class="attr">attestation</span>: <span class="string">&quot;direct&quot;</span>, <span class="comment">// 是否要回傳驗證氣資訊給伺服器</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> credential = <span class="keyword">await</span> navigator.<span class="property">credentials</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">publicKey</span>: publicKeyCredentialCreationOptions,</span><br><span class="line">&#125;); <span class="comment">// 產生公鑰及相關認證資訊，這些資訊可以存到服務端的 DB</span></span><br></pre></td></tr></table></figure>
+
+<p>產生的相關認證為下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">PublicKeyCredential</span> = &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&#x27;ADSU11KQmbqdGtpu4sjseh4cg2TxSvrbcHDTBsv4NSSX9...&#x27;</span>, <span class="comment">// 產生的認證 ID</span></span><br><span class="line">  <span class="attr">rawId</span>: <span class="title class_">ArrayBuffer</span> (<span class="number">59</span>), <span class="comment">// 也是認證 ID，只是為 [binary 格式(二進制文件)](https://zh.wikipedia.org/zh-hant/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6)</span></span><br><span class="line">  <span class="attr">response</span>: <span class="title class_">AuthenticatorAttestationResponse</span> &#123;</span><br><span class="line">    <span class="attr">clientDataJSON</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">121</span>), <span class="comment">// 瀏覽器與驗證氣之間傳遞的資料</span></span><br><span class="line">    <span class="attr">attestationObject</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">306</span>), <span class="comment">// 驗證器相關資料，包含公鑰等資訊</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;public-key&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/webAuthnSignIn.png" alt="登入驗證"></p>
+<p>驗證我們可以透過下面的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> publicKeyCredentialRequestOptions = &#123;</span><br><span class="line">  <span class="attr">challenge</span>: <span class="title class_">Uint8Array</span>.<span class="title function_">from</span>(</span><br><span class="line">    <span class="string">&quot;challenge from server&quot;</span>, <span class="function">(<span class="params">c</span>) =&gt;</span> c.<span class="title function_">charCodeAt</span>(<span class="number">0</span>)),</span><br><span class="line">  <span class="attr">allowCredentials</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="title class_">Uint8Array</span>.<span class="title function_">from</span>(</span><br><span class="line">        <span class="string">&quot;credential id&quot;</span>,</span><br><span class="line">        <span class="function">(<span class="params">c</span>) =&gt;</span> c.<span class="title function_">charCodeAt</span>(<span class="number">0</span>)),</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&quot;public-key&quot;</span>,</span><br><span class="line">      <span class="attr">transports</span>: [<span class="string">&quot;internal&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  ], <span class="comment">// (非必要)允許使用的驗證資訊，可用來限定登入裝置</span></span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">60000</span>, <span class="comment">// 登入流程的到期時間(毫秒)</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> assertion = <span class="keyword">await</span> navigator.<span class="property">credentials</span>.<span class="title function_">get</span>(&#123;</span><br><span class="line">  <span class="attr">publicKey</span>: publicKeyCredentialRequestOptions,</span><br><span class="line">&#125;); <span class="comment">// 取得註冊的裝置資訊，以及相關簽章結果</span></span><br></pre></td></tr></table></figure>
+
+<p>產生的相關認證資訊為下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">PublicKeyCredential</span> = &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&#x27;ADSUIlKQmbqdGtpu4sjseh4cg2T×SvrbcHDTBsv4NSSX9...&#x27;</span>,</span><br><span class="line">  <span class="attr">rawId</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">59</span>),</span><br><span class="line">  <span class="attr">response</span>:</span><br><span class="line">    <span class="title class_">AuthenticatorAssertionResponse</span> = &#123;</span><br><span class="line">      <span class="attr">authenticatorData</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">191</span>), <span class="comment">// 用來完成這次驗證的裝置資訊(注意：不會包含公鑰資訊)</span></span><br><span class="line">      <span class="attr">clientDataJSON</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">118</span>),</span><br><span class="line">      <span class="attr">signature</span>: <span class="title class_">ArrayBuffer</span>(<span class="number">70</span>), <span class="comment">// 由驗證器私鑰產生的簽章資訊，Client 端根據特定規則產生簽章，Server 端使用已註冊的公鑰驗證簽章</span></span><br><span class="line">      <span class="attr">userHandle</span>: <span class="title class_">ArrayBuffer</span> (<span class="number">10</span>), <span class="comment">// 由驗證器提供的額外使用者資訊</span></span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&#x27;public-key&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h4><p><img src="/images/others/loading.gif" data-original="/images/20230812/webAuthnLibrary.png" alt="Library"></p>
+<p>而現在有許多的套件都有提供這種驗證方式，不用自己手刻，有興趣參考程式碼可以看一下講者的簡報，挺有趣的，而筆者自己則找到了 <a target="_blank" rel="noopener" href="https://www.corbado.com/passkeys/react?gad=1&gclid=CjwKCAjw_uGmBhBREiwAeOfsdyNfoySOhQofoUpVM9s6aJz2jq72h40yl31allEjXfyriuHvL2x44hoCutYQAvD_BwE">Corbado</a> 這套套件，相信不久後會越來越多服務商提供這種登入方式，既簡單又快速。</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>有興趣者夥伴可以直接 <strong>Clone</strong> 講者的 <a target="_blank" rel="noopener" href="https://github.com/wellwind/webconf23-passkeys-demo">Code</a> 下來玩。</p>
+<hr>
+<h3 id="下午茶時間"><a href="#下午茶時間" class="headerlink" title="下午茶時間"></a>下午茶時間</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/teaTime.png" alt="下午茶時間"></p>
+<p>其實兩天都有，但是第一天的不知道為什麼數量比較少，去的時候很多東西都被夾光了</p>
+<ul>
+<li>疲勞 -100</li>
+<li>飢餓程度 -100</li>
+<li>快樂 +100</li>
+</ul>
+<hr>
+<h3 id="酷！玩！啥鬼CSS"><a href="#酷！玩！啥鬼CSS" class="headerlink" title="酷！玩！啥鬼CSS"></a>酷！玩！啥鬼CSS</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/amos.png" alt="AMOS"></p>
+<p>**Amos！**有學習過 <strong>CSS</strong> 的人大概都會聽過他，這場不外乎就是講了一些必用甚至是新穎的 <strong>CSS</strong>，其中重點摘要為：</p>
+<ol>
+<li>邏輯屬性</li>
+</ol>
+<ul>
+<li>Block inline 屬性</li>
+</ul>
+<ol start="2">
+<li>首字放大</li>
+</ol>
+<ul>
+<li>first letter</li>
+</ul>
+<ol start="3">
+<li>父層選取器</li>
+</ol>
+<ul>
+<li>:has()</li>
+</ul>
+<ol start="4">
+<li>媒體查詢</li>
+</ol>
+<ul>
+<li>@container 可以不必使用 @media</li>
+</ul>
+<ol start="5">
+<li>級聯層</li>
+</ol>
+<ul>
+<li>@layer 改變順序 上蓋下 後蓋前</li>
+</ul>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/2023CSS.png" alt="2023 新穎 CSS"><br><img src="/images/others/loading.gif" data-original="/images/20230812/2023CSSWithText.png" alt="2023 新穎 CSS 附上英文字"></p>
+<p>前面除了講者自己回顧之前做過的一些閒暇時做的作品(真的很屌)，有興趣可以參考他的 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=ZavL9y4Adrk&list=PLqivELodHt3iL9PgGHg0_EF86FwdiqCre&ab_channel=CSScoke">Youtube - 金魚都能懂系列</a></p>
+<hr>
+<h3 id="Beyond-Technology-技術之外-從個人身心安頓到人類福祉追求"><a href="#Beyond-Technology-技術之外-從個人身心安頓到人類福祉追求" class="headerlink" title="Beyond Technology 技術之外 - 從個人身心安頓到人類福祉追求"></a>Beyond Technology 技術之外 - 從個人身心安頓到人類福祉追求</h3><p><img src="/images/others/loading.gif" data-original="/images/20230812/beyound.png" alt="Beyond Technology"></p>
+<p>這場真的是技術之外的心得談，人常說家有一老如有一寶(筆者不是在攻擊講者)，非常有道理，因為他們身上蘊含的都是智慧，而這些智慧是經過生活及歷練孕育出來的。</p>
+<p>講者提出三個規劃，讓你的人生不會太過的焦慮也能感到幸福：</p>
+<ol>
+<li>過去 - 感恩</li>
+<li>現在 - 安頓</li>
+<li>未來 - 目標</li>
+</ol>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這是第二天的內容，其實筆者覺得每一場會議時間太過剪短，以致於一些比較深入的東西很難聽到，但不能否認這整個會議的目標就是暢談這十年以及最近的 <strong>Web</strong> 趨勢，理所當然會是心得居多。</p>
+<p>而講者需要技巧，聽者也需要技巧，如何整理收納並吸收這些知識就是我們聽者需要做的，不過常聽演講的夥伴應該也能知道，如何區分一位好的講者，聽聽他是不是照著 <strong>PPT Show</strong> 出來的東西念就對了，好的講者應該是更應該把精力放在如何把觀眾帶入到他自己的觀點中，透過講者得角度帶領聽眾去理解及獲得他想傳遞的東西。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230812/endStatistics.png" alt="結果統計"></p>
+<p>最後還是要感謝主辦方主辦這麼一場很精彩的會議，但我想現在是個言論自由的國度，有些東西還是可以說出來的吧，是吧？！</p>
+<p>我覺得有幾點是會議之後可以改善的</p>
+<ol>
+<li>場地太小 - 很多比較熱門的議程，過多的人去聽，導致很多人需要站著(雖然有人會不認同，但請繼續往下看)</li>
+<li>時程太緊湊 - 每一個議程時程大約都只有 40-45 min，個人覺得太短，很多東西都只是被皮毛帶過(雖然有人會不認同，但請繼續往下看)</li>
+<li>分流同時段進行卻沒有錄影回放 - 雖然主辦方有說過他們在開始前有問過講者，是不是不錄影，他們演講會比較自然，最後他們採用不錄影的方式，但一個時段有三個議程，我想要三個議程都聽到，這時候只能挑其中一個，剛好如果你又是選擇障礙者，會很困擾(雖然有人會不認同，但請繼續往下看)</li>
+<li>這點講出來可能會被噴，但看完這點請繼續往下看 - 紀念品太過簡單(雖然有人會不認同，但請繼續往下看)</li>
+</ol>
+<p>好，說完缺點來說說為什麼吧。</p>
+<p>首先主辦方有提到他們十年前有舉辦過，而他們吸取不好的教訓去改善，保留好的東西，他們有提到之前也有發生人太多導致很多人需要站著或坐著，但這次竟然又發生了，我想如果有這種情況，應該是一開始就能避免，因為人數及位子是一開始就能掌握的，而非賣超過的票，然後讓觀眾忍耐一下，畢竟這場會議也是不便宜啊。</p>
+<p>再來是時程太緊湊，雖然有人覺得人的精力只能專注在幾十分鐘內，太長的話你根本專注不下去，但舉例來說，有一場會議筆者想聽 <strong>K8s</strong> 的議程，但整場幾乎都是在聽他們為什麼要導入，怎麼導入(沒有太多的實作舉例)，然後他們解決了啥，個人覺得像是花錢去聽了公司就會有的技術心得分享會，聽同事試圖說服我他之前用過什麼很好用，然後要我導入，但請我自己去開官方文件來研究。</p>
+<p>第三點是分流進行沒有錄影，還是那點，我覺得花了錢了，應該是能取得最大的效益，當然你也許會秉持著熱情，或者不同的看法，我都尊重，但是我覺得講者及參加者應該都需要被尊重，而非講者統一決定了之後，讓參與者直接接受做法，我不確定是前是不是有什麼地方有公告，但至少在報名流程上我沒有看見(歡迎打臉我，我就是說說自己的想法)，如果今天我是免費近來聽，那我尊重！</p>
+<p>最後一點是紀念品的部分，其實說到這邊可能會有人覺得，啊你不就花錢想當大爺，但說真的我今天不是去做公益，我覺得花了錢，我就會有預期心理，而沒有得到你的預期報酬，你當然會有不滿足的地方，不然怎麼會有消基會呢？不然你怎麼不跟老闆談理想呢？對吧！</p>
+<p>雖然前面說了很多缺點，但其實我也只是想要做到 <strong>Ruddy</strong> 老師說的，你覺得操作者體驗不好？那就說出來啊，你不說，怎麼會有人知道呢！</p>
+<p>自己期許下一屆的 <strong>Webconf</strong> 會更好，我還是很感謝主辦方辛苦主辦這一切，但你知道的，完美並不完美，如果這世界都只有一種聲音，就不正常了是吧。</p>
+<p>另外筆記內容可能不是那麼正確，可以參考官方提供的 <a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FwHBNj8NPQamxPecU9VXoHQ?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">共筆</a>，裡面記錄的很詳細。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://webconf.tw/">Webconf Taiwan 2023</a></li>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/@webconf/BkImQ0Ds3/%2FwHBNj8NPQamxPecU9VXoHQ?utm_source=badge&utm_medium=badge&utm_campaign=webconf2023">Webconf Taiwan 2023 共筆</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Other/" rel="tag"><i class="fa fa-tag"></i> Other</a>
+              <a href="/tags/Life/" rel="tag"><i class="fa fa-tag"></i> Life</a>
+              <a href="/tags/WebConf/" rel="tag"><i class="fa fa-tag"></i> WebConf</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/11/20230811/" rel="prev" title="[Life Note] - WebConf Taiwan 2023 技術研討會">
+      <i class="fa fa-chevron-left"></i> [Life Note] - WebConf Taiwan 2023 技術研討會
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/28/20240128/" rel="next" title="[Flutter Note] - 前端拓展技能樹之 Flutter 安裝篇[macOS]">
+      [Flutter Note] - 前端拓展技能樹之 Flutter 安裝篇[macOS] <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BA%E8%AB%87-Vue-js-%E7%9A%84%E7%8B%80%E6%85%8B%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">淺談 Vue.js 的狀態管理模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%B3%B3%E2%80%A7%E6%A5%B5%E6%84%8F%EF%BC%9F%EF%BC%81"><span class="nav-number">2.2.</span> <span class="nav-text">鳳‧極意？！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%9E%E9%9B%B6%E6%89%93%E9%80%A0%E5%89%8D%E7%AB%AF%E6%95%88%E8%83%BD%E7%9B%A3%E6%B8%AC%E7%B3%BB%E7%B5%B1"><span class="nav-number">2.2.1.</span> <span class="nav-text">從零打造前端效能監測系統</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%97%9D%E8%A1%93%E7%95%8C%E7%B7%9A%E8%B6%85%E9%80%B2%E5%8C%96-%E5%BE%9E%E5%89%B5%E4%BD%9C%E5%88%B0%E5%AF%A6%E8%B8%90%EF%BC%8C%E6%8E%A2%E7%B4%A2%E7%94%9F%E6%88%90%E5%BC%8F%E8%97%9D%E8%A1%93%E8%88%87%E5%89%8D%E7%AB%AF%E4%BA%92%E5%8B%95%E6%8A%80%E8%A1%93%E7%9A%84%E5%85%B1%E8%88%9E"><span class="nav-number">2.3.</span> <span class="nav-text">藝術界線超進化-從創作到實踐，探索生成式藝術與前端互動技術的共舞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%88%E9%A4%90%E6%99%82%E9%96%93"><span class="nav-number">2.4.</span> <span class="nav-text">午餐時間</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B3%87%E8%A8%8A%E6%9E%B6%E6%A7%8B%E8%A8%AD%E8%A8%88%E6%96%B0%E9%AB%94%E9%A9%97%EF%BC%9A%E5%9C%A8%E9%9C%80%E6%B1%82%E6%83%85%E5%A2%83%E4%B8%AD%E9%81%8B%E7%94%A8%E9%A0%98%E5%9F%9F%E4%BA%8B%E4%BB%B6%E5%88%86%E6%9E%90%E6%8F%8F%E8%BF%B0%E7%B5%90%E6%A7%8B%E5%8C%96%E5%85%A7%E5%AE%B9"><span class="nav-number">2.5.</span> <span class="nav-text">資訊架構設計新體驗：在需求情境中運用領域事件分析描述結構化內容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E8%86%A8%E8%84%B9%E6%9C%83%E6%88%90%E7%82%BA%E8%B3%87%E8%A8%8A%E5%9E%83%E5%9C%BE%E5%A0%B4"><span class="nav-number">2.5.1.</span> <span class="nav-text">需求膨脹會成為資訊垃圾場</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%90%E6%B8%85%E9%9C%80%E6%B1%82%E5%8F%8A%E5%85%B7%E9%AB%94%E5%8C%96%E9%9C%80%E6%B1%82"><span class="nav-number">2.5.2.</span> <span class="nav-text">釐清需求及具體化需求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A1%E5%AF%86%E7%A2%BC%E6%99%82%E4%BB%A3%E9%99%8D%E8%87%A8%EF%BC%81%E4%BD%BF%E7%94%A8-Passkeys-%E6%89%93%E9%80%A0%E7%84%A1%E5%AF%86%E7%A2%BC%E9%A9%97%E8%AD%89%E6%9C%8D%E5%8B%99"><span class="nav-number">2.6.</span> <span class="nav-text">無密碼時代降臨！使用 Passkeys 打造無密碼驗證服務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WebAuthn-Web-Authentication"><span class="nav-number">2.6.1.</span> <span class="nav-text">WebAuthn(Web Authentication)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SigUp-%E5%8F%8A-SignIn"><span class="nav-number">2.7.</span> <span class="nav-text">SigUp 及 SignIn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Library"><span class="nav-number">2.7.1.</span> <span class="nav-text">Library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo"><span class="nav-number">2.7.2.</span> <span class="nav-text">Demo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E5%8D%88%E8%8C%B6%E6%99%82%E9%96%93"><span class="nav-number">2.8.</span> <span class="nav-text">下午茶時間</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%B7%EF%BC%81%E7%8E%A9%EF%BC%81%E5%95%A5%E9%AC%BCCSS"><span class="nav-number">2.9.</span> <span class="nav-text">酷！玩！啥鬼CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beyond-Technology-%E6%8A%80%E8%A1%93%E4%B9%8B%E5%A4%96-%E5%BE%9E%E5%80%8B%E4%BA%BA%E8%BA%AB%E5%BF%83%E5%AE%89%E9%A0%93%E5%88%B0%E4%BA%BA%E9%A1%9E%E7%A6%8F%E7%A5%89%E8%BF%BD%E6%B1%82"><span class="nav-number">2.10.</span> <span class="nav-text">Beyond Technology 技術之外 - 從個人身心安頓到人類福祉追求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2023/08/12/20230812/",
+      identifier: "2023/08/12/20230812/",
+      title     : "[Life Note] - WebConf Taiwan 2023 技術研討會 Part 2",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

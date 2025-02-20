@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言在之前 The F2E - 第二屆 前端 &amp; UI 修練精神時光屋 只會切版時候的筆者，在其中一關 第七週 - ChatRoom 匿名聊天室 第一次聽到了 Firebase 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 Node.js 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note] — Google Firebase DB 怎麼用(前端串接)？">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/08/09/20200809/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言在之前 The F2E - 第二屆 前端 &amp; UI 修練精神時光屋 只會切版時候的筆者，在其中一關 第七週 - ChatRoom 匿名聊天室 第一次聽到了 Firebase 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 Node.js 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-08-09T14:51:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.814Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="DB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/08/09/20200809/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Tool Note] — Google Firebase DB 怎麼用(前端串接)？ | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/08/09/20200809/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note] — Google Firebase DB 怎麼用(前端串接)？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-08-09 22:51:00" itemprop="dateCreated datePublished" datetime="2020-08-09T22:51:00+08:00">2020-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/DB/" itemprop="url" rel="index"><span itemprop="name">DB</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200809/firebase_logo.png" alt="Firebase"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>在之前 <a target="_blank" rel="noopener" href="https://www.hexschool.com/2019/06/14/2019-06-14-the_f2e/">The F2E - 第二屆 前端 &amp; UI 修練精神時光屋</a> 只會切版時候的筆者，在其中一關 <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/The-F2E-Challenge/tree/master/chatroom">第七週 - ChatRoom 匿名聊天室</a> 第一次聽到了 <strong>Firebase</strong> 這個玩意兒，沒想到將近快一年之後才真正去學習，藉著這次開始學習 <strong>Node.js</strong> 課程，趁著記憶猶新，趕快再來一篇筆記，還不會的朋友也歡迎一起上車。</p>
+<span id="more"></span>
+
+<p>本篇文章一樣不會過於允長及深入，會教基本的 <strong>CRUD</strong>，有興趣的前端仔不會後端也可以靠這個做出一個小全端 <strong>Side Project</strong>。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200809/sample.gif" alt="各種服務"></p>
+<p>如果還沒聽過 <strong>Firebase</strong> 的話這邊簡短介紹一下。<strong>Firebase</strong> 是 <strong>後端服務平台(Backend as a Services，BaaS)</strong>，在筆者開始學習的時候已經改過版本，現在也提供了免費的 <strong>數據分析、雲端訊息推播、通知系統、備份、Log 報告…等等</strong>(看購買的課程影片上的 <strong>Firebase</strong> 似乎已經是幾年前了)。</p>
+<p>而 <strong>Firebase</strong> 並非剛開始就是 <strong>Google</strong> 的，<strong>2011年</strong> 成立一直到了 <strong>2014年10月</strong> 才被 <strong>Google</strong> 收購；而這次我們會介紹 <strong>Firebase</strong> 的 <strong>Database</strong>！</p>
+<hr>
+<h3 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h3><h4 id="踏出第一步"><a href="#踏出第一步" class="headerlink" title="踏出第一步"></a>踏出第一步</h4><p>首先上 <strong><a target="_blank" rel="noopener" href="https://firebase.google.com/">Firebase 網站</a></strong>，然後點選 <strong>Get Started</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step1.png" alt="step1"></p>
+<p>然後新增一個專案，並且取一個專案名稱。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step2.png" alt="step2"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step3.png" alt="step3"></p>
+<p>接著可以選擇是否要使用 <strong><a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/?hl=zh-TW">Google Analytics (分析)</a></strong>，這邊可以選擇不開啟。</p>
+<blockquote>
+<p>之後會寫一篇文章來介紹 <strong>GA</strong> 及 <strong>GTM</strong>，剛好最近專案有碰到，這是一個很強大的 <strong>分析、行銷</strong> 工具(註1)。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step4.gif" alt="step4"></p>
+<h4 id="接通管線"><a href="#接通管線" class="headerlink" title="接通管線"></a>接通管線</h4><p><img src="/images/others/loading.gif" data-original="/images/20200809/step5.png" alt="step5"></p>
+<p>接著點選 <code>&lt;/&gt;</code> 這個符號，然後註冊一個網頁應用程式，下方的代管選項可以不必勾選，所謂的代管可以參考 <a target="_blank" rel="noopener" href="https://andy6804tw.github.io/2018/01/29/firebase-hosting-deploy/">Firebase Hosting 靜態網站部署</a>，有點類似於 <strong>Github Page</strong> 的概念。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step6.png" alt="step6"></p>
+<p>接著完成後就會出現一大串 <strong>JS Code</strong>，這時候可以先保存下來，我們將會做一個簡單的教學。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/step7.png" alt="step7"></p>
+<blockquote>
+<p>之後找不到 <strong>Firebase SDK</strong> 的話，可以至 <strong>Firebase</strong> 網頁，點選左邊 <strong>專案總覽</strong> 旁的 <strong>齒輪</strong>，然後再點選 <strong>專案設定</strong>，接著畫面滑到底就會有 <strong>Firebase SDK snippet</strong>。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/Firebase_SDK_snippet.png" alt="Firebase SDK"></p>
+<blockquote>
+<p>註1：<em>2020&#x2F;09&#x2F;13 寫了一篇 <strong><a href="https://rexhung0302.github.io/2020/09/13/20200913/">[Tool Notes] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？</a></strong> 對行銷或統計甚至對 <strong>GA、GTM</strong> 有興趣都可以參考。</em></p>
+</blockquote>
+<hr>
+<h3 id="筆者帶進門"><a href="#筆者帶進門" class="headerlink" title="筆者帶進門"></a>筆者帶進門</h3><h4 id="建立線上資料庫"><a href="#建立線上資料庫" class="headerlink" title="建立線上資料庫"></a>建立線上資料庫</h4><p>再來我們新增一個專案，然後新增一支 <strong>index.html</strong>，檔案，然後在 <strong>head</strong> 處引入剛剛複製的那些代碼。 </p>
+<p>這邊有個地方很重要，在那串代碼裡面有一行寫著 <code>&lt;!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#available-libraries --&gt;</code>，這個意思是提醒使用者在 <strong>Firebase</strong> 眾多的功能當中你需要用到什麼功能就要分別去引入，這邊是使用 <strong>Database</strong> 的功能所以我們加上這行 <code>&lt;script src=&quot;https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js&quot;&gt;&lt;/script&gt;</code> 就可以使用 <strong>firebase-database</strong> 的功能啦！</p>
+<p>接下來讓我們回到 <strong>Firebase</strong> 的網頁，點選左邊的 <strong>Database</strong> 進入後滑到下方，在標題顯示 <code>您也可以選用「Realtime Database」</code> 的地方，選擇建立一個新的 <strong>Realtime Database</strong> 資料庫。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/create_db.png" alt="create_db"></p>
+<blockquote>
+<p>因為跟著影片學習做筆記的原因，會先使用 <strong>Realtime Database</strong> 當作資料庫。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/mode_example.gif" alt="mode_example"></p>
+<p>打開後會有兩種模式可以選擇，可以稍微參考一下，然後我們選擇第一種，因為我們還會再作修改，不過這邊可以先有一個觀念，這個 <strong>即時資料庫安全性規則</strong> 是可以透過客製化設定的，比方說 <strong>誰能改、誰能閱讀、開放修改到何時…等等</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/clear_DB.png" alt="clear_DB"></p>
+<p>之後進入資料庫會發現一片空白，但有你剛剛專案的名稱，緊接著就來說明如何操作資料庫吧！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/ready.png" alt="小夫 我的資料要近來囉！"></p>
+<hr>
+<h3 id="像極了套件"><a href="#像極了套件" class="headerlink" title="像極了套件"></a>像極了套件</h3><h4 id="自訂規則"><a href="#自訂規則" class="headerlink" title="自訂規則"></a>自訂規則</h4><p>如果我們平常會使用的套件，人家怎麼定義，我們就如何使用，因為往往作者已經幫我們省去麻煩的設定，而我們只需要使用作者定義好的方法，就可以達到我們想要的效果！</p>
+<p>在我們講解如何操作資料庫的時候必須要更改一下我們資料庫的設定，剛剛提及的 <strong>即時資料庫安全性規則</strong> 便是我們第一件要處理的事情。</p>
+<p>在我們進入 <strong>Firebase</strong> 的 <strong>Database</strong> 後，可以看到上方有一個 <strong>規則</strong> 進入後會看到以下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;rules&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;.read&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&quot;.write&quot;</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>為了讓我們好測試及修改，這邊全部改為 <strong>true</strong>，如下方程式碼，然後點選跳出來的 <strong>發布</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;rules&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;.read&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;.write&quot;</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/rule.png" alt="修改規則"></p>
+<h4 id="ref-、set"><a href="#ref-、set" class="headerlink" title="ref()、set()"></a>ref()、set()</h4><p>與此時，你已經能操作資料庫了，只是你可能還不知道怎麼新增資料進去資料庫，讓我們一步一步慢慢來！</p>
+<p>再來我們跳回剛剛新增的 <strong>index.html</strong>，然後在引入的那些程式碼後面再加上 <code>firebase.database().ref().set(&#39;Hello Firebase!&#39;);</code>，緊接著打開 <strong>index.html</strong> 你會發現什麼事情都沒發生，這時候再跳回去 <strong>Firebase</strong> 的 <strong>Database</strong>，會發現剛剛 <code>set()</code> 裡的 <strong>Hello Firebase!</strong> 跑到資料庫了！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200809/new_data.png" alt="新資料"></p>
+<p>到這邊你會發現剛剛那一行的一些神奇之處 <code>firebase.database()</code> 即是使用 <strong>database</strong> 的意思，而 <code>ref()</code> 則是你指定的路徑，有點類似資料庫名稱，最後是 <code>set()</code>，這個毫無疑問就是新增，由於沒有指定路徑，所以會直接把所有東西都洗掉，然後加上我們指定的文字！</p>
+<h4 id="on-、once"><a href="#on-、once" class="headerlink" title="on()、once()"></a>on()、once()</h4><p>如果我們可以新增資料進去資料庫，也該有方法可以拿資料出來了吧？這兩個語法 <code>on()</code>、<code>once()</code> 就是會把資料從資料庫拿出來，差別在於前方的是類似即時更新，後方只會去資料庫拿一次，所以當我們在做聊天室的時候，寫上一個 <code>firebase.database().ref().on()</code> 就會方便許多，不用一直再去跟資料庫要，只要有更新即會觸發後續事件。</p>
+<p>這兩個語法裡面都是接上 <code>function()</code>，以下為範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firebase.<span class="title function_">database</span>().<span class="title function_">ref</span>().<span class="title function_">once</span>(<span class="keyword">function</span>(<span class="params">item</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item.<span class="title function_">val</span>());</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="push-、child-、remove-、child"><a href="#push-、child-、remove-、child" class="headerlink" title="push()、child()、remove()、child()"></a>push()、child()、remove()、child()</h4><p>前方我們有提到 <code>set()</code>，但你可能有時候只是想把東西丟進去不要洗掉全部的資料，這時候就要使用 <code>push()</code>，而每一個 <code>push()</code> 也會產生一個亂碼的 <code>Key</code>。</p>
+<p>而有新增就會有刪除，在我們把資料 <code>on()</code> 或 <code>once()</code> 出來的時候，我們可以順便在 <strong>DOM</strong> 上塞上 <strong>data-key&#x3D;”xxxx”</strong> 之後我們需要刪除，就需要帶特定 <strong>key</strong> 進去，下方為範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firebase.<span class="title function_">database</span>().<span class="title function_">ref</span>().<span class="title function_">child</span>(key).<span class="title function_">remove</span>();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>切記，怎麼新增，資料庫就會怎麼排列，建議在 <code>ref()</code> 就規劃好資料庫怎麼放。</p>
+</blockquote>
+<h4 id="orderByChild-、forEach"><a href="#orderByChild-、forEach" class="headerlink" title="orderByChild()、forEach()"></a>orderByChild()、forEach()</h4><p>當我們從資料庫拿資料出來多少會想排列，比方說從高到低，或從低到高，這時候就必須使用 <code>orderByChild()</code> 了，範例碼如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firebase.<span class="title function_">database</span>().<span class="title function_">ref</span>().<span class="title function_">orderByChild</span>(<span class="string">&#x27;weight&#x27;</span>).<span class="title function_">once</span>();</span><br></pre></td></tr></table></figure>
+
+<p>而會提到 <code>forEach()</code> 是因為 <code>orderByChild()</code> 過濾出來的資料，必須在用 <code>forEach()</code> 取出每一個內容。</p>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊附上一個使用 <strong>Google Firebase</strong> 的小專案，是六角學院的小作業，使用 <strong>Side Project</strong> 新增刪除自己的 <strong>BMI</strong>，有興趣可以自行 <strong>Clone</strong> 下來研究。</p>
+<p>這個作樂使用 <a target="_blank" rel="noopener" href="https://dwatow.github.io/2019/01-26-node-with-env-first/">Dotenv(讀取環境變數的套件)</a> 所以可以放心的 <strong>Clone</strong> 下來，並且修改完成之後上傳到自己的 <strong>GiuHub</strong>。</p>
+<p>Demo: <a href="https://rexhung0302.github.io/Hexschool-firebase-bmi-practice/index.html">傳送門</a></p>
+<p>Source Code: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-firebase-bmi-practice">傳送門</a></p>
+<blockquote>
+<p><em>題外話：此作業有使用一鍵指令快數部署靜態資源至 GitHub，有興趣可參考 <a href="https://rexhung0302.github.io/2020/08/04/20200804/">[Git Notes] — 快速部署 Vue Cli 靜態資源至 GitHub Pages</a>。</em></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實還有更多的方法沒有寫上來，但基本的操作流程就是這樣，想好好的用好一個套件或是服務，那就是 <strong>document</strong> 讀熟就對啦！</p>
+<blockquote>
+<p>看來下次要做到聊天室就不怕沒資料庫了。</p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="http://dog0416.blogspot.com/2018/06/firebase-firebase.html">[Firebase] Firebase 介紹與建立專案</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://andy6804tw.github.io/2018/01/29/firebase-hosting-deploy/">Firebase Hosting 靜態網站部署</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dwatow.github.io/2019/01-26-node-with-env-first/">《Chris 技術筆記》- Node.js 使用 .env 加上環境變數</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/DB/" rel="tag"><i class="fa fa-tag"></i> DB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/06/20200806/" rel="prev" title="[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手">
+      <i class="fa fa-chevron-left"></i> [NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/11/20200811/" rel="next" title="[JavaScript Note] — 關於 Url 轉址及 取得參數">
+      [JavaScript Note] — 關於 Url 轉址及 取得參數 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97"><span class="nav-number">2.1.</span> <span class="nav-text">使用指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B8%8F%E5%87%BA%E7%AC%AC%E4%B8%80%E6%AD%A5"><span class="nav-number">2.1.1.</span> <span class="nav-text">踏出第一步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E9%80%9A%E7%AE%A1%E7%B7%9A"><span class="nav-number">2.1.2.</span> <span class="nav-text">接通管線</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%86%E8%80%85%E5%B8%B6%E9%80%B2%E9%96%80"><span class="nav-number">2.2.</span> <span class="nav-text">筆者帶進門</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E7%B7%9A%E4%B8%8A%E8%B3%87%E6%96%99%E5%BA%AB"><span class="nav-number">2.2.1.</span> <span class="nav-text">建立線上資料庫</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%83%8F%E6%A5%B5%E4%BA%86%E5%A5%97%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">像極了套件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E8%A8%82%E8%A6%8F%E5%89%87"><span class="nav-number">2.3.1.</span> <span class="nav-text">自訂規則</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref-%E3%80%81set"><span class="nav-number">2.3.2.</span> <span class="nav-text">ref()、set()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#on-%E3%80%81once"><span class="nav-number">2.3.3.</span> <span class="nav-text">on()、once()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#push-%E3%80%81child-%E3%80%81remove-%E3%80%81child"><span class="nav-number">2.3.4.</span> <span class="nav-text">push()、child()、remove()、child()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orderByChild-%E3%80%81forEach"><span class="nav-number">2.3.5.</span> <span class="nav-text">orderByChild()、forEach()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.4.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/08/09/20200809/",
+      identifier: "2020/08/09/20200809/",
+      title     : "[Tool Note] — Google Firebase DB 怎麼用(前端串接)？",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

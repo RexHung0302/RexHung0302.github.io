@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="成果 &amp; 程式碼 Demo： 傳送門Code Source： 點我  Introduction &amp; 前言在前陣子得知 The F2E — 前端修練精神時光屋 之後剛好發現今年即將舉辦第二屆的切版大賽(？！)想想地下城好像還剩下幾樓，就想著看開賽前能完成多少是多少了，順便當練習。 這次拼圖有點免強做出來，原本打算再複習一下 Webpack 跟 Vue.js ，結果發現有些眉眉角角還需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖">
+<meta property="og:url" content="https://rexhung0302.github.io/2019/06/25/20190625/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="成果 &amp; 程式碼 Demo： 傳送門Code Source： 點我  Introduction &amp; 前言在前陣子得知 The F2E — 前端修練精神時光屋 之後剛好發現今年即將舉辦第二屆的切版大賽(？！)想想地下城好像還剩下幾樓，就想著看開賽前能完成多少是多少了，順便當練習。 這次拼圖有點免強做出來，原本打算再複習一下 Webpack 跟 Vue.js ，結果發現有些眉眉角角還需">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2019-06-25T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.649Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2019/06/25/20190625/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2019/06/25/20190625/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hero Of UnderGround 地下城] — 12F Puzzle 拼圖
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-06-25 12:00:00" itemprop="dateCreated datePublished" datetime="2019-06-25T12:00:00+08:00">2019-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/HeroOfUnground-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" itemprop="url" rel="index"><span itemprop="name">HeroOfUnground[地下城]</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="成果-程式碼"><a href="#成果-程式碼" class="headerlink" title="成果 &amp; 程式碼"></a>成果 &amp; 程式碼</h2><blockquote>
+<p><em>Demo： <a href="https://rexhung0302.github.io/JS-and-Fighter/JS-and-Fighter-12F/dist/index.html">傳送門</a><br/><br>Code Source： <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter/tree/master/JS-and-Fighter-12F">點我</a></em></p>
+</blockquote>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>在前陣子得知 <a target="_blank" rel="noopener" href="https://www.facebook.com/groups/173311386703334/?ref=group_header">The F2E — 前端修練精神時光屋</a> 之後剛好發現今年即將舉辦第二屆的切版大賽(？！)想想地下城好像還剩下幾樓，就想著看開賽前能完成多少是多少了，順便當練習。</p>
+<p>這次拼圖有點免強做出來，原本打算再複習一下 <strong>Webpack</strong> 跟 <strong>Vue.js</strong> ，結果發現有些眉眉角角還需要修改呀。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*BRR_0ftKoi9dfKHQXf137A.png" alt="12F大魔王 — 拼圖"></p>
+<span id="more"></span>
+
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>由於JS地下城每個BOSS的弱點都不一樣，每一層都要由弱點去進行攻略，本次BOSS的弱點有四項。</p>
+<ol>
+<li><p>【特定技術】可用 JS 框架，當然你想用原生 JS，也是 ok 的。</p>
+</li>
+<li><p>【特定技術】在設計稿上，總計有三個介面。</p>
+</li>
+<li><p>【特定技術】前端之碑審核時，會特別注重「遊戲體驗」</p>
+</li>
+<li><p>【書寫能力】請寫篇部落格，描述你在做此關時，「所遇到的瓶頸，以及你是如何克服的」</p>
+</li>
+</ol>
+<hr>
+<h3 id="關於畫面"><a href="#關於畫面" class="headerlink" title="關於畫面"></a>關於畫面</h3><p>其實到雙數樓層後，畫面一直都是基本要求，看了十個人就會有十個不同的切版方式，你還是需要找到自己最好用也最好明白的方式去切。</p>
+<p>這次的拼圖對自己來說算是第一次嘗試實作的功能，所以就先到處爬爬文，整理完之後發現有兩條路可以走。</p>
+<ol>
+<li><p><strong>HTML5</strong> 新增的 <strong>draggable</strong></p>
+</li>
+<li><p>使用 <strong>addEventListener</strong> 去處理</p>
+</li>
+</ol>
+<p>個人是選擇前者去使用，因為基本會用到的功能都差不多有了，直接加在 <strong>HTML</strong> 的 <strong>Element</strong> 上即可。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2664/1*NlGuMXyjoYa1Wrox8TxLfw.gif" alt="今日主角 拖曳"></p>
+<hr>
+<h3 id="前人種樹"><a href="#前人種樹" class="headerlink" title="前人種樹"></a>前人種樹</h3><p>這邊需要先感謝 <a target="_blank" rel="noopener" href="https://github.com/HuiyuLiz">HuiyuLiz</a> 大神的文章，看完大神推薦的兩位大大神影片後其實這樓基本上都能解決了。</p>
+<p>分別是 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=C22hQKE_32c">Drag &amp; Drop With Vanilla JS</a></p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/3264/1*RPTu7wtqIEfXa2JrbPMguw.png"></p>
+<p>還有 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av43463663/?p=1">鼻孔哥JS案例-拼图游戏</a></p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*nbTHZUOfkasTOaMeBCJVsw.png"></p>
+<hr>
+<h3 id="draggable-有什麼好料？"><a href="#draggable-有什麼好料？" class="headerlink" title="draggable 有什麼好料？"></a>draggable 有什麼好料？</h3><p>其實照著影片看完，先了解到你會用到的幾個 <strong>draggable</strong> 屬性就可以了。首先在你要拖曳的地方加上 <strong>draggable &#x3D; true</strong>，然後加上下方的事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ondragstart --&gt; 拖曳開始時發生</span><br><span class="line">ondragover  --&gt; 拖曳經過時發生</span><br><span class="line">ondragleave --&gt; 拖曳離開目標區域時發生</span><br><span class="line">ondragend   --&gt; 拖曳停止時發生(放開滑鼠)</span><br><span class="line">ondrop      --&gt; 拖曳停止時發生(放開滑鼠)</span><br></pre></td></tr></table></figure>
+
+<p>在HTML的DOM上直接加上去就不用再 <strong>addEventListener</strong> 一次，然後從最上面開始添加。</p>
+<p>首先 <strong>ondragstart</strong> 抓起時我們必須讓原本殘留在原地的圖片消失，就必須加上 <strong>CSS</strong> <strong>disable:none</strong> ，但是這時候原本的圖片會直接消失，必須加上 <strong>setTimeout</strong> 來防止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> (e.<span class="property">target</span>.<span class="property">className</span> += <span class="string">&quot; invisible&quot;</span>), <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接下來我們必須用到 <strong>ondragover</strong> 幫我們加上 <strong>hover</strong> 的效果，但是因為我們的 <strong>ondrop</strong> 事件會被 <strong>ondragover</strong> 事件不斷發生給卡住，所以這邊必須在  <strong>ondragover</strong> 事件裡面加上 <strong>e.preventDefault()</strong> 來防止事件不斷產生，然後可以再透過 <strong>ondragleave</strong> 事件來取消 <strong>hover</strong> 的樣式。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*umudwkR8NrcQuB-oeYW22Q.gif" alt="hover 事件"></p>
+<p>最後我們必須透過 <strong>ondrop</strong> 來判斷你丟的拼圖是不是正確位子，這邊我使用拼圖 <strong>ID</strong> 最後一個數字和拼圖格子上的 <strong>ID</strong> 最後一個數字來比對，正確就加上發光的 <strong>CSS</strong> 。</p>
+<blockquote>
+<p>這邊還可以用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData"><strong>DataTransfer.setData()</strong> </a>的方式來傳遞 <strong>ID</strong> 值，不過在使用前我已經用陣列去判斷哪個地方已經完成了所以沒用到，不過算是又學了一個新的方法。</p>
+</blockquote>
+<p>最後因為扔下拼圖的時候我必須去除掉 <strong>display:none</strong> 的 <strong>CSS</strong> 樣式，但是我把去除樣式寫在 <strong>ondrop</strong> 裡沒有反應，最後加在 <strong>ondragend</strong> 上才有反應，這邊還需要去研究一下為什麼會這樣。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2120/1*Bi2gjKOjNZCbSBLxkdrvPg.png"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次拼圖關卡也拖了好久的時間，不過每次打王就會學到新的技能，這才是最重要的。( 雖然這次偷懶很多地方，要改的地方也很多…</p>
+<p>最近總結一下自己學了一這陣子的程式發現不管學程式也好，學其他東西也是，都會在你剛開始的時候覺得自己學什麼都好快而且收穫滿滿，那個感覺也超棒，但是在一段時間後會發現自己突然卡住了，而且發現好多事情你突然發現不是那麼簡單，挫折感會挺重的。我想是因為剛開始什麼都不會，所以學什麼都快，但是因為碰到的都是基礎層面，所以一段時間後就會發現你了解的越多，你不懂的也越多。但是我們往往都是在感覺突破不了的時候突然突破了會發現自己成長好多，現在的自己就像是卡住一樣，我想是時候好好想想並規劃自己接下來該怎麼走了。</p>
+<p>最後除了繼續努力之外還是要列出檢討的地方，然後希望 <strong>F2E</strong> 開賽前還有時間朝下一關繼續加油，完畢。</p>
+<ul>
+<li><p>JS</p>
+</li>
+<li><p>邏輯</p>
+</li>
+<li><p>文筆</p>
+</li>
+<li><p><del><em>體重</em></del></p>
+</li>
+</ul>
+<h3 id="我的其他範例"><a href="#我的其他範例" class="headerlink" title="我的其他範例"></a>我的其他範例</h3><ul>
+<li><strong>Hero Of UnderGround — 地下層系列</strong><blockquote>
+<p><em>Demo &amp; Blog：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/JS-and-Fighter">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Vue系列-—"><a href="#Vue系列-—" class="headerlink" title="Vue系列 —"></a>Vue系列 —</h3><ul>
+<li><strong>[Vue Notes] — Vue-Cli #1 初次見面</strong><blockquote>
+<p><em>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/vue-notes-vue-cli-1-%E5%88%9D%E6%AC%A1%E8%A6%8B%E9%9D%A2-e2d868ee04aa">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="CSS系列-—"><a href="#CSS系列-—" class="headerlink" title="CSS系列 —"></a>CSS系列 —</h3><ul>
+<li><strong>[CSS Notes] — 談談CSS模組化</strong><blockquote>
+<p><em>Blog：<a target="_blank" rel="noopener" href="https://medium.com/@zehung860486/css-notes-css%E6%A8%A1%E7%B5%84%E5%8C%96-3bb03e72523e">點我</a></em></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/HuiyuLiz">HuiyuLiz</a> 大大 —<a target="_blank" rel="noopener" href="https://github.com/HuiyuLiz/js-puzzle"> JavaScript 題目篇 — 新手 JS 地下城</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ChenDarYen">ChenDarYen</a> 大大 — <a target="_blank" rel="noopener" href="https://github.com/ChenDarYen/puzzle">Vue Puzzle</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=C22hQKE_32c">Drag &amp; Drop With Vanilla JS</a></li>
+<li>鼻孔哥 — <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av43463663/?p=1">鼻孔哥JS案例-拼图游戏</a><br><a target="_blank" rel="noopener" href="https://www.gamer.com.tw/index2.php?ad=N">*巴哈姆特 舒壓用</a>*</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/18/20190618/" rel="prev" title="[Tool Note] — 關於Webpack #1 - 第一次就上手">
+      <i class="fa fa-chevron-left"></i> [Tool Note] — 關於Webpack #1 - 第一次就上手
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/07/14/20190714/" rel="next" title="[PHP Note] — 關於 php-Redis install on Mac OSX">
+      [PHP Note] — 關於 php-Redis install on Mac OSX <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E6%9E%9C-%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">1.</span> <span class="nav-text">成果 &amp; 程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">3.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E7%95%AB%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">關於畫面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%BA%BA%E7%A8%AE%E6%A8%B9"><span class="nav-number">3.2.</span> <span class="nav-text">前人種樹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#draggable-%E6%9C%89%E4%BB%80%E9%BA%BC%E5%A5%BD%E6%96%99%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">draggable 有什麼好料？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E5%85%B6%E4%BB%96%E7%AF%84%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">我的其他範例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E7%B3%BB%E5%88%97-%E2%80%94"><span class="nav-number">4.2.</span> <span class="nav-text">Vue系列 —</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E7%B3%BB%E5%88%97-%E2%80%94"><span class="nav-number">4.3.</span> <span class="nav-text">CSS系列 —</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.4.</span> <span class="nav-text">參考網站</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2019/06/25/20190625/",
+      identifier: "2019/06/25/20190625/",
+      title     : "[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

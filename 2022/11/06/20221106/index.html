@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 你開發使用 Tab 還是 Space 縮排呢？兩格還是四格？單引號還是雙引號？ 哎呀，git pull 下來怎麼排版又跑掉了… 這個 function 傳進來的參數到底是 string 還是 number？ 來吧！這篇文章將你的痛處一次解決。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸">
+<meta property="og:url" content="https://rexhung0302.github.io/2022/11/06/20221106/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 你開發使用 Tab 還是 Space 縮排呢？兩格還是四格？單引號還是雙引號？ 哎呀，git pull 下來怎麼排版又跑掉了… 這個 function 傳進來的參數到底是 string 還是 number？ 來吧！這篇文章將你的痛處一次解決。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2022-11-06T02:44:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.998Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2022/11/06/20221106/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2022/11/06/20221106/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-11-06 10:44:00" itemprop="dateCreated datePublished" datetime="2022-11-06T10:44:00+08:00">2022-11-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Next/" itemprop="url" rel="index"><span itemprop="name">Next</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>12 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20221106/banner.png" alt="Next.js + TS + ESLint + Prettier"></p>
+<p>你開發使用 <strong>Tab</strong> 還是 <strong>Space</strong> 縮排呢？兩格還是四格？單引號還是雙引號？</p>
+<p>哎呀，<code>git pull</code> 下來怎麼排版又跑掉了…</p>
+<p>這個 <strong>function</strong> 傳進來的參數到底是 <strong>string</strong> 還是 <strong>number</strong>？</p>
+<p>來吧！這篇文章將你的痛處一次解決。</p>
+<span id="more"></span>
+
+<p>如果你剛好想配置專案的 <strong>Alias</strong>，但對於 <strong>ESlint</strong> 及 <strong>TypeScript</strong> 怎麼設定毫無頭緒，也適合這篇文章的閱讀，最後文章會附上 <strong>Source Code</strong>。</p>
+<blockquote>
+<p><em><strong>統一團隊的 Coding Style 吧，筆者認為 TS + ESLint + Prettier 可以稱為前端規範三劍客</strong></em></p>
+</blockquote>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>這篇文章預設讀者已經有基本的 <code>npm install</code> 能力，或是已經涉略過一點 <strong>CRA</strong> 框架。</p>
+<p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>會基本的英文</li>
+<li>會使用 <strong><a target="_blank" rel="noopener" href="https://www.npmjs.com/">npm</a> install</strong> (或 <strong><a target="_blank" rel="noopener" href="https://yarnpkg.com/">yarn</a></strong>)</li>
+<li><strong>node</strong> 版本 &gt;&#x3D;16.0.0</li>
+<li>有一顆熱忱且耐心的心</li>
+</ul>
+<p>本篇文章將會學到：</p>
+<ol>
+<li>如何將團隊的 <strong>Coding Style</strong> 規範統一</li>
+<li>解決一些可能會碰到的痛點</li>
+<li>避免踩到關於規範套件的坑(也許會慢慢更新上來)</li>
+</ol>
+<hr>
+<h3 id="為何要寫這篇"><a href="#為何要寫這篇" class="headerlink" title="為何要寫這篇"></a>為何要寫這篇</h3><p>最近在建置公司的新專案，有鑒於之前工作時，到後期多個前端一起開發後，常常不同的人有不同的 <strong>VSCode</strong> 配置，有的人希望使用雙引號，有的人希望使用單引號。</p>
+<p>或許單引號雙引號是小事，或許你曾經碰過有人幫你 <strong>Code Review</strong> 後，修改了一點你的邏輯，但是你發現怎麼改了幾百幾千行？只因為他的縮排跟你不同</p>
+<p>為了解決這個情況，在開始接觸 <strong>ESLint</strong> 後，筆者就決定之後的專案要使用了；而講到專案規範也不得不提 <strong>TypeScript</strong>，這次將會使用一個新的專案示範如何將 <strong>ESLint、TypeScript</strong> 還有 <strong>Prettier</strong> 摻在同一個專案變成完美多汁的沙尿牛丸。</p>
+<p>順帶一提，這次不使用 <strong>CRA (Create React App)</strong> 建立普通專案是因為剛好在新的專案中筆者需要使用 <strong>Next</strong>，如果你要使用 <strong>CRA</strong> 或者其他 <strong>SSR、CSP</strong> 也是可以的，安裝起來其實大同小異。</p>
+<p>另外處使這篇文章的產生也是因為筆者在配置 Alias 的路徑時發生一些錯誤，所以想將過程記錄下來。</p>
+<blockquote>
+<p><em><strong>備註：這邊需要提及一下，這篇文章將會適合初始化專案沒有使用預設推薦安裝的人，現在安裝 <strong>Next.js</strong> 的時候會詢問是否要一併安裝，下面將會說到兩種安裝方式。</strong></em></p>
+</blockquote>
+<hr>
+<h3 id="Next-是什麼？"><a href="#Next-是什麼？" class="headerlink" title="Next 是什麼？"></a>Next 是什麼？</h3><blockquote>
+<p><em><strong>如果你已經會使用 Next 且知道這是什麼了，這段可以跳過</strong></em></p>
+</blockquote>
+<p>相信會看到這篇的讀者一定大部分都知道 <strong>Next</strong> 了，但可能有些讀者只有使用過 <strong>CRA</strong>，不用太擔心，如果你使用 <strong>CRA</strong> 也可以照著這篇的方式去安裝。</p>
+<p><strong><a target="_blank" rel="noopener" href="https://nextjs.org/">Next</a></strong> 是基於 <strong>React</strong> 的框架，同時支援 <strong>SSR (Server Side Rendering)</strong> 與 <strong>SSG (Static Side Generation)</strong> 兩種方法，如果你還不清楚什麼是 <strong>SSR、SSG、CSP</strong>…等等的話，可以參考這篇 <a target="_blank" rel="noopener" href="https://israynotarray.com/other/20210529/2519649612/">淺談 SPA、CSR、SSR、MPA、SSG 專有名詞</a> 文章。</p>
+<p>這篇文章就不著墨於這邊太多，簡單說一下通常會使用 <strong>Next.js</strong> 的絕大多情況，當你學習並且使用 <strong>CRA</strong> 在工作上都穩穩妥妥的，在某天風和日麗的情況下，老闆或 <strong>PM</strong> 突然跟你說 <strong>『欸欸，我們來優化一下網站的 SEO 吧！！』</strong>，相信大部分會開始研究 Next 的夥伴們都是從這邊開始的。</p>
+<p>接下來就留給讀者去研究了，如果你有興趣也可以參考這篇鐵人賽文章 - <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20110504/ironman/4269">從零開始學習 Next.js</a>，除了為什麼需要使用及 <strong>CSR、SSR</strong> 等等，也會介紹一系列的使用方式</p>
+<hr>
+<h3 id="安裝方式一"><a href="#安裝方式一" class="headerlink" title="安裝方式一"></a>安裝方式一</h3><p>這是相對簡單的安裝方式，如果你是使用 <strong>CRA</strong> 或者你的專案已經存在一段時間，這時候想要中途加入這些套件，請參照安裝方式二。</p>
+<p>首先初始化專案，這個步驟猶如 <strong>Hello World</strong>，都是各位將建立出偉大專案的第一步，參照 <strong>Next.js</strong> 官網的 <strong><a target="_blank" rel="noopener" href="https://nextjs.org/docs/api-reference/create-next-app">Create Next App</a></strong> 安裝方式。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npx create-next-app@latest</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">or</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn create next-app</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">or</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pnpm create next-app</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/install_next_way_one.png" alt="安裝方式一"></p>
+<p>輸入結束後，<strong>Next.js</strong> 將會詢問三個問題，分別是 <strong>專案名稱</strong>、是否使用 <strong>TypeScript</strong> 以及 是否使用 <strong>ESLint</strong>，如果你都接受使用，這就是安裝最簡單的方式。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/next_architecture.png" alt="專案架構"></p>
+<p>建立成功後會像上圖，該需要的設定檔都會出現了。</p>
+<p>介紹完第二個安裝方式後，將會介紹如何去簡單配置一些設定，還有如何安裝 <strong>Prettier</strong> 及配置 <strong>Alias</strong>。</p>
+<hr>
+<h3 id="安裝方式二"><a href="#安裝方式二" class="headerlink" title="安裝方式二"></a>安裝方式二</h3><p>這個方式適用於專案初始時沒有安裝 <strong>TS、ESLint</strong> 的人，或許剛開始你的專案像下圖一樣起始時沒有安裝這些規範套件的。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/install_next_way_two.png" alt="安裝方式二"></p>
+<h4 id="TypeScript"><a href="#TypeScript" class="headerlink" title="TypeScript"></a>TypeScript</h4><p>先確定路徑在專案內，接著先安裝 <strong>TypeScript</strong>，如果你還不知道 TS 是什麼可以參考 <strong><a target="_blank" rel="noopener" href="https://willh.gitbook.io/typescript-tutorial/introduction/what-is-typescript">什麼是 TypeScript</a></strong>，這邊就不多做介紹。</p>
+<p>在終端機內輸入底下指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -D typescript</span></span><br></pre></td></tr></table></figure>
+
+<p>這時候不會有什麼變化，在設定 <strong>TS</strong> 及 <strong>ESLint</strong> 的時候，都有一個共通點就是需要透過 <strong>Config</strong> 來設定，所以需要先初始化一個設定檔。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/init_tsc.png" alt="初始化設定檔"></p>
+<p>你可以選擇安裝全域的 <strong>TypeScript</strong> 之後使用指令初始化，也可以透過專案裡 <strong>node_modules</strong> 去初始化，如下指令：</p>
+<ul>
+<li>透過全域初始化</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全域安裝 TS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -g typescript</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在專案目錄底下初始化 TS</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">tsc --init</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>透過 <strong>node_modules</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在專案目錄底下初始化 TS 設定檔</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./node_modules/.bin/tsc --init</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em><strong>關於設定檔的內容配置，可以參考 TypeScript 的<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/tsconfig">官方文件</a></strong></em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/next_has_ts_config.png" alt="專案架構"></p>
+<p>這時候看一下專案架構，會發現多了一個 <strong>tsconfig.json</strong>，往後關於一些 <strong>JS</strong> 的規範就可以設定在這裡面。</p>
+<p>接下來我們需要手動把檔案改成 <strong>.tsx</strong> 結尾，這樣 <strong>TypeScript</strong> 才能監測並且檢查檔案有沒有符合規範。</p>
+<p>把專案底下的檔案改完之後，會發現出現很多條紅色蚯蚓，剛開始使用 <strong>TS</strong> 或許會很頭痛，但是日後開發上會幫助很大。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/ts_error_one.png" alt="錯誤一"><br><img src="/images/others/loading.gif" data-original="/images/20221106/ts_error_two.png" alt="錯誤二"></p>
+<p>仔細看一下修改完的檔案出現的錯誤，這時候就要開始去修改 <strong>tsconfig.json</strong> 的配置。</p>
+<p>如果你使用 <strong>Next</strong> 先安裝一下幾個 <strong>types</strong>，有時候程式碼會報錯也是因為套件找不到該程式碼定義的 <strong>types</strong>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D @types/node @types/react @types/react-dom</span><br></pre></td></tr></table></figure>
+
+<p>將 <strong>tsconfig.json</strong> 的配置改為下列：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;es5&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lib&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;dom&quot;</span><span class="punctuation">,</span> <span class="string">&quot;dom.iterable&quot;</span><span class="punctuation">,</span> <span class="string">&quot;esnext&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;allowJs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skipLibCheck&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;strict&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;forceConsistentCasingInFileNames&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;noEmit&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;esModuleInterop&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;esnext&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;resolveJsonModule&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;isolatedModules&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;jsx&quot;</span><span class="punctuation">:</span> <span class="string">&quot;preserve&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;incremental&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;next-env.d.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;**/*.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;**/*.tsx&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;node_modules&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然後重啟專案或者透過 <code>command + p</code> 打開 <strong>VSCode</strong> 的搜尋欄位，輸入 <code>&gt;TypeScript</code> 會有一個重啟 <strong>TS</strong> 的選項可以選擇</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/restart_ts.png" alt="重啟 TS"></p>
+<p>如果你是使用 <strong>Next.js</strong> 這時候會有第一個需要排解的地方，打開 pages&#x2F;index.tsx 會發現引入 <code>import styles from &#39;../styles/Home.module.css&#39;</code> 底下出現紅紅的蚯蚓，要解決的方法就是在專案底下建立 <strong>next-env.d.ts</strong>，然後內容輸入：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference types=&quot;next&quot; /&gt;</span></span><br><span class="line"><span class="comment">/// &lt;reference types=&quot;next/image-types/global&quot; /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">NOTE:</span> This file should not be edited</span></span><br><span class="line"><span class="comment">// see https://nextjs.org/docs/basic-features/typescript for more information.</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/ts_css_error.png" alt="CSS 的錯誤"></p>
+<p>這時候再重啟即可，之後的配置可以隨著專案需求慢慢新增或者修改。</p>
+<h4 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h4><p>裝完 <strong>TS</strong> 接下來就是要安裝 <strong>ESLint</strong>，如果你還不知道這是什麼的話可以參考 <strong><a target="_blank" rel="noopener" href="https://hackmd.io/@oooooo/eslint">ESLint 是什麼？</a></strong>。</p>
+<p>打開終端機，確定目前路徑在專案底下，輸入以下指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -D eslint eslint-config-airbnb eslint-plugin-jsx-a11y</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果你的專案是 Next 才需要底下這行</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -D eslint-config-next</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em><strong>是否要多安裝 <strong>Airbnb</strong> 可以看使用需求，這是一個 <strong>ESLint</strong> 的規範風格，裡面有定義好一些預設的規範，通常較多人使用，但是也比較嚴格，其餘還有 <strong>Standard</strong> 及 <strong>Google</strong> 可以選擇，有興趣的讀者也可以</strong>餵狗(Google)<strong>搜尋一下或參考這篇文章 <a target="_blank" rel="noopener" href="https://israynotarray.com/javascript/20210218/4003233584/">五分鐘快速替專案加上 ESLint</a> 文章底下有介紹各種不同的風格差異，這邊就不多做介紹</strong></em></p>
+</blockquote>
+<p>接下來一樣要初始化 <strong>ESlint</strong> 的設定檔，你可以選擇安裝全域的 <strong>ESLint</strong> 之後使用指令初始化，也可以透過專案裡 <strong>node_modules</strong> 去初始化，如下指令：</p>
+<ul>
+<li>透過全域初始化</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">全域安裝 ESLint</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -g eslint</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在專案目錄底下初始化 ESLint</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">eslint --init</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>透過 <strong>node_modules</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在專案目錄底下初始化 ESLint 設定檔</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./node_modules/.bin/tsc --init</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/init_eslint.gif" alt="初始化 ESLint"></p>
+<p>初始化的時候會分別問一些 <strong>ESLint</strong> 的問題，這些依照專案需求即可，舉例有下面幾個問題，像是你想在什麼情況下使用 <strong>ESLint、專案是用什麼模式導入模組、專案使用哪個框架</strong>…等等</p>
+<ul>
+<li>✔ How would you like to use ESLint? · problems</li>
+<li>✔ What type of modules does your project use? · esm</li>
+<li>✔ Which framework does your project use? · react</li>
+<li>✔ Does your project use TypeScript? · No &#x2F; Yes</li>
+<li>✔ Where does your code run? · browser</li>
+<li>✔ What format do you want your config file to be in? · JSON</li>
+</ul>
+<p>The config that you’ve selected requires the following dependencies:</p>
+<p>eslint-plugin-react@latest @typescript-eslint&#x2F;eslint-plugin@latest @typescript-eslint&#x2F;parser@latest</p>
+<ul>
+<li>✔ Would you like to install them now? · No &#x2F; Yes</li>
+<li>✔ Which package manager do you want to use? · yarn</li>
+</ul>
+<p>這時候再回去看專案，裡面會多出一支 <strong>.eslintrc.json</strong>，副檔名會依照 <code>What format do you want your config file to be in?</code> 這個問題而不同。</p>
+<p>我們稍微修改一下裡面的設定，改為下面的設定，如果你想客製化可以參考 <strong>ESLint</strong> 的 <strong><a target="_blank" rel="noopener" href="https://eslint.org/docs/latest/user-guide/configuring/">官網設定</a></strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;browser&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;es2021&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;extends&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="comment">// 有安裝 eslint-config-airbnb 才需要多配置 &quot;airbnb&quot;</span></span><br><span class="line">        <span class="string">&quot;airbnb&quot;</span><span class="punctuation">,</span> <span class="string">&quot;next/core-web-vitals&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;overrides&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;parser&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@typescript-eslint/parser&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;parserOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;ecmaVersion&quot;</span><span class="punctuation">:</span> <span class="string">&quot;latest&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;sourceType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;module&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;react&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;@typescript-eslint&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;rules&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="comment">// 0 = off, 1 = warn, 2 = error</span></span><br><span class="line">        <span class="comment">// suppress errors for missing &quot;import React&quot; in files</span></span><br><span class="line">        <span class="attr">&quot;react/react-in-jsx-scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="comment">// file extension rule</span></span><br><span class="line">        <span class="attr">&quot;react/jsx-filename-extension&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;extensions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;.tsx&quot;</span><span class="punctuation">,</span> <span class="string">&quot;.css&quot;</span><span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;quotes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="string">&quot;double&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;jsx-quotes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;error&quot;</span><span class="punctuation">,</span> <span class="string">&quot;prefer-double&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;prefer-arrow-callback&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;allowNamedFunctions&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span> <span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;indent&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;semi&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="string">&quot;always&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;operator-linebreak&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="number">2</span><span class="punctuation">,</span> <span class="string">&quot;after&quot;</span><span class="punctuation">,</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;overrides&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;?&quot;</span><span class="punctuation">:</span> <span class="string">&quot;before&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;:&quot;</span><span class="punctuation">:</span> <span class="string">&quot;before&quot;</span> <span class="punctuation">&#125;</span> <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;max-len&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">180</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;tabWidth&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;ignoreComments&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;ignoreTemplateLiterals&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;array-element-newline&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;multiline&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span> <span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;array-bracket-newline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="comment">// eslint-disable-next-line no-dupe-keys</span></span><br><span class="line">        <span class="attr">&quot;arrow-body-style&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;react/function-component-definition&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;@typescript-eslint/no-non-null-assertion&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;@typescript-eslint/no-unused-vars&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;react/require-default-props&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;react/jsx-no-useless-fragment&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;no-shadow&quot;</span><span class="punctuation">:</span> <span class="string">&quot;off&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;import/no-extraneous-dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;error&quot;</span><span class="punctuation">,</span> <span class="punctuation">&#123;</span> <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span> <span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>這時候再回去開你的 <code>/pages/index.tsx</code>，會發現熟悉的紅色毛毛蟲又回來了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/eslint_error.png" alt="ESLint 錯誤"></p>
+<p>如果使用 <strong>VSCode</strong> 可以把滑鼠指向紅色蚯蚓，點選 <strong>快速修復…(⇧⌘ㄡ)</strong>，就可以全部一次依照 <strong>ESLint</strong> 的設定檔規範修正</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/fix_all_eslint_error.gif" alt="VSCode 一鍵修復"></p>
+<p>此外我們也可以修改一下 <strong>package.json</strong> 的配置，將 <strong>“scripts”</strong> 那塊加上兩行程式碼：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next lint&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;lint:fix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eslint --fix --ext .js,.jsx,.tsx .&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/package_add_eslint_setting.png" alt="加入 ESlint 設定程式碼"></p>
+<p>接著在終端機輸入 <code>yarn lint</code> 或 <code>npm run lint</code>，就可以檢測程式碼有無符合規範，沒有就會出現下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/run_lint_error.png" alt="ESLint 檢測出錯誤"></p>
+<p>而透過 <code>yarn lint:fix</code> 或 <code>npm run lint:fix</code> 則是可以把整個專案包含 <code>.js,.jsx,.tsx</code> 的檔案一次修復。</p>
+<p>修復成功如果都無誤就會出現 <code>✔ No ESLint warnings or errors</code>。</p>
+<hr>
+<h3 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a>Prettier</h3><p>雖然我們已經有了程式碼的書寫規範，但身為工程師還是會想到更懶的問題，為什麼不能在儲存的時候就幫我們排版排好呢？還要一個一個解決問題或點 <strong>快速修復…(⇧⌘ㄡ)</strong> 太麻煩了吧。</p>
+<p>這時候就要發揮工程師精神，讓我們繼續往下安裝：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -D prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-hooks</span></span><br></pre></td></tr></table></figure>
+
+<p>裝完後接著在新建兩支檔案，分別為 <strong>.prettierrc</strong> 及 <strong>.prettierignore</strong>，前者同樣為設定檔，後者為 <strong>prettier</strong> 要忽略不涵蓋的檔案。</p>
+<p><strong>.prettierrc</strong> 的內容改為：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;trailingComma&quot;</span><span class="punctuation">:</span> <span class="string">&quot;es5&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tabWidth&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;printWidth&quot;</span><span class="punctuation">:</span> <span class="number">180</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;semi&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;singleQuote&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;jsxSingleQuote&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;bracketSpacing&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;endOfLine&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;arrowParens&quot;</span><span class="punctuation">:</span> <span class="string">&quot;avoid&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>.prettierignore</strong> 的內容改為：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package.json</span><br><span class="line">package-lock.json</span><br><span class="line">yarn.lock</span><br><span class="line">dist</span><br><span class="line">public</span><br><span class="line">node_nodules/</span><br><span class="line"># 如果專案是 Next.js 才需要配置</span><br><span class="line">.next</span><br></pre></td></tr></table></figure>
+
+<p>然後把 <strong>package.json</strong> 的 <strong>scripts</strong> 做一下修改：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next dev&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next build&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next start&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// 加入下面三行</span></span><br><span class="line">    <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;next lint&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lint:fix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eslint --fix --ext .js,.jsx,.tsx .&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;format&quot;</span><span class="punctuation">:</span> <span class="string">&quot;prettier --write --ext .js,.jsx,.tsx --config ./.prettierrc&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>之後我們就可以先用 <code>yarn lint</code> 檢查程式碼是否符合規範，然後再用 <code>yarn lint:fix</code> 去全域依照 <strong>ESLint</strong> 及 <strong>Prettier</strong> 去修正程式碼。</p>
+<h4 id="說好的自動修正呢？"><a href="#說好的自動修正呢？" class="headerlink" title="說好的自動修正呢？"></a>說好的自動修正呢？</h4><p>你一定會有疑問，不是說好要在儲存後就自動修正嗎？沒錯，如果你是使用 VSCode 的話，請在專案底下新增 <code>.vscode/settings.json</code>，然後在 <strong>settings.json</strong> 裡面寫上下面的內容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;editor.codeActionsOnSave&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;source.fixAll.eslint&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;eslint.validate&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;javascript&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>之後儲存就會自動修正了！</p>
+<hr>
+<h3 id="Alias"><a href="#Alias" class="headerlink" title="Alias"></a>Alias</h3><p>其實 <strong>Alias</strong> 才是促使本篇產出的重點，先說說這是什麼，以往我們在專案中會引入一些靜態文件或者 <strong>Components</strong>，大部分使用的時候我們都是會寫 <code>import Header from &#39;../../components/Header&#39;</code>，但是當我們檔案一多，資料夾一多，就可能會產生出 <code>import Header from &#39;../../../../../components/Header&#39;</code>，在另一個檔案可能又變成 <code>import Header from &#39;../../../components/Header&#39;</code>，可能這個例子比較誇張一點，但這樣確實不美觀且寫起來不舒服啊。</p>
+<p>所以就有了 <strong>Alias</strong> 可以使用，使用了之後上面的情況可以統一變成 <code>import Header from &#39;@components/Header&#39;</code>，這就是模板的概念。</p>
+<p>首先我們修改一下 <strong>tsconfig.json</strong>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;baseUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;es5&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lib&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;dom&quot;</span><span class="punctuation">,</span> <span class="string">&quot;dom.iterable&quot;</span><span class="punctuation">,</span> <span class="string">&quot;esnext&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;allowJs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;skipLibCheck&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;strict&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;forceConsistentCasingInFileNames&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;noEmit&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;esModuleInterop&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;esnext&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;resolveJsonModule&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;isolatedModules&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;jsx&quot;</span><span class="punctuation">:</span> <span class="string">&quot;preserve&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;incremental&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;@components/*&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;components/*&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;@pages/*&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;pages/*&quot;</span></span><br><span class="line">      <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;next-env.d.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;**/*.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;**/*.tsx&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;node_modules&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>多了 <strong>baseUrl</strong> 讓 <strong>TS</strong> 知道我們的基本路徑從哪裡開始，下面的 <strong>paths</strong> 則是設定 <strong>Alias</strong> 的部分，我們先這樣設定，然後在專案底下多建立一個 <strong>components</strong> 的資料夾，裡面建立一支 <strong>Header.tsx</strong> 的檔案，內容打上：</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">Header</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;&gt;</span>Header<span class="tag">&lt;/&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Header</span>;</span><br></pre></td></tr></table></figure>
+
+<p>目前專案架構會如下圖</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/add_new_components.png" alt="專案架構"></p>
+<p>然後回到 <code>/pages/index.tsx</code> 或者隨便一個 <code>.tsx</code> 檔案裡面，在最上面輸入 <code>import Header from &quot;@components/Header&quot;;</code>，會發現紅色蚯蚓又出來了。</p>
+<h4 id="踩坑之旅"><a href="#踩坑之旅" class="headerlink" title="踩坑之旅"></a>踩坑之旅</h4><p>這次碰到最大的問題就是關於引入報錯，依照 <strong><a target="_blank" rel="noopener" href="https://devrsi0n.com/articles/eslint-typescript-import-unsolve">ESLint 检查 TypeScript 时报 “Unable to resolve path to module ‘xxx’” 错误</a></strong> 一文指出 <em><strong>『eslint-plugin-import 原本只支持 ES6 模块，从 README 文档也可以看出默认只支持 .js, .jsx 后缀的这类 JS 社区常见的文件。TypeScript 使用的 .ts 和 .tsx 自然是不支持的，更不用说 import 插件还需要相应的 parser 来解决 TypeScript 解析问题。』</strong></em> 我們可以了解到如果使用了 <strong>TS</strong> 及 <strong>ESLint</strong> 再去使用 <strong>Alias</strong> 會被紅色蚯蚓噴得體無完膚。 </p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/import_alias_error.png" alt="引入錯誤"></p>
+<p>目前 <strong>ESLint</strong> 不認得這個路徑，所以我們必須讓它認得，我們只需要安裝幾個套件，讓程式碼規範套件讀得懂即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">yarn add -D eslint-import-resolver-alias eslint-import-resolver-typescript eslint-plugin-import</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的安裝是為了解決 <strong>ESLint</strong> 不認得我們在 <strong>TS</strong> 設定 <strong>Alias</strong> 的錯誤，安裝完畢後修改 .<code>.eslintrc.json</code> 的內容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;browser&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;es2021&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;extends&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;airbnb&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;next/core-web-vitals&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;plugin:@typescript-eslint/recommended&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;overrides&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;parser&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@typescript-eslint/parser&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;parserOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;ecmaVersion&quot;</span><span class="punctuation">:</span> <span class="string">&quot;latest&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;sourceType&quot;</span><span class="punctuation">:</span> <span class="string">&quot;module&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;import&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;react&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;@typescript-eslint&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;react-hooks&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;prettier&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="comment">// 解決 eslint-plugin-import 只支持 ES6 模块的問題，原本只支援 .js, .jsx</span></span><br><span class="line">        <span class="attr">&quot;import/parsers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;@typescript-eslint/parser&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;.ts&quot;</span><span class="punctuation">,</span> <span class="string">&quot;.tsx&quot;</span><span class="punctuation">]</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="comment">// </span></span><br><span class="line">        <span class="attr">&quot;import/resolver&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;typescript&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;alwaysTryTypes&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;rules&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="comment">// ...略</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>透過上面的修改後，就可以正常的讓 <strong>TypeScript</strong> 及 <strong>ESLint</strong> 讀懂我們設定的 <strong>Alias</strong> 模板，也能知道我們要引入的檔案是不是真的存在了。</p>
+<hr>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p><strong>TS + ESLint + Prettier</strong> 對於前端可以設置一個很好的團隊規範，也能有效地防止每個人有每個人的寫法造成 <strong>Code Review</strong> 需要去花更多時間解決不必要的衝突。</p>
+<p>有了 <strong>ESLint</strong> 我們也可以搭配之前文章 <a href="https://rexhung0302.github.io/2022/03/30/20220330/">[Git Note] - 統一團隊的 Git Commit 格式吧！不要再讓 Commit 亂糟糟</a> 裡提過的 <strong>Husky</strong>，在我們做 <strong>pre-commit</strong> 的時候就先去幫我們跑一次 <strong>Lint</strong>，如果不符合規範就拒絕開發者 <strong>git push</strong>，實在時居家旅行….</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221106/good_medicine.png" alt="必備良藥"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>隔了好一段時間沒有寫文章了，這段時間剛好經歷了工作的變動，一些生活上的調整等等，好一段時間都還在思索接下來的規劃。</p>
+<p>剛好到了新的工作崗位上碰到了更多新的挑戰，最近卡在這個 <strong>Alias</strong> 上一段時間，當下心裡第一時間想的是一定要把它記錄回來部落格，希望有人因為這個卡關時，可以剛好看到這篇文章。</p>
+<p>其中還是要特別謝謝我的大學室友，沒有他可能我這個問題還在卡關呢。</p>
+<p>這次因為新專案加上朋友委託筆者幫忙建置 <strong>Electron</strong> 的緣故，碰到了一直很想摸索的 <strong>Next.js</strong>，我想接下來又有更多的東西可以去玩了，下次有機會就來介紹一下 <strong>Electron</strong> 這個酷東西。</p>
+<p><strong>Source Code: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/next-ts-exlint-prettier-demo">請點我</a></strong></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://israynotarray.com/other/20210529/2519649612/">淺談 SPA、CSR、SSR、MPA、SSG 專有名詞</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20110504/ironman/4269">從零開始學習 Next.js</a></li>
+<li><a target="_blank" rel="noopener" href="https://willh.gitbook.io/typescript-tutorial/introduction/what-is-typescript">什麼是 TypeScript</a></li>
+<li><a target="_blank" rel="noopener" href="https://israynotarray.com/javascript/20210218/4003233584/">五分鐘快速替專案加上 ESLint</a></li>
+<li><a target="_blank" rel="noopener" href="https://devrsi0n.com/articles/eslint-typescript-import-unsolve">ESLint 检查 TypeScript 时报 “Unable to resolve path to module ‘xxx’” 错误</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/librarylai">我的前端好夥伴 - Library</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/11/20220411/" rel="prev" title="[Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧">
+      <i class="fa fa-chevron-left"></i> [Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/12/20221212/" rel="next" title="[Tool Note] - 讓 SonarQube 成為你的糞 Code 守門員">
+      [Tool Note] - 讓 SonarQube 成為你的糞 Code 守門員 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BD%95%E8%A6%81%E5%AF%AB%E9%80%99%E7%AF%87"><span class="nav-number">2.1.</span> <span class="nav-text">為何要寫這篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">Next 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E6%96%B9%E5%BC%8F%E4%B8%80"><span class="nav-number">2.3.</span> <span class="nav-text">安裝方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E6%96%B9%E5%BC%8F%E4%BA%8C"><span class="nav-number">2.4.</span> <span class="nav-text">安裝方式二</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TypeScript"><span class="nav-number">2.4.1.</span> <span class="nav-text">TypeScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ESLint"><span class="nav-number">2.4.2.</span> <span class="nav-text">ESLint</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prettier"><span class="nav-number">2.5.</span> <span class="nav-text">Prettier</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AA%AA%E5%A5%BD%E7%9A%84%E8%87%AA%E5%8B%95%E4%BF%AE%E6%AD%A3%E5%91%A2%EF%BC%9F"><span class="nav-number">2.5.1.</span> <span class="nav-text">說好的自動修正呢？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alias"><span class="nav-number">2.6.</span> <span class="nav-text">Alias</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B8%A9%E5%9D%91%E4%B9%8B%E6%97%85"><span class="nav-number">2.6.1.</span> <span class="nav-text">踩坑之旅</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">2.7.</span> <span class="nav-text">總結</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2022/11/06/20221106/",
+      identifier: "2022/11/06/20221106/",
+      title     : "[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

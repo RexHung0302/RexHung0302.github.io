@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言Docker 可以取代傳統建置 虛擬機(VM) 需要耗費大量的時間、人力成本；也因為傳統 VM 需要佔用較多空間，最後往往導致環境衝突，或是環境髒亂的後果，就可以透過 Docker 去解決。 在這邊我們要解決的事情很簡單，就是『讓我們要執行專案的環境，在我的電腦可以跑，也要讓它在任何地方都可以跑，而且只需要下幾行簡單指令就可以跑，不需要繁瑣的安裝流程』。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CI&#x2F;CD Note] — 透過 Docker 快速建立及部署環境">
+<meta property="og:url" content="https://rexhung0302.github.io/2021/12/10/20211210/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言Docker 可以取代傳統建置 虛擬機(VM) 需要耗費大量的時間、人力成本；也因為傳統 VM 需要佔用較多空間，最後往往導致環境衝突，或是環境髒亂的後果，就可以透過 Docker 去解決。 在這邊我們要解決的事情很簡單，就是『讓我們要執行專案的環境，在我的電腦可以跑，也要讓它在任何地方都可以跑，而且只需要下幾行簡單指令就可以跑，不需要繁瑣的安裝流程』。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2021-12-10T04:10:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.947Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="CI">
+<meta property="article:tag" content="CD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2021/12/10/20211210/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[CI/CD Note] — 透過 Docker 快速建立及部署環境 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2021/12/10/20211210/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [CI/CD Note] — 透過 Docker 快速建立及部署環境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-12-10 12:10:00" itemprop="dateCreated datePublished" datetime="2021-12-10T12:10:00+08:00">2021-12-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/CI-CD/" itemprop="url" rel="index"><span itemprop="name">CI/CD</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8.8k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>8 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><strong>Docker</strong> 可以取代傳統建置 <strong>虛擬機(VM)</strong> 需要耗費大量的時間、人力成本；也因為傳統 <strong>VM</strong> 需要佔用較多空間，最後往往導致環境衝突，或是環境髒亂的後果，就可以透過 <strong>Docker</strong> 去解決。</p>
+<p>在這邊我們要解決的事情很簡單，就是『<strong>讓我們要執行專案的環境，在我的電腦可以跑，也要讓它在任何地方都可以跑，而且只需要下幾行簡單指令就可以跑，不需要繁瑣的安裝流程</strong>』。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-logo-banner.png" alt="工程師都一定聽過的 Docker"></p>
+<span id="more"></span>
+
+<blockquote>
+<p><em>Docker 提供的解法是，以應用程式為核心虛擬化，取代傳統需要 Guest OS 的虛擬化技術</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/containers-vs-virtual-machines.png" alt="虛擬機 與 Container 的差異"></p>
+<p>詳細可參考：<a target="_blank" rel="noopener" href="https://www.weave.works/blog/a-practical-guide-to-choosing-between-docker-containers-and-vms">Docker vs Virtual Machines (VMs) : A Practical Guide to Docker Containers and VMs</a></p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p><em>這邊將會記錄簡單的起手式及進階一點點的 <strong>Docker</strong> 玩法。</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/aLittle.png" alt="真的只是一點點"></p>
+<blockquote>
+<p><em>(沒錯就是一點點)</em></p>
+</blockquote>
+<p>本篇文章預設學習前的基本條件需求</p>
+<ul>
+<li>會使用終端機</li>
+<li>知道 <strong>GitHub</strong> 是什麼有大概的概念(不知道麼操作沒關係)</li>
+</ul>
+<p>這邊可以簡單分為兩個小節：</p>
+<ol>
+<li>基本認識(適合完全不曉得怎麼操作 <strong>Docker</strong> 的新手)</li>
+<li>進階用法(適合知道怎麼從 <strong>Dockerfile</strong> → <strong>Image</strong> → <strong>Container</strong> 的初心者)</li>
+</ol>
+<hr>
+<h2 id="基本認識"><a href="#基本認識" class="headerlink" title="基本認識"></a>基本認識</h2><p>認識 <strong>Docker</strong> 之前需要先知道三寶</p>
+<ol>
+<li>映像檔(<strong>Image</strong>)</li>
+<li>容器(<strong>Container</strong>)</li>
+<li>倉庫(<strong>Registry</strong>)、(<strong>Repository</strong>)</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/three_things.png" alt="Docker 三寶"></p>
+<p><strong>Docker</strong> 最基本就是基於 <strong>映像檔(Image)</strong> 組成的，可以想像成每一個 <strong>Image</strong> 都是一片光碟，光碟裡面已經有我們設定好的安裝參數(環境)，例如我們會把 <strong>MySQL</strong> 服務包裝成一片 <strong>光碟(Image)</strong> 、前端需要的 <strong>Node</strong> 環境包裝成一片 <strong>光碟(Image)</strong>…</p>
+<p>當我們把每一個 <strong>Image</strong> 寫好之後，透過指令或是 <strong>GUI</strong> 在把每一片光碟放進 <strong>光碟機(Container)</strong> 去執行，這時候就很好理解，當同事想要跟我們一樣的服務，就把 <strong>光碟(Image)</strong> 拿去放盡 <strong>光碟機(Container)</strong> 安裝環境，當他們不想要這個服務就把 <strong>光碟(Image)</strong> 從 <strong>光碟機(Container)</strong> 退出來。</p>
+<p>透過這個方法我們可以快速的安裝解除服務，也不會污染全域環境，另外也可以區隔每一個 <strong>光碟機(Container)</strong> 各自在負責什麼事情。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/Alcohol-120.png" alt="Alcohol-120.png"></p>
+<p>我們可以把 <strong>光碟(Image)</strong> 想像成 <strong>酒精(<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Alcohol_120%25">Alcohol 120%</a>)</strong> 的映像檔，當然我們不必真的把 <strong>光碟(Image)</strong> 燒出來拿給其他人去安裝； <strong>Docker</strong> 提供了一項類似 <strong>GitHub</strong> 的服務，稱為 **<a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a> ，**我們可以透過 <strong>docker push</strong> 或 <strong>docker pull</strong> 去達成遠端推拉 <strong>光碟(Image)</strong>。</p>
+<hr>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>開始之前我們必須先安裝 <strong>Docker</strong>，透過<a target="_blank" rel="noopener" href="https://docs.docker.com/get-docker/">官方文件</a>，選擇符合你作業系統的安裝方式，然後安裝。</p>
+<p>與一般的專案事前準備不同，我們不需要東安裝西安裝，只需要把 <strong>Docker</strong> 安裝起來即可。接著鍵入下列指令到終端機。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker version</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-version.png" alt="Docker Version"></p>
+<p>出現上圖代表安裝成功了。</p>
+<hr>
+<h2 id="偉大始於一顆小螺絲-映像檔"><a href="#偉大始於一顆小螺絲-映像檔" class="headerlink" title="偉大始於一顆小螺絲 - 映像檔"></a>偉大始於一顆小螺絲 - 映像檔</h2><p>學習任何東西都需要從最基礎開始，而在 <strong>Hello World</strong> 的世界裡依然如此，對於 <strong>Docker</strong> 我們需要從 <strong>映像檔(Image)</strong> 開始。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-gui.png" alt="DOcker GUI"></p>
+<h3 id="指令-V-S-圖形化介面"><a href="#指令-V-S-圖形化介面" class="headerlink" title="指令 V.S 圖形化介面"></a><strong>指令 V.S 圖形化介面</strong></h3><p>雖然官方有提供 <strong>Docker Desktop</strong> 的 <strong>GUI</strong> 介面，可以快速的建立及啟用 <strong>Docker</strong>，但一些基本指令還是必須認識一下的，畢竟真的要把專案推上 <strong>VM</strong> 總是要執行 <strong>Command Line</strong> 的對吧？</p>
+<p>要寫出屬於我們自己的 <strong>映像檔(Image)</strong> 的話，我們需要先寫 <strong>Dockerfile</strong> 接著去執行它。這支檔案也會詳細敘述我們需要用到的環境，還有安裝等等的指令。</p>
+<p>在我們的專案建立一個 <strong>Dockerfile</strong>，然後鍵入下列內容，這邊我們將用一個前端 <strong>React</strong> 專案來示範。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/code.png" alt="DockerFile"></p>
+<p>這邊有幾個基本的指令</p>
+<ul>
+<li>FROM - 從 <strong>Docker Hub</strong> 的哪個地方抓取 <strong>映像檔(Image)</strong> 回來安裝。</li>
+<li>WORKDIR - 將會指定在容器啟動時我們會待在容器的哪個地方。</li>
+<li>ENV - 將會定義再 <strong>build</strong> 執行時的環境變量。</li>
+<li>RUN - 執行後方指令，像是會在容器上執行 <strong>npm install</strong>。</li>
+<li>COPY - 複製 ${目前本機目標位置的檔案} 到 ${容器目標位置}。</li>
+<li>EXPOSE - 輸出的 <strong>Port</strong>。</li>
+<li>CMD - 預設執行 <strong>Container</strong> 時會執行的指令。</li>
+</ul>
+<blockquote>
+<p><em>更多指令可參考 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/builder/">Dockerfile Document</a></em></p>
+</blockquote>
+<blockquote>
+<p><em>關於 <strong>CMD</strong> 的差異可參考 <strong><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10252166">了解 Docker 如何啟動 process</a></strong></em></p>
+</blockquote>
+<p>要讓你的 <strong>光碟(Image)</strong> 放進什麼資料取決於你，在其他使用這個 <strong>光碟(Image)</strong> 的人把它放進 <strong>光碟機(Container)</strong> 後就會安裝你由 <strong>Dockerfile</strong> 組成的內容。</p>
+<p><strong>Image</strong> 裡面除了可以寫自己的設定檔之外，也可以在自己的設定檔內，加上別人寫好的設定檔，然後包裝在一起，作為一個新的設定檔。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/myself_docker.png" alt="碰出新滋味"></p>
+<p>透過這個方法我可以包裝我想要的環境，例如我可以直接抓到 <strong>Node</strong> 的環境，接著我的光碟就有 <strong>Node</strong> 的環境，加上自己的客製化(像上圖的例子)，我們可以讓前端專案順利透過 <strong>Node</strong> 環境安裝；同理我也可以輕鬆的把 <a target="_blank" rel="noopener" href="https://www.mysql.com/">MySQL</a> 加上 <a target="_blank" rel="noopener" href="https://www.phpmyadmin.net/">phpMyAdmin</a> 的環境裝進 <strong>Image</strong> 裡。</p>
+<p>完成 <strong>Dockerfile</strong> 後，讓我們實際來用指令跑跑看吧。如果你有安裝 <strong>Docker Desktop</strong> 的話請打開它，然後鍵入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker images</span><br></pre></td></tr></table></figure>
+
+<p>這時候應該會是空的，我們將建置出我們第一個 <strong>Image</strong>，繼續鍵入下列指令到終端機：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker build <span class="literal">-t</span> docker<span class="literal">-react</span>:dev <span class="operator">-f</span> Dockerfile . <span class="literal">--no-cache</span></span><br></pre></td></tr></table></figure>
+
+<p>正常我們要建置 <strong>Image</strong> 的話，起手式都是 <strong>docker build</strong>，後面可帶的參數可參考 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/build/#options">官方指令文件</a>，但上方已經是可以符合普遍情況的簡單指令了。</p>
+<ul>
+<li><p>-t - 這邊將會給你的 <strong>Image</strong> 取一個名稱，後面的 <strong>react-docker</strong> 就是該 <strong>Image</strong> 的名稱；後面帶了一個冒號(<strong>:dev</strong>)，意思是給你的 <strong>Image</strong> 加上版號，也可以給他 <strong>react-docker:v1.0</strong>，如果你有同一個 <strong>Dockerfile</strong> 但是想要有一點小客製化，建置出不同的 <strong>Image</strong> 就可以依照版號去建置。</p>
+</li>
+<li><p>-f - 這邊是你要啟動的 <strong>Dockerfile</strong> 名稱，但通常我們都會命名為 <strong>Dockerfile</strong>，後面的空白在一個點點是路徑，如果你已經在該專案路徑就只要一個黑點即可，如果你的 <strong>Dockerfile</strong> 在上一層且名稱叫做 <strong>myDockerfile</strong>，也許你就會輸入 <strong>-f myDockerfile ..</strong>。</p>
+</li>
+<li><p>–no-cache - 最後面加上的 <strong>no cache</strong> 是避免在 <strong>Build Docker image</strong> 時被 <strong>cache</strong> 住，造成沒有 <strong>build</strong> 到修改過的 <strong>Dockerfile</strong>。</p>
+<p>  <img src="/images/others/loading.gif" data-original="/images/20211210/docker-build.gif" alt="Docker Build"></p>
+</li>
+</ul>
+<p>接著在終端機再輸入一次 <strong>docker Images</strong>，就會在列表看到你的 <strong>Image 名稱</strong>、<strong>版號</strong>、<strong>建立時間</strong>…等等的資訊。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-images.png" alt="Docker Images"></p>
+<p>如果你不想要某個 <strong>Image</strong> 也可以執行指令刪除，將你的 <strong>Image</strong> 名稱帶入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker rmi <span class="variable">$</span>&#123;image name&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="沒有彼此無法偉大-容器"><a href="#沒有彼此無法偉大-容器" class="headerlink" title="沒有彼此無法偉大 - 容器"></a>沒有彼此無法偉大 - 容器</h2><p>如果 <strong>Image</strong> 沒有 <strong>Container</strong>，它便無法被運作；同理，如果 <strong>Container</strong> 沒有 <strong>Image</strong>，他便無用武之地。</p>
+<p>容器就是我們的光碟機，如何讓他運行呢？讓我們在終端機鍵入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker run <span class="literal">--name</span> docker<span class="literal">-react-container</span> <span class="literal">-p</span> <span class="number">3005</span>:<span class="number">3000</span> docker<span class="literal">-react</span>:dev</span><br></pre></td></tr></table></figure>
+
+<p>正常我們要執行 <strong>Image</strong> 的話，起手式都是 <strong>docker run</strong>，後面可帶的參數可參考 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/run/#options">官方指令文件</a>，但上方已經是可以符合普遍情況的簡單指令了。</p>
+<ul>
+<li>—name - 這邊將會給你的 <strong>container</strong> 取一個名稱，後面的 <strong>docker-react-container</strong> 就是該 <strong>container</strong> 的名稱。</li>
+<li>-p 是你要把當下啟動該 <strong>container</strong> 環境的哪個 <strong>Port</strong> 連結到當下啟動該 <strong>container</strong> 時該環境的 <strong>Port</strong>，之後在啟動該 <strong>container</strong> 的環境輸入 <a target="_blank" rel="noopener" href="http://localhost:3005/">http://localhost:3005</a> 就可以連到這個 <strong>container</strong> 的環境(可能有些模糊，等等上圖好理解)。</li>
+<li>最後加上的 <strong>react-docker:dev</strong> 就是該 <strong>Image</strong> 的名稱加版號，在你建置 <strong>Image</strong> 時就已經給取好名稱了。</li>
+</ul>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-run.png" alt="Docker Run"></p>
+<p>出現上圖就可以打開你的 <a target="_blank" rel="noopener" href="http://localhost:3005/">http://localhost:3005</a> 了，查看一下就會發現頁面出現前端專案啦！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-run-success.png" alt="成功啟動"></p>
+<p>執行成功後你應該會馬上浮現兩個問題，第一個是 背景執行，第二個是 熱更新，就讓我們來學學怎麼透過參數簡單的解決這兩個問題吧。</p>
+<h3 id="背景執行"><a href="#背景執行" class="headerlink" title="背景執行"></a>背景執行</h3><p>這個問題比較簡單執行，你會發現透過上面指令執行 <strong>Image</strong> 的 <strong>container</strong>，如果終端機一關掉，整個 <strong>container</strong> 就被關閉了，這邊我們對原本啟動的指令動點手腳。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker run <span class="literal">--name</span> docker<span class="literal">-react-container</span> <span class="literal">-d</span> <span class="literal">-p</span> <span class="number">3005</span>:<span class="number">3000</span> docker<span class="literal">-react</span>:dev</span><br></pre></td></tr></table></figure>
+
+<p>仔細瞧瞧，好像一樣又有點不同，沒錯！就只是加上一個 <strong>-d</strong>，就可以讓這個 <strong>container</strong> 在背景執行了。</p>
+<h3 id="熱更新"><a href="#熱更新" class="headerlink" title="熱更新"></a>熱更新</h3><p>在啟動後我們開始修改我們的程式碼，這時候你可能會想，那我是不是改一行程式碼，我就要重新在 <strong>build</strong> 一個 <strong>Image</strong>，然後在 <strong>run</strong> 它呢？那豈不是累死了。</p>
+<p>所以這邊我們會先介紹一個參數利器 <strong>volumes</strong>，如果透過 <strong>GUI</strong> 介面你也可以清楚發現這個參數設定。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-gui-run-setting.png" alt="Docker Gui Setting"></p>
+<p>所以他到底拿來幹嘛的呢？簡單說就是讓你的 <strong>container</strong> 的其中一個資料夾跟當下啟動該 <strong>container</strong> 的環境下其中一個資料夾產生連結。</p>
+<p>先說說 <strong>當下啟動該 container 的環境</strong> 是什麼意思(與 <strong>當下啟動該 Image 的環境</strong> 同理)，如果你是在本機跑 <code>docker run</code>  那你 <strong>當下啟動該 xxx 的環境</strong> 指的就是你本機，如果你把程式碼推上 <strong>虛擬機(Linode、GCP、AWS)</strong>，在該虛擬機裡面跑 <code>docker run</code>  指的 <strong>當下啟動該 xxx 的環境</strong> 就是該台虛擬機。</p>
+<p>正所謂水能載舟亦能覆舟，因為 <strong>container</strong> 一停止，裡面的環境及資料都沒了，如果我們是建置出 <a target="_blank" rel="noopener" href="https://www.mysql.com/">MySQL</a> 加上 <a target="_blank" rel="noopener" href="https://www.phpmyadmin.net/">phpMyAdmin</a> 的環境，一但資料不見，肯定是<strong>初四了阿伯</strong>！</p>
+<p>所以我們通常如果有需要保存資料，會將 <strong>container</strong> 裡某一個資料夾與當下啟動環境的某一個資料夾產生連結，就算 <strong>container</strong> 被停止了，我們一樣可以保存資料。</p>
+<p>因為連結一但產生，是會隨時更新的，以在本機啟動 <strong>container</strong> 為例，如果在 <strong>container</strong> 裡面使用設定時與本地綁定 <strong>Volume</strong> 的資料夾新增了檔案 <strong>A</strong>，會同時本地產生連結的資料夾也新增檔案 <strong>A</strong>。相反的在本地綁定 Volume 的資料夾新增檔案 <strong>B</strong>，也會同時在 <strong>container</strong> 裡面綁定的資料夾產生檔案 <strong>B</strong>，如下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/volume-intro.png" alt="關於 Volume"></p>
+<p>透過這個特性，我們可以把本地的整個專案資料夾與 container 綁定，使用 <code>docker stop docker-react-container</code>  停止整個 <strong>container</strong> ，然後使用 <code>docker rm docker-react-container</code> 刪除原本的 <strong>container</strong> ，然後透過下面的指令在啟動一個新的 <strong>container</strong>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker run <span class="literal">--name</span> docker<span class="literal">-react-container</span> <span class="literal">-d</span> <span class="literal">-p</span> <span class="number">3005</span>:<span class="number">3000</span> <span class="literal">-v</span> <span class="variable">$</span>&#123;<span class="built_in">pwd</span>&#125;:/app docker<span class="literal">-react</span>:dev</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-v - 透過這個參數就是把 ${指定當下啟動環境的資料夾路徑} 與指定的 <strong>container</strong> 的資料夾路徑 產生綁定，你可以先透過終端機輸入 <code>pwd</code>  查看當下環境，這邊我的路徑正處於前端專案資料夾裡，我把該前端專案與 <strong>container</strong> 裡面的 <strong>app</strong>(註1) 資料夾產生綁定。</li>
+</ul>
+<blockquote>
+<p><em>註1：啟動前端專案後，專案位置會位於該 <strong>container</strong> 的 <strong>app</strong> 資料夾底下。</em></p>
+</blockquote>
+<p>透過上面的指令，既可以在背景執行，又可以達到熱更新，這樣也不會污染到我們當下的環境，因為我們不需要這些環境(<strong>Node.js</strong>)，的時候，只要把該 <strong>container</strong> 刪除掉，就可以了。</p>
+<p>如果你有同事想啟動你的專案，但又不想在他們電腦安裝 <strong>Node.js</strong> 的話，之後把整個專案包含 <strong>Dockerfile</strong> 傳給同事即可。</p>
+<p>現在可以使用下列其中一個指令到終端機：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker <span class="built_in">ps</span> / docker container <span class="built_in">ls</span> / docker <span class="built_in">ps</span> <span class="literal">--all</span> / docker container <span class="built_in">ls</span> <span class="literal">--all</span></span><br></pre></td></tr></table></figure>
+
+<p>最後嘗試看看修改後，畫面會不會更動吧！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/hot-reload-with-volume.gif" alt="熱更新成功"></p>
+<p>最後如果你不想要某個 <strong>Image</strong> 或 <strong>container</strong> 也可以執行指令刪除，將你的 <strong>Image&#x2F;container</strong> 名稱帶入下列指令(記得要先停止運行該 <strong>container</strong> 才可以刪除)：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker rmi <span class="variable">$</span>&#123;image name&#125; // 刪除 image</span><br><span class="line"></span><br><span class="line"><span class="variable">$</span> docker <span class="built_in">rm</span> <span class="variable">$</span>&#123;container name&#125; // 刪除 container</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="前人種樹後人乘涼"><a href="#前人種樹後人乘涼" class="headerlink" title="前人種樹後人乘涼"></a>前人種樹後人乘涼</h2><p>當我們把 <strong>Docker</strong> 的 <strong>Image</strong> 建置出來後，我們可以把這個 <strong>Image</strong> 分享給其他人，不需要透過壓縮檔傳送方式，也不需要透過雲端空間，<strong>Docker</strong> 很貼心提供了 <strong>Dockerhub</strong> 的地方，讓我們可以分享及使用他人的 <strong>Image</strong>，這個空間類似我們常用的 <strong>Github</strong>。</p>
+<p>關於 <strong>Docker</strong> 的 倉庫(<strong>Registry)</strong> 可以分為 <strong>公開</strong> 及 <strong>私人</strong>，兩種都可以自己架設，如果嫌麻煩，<strong>Docker</strong> 有提供 <strong>Dockerhub</strong>，如果是自己公司的專案，不方便公開 <strong>Image</strong> 的話可以自己架設一個。</p>
+<blockquote>
+<p><em>自行架設可參考 <a target="_blank" rel="noopener" href="https://dotblogs.com.tw/kinanson/2019/10/02/101052">[Docker]自行架設私有的Docker Registry</a></em></p>
+</blockquote>
+<p>這邊我們要把建置好的前端專案 <strong>Image</strong> 推倒 <strong>dockerhub</strong> 上。</p>
+<h3 id="申請-dockerhub-帳號密碼"><a href="#申請-dockerhub-帳號密碼" class="headerlink" title="申請 dockerhub 帳號密碼"></a>申請 <strong>dockerhub</strong> 帳號密碼</h3><p><img src="/images/others/loading.gif" data-original="/images/20211210/dockerhub-website.png" alt="Docker 官網"></p>
+<p>首先需要上 <a target="_blank" rel="noopener" href="https://hub.docker.com/">dockerhub 官網</a> 申請帳號密碼。</p>
+<h3 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h3><p>接著我們需要登入我們申請好的帳號密碼，鍵入下列指令到終端機：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker login</span><br></pre></td></tr></table></figure>
+
+<p>接著按照指示輸入帳號密碼即可，如果是透過 <strong>GUI</strong>，也可以點擊 <strong>Icon</strong> 圖示登入，這邊使用 <strong>Mac</strong> 示範：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/mac-tools-bar.png" alt="工具列"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-gui-login-dockerhub.png" alt="透過 GUI 登入"></p>
+<h3 id="新增-Repository"><a href="#新增-Repository" class="headerlink" title="新增 Repository"></a>新增 Repository</h3><p>和 <strong>Github</strong> 一樣，想上傳你的 程式碼(<strong>Image</strong>)，就必須要先建立一個 <strong>Repository</strong>，到 <a target="_blank" rel="noopener" href="https://hub.docker.com/">dockerhub 官網</a> 登入帳號密碼後，應該會看到目前是空的，點擊藍色按鈕(<strong>Create Repository</strong>)新增 <strong>Repository</strong> 。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-repository-step-1.png" alt="步驟一"></p>
+<p>接著輸入相關資訊，請先設定為公開的 <strong>Repository</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-repository-step-2.png" alt="步驟二"></p>
+<p>建立完成後會看到目前 <strong>Repository</strong> 裡面都是空的，代表建立成功了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-repository-step-3.png" alt="完成建立 Repository"></p>
+<blockquote>
+<p><em>旁邊依然很貼心提醒您相關指令</em></p>
+</blockquote>
+<h3 id="上版號-上傳-Image"><a href="#上版號-上傳-Image" class="headerlink" title="上版號 &amp; 上傳 Image"></a>上版號 &amp; 上傳 Image</h3><p>仔細看旁邊會發現 <strong>docker</strong> 很貼心的提醒你必須要上 <strong>tag</strong> 版號。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/tag-intro.png" alt="貼心的提醒"></p>
+<p>接著在終端機上鍵入 <code>docker images</code>  查看我們前端專案的 <strong>Image</strong> 的 <strong>ID</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-images-check.png" alt="再度查看 Images"></p>
+<p>再鍵入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker tag <span class="variable">$</span>&#123;IMAGE ID&#125; <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再輸入 <code>docker images</code>  你會發現多了一筆資料，因為我們沒有給版號，所以會出現 TAG 是 latest 的樣子，代表最新版本。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-images-check-2.png" alt="完成確認"></p>
+<p>如果想加入版號可以稍微修改上面的指令(記得 <strong>${}</strong> 要拿掉，裡面換上你該填入的資訊)：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker tag <span class="variable">$</span>&#123;IMAGE ID&#125; <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;:<span class="variable">$</span>&#123;版號&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後一步就是推 <strong>Image</strong> 上去了，跟 <strong>Github</strong> 一樣，使用 <strong>push</strong> 推上 <strong>dockerhub</strong>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker push <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;:<span class="variable">$</span>&#123;版號&#125;</span><br></pre></td></tr></table></figure>
+
+<p>讓我們再回去 <strong>dockerhub</strong> 瞧瞧，會發現現在已經把 <strong>Image</strong> 推上去囉！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-repository-done.png" alt="完成上傳"></p>
+<p>因為 <strong>dockerhub</strong> 只是單純拿來存放 <strong>Image</strong> 的地方，不像 <strong>Github</strong> 會把整個專案上傳，所以要怎麼啟動，或是專案怎麼擺放，通常大家都會另外再把相關程式碼或是專案整包在傳道 <strong>Github</strong>，最後寫在 <strong>dockerhub</strong> 的 <strong>Readme</strong>。</p>
+<p>雖然目前我們沒有把專案丟到 <strong>Github</strong>，但可以讓我們來寫啟動指令，讓其他人知道大概蓋怎麼執行。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-readme.png" alt="寫個易懂的簡介吧"></p>
+<h3 id="嘗試下載"><a href="#嘗試下載" class="headerlink" title="嘗試下載"></a>嘗試下載</h3><p>推上去之後我們就可以來試試看下載了，先把原本的 Image 清除：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker rmi <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後下載我們推上 <strong>dockerhub</strong> 的 <strong>Image：</strong></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker pull <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;:<span class="variable">$</span>&#123;版號&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後啟動它：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker run <span class="literal">--name</span> <span class="variable">$</span>&#123;container name&#125; <span class="literal">-d</span> <span class="literal">-p</span> <span class="number">3005</span>:<span class="number">3000</span> <span class="variable">$</span>&#123;docker 帳號&#125;/<span class="variable">$</span>&#123;docker repository 名稱&#125;:<span class="variable">$</span>&#123;版號&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-run-download-images.png" alt="成功啟動"></p>
+<p>大功告成！</p>
+<h3 id="嘗試搜尋"><a href="#嘗試搜尋" class="headerlink" title="嘗試搜尋"></a>嘗試搜尋</h3><p>當然我們也可以搜尋其他人的 <strong>Image</strong>，鍵入下列指令到終端機：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker search <span class="operator">-f</span>=stars=<span class="number">100</span> <span class="variable">$</span>&#123;image&#125;:<span class="variable">$</span>&#123;版號&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-f - 這邊後面可以階篩選條件，詳細可參考 <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/search/#options">官方文件</a>，<strong>-f</strong> 是 <strong>—filter</strong> 的縮寫</li>
+</ul>
+<h3 id="大膽假設"><a href="#大膽假設" class="headerlink" title="大膽假設"></a>大膽假設</h3><p>這邊筆者大膽想了一個做法，雖然還沒有實踐，但理論上應該是可以達到下圖這個目的，如果你辦到了，歡迎下面留言告訴筆者。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/possible-docker.png" alt="截圖 2021-12-08 下午5.48.11.png"></p>
+<p>在某個 <strong>Container</strong> 裡面起 <strong>Nginx</strong>，透過掛載不同的 <strong>Port</strong>，然後把 <strong>Nginx</strong> 的 <strong>Root</strong> 指向前端專案與本地綁定的 <strong>Volume</strong> 資料夾內，達到一件部署的可能性。</p>
+<blockquote>
+<p><em>尚待實驗成功</em></p>
+</blockquote>
+<hr>
+<h2 id="進階用法"><a href="#進階用法" class="headerlink" title="進階用法"></a>進階用法</h2><p>會了基本的用法，大概大家這時候都會開始往進階的地方探索，小小的功能可能已經無法滿足你的需求。</p>
+<p>舉例來說，你或許會覺得前端我要起一個專案，後端我要起一個專案，資料庫我要起一個專案，這樣不是太累了嗎？而且我到底該怎麼讓前端與後端溝通，後端能連接到資料庫呢？</p>
+<p>其實原本的指令參數有提供方法，但指令肯定沒有直接寫成設定檔來得容易，所以……</p>
+<p>這時候救星就出現了，<strong>Docker Compose</strong>！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-compose-logo.png" alt="docker compose"></p>
+<p>就像 <strong>Logo</strong> 一樣，藍色的箱子就是你的 <strong>Container</strong>，章魚是 <strong>docker compose</strong>，他可以將不同的 <strong>Container</strong> 組合成一個 <strong>Container。</strong></p>
+<h3 id="基本安裝"><a href="#基本安裝" class="headerlink" title="基本安裝"></a>基本安裝</h3><p>首先要安裝 <strong>docker compose</strong>，依照 <a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#install-compose">官方安裝文件</a> 一步一步安裝，接著鍵入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker<span class="literal">-compose</span> version</span><br></pre></td></tr></table></figure>
+
+<p>順利的話會看見 <code>docker-compose version 1.29.2, build 5becea4c</code>  這行文字。</p>
+<h3 id="關於網路-Network"><a href="#關於網路-Network" class="headerlink" title="關於網路(Network)"></a>關於網路(Network)</h3><p>再說怎麼讓 <strong>Container</strong> 互相溝通前必須提到 <strong>docker</strong> 的網路，但是這邊不會深入討論。</p>
+<p>正常我們透過 <strong>run</strong> 不同的 <strong>Image</strong>，會得到不同的 <strong>Container</strong>，最後會像下圖一樣。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-network.png" alt="關於 Network"></p>
+<p>仔細看會發現 <strong>Container</strong> 不能直接性的溝通，但如果我們使用 <strong>docker-compose</strong> 建置的話，<strong>Container</strong> 都會預設使用一個叫做 <strong>Bridge Network</strong> 的網路橋，所以互相的專案得以溝通。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-network-default.png" alt="預設的 docker network"></p>
+<blockquote>
+<p><em>上方的圖如果不是透過 <strong>docker-compose</strong> 建置的話，是必須要自己手動把 <strong>Container</strong> 連結在一起，詳細可參考 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10241642"><strong>使用 Network 連結 container</strong></a>。</em></p>
+</blockquote>
+<p>如果你是透過 <strong>docker-compose</strong> 建置的話，預設 <strong>docker</strong> 除了把你設定檔內使用到的 <strong>dockerfile</strong> 建置個別的 <strong>Container</strong> 之外，也會一併的把他們組起來。</p>
+<p>這時候你可以把一些 <strong>Image</strong> 透過 <strong>docker-compose</strong> 組合起來，也可以在另外單獨起別的 <strong>Image</strong>，類似下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-network-custome.png" alt="客製化 Docker 設定組合"></p>
+<p>這邊會發現網路如果不同，就無法互相溝通，所以設定檔怎麼寫就很重要！</p>
+<blockquote>
+<p><em>關於網路這邊筆者大力推薦可以參考 <a target="_blank" rel="noopener" href="https://godleon.github.io/blog/Docker/docker-network-bridge/">[Docker] Bridge Network 簡介</a>，作者說的很詳細，而且有圖解大推！</em></p>
+</blockquote>
+<h3 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h3><p>前面說了很多終於要來寫我們的設定檔，我們可以簡單理解要使用 <strong>docker-compose</strong>，我們必須要有 <strong>docker-compose.yml</strong> 這支檔案，而這支檔案可以把不同的 <strong>Image</strong> 或是 <strong>Dockerfile</strong> 整合進來。</p>
+<p>這邊使用 <strong>mariadb + adminer + react + nginx</strong> 組成的 <strong>Container</strong> 作為範例。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-compose-setting.png" alt="docker-compose 設定檔"></p>
+<p>其實基本上配置都和 <strong>Dockerfile</strong> 差異不大，相關設定也都能爬到文，這邊就不贅述。可以簡單理解為，我在一個目錄底下，去把各個 <strong>Dockerfile</strong> 引進來使用(<strong>React、Nginx</strong>)，甚至有使用到 <strong>Dockerhub</strong> 上面的 <strong>Image</strong>(<strong>mariadb、adminer</strong>)。</p>
+<p>類似組積木的方式，就像 <strong>Logo</strong> 一樣，一隻鯨魚承載著不同的貨櫃。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-logo.png" alt="Docker logo"></p>
+<p>寫好設定檔後就可以啟動了(請記得要位於設定檔的目錄底下)：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker<span class="literal">-compose</span> up <span class="literal">-d</span></span><br></pre></td></tr></table></figure>
+
+<p>啟動結束還是可以透過 <code>docker ps --all</code>  查看是否正常啟動了，如果想暫停可以鍵入下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker<span class="literal">-compose</span> stop</span><br></pre></td></tr></table></figure>
+
+<p>但有時候我們會想連 <strong>Image</strong> 一併刪除，可能因為 <strong>Dockerfile</strong> 沒寫好，這時候就可以使用下列指令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$</span> docker<span class="literal">-compose</span> down <span class="literal">--rmi</span> all</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="課後複習"><a href="#課後複習" class="headerlink" title="課後複習"></a>課後複習</h2><p>整個 <strong>Docker</strong> 流程大致可以分為以下的流程(當然我們省略了很多小細節)。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211210/docker-finally.png" alt="大致流程"></p>
+<ol>
+<li>透過 <strong>公開</strong> 或 <strong>私人</strong> 倉庫，拉取 <strong>Image</strong> 下來使用，配上自己寫的 <strong>Image</strong>。</li>
+<li>使用 <strong>docker-compose</strong> 把各個 <strong>Image</strong> 組合成 <strong>Container</strong>。</li>
+<li>把自己寫好的設定檔組成新的 <strong>Image</strong>，創建好 <strong>Repository</strong> 之後，推上公開或私有倉庫。</li>
+<li>可以選配 <strong>CI&#x2F;CD</strong>，達到一鍵部署的效果。</li>
+</ol>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實一直想研究 <strong>Docker</strong> 很久了，有陣子都在亂點技能樹，但對於自動部署的領域，筆者自己認為不管哪一端都必須要了解，畢竟工程師就是喜歡越懶越好。</p>
+<p>這次的 Docker 入門班雖然很淺很淺談，但我相信會熟能生巧的。</p>
+<p>趁著這次工作研究 <strong>Docker</strong>，又讓我學到了一課，慢慢進步的感覺，很棒！</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p>官方文件 - <a target="_blank" rel="noopener" href="https://storybook.js.org/">StoryBook</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.notion.so/chromatic-2f9e608544574281b0ddbc62839a0c21">透過 chromatic 發布成果</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Tools/" rel="tag"><i class="fa fa-tag"></i> Tools</a>
+              <a href="/tags/CI/" rel="tag"><i class="fa fa-tag"></i> CI</a>
+              <a href="/tags/CD/" rel="tag"><i class="fa fa-tag"></i> CD</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/04/20211104/" rel="prev" title="[UI/UX Note] — StoryBook 透過元件說故事">
+      <i class="fa fa-chevron-left"></i> [UI/UX Note] — StoryBook 透過元件說故事
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/18/20220218/" rel="next" title="[React Note] — 前端 SEO 兩分鐘就上手">
+      [React Note] — 前端 SEO 兩分鐘就上手 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AA%8D%E8%AD%98"><span class="nav-number">3.</span> <span class="nav-text">基本認識</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">4.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%89%E5%A4%A7%E5%A7%8B%E6%96%BC%E4%B8%80%E9%A1%86%E5%B0%8F%E8%9E%BA%E7%B5%B2-%E6%98%A0%E5%83%8F%E6%AA%94"><span class="nav-number">5.</span> <span class="nav-text">偉大始於一顆小螺絲 - 映像檔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-V-S-%E5%9C%96%E5%BD%A2%E5%8C%96%E4%BB%8B%E9%9D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">指令 V.S 圖形化介面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E5%BD%BC%E6%AD%A4%E7%84%A1%E6%B3%95%E5%81%89%E5%A4%A7-%E5%AE%B9%E5%99%A8"><span class="nav-number">6.</span> <span class="nav-text">沒有彼此無法偉大 - 容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E5%9F%B7%E8%A1%8C"><span class="nav-number">6.1.</span> <span class="nav-text">背景執行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%86%B1%E6%9B%B4%E6%96%B0"><span class="nav-number">6.2.</span> <span class="nav-text">熱更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E4%BA%BA%E7%A8%AE%E6%A8%B9%E5%BE%8C%E4%BA%BA%E4%B9%98%E6%B6%BC"><span class="nav-number">7.</span> <span class="nav-text">前人種樹後人乘涼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B3%E8%AB%8B-dockerhub-%E5%B8%B3%E8%99%9F%E5%AF%86%E7%A2%BC"><span class="nav-number">7.1.</span> <span class="nav-text">申請 dockerhub 帳號密碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%85%A5"><span class="nav-number">7.2.</span> <span class="nav-text">登入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-Repository"><span class="nav-number">7.3.</span> <span class="nav-text">新增 Repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E7%89%88%E8%99%9F-%E4%B8%8A%E5%82%B3-Image"><span class="nav-number">7.4.</span> <span class="nav-text">上版號 &amp; 上傳 Image</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%98%97%E8%A9%A6%E4%B8%8B%E8%BC%89"><span class="nav-number">7.5.</span> <span class="nav-text">嘗試下載</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%98%97%E8%A9%A6%E6%90%9C%E5%B0%8B"><span class="nav-number">7.6.</span> <span class="nav-text">嘗試搜尋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%86%BD%E5%81%87%E8%A8%AD"><span class="nav-number">7.7.</span> <span class="nav-text">大膽假設</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%B2%E9%9A%8E%E7%94%A8%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">進階用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%89%E8%A3%9D"><span class="nav-number">8.1.</span> <span class="nav-text">基本安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E7%B6%B2%E8%B7%AF-Network"><span class="nav-number">8.2.</span> <span class="nav-text">關於網路(Network)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="nav-number">8.3.</span> <span class="nav-text">快速上手</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%B2%E5%BE%8C%E8%A4%87%E7%BF%92"><span class="nav-number">9.</span> <span class="nav-text">課後複習</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">10.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">11.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2021/12/10/20211210/",
+      identifier: "2021/12/10/20211210/",
+      title     : "[CI/CD Note] — 透過 Docker 快速建立及部署環境",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 你的專案是否曾經碰過以下的需求：  這個畫面需要管理者才能刪除，一般的用戶不能刪除 我需要依照帳號角色來決定要顯示什麼 這麼多地方要寫判斷能不能顯示畫面，一堆 if-else 好醜啊，怎麼美化  如果剛好你有需要做權限的需求，剛好要碰到權限判斷，那 CASL 真的是完全符合你的選擇， 接下來我將記錄一篇怎麼在 Next 使用這套 Plugins 的過程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Next Note] - 在 Next&#x2F;React 使用 CASL 執行乾淨俐落的權限管理方案">
+<meta property="og:url" content="https://rexhung0302.github.io/2023/03/25/20230325/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 你的專案是否曾經碰過以下的需求：  這個畫面需要管理者才能刪除，一般的用戶不能刪除 我需要依照帳號角色來決定要顯示什麼 這麼多地方要寫判斷能不能顯示畫面，一堆 if-else 好醜啊，怎麼美化  如果剛好你有需要做權限的需求，剛好要碰到權限判斷，那 CASL 真的是完全符合你的選擇， 接下來我將記錄一篇怎麼在 Next 使用這套 Plugins 的過程。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2023-03-25T05:15:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:06.011Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Next">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2023/03/25/20230325/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Next Note] - 在 Next/React 使用 CASL 執行乾淨俐落的權限管理方案 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2023/03/25/20230325/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Next Note] - 在 Next/React 使用 CASL 執行乾淨俐落的權限管理方案
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-03-25 13:15:00" itemprop="dateCreated datePublished" datetime="2023-03-25T13:15:00+08:00">2023-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:06" itemprop="dateModified" datetime="2025-02-21T01:36:06+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Next/" itemprop="url" rel="index"><span itemprop="name">Next</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>10 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20230325/CASL_logo.png" alt="CASL 權限管理系統"></p>
+<p>你的專案是否曾經碰過以下的需求：</p>
+<ul>
+<li>這個畫面需要管理者才能刪除，一般的用戶不能刪除</li>
+<li>我需要依照帳號角色來決定要顯示什麼</li>
+<li>這麼多地方要寫判斷能不能顯示畫面，一堆 <code>if-else</code> 好醜啊，怎麼美化</li>
+</ul>
+<p>如果剛好你有需要做權限的需求，剛好要碰到權限判斷，那 <strong>CASL</strong> 真的是完全符合你的選擇，</p>
+<p>接下來我將記錄一篇怎麼在 <strong>Next</strong> 使用這套 <strong>Plugins</strong> 的過程。</p>
+<p><strong><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/guide/intro">CASL</a></strong> 可以在 <strong>Server端</strong> 及 <strong>Client端</strong> 安裝使用，如果你使用 <strong>Express、Koa、NestJS</strong> 或 <strong>前端三大框架(Vue、React、Angular)</strong> 皆可以使用，方法也差不多。</p>
+<span id="more"></span>
+
+<p><em><strong>CASL 是一個權限管理套件，它提供了一種 DSL（Domain Specific Language），讓開發者可以使用類似自然語言的方式來定義權限控制規則。它支持將權限控制的邏輯集中管理，可以在多個地方重複使用。另外，CASL 還提供了可視化的能力，可以將權限控制規則轉換為圖形化的形式，便於開發者閱讀和維護。</strong></em></p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>需要會使用 Npm install</li>
+<li>需要會 JavaScript(本篇文章以 React 生態框架下去紀錄)</li>
+</ul>
+<p>本篇文章將會學到：</p>
+<ol>
+<li>基礎認識 - CASL 可以做什麼</li>
+<li>開始安裝 - 環境安裝及設定</li>
+<li>使用方法 - 套件使用方法</li>
+</ol>
+<p><em><strong>備註：截至文章發表前，套件目前更新至 <a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/guide/intro">CASL V6</a> 版本，有些文章搜尋後點擊跳轉的連結會跑到 v5 甚至 v3 去，需要特別注意一下</strong></em></p>
+<hr>
+<h3 id="為何要寫這篇"><a href="#為何要寫這篇" class="headerlink" title="為何要寫這篇"></a>為何要寫這篇</h3><p>老樣子還是需要說一下為什麼需要寫這篇文章，之前工作大部分接觸的後台系統，都不太需要做權限管理，有只是簡單的 <code>超級管理員</code> 跟 <code>一般用戶</code>，</p>
+<p>也不會有太多頁面需要做隱藏顯示的判斷，剛好前陣子自己寫的 <strong>Side Project</strong> 以及自己工作上真的開始碰到了後台系統需要做權限管控，</p>
+<p>因為之前就有從前同事口中聽過 <strong>CASL</strong> 這套插件，所以當下二話不說就直接選擇這套。</p>
+<p><strong>But</strong>，因為在官方的範例中 <strong>React</strong> 使用的是 <strong>useContext</strong> 的方法(非 <strong>React</strong> 使用者可以忽略這段)，筆者想研究如何把這套件丟到 <strong>Redux</strong> 中，畢竟可以丟到 <strong>Redux</strong> 就可以少寫一個 <strong>Context</strong> 的 <strong>Provider</strong>，也方便統一管理，何樂不為呢？所以這篇紀錄文就誕生了，希望能跟相同情境的使用者交流。</p>
+<hr>
+<h3 id="基礎認識"><a href="#基礎認識" class="headerlink" title="基礎認識"></a>基礎認識</h3><p><img src="/images/others/loading.gif" data-original="/images/20230325/next_CASL_logo.png" alt="CASL Ft. Next"></p>
+<p>在前端專案上我們要實現權限檢查很可能充斥著以下這種代碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (user.<span class="property">role</span> === <span class="string">&#x27;admin&#x27;</span> || user.<span class="property">id</span> === article.<span class="property">authorId</span>) &#123;</span><br><span class="line">  <span class="comment">// ... Can Do Something</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// ... Hidden DOM </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一來程式碼可能很雜亂，二來不好維護，邏輯一複雜了，可能就出現很多層的 <code>if-else</code>，而對於權限來說始終脫離不了 <strong>主體、角色、權限…(RBAC)</strong> ，</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/CASL_DSL.png" alt="CASL DSL 介紹"></p>
+<p>而 <strong>CASL</strong> 提供了我們更細粒度的控制，<strong>CASL</strong> 可以讓你使用更直觀的 <strong>DSL（Domain-Specific Language）</strong> 來表示對於不同角色或者用戶的權限控制，而不是像 <strong>RBAC</strong> 一樣使用角色權限進行管理，如官方在 <strong><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/guide/define-rules">Define Rules</a></strong> 文內所述。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/login_CASL_process.png" alt="流程圖"></p>
+<p>可以用上面的流程圖大概想一下，如果我們有好幾個頁面都需要判斷，是不是會充斥著一大堆的 <code>if-else</code>，但這些程式碼都可以交由 <strong>CASL</strong> 來做到。</p>
+<h4 id="Basic-Rules"><a href="#Basic-Rules" class="headerlink" title="Basic Rules"></a>Basic Rules</h4><p>先讓我們來一些基本認識吧！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/basic_rules.png" alt="基本規則"></p>
+<p>基本上 <strong>CASL</strong> 的核心架構脫離不了四種規則，但通常我們比較常使用到的是 <strong>User Action</strong> 及 <strong>Subject</strong>。</p>
+<ul>
+<li><p><strong>User Action</strong>：通常用來放使用者操作的能力是什麼，例如 <strong><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">CRUD</a></strong> 。</p>
+</li>
+<li><p><strong>Subject</strong>：用來檢查使用者操作的項目，通常會是一個 <strong>主題</strong> 或 <strong>實體</strong>，例如 <strong>Post</strong> 或者 <strong>article-list</strong>(下面會在說到用法)。</p>
+</li>
+<li><p><strong>Fields</strong>：這個可以理解成 <strong>Subject</strong> 的補充，如果 <strong>Subject</strong> 是一個大項目，例如文章列表，那 <strong>Fields</strong> 可以想成小項目，例如文章列表裡面的 <strong>Title</strong> 或 <strong>Description</strong>。</p>
+</li>
+<li><p><strong>Conditions</strong>： 使用這個可以更精準的匹配使用者是否符合該權限，如果用上一個 <strong>Fields</strong> 的條件來擴充，可以在使用這個方法去做更複雜的驗證，例如我想要達到使用者只能更新自己的文章。</p>
+</li>
+</ul>
+<p>綜合以上四中基本規則，你會得到以下的物件格式(<strong>Fields</strong> 及 <strong>Conditions</strong> 是非必填的)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">usrAbility</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">action</span>: <span class="string">&#x27;Read&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;article-list&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">action</span>: <span class="string">&#x27;Update&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;article-list&#x27;</span>,</span><br><span class="line">    <span class="attr">fields</span>: [<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;description&#x27;</span>],</span><br><span class="line">    <span class="attr">conditions</span>: &#123;</span><br><span class="line">      <span class="attr">authorId</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>根據上面的範例，代表我們賦予這個使用者的權限為可以閱讀(action: ‘Read’)文章列表(subject: ‘article-list’)、可以編輯(action: Update)作者 ID 為 1(conditions:{authorId: 1}) 文章裡的 Title(fields: [‘title’, ‘description’]) 及 Description。</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/fields_patterns.png" alt="Fields Patterns"></p>
+<p>當然這只是一個很簡單的範例，當中其實可以有更複雜的用法，像是 <strong>fields</strong> 可以使用 <strong>patterns</strong>，如上圖，但這邊就先不深入討論這個。</p>
+<h4 id="Define-Rules"><a href="#Define-Rules" class="headerlink" title="Define Rules"></a>Define Rules</h4><p>當我們賦予目標用戶擁有的權限後，該怎麼在套件上將這些權限做使用呢，<strong>CASL</strong> 的核心之一即是 <strong>能力(Ability)</strong></p>
+<p>而 <strong>CASL</strong> 定義能力的方式有三種，這邊我們使用第一種 <strong>defineAbility</strong>，另外兩種有興趣也可以參考官方網站 <strong><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/guide/define-rules">Define Rules</a></strong> 的介紹。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/define_rules.png" alt="Define Rules"></p>
+<p>我們稍微修改一下官網提供的範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ability.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; defineAbility &#125; <span class="keyword">from</span> <span class="string">&#x27;@casl/ability&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">usrAbility</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">action</span>: <span class="string">&#x27;Read&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;article-list&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">action</span>: <span class="string">&#x27;Update&#x27;</span>,</span><br><span class="line">    <span class="attr">subject</span>: <span class="string">&#x27;article-list&#x27;</span>,</span><br><span class="line">    <span class="attr">fields</span>: [<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;description&#x27;</span>],</span><br><span class="line">    <span class="attr">conditions</span>: &#123;</span><br><span class="line">      <span class="attr">authorId</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineAbility</span>(<span class="function">(<span class="params">can, cannot</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; usrAbility.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;</span><br><span class="line">      action,</span><br><span class="line">      subject,</span><br><span class="line">      fields,</span><br><span class="line">      conditions</span><br><span class="line">    &#125; = usrAbility.<span class="property">length</span>[i];</span><br><span class="line">    <span class="title function_">can</span>(action, subject, fields || [], conditions || <span class="literal">undefined</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// someComponent.js</span></span><br><span class="line"><span class="keyword">import</span> ability <span class="keyword">from</span> <span class="string">&#x27;./ability.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mockArticleList = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">authorId</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">    <span class="attr">description</span>: <span class="string">&#x27;456&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">authorId</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;123&#x27;</span>,</span><br><span class="line">    <span class="attr">description</span>: <span class="string">&#x27;456&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Home</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;</span></span><br><span class="line"><span class="language-xml">        ability.can(&#x27;Read&#x27;, &#x27;article-list&#x27;) ? (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            mockArticleList.map((article) =&gt; (</span></span><br><span class="line"><span class="language-xml">              <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;article.id&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>Title: &#123;article.title&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                <span class="tag">&lt;<span class="name">p</span>&gt;</span>description: &#123;article.description&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;</span></span><br><span class="line"><span class="language-xml">                  ability.can(&#x27;Update&#x27;, &#x27;article-list&#x27;) &amp;&amp; (</span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">button</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">                      <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-xml">                        // ... Do Something</span></span><br><span class="line"><span class="language-xml">                      &#125;&#125;</span></span><br><span class="line"><span class="language-xml">                    &gt;Edit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                  )</span></span><br><span class="line"><span class="language-xml">                &#125;</span></span><br><span class="line"><span class="language-xml">              <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            ))</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        )</span></span><br><span class="line"><span class="language-xml">      &#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Home</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上方只是一個很基礎簡單的範例，但可以明顯發現我們能力都包裹在 <strong>Ability</strong> 之中，透過 <strong>definedAbility</strong> 提供的 <strong>can()</strong> 方法，去驗證我們目前定義的能力能不能使用，該方法定義的 <strong>Type</strong> 是 <code>(method) can(...args: [action: any] | [action: any, subject: any, field?: string | undefined]): boolean</code>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/defineAbilityFor.png" alt="DefineAbilityFor"></p>
+<p>而創建 <strong>Ability</strong> 的方法也可以在包裹一層 <strong>function</strong>，透過傳入參數的方式，讓 <strong>conditions</strong> 裡面使用 <strong>user</strong> 傳遞進來的參數，例如上圖。</p>
+<hr>
+<h3 id="開始安裝"><a href="#開始安裝" class="headerlink" title="開始安裝"></a>開始安裝</h3><p>前面我們有提到，該篇文章將會以 <strong>Next</strong> 的角度下去紀錄，但其實透過上面的範例，普通的 <strong>JS</strong> 已經可以使用這個套件達到基本效果了。</p>
+<p><em><strong>提醒：這邊還是需要提醒一下，因為官方的範例是使用 useContext 的方式，而官方有提供一個 <Can /> 的組件可以檢查 conditions，而我自己使用的方式是類似上述範例，輸出 Ability.js 之後，使用 ability.can() 的方式，如前面提到該方法定義的 Type 為 <code>(method) can(...args: [action: any] | [action: any, subject: any, field?: string | undefined]): boolean</code>，因為該方法無法直接帶入 conditions，所以筆者還在研究如何帶入驗證，接下來的範例不會包含 Fields 及 Conditions 的部分，很抱歉！</strong></em></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/react_package.png" alt="React Package"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/CASL_react_install_way.png" alt="CASL Install Way"></p>
+<p>首先我們到官網後，看到左側選擇你目前使用的環境，這邊筆者選擇 <strong>CASL React</strong>，接著內文其實都介紹得滿清楚的了，怎麼安裝及使用：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/CASL_v5.png" alt="CASL V5"></p>
+<p>再次提醒，一定要注意看 <strong>CASL</strong> 的版本喔，如果你查看的官網為 <strong>v4</strong> 或 <strong>v5</strong> 版本，左上角下拉點開後不會有 <strong>v6</strong>，按照官網安裝方式現在裝的一定會是 <strong>v6</strong> 版本，網址需要自己輸入 <strong><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/package/casl-react">https://casl.js.org/v6/en/package/casl-react</a></strong> 去查看 <strong>v6</strong> 的文件，因為 <strong>v6</strong> 已經棄用 <code>import &#123; Ability &#125; form &#39;@casl/ability&#39;;</code> 了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/ability_already_remove.png" alt="Ability Type Deprecated"></p>
+<p>如果有在使用 <strong>ChatGPT</strong> 的工程師們，一定會發現它給你的範例都是使用這個方法。</p>
+<h4 id="React-js-With-useContext-and-CASL"><a href="#React-js-With-useContext-and-CASL" class="headerlink" title="React.js With useContext and CASL"></a>React.js With useContext and CASL</h4><p><em><strong>&gt;文章的最後會有一個 <strong>Demo</strong> 及 <strong>範例程式碼</strong>，筆者以自行理解的方式將 <strong>CASL</strong> 融入 <strong>Redux</strong> 之中，如果有誤，還請各路大神手下留情，底下可以留言告知筆者。</strong></em></p>
+<p>在 <strong>React</strong> 使用 <strong>CASL</strong> 官方的方法為 <strong><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en/package/casl-react">useContext</a></strong> ，我們先使用這種方式介紹：</p>
+<ol>
+<li>首先創建一支檔案為 <strong>ability.ts(可是自己的情況改為 .js)</strong> ，筆者放在專案目錄 <code>/utils/casl/ability.tsx</code></li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineAbility &#125; <span class="keyword">from</span> <span class="string">&#x27;@casl/ability&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createContext &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createContextualCan &#125; <span class="keyword">from</span> <span class="string">&#x27;@casl/react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newAbility = <span class="title function_">defineAbility</span>(<span class="function">(<span class="params">can</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 基本權限 可以隨意新增 內容也可以為空</span></span><br><span class="line">  <span class="title function_">can</span>([<span class="string">&#x27;Create&#x27;</span>, <span class="string">&#x27;Read&#x27;</span>, <span class="string">&#x27;Update&#x27;</span>, <span class="string">&#x27;Delete&#x27;</span>], <span class="string">&#x27;Home&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">AbilityContext</span> = <span class="title function_">createContext</span>(newAbility); <span class="comment">// 此處參數也可為空</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Can</span> = <span class="title function_">createContextualCan</span>(<span class="title class_">AbilityContext</span>.<span class="property">Consumer</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>接著修改 <strong>main.tsx</strong> 或 <strong>app.tsx</strong>，將 <strong>context</strong> 包裹著整個專案</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom/client&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">BrowserRouter</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react-router-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AbilityContext</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@utils/casl/ability&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ability <span class="keyword">from</span> <span class="string">&#x27;@utils/casl/config/ability&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;@/App&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@/index.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>)!).<span class="title function_">render</span>(</span><br><span class="line">  <span class="comment">// &lt;React.StrictMode&gt;</span></span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">BrowserRouter</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">AbilityContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;ability&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">AbilityContext.Provider</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">BrowserRouter</span>&gt;</span></span></span><br><span class="line">  <span class="comment">// &lt;/React.StrictMode&gt;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用方式為兩種方式</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> ability <span class="keyword">from</span> <span class="string">&#x27;@utils/casl/config/ability&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Can</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@casl/react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Home</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ability.<span class="title function_">can</span>([<span class="string">&#x27;Read&#x27;</span>, <span class="string">&#x27;Create&#x27;</span>], <span class="string">&#x27;Home&#x27;</span>));</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> mockUserInfo = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;RexHung&#x27;</span></span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      Home Page</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Can</span> <span class="attr">I</span>=<span class="string">&quot;Edit&quot;</span> <span class="attr">a</span>=<span class="string">&quot;Home&quot;</span> <span class="attr">ability</span>=<span class="string">&#123;ability&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span>&gt;</span>Edit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Can</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Can</span> <span class="attr">I</span>=<span class="string">&quot;Delete&quot;</span> <span class="attr">a</span>=<span class="string">&quot;Home&quot;</span> <span class="attr">this</span>=<span class="string">&#123;mockUserInfo&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span>&gt;</span>Delete<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Can</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Can</span> <span class="attr">I</span>=<span class="string">&quot;Delete&quot;</span> <span class="attr">a</span>=<span class="string">&quot;Home&quot;</span> <span class="attr">field</span>=<span class="string">&quot;article&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span>&gt;</span>Create<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">Can</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Home</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/react_can_component.png" alt="CASL React Can Component"></p>
+<p>兩種方式分別為直接使用核心 <code>ability.can()</code> 及使用套件幫你包裝好的 <code>&lt;Can /&gt;</code>，前面筆者有提到自行使用 <strong>Redux</strong> 定義之後，無法使用 <code>ability.can()</code> 帶入 <strong>conditions</strong>，這個組件可以幫你解決這個問題。</p>
+<p>在不同的框架套件封裝的組件傳參方式都不同，例如 <strong>Vue</strong> 是 <code>&lt;Can do=&quot;read&quot; :on=&quot;post&quot; field=&quot;title&quot;&gt;...&lt;/Can&gt;</code> 而 <strong>Angular</strong> 是 <code>&lt;div *ngIf=&quot;&#39;create&#39; | able: &#39;Post&#39;&quot; /&gt;</code>，但是目的都是要把 <strong>Basic Rules</strong> 那些當作條件傳遞進去給 ability 驗證是否合法，最後返回布林。</p>
+<p>以上三個步驟是不是非常簡單呢？</p>
+<h4 id="Next-js-With-Redux-and-CASL"><a href="#Next-js-With-Redux-and-CASL" class="headerlink" title="Next.js With Redux and CASL"></a>Next.js With Redux and CASL</h4><p>使用 <strong>Redux</strong> 主要原因為筆者覺得在最外層需要包裹兩層 <strong>Provider</strong> 有點醜，想要融合再一起，但筆者需要在聲明一次，截至文章發表前，筆者目前還沒有找到 <code>ability.can()</code> 可以傳遞 <strong>conditions</strong> 進去的方式。</p>
+<ol>
+<li>我們跳過 <strong>Redux</strong> 的安裝，在 <strong>Redux</strong> 新增一個 <strong>authSlice.tsx</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createSlice &#125; <span class="keyword">from</span> <span class="string">&quot;@reduxjs/toolkit&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppState</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@/store&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">HYDRATE</span> &#125; <span class="keyword">from</span> <span class="string">&quot;next-redux-wrapper&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AnyMongoAbility</span>, defineAbility &#125; <span class="keyword">from</span> <span class="string">&quot;@casl/ability&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> interface <span class="title class_">AuthState</span> &#123;</span><br><span class="line">  <span class="attr">ability</span>: <span class="title class_">AnyMongoAbility</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Initial state</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">initialState</span>: <span class="title class_">AuthState</span> = &#123;</span><br><span class="line">  <span class="attr">ability</span>: <span class="title function_">defineAbility</span>(<span class="function">(<span class="params">can</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 基本權限</span></span><br><span class="line">    <span class="title function_">can</span>([<span class="string">&#x27;Create&#x27;</span>, <span class="string">&#x27;Read&#x27;</span>, <span class="string">&#x27;Update&#x27;</span>, <span class="string">&#x27;Delete&#x27;</span>], <span class="string">&#x27;Home&#x27;</span>);</span><br><span class="line">  &#125;),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">interface <span class="title class_">IPermission</span> &#123;</span><br><span class="line">  <span class="attr">action</span>: <span class="title class_">Array</span>&lt;<span class="string">&quot;Create&quot;</span> | <span class="string">&quot;Read&quot;</span> | <span class="string">&quot;Update&quot;</span> | <span class="string">&quot;Delete&quot;</span>&gt;;</span><br><span class="line">  <span class="attr">subject</span>: string;</span><br><span class="line">  fields?: <span class="title class_">Array</span>&lt;string&gt;;</span><br><span class="line">  conditions?: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface <span class="title class_">IDefineAbilitiesFor</span> &#123;</span><br><span class="line">  <span class="attr">user</span>: <span class="title class_">IUser</span>;</span><br><span class="line">  <span class="attr">permissions</span>: <span class="title class_">IPermission</span>[];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">defineAbilitiesFor</span> = (<span class="params">&#123;user, permissions&#125;: IDefineAbilitiesFor</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">defineAbility</span>(<span class="function">(<span class="params">can</span>) =&gt;</span> &#123;</span><br><span class="line">    permissions.<span class="title function_">map</span>(<span class="function">(<span class="params">permission</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 這邊如果沒有 fields 但是有定義 conditions 傳遞進來，如果 fields 沒有寫入 Undefined 的話，conditions 會存不進去，</span></span><br><span class="line">      <span class="comment">// 所以如果沒有 fields 必須要給一個空陣列</span></span><br><span class="line">      <span class="title function_">can</span>(permission.<span class="property">action</span>, permission.<span class="property">subject</span>, permission.<span class="property">fields</span> || [], permission.<span class="property">conditions</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> authSlice = <span class="title function_">createSlice</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;auth&quot;</span>,</span><br><span class="line">  initialState,</span><br><span class="line">  <span class="attr">reducers</span>: &#123;</span><br><span class="line">    <span class="title function_">setAbility</span>(<span class="params">state, action</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> permission = action.<span class="property">payload</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// pass userInfo and get New Ability</span></span><br><span class="line">      <span class="keyword">const</span> newAbility = <span class="title function_">defineAbilitiesFor</span>(&#123;</span><br><span class="line">        <span class="attr">permissions</span>: permission</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      state.<span class="property">ability</span> = newAbility;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">setClearAbility</span>(<span class="params">state</span>) &#123;</span><br><span class="line">      state.<span class="property">ability</span> = state.<span class="property">ability</span>.<span class="title function_">update</span>([]);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// HYDRATE 這整段可以不需要管，這是因為在 Next.js 使用 Redux 需要另外加上的</span></span><br><span class="line">  <span class="attr">extraReducers</span>: <span class="function">(<span class="params">builder</span>) =&gt;</span> &#123;</span><br><span class="line">    builder.<span class="title function_">addCase</span>(<span class="variable constant_">HYDRATE</span>, <span class="function">(<span class="params">state, action: any</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        ...state,</span><br><span class="line">        ...action.<span class="property">payload</span>,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> &#123; setAbility, setClearAbility &#125; = authSlice.<span class="property">actions</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">selectAbility</span> = (<span class="params">state: AppState</span>) =&gt; state.<span class="property">auth</span>.<span class="property">ability</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> authSlice.<span class="property">reducer</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>接著就可以在專案上使用了</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; selectAbility &#125; <span class="keyword">from</span> <span class="string">&quot;@/store/reducers/authSlice&quot;</span>;</span><br><span class="line"></span><br><span class="line">interface <span class="title class_">IArticleManagerProps</span> &#123;</span><br><span class="line">  <span class="attr">propsPosts</span>: <span class="title class_">IPost</span>[];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">ArticleManager</span> = (<span class="params">&#123;</span></span><br><span class="line"><span class="params">  propsPosts</span></span><br><span class="line"><span class="params">&#125;: IArticleManagerProps</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> ability = <span class="title function_">useSelector</span>(selectAbility);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(ability.<span class="title function_">can</span>(<span class="string">&#x27;Read&#x27;</span>, <span class="string">&#x27;Home&#x27;</span>));</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span>...略<span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">ArticleManager</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如同前面一直提到的，筆者還在研究怎麼在 <strong>can</strong> 帶入 <strong>conditions</strong>，如果有大神知道的話還麻煩下面留言告知一下，非常感謝，筆者修改後會第一時間上來更新內容。</p>
+<p>因為少了使用 <code>import &#123; Can &#125; from &#39;@casl/react&#39;;</code> 這段，所以其實使用 <strong>Redux</strong> 的話可能需要自行封裝傳入 <strong>conditions</strong> 方法，這邊筆者會繼續爬文。</p>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
+<p>Source Code: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/casl-redux-app">傳送門</a></p>
+<p>Demo: <a target="_blank" rel="noopener" href="https://casl-redux-app.vercel.app/">傳送門</a></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>之前還沒有得知這套插件的時候還是一直使用 <code>if-else</code> 去判斷使用者的權限，有了這個套件，雖然免不了要在程式碼內寫一些客製化判斷，但基本上我們將邏輯都縮小到了 <strong>ability.js</strong> 裡 <code>defineAbility()</code> 的範圍內，算是方便統一維護及管理。</p>
+<p>筆者藉著這次機會，順便第一次使用了 <strong>Next.js</strong> 來做一個簡易的後台，帳號密碼都是寫死在專案內的 <strong>API</strong>，畫面渲染可能會有點不佳，目前筆者還在持續學習當中，請各路大神手下留情，也希望這篇文章可以幫助到正在製作權限功能路上苦惱的工程師們。</p>
+<p><em><strong>備註：如果你是使用 Vue.js 也非常推薦查閱這篇文章 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903588926324744">基于Vue.js开发的应用程序如何管理用户权限</a>，內容非常扎實及完整，有興趣可以參考看看。</strong></em></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20230325/vercel_deployments.png" alt="Vercel Deployment"></p>
+<p>最後離題的推薦一下，使用 <strong>Next.js</strong> 除了解決路由的一些問題外，雖然滿多地方需要摸索的，但在部署上 <strong><a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a></strong> 真的超級方便啊，只要將程式碼更新上 <strong>Github</strong> 後，就會自動進行部署，解決了需要自己實作 <strong>CD (Continuous Deployment)</strong> 的部分。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://casl.js.org/v6/en">CASL</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6882645988293640200">基于CASL的前端应用权限管理方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903588926324744">基于Vue.js开发的应用程序如何管理用户权限</a></li>
+<li><a target="_blank" rel="noopener" href="https://chat.openai.com/">ChatGPT</a> &lt;- 雖然幫助真的不大，給予的內容不是鬼打牆就是錯誤或者舊的寫法，但還是有給我一些思路上的幫助</li>
+<li><a target="_blank" rel="noopener" href="https://vercel.com/">Vercel</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+              <a href="/tags/Next/" rel="tag"><i class="fa fa-tag"></i> Next</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/02/19/20230219/" rel="prev" title="[Life Note] - LINE TAIWAN TechPulse 2023">
+      <i class="fa fa-chevron-left"></i> [Life Note] - LINE TAIWAN TechPulse 2023
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/18/20230418/" rel="next" title="[Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧">
+      [Vue Note] - Vue 佐 JSX/TSX，在 JS 中切版吧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BD%95%E8%A6%81%E5%AF%AB%E9%80%99%E7%AF%87"><span class="nav-number">2.1.</span> <span class="nav-text">為何要寫這篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E8%AA%8D%E8%AD%98"><span class="nav-number">2.2.</span> <span class="nav-text">基礎認識</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Basic-Rules"><span class="nav-number">2.2.1.</span> <span class="nav-text">Basic Rules</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Define-Rules"><span class="nav-number">2.2.2.</span> <span class="nav-text">Define Rules</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%A7%8B%E5%AE%89%E8%A3%9D"><span class="nav-number">2.3.</span> <span class="nav-text">開始安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-js-With-useContext-and-CASL"><span class="nav-number">2.3.1.</span> <span class="nav-text">React.js With useContext and CASL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next-js-With-Redux-and-CASL"><span class="nav-number">2.3.2.</span> <span class="nav-text">Next.js With Redux and CASL</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.4.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2023/03/25/20230325/",
+      identifier: "2023/03/25/20230325/",
+      title     : "[Next Note] - 在 Next/React 使用 CASL 執行乾淨俐落的權限管理方案",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言今天會提到關於 Nodejs 的 Template，如果你在前端有使用過 Pug(Jade)，會比較好理解一些，如果沒用過也沒關係，跟著這篇一起練習吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/09/14/20200914/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言今天會提到關於 Nodejs 的 Template，如果你在前端有使用過 Pug(Jade)，會比較好理解一些，如果沒用過也沒關係，跟著這篇一起練習吧。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-09-14T02:46:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.833Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="NodeJS">
+<meta property="article:tag" content="Express">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/09/14/20200914/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/09/14/20200914/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-09-14 10:46:00" itemprop="dateCreated datePublished" datetime="2020-09-14T10:46:00+08:00">2020-09-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>9.5k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>9 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200914/express_logo.jpg" alt="Express"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>今天會提到關於 <strong>Nodejs</strong> 的 <strong>Template</strong>，如果你在前端有使用過 <strong>Pug(Jade)</strong>，會比較好理解一些，如果沒用過也沒關係，跟著這篇一起練習吧。</p>
+<span id="more"></span>
+
+<p><strong>Nodejs</strong> 的 <strong>Template</strong> 有許多種，這邊示範的為 <strong>EJS</strong>。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200914/EJS_logo.png" alt="EJS Template"></p>
+<p>在前面的文章 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 我們開啟了全端之路，在入門如何安裝及使用 <strong>Nodejs</strong> 之後這篇文章就要簡短講解如何快速建立後端環境，並且規劃簡單的架構及使用模板建立多頁面。</p>
+<hr>
+<h3 id="老樣子"><a href="#老樣子" class="headerlink" title="老樣子"></a>老樣子</h3><p>按照慣例文章開頭還是要講一下什麼是 <strong>Express</strong>。</p>
+<p>跟前端一樣，<strong>Nodejs</strong> 也有三個比較流行的框架，分別為 <strong>Express、Koa</strong> 及 <strong>Hapi</strong>，但你可能會有點疑問，我安裝了這些框架但他們好像沒有幫我弄好環境？</p>
+<p>沒有錯，這些框架和前端那些框架有些異曲同工之妙，這三個框架提供了一些更方便的 <strong>API</strong> 可以使用，但環境必須要自行建立，如果你不想要手動建立環境的話別擔心，可以考慮研究一下 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/generator">Express Generator</a>(註1)</strong>，但這邊推薦新手先自行從 0 開始建立環境才能比較了解為什麼 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/generator">Express Generator</a></strong> 要幫我把環境這樣放。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/three_logo.png" alt="Nodejs 框架三劍客"></p>
+<p>關於三個框架的好壞這邊稍微提一下(不是專業的分析，有誤還請各路大神見諒)，詳細可參考 <strong><a target="_blank" rel="noopener" href="https://kknews.cc/zh-tw/tech/gj9rkay.html">如何正確選擇Node框架：Express、Koa還是Hapi</a></strong>：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/expressjs/express">Express</a></li>
+</ol>
+<ul>
+<li><p>優點：三個框架內最小且靈活的框架、學習曲線較低、可客制程度高、可擴展性高</p>
+</li>
+<li><p>缺點：需要大量的手動建置，且框架對於組織需要非常明確。</p>
+</li>
+</ul>
+<ol start="2">
+<li><a target="_blank" rel="noopener" href="https://github.com/koajs/koa">Koa</a></li>
+</ol>
+<ul>
+<li><p>優點：由 <strong>Express</strong> 原班人馬開發，在 <strong>koa2</strong> 開始使用了 <strong>async&#x2F;await</strong>，在非同步控制上，代碼可讀性更高、性能好。</p>
+</li>
+<li><p>缺點：<strong>Koa</strong> 的社群相對較小(現在似乎不一定了)、和 <strong>Express</strong> 的插件不相容。</p>
+</li>
+</ul>
+<ol start="3">
+<li><a target="_blank" rel="noopener" href="https://github.com/hapijs/hapi">Hapi</a></li>
+</ol>
+<ul>
+<li><p>優點：<strong>issues</strong> 數量少，維護與關注狀態都非常好、對於路由配置更加詳細。</p>
+</li>
+<li><p>缺點：配置上結構較複雜。</p>
+</li>
+</ul>
+<blockquote>
+<p>註1：<em>之後會再寫一篇如何使用 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/generator">Express Generator</a></strong> 快速建立 <strong>Nodejs</strong> 專案。</em></p>
+</blockquote>
+<hr>
+<h3 id="起手式一"><a href="#起手式一" class="headerlink" title="起手式一"></a>起手式一</h3><p>首先建立一個新專案資料夾，然後進入這個專案資料夾：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir express-example</span><br><span class="line"></span><br><span class="line">$ cd express-example</span><br><span class="line"></span><br><span class="line">$ npm init/init -y // 加上 -y 快速建立</span><br><span class="line"></span><br><span class="line">$ npm i express -S // 安裝 express</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/package_example.png" alt="目前的資料夾"></p>
+<p>到目前為止在專案資料夾應該會出現 <strong>node_modules package.json package-lock.json</strong>(註2)。</p>
+<blockquote>
+<p>註2：<em>關於 <strong>node_modules package.json package-lock.json</strong> 前面文章提到過很多次，這邊再稍微講一下，<strong>node_modules</strong> 是放各種套件的地方，<strong>package.json</strong> 則是紀錄你這個專案使用了什麼套件，所以之後把專案上傳可以不用上傳 <strong>node_modules</strong> 只需要讓下一個人拿到 <strong>package.json</strong> 即可安裝你之前安裝過的所有套件，最後 <strong>package-lock.json</strong> 則是紀錄套件使用的版本號。</em></p>
+</blockquote>
+<hr>
+<h3 id="起手式二"><a href="#起手式二" class="headerlink" title="起手式二"></a>起手式二</h3><p>裝好之後在專案底下建立 <strong>app.js</strong> 並且輸入以下內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span> (<span class="params">request, response</span>) &#123;</span><br><span class="line">  response.<span class="title function_">send</span>(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>之後在終端機輸入 <code>node app.js</code> 就可以看見終端機的訊息：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/example_nodejs_express_start.png" alt="成功跑在 3000 port"></p>
+<p>接著在網址上輸入 <code>http://localhost:3000/</code> 就會出現下面的訊息：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/success_on_web.png" alt="成功啟動"></p>
+<h4 id="起手式二-補充"><a href="#起手式二-補充" class="headerlink" title="起手式二 - 補充"></a>起手式二 - 補充</h4><p>上面我們可以成功在網頁上顯示 <strong>Hello Express!</strong> 聰明的你一定想得到是透過 <code>response.send()</code> 這個方法，這邊就要講解關於 <code>request</code> 及 <code>response</code>。</p>
+<p><code>request</code> 為 從使用者那邊發送過來的請求，<code>response</code> 為服務器這端發送回去的回應，我們可以透過 <code>request</code> 拿到一些使用者的請求及資訊，比方說 <code>request.route</code>、<code>req.param(&#39;key&#39;)</code> 及 <code>req.body.xxx</code> 等等。</p>
+<p>這邊試著將 <strong>app.js</strong> 的程式碼改為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(request);</span><br><span class="line">  response.<span class="title function_">send</span>(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>你會看見 <code>request</code> 有許多資訊可以拿取：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/req_info.png" alt="許多資訊"></p>
+<blockquote>
+<p><em>後面會再提到如何顯示 <strong>HTML</strong> 在頁面上。</em></p>
+</blockquote>
+<hr>
+<h3 id="規劃及準備"><a href="#規劃及準備" class="headerlink" title="規劃及準備"></a>規劃及準備</h3><p>前面了解到基本路由的概念，這時候我們就要開始規劃怎麼更改我們的專案架構，可以想像我們之後會有很多路由，我們可以把路由另外放一個資料夾，然後再透過 <strong>app.js</strong> 引入進來。</p>
+<p>先在專案建立資料夾 <strong>routes(放路徑)</strong> 然後在資料夾內在建立 <strong>index.js</strong>。</p>
+<p>這時候你的架構會長這樣：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/framework_example.png" alt="目前的架構"></p>
+<p>接著打開 <code>/routes/index.js</code> 之後把內容改為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">send</span>(<span class="string">&#x27;Hello Express!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/detail&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">send</span>(<span class="string">&#x27;This is detail page!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+
+<p>然後把 <strong>app.js</strong> 改寫為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/index&#x27;</span>); <span class="comment">// 引入 index 的所有路由</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/&#x27;</span>, indexRouter);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>這樣我們就把 index 的路由都統一放到 <code>/routes/index.js</code> 去管理了，如果還不太明白，我們再多建立一個 <strong>router</strong>，一樣在 <code>/routes</code> 底下建立一個 <code>user.js</code>，然後內容改為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/user.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">send</span>(<span class="string">&#x27;Hello User!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/user-edit&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">send</span>(<span class="string">&#x27;This is user-edit page!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+
+<p>接著一樣在 <strong>app.js</strong> 引入路由：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/index&#x27;</span>); <span class="comment">// 引入 index 的所有路由</span></span><br><span class="line"><span class="keyword">var</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/user&#x27;</span>); <span class="comment">// 引入 user 的所有路由</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/&#x27;</span>, indexRouter);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/user&#x27;</span>, userRouter);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>緊接著在終端機輸入 <code>node app.js</code> 啟動網頁，分別輸入網址 <code>http://localhost:3000/</code>、<code>http://localhost:3000/detail</code>、<code>http://localhost:3000/user</code> 及 <code>http://localhost:3000/user/user-edit</code>：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/router_info.png" alt="架構概念"></p>
+<p>懶人包：建立 <strong>routes</strong> 資料夾，每次要新增一個路由分類時，先到 <strong>routes</strong> 資料夾底下新增，例：<strong>user</strong>、<strong>member</strong> 或 <strong>login</strong> 等等，然後再到 <strong>app.js</strong> 分別引入，例：<code>var indexRouter = require(&#39;./routes/index&#39;);</code> 或 <code>var userRouter = require(&#39;./routes/user&#39;);</code> 然後在使用路由 <code>app.use(&#39;/&#39;, indexRouter);</code> 及 <code>app.use(&#39;/user&#39;, userRouter);</code>。</p>
+<hr>
+<h3 id="EJS"><a href="#EJS" class="headerlink" title="EJS"></a>EJS</h3><h4 id="快速導覽"><a href="#快速導覽" class="headerlink" title="快速導覽"></a>快速導覽</h4><p>學玩怎麼使用 <strong>router</strong> 之後這邊就要提到，後端寫好一支 <strong>API</strong> 可能是吐回一段文字，可能是直接渲染一個畫面，也可能是一段 <strong>JSON</strong>，前面我們使用的 <code>response.send(&#39;xxx&#39;);</code> 這個意思就是吐一段文字回去給瀏覽器，</p>
+<p>這時候你肯定會想我寫了一個 <strong>HTML</strong> 想渲染給使用者看，我不就要寫 <code>response.send(&#39;&lt;h1&gt;我是標題&lt;/h1&gt;&#39;);</code>，其實不用這麼麻煩，這邊要介紹到的 <strong>EJS</strong> 就是方便你渲染及動態帶入參數。</p>
+<p>另外 <strong>Template</strong> 的好處應該大家也都知道了，如果我今天有十支檔案都有 <strong>header</strong>，假如 <strong>header</strong> 有個地方要修改，不用十支都修改，只需要修改共用的 <strong>Template</strong> 即可。</p>
+<h3 id="快速起手"><a href="#快速起手" class="headerlink" title="快速起手"></a>快速起手</h3><p>在開始動作之前我們先在終端機輸入 <code>npm i ejs-locals -S</code>(註3) 安裝 <code>EJS</code>。</p>
+<p>接著在專案資料夾底下新增 <code>/views/index.ejs</code> 及 <code>/views/user.ejs</code> 然後把 <code>app.js</code> 改為下列內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;views&#x27;</span>, path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;views&#x27;</span>));</span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/index&#x27;</span>); <span class="comment">// 引入 index 的所有路由</span></span><br><span class="line"><span class="keyword">var</span> userRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/user&#x27;</span>); <span class="comment">// 引入 user 的所有路由</span></span><br><span class="line"></span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/&#x27;</span>, indexRouter);</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/user&#x27;</span>, userRouter);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">listen</span>(<span class="number">3000</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Example Nodejs Express listening on port 3000!&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>然後把 <code>/views/index.ejs</code> 的內容改為下列的內容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /views/index.ejs --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello Express By index.ejs.</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然後再回到 <code>/routes/index.js</code> 改為下列內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/index.ejs</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">render</span>(<span class="string">&#x27;index&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/detail&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">send</span>(<span class="string">&#x27;This is detail page!&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+
+<p>在上面我們把原本的 <code>response.send()</code> 改為 <code>response.render(&#39;index&#39;)</code> 意思就是把 <strong>views</strong> 底下的 <strong>index.ejs</strong> 渲染回去給瀏覽器，那為什麼 <strong>nodejs</strong> 會知道我們要選染哪一隻檔案回去呢？因為上面我們使用了下列的程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;views&#x27;</span>, path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;views&#x27;</span>));</span><br><span class="line">app.<span class="title function_">set</span>(<span class="string">&#x27;view engine&#x27;</span>, <span class="string">&#x27;ejs&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>上面的 <strong>path</strong> 就是 <strong>nodejs</strong> 原始的 <strong>API</strong>，而 <strong>__dirname</strong> 我們在前面的 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 有提到，這邊大概的意思就是當我使用 <code>response.render(&#39;index&#39;)</code> 的時候，會自動幫我抓路徑 <code>response.render(&#39;index&#39;) =&gt; response.render(&#39;目前路徑/views/index&#39;)</code>，最後一行則是把目前的 <strong>view</strong> 引擎設定為 <strong>ejs</strong>。</p>
+<p>現在停止終端機的指令，重新輸入 <code>node app.js</code> 打開瀏覽器輸入 <code>http://localhost:3000/</code> 吧，會出現下面的畫面就代表成功了：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_example.png" alt="成功渲染"></p>
+<blockquote>
+<p>註3：<em>這邊建議安裝 <strong><a target="_blank" rel="noopener" href="https://github.com/randometc/ejs-locals">ejs-locals</a></strong> 而非 <strong><a target="_blank" rel="noopener" href="https://github.com/mde/ejs">ejs</a></strong> 因為前者多了更多的 <strong>API</strong> 可以使用</em></p>
+</blockquote>
+<h3 id="帶入參數"><a href="#帶入參數" class="headerlink" title="帶入參數"></a>帶入參數</h3><p>但是通常我們後端在渲染畫面的時候，必定會先去資料庫拿資料，在渲染畫面，而參數帶入的方法也很簡單，只需要在渲染的時候加進去即可，接著再去 <strong>ejs</strong> 顯示出來，找到 <code>/routes/user.js</code> 這隻檔案，並且改寫為下列內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/user.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    response.<span class="title function_">render</span>(<span class="string">&#x27;user&#x27;</span>,&#123;</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;大雄&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">get</span>(<span class="string">&#x27;/user-edit&#x27;</span>, <span class="keyword">function</span>(<span class="params">request, response</span>)&#123;</span><br><span class="line">    <span class="comment">// 假設到資料庫拿到資料了</span></span><br><span class="line">    <span class="keyword">var</span> user_arr = [</span><br><span class="line">        &#123; <span class="attr">username</span>: <span class="string">&#x27;胖虎&#x27;</span>, <span class="attr">age</span>: <span class="number">20</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">username</span>: <span class="string">&#x27;小夫&#x27;</span>, <span class="attr">age</span>: <span class="number">22</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">username</span>: <span class="string">&#x27;靜香&#x27;</span>, <span class="attr">age</span>: <span class="number">16</span> &#125;,</span><br><span class="line">        &#123; <span class="attr">username</span>: <span class="string">&#x27;多拉A夢&#x27;</span>, <span class="attr">age</span>: <span class="number">100</span> &#125;,</span><br><span class="line">    ]</span><br><span class="line">    response.<span class="title function_">render</span>(<span class="string">&#x27;user&#x27;</span>,&#123;</span><br><span class="line">        <span class="string">&#x27;user_arr&#x27;</span>: user_arr,</span><br><span class="line">        <span class="string">&#x27;show&#x27;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+
+<p>接著也把 <code>/views/user.ejs</code> 改寫一下吧：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /views/user.ejs --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello Express By index.ejs.</span><br><span class="line"></span><br><span class="line">    &lt;%= username %&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>聰明的你會立馬發現 <code>&lt;%= username %&gt;</code> 這個新寫法，其實這就是模板的原理，在要替換的地方使用變數，再透過更新資料去觸發畫面更動，這也是 <strong>Vue</strong> 的原理，像六角學院校長說的，並非魔術！</p>
+<p>接下來重新啟動終端機輸入 <code>node app.js</code> 一樣打開瀏覽器輸入 <code>http://localhost:3000/user</code> 你會發現神奇的大雄被帶進來了，如下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_user_example.png" alt="user頁面成功渲染"></p>
+<h4 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h4><p>另外 <strong>ejs</strong> 可以跟 <strong>pug</strong> 一樣寫 <strong>js</strong> 在上面，所以我們也可以寫判斷，把 <code>/views/user.ejs</code> 改寫為下列內容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /views/user.ejs --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    Hello Express By index.ejs.</span><br><span class="line"></span><br><span class="line">    &lt;% if(show)&#123; %&gt;</span><br><span class="line">        &lt;% for(var i = 0; i &lt; user_arr.length; i++) &#123; %&gt;</span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>username： &lt;%= user_arr[i].username %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>age： &lt;%= user_arr[i].age %&gt;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        &lt;% &#125; %&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接著一樣重新啟動終端西，執行 <code>node app.js</code> 之後打開瀏覽器輸入 <code>http://localhost:3000/user/user-edit</code> 會出現下面的內容：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200914/ejs_user_edit_example.png" alt="user頁面成功渲染"></p>
+<p>我們可以在參數使用 <strong>Boolean</strong> 然後在渲染時依靠 <strong>true&#x2F;false</strong> 去決定是否顯示內容，也可以用迴圈的方式把資料給渲染出來，這和我們使用 <strong>JS</strong> 來渲染畫面到 <strong>HTML</strong> 是大同小異的。</p>
+<blockquote>
+<p><em>關於更多的 <strong>ejs</strong> 用法可以參考 <strong><a target="_blank" rel="noopener" href="https://ejs.co/#docs">ejs docs</a></strong></em></p>
+</blockquote>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊附上簡單的 <strong>express-example</strong>，裡面包含簡單的 <strong>routes</strong> 拆分 及 <strong>ejs</strong> 的模板使用。</p>
+<p>另外有補上簡單的靜態資源引入，用法很簡單，只需要在 <strong>app.js</strong> 加上一行 <code>app.use(express.static(&#39;public&#39;));</code> 即可，接著在需要引入的地方只需要直接把路由從 <strong>public</strong> 接著打下去即可，因為預設會去找 <strong>public</strong> 這個資料夾，例：<code>&lt;img src=&quot;/images/soGood.jpeg&quot;&gt;</code>。</p>
+<p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/express-example">傳送門</a></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這篇文章原本想簡短介紹 <strong>EJS</strong>，但因為提到了 Router 不得不在最後把文章標題從 <strong>Express 及 EJS 入門淺談</strong> 改為 <strong>Express、Router 及 EJS 入門淺談</strong>，原本想長話短說，不知不覺又越寫越長，不過到這邊也大致對 nodejs 的環境有些許了解了，之後的篇章將會繼續講解如何使用 <strong>nodejs</strong> 的 <strong>Cookie</strong> 及 <strong>Session</strong>。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://hsiangfeng.github.io/nodejs/20190701/3739361538/">全端勇士之路 Node.js 基礎學習-Express EJS 撰寫篇</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.fundebug.com/2019/05/10/express-koa-hapi/">如何选择正确的Node框架：Express，Koa还是Hapi？</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/@rorast.power.game/%E5%9F%BA%E6%96%BCnodejs%E7%9A%84koa2%E5%9F%BA%E6%9C%AC%E6%95%99%E5%AD%B8-67d1ce0bb59a">基於Nodejs的Koa2基本教學</a></p>
+</li>
+<li><p><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/NodeJS/" rel="tag"><i class="fa fa-tag"></i> NodeJS</a>
+              <a href="/tags/Express/" rel="tag"><i class="fa fa-tag"></i> Express</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/13/20200913/" rel="prev" title="[Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？">
+      <i class="fa fa-chevron-left"></i> [Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/13/20201013/" rel="next" title="[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List">
+      [NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%81%E6%A8%A3%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">老樣子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E6%89%8B%E5%BC%8F%E4%B8%80"><span class="nav-number">2.2.</span> <span class="nav-text">起手式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E6%89%8B%E5%BC%8F%E4%BA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">起手式二</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%B7%E6%89%8B%E5%BC%8F%E4%BA%8C-%E8%A3%9C%E5%85%85"><span class="nav-number">2.3.1.</span> <span class="nav-text">起手式二 - 補充</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%8F%E5%8A%83%E5%8F%8A%E6%BA%96%E5%82%99"><span class="nav-number">2.4.</span> <span class="nav-text">規劃及準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EJS"><span class="nav-number">2.5.</span> <span class="nav-text">EJS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%B0%8E%E8%A6%BD"><span class="nav-number">2.5.1.</span> <span class="nav-text">快速導覽</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E8%B5%B7%E6%89%8B"><span class="nav-number">2.6.</span> <span class="nav-text">快速起手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B6%E5%85%A5%E5%8F%83%E6%95%B8"><span class="nav-number">2.7.</span> <span class="nav-text">帶入參數</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if-else"><span class="nav-number">2.7.1.</span> <span class="nav-text">if-else</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.8.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/09/14/20200914/",
+      identifier: "2020/09/14/20200914/",
+      title     : "[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

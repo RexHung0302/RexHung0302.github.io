@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言如果你為了前端切版每次都要從 HTML 開始建立檔案，然後 CSS 再來 JavaScript…等等，而且碰到多頁面的版面手足無措，那你就可以考慮看看這篇文章了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note] — 關於Gulp">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/05/06/20200506/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言如果你為了前端切版每次都要從 HTML 開始建立檔案，然後 CSS 再來 JavaScript…等等，而且碰到多頁面的版面手足無措，那你就可以考慮看看這篇文章了。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-05-05T23:11:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.758Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Gulp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/05/06/20200506/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Tool Note] — 關於Gulp | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/05/06/20200506/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note] — 關於Gulp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-05-06 07:11:00" itemprop="dateCreated datePublished" datetime="2020-05-06T07:11:00+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Gulp/" itemprop="url" rel="index"><span itemprop="name">Gulp</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>7 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200506/gulp_logo.jpg" alt="終於講到飲料杯了"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>如果你為了前端切版每次都要從 <strong>HTML</strong> 開始建立檔案，然後 <strong>CSS</strong> 再來 <strong>JavaScript</strong>…等等，而且碰到多頁面的版面手足無措，那你就可以考慮看看這篇文章了。</p>
+<span id="more"></span>
+
+<p>開始前先提醒一下文章較長，您可以重頭開始看怎麼建立 <strong>Gulp</strong> 抑或是滑到下方選擇觀看 <strong><a href="#%E9%A0%90%E5%91%8A%E5%A4%AA%E9%95%B7%E4%BA%86">安裝後的Gulp筆記</a></strong> 或 <strong><a href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E7%9B%AE%E9%8C%84">關鍵懶人包目錄</a></strong>！！</p>
+<p>之前玩過 <strong>Webpack</strong> 時就一直聽過 <strong>Gulp</strong>，但是一直沒有去研究過，一直以為兩個是差不多性質的東西，應該一個就夠用了，但是藉由這次的六角切版直播班真的接觸到了 <strong>Gulp</strong>，我想是時候好好研究研究一番了。</p>
+<blockquote>
+<p><em>溫馨提醒：如果還沒看過 Webpack 或是您已經是 Webpack 高手，建議可以先參考看看我的前兩篇文章，如果您只是想研究 Gulp 其實只看本篇文章也沒關係，<a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a> 及 <a href="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？</a> 如果有歡念錯誤歡迎各路高手不吝社指教。</em></p>
+</blockquote>
+<blockquote>
+<p><em>地雷警告：由於 <strong>Gulp</strong> 自己也還不是很熟，本篇文章就是用來筆記加練習的，如果有觀念錯誤也歡迎各路高手不吝社指教。</em></p>
+</blockquote>
+<hr>
+<h3 id="關鍵懶人包目錄"><a href="#關鍵懶人包目錄" class="headerlink" title="關鍵懶人包目錄"></a>關鍵懶人包目錄</h3><p>這邊提供給已經安裝過並且懂的大概的 <strong>npm</strong> 操作流程，只想看 <strong>Gulp</strong> 怎麼操作的人：</p>
+<ol>
+<li><p><a href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E4%B8%80">任務執行基礎的兩個API - 同步任務 及 非同步任務</a></p>
+</li>
+<li><p><a href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E4%BA%8C">檔案操作基礎的兩個API - 取得 及 輸出</a></p>
+</li>
+<li><p><a href="#%E8%B6%85%E7%B4%9A%E6%AF%94%E4%B8%80%E6%AF%94">最後關鍵比一比懶人包</a></p>
+</li>
+<li><p><a href="#%E4%BD%A0%E8%A6%81%E7%9A%84%E9%AD%9A%E5%9C%A8%E9%80%99">範例檔下載</a></p>
+</li>
+</ol>
+<hr>
+<h3 id="Gulp-是什麼？"><a href="#Gulp-是什麼？" class="headerlink" title="Gulp 是什麼？"></a>Gulp 是什麼？</h3><p>和 <strong>Webpack</strong> 一樣，剛學前端在切版時我們很長就是創建一個新的 <strong>HTML CSS JavaScript</strong>…等等，碰到多頁面的版面我們就是 <strong>index_1.html index_2.html index_3.html</strong>，久了就會覺得麻煩，身為工程師，不就是要把麻煩的事情簡單化嗎？！</p>
+<p>所以在後來就出現了基於 <strong>Node.js</strong>(剛接觸前端不久後可能就會常常碰到)<strong>、NPM</strong> 的<strong>自動化建構工具(註1)</strong>，幫你省去很多重複且枯燥的步驟。</p>
+<blockquote>
+<p><em>註1:就字面上的意思大概已經解釋了 87% 簡單說就是下個指令之後幫你執行一些不必重複做的工作，比方說 編譯、壓縮、命名或是開發時用一種寫法，上正式環境換一種寫法。</em></p>
+</blockquote>
+<h3 id="使用說明？"><a href="#使用說明？" class="headerlink" title="使用說明？"></a>使用說明？</h3><p><img src="/images/others/loading.gif" data-original="/images/20200506/gulp_logo_gif.gif" alt="自動化建構工具"></p>
+<p>其實仔細看 <strong>Gulp</strong> 跟 <strong><a target="_blank" rel="noopener" href="https://webpack.js.org/">Webpack</a></strong> 的官網介紹，會發現兩個非常像，但你實際使用，會發現 <strong>Gulp</strong> 更注重於 <strong>任務</strong> 的概念，而 <strong>Webpack</strong> 注重於 <strong>打包</strong> 及 <strong>效能</strong> 方面。</p>
+<p>但其實兩種工具官方都有很詳盡的介紹，只要跟著走，基本都沒什麼問題！甚至最後你還能將兩者合併使用呢！</p>
+<p>但筆記不是寫心情日記，今天還是要認真的跑過一次流程，下面開始就會介紹怎麼把 <strong>Gulp</strong> 跑過一遍。</p>
+<hr>
+<h3 id="釣竿來"><a href="#釣竿來" class="headerlink" title="釣竿來"></a>釣竿來</h3><blockquote>
+<p>這邊建議還是要有一點 <strong>JavaScript</strong> 的基礎，如果沒有沒關係，如果有會比較輕鬆。</p>
+</blockquote>
+<p>首先您必須要先安裝 <strong>Node.js</strong> 之後才能使用 <strong>npm</strong>，這邊先不用搞懂他們在幹嘛，只要記得之後常常會碰到 <strong>node_module</strong> 而這裡面放滿你會用到的<strong>前端套件</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/node_logo.png" alt="NodeJS"></p>
+<p>安裝方法很簡單，可以到 <strong>Node.js</strong> 的官方網站下載安裝檔安裝，或是參考我的這篇文章安裝 <a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a> 裡面有提到 <strong>Node.js</strong> 怎麼安裝。</p>
+<blockquote>
+<p><em>安裝完成記得打開終端機輸入 <code>node --version</code> 如果安裝成功你會看到 <code>v版本號</code>，就是安裝成功了，記得也要輸入 <code>npm --version</code> 就能看到有沒有把 <strong>npm</strong> 安裝成功！</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/node&npm_version.png" alt="成功安裝！"></p>
+<h3 id="趕快發車"><a href="#趕快發車" class="headerlink" title="趕快發車"></a>趕快發車</h3><p>前置作業了之後我們要安裝 <strong>全域的Gulp-cli</strong> 及 <strong>專案裡的Gulp</strong>，前者的安裝讓使用者可以在任何地方透過 <strong>cli</strong> 指令(比如 <strong>gulp</strong>) 來下指令，後者讓使用者可以使用 <strong>gulp API</strong> 來自定義建構的任務。</p>
+<p>首先安裝全域的 <strong>gulp-cli</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install gulp-cli -g // 安裝全域的 gulp-cli</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>接著進到你要實作的專案底下輸入以下指令(安裝路徑記得要對喔！！)，縮寫的 <strong>i</strong> 為 <strong>install</strong> 縮寫 <strong>-D</strong> 為 <strong>–save-dev</strong> 的縮寫，意指只安裝到 <strong>package.json</strong> 的 <strong>devDependencies</strong>，不理解的話先略過沒關係</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i -D gulp // 安裝 gulp 到專案</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成輸入 <code>gulp --version</code> ，如果看見下圖 <strong>Local version: Unknown</strong> 就代表你目前在錯誤的目錄，一定要進到你要實作的專案底下安裝才會有版本號出現！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/gulp_install_finished.png" alt="安裝完成"></p>
+<hr>
+<h3 id="初始化專案"><a href="#初始化專案" class="headerlink" title="初始化專案"></a>初始化專案</h3><p>以往我們都是從 <strong>index.html</strong> 開始建立，這邊我們換個做法，到你要實作的專案資料夾下，先在終端機輸入 <code>npm init</code> 或 <code>npm init -y</code>，第一次建立建議都輸入前者，因為接下來會跳出一連串的問題給你作答，大致就是問你 <strong>專案名稱 專案介紹 作者</strong> 或是 <strong>是否要連上Git</strong>…等等，建議跑過一次流程之後再試試後面的輸入方法，後者可以省略那堆問題！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/question.png" alt="一連串的問題"></p>
+<p>因為我們是練習，所以就是一路 <strong>Enter</strong> 下來，最後會在你的資料夾內看到 <strong>package.json</strong> 檔案，這邊我們先來介紹一下這個檔案是幹嘛的。</p>
+<p>以往我們會把需要用的套件直接用 <strong>CDN</strong> 方式插入在 <strong>index.html</strong> 裡面，就像下圖所示。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/cdn_example.png" alt="傳統套件引入作法"></p>
+<p>但是隨著引用的套件越來越多，會越來越雜亂，而且也不好管理版本，所以後來的 <strong>package.json</strong> 就是在做這件事情，裡面詳細記載你用了什麼套件，還有這個專案的詳細介紹(沒錯 就是你前面略過的那一大串)，至於版本號等等還會有個檔案叫 <strong>package-lock.json</strong> 記載。</p>
+<p>前置步驟的最後在輸入下列語法，就會安裝記載在 <strong>package.json</strong> 裡的所有套件，這也是為什麼我們最後只需要上傳 <strong>原始檔</strong> 及 <strong>package.json</strong> 給下一個人，他就會知道你用了什麼套件並且怎麼修改，而我們也不需要把一大包套件上傳到空間上去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<p>除此之外使用 <strong>package.json</strong> 管理套件還有個好處，通常使用 cdn 方式引入套件，如果對方存放套件的 <strong>Server</strong> 掛掉了，或是連結甚至網路掛掉了，基本上就無法使用這個套件了，但安裝在 <strong>node_module</strong> 等於是安裝在本地，即使網路斷了，或是來源遺失了，至少你還保留一份套件檔案在這邊，前提是你必須在掛掉之前安裝Ｑ。</p>
+<p>安裝完成後就會出現 <strong>package-lock.json</strong>，這就會記載你安裝套件的版本號啦！</p>
+<hr>
+<h3 id="預告太長了"><a href="#預告太長了" class="headerlink" title="預告太長了"></a>預告太長了</h3><p>先別急，這邊正式要開始了。這邊開始 <strong>Gulp</strong> 做法跟 <strong>Webpack</strong> 有點像，後者會在資料夾建立 <strong>webpack.config.js</strong>，前者會在資料夾建立 <strong>gulpfile.js</strong>，這就是我們的 <strong>核心設定</strong> 檔案了。</p>
+<p>按照官網的指示，我們先在專案資料夾創建 <strong>gulpfile.js</strong> 然後在裡面貼上下列程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">defaultTask</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="comment">// place code for your default task here</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">123</span>);</span><br><span class="line">  <span class="title function_">cb</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">default</span> = defaultTask</span><br></pre></td></tr></table></figure>
+
+<p>之後在終端機上輸入 <strong>gulp</strong>(記得要到專案目錄底下喔！)，會出現下面的結果，先講解一下，終端機輸入 <strong>gulp</strong> 後面如果不帶任何字串，預設就是 <strong>gulp default</strong>，而我們要有個概念 <strong>gulp</strong> 都是以任務為出發點再跑的，意思就是跑一個 <strong>default</strong> 的任務，而前面我們已經寫好了，預設的 <strong>default</strong> 任務就是 <code>function defaultTask()</code>，內容就是 <code>console.log(123);</code>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/task_example.png" alt="預設任務"></p>
+<p>沒錯！到這邊你就完成了，就是這麼簡單。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/easy.jpg" alt="就這麼簡單"></p>
+<hr>
+<h3 id="不是幼幼班"><a href="#不是幼幼班" class="headerlink" title="不是幼幼班"></a>不是幼幼班</h3><p>當然事情沒有這麼容易，我們想做到的事情和現在還差<strong>十萬八千里遠</strong>，但放心，如果是 <strong>Webpack</strong> 的話目前應該還有<strong>二十萬八千里遠</strong>(以一個菜鳥過來人的上手經驗來說，有誤別砲我)。</p>
+<p>在我們有了 <strong>任務</strong> 的概念之後，我們還要先有一個基礎知識，前面提到我們有說我們會安裝很多套件在 <strong>node_module</strong> 立面並且記載在 <strong>package.json</strong>，那是不是 <strong>npm install</strong> 之後出現 <strong>package-lock.json</strong> 就可以使用了呢？</p>
+<p>這邊就要講解一下了，通常透過 <strong>Node.js</strong> 安裝的套件，在那個專案都會有一個 <strong>進入點(在前面 npm init 的時候會問你要不要指定檔案 不要就是預設 index.js)</strong>，而我們想使用套件就必須在 <strong>進入點</strong> 把套件 <strong>import</strong> 或是 <strong>required</strong> 近來，意思其實跟 <strong>cdn</strong> 在 <strong>index.html</strong> 插入一行 <code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./plugins/bootstrap-v4.3.1/css/bootstrap.min.css&quot; /&gt;</code> 是差不多的，接著你就能在 <strong>進入點</strong> 的那隻檔案使用那個套件，最後只要你的檔案可以吃得到 <strong>進入點</strong> 就能使用套件。</p>
+<blockquote>
+<p><em>Gulp 4.0 和以前的寫法可能有些許差異，因為菜雞我沒用過以前版本，但 4.0 的寫法在 4.0 以前會無法使用，例如陣列寫法改為 <strong>series()</strong> 及 <strong>parallel()</strong></em></p>
+</blockquote>
+<h3 id="怎麼引入套件"><a href="#怎麼引入套件" class="headerlink" title="怎麼引入套件"></a>怎麼引入套件</h3><p>這邊我們會引領您記得幾個 <strong>Gulp</strong> 要記得的 <strong>API</strong>，以後您會常常使用到它！</p>
+<p>首先這邊就以 <strong>Gulp</strong> 為例子，當我們有很多任務要執行的時候，我們該怎麼做呢？</p>
+<p>在檔案內改為以下的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入套件 及 套件API</span></span><br><span class="line"><span class="keyword">const</span> &#123; series, parallel &#125; = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任務一</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">taskOne</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="title function_">cb</span>();</span><br><span class="line">  &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任務二</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">taskTwo</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="title function_">cb</span>();</span><br><span class="line">  &#125;,<span class="number">2000</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 任務三</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">taskThree</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">  <span class="title function_">cb</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 輸出整個任務</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">default</span> = <span class="title function_">series</span>(taskOne, <span class="title function_">parallel</span>(taskTwo, taskThree))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第一句就是我們引進套件及套件的API(方法)，而 4.0 跟以往最大的差異就在多了 <code>series</code> 及 <code>parallel</code>，前者為任務一個結束才會換下一個，後者為同步進行，我不管前面完成沒有，反正包在 <code>parallel</code> 裡的我全部都一次進行。</p>
+<p>而範例的進行結果就是後面會等 <strong>taskOne</strong> 運行結束(記得如果沒有 Return 在 Function 立面都要設定一個 end 宣吿，例如 cb())，結束後包在 <code>parallel</code> 裡面的不管順序都會一起進行。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/series_example.png" alt="仔細看看秒數"></p>
+<blockquote>
+<p><em>順帶一提，最前方的 <code>const &#123; series, parallel &#125; = require(&#39;gulp&#39;);</code> 亦可寫為 <code>const gulp = require(&#39;gulp&#39;);</code> 然後在需要使用的地方加上 <code>gulp.series</code> 或 <code>gulp.parallel</code>，例如最後一句可改為 <code>exports.default = gulp.series(taskOne, gulp.parallel(taskTwo, taskThree))</code>，意思為使用 <strong>gulp 的 API</strong> <code>series</code> 及 <code>parallel</code>。</em></p>
+</blockquote>
+<blockquote>
+<p><em>除了前面寫的 cb() 當作結束任務外，任務還可以使用諸如 <code>promise</code>、<code>event emitter</code>、<code>child process</code>或<code>observable</code>…等等，詳細可參考<a target="_blank" rel="noopener" href="https://www.gulpjs.com.cn/docs/getting-started/async-completion/">官方指南</a>，如果都不用就是必須向前面寫的，要有一個 <strong>callback</strong>(例：cb())。</em></p>
+</blockquote>
+<h4 id="關鍵懶人包一"><a href="#關鍵懶人包一" class="headerlink" title="關鍵懶人包一"></a>關鍵懶人包一</h4><p><strong>上述例子做完你已經學會了基本的兩個API，<code>series</code> 及 <code>parallel</code>，只要記得要呼叫任務就是使用這兩個，前者為不同步呼叫，後者為同步呼叫！</strong></p>
+<h3 id="還有什麼全都拿出來！"><a href="#還有什麼全都拿出來！" class="headerlink" title="還有什麼全都拿出來！"></a>還有什麼全都拿出來！</h3><p>再學會前面兩個基本的 <strong>API</strong> 後，這邊開始我們要學另外<strong>兩個</strong>基本的 <strong>API</strong>；想要 <strong>自動化建構</strong> 我們最基本需要的事情就是 <strong>操作檔案</strong>。</p>
+<blockquote>
+<p><em>為什麼 <strong>Gulp</strong> 的 <strong>API</strong> 可以操作檔案呢？因為他接受 <strong>glob</strong> 參數，詳細的介紹可參考<a target="_blank" rel="noopener" href="https://www.gulpjs.com.cn/docs/getting-started/explaining-globs/">此處</a>。</em></p>
+</blockquote>
+<p>首先我們要記得第一個 <strong>API</strong> 為 <strong>src()</strong>，意思就是從哪個路徑讀取檔案，使用方式和前方一樣，先引入 <code>const gulp = require(&#39;gulp&#39;);</code>，然後呼叫 <code>gulp.src(&#39;./檔案路徑&#39;)</code>，或是在最前方改為 <code>const &#123; src &#125; = require(&#39;gulp&#39;);</code>，然後使用 <code>src(&#39;./檔案路徑&#39;)</code>。</p>
+<p>按照官網的說法，取得檔案後會生成一個 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong>，意思是蝦咪呢？<del>Steam 我還理解(誤)</del></p>
+<p>翻了網上的解釋，它是一種數據處理的方法，從輸入到輸出，可以稱為一個流，他並不是像傳統的讀寫文件，一次一個，而是隨讀取的數據多寡，處理其內容，而在大數據之中就非常強大，例如檔案可能超過你的空間容量，不可能將整個文件塞進你的空間在讀取，而這時後 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong> 就發揮作用了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/stream_example.png" alt="流的抽象概念"></p>
+<blockquote>
+<p><em>抱歉我實在是找不到圖片，如果比喻有誤還請手下留情。</em></p>
+</blockquote>
+<p>而 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong> 分為四種流：</p>
+<h4 id="清流？流派？"><a href="#清流？流派？" class="headerlink" title="清流？流派？"></a>清流？流派？</h4><p>流大致可分為四種類型：</p>
+<ol>
+<li><p>Writable - 可寫入的流</p>
+</li>
+<li><p>Readable - 可讀取數據的流</p>
+</li>
+<li><p>Duplex - 可讀又可寫的流</p>
+</li>
+<li><p>Transform - 在讀取過程中可以修改或轉換數據的 Duplex 流</p>
+</li>
+</ol>
+<blockquote>
+<p><em>上面貼這麼多流得介紹網站如果你英文不好可以參考這邊 <a target="_blank" rel="noopener" href="http://nodejs.cn/api/stream.html">中文流</a>。</em></p>
+</blockquote>
+<h4 id="繼續開車"><a href="#繼續開車" class="headerlink" title="繼續開車"></a>繼續開車</h4><p>接著繼續學習我們的 <strong>Gulp API</strong>，簡單理解下，從我們發起讀取檔案 <code>gulp.src(&#39;./檔案路徑&#39;)</code> 後，這時候就會產生 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong> 而這時候我們就可以在這之間去對 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong> 做動作。</p>
+<p>然而怎麼做動作可以依靠 <strong><a target="_blank" rel="noopener" href="https://nodejs.org/api/stream.html">Node流(stream)</a></strong> 提供的方法 <code>.pipe()</code>，適用於 <strong>轉換流(Transform streams)</strong> 或是 <strong>寫流(Writable streams)</strong>，透過 <code>.pipe()</code> 我們可以把想做的事情透過方法寫在 <code>.pipe()</code> 內，比如 <code>.pipe(babel())</code>。</p>
+<p>這邊就會學到我們接下來第二個基本的 <strong>API</strong>，<strong>dest()</strong>。</p>
+<p>如果不想理解上方這麼多細節的話，請先在專案底下創建 <strong>app</strong> 資料夾，裡面在創建一個 <strong>assets</strong> 資料夾，最後再放入 <strong>js</strong> 資料夾，然後創建兩個 <strong>.js</strong> 在裡面，這邊範例一個名稱為 <strong>main.js</strong> 另一個為 <strong>second.js</strong>，接著在 核心檔案 <strong>gulpfile.js</strong> 內輸入以下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 來源, 目的地</span></span><br><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">js</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">src</span>(<span class="string">&#x27;./app/assets/js/*.js&#x27;</span>)  <span class="comment">// 讀取資料夾 ./app/assets/js 底下的所有 .js 檔案</span></span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">dest</span>(<span class="string">&#x27;./dist&#x27;</span>)) <span class="comment">// 輸出所有被讀取的 .js 檔案</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">default</span> = js</span><br></pre></td></tr></table></figure>
+
+<p>接著在終端機輸入 <strong>gulp(或 gulp default)</strong>，就會開始編譯，這時候你會發現多出一個 <strong>dist</strong> 資料夾，仔細瞧，你的自動化已經踏出一大步了！</p>
+<h4 id="關鍵懶人包二"><a href="#關鍵懶人包二" class="headerlink" title="關鍵懶人包二"></a>關鍵懶人包二</h4><p><strong>上述例子做完你又學會了基本的兩個API，<code>src()</code> 及 <code>dest()</code>，只要記得想要操作檔案，就要取檔案及輸出檔案，前者為取得檔案，後者為輸出檔案，而這中間的過程可以對檔案做一些<del>壞壞的事情</del>想做的事情！</strong></p>
+<hr>
+<h4 id="補充說明"><a href="#補充說明" class="headerlink" title="補充說明"></a>補充說明</h4><p>上面提到的 <code>.pipe(dest())</code> 為 <code>gulp</code> 提供的一個 <strong>API</strong>，而我們有一些多的套件都可以加入到這裡面，比方說 <code>ES6</code> 編譯，接著來學習怎麼使用套件吧！</p>
+<p>先輸入 <code>npm i -D gulp-babel @babel/core @babel/preset-env</code> 然後在  <strong>gulpfile.js</strong> 上方引入 <code>const babel = require(&#39;gulp-babel&#39;);</code> 編譯套件，接著在把前面提到的範例程式碼做一下改編：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 來源, 目的地</span></span><br><span class="line"><span class="keyword">const</span> &#123; src, dest &#125; = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">js</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">src</span>(<span class="string">&#x27;./app/assets/js/*.js&#x27;</span>)  <span class="comment">// 讀取資料夾 ./app/assets/js 底下的所有 .js 檔案</span></span><br><span class="line">    .<span class="title function_">pipe</span>(</span><br><span class="line">      <span class="title function_">babel</span>(&#123;</span><br><span class="line">        <span class="attr">presets</span>: [<span class="string">&#x27;@babel/env&#x27;</span>], <span class="comment">// 使用預設環境編譯</span></span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">    .<span class="title function_">pipe</span>(<span class="title function_">dest</span>(<span class="string">&#x27;./dist&#x27;</span>)) <span class="comment">// 輸出所有被讀取的 .js 檔案</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">default</span> = js</span><br></pre></td></tr></table></figure>
+
+<p>然後到我們的 <code>./app/assets/js/main.js</code> 把裡面的程式碼改為下列範例，範例為 <strong>ES6</strong> 的箭頭函示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">exampleWord</span> = (<span class="params"></span>) =&gt; <span class="string">&quot;Hello Gulp!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">exampleWord</span>());</span><br></pre></td></tr></table></figure>
+
+<p>之後一樣在專案底下開啟終端機輸入 <code>gulp(或 gulp default)</code>，結果再到 <code>./dist</code> 資料夾查看編譯出來的 <strong>.js</strong> 檔案，你會發現語法已經被編譯成普通的 <strong>JavaScript</strong> 了！</p>
+<p>像是 <strong>babel()</strong> 這個 <strong>API</strong> 就是套件提供給我們的，我們只需要塞入 <code>.pipe()</code> 然後在看套件有什麼需要設定的；而像 <strong>模板、SCSS、複製檔案</strong>…等等，差不多都是這樣的做法，突然覺得還挺簡單得吧(當我沒說哈哈？！</p>
+<hr>
+<h3 id="你畢業了"><a href="#你畢業了" class="headerlink" title="你畢業了"></a>你畢業了</h3><p>學會四個基本的 <strong>API</strong>，其實你已經學得差不多了，接著就是剩下的套件學習，是不是覺得跟 <strong>Webpack</strong> 基礎理解差不多，只要抓到基礎得點，剩下再延伸進入研究就差不多了，雖然我還是覺得 <strong>Gulp</strong> 比較好上手。</p>
+<p>接下來這邊會提供一份範例，有興趣的同學可以抓下來研究，也可以自己重無到有去創建，記住只要抓住那四個基礎，如何<strong>開始任務</strong>，如何解決<strong>同步非同步任務</strong>，如何<strong>取得</strong>及<strong>輸出</strong>檔案，你就能慢慢上手。</p>
+<blockquote>
+<p><em>恭喜幼幼班畢業</em></p>
+</blockquote>
+<hr>
+<h3 id="超級比一比"><a href="#超級比一比" class="headerlink" title="超級比一比"></a>超級比一比</h3><p>雖然這樣比好像不是正確的，但目前自己練習完 <strong>Webpack</strong> 及 <strong>Gulp</strong> 之後的整理心得如下圖，如果想入門一探這兩種自動建構工具的學習基礎：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200506/compare.png" alt="自動化建構工具比一比"></p>
+<blockquote>
+<p>搞懂這幾個基礎點之後剩下的就是一些設定及套件研究了！</p>
+</blockquote>
+<hr>
+<h3 id="你要的魚在這"><a href="#你要的魚在這" class="headerlink" title="你要的魚在這"></a>你要的魚在這</h3><p>這邊提供一個範例，包含 <strong>JS 編譯、Sass&#x2F;Scss 編譯、檔案複製、檔案監聽、模擬瀏覽器</strong>…等等，之後會再補上 <strong>HTML</strong> 模板部分，可至 <strong>GitHtb</strong> 的 <strong>README.md</strong> 查看安裝的過程。</p>
+<blockquote>
+<p><strong>Gulp 範例傳送門 &#x3D;&gt; <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/GulpPractice">點我</a></strong></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實以前已經想研究 <strong>Gulp</strong> 很久了，這次會接觸也是因為<a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/web-layout-training-1st.html">六角切版直播班</a>，但因為是切版為主，課程沒有太在 <strong>Gulp</strong> 著墨，但我想工程師的本質都是想追根究底的，碰到東西還是會想研究學習一番，畢竟之後開始處理問題總不能一直拿老師的範例吧。</p>
+<p>這次為 <strong>Gulp</strong> 初體驗，我想還有許多改進空間，像是之後還會再考慮如何把 <strong>Webpack</strong> 融入進 <strong>Gulp</strong>，而我想後者的學習門檻似乎比前者還要低一點，恰巧最近碰到需要把前端規劃出一個有效且快速的部署環境，我想 <strong>Gulp</strong> 應該會很適合我。</p>
+<p>這邊有機會在寫下一篇 <strong>Gulp</strong> 了，感謝各路大神的觀看，如果有錯還請各路大神不吝社指教，在此小弟先謝過了！</p>
+<blockquote>
+<p><em>我們都是在錯誤和學習中成長，但憑著興趣或快樂學習的速度將會是倍數成長！</em></p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>Gulp 官網 — <a target="_blank" rel="noopener" href="https://gulpjs.com/">Gulp EN</a></li>
+<li>Gulp 中文官網 — <a target="_blank" rel="noopener" href="https://www.gulpjs.com.cn/docs/getting-started/working-with-files/">Gulp CH</a></li>
+<li>鐵人邦 ayugioh2003 大大 — <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10217595">[試著把切版專案升級到 gulp4.0 吧] Day03 Gulp4 環境配置</a></li>
+<li>Roya’s Blog — <a target="_blank" rel="noopener" href="https://awdr74100.github.io/2020-01-08-gulp-gulpbabel/">Gulp 前端自動化 - 使用 Babel 編譯 ES6</a></li>
+<li>Ray Blog — <a target="_blank" rel="noopener" href="https://hsiangfeng.github.io/tags/%E9%80%99%E6%98%AF%E5%9C%A8%E8%AC%9B-Gulp-%E4%B8%8D%E6%98%AF%E9%A3%B2%E6%96%99%E6%98%AF%E4%BB%BB%E5%8B%99%E8%87%AA%E5%8B%95%E5%8C%96%E5%B7%A5%E5%85%B7%E9%80%99%E4%BB%B6%E4%BA%8B/">這是在講 Gulp 不是飲料是任務自動化工具這件事</a></li>
+<li>六角 — <a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/web-layout-training-1st.html">切版直播班</a></li>
+<li>Rex — <a href="https://rexhung0302.github.io/2019/06/18/20190618/">[Tool Notes] — 關於Webpack #1 - 第一次就上手</a></li>
+<li>Rex — <a href="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？</a></li>
+</ul>
+<hr>
+<h3 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h3><p>這篇文其實實在 <strong>2020&#x2F;05&#x2F;05</strong> 晚上寫的，但 <strong>hexo</strong> 似乎無法用兩個一樣名字的 <strong>.md</strong> 所以只好把日期往後延一天了。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Gulp/" rel="tag"><i class="fa fa-tag"></i> Gulp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/05/20200505/" rel="prev" title="[Hexschool Web Layout Training] — Week_4 多頁式網頁設計">
+      <i class="fa fa-chevron-left"></i> [Hexschool Web Layout Training] — Week_4 多頁式網頁設計
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/12/20200512/" rel="next" title="[Hexschool Web Layout Training] — Week_5 後台表單設計">
+      [Hexschool Web Layout Training] — Week_5 後台表單設計 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E7%9B%AE%E9%8C%84"><span class="nav-number">1.1.</span> <span class="nav-text">關鍵懶人包目錄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gulp-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">Gulp 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AA%AA%E6%98%8E%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">使用說明？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%A3%E7%AB%BF%E4%BE%86"><span class="nav-number">1.4.</span> <span class="nav-text">釣竿來</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%95%E5%BF%AB%E7%99%BC%E8%BB%8A"><span class="nav-number">1.5.</span> <span class="nav-text">趕快發車</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B0%88%E6%A1%88"><span class="nav-number">1.6.</span> <span class="nav-text">初始化專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A0%90%E5%91%8A%E5%A4%AA%E9%95%B7%E4%BA%86"><span class="nav-number">1.7.</span> <span class="nav-text">預告太長了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%98%AF%E5%B9%BC%E5%B9%BC%E7%8F%AD"><span class="nav-number">1.8.</span> <span class="nav-text">不是幼幼班</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E9%BA%BC%E5%BC%95%E5%85%A5%E5%A5%97%E4%BB%B6"><span class="nav-number">1.9.</span> <span class="nav-text">怎麼引入套件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E4%B8%80"><span class="nav-number">1.9.1.</span> <span class="nav-text">關鍵懶人包一</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%84%E6%9C%89%E4%BB%80%E9%BA%BC%E5%85%A8%E9%83%BD%E6%8B%BF%E5%87%BA%E4%BE%86%EF%BC%81"><span class="nav-number">1.10.</span> <span class="nav-text">還有什麼全都拿出來！</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E6%B5%81%EF%BC%9F%E6%B5%81%E6%B4%BE%EF%BC%9F"><span class="nav-number">1.10.1.</span> <span class="nav-text">清流？流派？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B9%BC%E7%BA%8C%E9%96%8B%E8%BB%8A"><span class="nav-number">1.10.2.</span> <span class="nav-text">繼續開車</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E9%8D%B5%E6%87%B6%E4%BA%BA%E5%8C%85%E4%BA%8C"><span class="nav-number">1.10.3.</span> <span class="nav-text">關鍵懶人包二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%9C%E5%85%85%E8%AA%AA%E6%98%8E"><span class="nav-number">1.10.4.</span> <span class="nav-text">補充說明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E7%95%A2%E6%A5%AD%E4%BA%86"><span class="nav-number">1.11.</span> <span class="nav-text">你畢業了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E7%B4%9A%E6%AF%94%E4%B8%80%E6%AF%94"><span class="nav-number">1.12.</span> <span class="nav-text">超級比一比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E8%A6%81%E7%9A%84%E9%AD%9A%E5%9C%A8%E9%80%99"><span class="nav-number">1.13.</span> <span class="nav-text">你要的魚在這</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">3.</span> <span class="nav-text">參考網站</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%8C%E8%A8%98"><span class="nav-number">3.1.</span> <span class="nav-text">後記</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/05/06/20200506/",
+      identifier: "2020/05/06/20200506/",
+      title     : "[Tool Note] — 關於Gulp",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

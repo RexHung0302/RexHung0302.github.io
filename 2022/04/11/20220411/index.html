@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 相信玩 NFT 一段時間的人一定都聽過嘟嘟房事件，這篇文章將會記錄該怎麼處理 NFT 白名單的方法，且可以避開高額的氣費。  如果不知道這是什麼，可以參考 Rex 前輩寫的文章 嘟嘟房NFT出包事件懶人包，如果簡單說就是智能合約的白名單寫法沒有寫好，導致持有白名單的人 Pre-Mint 發生了需要支付高額的氣費，而且還 Mint 失敗。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧">
+<meta property="og:url" content="https://rexhung0302.github.io/2022/04/11/20220411/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 相信玩 NFT 一段時間的人一定都聽過嘟嘟房事件，這篇文章將會記錄該怎麼處理 NFT 白名單的方法，且可以避開高額的氣費。  如果不知道這是什麼，可以參考 Rex 前輩寫的文章 嘟嘟房NFT出包事件懶人包，如果簡單說就是智能合約的白名單寫法沒有寫好，導致持有白名單的人 Pre-Mint 發生了需要支付高額的氣費，而且還 Mint 失敗。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2022-04-11T02:49:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.994Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Solidity">
+<meta property="article:tag" content="NFT">
+<meta property="article:tag" content="Mint">
+<meta property="article:tag" content="OpenSea">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2022/04/11/20220411/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2022/04/11/20220411/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-04-11 10:49:00" itemprop="dateCreated datePublished" datetime="2022-04-11T10:49:00+08:00">2022-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Solidity/" itemprop="url" rel="index"><span itemprop="name">Solidity</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>13 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20220411/outOfGas.png" alt="Mint Fail"></p>
+<p>相信玩 <strong>NFT</strong> 一段時間的人一定都聽過嘟嘟房事件，這篇文章將會記錄該怎麼處理 <strong>NFT</strong> 白名單的方法，且可以避開高額的氣費。</p>
+<blockquote>
+<p><em>如果不知道這是什麼，可以參考 <strong>Rex</strong> 前輩寫的文章 <a target="_blank" rel="noopener" href="https://medium.com/fuly-ai-%E6%99%BA%E8%83%BD%E6%8A%95%E8%B3%87%E7%AD%96%E7%95%A5%E6%A9%9F%E5%99%A8%E4%BA%BA-bitfinex-%E6%94%BE%E8%B2%B8%E6%A9%9F%E5%99%A8%E4%BA%BA/%E5%98%9F%E5%98%9F%E6%88%BFnft%E5%87%BA%E5%8C%85%E4%BA%8B%E4%BB%B6%E6%87%B6%E4%BA%BA%E5%8C%85-4a4acd7fe0c2">嘟嘟房NFT出包事件懶人包</a>，如果簡單說就是智能合約的白名單寫法沒有寫好，導致持有白名單的人 <strong>Pre-Mint</strong> 發生了需要支付高額的氣費，而且還 <strong>Mint</strong> 失敗。</em></p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>這篇文章不會檢討或探討這個事件的問題，只會記錄透過這個事件筆者開始學習關於紀錄白名單的方法心得。</p>
+<p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>會基本的英文</li>
+<li>會使用 <a target="_blank" rel="noopener" href="https://remix.ethereum.org/">Remix IDE</a></li>
+</ul>
+<p>本篇文章將會學到：</p>
+<ol>
+<li>花費少許 <strong>ETH</strong> 即可達到對智能合約的白名單列表的驗證及儲存</li>
+<li>每次對智能合約更新白名單不需要再花費高額的 <strong>ETH</strong></li>
+</ol>
+<hr>
+<h3 id="白名單？"><a href="#白名單？" class="headerlink" title="白名單？"></a>白名單？</h3><p>在 <strong>NFT</strong> 開始火紅之後越來越多人從 <strong>Web2</strong> 進入到 <strong>Web3</strong> 世界，相信大部分的人都沒有什麼區塊鏈的知識，例如筆者…</p>
+<p>在台灣越來越多團隊開始發行 <strong>NFT</strong> 之後，幾乎常常都有可以學習的地方，筆者相信不是壞事，畢竟越來越多人願意接觸甚至開始有公司願意出資在這上面，代表越多的人來研究這塊，一開始的 <strong>Web2</strong> 肯定也是有很多問題是後來慢慢被克服的。</p>
+<p>在發行 <strong>NFT</strong> 之後，大部分的團隊都會碰到一個問題，我需要保留一些名額給特定的人，讓他們保證可以買到，或者保留一部分的名額，給其他的 <strong>KOL</strong> 抽獎，這些一定可以 <strong>Mint</strong> 到 <strong>NFT</strong> 的名額簡稱白名單。</p>
+<blockquote>
+<p><em><a target="_blank" rel="noopener" href="https://www.youfind.hk/blog/kol.html">KOL中文是什麼意思？如何分辨「網紅」與「KOL」？</a></em></p>
+</blockquote>
+<p>這些白名單通常不是小數目，可能幾十位，甚至幾百位，但這些名單我應該怎麼讓合約知道，而且在合約程式碼判斷的時候可以做檢查呢？在 <strong>Web2</strong> 的做法就是去打 <strong>API</strong> 跟後端拿白名單，在 <strong>Web3</strong> 肯定很多人一開始的想法都是把這些名單直接寫在合約內。</p>
+<p>雖然 <strong>Web3</strong> 也可以透過 <strong>ChainLink</strong> 去打外部 <strong>API</strong>，但這邊先不討論。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/chainLink.png" alt="預言機 Chain Link"></p>
+<p>玩了一陣子以太鏈的人一定都知道，不管呼叫合約或者做任何交易都需要支付一定的氣費，而這些費用會依造你交易的複雜程度決定。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.blocktempo.com/6-important-things-to-know-about-gas-fee-ch-a5074adddf43/"><em>【新手必讀｜加密小知識】關於礦工費（Gas Fee），你不可不知的 6 件事</em></a></p>
+</blockquote>
+<p>這件事情就從這裡拉開序幕，由於嘟嘟房的合約犯了智能合約很嚴重的錯誤，把白名單存在陣列裡面儲存，在持有白名單的人 <strong>Mint</strong> 的時候，就會去跑迴圈檢查陣列，由於陣列長度可能很長，這時候氣費計算出來就需要花費較高的以太才可能交易成功。</p>
+<p>可以觀察一下嘟嘟房的<a target="_blank" rel="noopener" href="https://etherscan.io/address/0xae122962331c2b02f837b2aa501d3c5d903ed28a#code">合約</a>，合約的白名單存在一個叫 <strong>whitelistedAddresses</strong> 的陣列，這就是這篇文章出現的原因。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/arrayWhiteList.png" alt="陣列存放白名單"></p>
+<p>在嘟嘟房當天白名單可以先 <strong>Mint</strong> 發生了 <strong>Out Of Gas</strong> 的事情之後，許多群組都開始討論這個，筆者決定著手研究大部分處理白名單的方式都如何處理。</p>
+<hr>
+<h3 id="解決方案一"><a href="#解決方案一" class="headerlink" title="解決方案一"></a>解決方案一</h3><p>大部分寫智能合約會避開使用 <strong>Array</strong> 去存資訊，也會避免使用迴圈去跑陣列，主要都是為了避免花費大量的氣費，在白名單使用陣列的替代方案最快速的方式就是使用 <strong>mapping</strong>。</p>
+<p>mapping 寫起來會感覺很像是陣列，但其實他是類似 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hash_table">hash tables</a>，詳細可以參考 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10204297">開發智能合約 - mapping 型別 (Day16)</a>，這邊就不仔細探討。</p>
+<p>要解決前面提到可能花費高昂氣費的白名單問題，需要解決兩件事情：</p>
+<ol>
+<li>把大量的名單存在智能合約內上鏈，需要花費不少的費用去存這些資訊</li>
+<li>跑陣列一筆一筆檢查你是否在白名單內，會造成礦工難以預估你的氣費，造成容易 <strong>Out Of Gas</strong></li>
+</ol>
+<p>解決方案一只能解決第二項，就是使用 <strong>mapping</strong>，解決方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 改用 mapping 存放白名單</span><br><span class="line">mapping(address =&gt; bool) public whitelistedAddresses;</span><br><span class="line"></span><br><span class="line">// 檢查是否在白名單內(修改原本嘟嘟房的函示)</span><br><span class="line">function isWhitelisted(address _user) public view returns (bool) &#123;</span><br><span class="line">    return whitelistedAddresses[_user];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊甚至可以優化一下原本的合約檢查方式，改用 <strong>modifier</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 優化檢查使用 modifier</span><br><span class="line">modifier checkWhiteList() &#123;</span><br><span class="line">	require(whitelistedAddresses[msg.sender], &quot;user is not whitelisted&quot;);</span><br><span class="line">	_;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 任何一個想檢查白名單的 Function</span><br><span class="line">function preSaleMint(uint256 _mintAmount) public payable checkWhiteList &#123;</span><br><span class="line">	//...略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="解決方式二"><a href="#解決方式二" class="headerlink" title="解決方式二"></a>解決方式二</h3><p>這個就是本篇的重點了，原本的解決方式一只能解決 <strong>Out Of Gas</strong>，但在剛開始存白名單還是不能避免花掉一些 ETH，如果你的白名單很少，那就無所謂，但如果你像嘟嘟房的白名單有 <strong>898</strong> 筆那就很可觀，尤其在以太坊壅塞的時候。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/898WhiteList.png" alt="898筆白名單存放在陣列內"></p>
+<blockquote>
+<p><em>陣列從 0 開始，所以是 0-897，總共 898 筆，交易紀錄可以看這邊 <a target="_blank" rel="noopener" href="https://etherscan.io/tx/0x8c259c8b199826c9820c72c608fa61e52b687877e416073f9daa97138bfb2301">0x8c259c8b199826c9820c72c608fa61e52b687877e416073f9daa97138bfb2301</a></em></p>
+</blockquote>
+<p>嘟嘟房 <strong>Mint NFT</strong> 的時候剛好是 <strong>NFT</strong> 比較冷清的時候，那時候 <strong>Gas Fee</strong> 還算低，就已經需要花費 <strong>0.689</strong> ETH 去上傳白名單，以當時的價格約莫在四萬八接近五萬台幣。</p>
+<p>想像一下今天小幫手上傳白名單之後，啊，不小心漏掉一筆，怎麼辦？只好再傳一次，也許十萬就這樣沒了～</p>
+<p>這時候就該本篇紀錄主角出現了，<strong>Merkle Tree</strong>！</p>
+<hr>
+<h3 id="什麼樹？"><a href="#什麼樹？" class="headerlink" title="什麼樹？"></a>什麼樹？</h3><p><img src="/images/others/loading.gif" data-original="/images/20220411/MerkleTreeBanner.png" alt="Merkle Tree"></p>
+<p><strong>Merkle Tree</strong> 又被稱為雜湊樹，是一個存儲 <strong>Hash</strong> 值的一棵樹，其實 <strong>Merkle Tree</strong> 不止在白名單才被利用，早在密碼學就很常出現，然後像是 <strong>比特幣</strong> 的交易資訊。</p>
+<blockquote>
+<p>*詳細可參考 <a target="_blank" rel="noopener" href="https://inf.news/zh-tw/tech/1cd27fc5497a340fc05da2dca9fbcaa2.html">Merkle tree–默克爾樹</a> *******<em>文章的 <strong><strong>merkle tree的數據結構</strong></strong></em></p>
+</blockquote>
+<p>要說 <strong>Merkle Tree</strong> 提供了什麼好處？簡單說就是可以把好幾筆資料透過 <strong>SHA-256</strong> 的計算後，最後產出一個 <strong>Merkle Root</strong>，也就是上圖的 <strong>Top Hash</strong>，在區塊鏈礦工可以不用一次下載全部的交易紀錄，只需要透過某些節點即可驗證這筆交易是不是真的或者假的，後面我們會再說說怎麼驗證的。</p>
+<p>首先通常這棵樹都是顛倒顯示的，根在頂部，葉子在底部；要了解 <strong>Merkle Tree</strong> 要先知知道這棵樹的基本概念，這棵樹有三種類型節點：</p>
+<ol>
+<li><p><strong>葉節點(Leaf Nodes)</strong> - 位於整棵樹的最底部，通常指資料經過 <strong>SHA-256</strong> 的計算後產出的結果層，像是上圖 <strong>Hash 0-0、0-1、1-0、1-1</strong> 那層。</p>
+</li>
+<li><p><strong>父節點(Parent Nodes)</strong> - 可位於樹的不同層級，但一定都是在 <strong>葉節點(Leaf Nodes)</strong> 之上，從 <strong>葉節點(Leaf Nodes)</strong> 出來之後會兩兩一組組成一個 <strong>父節點(Parent Nodes)</strong>，直到最後剩下最後一個節點，父節點只會有最多兩個子節點，最少一個。</p>
+<blockquote>
+<p><em>如果存在基數的筆數資料，將會複製自己的節點，然後在計算 <strong>SHA-256</strong> 產出的結果，如下圖</em></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/CardinalityOfMarkleTree.png" alt="基數的筆數"></p>
+</blockquote>
+</li>
+<li><p><strong>根節點(Root Node)</strong> - 位於整棵樹的最頂端，也就是最後算出來的那個 <strong>SHA-256</strong> 總和，任何一棵 Merkle Tree 都只會有一個 <strong>根節點(Root Node)</strong>，而我們需要的就是這個 <strong>根節點(Root Node)</strong>。</p>
+</li>
+</ol>
+<h3 id="怎麼計算？"><a href="#怎麼計算？" class="headerlink" title="怎麼計算？"></a>怎麼計算？</h3><p>在說怎麼使用之前要先說說這棵樹怎麼來的，最簡單就是看圖解釋，先看看下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/MerkleTreeSample.png" alt="樹的長出方式"></p>
+<p>每一筆資料都會先經過 <strong>SHA-256</strong> 去計算，運算結果，是一個 <strong>64 bytes</strong> 的 **HEX（十六進位）**字串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HA = SHA256( SHA256(TxA) )</span><br><span class="line">HB = SHA256( SHA256(TxB) )</span><br></pre></td></tr></table></figure>
+
+<p>然後在兩兩一組，先把二個字串連接**（concat）*<em>在一起，變成一個 *<em>64</em>2&#x3D;128 bytes*</em> 的字串，再透過 <strong>double SHA-256</strong> 計算，以次類推，多筆資料就這樣一直 <code>SHA256()</code> 上去，直到最後拿到根節點。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HAB = SHA256( SHA256(HA + HB) )</span><br></pre></td></tr></table></figure>
+
+<p>正因為我們都是透過 <code>SHA256()</code> 去計算拿到字串結果，只要資料稍微有點不一樣，就會影響整棵樹最後的 <strong>根節點(Root Node)</strong>，這時候我們便可以拿著 <strong>根節點(Root Node)</strong> 去驗證我們起始的資料正不正確。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/MerkleTreeChanged.png" alt="改變資料後計算結果會錯誤"></p>
+<blockquote>
+<p><em>只要中間被動過，最後結果就會不一樣，像是 <code>TxG</code> 被改為 <code>TxP</code> 最後結果就會從 <code>Habcdefgh</code> 變成 <code>Habcdefph</code></em></p>
+</blockquote>
+<hr>
+<h3 id="如何驗證？"><a href="#如何驗證？" class="headerlink" title="如何驗證？"></a>如何驗證？</h3><p>聰明的你一定想到了最底層的資料就是我們的白名單列表，每一個地址我們都會透過 <code>SHA256()</code>，最後組出 <strong>Merkle Tree</strong> 並且拿到 <strong>根節點(Root Node)</strong> 又稱 <strong>Merkle Root</strong>。</p>
+<p>但是 <strong>Merkle Tree</strong> 會怎麼驗證呢？我們可以簡單透過下圖了解驗證方式。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/MerkleTreeVerify.png" alt="驗證所需要提供的值"></p>
+<p>假如我們有一個地址 <code>TxG</code> 想要驗證是不是在白名單內，我們必須要先持有 <code>Hh</code> <code>Hef</code> <code>Habcd</code>，這三個用 <code>SHA256()</code> 產出的結果(<strong>藍色框框</strong>)，然後依然按造上面我們說的產生方式，把 <code>TxG</code> 去 <code>SHA256()</code> 產出 <code>Hg</code> 再透過產出的結果跟 <code>Hh</code> 產出下一個字串，最後看看我們拿到的 <strong>Merkle Root</strong> 是否符合我們原本預期的結果。</p>
+<p>你可能會想，為何不把所有 <strong>葉節點(Leaf Nodes)</strong> 一次透過 <code>SHA256()</code> 去計算出 <strong>Merkle Root</strong> 呢？大部分的文章都會告訴你因為這樣我們只需要持有部分節點即可，就像 <strong>比特幣</strong> 如果自創節點，我可以使用 <strong>輕節點</strong>(註1) 去建立，不需要創建完整的整份節點，這種解釋對新手(如筆者)可能會比較難以理解，但如果使用白名單的概念來告訴你，你並不需要持有整份白名單直接去算出 <strong>Merkle Root</strong>，只需要拿某一個地址去驗證即可，就方便理解許多。</p>
+<blockquote>
+<p><em>註1：簡易支付驗證節點，SPV(Simplified Payment Verification) node，不需運行完全節點也可以驗證支付，使用者只需要保存所有的 block header，詳細可參考 <a target="_blank" rel="noopener" href="https://www.itread01.com/content/1544927595.html">《詳解比特幣白皮書》-Simplified Payment Verification(簡化的交易驗證(SPV))</a></em></p>
+</blockquote>
+<p>在這方便的年代我們不需要自己去造輪子，不需要我們自己把 <code>Hh</code> <code>Hef</code> <code>Habcd</code> 手動挑出來送去驗證，這個工作只要透過套件即可創建並且驗證 <strong>Merkle Tree</strong>，接下來就是進入我們實作的部分。</p>
+<hr>
+<h3 id="實際上陣"><a href="#實際上陣" class="headerlink" title="實際上陣"></a>實際上陣</h3><p>在開始前我們先懶人包知道一下我們需要做什麼：</p>
+<ol>
+<li>透過 <strong>Merkle Tree</strong> 去對白名單列表產出 <strong>Merkle Root</strong></li>
+<li>把 <strong>Merkle Root</strong> 儲存在智能合約上</li>
+<li>在 <strong>Mint Function</strong> 執行前透過驗證檢查該地址是否在白名單中</li>
+<li>不需花費高額 <strong>ETH</strong> 去更新白名單列表</li>
+</ol>
+<h3 id="透過-Merkle-Tree-去對白名單列表產出-Merkle-Root"><a href="#透過-Merkle-Tree-去對白名單列表產出-Merkle-Root" class="headerlink" title="透過 Merkle Tree 去對白名單列表產出 Merkle Root"></a>透過 <strong>Merkle Tree</strong> 去對白名單列表產出 <strong>Merkle Root</strong></h3><p>首先我們為了方便先打開 <a target="_blank" rel="noopener" href="https://codepen.io/pen/">CodePen</a> 的畫面，這也是一個線上 <strong>IDE</strong>，方便的是如果你有登入，儲存後下次進來程式碼還會在，並且可以把完成的程式碼分享給其他人看，如果修改程式碼並不會影響到你的存檔，他如果儲存的話在自動另外自己存一份他的版本</p>
+<p>我們會需要用到 <a target="_blank" rel="noopener" href="https://github.com/miguelmota/merkletreejs">merkletreejs</a> 去幫我們產生樹，另外還需要透過 <a target="_blank" rel="noopener" href="https://github.com/miguelmota/keccak256">keccak256</a> 去幫我們做 <strong>散列</strong>(註2)，目前 <strong>比特幣</strong> 使用 <strong>SHA256</strong> 而 <strong>以太坊</strong> 使用 <strong>Keccak256</strong>。</p>
+<blockquote>
+<p><em>註2：散列又稱雜湊，意指透過雜湊函示(Hash Function)，詳細可參考 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B8">維基百科 - 雜湊函式</a></em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/merkletreejs.png" alt="merkletreejs"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/keccak256.png" alt="以太坊使用 keccak256 而 比特幣 使用 SHA256"></p>
+<p>點擊 <strong>JS</strong> 那欄的齒輪，把這兩個套件透過 <strong>Github</strong> 文章上的 <strong>CDN</strong> 網址引入使用</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/codePen.png" alt="CodePen"></p>
+<p>接著點擊 <strong>Save &amp; Close</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/saveAndClose.png" alt="儲存並關閉"></p>
+<p>對準備好的白名單的列表，進行散列且產出 <strong>Merkle Tree</strong>，這邊產出樹的第三個參數大部分教學都有寫需要加上去，筆者有加沒加似乎都可以，如果你沒有加上去卻發生了問題，可以試看看加 <code>&#123; sortPairs: true &#125;</code> 上去會不會解決</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 白名單列表，可寫死，可從後端拿</span></span><br><span class="line"><span class="keyword">const</span> whitelistedAddresses = [</span><br><span class="line">  <span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x7b399B9c5bb519D4258e61100cC5ef2F4Bd9c873&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x54Ac1F0366724cf30a6E91f32769D95540a18203&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xdC1Ca18bEeB3DFAEfCEe4aa91491B365A6F5aE12&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xe5A7B3B752d93514a97a23A9e134aBF6CF01DC6e&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x59734A5500faDCd7c64B3212538442Cfd26416Cb&quot;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 對所有名單進行雜湊 - SHA256</span></span><br><span class="line"><span class="keyword">const</span> leafOfNodes = whitelistedAddresses.<span class="title function_">map</span>(<span class="function"><span class="params">address</span> =&gt;</span> <span class="title function_">keccak256</span>(address));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 產生出 Merkle Tree</span></span><br><span class="line"><span class="keyword">const</span> merkleTree = <span class="keyword">new</span> <span class="title class_">MerkleTree</span>(leafOfNodes, keccak256, &#123; <span class="attr">sortPairs</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(merkleTree.<span class="title function_">toString</span>());</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/merkleTreeToString.png" alt="MerkleTree toString"></p>
+<p>那串 <code>3263cb94bd59231d2efe63bbad8915f59119fff6a872fa0fa7513f37fb19f141</code> 就是我們需要拿去放在智能合約裡的 <strong>Merkle Root</strong></p>
+<p>使用 <code>getRoot()</code> 也可以拿到 <strong>merkleTree</strong> 的 <strong>Root</strong>，將上面的程式碼改一下</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 白名單列表，可寫死，可從後端拿</span></span><br><span class="line"><span class="keyword">const</span> whitelistedAddresses = [</span><br><span class="line">  <span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x7b399B9c5bb519D4258e61100cC5ef2F4Bd9c873&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x54Ac1F0366724cf30a6E91f32769D95540a18203&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xdC1Ca18bEeB3DFAEfCEe4aa91491B365A6F5aE12&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xe5A7B3B752d93514a97a23A9e134aBF6CF01DC6e&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x59734A5500faDCd7c64B3212538442Cfd26416Cb&quot;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 對所有名單進行雜湊 - SHA256</span></span><br><span class="line"><span class="keyword">const</span> leafOfNodes = whitelistedAddresses.<span class="title function_">map</span>(<span class="function"><span class="params">address</span> =&gt;</span> <span class="title function_">keccak256</span>(address));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 產生出 Merkle Tree</span></span><br><span class="line"><span class="keyword">const</span> merkleTree = <span class="keyword">new</span> <span class="title class_">MerkleTree</span>(leafOfNodes, keccak256, &#123; <span class="attr">sortPairs</span>: <span class="literal">true</span> &#125;); <span class="comment">// 拿整棵樹</span></span><br><span class="line"><span class="keyword">const</span> merkleRoot = merkleTree.<span class="title function_">getRoot</span>().<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>); <span class="comment">// 直接拿 Root</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(merkleTree.<span class="title function_">toString</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(merkleRoot);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/merkleRoot.png" alt="取得 Merkle Root"></p>
+<h3 id="把-Merkle-Root-儲存在智能合約上"><a href="#把-Merkle-Root-儲存在智能合約上" class="headerlink" title="把 Merkle Root 儲存在智能合約上"></a>把 <strong>Merkle Root</strong> 儲存在智能合約上</h3><p>拿到 <strong>Root</strong> 後我們需要著手下去寫合約，透過修改之前我們的合約，把 <strong>Mint Function</strong> 多加上一個 <strong>modifier</strong>，如果不曉得怎麼創建合約並且推上鏈，可以先參考之前的文章 <a href="https://rexhung0302.github.io/2022/03/10/20220310/#more">[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT</a>。</p>
+<p>在合約內我們需要引入 <strong>MerkleProof.sol</strong>，接著我們會寫幾項功能：</p>
+<ol>
+<li>把 <strong>Merkle Root</strong> 存在合約上的變數，以及可以替換這個變數的 <strong>Function</strong></li>
+<li>透過 <strong>modifier</strong> 加上 <strong>require</strong> 去驗證我們的地址是否在白名單內</li>
+</ol>
+<p>請複製以下的程式碼，這是部分程式碼，但還是可以 <strong>Work</strong>，如果需要完整的合約程式碼可以到 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/address/0x31bf20772514551cbc7b897914321d98559a9ff9#code">0x31BF20772514551CBC7B897914321D98559a9FF9</a> 去複製，完整的合約包含 設定 <strong>ERC721</strong> 合約及代幣名稱、限制一定金額才能 Mint、盲盒階段、新增刪除控制人員、領出合約餘額、刪除合約…等等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.4;</span><br><span class="line"></span><br><span class="line">import &quot;@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/access/Ownable.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/utils/Strings.sol&quot;;</span><br><span class="line">import &quot;@openzeppelin/contracts/utils/cryptography/MerkleProof.sol&quot;;</span><br><span class="line"></span><br><span class="line">contract WhiteListByMerkeleTree is ERC721Enumerable, Ownable &#123;</span><br><span class="line">    string public baseURI;</span><br><span class="line">    string public baseExtension = &quot;.json&quot;;</span><br><span class="line"></span><br><span class="line">    bytes32 public merkleRoot;</span><br><span class="line"></span><br><span class="line">    uint256 public cost = 0.0001 ether; // Mint 價格</span><br><span class="line">    uint256 public maxSupply = 5;</span><br><span class="line">    uint256 public maxMintAmount = 1; // 一次最多只能 Mint 一個</span><br><span class="line"></span><br><span class="line">    constructor(</span><br><span class="line">        string memory _name,</span><br><span class="line">        string memory _symbol,</span><br><span class="line">        string memory _initBaseURI,</span><br><span class="line">    ) ERC721(_name, _symbol) </span><br><span class="line">        baseURI = _initBaseURI;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function _baseURI() internal view override returns (string memory) &#123;</span><br><span class="line">        return baseURI;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // public</span><br><span class="line">    function mint(address _to, uint256 _mintAmount, bytes32[] calldata _merkleProof)</span><br><span class="line">        public </span><br><span class="line">        payable</span><br><span class="line">        isContractAvailable</span><br><span class="line">        checkWhiteList(_to, _merkleProof, merkleRoot)</span><br><span class="line">    &#123;</span><br><span class="line">            uint256 supply = totalSupply();</span><br><span class="line">            require(_mintAmount &gt; 0); // 每次必須鑄造超過 0 個</span><br><span class="line">            require(_mintAmount &lt;= maxMintAmount, &quot;You can only adopt 1 BigBenFun at a time&quot;); // 鑄造的數量不可以大於每次最大鑄造數量</span><br><span class="line">            require(supply + _mintAmount &lt;= maxSupply); // 鑄造的數量和當前發行量加起來，不可以超過最大總發行量</span><br><span class="line">            require(cost * _mintAmount &lt;= msg.value, &quot;Ether value sent is not correct&quot;);</span><br><span class="line"></span><br><span class="line">            for(uint256 i = 0; i &lt; _mintAmount; i++) &#123;</span><br><span class="line">                uint256 mintIndex = supply + i;</span><br><span class="line">                while(_exists(mintIndex))&#123;</span><br><span class="line">                    mintIndex++;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (mintIndex &lt;= maxSupply) &#123;</span><br><span class="line">                    _safeMint(_to, mintIndex);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 查看使用者持有的 NFT MetaDate</span><br><span class="line">    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) &#123;</span><br><span class="line">        require(</span><br><span class="line">            _exists(tokenId),</span><br><span class="line">            &quot;ERC721Metadata: URI query for nonexistent token&quot;</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        string memory currentBaseURI = _baseURI();</span><br><span class="line">        return bytes(baseURI).length &gt; 0</span><br><span class="line">            ? string(abi.encodePacked(currentBaseURI, Strings.toString(tokenId), baseExtension))</span><br><span class="line">            : &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 檢查是否在白名單內</span><br><span class="line">    modifier checkWhiteList (address _to, bytes32[] calldata _merkleProof, bytes32 _merkleRoot) &#123;</span><br><span class="line">        require(</span><br><span class="line">            MerkleProof.verify(</span><br><span class="line">                _merkleProof,</span><br><span class="line">                _merkleRoot,</span><br><span class="line">                keccak256(abi.encodePacked(_to))</span><br><span class="line">            ), &quot;Address does not exist in WL&quot;);</span><br><span class="line">        _; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 賦值給 Merkle Root</span><br><span class="line">    function setMerkleRoot(bytes32 _merkleRoot) public onlyOwner &#123;</span><br><span class="line">        merkleRoot = _merkleRoot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊快速解釋一下，正常我們可以透過 <code>MerkleProof.sol</code> 去幫我們驗證傳進來的地址是不是在白名單內，會需要 <strong>Merkle Root</strong>，這個參數我們存在合約內不寫死，透過 <code>setMerkleRoot()</code> 可以讓我們隨時修改，之後如果有新增餐除白名單，都可以在透過這個 <strong>Function</strong> 去更新，由於更新近來不再是一整段陣列，所以費用會少很多。</p>
+<p>在檢查白名單部分這邊使用 <strong>modifier</strong> 把檢查包起來，方便之後其他 <strong>Function</strong> 使用，裡面就是 <code>MerkleProof.sol</code> 的使用方式，需要傳入三個參數，第一個就是我們之前上面提到的，如果需要驗證某個資料是不是正確的，就要把當初跟他是一組的對面那個參數拿出來，像上面的 <code>Hh</code> <code>Hef</code> <code>Habcd</code> 這三個值，把他組成陣列丟進來，怎麼拿出來等等會再說。</p>
+<p>第二個參數是我們樹的 <strong>Merkle Root</strong>，如剛剛所提，這個值我們隨時可以透過 <code>setMerkleRoot()</code> 隨時去更改，達到隨時可以更新白名單。</p>
+<p>第三個參數是要驗證的白名單地址，需要先透過散列 <code>keccak256()</code> 去把它轉成 bytes32，才能丟進 <code>MerkleProof.verify()</code> 去驗證。</p>
+<p>最後只需要在 <code>mint()</code> 的後面加上 <strong>modifier</strong> <code>checkWhiteList()</code> 即可，不知道 <strong>modifier</strong> 用法的可以參考 <a target="_blank" rel="noopener" href="https://codingnote.cc/zh-hk/p/321055/">solidity的函數修改器(modifier)</a> 這篇文章。</p>
+<p><strong>tokenURI</strong> 這個 <strong>Function</strong> 就是 <strong>ERC721</strong> 一定會有的 <strong>Function</strong>，主要是返回你指定 <strong>Token ID</strong> 的 <strong>URL</strong>，這個 <strong>URL</strong> 會指向 <strong>一張圖</strong> 或 一個 <strong>.json</strong>，詳細也可以參考之前的文章 <a href="https://rexhung0302.github.io/2022/03/10/20220310/#more">[Solidity Note] - 透過工程師的方式發布 基於 ERC721 的 NFT</a>，這邊如果要刪掉也可以，只是最後去 <a target="_blank" rel="noopener" href="https://testnets.opensea.io/">Test OpenSea</a> 查看圖會是空的。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/baseURI.png" alt="tokenURI &amp; baseURI"></p>
+<blockquote>
+<p>*這邊是 <a target="_blank" rel="noopener" href="https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol#L93">ERC721.sol</a> *******<em>的程式碼，不複寫之後呼叫 tokenURI 就會回傳空字串</em></p>
+</blockquote>
+<h3 id="在-Mint-Function-執行前透過驗證檢查該地址是否在白名單中"><a href="#在-Mint-Function-執行前透過驗證檢查該地址是否在白名單中" class="headerlink" title="在 Mint Function 執行前透過驗證檢查該地址是否在白名單中"></a>在 <strong>Mint Function</strong> 執行前透過驗證檢查該地址是否在白名單中</h3><p>前面有提到我們要 <strong>Mint</strong> 的時候需要丟 <strong>MerkleProof</strong> 近來，我們先來改寫一下剛剛的 <strong>CodePen</strong> 程式碼。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 白名單列表，可寫死，可從後端拿</span></span><br><span class="line"><span class="keyword">const</span> whitelistedAddresses = [</span><br><span class="line">  <span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x7b399B9c5bb519D4258e61100cC5ef2F4Bd9c873&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x54Ac1F0366724cf30a6E91f32769D95540a18203&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xdC1Ca18bEeB3DFAEfCEe4aa91491B365A6F5aE12&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xe5A7B3B752d93514a97a23A9e134aBF6CF01DC6e&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x59734A5500faDCd7c64B3212538442Cfd26416Cb&quot;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 對所有名單進行雜湊 - SHA256</span></span><br><span class="line"><span class="keyword">const</span> leafOfNodes = whitelistedAddresses.<span class="title function_">map</span>(<span class="function"><span class="params">address</span> =&gt;</span> <span class="title function_">keccak256</span>(address));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 產生出 Merkle Tree</span></span><br><span class="line"><span class="keyword">const</span> merkleTree = <span class="keyword">new</span> <span class="title class_">MerkleTree</span>(leafOfNodes, keccak256, &#123; <span class="attr">sortPairs</span>: <span class="literal">true</span> &#125;); <span class="comment">// 拿整棵樹</span></span><br><span class="line"><span class="keyword">const</span> merkleRoot = merkleTree.<span class="title function_">getRoot</span>().<span class="title function_">toString</span>(<span class="string">&#x27;hex&#x27;</span>); <span class="comment">// 直接拿 Root</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 上面已經拿到 MerkleRoot 了，這邊我們需要拿驗證的 MerkleProof</span></span><br><span class="line"><span class="keyword">const</span> mintUserLeaf = <span class="title function_">keccak256</span>(<span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> mintUserProof = merkleTree.<span class="title function_">getHexProof</span>(mintUserLeaf);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;mintUserProof:&quot;</span>, mintUserProof);</span><br></pre></td></tr></table></figure>
+
+<p>大概如下面的概念，我們需要驗證 <code>0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97</code> 是否在白單內，要先把他散列，然後透過 <strong>merkleTreejs</strong> 提供的 <code>getHexProof()</code>，去拿到藍色框框部分的值，這些結果會是一串陣列。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/merkleTreeVerifyAddress.png" alt="驗證地址"></p>
+<p>拿到這串陣列就是我們需要的 <strong>MerkleProof</strong>，之後需要丟到合約內讓 <code>MerkleProof.verify()</code> 去驗證。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/MerkleProof.png" alt="要拿來驗證的陣列"></p>
+<h3 id="不需花費高額-ETH-去更新白名單列表"><a href="#不需花費高額-ETH-去更新白名單列表" class="headerlink" title="不需花費高額 ETH 去更新白名單列表"></a>不需花費高額 <strong>ETH</strong> 去更新白名單列表</h3><p>回到合約這邊來，我們已經知道隨時可以產生新的 <strong>Merkle Root</strong> 去更新白名單，這時候我們先透過 <code>setMerkleRoot()</code> 去把 <strong>CodePen</strong> 的 <strong>Merkle Root</strong> 傳進去。</p>
+<p>請記得 <strong>merkleTreejs</strong> 產生出來的值我們需要在前面加上 <code>0x</code> 才可以設定到合約內，這邊將 <code>0x5636657f8352b2652e3a43c07a6e8e7413d37f553633f901fd22c01cf605f9cf</code> 設定進去合約。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/setMerkleRoot.png" alt="隨時可以更改 Merkle Root 達到隨時更新白名單又不用花高額氣費需求"></p>
+<blockquote>
+<p><em>記錄在 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xd4c7bb2fb1cd2f0a08957c2f1ad6b2764304f40dde4a15d226cb86dcb217ff11">0xd4c7bb2fb1cd2f0a08957c2f1ad6b2764304f40dde4a15d226cb86dcb217ff11</a></em></p>
+</blockquote>
+<p>設定完記得再去看一下是不是有成功</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/getMerkleRoot.png" alt="取得 MerkleRoot"></p>
+<p>接下來就可以執行 <code>mint()</code> 了，把相關參數帶進去，這邊帶入地址 <code>0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97</code> 還有 <strong>Mint</strong> 數量一個，加上剛剛從 <strong>CodePen</strong> 那邊拿到的 <strong>Proof</strong> 陣列，<code>[&quot;0xff5222b3eecfb5315af7137810edbf828ba4069a2dcb427f4567c271e2d9cc20&quot;,&quot;0x64024fbe99ce8546990c17ddf281ceb42af726f7ff8aeae82ef56d6eeafa5dac&quot;,&quot;0x91a14a4390ff7871c7544a0533850a620de989cca0eb04658b885c63e645178b&quot;]</code> </p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/mintFunc.png" alt="Mint NFT"></p>
+<p>送出交易後檢查並成功 <strong>Mint</strong> 紀錄 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0x3dc271c7dd217387cab97c3649d71b34212b9c5a621b6cba13907489c4bca59a">0x3dc271c7dd217387cab97c3649d71b34212b9c5a621b6cba13907489c4bca59a</a></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/mintSuccessEtherScan.png" alt="成功紀錄"></p>
+<h3 id="仿造錯誤流程"><a href="#仿造錯誤流程" class="headerlink" title="仿造錯誤流程"></a>仿造錯誤流程</h3><p>為了驗證是否不對的地址會失敗，我們這邊傳入不在剛剛 <strong>codePen</strong> 上 <strong>whitelistedAddresses</strong> 陣列內的地址 <code>0xf14cc09860DA951B0310d8192f74Ca1dB7a27C92</code> ，結果會拿到空陣列</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/errorMerkleProof.png" alt="錯誤的 Address 拿到錯誤的 Merkle Proof"></p>
+<p>但如果發起交易者聰明一點，直接使用你的合約 <strong>Function</strong> 去 <strong>Mint</strong>，自己造假白名單，這邊我們也可以來嘗試一下。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 造假的白名單 只有一開始兩筆一樣 其餘都不同</span></span><br><span class="line"><span class="keyword">const</span> fake_whitelistedAddresses = [</span><br><span class="line">  <span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x7b399B9c5bb519D4258e61100cC5ef2F4Bd9c873&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xf14cc09860DA951B0310d8192f74Ca1dB7a27C92&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0xC87aC2a4Cec03e1913f13ce6fED4Dd4d880362AB&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x09a8Ba0EEaaA0D5c81ebf0E1C15C771FB3149f80&quot;</span>,</span><br><span class="line">  <span class="string">&quot;0x052EA8Ec718Ac9Bca7E37A9c91717ED219155B1f&quot;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 對所有假名單進行雜湊 - SHA256</span></span><br><span class="line"><span class="keyword">const</span> fake_leafOfNodes = fake_whitelistedAddresses.<span class="title function_">map</span>(<span class="function"><span class="params">address</span> =&gt;</span> <span class="title function_">keccak256</span>(address));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 產生出假的 Merkle Tree</span></span><br><span class="line"><span class="keyword">const</span> fake_merkleTree = <span class="keyword">new</span> <span class="title class_">MerkleTree</span>(fake_leafOfNodes, keccak256, &#123; <span class="attr">sortPairs</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 拿假的 Proof</span></span><br><span class="line"><span class="keyword">const</span> mintUserLeaf = <span class="title function_">keccak256</span>(<span class="string">&quot;0xE09Eb3a29358dBDE39FE5f77F6597e1Dee0ceb97&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> fake_mintUserProof = fake_merkleTree.<span class="title function_">getHexProof</span>(mintUserLeaf);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;fake_mintUserProof:&quot;</span>, fake_mintUserProof);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/fakeMarkelProof.png" alt="仿造錯誤的白名單拿 Proof"></p>
+<p>這時候會拿到一串陣列， <code>[&quot;0xff5222b3eecfb5315af7137810edbf828ba4069a2dcb427f4567c271e2d9cc20&quot;,&quot;0x76c410014698a9fed99b4053e2389e27c1ea14a0e5cbf4e3a0bdfbc4a7c8daa1&quot;,&quot;0xb536b4e32056b0e9000f4c0b2af31adceb92f637390dfdcaf606ca65a5902f8a&quot;]</code> 與原本的相比明顯就不同了，這時候我們繼續把他送進去 <code>mint()</code> </p>
+<p><img src="/images/others/loading.gif" data-original="/images/20220411/mintFail.png" alt="Mint 失敗"></p>
+<p>這時候就會跳出錯誤警告，這筆失敗交易記錄在 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/tx/0xac16bec0714adf0c9077428a3d7d42e290487cc7b43dd73dd62dbc149b7ffa61">0xac16bec0714adf0c9077428a3d7d42e290487cc7b43dd73dd62dbc149b7ffa61</a></p>
+<hr>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p><img src="/images/others/loading.gif" data-original="/images/20220411/allProcess.png" alt="整體流程"></p>
+<p>了解完整個過程其實過程是算很簡單的，開發者先行設定 <strong>Merkle Root</strong> 到合約上，隨時也都可以做更改，<strong>Merkle Root</strong> 就像是一個寶箱。</p>
+<p>使用者在前端操作 Mint 的時候，前端網站從後端拿白名單，透過 <strong>merkleTreejs</strong> 提供的 <code>getHexProof()</code> 拿到 <strong>msg.sender</strong>(交易發起人) 的 <strong>Merkle Proof</strong>。</p>
+<p>最後把這個 <strong>msg.sender</strong> 及 <strong>Proof</strong> 傳進合約內去，透過 <code>MerkleProof.sol</code> 去幫我們驗證是否可以打開寶箱，這個過程也就猶如拿了你給他的材料去鑄造一把鑰匙。</p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>每一次的錯誤都在使我們成長，不過有些教訓是真的滿貴的，嘟嘟房後續看起來是滿有心處理，但也花費了許多錢去補償，透過這個教訓這次也讓筆者學到了怎麼去實作白名單。</p>
+<p>這次的完整合約 <a target="_blank" rel="noopener" href="https://rinkeby.etherscan.io/address/0x31bf20772514551cbc7b897914321d98559a9ff9#code">0x31BF20772514551CBC7B897914321D98559a9FF9</a> 修正了一些之前第一次發布的問題，像是 <code>totalSupply()</code> 筆者一直認為是總發行數，結果是已經發行出去的數量，筆者也還在努力學習中，如果這篇文章中有任何錯誤，還請不吝嗇指出，感謝各位前輩，也希望和之前在學習前端時一樣，能跟一群志同道合的前端夥伴一起前進。</p>
+<p>另外在 <strong>MerkleTree</strong> 的網站也有提供方便的生成器，如果不習慣用 CodePen 的人，也可以使用 <a target="_blank" rel="noopener" href="https://lab.miguelmota.com/merkletreejs/example/">MerleTree.js example</a> 去直接產出 <strong>Proof</strong>。</p>
+<blockquote>
+<p><em>合約裡面有一個判斷寫錯了，關於盲盒的部分，判斷應該是 <code>if(blindBoStep == true)</code> 才對，但我寫反了，後來有透過 <code>SetBlindBoxStep()</code> 把變數改成 <code>false</code>…如果有看到的前輩請手下留情</em></p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://mirror.xyz/qiwihui.eth/HRifb9gziR1UvVmRcMjDfDvQ9mq7o7FA6BNuCJMFT00">使用 Merkle 树做 NFT 白名单验证</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/my-blockchain-development-daily-journey/%E5%B0%87-merkle-trees%E7%94%A8%E6%96%BC-nft-%E7%99%BD%E5%90%8D%E5%96%AE-248a5c2c1570">將 Merkle Trees用於 NFT 白名單</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/yLppWmZ?editors=0011">本次白名單的 Proof 產出 CodePen 範例</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10215108?sc=rss.iron">Day13|密碼學初探(6)：Merkle Tree</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/62844713">区块链中merkle树是如何验证的，它的具体运行机制是？</a></li>
+<li><a target="_blank" rel="noopener" href="https://academy.binance.com/zt/articles/merkle-trees-and-merkle-roots-explained">Merkle Tree 和 Merkle Root 介紹</a></li>
+<li><a target="_blank" rel="noopener" href="https://codingnote.cc/zh-hk/p/321055/">solidity的函數修改器(modifier)</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Solidity/" rel="tag"><i class="fa fa-tag"></i> Solidity</a>
+              <a href="/tags/NFT/" rel="tag"><i class="fa fa-tag"></i> NFT</a>
+              <a href="/tags/Mint/" rel="tag"><i class="fa fa-tag"></i> Mint</a>
+              <a href="/tags/OpenSea/" rel="tag"><i class="fa fa-tag"></i> OpenSea</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/05/20220405/" rel="prev" title="[Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！">
+      <i class="fa fa-chevron-left"></i> [Solidity Note] - 合約有漏洞？要升級？要修改？怎麼辦？學學部署可升級合約吧！
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/06/20221106/" rel="next" title="[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸">
+      [Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BD%E5%90%8D%E5%96%AE%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">白名單？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%A1%88%E4%B8%80"><span class="nav-number">2.2.</span> <span class="nav-text">解決方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E5%BC%8F%E4%BA%8C"><span class="nav-number">2.3.</span> <span class="nav-text">解決方式二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%A8%B9%EF%BC%9F"><span class="nav-number">2.4.</span> <span class="nav-text">什麼樹？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E9%BA%BC%E8%A8%88%E7%AE%97%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">怎麼計算？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%A9%97%E8%AD%89%EF%BC%9F"><span class="nav-number">2.6.</span> <span class="nav-text">如何驗證？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%A6%E9%9A%9B%E4%B8%8A%E9%99%A3"><span class="nav-number">2.7.</span> <span class="nav-text">實際上陣</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E9%81%8E-Merkle-Tree-%E5%8E%BB%E5%B0%8D%E7%99%BD%E5%90%8D%E5%96%AE%E5%88%97%E8%A1%A8%E7%94%A2%E5%87%BA-Merkle-Root"><span class="nav-number">2.8.</span> <span class="nav-text">透過 Merkle Tree 去對白名單列表產出 Merkle Root</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%8A-Merkle-Root-%E5%84%B2%E5%AD%98%E5%9C%A8%E6%99%BA%E8%83%BD%E5%90%88%E7%B4%84%E4%B8%8A"><span class="nav-number">2.9.</span> <span class="nav-text">把 Merkle Root 儲存在智能合約上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-Mint-Function-%E5%9F%B7%E8%A1%8C%E5%89%8D%E9%80%8F%E9%81%8E%E9%A9%97%E8%AD%89%E6%AA%A2%E6%9F%A5%E8%A9%B2%E5%9C%B0%E5%9D%80%E6%98%AF%E5%90%A6%E5%9C%A8%E7%99%BD%E5%90%8D%E5%96%AE%E4%B8%AD"><span class="nav-number">2.10.</span> <span class="nav-text">在 Mint Function 執行前透過驗證檢查該地址是否在白名單中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E9%9C%80%E8%8A%B1%E8%B2%BB%E9%AB%98%E9%A1%8D-ETH-%E5%8E%BB%E6%9B%B4%E6%96%B0%E7%99%BD%E5%90%8D%E5%96%AE%E5%88%97%E8%A1%A8"><span class="nav-number">2.11.</span> <span class="nav-text">不需花費高額 ETH 去更新白名單列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BF%E9%80%A0%E9%8C%AF%E8%AA%A4%E6%B5%81%E7%A8%8B"><span class="nav-number">2.12.</span> <span class="nav-text">仿造錯誤流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">2.13.</span> <span class="nav-text">總結</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2022/04/11/20220411/",
+      identifier: "2022/04/11/20220411/",
+      title     : "[Solidity Note] - 在區塊鏈上最好的白名單實作方式？試試看 Merkle Tree 吧",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 這是一篇關於 Socket.io 的淺入淺出文章，如果你正在尋找相關知識或想知道什麼是 Socket.io 甚至有想要嘗試自己做一個即時聊天室，那麼這篇文章就很適合你。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NodeJS Become A Full Stack Developer] — 透過 Socket.io 來製作即時聊天室吧">
+<meta property="og:url" content="https://rexhung0302.github.io/2021/10/01/20211001/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 這是一篇關於 Socket.io 的淺入淺出文章，如果你正在尋找相關知識或想知道什麼是 Socket.io 甚至有想要嘗試自己做一個即時聊天室，那麼這篇文章就很適合你。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2021-09-30T17:44:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.938Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="NodeJS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2021/10/01/20211001/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[NodeJS Become A Full Stack Developer] — 透過 Socket.io 來製作即時聊天室吧 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2021/10/01/20211001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NodeJS Become A Full Stack Developer] — 透過 Socket.io 來製作即時聊天室吧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-10-01 01:44:00" itemprop="dateCreated datePublished" datetime="2021-10-01T01:44:00+08:00">2021-10-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/Express/" itemprop="url" rel="index"><span itemprop="name">Express</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/Express/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/Express/React/Socket-io/" itemprop="url" rel="index"><span itemprop="name">Socket.io</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>8 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20211001/demo.gif" alt="Chat Room"></p>
+<p>這是一篇關於 <strong>Socket.io</strong> 的淺入淺出文章，如果你正在尋找相關知識或想知道什麼是 <strong>Socket.io</strong> 甚至有想要嘗試自己做一個即時聊天室，那麼這篇文章就很適合你。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章後端將會使用 <strong>Node.js</strong>，前端將會使用 <strong>React(Create React APP)</strong>，不同框架語言使用方式其實應該都差不多，但如果你有打算使用其他框架，可以再多爬幾篇文章比較一下。</p>
+<p>這邊會簡單的提一下 <strong>Socket.io</strong> 是什麼，但不會深度解析什麼是 <strong>Socket.io</strong> 及背後的原理；最後我們將會實作出有下列幾個簡單功能的聊天室。</p>
+<ol>
+<li>透過 <strong>Socket.io</strong> 達到即時聊天效果。</li>
+<li>不同聊天室分群聊天效果。</li>
+<li>全頻道&#x2F;分群廣播效果。</li>
+<li>透過打 <strong>api</strong> 後，操作 <strong>Socket.io</strong>。</li>
+</ol>
+<hr>
+<h2 id="淺入淺出關於-Sokect-io-的介紹"><a href="#淺入淺出關於-Sokect-io-的介紹" class="headerlink" title="淺入淺出關於 Sokect.io 的介紹"></a>淺入淺出關於 Sokect.io 的介紹</h2><blockquote>
+<p><em><strong>在實作 Socket.io 聊天室之前，筆者雖然預設大家都已經知道這個東西是什麼，但或許還是有一些讀者是第一次接觸或不了解 Socket.io 的。如果你已經知道，這個地方可以跳過。</strong></em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/api_vs_socketio.png" alt="不專業的解說圖"></p>
+<h3 id="一般的伺服器與使用者溝通方式"><a href="#一般的伺服器與使用者溝通方式" class="headerlink" title="一般的伺服器與使用者溝通方式"></a>一般的伺服器與使用者溝通方式</h3><p>首先我們一般前端使用者與後端溝通都是透過 <strong>API</strong> 來發送請求，然後再透過 <strong>Response</strong> 去接收回覆的訊息，但是伺服器並無法直接主動發出訊息給使用者；使用者在送出表單或者點擊某顆按鈕後透過 <strong>ajax</strong> 或 <strong>axios</strong> 去打 <strong>API</strong> 亦或者連接網站後，發出任何請求至後端。</p>
+<p>像上方左邊的圖，<strong>1</strong> 就是使用者發起請求，而伺服器收到後會傳送 <strong>Response</strong> 回給發起請求的使用者，但無法發送給其他使用者，例如 <strong>使用者A</strong> 發起請求後，伺服器只能回傳 <strong>Response</strong> 給這個使用者，無法發給 <strong>使用者B</strong> 或 <strong>使用者C</strong>。</p>
+<h3 id="使用-Socket-io-的伺服器與使用者溝通方式"><a href="#使用-Socket-io-的伺服器與使用者溝通方式" class="headerlink" title="使用 Socket.io 的伺服器與使用者溝通方式"></a>使用 Socket.io 的伺服器與使用者溝通方式</h3><p>透過 <strong>Socket.io</strong> 我們可以達到上面一般方式我們想達到的事情，可以把 <strong>Socket.io</strong> 想像成 <strong>某個訂閱服務</strong>，當使用者主動發起請求至訂閱服務，可以再回傳事件，但這時候已經不是依靠 API 方式去溝通，而是透過 <strong>Socket.io</strong> 提供的 <strong>API</strong>，待會後面會說到。</p>
+<p>最主要的地方來了，當訂閱服務收到使用者的請求後，他除了可以主動回覆給該使用者，也可以一併的主動發出訊息給所有訂閱的使用者，聰明的你就知道這個可以達到聊天室的需求。</p>
+<p>其實現在很多東西都會用到 <strong>Socket.io</strong>：</p>
+<ol>
+<li><p>遊戲</p>
+</li>
+<li><p>聊天室</p>
+</li>
+<li><p>客服中心</p>
+</li>
+<li><p>任何需要即時更新的資料，股票、博彩…等等</p>
+</li>
+</ol>
+<h3 id="何謂-Socket-io-Websocket-Socket"><a href="#何謂-Socket-io-Websocket-Socket" class="headerlink" title="何謂 Socket.io Websocket Socket"></a>何謂 Socket.io Websocket Socket</h3><p>這邊其實沒有要詳細說明三者差異，有興趣可以參考 <a target="_blank" rel="noopener" href="https://leesonhsu.blogspot.com/2018/07/socketwebsocketsocketio.html">【筆記】Socket，Websocket，Socket.io的差異</a>。</p>
+<p>但還是快速地說一下：</p>
+<ul>
+<li><p><strong>Socket</strong> 就是以前的 <strong>TCP&#x2F;IP</strong>，現在也變成通訊的標準之一。</p>
+</li>
+<li><p><strong>Websocket</strong> 在七層模型中屬於「<strong>應用層</strong>」，也是一種協議。</p>
+</li>
+<li><p><strong>Socket.io</strong> 和上面兩者不同，他是 <strong>JavaScript</strong> 的一個函式庫，使伺服器和客戶端之間即時雙向的通信成為可能</p>
+</li>
+</ul>
+<hr>
+<h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><p><img src="/images/others/loading.gif" data-original="/images/20211001/socketio_website.png" alt="Socket.io 官方文件"></p>
+<p>在開始前我們都需要先認識幾個簡單的 <strong>Socket.io</strong> 的 <strong>API</strong>，這邊會分成前端及後端部分去講解，就跟 <strong>Socket.io</strong> 官方文件差不多。</p>
+<h3 id="關於後端的-Socket-io"><a href="#關於後端的-Socket-io" class="headerlink" title="關於後端的 Socket.io"></a>關於後端的 Socket.io</h3><p>因為會講到連接的方式，所以這邊會從後端開始講起，這邊會先提供最終程式碼，<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Socketio-Server">傳送門請點我</a>。</p>
+<ol>
+<li>首先我們用 <strong>Node.js</strong> 的 <strong><a target="_blank" rel="noopener" href="https://www.runoob.com/nodejs/nodejs-express-framework.html">Express</a></strong> 框架作為我們的後端專案，如果你想從頭寫，不用框架也可以，可以參考官方的 <strong><a target="_blank" rel="noopener" href="https://socket.io/get-started/chat">教學文件</a></strong>。</li>
+</ol>
+<p>我們需要先安裝 <code>express-generator</code>，這是一個 <strong>Express</strong> 的應用程式產生器，然後透過 <code>express-generator</code> 去產生一個 <strong>Node.js</strong> 專案。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install express-generator -g // 全域安裝</span><br><span class="line"></span><br><span class="line">$ express -h // 查看指令大全 順便檢查有無安裝成功</span><br><span class="line"></span><br><span class="line">$ express --view=pug Socketio-Server // --view=pug 為使用 pug 模板，這邊不重要 我們不會用到</span><br></pre></td></tr></table></figure>
+
+<p>建立完成後大概會長得像下面的架構。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/socketio_server.png" alt="後端架構"></p>
+<ol start="2">
+<li>接著我們要安裝我們的主角，<strong><a target="_blank" rel="noopener" href="https://github.com/socketio/socket.io">Socket.io</a></strong>，官方文件可參考 <strong><a target="_blank" rel="noopener" href="https://socket.io/">此處</a></strong>。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install socket.io // 現在的版本都會預設 -S 可以不用加了</span><br><span class="line"></span><br><span class="line">$ npm install uuidv4 // 可裝可不裝，後面判斷使用者會用到</span><br><span class="line"></span><br><span class="line">$ npm install moment // 可裝可不裝，後面聊天室顯示送出訊息時間用</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/save_desc.png" alt="關於 -S"></p>
+<blockquote>
+<p><em>如果不知道 -S 是什麼意思，可以參考 <strong><a href="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？</a></strong> 的 <strong>開動了</strong> 一小段。</em></p>
+</blockquote>
+<ol start="3">
+<li>安裝完後就可以開始使用了，打開 <code>/bin/www</code> 這隻檔案，然後引入相關套件。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">v4</span>: uuidv4 &#125; = <span class="built_in">require</span>(<span class="string">&quot;uuid&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> moment = <span class="built_in">require</span>(<span class="string">&quot;moment&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = http.<span class="title function_">createServer</span>(app); <span class="comment">// 這行原本就有</span></span><br><span class="line"><span class="keyword">const</span> io = <span class="built_in">require</span>(<span class="string">&quot;socket.io&quot;</span>)(server); <span class="comment">// 一定要在 server 後面</span></span><br></pre></td></tr></table></figure>
+
+<p>因為我們的聊天室會有使用者們及聊天房間，所以在加入下面程式碼，因為這次範例是全部分開聊天，如果你想要也可以在弄一個房間作為大廳。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> users = [];</span><br><span class="line"><span class="keyword">let</span> chatRooms = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title function_">uuidv4</span>(),</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;新手村一&quot;</span>,</span><br><span class="line">    <span class="attr">desc</span>: <span class="string">&quot;菜雞才能來喔！&quot;</span>,</span><br><span class="line">    <span class="attr">userNumber</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title function_">uuidv4</span>(),</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;無差別&quot;</span>,</span><br><span class="line">    <span class="attr">desc</span>: <span class="string">&quot;不管你是什麼雞都可以來～&quot;</span>,</span><br><span class="line">    <span class="attr">userNumber</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>開始使用 <strong>socket.io</strong> 套件，繼續編輯我們的 <code>/bin/www</code>，加上下面程式碼</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line">io.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 登入</span></span><br><span class="line">  socket.<span class="title function_">on</span>(<span class="string">&quot;login&quot;</span>, <span class="function">(<span class="params">&#123; id, name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> sameUser = users.<span class="title function_">find</span>(<span class="function">(<span class="params">user</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> user.<span class="property">name</span> === name;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (sameUser) &#123;</span><br><span class="line">      socket.<span class="title function_">emit</span>(<span class="string">&quot;connectionFail&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">message</span>: <span class="string">&quot;使用者名稱重複&quot;</span>,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 只發事件給這個使用者</span></span><br><span class="line">      socket.<span class="title function_">emit</span>(<span class="string">&quot;connectionSuccess&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">message</span>: <span class="string">&quot;歡迎加入！連線成功&quot;</span>,</span><br><span class="line">        <span class="attr">rooms</span>: chatRooms,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 給除了這個使用者外的其他人</span></span><br><span class="line">      socket.<span class="property">broadcast</span>.<span class="title function_">emit</span>(<span class="string">&quot;connectionSuccess&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">message</span>: <span class="string">`歡迎使用者 <span class="subst">$&#123;name&#125;</span> 連線成功`</span>,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 發事件給所有人，包括這個使用者</span></span><br><span class="line">      io.<span class="title function_">emit</span>(<span class="string">&quot;connectionSuccess&quot;</span>, &#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">message</span>: <span class="string">&quot;即刻起免費使用聊天室直到～永遠&quot;</span>,</span><br><span class="line">        <span class="attr">rooms</span>: chatRooms,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      users.<span class="title function_">push</span>(&#123;</span><br><span class="line">        id,</span><br><span class="line">        name,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面這幾行其實也是使用了 <strong>Socket.io</strong> 最常使用的兩個 <strong>API</strong>，<code>on</code> 及 <code>emit</code>，前者就是監聽事件，後者就是發送事件。</p>
+<p><code>io.on(&quot;connection&quot;, (socket) =&gt; &#123;</code> 這行就是前端在連接(訂閱)這個 <strong>Socket.io</strong> 後會觸發的事件，這邊都是使用 <strong>connection</strong> 或 <strong>connect</strong>，兩者都可以，差別就在於如果你兩者都有使用的話 <strong>connect</strong> 會先被觸發，之後再跑 <strong>connection</strong>，詳細可參考 <strong><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012915401">你知道socket.io中connect事件和connection事件的区别吗?</a></strong>，如果想實驗可以改為下列程式碼。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line">io.<span class="title function_">on</span>(<span class="string">&quot;connect&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a user connect&quot;</span>);</span><br><span class="line">  io.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a user connection&quot;</span>);</span><br><span class="line">    <span class="comment">//... 下略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 將會輸出</span></span><br><span class="line"><span class="comment">// a user connect</span></span><br><span class="line"><span class="comment">// a user connection</span></span><br></pre></td></tr></table></figure>
+
+<p>修改完就會發現兩個 <strong>console.log</strong> 都被觸發，但如果你反過來像下面程式碼就只會觸發一個。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">io.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a user connection&quot;</span>);</span><br><span class="line">  io.<span class="title function_">on</span>(<span class="string">&quot;connect&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;a user connect&quot;</span>);</span><br><span class="line">    <span class="comment">//... 下略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 將會輸出</span></span><br><span class="line"><span class="comment">// a user connection</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>等等後面會在提到 <strong>Namespace</strong> 及 <strong>room</strong> 的部分。</em></p>
+</blockquote>
+<p>在跑完 <strong>connection</strong> 後會回傳一個 <strong>value</strong>，這邊我們跟官方文件一樣使用 <strong>socket</strong>，這邊會發現使用了 <code>socket.emit(&quot;connectionSuccess&quot;</code>，但後面又有 <code>socket.broadcast.emit(&quot;connectionSuccess&quot;</code> 及 <code>io.emit(&quot;connectionSuccess&quot;</code>，這邊其實先搞懂 <strong>io</strong> 跟 <strong>socket</strong> 的差異之後發事件就大同小異了。</p>
+<p><code>socket.emit(&quot;connectionSuccess&quot;</code> 就是發送事件給發送事件給後端的這個使用者，可能有點饒舌，但簡單說就是發送事件給透過 <code>io.on(&quot;connection&quot;, //...略</code> 連線(訂閱)的使用者。</p>
+<p><code>socket.broadcast.emit(&quot;connectionSuccess&quot;</code> 就是發送事件給除了發起事件給後端的前端使用者外的人。</p>
+<p><code>io.emit(&quot;connectionSuccess&quot;</code> 就是發送事件給所有人。</p>
+<p>後面基本上我們會大量使用到 <code>socket</code> 去做 <code>socket.on</code> 或者 <code>socket.emit</code>，到這邊我們大致完成了後端的部分，接下來開始著手完成前端的部分吧。</p>
+<p>接著就可以啟用 <code>npm start</code> 了，筆者自己跟預設應該都是跑在 <code>port 3000</code>。</p>
+<h3 id="關於前端的-Socket-io"><a href="#關於前端的-Socket-io" class="headerlink" title="關於前端的 Socket.io"></a>關於前端的 Socket.io</h3><p>首先我們需要在前端刻出聊天室的樣子，這邊會先提供程式碼，<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Socketio-Client">傳送門請點我</a>，這邊就不詳細講解怎麼切版；</p>
+<ol>
+<li>前端主要需要安裝 <strong>socket.io-client</strong> 這個套件 及 <strong>uuid</strong> 產生獨一無二的 ID。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm i socket.io-client -S // or yarn add</span><br><span class="line"></span><br><span class="line">$ npm i uuid</span><br></pre></td></tr></table></figure>
+
+<p>再來前端很簡單只要記得三個基本的東西：</p>
+<ul>
+<li>連線</li>
+<li>監聽事件(on, once)</li>
+<li>發送事件(emit)</li>
+</ul>
+<ol start="2">
+<li>讓我們跟後端 <strong>Socket.io</strong> 連線，根據你想連線的檔案位子可以做調整，例如我想在 <strong>component</strong> 是聊天室頁面的時候再連線。</li>
+</ol>
+<p>參考 <code>src/pages/Lobby/index.tsx</code> 這隻檔案，可以發現在 <strong>useEffect</strong> 剛進來的時候去做連線的動作。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/init_socketio.png" alt="初始化 Socket.io"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/pages/Lobby/index.tsx 範例檔案</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; io &#125; <span class="keyword">from</span> <span class="string">&quot;socket.io-client&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Lobby</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 初始化</span></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> newSocket = <span class="title function_">io</span>(</span><br><span class="line">    process.<span class="property">env</span>.<span class="property">REACT_APP_API_DOMAIN</span></span><br><span class="line">      ? process.<span class="property">env</span>.<span class="property">REACT_APP_API_DOMAIN</span></span><br><span class="line">      : <span class="string">&quot;http://localhost:3000&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">transports</span>: [<span class="string">&quot;websocket&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//... 略</span></span><br><span class="line">    <span class="comment">// 因為前端邏輯需求，範例專案這邊註解了</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      newSocket.<span class="title function_">close</span>();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, [])</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Lobby</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>做好連線後我們就可以在需要的地方發起事件通知後端，在需要連線得地方輸入下面程式碼，這樣一來後端就可以接到事件了。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/pages/ChatRoom/index.tsx 範例檔案</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; useEffect &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; io &#125; <span class="keyword">from</span> <span class="string">&quot;socket.io-client&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; v4 <span class="keyword">as</span> uuidv4 &#125; <span class="keyword">from</span> <span class="string">&quot;uuid&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">ChatRoom</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 初始化</span></span><br><span class="line">  <span class="title function_">useEffect</span>(</span><br><span class="line">    <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        io.<span class="title function_">emit</span>(<span class="string">&quot;joinChatRoom&quot;</span>, &#123;</span><br><span class="line">          <span class="attr">id</span>: <span class="title function_">uuidv4</span>(),</span><br><span class="line">          <span class="attr">name</span>: <span class="string">&quot;使用者名稱&quot;</span>,</span><br><span class="line">          <span class="attr">roomId</span>: xxxxxxxx<span class="comment">// 房間 ID，可在連線時由後端傳過來,</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    []</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">ChatRoom</span>;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>接下來為監聽事件，監聽的事件如果在後端發起了事件，而名稱剛好對到，就會收到訊息。</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/socketio_on_once.png" alt="監聽事件"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/pages/Lobby/index.tsx</span></span><br><span class="line"></span><br><span class="line">data.<span class="property">state</span>.<span class="property">ws</span>.<span class="title function_">once</span>(<span class="string">&quot;connectionFail&quot;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...略  </span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">data.<span class="property">state</span>.<span class="property">ws</span>.<span class="title function_">on</span>(<span class="string">&quot;updateInfo&quot;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>關於 <strong>on</strong> 及 <strong>once</strong> 的差異可以簡單分為，前者為事件發生當下會收到， <strong>once</strong> 則為下一次才收到。</p>
+<ol start="5">
+<li>我們有接收的監聽事件，理所當然使用者端也可以主動發起事件，這邊就是透過 <strong>emit</strong>。</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/socketio_emit.png" alt="事件發送"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data.<span class="property">state</span>.<span class="property">ws</span>.<span class="title function_">emit</span>(<span class="string">&quot;createNewChatRoom&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">userId</span>: data.<span class="property">state</span>.<span class="property">id</span>,</span><br><span class="line">  ...newChatRoom,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用者端基本就是這三個 <strong>API</strong>，再詳細的話可以參考官方文件 <a target="_blank" rel="noopener" href="https://socket.io/docs/v4/client-installation/">Socket.io</a></p>
+<hr>
+<h2 id="初階版的小晉級"><a href="#初階版的小晉級" class="headerlink" title="初階版的小晉級"></a>初階版的小晉級</h2><p>上面有提到 <strong>Namespace</strong> 及 <strong>Room</strong>，雖然我們有使用 <strong>chatRooms</strong> 去分不同的聊天室，但其實後端透過 <code>io.emit()</code> 去發送事件，全部的人都會收到，這樣會照成一個尷尬的情況，就是 <strong>使用者A</strong> 在 <strong>房間A</strong> 聊天，透過前端的 <code>io.emit()</code> 把訊息發事件到後端，然後後端使用 <strong>io.emit</strong> 或 <strong>socket.broadcast.emit</strong> 發事件給使用者，這時候 <strong>房間B</strong> 的全部使用者也都會接收到訊息。</p>
+<p>為了做到真正的分流，我們可以使用官方提供的方法 <strong>Namespace</strong> 或 <strong>Room</strong>。</p>
+<h3 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h3><p><img src="/images/others/loading.gif" data-original="/images/20211001/namespace_desc.png" alt="Namespace"></p>
+<p>這邊先來説說 <strong>Namespace</strong>，一般我們前端跟 <strong>Socket.io</strong> 連線，後端的部分都是預設 <code>io.on(&quot;connection&quot;, //...略</code>，但如果透過 Namespace 就可以達到一個 <strong>socket.io</strong> 有很多個 <strong>channel</strong>。</p>
+<ol>
+<li>將原本的 <code>/bin/www</code> 多加下列的程式碼</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line"><span class="keyword">const</span> io = <span class="built_in">require</span>(<span class="string">&quot;socket.io&quot;</span>)(server); <span class="comment">// 原本就有的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> channel2 = io.<span class="title function_">of</span>(<span class="string">&quot;/channel-2&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> channel3 = io.<span class="title function_">of</span>(<span class="string">&quot;/channel-3&quot;</span>);</span><br><span class="line">channel2.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">&#125;);</span><br><span class="line">channel3.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>再把前端加上下列程式碼</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; io &#125; <span class="keyword">from</span> <span class="string">&quot;socket.io-client&quot;</span>; <span class="comment">// 原本就有的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">xxx</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> newSocket = <span class="title function_">io</span>(</span><br><span class="line">    process.<span class="property">env</span>.<span class="property">REACT_APP_API_DOMAIN</span></span><br><span class="line">      ? process.<span class="property">env</span>.<span class="property">REACT_APP_API_DOMAIN</span></span><br><span class="line">      : <span class="string">&quot;http://localhost:3000&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">transports</span>: [<span class="string">&quot;websocket&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> channel2 = <span class="title function_">io</span>(<span class="string">&quot;http://localhost:3000/channel-2&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">transports</span>: [<span class="string">&quot;websocket&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> channel3 = <span class="title function_">io</span>(<span class="string">&quot;http://localhost:3000/channel-3&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">transports</span>: [<span class="string">&quot;websocket&quot;</span>],</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> xxx;</span><br></pre></td></tr></table></figure>
+
+<p>如此就達到分 <strong>Channel</strong> 的概念，你可以分別在不同的 <strong>Namespace</strong> 下去監聽或者發起事件。</p>
+<blockquote>
+<p><em>更詳細可參考官方文件 <a target="_blank" rel="noopener" href="https://socket.io/docs/v4/namespaces/">Namespace</a></em></p>
+</blockquote>
+<h3 id="Room"><a href="#Room" class="headerlink" title="Room"></a>Room</h3><p><img src="/images/others/loading.gif" data-original="/images/20211001/room_desc.png" alt="Room"></p>
+<p>再來我們來說說 <strong>Room</strong>，和 <strong>Namespace</strong> 都一樣可以做到分流，但他的加入方式不同，<strong>Room</strong> 提供幾個基本的 <strong>API</strong>，其中加入方式為  <strong>join()</strong>，當然也可以離開房間 <strong>leave()</strong>。</p>
+<ol>
+<li>我們嘗試把使用者加入到某間房間，修改一下我們原本 <code>/bin/www</code> 的程式碼</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /bin/www</span></span><br><span class="line">io.<span class="title function_">on</span>(<span class="string">&quot;connection&quot;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 登入</span></span><br><span class="line">  socket.<span class="title function_">on</span>(<span class="string">&quot;login&quot;</span>, <span class="function">(<span class="params">&#123; id, name &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//... 略</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  socket.<span class="title function_">on</span>(<span class="string">&quot;join&quot;</span>, <span class="function">(<span class="params">&#123;id, name&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 加入 Room</span></span><br><span class="line">    socket.<span class="title function_">join</span>(id);</span><br><span class="line"></span><br><span class="line">    io.<span class="title function_">to</span>(id).<span class="title function_">emit</span>(<span class="string">`使用者 <span class="subst">$&#123;name&#125;</span> 加入房間啦！`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面我們模擬一個情境，在前端透過點擊參加聊天室後，透過 <strong>Socket.io</strong> 發送事件 <strong>join</strong>，並且帶著房間(Room) <strong>id</strong> 及 <strong>使用者名稱</strong>，房間資訊在一開始登入時會傳給使用者。</p>
+<p>接著透過 <strong>join()</strong> 這個方式把該事件的發送使用者(<strong>socket</strong>)加入名為變數 <strong>id</strong> 的 <strong>Room</strong>。緊接著透過 <code>io.to(id).emit()</code> 取代原本的 <code>io.emit()</code>，這樣事件只會發送給該房間(Room)的使用者(訂閱者)。</p>
+<blockquote>
+<p><em>更詳細可參考官方文件 <a target="_blank" rel="noopener" href="https://socket.io/docs/v4/rooms/#default-room">Room</a></em></p>
+</blockquote>
+<h3 id="結合迸出新滋味"><a href="#結合迸出新滋味" class="headerlink" title="結合迸出新滋味"></a>結合迸出新滋味</h3><p>這時候聰明的你會想到，那我不就可以先用 <strong>Namespace</strong> 做出不同的頻道(伺服器的概念)，裡面再丟好幾個小房間。沒錯！你可以這麼做，而這也是 <strong>Socket.io</strong> 的最佳應用。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/namespace_room_desc.png" alt="遊戲分流概念"></p>
+<p>如果用上圖來說明，應該會更清楚，如果你沒在玩遊戲，或者不清楚，也可以在參考下圖。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/namespace_room_desc_2.png" alt="大致概念"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>沒想到最近在工作上一忙，一晃眼又是兩個月沒有更新部落格了，趁這次在工作上摸新技術時，筆記了一下所學，其中一個就是 <strong>Socket.io</strong>，其實好久之前就一直想摸，雖然這篇文章沒有講得很詳細，但其實 <strong>Socket.io</strong> 真的滿好入門的，只要掌握其中幾個 <strong>API</strong>，像是 <code>on()</code>、<code>emit()</code>、<code>of()</code>、<code>to()</code>、<code>join()</code>、<code>leave()</code>…等等，其中最前面兩個也才是最常用的，大概了解了運作流程就可以自己做很多好玩的應用了。</p>
+<p>前端專案裡面有包著 <strong>dockerfile</strong>，剛好最近工作上也有接觸到，但如果沒有研究的話，其實可以先跳過，這部分不影響程式碼進行；最後這邊會再附上 <strong>Source Code</strong> 的網址，大家都可以 <strong>colone</strong> 下來玩看看。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/banner.png" alt="Chat Room"></p>
+<ul>
+<li>前端 <strong>Source Code</strong> - <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Socketio-Client">點我</a></li>
+<li>後端 <strong>Source Code</strong> - <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Socketio-Server">點我</a></li>
+</ul>
+<p>最後的最後放上一張手寫筆記結束今天這一回合，晚安各位！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20211001/note.png" alt="筆記大全"></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p>官方文件 - <a target="_blank" rel="noopener" href="https://socket.io/docs/v4/client-installation/">Socket.io</a></p>
+</li>
+<li><p>segmentfault - <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012915401">你知道socket.io中connect事件和connection事件的区别吗?</a></p>
+</li>
+<li><p>Creative Coding TW - 互動程式創作台灣站 - <a target="_blank" rel="noopener" href="https://creativecoding.in/2020/03/25/%E7%94%A8-socket-io-%E5%81%9A%E4%B8%80%E5%80%8B%E5%8D%B3%E6%99%82%E8%81%8A%E5%A4%A9%E5%AE%A4%E5%90%A7%EF%BC%81%EF%BC%88%E7%9B%B4%E6%92%AD%E7%AD%86%E8%A8%98%EF%BC%89/">用 Socket.io 做一個即時聊天室吧！（直播筆記）</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/NodeJS/" rel="tag"><i class="fa fa-tag"></i> NodeJS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/28/20210928/" rel="prev" title="[Git Note] — React 部署至 GitHub Page 超級淺入遷出">
+      <i class="fa fa-chevron-left"></i> [Git Note] — React 部署至 GitHub Page 超級淺入遷出
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/04/20211104/" rel="next" title="[UI/UX Note] — StoryBook 透過元件說故事">
+      [UI/UX Note] — StoryBook 透過元件說故事 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BA%E5%85%A5%E6%B7%BA%E5%87%BA%E9%97%9C%E6%96%BC-Sokect-io-%E7%9A%84%E4%BB%8B%E7%B4%B9"><span class="nav-number">3.</span> <span class="nav-text">淺入淺出關於 Sokect.io 的介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E7%9A%84%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%88%87%E4%BD%BF%E7%94%A8%E8%80%85%E6%BA%9D%E9%80%9A%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">一般的伺服器與使用者溝通方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Socket-io-%E7%9A%84%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%88%87%E4%BD%BF%E7%94%A8%E8%80%85%E6%BA%9D%E9%80%9A%E6%96%B9%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">使用 Socket.io 的伺服器與使用者溝通方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%95%E8%AC%82-Socket-io-Websocket-Socket"><span class="nav-number">3.3.</span> <span class="nav-text">何謂 Socket.io Websocket Socket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E4%BD%9C%E6%A5%AD"><span class="nav-number">4.</span> <span class="nav-text">前置作業</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%BE%8C%E7%AB%AF%E7%9A%84-Socket-io"><span class="nav-number">4.1.</span> <span class="nav-text">關於後端的 Socket.io</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%89%8D%E7%AB%AF%E7%9A%84-Socket-io"><span class="nav-number">4.2.</span> <span class="nav-text">關於前端的 Socket.io</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E9%9A%8E%E7%89%88%E7%9A%84%E5%B0%8F%E6%99%89%E7%B4%9A"><span class="nav-number">5.</span> <span class="nav-text">初階版的小晉級</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Namespace"><span class="nav-number">5.1.</span> <span class="nav-text">Namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Room"><span class="nav-number">5.2.</span> <span class="nav-text">Room</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E5%90%88%E8%BF%B8%E5%87%BA%E6%96%B0%E6%BB%8B%E5%91%B3"><span class="nav-number">5.3.</span> <span class="nav-text">結合迸出新滋味</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">6.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">7.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2021/10/01/20211001/",
+      identifier: "2021/10/01/20211001/",
+      title     : "[NodeJS Become A Full Stack Developer] — 透過 Socket.io 來製作即時聊天室吧",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

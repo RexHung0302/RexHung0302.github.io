@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言最近因為工作關係有碰到 Redis ，雖然菜雞前端對後端還一竅不通，不過照慣例關於安裝的部分還是要寫一下的！以後也有個根據可以來看看，以防忘記。所以這只是小筆記關於 PHP-Redis 的安裝( For Mac OSX 因為菜雞我大部分使用 Mac)，如果有誤還請不吝嗇指教。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[PHP Note] — 關於 php-Redis install on Mac OSX">
+<meta property="og:url" content="https://rexhung0302.github.io/2019/07/14/20190714/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言最近因為工作關係有碰到 Redis ，雖然菜雞前端對後端還一竅不通，不過照慣例關於安裝的部分還是要寫一下的！以後也有個根據可以來看看，以防忘記。所以這只是小筆記關於 PHP-Redis 的安裝( For Mac OSX 因為菜雞我大部分使用 Mac)，如果有誤還請不吝嗇指教。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2019-07-14T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.656Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2019/07/14/20190714/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[PHP Note] — 關於 php-Redis install on Mac OSX | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2019/07/14/20190714/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [PHP Note] — 關於 php-Redis install on Mac OSX
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-07-14 12:00:00" itemprop="dateCreated datePublished" datetime="2019-07-14T12:00:00+08:00">2019-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近因為工作關係有碰到 <strong>Redis</strong> ，雖然菜雞前端對後端還一竅不通，不過照慣例關於安裝的部分還是要寫一下的！以後也有個根據可以來看看，以防忘記。所以這只是小筆記關於 <strong>PHP-Redis</strong> 的安裝( <strong>For Mac OSX 因為菜雞我大部分使用 Mac</strong>)，如果有誤還請不吝嗇指教。</p>
+<span id="more"></span>
+
+<p>雖然不太了解 <strong>Redis</strong> 是什麼，但是還是要餵狗( <strong>google</strong> )一下。<strong>REmote DIctionary Server(Redis)</strong> 是一個 <strong>key-value</strong> 儲存系統。常常聽到需要大量用到資料庫(<strong>快取 Cache 的時候</strong>)的時候就會透過 <strong>Redis</strong> 來減輕資料庫的壓力。</p>
+<blockquote>
+<p>這邊不過多探討，詳情可以見 <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2016/06/18/redis-introduction/">傳送門</a></p>
+</blockquote>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><strong>安裝方法1：</strong></p>
+<ol>
+<li><p><a href="#a031">Install wget &amp; pecl.</a></p>
+</li>
+<li><p><a href="#f526">Install pear.</a></p>
+</li>
+<li><p><a href="#199a">Install PHPRedis.</a></p>
+</li>
+<li><p><a href="#b905">About php.ini.</a></p>
+</li>
+</ol>
+<p>✔︎ <strong>安裝方法2( 最後透過此方法安裝完成 )：</strong></p>
+<ol>
+<li><p><a href="#4117">Install PHP-Redis With MAMP</a></p>
+</li>
+<li><p><a href="#4c39">關於 Cannot find config.m4 錯誤</a></p>
+</li>
+</ol>
+<hr>
+<h2 id="Install-wget-pecl"><a href="#Install-wget-pecl" class="headerlink" title="Install wget &amp; pecl"></a>Install wget &amp; pecl</h2><blockquote>
+<p>詳細可參考：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos">How to install wget in macOS? [closed]</a></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2400/1*Il8bOi96ZtUGQTjeUVoG1A.png" alt="Img from https:&#x2F;&#x2F;www.google.com&#x2F;search?biw&#x3D;1868&amp;bih&#x3D;928&amp;tbm&#x3D;isch&amp;sa&#x3D;1&amp;ei&#x3D;sFQoXaSHHcPWhwP346v4Bg&amp;q&#x3D;homebrew&amp;oq&#x3D;homebrew&amp;gs_l&#x3D;img.3..0j0i7i30l2j0i30l7.3393.4872..5048...0.0..0.57.304.6......0....1..gws-wiz-img.......35i39j0i10i24.qZNiJeP4uWY#imgrc&#x3D;jJS8P8NvKE_aiM:"></p>
+<p>因為安裝 <strong>PHP-Redis</strong> 必須透過 <strong>pecl</strong>，所以必須先做一些事前作業，</p>
+<p>首先如果沒有安裝 <strong><a target="_blank" rel="noopener" href="http://brew.sh/">brew</a></strong> 需要先安裝：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>接下來透過 <strong>brew</strong> 來安裝 <strong>wget</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install wget --with-libressl</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*FaA3itv-whYRjL3fNxsTPg.png"></p>
+<p>這時候如果你炸開了，出現警告的話試試看：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install wget</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Now-let’s-install-pear"><a href="#Now-let’s-install-pear" class="headerlink" title="Now let’s install pear"></a>Now let’s install pear</h3><blockquote>
+<p>詳細可參考：<a target="_blank" rel="noopener" href="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/">[教學] Mac 安裝 pecl ，安裝 php extension.</a></p>
+</blockquote>
+<p>首先安裝 <strong>pear</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget [http://pear.php.net/go-pear.phar](http://pear.php.net/go-pear.phar)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*pUcHBQ6TwuRwZf80nMki2g.png" alt="**Success**"></p>
+<p>接下來輸入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -d detect_unicode=0 go-pear.phar</span><br></pre></td></tr></table></figure>
+<p>‘<br>接下來會顯示一些資訊，如果都沒有要輸入就一路 <strong>Enter</strong> 到尾吧！</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*LTIsgzkHBNGxVbvCHBiIOg.png"></p>
+<p>接下來添加環境變數到你的 <strong>.zshrc</strong> 或 <strong>.config</strong> 或 <strong>.bash_profile</strong>：<br><strong>(通常會在 &#x2F;Users&#x2F;$USER&#x2F; )</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ export PATH=$PATH:/Users/zehung/pear/bin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h2 id="注意：添加完成後必須重新啟動-Terminal-或-iTerm！"><a href="#注意：添加完成後必須重新啟動-Terminal-或-iTerm！" class="headerlink" title="注意：添加完成後必須重新啟動 Terminal 或 iTerm！"></a><em>注意：添加完成後必須重新啟動 Terminal 或 iTerm！</em></h2></blockquote>
+<p>現在輸入 <strong>pecl help</strong> 你可以看到一些資訊，代表成功了！</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*8UDGLIKug-AZixbFTzLAkQ.png" alt="**pecl can use now**"></p>
+<hr>
+<h3 id="Install-PHP-Redis"><a href="#Install-PHP-Redis" class="headerlink" title="Install PHP-Redis"></a>Install PHP-Redis</h3><blockquote>
+<p>詳細可參考：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx">Install phpredis MAC OSX</a>.</p>
+</blockquote>
+<p>首先 <strong>Git clone phpredis</strong> 然後進入資料夾內安裝：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone [https://www.github.com/phpredis/phpredis.git](https://www.github.com/phpredis/phpredis.git)</span><br><span class="line">$ cd phpredis</span><br><span class="line">$ phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*OMW5gMlYEAuO1KrsQTWQvA.png" alt="**Install success**"></p>
+<p>接下來添加這面這行到你的 <strong>php.ini</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ extension=redis.so</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2400/1*0nJ43FpUf2wefbxzxb-wZQ.png" alt="Img from [this](https:&#x2F;&#x2F;www.google.com&#x2F;search?tbm&#x3D;isch&amp;source&#x3D;hp&amp;biw&#x3D;1868&amp;bih&#x3D;977&amp;ei&#x3D;U2QoXZEpjuzzBazWg-AM&amp;q&#x3D;php&amp;oq&#x3D;php&amp;gs_l&#x3D;img.3..35i39l2j0l8.1450.2194..2353...0.0..0.76.252.6......0....1..gws-wiz-img.....0.XGJUGuNsjtg#imgrc&#x3D;XTO7ngnkIubMrM:)."></p>
+<hr>
+<h3 id="關於怎麼找-php-ini"><a href="#關於怎麼找-php-ini" class="headerlink" title="關於怎麼找 php.ini"></a>關於怎麼找 php.ini</h3><p>創建一支 .php 檔案輸入下面程式碼，然後打開它：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>尋找 <strong>Loaded Configuration File</strong> 這行，接下來就可直接打開編輯或是 <strong>vim</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2010/1*gH38dpbk7SweEd_HPDDXSA.png"></p>
+<p>接下來重啟你的php，輸入下列指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew services restart (php@7.1.8) **// 最後php@後面放你的版本**</span><br></pre></td></tr></table></figure>
+
+<p>如果又噴錯，發生下面情形：</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*rokJogPdN0efTcRPtsvcZw.png"></p>
+<p>試試看輸入下面指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o /usr/local/bin/brew-services.rb [https://gist.githubusercontent.com/lwe/766293/raw/75a7907004bbff0eb3b072d1d951be2cfe7e5020/brew-services.rb](https://gist.githubusercontent.com/lwe/766293/raw/75a7907004bbff0eb3b072d1d951be2cfe7e5020/brew-services.rb)</span><br><span class="line"></span><br><span class="line">$ chmod +x /usr/local/bin/brew-services.rb</span><br><span class="line"></span><br><span class="line">$ brew services help</span><br></pre></td></tr></table></figure>
+
+<p>接下來重啟你的 <strong>php</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew services restart php@7.2</span><br><span class="line">$ make test </span><br></pre></td></tr></table></figure>
+
+<p>最後可以輸入指令來檢查有無安裝成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php -r &quot;if (new Redis() == true)&#123; echo \&quot;\r\n OK \r\n\&quot;; &#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Install-PHP-Redis-With-MAMP"><a href="#Install-PHP-Redis-With-MAMP" class="headerlink" title="Install PHP-Redis With MAMP"></a>Install PHP-Redis With MAMP</h2><blockquote>
+<p>MAMP詳細安裝可參考：<a target="_blank" rel="noopener" href="https://progressbar.tw/posts/27">[PHP][Mac] 00. 覺得開發環境設定很麻煩嗎，用MAMP安裝就對了！</a></p>
+</blockquote>
+<blockquote>
+<p>詳細可參考：<a target="_blank" rel="noopener" href="https://kknews.cc/other/pgmymrj.html">在MAC版MAMP環境下為PHP7.x安裝redis擴展的過程</a>.</p>
+</blockquote>
+<blockquote>
+<p>或是這篇：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010298874">MAMP下安装PHP Redis扩展及Redis下载使用</a>.( ✔︎ 我是參考這篇安裝完成的)</p>
+</blockquote>
+<p>事前準備必須先安裝 <strong>Homebrew</strong>，直接輸入下方指令安裝：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="讓我們騰雲駕霧吧"><a href="#讓我們騰雲駕霧吧" class="headerlink" title="讓我們騰雲駕霧吧"></a>讓我們騰雲駕霧吧</h3><p>首先必須先對 <strong>PHP</strong> 進行配置，我們先下載 <strong>PHP</strong> 源碼 (依你的版本 盡量是 .tar 格式 網址在下方傳送門)，然後放置你版本的資料夾：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /Applications/MAMP/bin/php/php(你的版本)／include/php</span><br></pre></td></tr></table></figure>
+
+<p><strong>記得路徑不一定是絕對的，要找到自己的 MAMP 資料夾後再去找你的版本號，<a target="_blank" rel="noopener" href="https://www.php.net/downloads.php">源碼下載傳送門</a>，如果找不到可以試著使用下面一行的指令(記得要安裝上方的 wget 哦！)。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O php-版本號.tar.gz http://us.php.net/get/php-5.5.14.tar.gz/from/this/mirror</span><br></pre></td></tr></table></figure>
+
+<p>然後輸入 <strong>.&#x2F;configure</strong> 安裝，成功會出現下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*IrRmQfOKL0Zr_b-OwwboDw.png"></p>
+<p>如果失敗的話可以參考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/24987305/php-configure-error-please-specify-the-install-prefix-of-iconv-with-with-icon">傳送門</a> 並執行下面這兩個：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew install homebrew/core/libiconv</span><br><span class="line"></span><br><span class="line">$ ./configure --with-iconv=$(brew --prefix libiconv)</span><br></pre></td></tr></table></figure>
+
+<p>然後在 <strong>&#x2F;Applications&#x2F;MAMP&#x2F;bin&#x2F;php&#x2F;php( 你的版本 )&#x2F;include&#x2F;php</strong> 這個資料夾下 <strong>Git Clone PHP-Redis( <a target="_blank" rel="noopener" href="https://github.com/phpredis/phpredis">傳送門</a> )</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone [https://github.com/phpredis/phpredis.git](https://github.com/phpredis/phpredis.git)</span><br></pre></td></tr></table></figure>
+
+<p>先進入 clone 下來的 PHP-Redis</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd phpredis</span><br></pre></td></tr></table></figure>
+
+<p>接著輸入( <strong>路徑滿重要的 錯誤可能要自己抓一下 踩了好久的坑</strong> )：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /Applications/MAMP/bin/php/php(你的版本)/bin/phpize</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*goGLDtSmUJdgo2QDGWjkYQ.png" alt="成功畫面"></p>
+<p>再接著輸入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --with-php-config=/Applications/MAMP/bin/php/php(你的版本)/bin/php-config</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*VcRar6MdvqJgl78KT92DOg.png"></p>
+<p>最後輸入 <strong>make</strong>， 成功會看見下圖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*D2Bzvdu_clpLZoRVNULP8g.png"></p>
+<h3 id="重要步驟注意！！"><a href="#重要步驟注意！！" class="headerlink" title="重要步驟注意！！"></a>重要步驟注意！！</h3><p>成功後你的資料夾會多一個 <strong>module</strong>，這時候進到裡面複製 redis.so 的執行程式，然後丟掉 <strong>applications&#x2F;MAMP&#x2F;bin&#x2F;php&#x2F;php版本號&#x2F;lib&#x2F;php&#x2F;extensions&#x2F;no-debug-non-zts-一串數字</strong> 下面，路徑自己要看一下。</p>
+<p>最後的最後我們只需要把 <strong>extension</strong> 加上你所使用的 <strong>php.ini</strong> 即可，現在你可以 <strong>cd</strong> 進入 <strong>module</strong> 然後 <strong>ls</strong> 看看有沒有 <strong>redis.so</strong> 的檔案，然後打開你的 <strong>MAMP</strong> 再你所使用 <strong>PHP</strong> 版本的 <strong>php.ini</strong>最後加上  <strong>extension</strong> 即可完成。</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*O9hXyzxXQsHolXcjykbZ2A.png" alt="選擇你的版本號"></p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*FKchfNBz_iMU5ry25sLAQw.png" alt="添加上你的 redis.so 檔案路徑"></p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*QvHMGwn3I57AOv4Sc_t-cQ.png" alt="系統如果沒有提示你重開必須自己手動重啟"></p>
+<h3 id="大功告成啦"><a href="#大功告成啦" class="headerlink" title="大功告成啦"></a>大功告成啦</h3><p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*HSE9M6S51E3_w7fqaZl_bg.png" alt="Finally finished"></p>
+<blockquote>
+<p><em>如果無法成功，記得把上方剛剛最後要輸入路徑的 <strong>redis.so</strong> 那個地方改為 <strong>extension &#x3D; redis.so;</strong> 即可。</em></p>
+</blockquote>
+<hr>
+<h3 id="關於-Cannot-find-config-m4-錯誤"><a href="#關於-Cannot-find-config-m4-錯誤" class="headerlink" title="關於 Cannot find config.m4 錯誤"></a>關於 Cannot find config.m4 錯誤</h3><p>如果看見這個錯誤(詳情 <a target="_blank" rel="noopener" href="https://www.fujieace.com/php/php-extensions/config-m4.html">傳送門</a>)</p>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*MgytsLeSJETtZrDSQJ2Vog.png"></p>
+<p>這是因為你所在的路徑錯誤，或是沒有找到 <strong>config.m4</strong> 這個檔案。首先進入你  <strong>MAMP</strong> 所用的那個 <strong>PHP</strong>的版本資料夾，進入下面的位子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd /Applications/MAMP/bin/php/php(你的版本)/include/php/ext/zlib</span><br></pre></td></tr></table></figure>
+
+<p>再次執行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /Applications/MAMP/bin/php/php(你的版本)/bin/phpize</span><br></pre></td></tr></table></figure>
+
+<p>如果再度噴錯代表可能檔案名稱不對，更改檔案名稱即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mv config0.m4 config.m4</span><br></pre></td></tr></table></figure>
+
+<p>然後再次執行一次下列程式碼，接著會看到下一張圖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /Applications/MAMP/bin/php/php(你的版本)/include/php/ext/zlib</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*9citlEk_EugjaPVsOYbuDA.png" alt="成功了"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>因為本機安裝一直無法成功，後來改用 <strong>MAMP PRO</strong> 終於安裝成功，一直卡住噴錯的人也可以試試，以上僅供參考，寫成小筆記來記錄之後自己比較不會忘記。因為對後端非常之不熟，有任何疑慮都可以餵狗( <strong>google</strong> )，或是留個言，感謝各位大大指教。</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33886917/how-to-install-wget-in-macos">How to install wget in macOS? [closed]</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.caesarchi.com/2012/03/17/-e6-95-99-e5-ad-b8-mac--e5-ae-89-e8-a3-9d-pecl--ef-bc-8c-e5-ae-89-e8-a3-9d-php-extension/">[教學] Mac 安裝 pecl ，安裝 php extension.</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/51908004/install-phpredis-mac-osx">Install phpredis MAC OSX</a>.</li>
+<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2016/06/18/redis-introduction/">資料庫的好夥伴:Redis</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+              <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/25/20190625/" rel="prev" title="[Hero Of UnderGround 地下城] — 12F Puzzle 拼圖">
+      <i class="fa fa-chevron-left"></i> [Hero Of UnderGround 地下城] — 12F Puzzle 拼圖
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/08/20/20190820/" rel="next" title="[Tool Note] — 關於爬蟲">
+      [Tool Note] — 關於爬蟲 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-wget-pecl"><span class="nav-number">3.</span> <span class="nav-text">Install wget &amp; pecl</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Now-let%E2%80%99s-install-pear"><span class="nav-number">3.1.</span> <span class="nav-text">Now let’s install pear</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%AE%8C%E6%88%90%E5%BE%8C%E5%BF%85%E9%A0%88%E9%87%8D%E6%96%B0%E5%95%9F%E5%8B%95-Terminal-%E6%88%96-iTerm%EF%BC%81"><span class="nav-number">4.</span> <span class="nav-text">注意：添加完成後必須重新啟動 Terminal 或 iTerm！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-PHP-Redis"><span class="nav-number">4.1.</span> <span class="nav-text">Install PHP-Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E6%80%8E%E9%BA%BC%E6%89%BE-php-ini"><span class="nav-number">4.2.</span> <span class="nav-text">關於怎麼找 php.ini</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-PHP-Redis-With-MAMP"><span class="nav-number">5.</span> <span class="nav-text">Install PHP-Redis With MAMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%93%E6%88%91%E5%80%91%E9%A8%B0%E9%9B%B2%E9%A7%95%E9%9C%A7%E5%90%A7"><span class="nav-number">5.1.</span> <span class="nav-text">讓我們騰雲駕霧吧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%AD%A5%E9%A9%9F%E6%B3%A8%E6%84%8F%EF%BC%81%EF%BC%81"><span class="nav-number">5.2.</span> <span class="nav-text">重要步驟注意！！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90%E5%95%A6"><span class="nav-number">5.3.</span> <span class="nav-text">大功告成啦</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-Cannot-find-config-m4-%E9%8C%AF%E8%AA%A4"><span class="nav-number">5.4.</span> <span class="nav-text">關於 Cannot find config.m4 錯誤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">6.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">7.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2019/07/14/20190714/",
+      identifier: "2019/07/14/20190714/",
+      title     : "[PHP Note] — 關於 php-Redis install on Mac OSX",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

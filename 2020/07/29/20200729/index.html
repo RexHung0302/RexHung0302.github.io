@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言結束八週切版直播版，接著 六角學院 開了一門關於 JavaScript(下稱JS) 的新課程。 雖然筆者沒有報名參加，但是 六角學院 為了銜接上課程舉辦了為期 60天的 JS 學徒試煉。 這篇文章將紀錄 60天的練習，自己也會出一些新的題目，有興趣的朋友們也可以試著解題，或是在下方留言一起討論。 這篇文章將會記錄第 31 天 - 60 天 的練習。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/07/29/20200729/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言結束八週切版直播版，接著 六角學院 開了一門關於 JavaScript(下稱JS) 的新課程。 雖然筆者沒有報名參加，但是 六角學院 為了銜接上課程舉辦了為期 60天的 JS 學徒試煉。 這篇文章將紀錄 60天的練習，自己也會出一些新的題目，有興趣的朋友們也可以試著解題，或是在下方留言一起討論。 這篇文章將會記錄第 31 天 - 60 天 的練習。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-07-28T16:00:01.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.796Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/07/29/20200729/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/07/29/20200729/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-07-29 00:00:01" itemprop="dateCreated datePublished" datetime="2020-07-29T00:00:01+08:00">2020-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>12k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>11 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200607/JS60.png" alt="60天特訓"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>結束八週切版直播版，接著 <strong>六角學院</strong> 開了一門關於 <strong>JavaScript(下稱JS)</strong> 的新課程。</p>
+<p>雖然筆者沒有報名參加，但是 <strong>六角學院</strong> 為了銜接上課程舉辦了為期 <strong>60天的 JS 學徒試煉</strong>。</p>
+<p>這篇文章將紀錄 <strong>60天的練習</strong>，自己也會出一些新的題目，有興趣的朋友們也可以試著解題，或是在下方留言一起討論。</p>
+<p>這篇文章將會記錄第 <strong>31 天 - 60 天</strong> 的練習。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>每天早上校長會出一題關於 <strong>JS</strong> 的題目，這邊將會記錄下來自己的解題過程，自己也可能會提出新的題目，有解出題目答案或是不了解也可以在下方留言一起討論，如果題目出得不好也請各路大神手下留情。</p>
+<ul>
+<li><a href="#Day31">Day-31</a></li>
+<li><a href="#Day32">Day-32</a></li>
+<li><a href="#Day33">Day-33</a></li>
+<li><a href="#Day34">Day-34</a></li>
+<li><a href="#Day35">Day-35</a></li>
+<li><a href="#Day36">Day-36</a></li>
+<li><a href="#Day37">Day-37</a></li>
+<li><a href="#Day38">Day-38</a></li>
+<li><a href="#Day39">Day-39</a></li>
+<li><a href="#Day40">Day-40</a></li>
+<li><a href="#Day41">Day-41</a></li>
+<li><a href="#Day42">Day-42</a></li>
+<li><a href="#Day43">Day-43</a></li>
+<li><a href="#Day44">Day-44</a></li>
+<li><a href="#Day45">Day-45</a></li>
+<li><a href="#Day46">Day-46</a></li>
+<li><a href="#Day47">Day-47</a></li>
+<li><a href="#Day48">Day-48</a></li>
+<li><a href="#Day49">Day-49</a></li>
+<li><a href="#Day50">Day-50</a></li>
+<li><a href="#Day51">Day-51</a></li>
+<li><a href="#Day52">Day-52</a></li>
+<li><a href="#Day53">Day-53 ~ Day-60</a></li>
+</ul>
+<hr>
+<h2 id="每日題目"><a href="#每日題目" class="headerlink" title="每日題目"></a>每日題目</h2><h3 id="Day31"><a href="#Day31" class="headerlink" title="Day31"></a>Day31</h3><p>第三十一天六角的題目為：</p>
+<p>今天為感謝日，必須在 <strong>Slack</strong> 上觀看一個同學的部落格，並且寫上心得。</p>
+<p>第三十一天六角的題目解答為：</p>
+<p>雖然之前有碰過 <strong>JS</strong> 但是其實很多地方沒有很熟悉，真的開始做題目才發現很多地方自己並不是很了解。像是昨日的 <strong>C3.js</strong> 就很生手，還好同學有寫一篇 <a target="_blank" rel="noopener" href="https://hsuchihting.github.io/javascript/20200715/3292510004/">提姆寫程式(TimCodingBlog) - JS 筆記 - C3.js 基本認識</a>，這讓我想到之前開始寫部落格的初衷，記錄自己的成長過程，並且幫助其他人，就像六角校長說的「<strong>永遠都會有比你弱的人</strong>」，可能剛好那個人也正在跟妳找一樣的問題點，一個人的進步肯定會慢過一群人一起進步！</p>
+<blockquote>
+<p>解題關鍵：如同賈伯斯說的「<strong>Stay hungry. Stay foolish</strong>」。</p>
+</blockquote>
+<h3 id="Day32"><a href="#Day32" class="headerlink" title="Day32"></a>Day32</h3><p>第三十二天六角的題目為：</p>
+<p>結合之前練習的列表渲染，把三十天的圖表一起渲染到畫面上吧！</p>
+<p>第三十二天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第三十二天練習" src="https://codepen.io/rexhung0302/embed/rNxoEed?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/rNxoEed'>JS學徒特訓班 - 第三十二天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：今日也算是複習日！</p>
+</blockquote>
+<h3 id="Day33"><a href="#Day33" class="headerlink" title="Day33"></a>Day33</h3><p>第三十三天六角的題目為：</p>
+<p>今日需要將之前拿到的 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hexschool/hexschoolNewbieJS/master/data.json">API</a> 改為<a target="_blank" rel="noopener" href="https://c3js.org/samples/chart_pie.html">圓餅圖</a>！</p>
+<p>第三十三天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第三十三天練習" src="https://codepen.io/rexhung0302/embed/xxZMOXm?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/xxZMOXm'>JS學徒特訓班 - 第三十三天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：今天一樣照著官方指南手，有些小地方要注意，像是之前用到的 <a href="#Axis(%E8%BB%B8)">Axis(軸)</a> 這裡就不能用，然後 <strong>types</strong> 也會變成 <strong>type</strong>，這就是用套件要注意的地方，必須跟著對方的方式走。而 <strong>圓餅圖</strong> 也可以加入 <code>onclick()</code>、<code>onmouseover()</code>、<code>onmouseout()</code>，<strong>C3.js</strong> 真的很強大呀！ </p>
+</blockquote>
+<h3 id="Day34"><a href="#Day34" class="headerlink" title="Day34"></a>Day34</h3><p>第三十四天六角的題目為：</p>
+<p>今日一樣需要將之前拿到的 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hexschool/hexschoolNewbieJS/master/data.json">API</a> 處理後判斷名稱大於六個字及小於的人，然後用圓餅圖表示出來。</p>
+<p>第三十四天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第三十四天練習" src="https://codepen.io/rexhung0302/embed/dyGarva?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/dyGarva'>JS學徒特訓班 - 第三十四天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：因為名稱會有 <strong>中文</strong> 及 <strong>英文</strong>，這邊有兩種方法，一種為使用 <code>String.prototype.charCodeAt()</code>，參考文章為 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43437571/article/details/106088271">https://blog.csdn.net/qq_43437571&#x2F;article&#x2F;details&#x2F;106088271</a>，判斷字元是否超過 <strong>255</strong>，缺點為需要跑迴圈每個字拆開；另外有種方法比較簡單，為 <strong>正則表達式</strong>，不需要拆開判斷，只需要用 <code>replace</code> 即可，參考文章為 <a target="_blank" rel="noopener" href="https://blog.xuite.net/revia.yeh/projects/9591895-%E5%88%A4%E6%96%B7%E4%B8%AD%E8%8B%B1%E6%96%87%E5%AD%97%E4%B8%B2%E7%9A%84%E9%95%B7%E5%BA%A6">判斷中英文字串的長度</a>，方法如下<a href="#%E8%A8%BB1">註1</a>。</p>
+</blockquote>
+<h4 id="註1"><a href="#註1" class="headerlink" title="註1"></a>註1</h4><p>判斷中英文方法為下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getlengthb</span>(<span class="params">str</span>)&#123;</span><br><span class="line">     <span class="keyword">return</span> str.<span class="title function_">replace</span>(<span class="regexp">/[^\x00-\xff]/g</span>,<span class="string">&quot;**&quot;</span>).<span class="property">length</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Day35"><a href="#Day35" class="headerlink" title="Day35"></a>Day35</h3><p>第三十五天六角的題目為：</p>
+<p>今日需要將之前拿到的 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hexschool/hexschoolNewbieJS/master/data.json">API</a> 處理之後帶入圖表之中。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;chart&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;chart2&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.min.css&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha512-cznfNokevSG7QPA5dZepud8taylLdvgr0lDqw/FEZIhluFsSwyvS81CMnRdrNSKwbsmc43LtRd2/WMQV+Z85AQ==&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.min.js&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha512-bW79RVtvrrTS2QzmDsJeh62Nt4b/RjYlYvi2iEmkXPhzzbXMx69JT/zHgiGcL1Tk5nkLMTF6xkEUuynTkdC9PQ==&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> chart = c3.<span class="title function_">generate</span>(&#123;</span><br><span class="line">  <span class="attr">bindto</span>: <span class="string">&#x27;#chart&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="comment">// iris data from R</span></span><br><span class="line">        <span class="attr">columns</span>: [</span><br><span class="line">            [<span class="string">&#x27;完課率0~20%&#x27;</span>, <span class="number">70</span>],</span><br><span class="line">            [<span class="string">&#x27;完課率21~49%&#x27;</span>, <span class="number">50</span>],</span><br><span class="line">          [<span class="string">&#x27;完課率50%以上&#x27;</span>, <span class="number">30</span>],</span><br><span class="line">        ],</span><br><span class="line">        type : <span class="string">&#x27;pie&#x27;</span>,</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> chart2 = c3.<span class="title function_">generate</span>(&#123;</span><br><span class="line">  <span class="attr">bindto</span>: <span class="string">&#x27;#chart2&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">columns</span>: [</span><br><span class="line">            [<span class="string">&#x27;完課率0~20%&#x27;</span>, <span class="number">70</span>],</span><br><span class="line">            [<span class="string">&#x27;完課率21~49%&#x27;</span>, <span class="number">50</span>],</span><br><span class="line">          [<span class="string">&#x27;完課率50%以上&#x27;</span>, <span class="number">50</span>],</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">bar</span>: &#123;</span><br><span class="line">        <span class="attr">width</span>: &#123;</span><br><span class="line">            <span class="attr">ratio</span>: <span class="number">0.5</span> <span class="comment">// this makes bar width 50% of length between ticks</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// or</span></span><br><span class="line">        <span class="comment">//width: 100 // this makes bar width 100px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>第三十五天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第三十五天練習" src="https://codepen.io/rexhung0302/embed/XWXGgPq?height=265&theme-id=dark&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/XWXGgPq'>JS學徒特訓班 - 第三十五天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：這邊一樣取得 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/hexschool/hexschoolNewbieJS/master/data.json">API</a> 之後跑迴圈處理資料，在帶入圖表之中。</p>
+</blockquote>
+<h3 id="Day36"><a href="#Day36" class="headerlink" title="Day36"></a>Day36</h3><p>第三十六天六角的題目為：</p>
+<p>今日必須將原本第 <a href="#Day20">Day-20</a> 的內容改為字串模板，如果原本就已經使用的話就找一樣 <strong>ES6</strong> 沒學過或用過的東西來學習。</p>
+<p>第三十六天六角的題目解答為：</p>
+<p>這次學習的為 <strong>fetch</strong>，以前都是使用 <strong>axios</strong> 直接打 <strong>API</strong>，但沒想到 <strong>ES6</strong> 提供了這個方法，但其實這個用法還是有缺點的，比如說會把 400、500 都當成成功的請求，沒辦法監測請求的進度，但原生的 <strong>XHR</strong> 是可以的。</p>
+<blockquote>
+<p>解題關鍵：ES6 雖然語法糖很多，但其實實際瞭解又是另一回事，實際能用的上又再度是另一回事，不管 <strong>ES6 ES7 ES8</strong> 都是要不段的精益求精。</p>
+</blockquote>
+<h3 id="Day37"><a href="#Day37" class="headerlink" title="Day37"></a>Day37</h3><p>第三十七天六角的題目為：</p>
+<p>在往後將會更多的使用 <code>let</code>、<code>const</code>，並且盡少使用 <code>var</code>，今天將會複習一下關於這三個的差異。</p>
+<p>第三十七天六角的題目解答為：</p>
+<p>其實剛學 <strong>JS</strong> 的時候，就有朋友丟 <strong>ES6</strong> 給我看過，想當然自己當初是超級小菜雞，根本什麼都不懂，所以又過了一陣子(經過<strong>六角勇者地下城</strong>的洗禮)才又回來摸一下 <strong>ES6</strong>。這時候對 <strong>JS</strong> 已經有一些概念了，所以有些地方就明白為什麼不用 <code>var</code>。</p>
+<p>在 <strong>ES6</strong> 之前其實 <strong>JS</strong> 並沒有 <strong>區塊(Block)</strong> 的概念，所以常常會有全域變數被污染的事情發生，比方說下面例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;王小明&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...掠過千百行 JS</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">&#x27;王大錘&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name); <span class="comment">// &#x27;王大錘&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>雖然 <code>var</code> 會被全域污染，但要記得 <code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，下面再畫一張圖好理解：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200607/Day37.png" alt="關於 var 的奧秘"></p>
+<p>圖上可以很清楚看到有 <strong>三個紅色的 var</strong>，<code>var</code> 在 <code>function</code> 的區域也是一層一層的(<strong>function scope</strong>)，所以三個 <code>console.log()</code> 分別為 <strong>1.王大錘 2.王小明 3.陳小王</strong>。</p>
+<p>上述舉了一個簡單的例子，可能剛開始我們定義好 <strong>全域變數</strong>，但在我們寫了幾百幾千行 <strong>JS</strong> 之後可能早已經忘了取過什麼變數了(沒有使用 <strong>前端開發工具</strong>、<strong>前端框架</strong> 的情況下單支 <strong>JS</strong> 都會露露長)，然後可能中途某個 <strong>function</strong> 你就這麼剛好的重複使用了這個變數，這時候全域變數就會被污染。</p>
+<p>然而 <code>ES6</code> 的 <code>let</code> 出現拯救了這個問題(雖然同時也會有缺點，後面會提到)，<code>let</code> 屬於 <strong>區塊(Block)</strong>，它並不會依附在 <strong>window</strong> 上，所以下述情況會發生：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name_one = <span class="string">&#x27;王小明&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name_one); <span class="comment">// &#x27;王小明&#x27;</span></span><br><span class="line"><span class="keyword">let</span> name_two = <span class="string">&#x27;王大錘&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name_two); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>再來 <code>const</code> 比較簡單，和 <code>let</code> 一樣都是屬於區塊內宣告，不會污染到全域，但 <code>const</code> 最大的用處就是在你只能宣告一次，然後不能更改裡面得值，這個會常用在 <code>const api_url = &#39;https://xxx/xxx/&#39;</code>、<code>const win_score = &#39;60&#39;</code>…等等，一旦宣告後面不能再改變，嘗試複寫會出現 <strong>Uncaught TypeError: Assignment to constant variable.</strong>。</p>
+<p>最後的最後要來提一下 <code>let</code> 和 <code>const</code> 的缺點，這個缺點可是讓我吃了幾次虧…就是 <strong>舊手機不支援</strong> 啦！但還好透過 <strong>Gulp</strong> 或是 <strong>Babel</strong> 編譯後可以拯救，如果你不知道怎麼拯救，可以看這篇文章 <a href="https://rexhung0302.github.io/2020/03/21/20200321/">[Tool Notes] — 關於Webpack #2 - Babel？</a>，當時也是採了許多次坑，然後開始研究 <code>Babel</code>，亦或是可以參考這篇 <a href="https://rexhung0302.github.io/2020/05/06/20200506/">[Tool Notes] — 關於Gulp</a>。</p>
+<blockquote>
+<p>解題關鍵：<strong>子曰：「學而不思則罔，思而不學則殆。」</strong>，在每次的採坑每次的學習之後還是需要重複思考下次該如何應對，熟能生巧，是寫程式的不二法門！</p>
+</blockquote>
+<h3 id="Day38"><a href="#Day38" class="headerlink" title="Day38"></a>Day38</h3><p>第三十八天六角的題目為：</p>
+<p>試著解開 <code>let</code> 與 <code>const</code> 的相關題目。</p>
+<ol>
+<li>請問下面會出現的 console 是？</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">//ReferenceError</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>會出現 <code>ReferenceError</code> 而不是 <code>undefined</code>，這邊可以看看這篇文章 <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2018/11/10/javascript-hoisting/">我知道你懂 hoisting，可是你了解到多深？</a></p>
+</blockquote>
+<ol start="2">
+<li>以下是否會正常執行？若不會，會顯示什麼紅字錯誤？</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">a=<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c = <span class="number">3</span>;</span><br><span class="line">c=<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>此為熱門面試題目</li>
+</ol>
+<p>請問 var、let、const 的區別是？</p>
+<p>第三十八天六角的題目解答為：</p>
+<ol>
+<li><p><code>Uncaught ReferenceError: a is not defined</code></p>
+</li>
+<li></li>
+<li><p>會正常執行、不會有紅字錯誤。</p>
+</li>
+<li><p>不能正常執行，有重複宣告、會出現 <code>Uncaught SyntaxError: Identifier &#39;b&#39; has already been declared</code>。</p>
+</li>
+<li><p>不能正常執行，<code>const</code> 只能宣告一次，並且無法在改值、會出現 <code>Uncaught TypeError: Assignment to constant variable.</code>。</p>
+</li>
+</ol>
+<blockquote>
+<p>解題關鍵：當現今瀏覽器支援度越來越高的時候，盡量棄用 <code>var</code>，如果不知道怎麼分別，記得一個原則，要在最外層 <code>window</code> 宣告的變數，就用 <code>var</code>， <strong>區塊(Block)</strong> 內的就改用 <code>let</code> 避免全域污染，而只會拿來宣告不會改值的，就一定要用 <code>const</code>，避免不知情的狀況下被改值了，以下會有個簡單範例(如範例有誤，還請不吝社指出，感激不盡)。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">&#x27;一中夜市&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> open_time = <span class="string">&#x27;17:00&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> end_time = <span class="string">&#x27;24:00&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">storeDetail</span>(<span class="params">store</span>) &#123;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;title&#x27;</span>).<span class="property">innerHTML</span> = <span class="string">`&lt;span&gt;「<span class="subst">$&#123;name&#125;</span>」有許多的攤販，營業時間大部分為 <span class="subst">$&#123;open_time&#125;</span> - <span class="subst">$&#123;end_time&#125;</span>。&lt;/span&gt;`</span>;</span><br><span class="line">  store.<span class="title function_">forEach</span>(<span class="function">(<span class="params">i, k</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> temp;</span><br><span class="line">    temp = <span class="string">`&lt;li&gt;攤販 <span class="subst">$&#123; k + <span class="number">1</span> &#125;</span> 為 <span class="subst">$&#123;i&#125;</span>&lt;/li&gt;`</span></span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ul&#x27;</span>).<span class="title function_">insertAdjacentHTML</span>(<span class="string">&#x27;beforeend&#x27;</span>, temp);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Day39"><a href="#Day39" class="headerlink" title="Day39"></a>Day39</h3><p>第三十九天六角的題目為：</p>
+<p>假使你已經會箭頭函式，請分享 <strong>箭頭函式(arrow function)</strong> 會如何影響到 <strong>This</strong>。</p>
+<p>第三十九天六角的題目解答為：</p>
+<p>因為之前在上 <strong>JS核心篇</strong> 有寫到一篇關於 <strong>This</strong> 的文章，這次趁補充 <strong>ES6 箭頭函式(arrow function)</strong> 的相關知識回去補足它了。</p>
+<p>文章在此處 <a href="https://rexhung0302.github.io/2019/10/28/20191028/">[JavaScript Notes] — 淺談 JavaScript #4</a>，有興趣也可以參考該系列其他篇章，如有誤還請各位手下留情。</p>
+<h3 id="Day40"><a href="#Day40" class="headerlink" title="Day40"></a>Day40</h3><p>第四十天六角的題目為：</p>
+<p>改寫之前第 <strong>Day20</strong> 及 <strong>Day35</strong> 的程式碼，需改為 <strong>ES6</strong> 寫法。</p>
+<p>第四十天六角的題目解答為：</p>
+<p>之前已經使用 <strong>ES6</strong> 寫法，所以這邊就再度複習一次囉。</p>
+<p>傳送門：<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/RwrjeqX">20關</a>、<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/XWXGgPq">35關</a></p>
+<h3 id="Day41"><a href="#Day41" class="headerlink" title="Day41"></a>Day41</h3><p>第四十一天六角的題目為：</p>
+<p><code>new Date()</code> 時間處理</p>
+<p>第四十一天六角的題目解答為：</p>
+<p>我們最常使用的建立時間物件應該就屬 <code>new Date()</code> 莫屬，而裡面也可以帶上參數，像是 <code>new Date(value)</code>。</p>
+<p>關於時間一文可參考我的第一篇部落格文章 <a href="https://rexhung0302.github.io/2019/03/05/20190305/">[Hero Of UnderGround 地下城] — 4F World Clock 各國時區</a>。</p>
+<h3 id="Day42"><a href="#Day42" class="headerlink" title="Day42"></a>Day42</h3><p>第四十二天六角的題目為：</p>
+<p>請用你學會的語法，取出今日時間，並依序組出以下字串</p>
+<p>假設今天時間為 8&#x2F;5，則需透過 <code>new Date()</code> 處理後，印出以下資料</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 目前時間是 2020/8/5 14:20 </span><br><span class="line">// 2020/08/05</span><br><span class="line">// 2020-08-05</span><br><span class="line">// 今天是禮拜五</span><br><span class="line">// 今天是八月五日，時間為 14:20</span><br></pre></td></tr></table></figure>
+
+<p>第四十二天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第四十二天練習" src="https://codepen.io/rexhung0302/embed/KKzpWbY?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/KKzpWbY'>JS學徒特訓班 - 第四十二天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<p>這邊起手式一樣為 <code>new Date()</code> 然後再利用各種 <strong>API</strong> 去取的時間，但要記得幾個小陷阱，比如 <strong>月份會從 0 開始</strong>，時間因為地區會有所不同…等等。</p>
+<blockquote>
+<p>善用字串模板可以將小於 10 的分鐘或秒數加上一個 0，會更美觀。</p>
+</blockquote>
+<h3 id="Day43"><a href="#Day43" class="headerlink" title="Day43"></a>Day43</h3><p>第四十三天六角的題目為：</p>
+<p>學習使用 <strong>Github Page</strong></p>
+<p>第四十三天六角的題目解答為：</p>
+<p>之前專案都是傳 <strong>Github</strong> 這邊不再贅述。</p>
+<h3 id="Day44"><a href="#Day44" class="headerlink" title="Day44"></a>Day44</h3><p>第四十四天六角的題目為：</p>
+<p>了解 window.location 類別的功能，例如轉址、取得網址參數等等，並分享你學的東西與範例程式碼。</p>
+<p>第四十四天六角的題目解答為：</p>
+<p><a href="https://rexhung0302.github.io/2020/08/11/20200811/#more">[JavaScript Notes] — 關於 Url 轉址及 取得參數</a></p>
+<h3 id="Day45"><a href="#Day45" class="headerlink" title="Day45"></a>Day45</h3><h3 id="Day46"><a href="#Day46" class="headerlink" title="Day46"></a>Day46</h3><p>第四十五及四十六天六角的題目為：</p>
+<p>45 天題目 - 以下有兩顆按鈕，請使用 <strong>JavaScript</strong> 語法，操控點擊後，能夠轉址到對應網站去</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;google&quot;</span>&gt;</span>連到 Google<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;yahoo&quot;</span>&gt;</span>連到 Yahoo<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>46-1 天題目 - 以下有兩顆按鈕，是部落格推薦連結，請抓取 <strong>data-id</strong> 的值後進行轉址：</p>
+<p>點擊 Tom 時，網址為 <a target="_blank" rel="noopener" href="https://www.hexschool.com/?recommend=tom">https://www.hexschool.com/?recommend=tom</a></p>
+<p>點擊 John 時，網址為 <a target="_blank" rel="noopener" href="https://www.hexschool.com/?recommend=John">https://www.hexschool.com/?recommend=John</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;button class=&quot;google_2&quot; data-id=&quot;tom&quot;&gt;Tom 推薦六角學院&lt;/button&gt;</span><br><span class="line">&lt;button class=&quot;yahoo_2&quot; data-id=&quot;John&quot;&gt;John 推薦六角學院&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>46-2 天題目 - 如果網址規則是<a target="_blank" rel="noopener" href="https://www.hexschool.com/?recommend=%22%E5%80%BC%22%EF%BC%8C%E8%A9%B2%E5%A6%82%E4%BD%95%E5%8F%96%E5%87%BA">https://www.hexschool.com/?recommend=&quot;值&quot;，該如何取出</a> recommend 的值？</p>
+<p>第四十五天及四十六天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第四十五、四十六天練習" src="https://codepen.io/rexhung0302/embed/dyMGyVQ?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/dyMGyVQ'>JS學徒特訓班 - 第四十五、四十六天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>解題關鍵：雖然 <strong>Codepen</strong> 抓不到網址，還是暫時用 <strong>Codepen</strong> 練習。四十五天的題目跟四十六天其實很相像，插在一個要另外傳參數，而我們秉持的原則就是會想兩個以上類似的 <strong>function</strong> 就把他們合再一起。而四十六天第二個題目在前一天的文章有提到 <a href="https://rexhung0302.github.io/2020/08/11/20200811/#more">[JavaScript Notes] — 關於 Url 轉址及 取得參數</a>。</p>
+</blockquote>
+<h3 id="Day47"><a href="#Day47" class="headerlink" title="Day47"></a>Day47</h3><h3 id="Day48"><a href="#Day48" class="headerlink" title="Day48"></a>Day48</h3><p>第四十七及四十八天六角的題目為：</p>
+<p>使用六角提供的 <a target="_blank" rel="noopener" href="https://github.com/hexschool/nodejs_ajax_tutorial#%E8%A8%BB%E5%86%8A">API</a> 練習 <strong>AJAX POST</strong>，並且使用三個範例分別為 <strong>xmlhttprequest、Fetch、axios</strong>，做出 <strong>註冊</strong> 及 <strong>登入</strong> 的版面。</p>
+<p>第四十七及四十八天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第四十七、四十八天練習" src="https://codepen.io/rexhung0302/embed/oNxxZXJ?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/oNxxZXJ'>JS學徒特訓班 - 第四十七、四十八天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<p>之前打 <strong>API</strong> 都是使用 <strong>axios</strong> 居多，趁著這次練習熟悉一下 <strong>xmlhttprequest、Fetch</strong>。</p>
+<p>首先為 <strong>xmlhttprequest</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>(); <span class="comment">// 起手式為 先新增一個 **xmlhttprequest** 方法 </span></span><br><span class="line"></span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;https://hexschool-tutorial.herokuapp.com/api/signup&quot;</span>, <span class="literal">true</span>); <span class="comment">// 然後在開啟一個實例</span></span><br><span class="line"></span><br><span class="line">xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>); <span class="comment">// 接著要設定我們要送什麼個是</span></span><br><span class="line"></span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="string">`email=<span class="subst">$&#123;email&#125;</span>&amp;password=<span class="subst">$&#123;password&#125;</span>`</span>);  <span class="comment">// 我們要送出什麼</span></span><br><span class="line"></span><br><span class="line">xhr.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123; </span><br><span class="line">  <span class="comment">// ... 做什麼</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">responseText</span>)); <span class="comment">// 這邊可以在查看一次剛剛宣告的 xhr 可以拿到一些資訊</span></span><br><span class="line">&#125; <span class="comment">// 這邊為傳送結束後要做什麼事情</span></span><br></pre></td></tr></table></figure>
+
+<p>再來為 <strong>Fetch</strong>(範例取自 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch">MDN</a>)：</p>
+<p>這個要簡單可以用簡單的方法，也可以使用自定義的方法去打 <strong>API</strong>，一般來說最簡單的方法為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;http://example.com/movies.json&#x27;</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response.<span class="title function_">json</span>();</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="keyword">function</span>(<span class="params">myJson</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面這個為簡單的 <strong>get</strong> 傳法，接著如果需要自定義會建議把設定包為一個 <strong>function</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先定義方法</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">postData</span>(<span class="params">url, data</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetch</span>(url, &#123;</span><br><span class="line">    <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(data), <span class="comment">// must match &#x27;Content-Type&#x27; header</span></span><br><span class="line">    <span class="attr">cache</span>: <span class="string">&#x27;no-cache&#x27;</span>, <span class="comment">// *default, no-cache, reload, force-cache, only-if-cached</span></span><br><span class="line">    <span class="attr">credentials</span>: <span class="string">&#x27;same-origin&#x27;</span>, <span class="comment">// include, same-origin, *omit</span></span><br><span class="line">    <span class="attr">headers</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/4.0 MDN Example&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// *GET, POST, PUT, DELETE, etc.</span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;cors&#x27;</span>, <span class="comment">// no-cors, cors, *same-origin</span></span><br><span class="line">    <span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span>, <span class="comment">// manual, *follow, error</span></span><br><span class="line">    <span class="attr">referrer</span>: <span class="string">&#x27;no-referrer&#x27;</span>, <span class="comment">// *client, no-referrer</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">response</span> =&gt;</span> response.<span class="title function_">json</span>()) <span class="comment">// 輸出成 json，這樣呼叫那邊就能拿到回傳的資訊</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接著呼叫方法</span></span><br><span class="line"><span class="title function_">postData</span>(<span class="string">&#x27;http://example.com/answer&#x27;</span>, &#123;<span class="attr">answer</span>: <span class="number">42</span>&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function"><span class="params">data</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(data)) <span class="comment">// JSON from `response.json()` call</span></span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(error))</span><br></pre></td></tr></table></figure>
+
+<p>這邊要注意，雖然直接使用 <strong>fetch</strong> 像是上方最後的 <code>postData()</code> 禮最後的 <strong>response</strong> 可以拿到回傳結果，但是僅能拿到 <strong><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status">Status Code</a></strong>，你不能知道回傳什麼。</p>
+<p>例如這次的作業，回傳雖然 <strong>200</strong> 是成功，但可能會回傳 <strong>該帳號已被註冊</strong>，所以必須等 <code>response.json()</code> 之後再去看最後拿到什麼。</p>
+<blockquote>
+<p>解題關鍵：練習裡三種方法都有示範，可以使用看看，不過現在有 <strong>axios</strong> 這麼方便的東西，其實有機會我們還是該好好了解一下底層的做法是什麼，因為你可能在實務上不太會有機會碰到了。</p>
+</blockquote>
+<h3 id="Day49"><a href="#Day49" class="headerlink" title="Day49"></a>Day49</h3><h3 id="Day50"><a href="#Day50" class="headerlink" title="Day50"></a>Day50</h3><p>第四十九及五十天六角的題目為：</p>
+<p>修改題目的 <strong>API</strong> 設定，因為沒有帶入 <strong>Token</strong> 所以無法打成功，這邊需要到 <strong><a target="_blank" rel="noopener" href="https://challenge.thef2e.com/news/17">The F2E</a></strong> 申請一組 <strong>Token</strong>。</p>
+<p>第四十九及五十天六角的題目解答為：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="JS學徒特訓班 - 第四十九、五十天練習" src="https://codepen.io/rexhung0302/embed/MWyeKWJ?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/MWyeKWJ'>JS學徒特訓班 - 第四十九、五十天練習</a> by RexHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<p>看到 <strong><a target="_blank" rel="noopener" href="https://challenge.thef2e.com/news/17">The F2E</a></strong> 真的好懷念，去年最後一關時車禍了，所以未完賽Ｑ。</p>
+<p>這次打 <strong>API</strong> 需要帶入 <strong>Token</strong>，因為這次使用 <strong>axios</strong> 來打 <strong>API</strong>，所以使用 <strong>axios</strong> 配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">axios.<span class="property">defaults</span>.<span class="property">baseURL</span> = <span class="string">&#x27;https://example.com&#x27;</span>; <span class="comment">// 打 API 網址</span></span><br><span class="line">axios.<span class="property">defaults</span>.<span class="property">headers</span>.<span class="property">common</span>[<span class="string">&#x27;Authorization&#x27;</span>] = <span class="string">`<span class="subst">$&#123;token&#125;</span>`</span>; <span class="comment">// 塞 從F2E拿到的 Token</span></span><br><span class="line">axios.<span class="property">defaults</span>.<span class="property">headers</span>.<span class="property">post</span>[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span>; <span class="comment">// 傳送的格式</span></span><br></pre></td></tr></table></figure>
+
+<p>其實後端需要檢查什麼，可以再另外在前端這邊塞入，這是一種保護的機制，不會讓別人隨意打 <strong>API</strong>。</p>
+<h3 id="Day51"><a href="#Day51" class="headerlink" title="Day51"></a>Day51</h3><h3 id="Day52"><a href="#Day52" class="headerlink" title="Day52"></a>Day52</h3><p>第五十一天及五十二天六角的題目為：</p>
+<ul>
+<li><p>任務一：這頁面需要使用到 <strong>GitHub Pages</strong>，並設計兩頁，一頁是 <strong>index.html</strong> 顯示所有房型，每個房型都會帶 <strong>a</strong> 連結，連結會帶參數，參數請帶每個房型的 <strong>id</strong>。</p>
+</li>
+<li><p>任務二：當點擊連結進入到 <strong>room.html</strong> 後，依照取得的 id 資料，去接 [GET] 單一房型細節，並在該頁顯示該房型細節。例如有無提供各種 <strong>room service</strong>、訂房紀錄等等。</p>
+</li>
+</ul>
+<p>簡單說就是使用 <strong><a target="_blank" rel="noopener" href="https://challenge.thef2e.com/news/17">六角學院＆The F2E API</a></strong> 串接，拿取所有房型後，再設計一個頁面可以顯示所點擊房型的詳細資訊。</p>
+<p>第五十一天及五十二天六角的題目解答為：</p>
+<p>先上 <strong><a href="https://rexhung0302.github.io/Hexschool-ajax-room-practice/index.html">DEMO</a></strong> 及 <strong><a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-ajax-room-practice">Source Code</a></strong></p>
+<p>首先這次使用 <strong>Gulp</strong> 來切頁面，如果還不清楚 <strong>Gulp</strong> 是蝦咪，可以參考筆者之前這篇 <strong><a href="https://rexhung0302.github.io/2020/05/06/20200506/">[Tool Notes] — 關於Gulp</a></strong>，對於前端開發可以省很多力氣，少做許多要重複做的事情，總之推推推！</p>
+<p>接著簡短說一下這次的做法：</p>
+<ol>
+<li><p>最一開始還是要提醒一下，因為這次的 <strong>API</strong> 會檢查 <strong>Token</strong>，所以我們必須拿到可以通過檢查的 <strong>Token</strong>，然後再將 <strong>Token</strong> 塞在 <strong>Headers</strong> 裡面，詳細可參考 <strong><a href="https://rexhung0302.github.io/2020/07/29/20200729/#Day50">49及50天</a></strong>。</p>
+</li>
+<li><p>第一頁 index.html 先把所有房型拿出來並渲染到畫面，這應該沒有太大問題，和 <strong><a href="https://rexhung0302.github.io/2020/07/29/20200729/#Day50">49及50天</a></strong> 一樣，只是在每一個房型點擊跳頁時，需要帶參數在網址上。</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">linkRoomHandler</span>(<span class="params">id</span>) &#123;</span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">location</span> = <span class="string">`./room.html?roomId=<span class="subst">$&#123;id&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>題外話：最近公司剛好在做 <strong>LINE</strong> 的案子，有些資訊剛好需要存在使用者這邊，如果不想要一直去拿資料，刷新網頁也還想保留資料，就可以使用 <strong>LocalStorage</strong>，且情況需求，這次筆者還發現了 <strong>LocalStorage</strong> 雖然是永久儲存直到使用者手動清除或資料清除才會消失，但是我們可以透過給 <strong>LocalStorage</strong> 存進時間，讓資料自動刪除，有興趣可參考 <strong><a target="_blank" rel="noopener" href="https://www.itread01.com/content/1542131109.html">localStorage設定過期時間</a></strong></em></p>
+</blockquote>
+<ol start="2">
+<li>在下一頁剛開始就必須判斷有無帶職進來，這邊因為我們已經確網址帶過來的 <strong>Key</strong> 會是什麼名稱，所以可以使用下列的函式去判斷有無拿到值：</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getUrlVal</span>(<span class="params">val</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> query = <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">search</span>.<span class="title function_">substring</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">var</span> vars = query.<span class="title function_">split</span>(<span class="string">&quot;&amp;&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; vars.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> pair = vars[i].<span class="title function_">split</span>(<span class="string">&quot;=&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span>(pair[<span class="number">0</span>] == val) &#123;</span><br><span class="line">            <span class="keyword">return</span> pair[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">getUrlVal</span>(<span class="string">&#x27;roomId&#x27;</span>); <span class="comment">// 沒有東西會回傳 false</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>接著就可以拿 <strong>roomId</strong> 去打 <strong>API</strong> 拿資料啦！然後就是渲染畫面了。</p>
+</li>
+<li><p>因為半夜才能做每日練習，這次小偷懶沒有做預約功能，之後再補上。</p>
+</li>
+</ol>
+<blockquote>
+<p><em>題外話：這次作業必須使用 <strong>GitHub Page</strong> 上傳，如果你有使用打包套件，覺得每次改完都要手動去 <strong>Build</strong> 什麼的很麻煩，可以參考筆者的這篇文章 <a href="https://rexhung0302.github.io/2020/08/04/20200804/">[Git Notes] — 快速部署 Vue Cli 靜態資源至 GitHub Pages</a>。</em></p>
+</blockquote>
+<h3 id="Day53"><a href="#Day53" class="headerlink" title="Day53"></a>Day53</h3><h3 id="Day60"><a href="#Day60" class="headerlink" title="Day60"></a>Day60</h3><p>第五十三天開始到六十天六角的題目為：</p>
+<p>完成訂房網站的 <strong>API</strong> 串接，包含 <strong>瀏覽房型、預約功能、查看預約功能</strong>。</p>
+<p>第五十三天開始到六十天六角的題目解答為：</p>
+<p>這陣子公司案子太忙一直邊做邊修，原本想手刻日曆，但最後沒時間只好找套件套上。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-ajax-room-practice">Source Code</a></p>
+<p><a href="https://rexhung0302.github.io/Hexschool-ajax-room-practice/index.html">Demo</a></p>
+<blockquote>
+<p>解題關鍵：這題其實在之前 <strong>The F2E</strong> 挑戰有做過，不過當時沒有串接 <strong>API</strong>，這次算是補上串接 <strong>API</strong> 功能，幾乎都是切版及打 <strong>AJAX</strong>，時間套件使用<br><a target="_blank" rel="noopener" href="https://www.daterangepicker.com/">Date Range Picker</a>，有興趣可以參考 <a target="_blank" rel="noopener" href="https://medium.com/@miahsuwork/date-range-picker-%E6%97%A5%E6%9C%9F%E5%8D%80%E9%96%93%E9%81%B8%E6%93%87%E5%99%A8-bd0a7244df3a">[Date Range Picker]日期區間選擇器</a>。</p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>目前會每天依序的練習，如果有解開題目答案或是不了解也可以在下方留言呦！如果題目出得不好也請各路大神手下留情。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/07/20200607/" rel="prev" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30">
+      <i class="fa fa-chevron-left"></i> [Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/04/20200804/" rel="next" title="[Git Note] — 快速部署 Vue Cli 靜態資源至 GitHub Pages">
+      [Git Note] — 快速部署 Vue Cli 靜態資源至 GitHub Pages <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E9%A1%8C%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">每日題目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day31"><span class="nav-number">3.1.</span> <span class="nav-text">Day31</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day32"><span class="nav-number">3.2.</span> <span class="nav-text">Day32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day33"><span class="nav-number">3.3.</span> <span class="nav-text">Day33</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day34"><span class="nav-number">3.4.</span> <span class="nav-text">Day34</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A8%BB1"><span class="nav-number">3.4.1.</span> <span class="nav-text">註1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day35"><span class="nav-number">3.5.</span> <span class="nav-text">Day35</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day36"><span class="nav-number">3.6.</span> <span class="nav-text">Day36</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day37"><span class="nav-number">3.7.</span> <span class="nav-text">Day37</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day38"><span class="nav-number">3.8.</span> <span class="nav-text">Day38</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day39"><span class="nav-number">3.9.</span> <span class="nav-text">Day39</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day40"><span class="nav-number">3.10.</span> <span class="nav-text">Day40</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day41"><span class="nav-number">3.11.</span> <span class="nav-text">Day41</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day42"><span class="nav-number">3.12.</span> <span class="nav-text">Day42</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day43"><span class="nav-number">3.13.</span> <span class="nav-text">Day43</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day44"><span class="nav-number">3.14.</span> <span class="nav-text">Day44</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day45"><span class="nav-number">3.15.</span> <span class="nav-text">Day45</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day46"><span class="nav-number">3.16.</span> <span class="nav-text">Day46</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day47"><span class="nav-number">3.17.</span> <span class="nav-text">Day47</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day48"><span class="nav-number">3.18.</span> <span class="nav-text">Day48</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day49"><span class="nav-number">3.19.</span> <span class="nav-text">Day49</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day50"><span class="nav-number">3.20.</span> <span class="nav-text">Day50</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day51"><span class="nav-number">3.21.</span> <span class="nav-text">Day51</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day52"><span class="nav-number">3.22.</span> <span class="nav-text">Day52</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day53"><span class="nav-number">3.23.</span> <span class="nav-text">Day53</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day60"><span class="nav-number">3.24.</span> <span class="nav-text">Day60</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">4.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/07/29/20200729/",
+      identifier: "2020/07/29/20200729/",
+      title     : "[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[JavaScript Note] — 淺談 JavaScript #4">
+<meta property="og:url" content="https://rexhung0302.github.io/2019/10/28/20191028/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言這章節主要筆記關於 This 的一些淺談，剛學 JavaScript 時就常常聽到『你真的了解 This 嗎？』、『This 到底指的是什麼？』，剛好在 JavaScript 核心篇的一個章節提到 This ，課後終於小了解關於 This 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 This 吧。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2019-10-28T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.676Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2019/10/28/20191028/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[JavaScript Note] — 淺談 JavaScript #4 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2019/10/28/20191028/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [JavaScript Note] — 淺談 JavaScript #4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-10-28 12:00:00" itemprop="dateCreated datePublished" datetime="2019-10-28T12:00:00+08:00">2019-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這章節主要筆記關於 <strong>This</strong> 的一些淺談，剛學 <strong>JavaScript</strong> 時就常常聽到『你真的了解 <strong>This</strong> 嗎？』、『<strong>This</strong> 到底指的是什麼？』，剛好在 <strong>JavaScript</strong> 核心篇的一個章節提到 <strong>This</strong> ，課後終於小了解關於 <strong>This</strong> 的三兩事，如果沒有搞清楚，常常會在錯誤的作用域裡做事情呢，話不多說，下面就開始來認識認識 <strong>This</strong> 吧。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>接下來的每一章，不免俗的都會來一句：</p>
+</blockquote>
+<blockquote>
+<p>本篇文章一切皆為筆記作用，有任何錯誤及問題，歡迎理性指教及討論，詳情請查閱公開課程說明書。</p>
+</blockquote>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>本系列將會淺談 <strong>JavaScript</strong> ，希望給未來自己當作筆記以及剛接觸 <strong>JavaScript</strong> 的夥伴們，甚至能帶點不一樣觀點或您沒聽過的觀點給大家，所以不會太過深入的討論。</p>
+</blockquote>
+<p>關於淺談的主題將會大致分為下列幾項，<strong>項目可能會做更動</strong>。</p>
+<ol>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/09/20191009/">JavaScript 執行環境及作用域</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/15/20191015/">運算子、型別與文法</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/24/20191024/">物件</a></strong></p>
+</li>
+<li><p><strong><a href="https://rexhung0302.github.io/2019/10/28/20191028/">關於 This 那些事</a></strong></p>
+</li>
+</ol>
+<p>本章討論的幾個關鍵標題為下列幾項。</p>
+<ol>
+<li><p>This 是什麼？</p>
+</li>
+<li><p>This 的特性</p>
+</li>
+<li><p>關於箭頭函式對 this 的影響</p>
+</li>
+</ol>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="https://cdn-images-1.medium.com/max/2000/1*emhX3OcXv7c1b7yzUfsg5A.png" alt="關於 This"></p>
+<h3 id="This-是什麼？"><a href="#This-是什麼？" class="headerlink" title="This 是什麼？"></a>This 是什麼？</h3><p>關於 <strong>JavaScript</strong> 的 <strong>This</strong> 其實上 <strong>Google</strong> 就會發現好多大神的文章，究竟為什麼 <strong>This</strong> 這麼重要呢？在相關文章中能看見，如果你搞清楚 <strong>This</strong> 你就能掌握到程式將會怎麼走，也能掌握程式在對的地方執行對的事情。</p>
+<blockquote>
+<p>JavaScript <strong>函式內的 this 關鍵字</strong> 表現，和其他語言相比略有差異。在<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode">嚴格模式</a>與非嚴格模式下也有所不同。<br>通常，this 值由被呼叫的函式來決定。它不能在執行期間被指派，每次函式呼叫調用的值也可能不同。ES5 引入了 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">bind</a> 方法去<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/this#The_bind_method">設置函式的 this 值，而不管它怎麼被呼叫。</a><strong>ECMAScript 2015</strong> 也導入了定義 this 詞法範圍的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions">箭頭函式</a><br>— 擷至 MDN</p>
+</blockquote>
+<hr>
+<h3 id="This-的特性"><a href="#This-的特性" class="headerlink" title="This 的特性"></a>This 的特性</h3><p>原理或是理論的部分這邊就不過多的詳細描述，但是主要還是要說一些比較淺顯易懂的東西。關於 <strong>This</strong> 的特性有幾點：</p>
+<ol>
+<li><p><strong>不需宣告。</strong></p>
+</li>
+<li><p><strong>每個執行環境都有自己的 This 關鍵字。</strong></p>
+</li>
+<li><p><strong>This 和 Function 如何宣告沒有關聯性，和被呼叫方式有關。</strong></p>
+</li>
+<li><p><strong>在嚴格模式下，與在簡易模式下很不同。</strong></p>
+</li>
+</ol>
+<p>在我們打開網頁 <strong>F12</strong> 之後開啟 <strong>Sources</strong> 然後就能看見最一開始的 <strong>This</strong> 指的是 <strong>Windows</strong>，而隨著我們的 <strong>Function</strong> ， <strong>This</strong> 的指向位置又會開始改變。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">moreThis</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// ....</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> student = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;Rex&#x27;</span>,</span><br><span class="line">  <span class="attr">moreThis</span>: moreThis,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">student.<span class="title function_">moreThis</span>(); </span><br><span class="line"><span class="comment">// 前面宣告什麼的都可以不用注意 只要看呼叫的時候 student 就是那個 This</span></span><br></pre></td></tr></table></figure>
+
+<p>上面提到到所謂的 <strong>嚴格模式(‘use strice’)</strong>，在 <strong>JavaScript</strong> 裡有一個靜默的小錯誤，不至於影響程式進行將會被忽略不會跳出警告，而使用 <strong>嚴格模式(‘use strice’)</strong> 後將會直接看見，而 <strong>嚴格模式(‘use strice’)</strong> 也可以依照部分環境加入，意思就是這個 <strong>Function</strong> 我想要加入，另一個不要其實也可以。</p>
+<hr>
+<p>2020.07.31 後更：</p>
+<h3 id="關於箭頭函式對-this-的影響"><a href="#關於箭頭函式對-this-的影響" class="headerlink" title="關於箭頭函式對 this 的影響"></a>關於箭頭函式對 this 的影響</h3><h4 id="廢話前言"><a href="#廢話前言" class="headerlink" title="廢話前言"></a>廢話前言</h4><p>沒想到過了快一年才回來補充，最近剛好在挑戰六角學院的 <strong>JS 60 Day</strong>，有興趣可以看看我的文章 <a href="https://rexhung0302.github.io/2020/06/07/20200607/#more">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30</a> 及 <a href="https://rexhung0302.github.io/2020/07/29/20200729/#more">[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day31-60</a>。</p>
+<p>在第三十九天練習時碰到的題目剛好跟之前的 <strong>JS核心</strong> 有相關，就補充在這邊啦！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191028/es6.png" alt="ECMAScript6 - ES6"></p>
+<p>關於 <strong>ES6</strong> 的歷史，在這個系列前一章 <a href="https://rexhung0302.github.io/2019/10/24/20191024/#%E9%A1%8D%E5%A4%96%E8%A3%9C%E5%85%85">[JavaScript Notes] — 淺談 JavaScript #3</a> 有介紹到，這邊大致再帶過一次。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20191028/es_history.png" alt="ES歷史"></p>
+<blockquote>
+<p><em>ES 又稱 ECMAScript，Script 代表著腳本，而 ECMAScript 提供了腳本語言需要遵守的規則、細節和規範， JavaScript 是實現 ECMAScript 的規範後所誕生出來的語言。簡單點來說就是一些可以讓你更簡單做事情的 Function 及 一些寫 Code 規範，更詳細的發展歷程可以點 傳送門 查看。</em></p>
+</blockquote>
+<h4 id="進入正題"><a href="#進入正題" class="headerlink" title="進入正題"></a>進入正題</h4><p>這邊雖然大家可能已經知道箭頭函式是做什麼的，但還是要提一下，在剛學習 <strong>JS</strong> 一陣子後可能會開始發現很多很酷炫的寫法，比如常見的 <strong>箭頭函式</strong>、<strong>解構</strong>、<strong>字串模板</strong>…等等，以下為 <strong>箭頭函式</strong> 的範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 舊寫法</span></span><br><span class="line"><span class="keyword">var</span> callName = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;I&#x27;m&quot;</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 箭頭函式 寫法</span></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">callName</span> = (<span class="params">name</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;I&#x27;m&quot;</span> + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">callName</span>(<span class="string">&#x27;王小明&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>上面可以看到 <strong>箭頭函式</strong> 取代了 <code>function</code>，雖然剛開始不是很習慣，但寫久了會變得很直覺，而且省下很多時間，身為工程師就必須能多懶就多懶，但是又要能懶到要處，讓人一看 <strong>Code</strong> 就知道你在寫蝦咪碗糕！</p>
+<p>所以上面的例子我們還能這樣省：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 箭頭函式 寫法</span></span><br><span class="line"><span class="comment">// 單一行陳述不需要 `&#123;&#125;`</span></span><br><span class="line"><span class="comment">// 此為舉例，如果需要 return 要自己帶入，並非可以省略並有 return 效果！</span></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">callName</span> = name =&gt; <span class="string">&quot;I&#x27;m&quot;</span> + name;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">callName</span>(<span class="string">&#x27;王小明&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>夠省吧！簡單的說只要記得下列幾點：</p>
+<ol>
+<li><p><code>function</code> 改為 <code>=&gt;</code></p>
+</li>
+<li><p>帶有參數情況下，<code>()</code> 必須移到 <code>=&gt;</code> 箭頭前，且如果只有一個參數情況下，可省略 <code>()</code>，但若 <strong>沒有參數</strong> 或 <strong>一個以上的參數</strong> 情況下，一定要帶括號！</p>
+</li>
+<li><p>單一行陳述不需要 <code>&#123;&#125;</code></p>
+</li>
+</ol>
+<h4 id="呼應主題-This"><a href="#呼應主題-This" class="headerlink" title="呼應主題 This"></a>呼應主題 This</h4><p>一篇好的文章結尾處是必須要呼應主題的，既然這篇文章是在講 <strong>This</strong>，那這邊就要再回來題 <strong>箭頭函式</strong> 對 <strong>This</strong> 的影響。</p>
+<p>首先我們先記得兩點關於 <strong>This</strong> 的差別：</p>
+<ol>
+<li><p>傳統函式 &#x3D;&gt; 依呼叫的方法而定</p>
+</li>
+<li><p>箭頭函式 &#x3D;&gt; 綁定到其定義時所在的物件</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;王小明&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> myFriend = &#123;</span><br><span class="line">  name = <span class="string">&#x27;王大錘&#x27;</span>,</span><br><span class="line">  <span class="attr">callName</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>); <span class="comment">// 王大錘</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// myFriend</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">callName_2</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>); <span class="comment">// 王小明</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// window</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">myFriend.<span class="title function_">callName</span>();</span><br><span class="line">myFriend.<span class="title function_">callName_2</span>();</span><br></pre></td></tr></table></figure>
+
+<p>上述例子很清楚可以看見使用 <strong>箭頭函式</strong> 的 <strong>This</strong> 會穿過原本的區塊直接指向外層的 <strong>window</strong>，這是因為 <strong>箭頭函式</strong> 的 <strong>This</strong> 會綁定在 <code>其定義時所在的物件</code>，一般建立函式都是在 <strong>window</strong> 下，所以很自然就會指向 <strong>window</strong>，那要怎麼才能指向函式呢？</p>
+<p>這邊再說一個比較好記的方式：</p>
+<p>建立在物件內的函式，才會影響箭頭函式的 <strong>This</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">fun</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title function_">fun2</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> fun3 = &#123;</span><br><span class="line">    <span class="attr">fun</span>: fun2,</span><br><span class="line">    <span class="attr">xxx</span>: <span class="string">&#x27;xxx&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">fun2</span>(); <span class="comment">// this =&gt; window</span></span><br><span class="line">  fun3.<span class="title function_">fun</span>(); <span class="comment">// this =&gt; fun3 Object</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>簡單說就是如果你的 <strong>function</strong> 有被物件包起來，這時候 <strong>This</strong> 指向的位置就不會是 <strong>window</strong>，因為你並不是建立在 <strong>window</strong> 上的，而是 <strong>Object</strong> 上的。</p>
+<blockquote>
+<p>注意：上方示範的箭頭函式，適用於原本一般的函式。</p>
+</blockquote>
+<h4 id="call，apply，bind"><a href="#call，apply，bind" class="headerlink" title="call，apply，bind"></a>call，apply，bind</h4><p>關於這三個可以參考 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10195896">JavaScript - call，apply，bind</a>，會提到這三個屬性是因為在 <strong>箭頭函式</strong> 裡， <strong>This</strong> 是被綁定的，所以 <code>call()</code> 無法修改 <strong>This</strong>，<code>call()</code> 或 <code>apply()</code> 呼叫箭頭函式只能傳入參數。</p>
+<h4 id="建構函式-Out"><a href="#建構函式-Out" class="headerlink" title="建構函式 Out"></a>建構函式 Out</h4><p>如果使用 <strong>new</strong> 運算子，<strong>箭頭函式</strong> 不可作為建構式使用；若使用於建構式，會在使用 <strong>new</strong> 時候拋出錯誤(範例為 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions">MDN</a>)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title function_">Foo</span> = (<span class="params"></span>) =&gt; &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> <span class="title class_">Foo</span>(); <span class="comment">// TypeError: Foo is not a constructor</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="DOM-監聽"><a href="#DOM-監聽" class="headerlink" title="DOM 監聽"></a>DOM 監聽</h4><p>記得前面提過的 <strong>This</strong> 會綁到 <strong>window</strong> 上嗎？所以如果拿來當 <strong>監聽事件</strong> 的作用會錯誤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="variable language_">document</span>.<span class="title function_">getElementsById</span>(<span class="string">&#x27;name_input&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> <span class="title function_">changeName</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);                   <span class="comment">// window</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">style</span>.<span class="property">disable</span> = <span class="string">&#x27;true&#x27;</span> <span class="comment">// 錯誤</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">name.<span class="title function_">addEventListener</span>(<span class="string">&#x27;onkeyup&#x27;</span>, changeName, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述例子為參考 <a target="_blank" rel="noopener" href="https://wcc723.github.io/javascript/2017/12/21/javascript-es6-arrow-function/">卡斯伯老師 - 鐵人賽：箭頭函式 (Arrow functions)</a> 修改。</p>
+</blockquote>
+<h4 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h4><p>關於 <strong>箭頭函式</strong> 或是其他一些 <strong>ES語法糖</strong> 雖然很方便，但總還是會有需要注意的地方，但我們並無法都預先知道所有的錯誤， 就算知道了也可能很快就會忘記，所以最好的作法就是多練習，多犯錯！</p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實在原本就是打算做筆記之用途，因為實在有太多的大神已經寫了好多篇關於 <strong>This</strong> 的文章，沒有十足把握的話其實覺得多寫一篇關於 <strong>This</strong> 的文章真的是很沒意義，不過既然是自己要作為筆記用途，那就多少寫一些多少記一些囉。</p>
+<p>更多關於 <strong>This</strong> 就等之後補上囉～</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li>六角學院 — <a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/js-core.html?utm_source=LINE&utm_medium=message&utm_campaign=0807LINE_message#recommend">JavaScript 核心篇</a></li>
+<li>MDN — <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/this">This</a></li>
+<li>TechBridge 技術共筆部落格 — <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2019/02/23/javascript-this/">淺談 JavaScript 頭號難題 this：絕對不完整，但保證好懂</a></li>
+<li><a target="_blank" rel="noopener" href="https://kuro.tw/">Kuro’s Blog</a> — <a target="_blank" rel="noopener" href="https://kuro.tw/posts/2017/10/12/What-is-THIS-in-JavaScript-%E4%B8%8A/">What’s THIS in JavaScript ? [上]</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/24/20191024/" rel="prev" title="[JavaScript Note] — 淺談 JavaScript #3">
+      <i class="fa fa-chevron-left"></i> [JavaScript Note] — 淺談 JavaScript #3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/01/20191101/" rel="next" title="萬事起頭不會難">
+      萬事起頭不會難 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">This 是什麼？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#This-%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">This 的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F%E5%B0%8D-this-%E7%9A%84%E5%BD%B1%E9%9F%BF"><span class="nav-number">2.3.</span> <span class="nav-text">關於箭頭函式對 this 的影響</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%A2%E8%A9%B1%E5%89%8D%E8%A8%80"><span class="nav-number">2.3.1.</span> <span class="nav-text">廢話前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%B2%E5%85%A5%E6%AD%A3%E9%A1%8C"><span class="nav-number">2.3.2.</span> <span class="nav-text">進入正題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BC%E6%87%89%E4%B8%BB%E9%A1%8C-This"><span class="nav-number">2.3.3.</span> <span class="nav-text">呼應主題 This</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#call%EF%BC%8Capply%EF%BC%8Cbind"><span class="nav-number">2.3.4.</span> <span class="nav-text">call，apply，bind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E6%A7%8B%E5%87%BD%E5%BC%8F-Out"><span class="nav-number">2.3.5.</span> <span class="nav-text">建構函式 Out</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM-%E7%9B%A3%E8%81%BD"><span class="nav-number">2.3.6.</span> <span class="nav-text">DOM 監聽</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">2.3.7.</span> <span class="nav-text">小結</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2019/10/28/20191028/",
+      identifier: "2019/10/28/20191028/",
+      title     : "[JavaScript Note] — 淺談 JavaScript #4",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

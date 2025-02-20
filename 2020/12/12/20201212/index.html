@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言寫了一陣子的程式碼，你有沒有曾經想過，有時候我們能像 git pull、git push…這樣輸入完指令就完成所有你預期內的步驟嗎？ 這篇文章將帶你簡單入們一鍵指令，就可以完成你需要完成的任務。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Shell Script Note] — 教你如何一鍵部署 env, 兩分鐘就學會">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/12/12/20201212/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言寫了一陣子的程式碼，你有沒有曾經想過，有時候我們能像 git pull、git push…這樣輸入完指令就完成所有你預期內的步驟嗎？ 這篇文章將帶你簡單入們一鍵指令，就可以完成你需要完成的任務。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-12-11T18:22:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.861Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Note">
+<meta property="article:tag" content="Shell Script">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/12/12/20201212/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Shell Script Note] — 教你如何一鍵部署 env, 兩分鐘就學會 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/12/12/20201212/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Shell Script Note] — 教你如何一鍵部署 env, 兩分鐘就學會
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-12 02:22:00" itemprop="dateCreated datePublished" datetime="2020-12-12T02:22:00+08:00">2020-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Shell-Script/" itemprop="url" rel="index"><span itemprop="name">Shell Script</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Shell-Script/Env/" itemprop="url" rel="index"><span itemprop="name">Env</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Shell-Script/Env/env/" itemprop="url" rel="index"><span itemprop="name">env</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>2 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20201212/shell-banner.png" alt="Shell Script?"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>寫了一陣子的程式碼，你有沒有曾經想過，有時候我們能像 <code>git pull</code>、<code>git push</code>…這樣輸入完指令就完成所有你預期內的步驟嗎？</p>
+<p>這篇文章將帶你簡單入們一鍵指令，就可以完成你需要完成的任務。</p>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201212/env-preview.png" alt="ENV"></p>
+<p>開始前先說說為何有寫這篇文章的動機；起因為筆者在工作上目前會有好幾個專案用到同一份專案的程式碼，簡單說就是好幾個不同家的廠商(A端)會打同一個專案的 API(Ｂ端)。</p>
+<p>而在開發時我們本地只會留一個 B端 專案，上線才會一個專案(A端)配一個 API 專案(B端)，而在本地我們就是靠切換 API(B端)的 ENV 去切換目前需要用到哪個會用到的資訊，像是<strong>資料庫</strong>。</p>
+<p>但這篇文章最主要還是作為自己的筆記使用，記錄下如何透過 <strong>Shell Script</strong> 去一鍵執行我需要的任務。</p>
+<hr>
+<h3 id="何謂-Shell-Script"><a href="#何謂-Shell-Script" class="headerlink" title="何謂 Shell Script"></a>何謂 Shell Script</h3><p><strong>Shell</strong> 是文字介面底下我們與系統溝通的一個工具介面，而 <strong>Script</strong> 即為腳本、劇本，就是針對 <strong>Shell</strong> 寫的腳本。</p>
+<hr>
+<h3 id="如何製作腳本並執行"><a href="#如何製作腳本並執行" class="headerlink" title="如何製作腳本並執行"></a>如何製作腳本並執行</h3><p>在我們一鍵部署前，還是必須先寫好任務內容，這邊會用筆者工作上的例子來舉例。</p>
+<ol>
+<li><p>先至隨便在一個你會記得的地方建立之後要一鍵啟動任務執行的 <strong>sh</strong> 檔案，<code>touch /你的路徑/update_api_env.sh</code>。</p>
+</li>
+<li><p>編輯這支 <strong>sh</strong> 檔案，<code>vim update_api_env.sh</code>。</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># 更改資料庫位置</span><br><span class="line">sed -i &#x27;&#x27; -e &quot;s/DB_DATABASE=.*/DB_DATABASE=$1_db/1&quot; /路徑1/.env</span><br><span class="line">sed -i &#x27;&#x27; -e &quot;s/DB_DATABASE=.*/DB_DATABASE=$1_db/1&quot; /路徑2/.env</span><br><span class="line">sed -i &#x27;&#x27; -e &quot;s/DB_DATABASE=.*/DB_DATABASE=$1_db/1&quot; /路徑3/.env</span><br></pre></td></tr></table></figure>
+
+<p>在開頭的 <code>#!/bin/bash</code> 則為 <strong>Shell Script</strong> 的起手式。</p>
+<ol start="3">
+<li>在 <strong>Terminal</strong> 輸入 <code>vim ~/.zshrc</code> 或 <code>vim ~/.bashrc</code>，接著加入下面的自定義快捷鍵(關鍵字)。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 自定義快捷鍵</span><br><span class="line">alias upEnv=&#x27;sh /你的路徑/update_api_env.sh&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>在這邊的自定義快捷鍵(關鍵字)也可加入許多自己平常會用到的指令，像是開頭提過的 <code>git pull</code>、<code>git push</code>…等等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alias gis=&#x27;git status&#x27;;</span><br><span class="line">alias gia=&#x27;git add -A&#x27;;</span><br><span class="line">alias gic=&#x27;git commit&#x27;;</span><br><span class="line">alias gipl=&#x27;git pull origin&#x27;;</span><br><span class="line">alias giph=&#x27;git push origin&#x27;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>關掉你的 <strong>Terminal</strong> 然後重新開啟。</p>
+</li>
+<li><p>輸入剛剛取的快捷鍵名稱(關鍵字) <code>upEnv xxx</code> 就會替換成功了。</p>
+</li>
+</ol>
+<hr>
+<h3 id="如何防呆"><a href="#如何防呆" class="headerlink" title="如何防呆"></a>如何防呆</h3><p>這時候如果我們只有輸入 <code>upEnv</code> 其實是會更改成功的，所以我們必須做一些防呆措施。</p>
+<p>在我們提到的 <strong>Shell Script</strong> 其實也可以像我們寫 <strong>php</strong> 或是 <strong>JS</strong> 一樣寫一些判斷式，這邊提供一個範例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ ! -n &quot;$1&quot; ] ; then</span><br><span class="line">  echo &quot;Error: You need type keyword to change env!&quot;</span><br><span class="line">else</span><br><span class="line">  # DO something...</span><br><span class="line">  echo &quot;Success: Already changed -&gt; $1&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>這邊有幾個雷需要注意，<strong>Shell Script</strong> <strong>每個判斷</strong> 或 <strong>每個值</strong> 建議都留一個空白鍵跟下個值做區隔，不然容易報錯。</p>
+<blockquote>
+<p><em>$1 的意思為輸入指令時空白鍵後第一個參數，舉例來說在上面我們設定啟動這個執行檔的關鍵字為 <code>upEnv</code>，如果你輸入 <code>upEnv Hello World</code>，<strong>Hello</strong> 將會是第一個變數($1)，<strong>World</strong> 將會是第二個變數($2)，以此類推…</em></p>
+</blockquote>
+<hr>
+<h3 id="加上絢麗的效果"><a href="#加上絢麗的效果" class="headerlink" title="加上絢麗的效果"></a>加上絢麗的效果</h3><p>這邊會看到 <strong>echo</strong> 出來的東西有點單調，就是單純的文字，如果有設定錯誤提醒，或許不夠明顯。</p>
+<p>好在我們可以對 <strong>echo</strong> 設定顏色，加入的指令為：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\033[30m文字字串\033[0m&quot;   --&gt; 黑色字</span><br><span class="line">echo -e &quot;\033[31m文字字串 \033[0m&quot;   --&gt; 紅色字</span><br><span class="line">echo -e &quot;\033[32m文字字串 \033[0m&quot;   --&gt; 綠色字</span><br><span class="line">echo -e &quot;\033[33m文字字串 \033[0m&quot;   --&gt; 黃色字</span><br><span class="line">echo -e &quot;\033[34m文字字串 \033[0m&quot;   --&gt; 藍色字</span><br><span class="line">echo -e &quot;\033[35m文字字串 \033[0m&quot;   --&gt; 紫色字</span><br><span class="line">echo -e &quot;\033[36m文字字串 \033[0m&quot;   --&gt; 天藍字</span><br><span class="line">echo -e &quot;\033[37m文字字串 \033[0m&quot;   --&gt; 白色字</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[40;37m文字字串\033[0m&quot;   --&gt; 黑底白字</span><br><span class="line">echo -e &quot;\033[41;37m文字字串\033[0m&quot;   --&gt; 紅底白字</span><br><span class="line">echo -e &quot;\033[42;37m文字字串\033[0m&quot;   --&gt; 綠底白字</span><br><span class="line">echo -e &quot;\033[43;37m文字字串\033[0m&quot;   --&gt; 黃底白字</span><br><span class="line">echo -e &quot;\033[44;37m文字字串\033[0m&quot;   --&gt; 藍底白字</span><br><span class="line">echo -e &quot;\033[45;37m文字字串\033[0m&quot;   --&gt; 紫底白字</span><br><span class="line">echo -e &quot;\033[46;37m文字字串\033[0m&quot;   --&gt; 天藍底白字</span><br><span class="line">echo -e &quot;\033[47;30m文字字串\033[0m&quot;   --&gt; 白底黑字</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20201212/echo-color-preview.png" alt="Echo Color"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這邊文章簡短的介紹如何使用快捷鍵一鍵更換 <strong>ENV</strong>，這次在工作上托同事的福又學了一招，趁記憶猶新趕緊記錄下來，這會是一個實用的功能！</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_basic/0340bashshell-scripts.php#script_why">鳥哥的 Linux 私房菜 - 第十二章、學習 Shell Scripts</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://775225.blogspot.com/2012/06/linuxecho.html">[Linux]改變echo顏色的指令</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Note/" rel="tag"><i class="fa fa-tag"></i> Note</a>
+              <a href="/tags/Shell-Script/" rel="tag"><i class="fa fa-tag"></i> Shell Script</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/09/20201109/" rel="prev" title="[NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫">
+      <i class="fa fa-chevron-left"></i> [NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/19/20201219/" rel="next" title="[Life Note] - LINE TAIWAN TechPulse 2020">
+      [Life Note] - LINE TAIWAN TechPulse 2020 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%95%E8%AC%82-Shell-Script"><span class="nav-number">2.1.</span> <span class="nav-text">何謂 Shell Script</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A3%BD%E4%BD%9C%E8%85%B3%E6%9C%AC%E4%B8%A6%E5%9F%B7%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">如何製作腳本並執行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%98%B2%E5%91%86"><span class="nav-number">2.3.</span> <span class="nav-text">如何防呆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E4%B8%8A%E7%B5%A2%E9%BA%97%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">2.4.</span> <span class="nav-text">加上絢麗的效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/12/12/20201212/",
+      identifier: "2020/12/12/20201212/",
+      title     : "[Shell Script Note] — 教你如何一鍵部署 env, 兩分鐘就學會",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

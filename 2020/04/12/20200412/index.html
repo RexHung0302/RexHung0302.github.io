@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言依稀記得剛開始寫前端切版都是東摸西湊的，很多東西都是靠感覺硬拚出來的，最近公司案子變趕的情況下終於意識到自己的寫 Code 速度好像有待提升，除了打錯字外，在排版上似乎也還有很多可以精進的空間，又這麼剛好，在今年的 The F2E 開始前 六角學院 就釋出了一則消息：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Web Layout Training] — Week_1 個人履歷">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/04/12/20200412/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言依稀記得剛開始寫前端切版都是東摸西湊的，很多東西都是靠感覺硬拚出來的，最近公司案子變趕的情況下終於意識到自己的寫 Code 速度好像有待提升，除了打錯字外，在排版上似乎也還有很多可以精進的空間，又這麼剛好，在今年的 The F2E 開始前 六角學院 就釋出了一則消息：">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-04-12T09:07:13.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.733Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Web-Layout-Training">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/04/12/20200412/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool Web Layout Training] — Week_1 個人履歷 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/04/12/20200412/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Web Layout Training] — Week_1 個人履歷
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-04-12 17:07:13" itemprop="dateCreated datePublished" datetime="2020-04-12T17:07:13+08:00">2020-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>6.6k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>6 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200412/week_1_classLogo.png" alt="第一週的練習"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>依稀記得剛開始寫前端切版都是東摸西湊的，很多東西都是靠感覺硬拚出來的，最近公司案子變趕的情況下終於意識到自己的寫 <strong>Code</strong> 速度好像有待提升，除了打錯字外，在排版上似乎也還有很多可以精進的空間，又這麼剛好，在今年的 <strong>The F2E</strong> 開始前 <strong>六角學院</strong> 就釋出了一則消息：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/line_class_message.png" alt="荷包君 TAT"></p>
+<span id="more"></span>
+
+<p>沒錯，工程師的限量就跟大媽瘋搶衛生紙一樣，沒多想就刷下去了，原本想等課程結束再來一篇完整的心得，但現在一個練習搭配一篇文章已經是基本了(笑</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>*本篇文章將會以三個角度來紀錄， <strong>課程心得(上課後的心得整理)</strong>、<strong>練習心得(做完作業後的心得整理))</strong> 及 <strong>小組任務(每週會有一項小組任務，寫完後的心得)</strong>。*</p>
+</blockquote>
+<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<a target="_blank" rel="noopener" href="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w">練習菜單</a>，及額外的一項打字練習。</p>
+<ol>
+<li><p><strong>熟悉三個編輯器熱鍵</strong></p>
+</li>
+<li><p><strong>幾乎全程使用 <a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">emmet</a> 開發</strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="http://keybr.com/">英打速度</a></strong> 練習</p>
+</li>
+</ol>
+<h4 id="關卡目標"><a href="#關卡目標" class="headerlink" title="關卡目標"></a>關卡目標</h4><ol>
+<li><p>充分了解 box model 盒模型概念</p>
+</li>
+<li><p>了解 margin、padding 使用時機</p>
+</li>
+<li><p>inline 行內與 block 區塊元素運用</p>
+</li>
+<li><p>行距觀念</p>
+</li>
+</ol>
+<hr>
+<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>課程分為八週，一堂兩小時半，本週為第一次上課，到課率在第一天是很高的，畢竟校長都親口說不來上課的人會一個一個打電話了(笑，另外也許現代許多人還是能擠出零碎的時間來上線上課程，畢竟比起實體課程事後還是有錄影可以補課的，不用搭配老師時間。</p>
+<p>這次直播班就是標榜打好你的底，所以有許多同學也是從 0 開始，剛好矯正我一些不對的觀念，以前剛開始學前端切版就是亂學亂用，也沒在乎過一些定義什麼的，所以後來才又陸陸續續學了 <strong><a target="_blank" rel="noopener" href="https://www.udemy.com/course/sasssecret/">Sass 實戰全攻略 - 成為前 1% 的 CSS 頂尖好手</a></strong> 及 <strong><a target="_blank" rel="noopener" href="https://www.udemy.com/course/javascript-adv/">JavaScript 核心篇</a></strong>…等等來打好自己基礎。</p>
+<p>這堂課介紹的項目主要如下：</p>
+<h4 id="什麼元素會佔滿版？"><a href="#什麼元素會佔滿版？" class="headerlink" title="什麼元素會佔滿版？"></a>什麼元素會佔滿版？</h4><p>從前自己的觀念是任何東西我都要用 <strong>Div</strong> 包起來，有的東西也不知道為什麼自己就是 <code>width:100%</code>，因為有套用 <a target="_blank" rel="noopener" href="https://bootstrap.hexschool.com/">Bootstrap</a>，所以有換行就給他用 <code>class=&quot;d-block&quot;</code> 不換行就給他 <code>class=&quot;d-inline-block&quot;</code>，上了課之後終於好好的了解了。</p>
+<p>根據 <strong>W3C</strong>(註1) 的規定，元素都有一個預設的 <strong>display</strong> 值，而元素預設的屬性又是以 <strong>display: block;(區塊元素)</strong> 及 <strong>display: inline-block;(行內元素)</strong> 為主。</p>
+<p><strong>display: block;(區塊元素)</strong>： </p>
+<ol>
+<li><p>區塊元素之後的元素都會被擠到下一行。</p>
+</li>
+<li><p>高度寬度都可以另外給予。</p>
+</li>
+<li><p>預設寬度會自適應父元素的寬度，自己為預設 <code>width:100%;</code>。</p>
+</li>
+</ol>
+<p>有這些預設屬性的標籤如下：<code>html, address, blockquote, body, dd, div, dl, dt, fieldset, form, frame, frameset, h1, h2, h3, h4, h5, h6, noframes, ol, p, ul, center, dir, hr, menu, pre</code>。</p>
+<blockquote>
+<p><em>這邊需要提到，以前一直不知道，一直到六角校長及助教提醒才知道一個網頁只會有一個 <code>&lt;h1&gt;&lt;/h1&gt;</code>，這點還真的要特別注意一下。</em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/block-example-1.png" alt="自動佔滿 100%"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/block-example-1.png" alt="自訂 block 寬度後還是會佔滿一行"></p>
+<p><strong>display: inline-block;(行內元素)</strong>： </p>
+<ol>
+<li><p>會和其他的元素在同一行上，如果有多的行內元素則會一直排到排不下自動還行。</p>
+</li>
+<li><p>高度寬度無法另外給予。</p>
+</li>
+<li><p><code>margin-top, margin-bottom, padding-top, padding-bottom</code> 這四個屬性無效，但是左右是可以的 <code>margin-left, margin-right, padding-left, padding-right</code>。</p>
+</li>
+</ol>
+<p>有這些預設屬性的標籤如下：<code>span, em, i, b, strong, a, img, br, q, bdo, sub, sup, button, textarea, input, select</code>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/inline-block-example-1.png" alt="一直排到排不下才會自動換行"></p>
+<blockquote>
+<p><em>註1: W3C為 全球資訊網協會，又稱W3C理事會，是全球資訊網的主要國際標準組織。為半自治非政府組織，詳細介紹可參考<a target="_blank" rel="noopener" href="https://www.ozchamp.com/professionals-d793-n1.html">此處</a>。</em></p>
+</blockquote>
+<h4 id="CSS-還你漂漂拳"><a href="#CSS-還你漂漂拳" class="headerlink" title="CSS 還你漂漂拳"></a>CSS 還你漂漂拳</h4><p><strong>W3C</strong> 制定 <strong>HTML</strong> 及 <strong>CSS</strong> 時，沒有強制規定網頁需要有規定的預設樣式，簡單說就是很多瀏覽器都有自己預設的樣式，比如下面這張 <strong>chrome</strong> 的截圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/chrome-web-example.png" alt="瀏覽器壞壞"></p>
+<p>這時候你可能會納悶，有時候我明明就對準了且下對了 <strong>CSS</strong>，可是怎麼跑版了？這時候你就需要用到 <strong>CSS Reset</strong> 或 <strong>CSS Normalize</strong>，這是用來重置你網頁 <strong>CSS</strong> 的 <strong>CSS</strong>(好饒舌？！)，看下面這段 <strong>CSS Reset Code</strong> 就知道了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-tag">div</span>, <span class="selector-tag">span</span>, applet, <span class="selector-tag">object</span>, <span class="selector-tag">iframe</span>,</span><br><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>, <span class="selector-tag">p</span>, <span class="selector-tag">blockquote</span>, pre,</span><br><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">abbr</span>, acronym, <span class="selector-tag">address</span>, big, <span class="selector-tag">cite</span>, <span class="selector-tag">code</span>,</span><br><span class="line"><span class="selector-tag">del</span>, <span class="selector-tag">dfn</span>, <span class="selector-tag">em</span>, <span class="attribute">font</span>, <span class="selector-tag">img</span>, <span class="selector-tag">ins</span>, <span class="selector-tag">kbd</span>, <span class="selector-tag">q</span>, s, <span class="selector-tag">samp</span>,</span><br><span class="line">small, strike, <span class="selector-tag">strong</span>, sub, <span class="selector-tag">sup</span>, tt, <span class="selector-tag">var</span>,</span><br><span class="line"><span class="selector-tag">dl</span>, <span class="selector-tag">dt</span>, <span class="selector-tag">dd</span>, <span class="selector-tag">ol</span>, <span class="selector-tag">ul</span>, <span class="selector-tag">li</span>,</span><br><span class="line"><span class="selector-tag">fieldset</span>, <span class="selector-tag">form</span>, <span class="selector-tag">label</span>, <span class="selector-tag">legend</span>,</span><br><span class="line"><span class="selector-tag">table</span>, <span class="selector-tag">caption</span>, <span class="selector-tag">tbody</span>, <span class="selector-tag">tfoot</span>, <span class="selector-tag">thead</span>, <span class="selector-tag">tr</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">font-weight</span>: inherit;</span><br><span class="line">	<span class="attribute">font-style</span>: inherit;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">font-family</span>: inherit;</span><br><span class="line">	<span class="attribute">vertical-align</span>: baseline;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* remember to define focus styles! */</span></span><br><span class="line"><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">	<span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">	<span class="attribute">color</span>: black;</span><br><span class="line">	<span class="attribute">background</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ol</span>, <span class="selector-tag">ul</span> &#123;</span><br><span class="line">	<span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* tables still need &#x27;cellspacing=&quot;0&quot;&#x27; in the markup */</span></span><br><span class="line"><span class="selector-tag">table</span> &#123;</span><br><span class="line">	<span class="attribute">border-collapse</span>: separate;</span><br><span class="line">	<span class="attribute">border-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">caption</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span> &#123;</span><br><span class="line">	<span class="attribute">text-align</span>: left;</span><br><span class="line">	<span class="attribute">font-weight</span>: normal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">blockquote</span><span class="selector-pseudo">:before</span>, <span class="selector-tag">blockquote</span><span class="selector-pseudo">:after</span>,</span><br><span class="line"><span class="selector-tag">q</span><span class="selector-pseudo">:before</span>, <span class="selector-tag">q</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">	<span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">blockquote</span>, <span class="selector-tag">q</span> &#123;</span><br><span class="line">	<span class="attribute">quotes</span>: <span class="string">&quot;&quot;</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>明白了吧，就是把瀏覽器預設給你的 <strong>CSS</strong> 給歸零，而你可能會納悶 <strong>CSS Normalize</strong> 是蝦咪？！在時間上 <strong>CSS Reset</strong> 是比較早出來的，但是缺點就是 <strong>CSS Reset</strong> 像是強制把所有的 <code>margin, padding, border, outline...等等</code> 都直接歸零，所以很多地方使用者必須自己重新設定，而後者提到的最主要的目標則是 <strong>保留有用的瀏覽器默認設置，不是將之刪除</strong>，所以對針對不同的瀏覽器版本進行微調整。</p>
+<blockquote>
+<p>這邊筆者最常使用的是 <strong><a target="_blank" rel="noopener" href="https://necolas.github.io/normalize.css/">Normalize.css</a></strong>，跟框架一樣，沒有哪個最好，只有最適合自己的。</p>
+</blockquote>
+<h4 id="頁面排版怎麼推擠？"><a href="#頁面排版怎麼推擠？" class="headerlink" title="頁面排版怎麼推擠？"></a>頁面排版怎麼推擠？</h4><p>在以前不懂排版總是會給予 <strong>魔數高度(註2)</strong>，什麼寬高就是直接照的舒服的樣子或是設計稿直接設定，但是其實排版最不會出錯的法則就是由上而下，網頁該怎麼讓他往下排版呢？就是一個推一個，這邊建議朝同一個方向推擠即可，比如說 <code>margin-bottom: 20px; margin-bottom: 30px;</code> 這樣一路往下推，千萬不要左邊推一個，右邊推一個。</p>
+<p>而這時候你可能會想說那高度怎麼算呢？這時候就要來圖解啦：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/height-example.png" alt="高度這樣來的"></p>
+<p>剛學切版我也不曉得東西高度怎麼算，後來才知道每一個元素高度是由 <code>font-size</code> 及 <code>line-height</code> 加出來的，這樣你就知道距離下一個東西高度為多少了吧！千萬不要再讓設計師生氣了(笑</p>
+<p><em>註2: 這是一種統稱，意指那些不規律的數字，比方說 <code>height: 237px;</code> 或 <code>margin-top: 164px;</code>，通常不建議給予元素這種之後回來看 Code 或是其他人接手會毫無頭緒的數字</em></p>
+<h4 id="一般人不會注意到的-Img-小秘密"><a href="#一般人不會注意到的-Img-小秘密" class="headerlink" title="一般人不會注意到的 Img 小秘密"></a>一般人不會注意到的 Img 小秘密</h4><p>上面講完高度你可能開始會去注意每一個元素到底有沒有對齊，<strong>1px 也不想差</strong>，但是會意外發現 <strong>img</strong> 這個元素藏的彩蛋，你或許會納悶為什麼他的高度會多出 <strong>2px - 3px</strong> 呢？</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/img-more-2px-example.png" alt="什麼？"></p>
+<p>以前壓根沒注意過呀，因為 <strong>Bootstrap</strong> 套進去加上 <code>img-fluid</code> 或是直接給 <code>.img:&#123;height:100&#125;</code> 都不會發現這問題，那為什麼會這樣呢？</p>
+<p>因為 <strong>img</strong> 其實算是 <strong>text</strong> 的歸類，而文字分為 <code>頂線(top line), 中線(middle line), 基線(base line), 底線(bottom line)</code>，所以在文字上會多出 <strong>2px - 3px</strong> 來預留顯示會在 <strong>底線(bottom line)</strong> 上文字的尾巴，比如 <code>j</code>。</p>
+<p>解決方式通常都會建議直接給予圖片 <code>display: block;</code>，佔滿整個元素寬高，或是把圖調整到 <strong>中線(middle line)</strong> 上對齊，程式碼如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.img</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.img</span> &#123;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="265" data-theme-id="dark" data-default-tab="html,result" data-user="rexhung0302" data-slug-hash="ZEbGWBX" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="2020春季網頁切版直播班 - 第一週範例程式碼 - Img 的小眉角">
+  <span>See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/ZEbGWBX">
+  2020春季網頁切版直播班 - 第一週範例程式碼 - Img 的小眉角</a> by ZeHung (<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302">@rexhung0302</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<blockquote>
+<p>另外有人提到通常不建議使用 <code>display：block;</code> 這種寫法，因為通常項目在圖片右邊，如果這樣使用，就不能使文字緊鄰圖片排版，這時候就隨機應變囉！</p>
+</blockquote>
+<h4 id="額外小眉角"><a href="#額外小眉角" class="headerlink" title="額外小眉角"></a>額外小眉角</h4><ol>
+<li>關於 <strong>Border</strong> 是會算進寬高的，如果不想要被算進寬高，可以使用：</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或是自定義 Class Name 然後個別給予這個屬性</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>關於行動裝置人體手指點選最適大小為 <strong>44px</strong>，記得囉，千萬不要在使用過小的按鈕或連結，造成差勁的使用者體驗！</p>
+</li>
+<li><p>關於 <strong>CodePen</strong> 的小眉角，可以直接在部落格貼上片段程式碼，只要到 <strong>CodePen</strong> 上寫完程式碼後存儲下來，然後點選右下角的 <strong>Embed</strong> 會彈出樣式給你選擇，複製最下面的 <strong>Copy &amp; Paste Code</strong> 即可。</p>
+</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/share-codepen-example-1.png" alt="點選右下角 Embed"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/share-codepen-example-2.png" alt="選擇好樣式後複製下方程式碼貼上部落格"></p>
+<ol start="4">
+<li>關於 <strong>MarkMan 馬克曼</strong>，這是一款 <strong>高效的設計稿標註與測量工具</strong>，有時候你不知道設計師距離到底設定多少，就可以使用這款程式測量。</li>
+</ol>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/MarkMan-example-2.png" alt="很方便呢"></p>
+<p>但是 <strong>MacOS</strong> 似乎安裝有點問題，還好同學(<strong>treeman</strong>)神通廣大，解決方法如下：</p>
+<blockquote>
+<p><strong>如果您安裝有遇到問題請在試著這樣做</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 記得打開終端機，前方的錢字號不需要複製</span><br><span class="line"></span><br><span class="line">$ cd /Library/Frameworks</span><br><span class="line"></span><br><span class="line">$ sudo xattr -d com.apple.quarantine &quot;Adobe AIR.framework&quot;</span><br><span class="line"></span><br><span class="line">// 如果執行了第二行沒有顯示任何東西就是成功了</span><br><span class="line"></span><br><span class="line">// 接著請重新安裝</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安裝位置及方法可以參考 <strong>六角學院文章</strong> <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10209355">MarkMan - 高效的設計稿標註與測量工具</a>。</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/markman-example.png" alt="感謝大神同學"></p>
+<hr>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>這次排版練習使用了 <strong>emmet</strong> 來寫，整個流程雖然不太習慣，但是有感覺到整體速度提升了許多，我想之後還是會按照這種方式寫下去。</p>
+<p>另外之前六角學院校長及助教提過 <strong>h1</strong> 一個網頁只會有一個，所以這邊也特別注意並且改善掉。</p>
+<p>而在切版時有些觀念不太清楚，在爬文中偶然爬見助教 <a target="_blank" rel="noopener" href="https://medium.com/@alice0050722/flex-%E4%BF%AE%E7%85%89%E6%99%82%E5%85%89%E5%B1%8B-9faf909c1405">穎旻</a> 的 <strong>Flex 修煉時光屋</strong> 作業批改心得，裡面有提到通常 <strong>ul li</strong> 不會再另外包一層 <strong>Div</strong> 了，這邊也有特別修正程式碼，但其實滿好奇如果有時候 <strong>ul</strong> 需要和其他元素綁在一起而且需要下 <strong>padding</strong> 一起置中或給獨立的背景顏色的情況下，還能不能包一個 <strong>Div</strong>，這邊還有待跟助教確認。</p>
+<p>最後在切版上沒有太大的問題，覺得自己刪減掉很多不必要的 <strong>Div</strong> 了，這邊就等待校長或助教改完程式碼再進行課後檢討及修正了！</p>
+<hr>
+<h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><p>本週小組任務有五題：</p>
+<h4 id="第一題-選擇題"><a href="#第一題-選擇題" class="headerlink" title="第一題 選擇題"></a>第一題 選擇題</h4><p>以下範例程式碼的 .text 高度是多少？(請不要用瀏覽器觀察)</p>
+<ol>
+<li>90px</li>
+<li>92~93px</li>
+<li>120px</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">src</span>=<span class="string">&quot;logo.png&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90&quot;</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>解：因為圖片為文字屬性，有預留 <strong>底線(bottom line)</strong>，所以會多出 <strong>2px - 3px</strong>。</p>
+<h4 id="第二題"><a href="#第二題" class="headerlink" title="第二題"></a>第二題</h4><p>請問 .box 的高度是多少？(請不要用瀏覽器觀察)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>標題<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">src</span>=<span class="string">&quot;logo.png&quot;</span> <span class="attr">height</span>=<span class="string">&quot;90&quot;</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> <span class="selector-tag">h1</span>&#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">36px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-tag">p</span>&#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">24px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> <span class="selector-tag">img</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解：圖片不考慮多出來的 <strong>2px - 3px</strong>，因為有給予 <code>display: block;</code> 屬性，高度算法為 <strong>h1</strong> 的 <strong>line-height: 36px</strong> 加上 <strong>p</strong> 段落的 <code>line-height: 1.5;(1 為網頁預設的 16px, 1.5 x 16px)</code> 先加上 <code>margin-bottom: 24px</code> 在乘上兩個，加上圖片的高度 <strong>90px</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">36</span> + (( <span class="number">1.5</span> * <span class="number">16</span> + <span class="number">24</span> ) * <span class="number">2</span>) + <span class="number">90</span> );</span><br><span class="line"></span><br><span class="line"><span class="comment">// -&gt; 222px</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="第三題"><a href="#第三題" class="headerlink" title="第三題"></a>第三題</h4><p>請問 .card 的寬高與高度各是多少？(請不要用瀏覽器觀察)</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">border-bottom</span>: <span class="number">3px</span> solid orange;</span><br><span class="line">  <span class="attribute">border-right</span>: <span class="number">3px</span> solid <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>解：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/question-3-example.png" alt="圖解"></p>
+<h4 id="第四題"><a href="#第四題" class="headerlink" title="第四題"></a>第四題</h4><p>請優化此<a target="_blank" rel="noopener" href="https://codepen.io/liao/pen/OJyLOzr">程式碼</a>，優化重點為：</p>
+<ul>
+<li>在不影響外觀情況下，試著將不必要的 CSS 移除或整合</li>
+<li>請不用更動 HTML 程式碼，僅需優化 CSS 程式碼</li>
+</ul>
+<p>解：<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/GRpgaQp">傳送門</a></p>
+<blockquote>
+<p>父層下的 css 其實都可以直接下在父層上, 因為幾乎都是共通的, 如果有需要客製在另外下 css 即可 </p>
+</blockquote>
+<h4 id="第五題"><a href="#第五題" class="headerlink" title="第五題"></a>第五題</h4><p>請優化此<a target="_blank" rel="noopener" href="https://codepen.io/liao/pen/qBOWPea">程式碼</a>，並將程式碼連結放到 Codepen 上。優化重點為：</p>
+<ul>
+<li>在不影響外觀情況下，將重複的 CSS 樣式，獨立成一個共用的 class</li>
+<li>可依照您設定的共用 class，適當調整 HTML 結構</li>
+</ul>
+<p>解：<a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/MWaYdOr">傳送門</a></p>
+<blockquote>
+<p>盡量把能重複使用的樣式獨立出來，如果有需要特別客製化的 CSS 如 height: 100px; 或 background: green; 在另外下，獨立 CSS 到新的 Class Name 有益網頁渲染速度，因為減少了 CSS 的階層數。</p>
+<p>註：因為有 “在不影響外觀情況下” 的前提下，所以不考慮多放一個 container 的 div 至 wrap 下然後給 500px，或是直接對 wrap 下寬度 500px，因為這樣背景顏色會無法佔滿滿版。</p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次直播課也是吸取了很多新知，人們常說，了解的越多你不懂的也越多，所以不論什麼人事物身上都是有值得你學習的地方，我想這次的階版直播班從 0 開始也能糾正我很多觀念。</p>
+<p>希望之後幾週也能順利，然後接著 <strong>The F2E</strong>，不過還是希望 <strong>PM</strong> 能好好的跟客戶排時程放過我 QQ。</p>
+<hr>
+<h2 id="Demo-成果程式碼"><a href="#Demo-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>Source Code：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-web-layout-training/tree/master/Week_1">點我</a></p>
+<p>Demo：<a href="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_1/index.html">點我</a></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.flycan.com/article/css/w3c-html-4-css-386.html">W3C 規定~ 全部 HTML 標籤的 CSS 屬性預設值</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zh-tw.learnlayout.com/display.html">關於 “display” 屬性</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://medium.com/@small2883/%E5%8D%80%E5%A1%8A%E5%85%83%E7%B4%A0-%E8%A1%8C%E5%85%A7%E5%85%83%E7%B4%A0-%E7%A9%BA%E5%85%83%E7%B4%A0%E7%89%B9%E9%BB%9E%E5%88%86%E5%88%A5%E6%9C%89%E5%93%AA%E4%BA%9B-19f8c05f16f6">區塊元素 行內元素 空元素特點？分別有哪些？</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45543743/article/details/99750142">h5-div内img会多2px间隙</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/web-layout-training-1st.html">六角學院切版直播班</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">Emmet</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"><i class="fa fa-tag"></i> Web-Layout-Training</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/23/20200323/" rel="prev" title="[CSS Note] - 第一次 Flex 就上手">
+      <i class="fa fa-chevron-left"></i> [CSS Note] - 第一次 Flex 就上手
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/19/20200419/" rel="next" title="[Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術">
+      [Hexschool Web Layout Training] — Week_2 Flexbox 網頁排版術 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E5%8D%A1%E7%9B%AE%E6%A8%99"><span class="nav-number">2.0.1.</span> <span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E5%BF%83%E5%BE%97"><span class="nav-number">2.1.</span> <span class="nav-text">課程心得</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E5%85%83%E7%B4%A0%E6%9C%83%E4%BD%94%E6%BB%BF%E7%89%88%EF%BC%9F"><span class="nav-number">2.1.1.</span> <span class="nav-text">什麼元素會佔滿版？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-%E9%82%84%E4%BD%A0%E6%BC%82%E6%BC%82%E6%8B%B3"><span class="nav-number">2.1.2.</span> <span class="nav-text">CSS 還你漂漂拳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A0%81%E9%9D%A2%E6%8E%92%E7%89%88%E6%80%8E%E9%BA%BC%E6%8E%A8%E6%93%A0%EF%BC%9F"><span class="nav-number">2.1.3.</span> <span class="nav-text">頁面排版怎麼推擠？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E4%BA%BA%E4%B8%8D%E6%9C%83%E6%B3%A8%E6%84%8F%E5%88%B0%E7%9A%84-Img-%E5%B0%8F%E7%A7%98%E5%AF%86"><span class="nav-number">2.1.4.</span> <span class="nav-text">一般人不會注意到的 Img 小秘密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%8D%E5%A4%96%E5%B0%8F%E7%9C%89%E8%A7%92"><span class="nav-number">2.1.5.</span> <span class="nav-text">額外小眉角</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E5%BF%83%E5%BE%97"><span class="nav-number">2.2.</span> <span class="nav-text">練習心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%B5%84%E4%BB%BB%E5%8B%99"><span class="nav-number">2.3.</span> <span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%A1%8C-%E9%81%B8%E6%93%87%E9%A1%8C"><span class="nav-number">2.3.1.</span> <span class="nav-text">第一題 選擇題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%A1%8C"><span class="nav-number">2.3.2.</span> <span class="nav-text">第二題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%A1%8C"><span class="nav-number">2.3.3.</span> <span class="nav-text">第三題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%A1%8C"><span class="nav-number">2.3.4.</span> <span class="nav-text">第四題</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E9%A1%8C"><span class="nav-number">2.3.5.</span> <span class="nav-text">第五題</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-%E6%88%90%E6%9E%9C%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/04/12/20200412/",
+      identifier: "2020/04/12/20200412/",
+      title     : "[Hexschool Web Layout Training] — Week_1 個人履歷",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言這一篇文章會快速介紹一下筆者在上 六角學院 - NodeJS 前後端開發實戰 課程時，章節練習的小作業，透過 Nodejs 及 Firebase 寫一個菜鳥都必須要練習過的題目 Todo List。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/10/13/20201013/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言這一篇文章會快速介紹一下筆者在上 六角學院 - NodeJS 前後端開發實戰 課程時，章節練習的小作業，透過 Nodejs 及 Firebase 寫一個菜鳥都必須要練習過的題目 Todo List。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-10-13T04:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.844Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="Back-end">
+<meta property="article:tag" content="NodeJS">
+<meta property="article:tag" content="Express">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/10/13/20201013/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/10/13/20201013/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-10-13 12:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T12:00:00+08:00">2020-10-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/" itemprop="url" rel="index"><span itemprop="name">Back-end</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Back-end/NodeJS/" itemprop="url" rel="index"><span itemprop="name">NodeJS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20201013/todo_list_banner.png" alt="Todo List"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>這一篇文章會快速介紹一下筆者在上 <strong><a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a></strong> 課程時，章節練習的小作業，透過 <strong>Nodejs</strong> 及 <strong>Firebase</strong> 寫一個菜鳥都必須要練習過的題目 <strong>Todo List</strong>。</p>
+<span id="more"></span>
+
+<p>本次 <strong>Nodejs</strong> 的 <strong>Template</strong> 使用為 <strong>PUG(Jade)</strong>。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20201013/demo.gif" alt="Demo"></p>
+<p>有興趣跟筆者一起從後端窺探可以參考前幾篇文章 <strong><a href="https://rexhung0302.github.io/2020/08/06/20200806/">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong> 及 <strong><a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a></strong>。</p>
+<p>本次作業練習將會使用 <strong>Express</strong> 及 <strong>Firebase</strong> 實作。</p>
+<hr>
+<h3 id="整體規劃"><a href="#整體規劃" class="headerlink" title="整體規劃"></a>整體規劃</h3><p>其實這次作業是希望我們做形象官網，但想了一下還是想從待辦清單下手，也可以串接 <strong>Firebase</strong> 的登入驗證，不需要在自己寫一個會員系統。</p>
+<p>而這次路由也規劃拆成 <code>routes -&gt; controllers -&gt; models</code><strong>(MVC架構)</strong>，一方面好維護，一方面檔案也不會那麼亂，比較清爽。</p>
+<p>在前篇文章 <strong><a href="https://rexhung0302.github.io/2020/09/14/20200914/#more">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a></strong> 有提到如何使用 <strong>Express</strong> 快速建立一個專案環境，但資料夾架構怎麼放就是看個人了，這邊筆者拆成自己比較容易理解且好處理的架構。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/framework.png" alt="大致架構"></p>
+<p>由上至下大概為：</p>
+<ol>
+<li><p>config -&gt; 放第三方服務的設定</p>
+</li>
+<li><p>controllers -&gt; <strong>Models</strong> 及 <strong>Router</strong> 的橋樑</p>
+</li>
+<li><p>middleware -&gt; 中介層(可用來驗證…等等)</p>
+</li>
+<li><p>models -&gt; 與資料庫的橋樑</p>
+</li>
+<li><p>node_modules -&gt; 套件庫</p>
+</li>
+<li><p>public -&gt; 靜態資源放置區</p>
+</li>
+<li><p>routes -&gt; 路由</p>
+</li>
+<li><p>views -&gt; 靜態頁面</p>
+</li>
+<li><p>env -&gt; 環境變數</p>
+</li>
+</ol>
+<blockquote>
+<p><em>還有一些常見到的就不特別介紹了</em></p>
+</blockquote>
+<hr>
+<h3 id="大致功能"><a href="#大致功能" class="headerlink" title="大致功能"></a>大致功能</h3><p>這次筆者做一個比較簡單的待辦事項，可以簡單新增編輯刪除，其實這些透過 <strong>Firebase</strong> 都可以很輕易地做到，而路由安排也是簡單的指定並渲染，其中有使用到 <a target="_blank" rel="noopener" href="https://github.com/jaredhanson/connect-flash">connect-flash</a>，這是可以將一些資訊暫存在 <strong>session</strong>，好處是刷新後只會顯示一次，之後就會消失，不會再留存在我們的記憶體內，省空間！</p>
+<p>使用方式也很簡單，路由需要用到的地方，只要使用以下方法即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 這個方法會將 &#x27;錯誤資訊&#x27; 暫時存放再 session</span></span><br><span class="line">req.<span class="title function_">flash</span>(<span class="string">&#x27;error&#x27;</span>, <span class="string">&#x27;錯誤資訊&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過這個方法可將剛剛暫存的資料拿出來，但也將會消失在暫存中</span></span><br><span class="line">req.<span class="title function_">flash</span>(<span class="string">&#x27;error&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="模板題外話"><a href="#模板題外話" class="headerlink" title="模板題外話"></a>模板題外話</h3><p>此外這邊透過 <strong>pug</strong> 渲染，在之前前端使用 <strong>pug</strong> 時幾乎不會用到變數這功能，而這次接觸到了怎麼將變數渲染到頁面上，在後端透過下列方式將值放進變數裡：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 111行</span></span><br><span class="line">res.<span class="title function_">render</span>(<span class="string">&#x27;editTask&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;Edit Task&#x27;</span>,</span><br><span class="line">    <span class="attr">error</span>: req.<span class="title function_">flash</span>(<span class="string">&#x27;error&#x27;</span>),</span><br><span class="line">    <span class="attr">title_val</span>: title,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>接著在前端頁面使用下面的方式渲染出來：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//- /views/editTask.pug 36行</span><br><span class="line">input#email.form-control(</span><br><span class="line">    type=&#x27;text&#x27;, </span><br><span class="line">    name=&quot;title&quot;,</span><br><span class="line">    placeholder=&quot;Title&quot;,</span><br><span class="line">    autocomplete,</span><br><span class="line">    value=`$&#123;title_val ? title_val : &#x27;&#x27;&#125;`</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>而如果碰到陣列要渲染就透過下面的方式渲染：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//- /views/editTask.pug 13行</span><br><span class="line">if error</span><br><span class="line">    each val,index in error</span><br><span class="line">        .alert.alert-danger.alert-dismissible.fade.show.animate__animated.animate__shakeX(</span><br><span class="line">            role=&quot;alert&quot;</span><br><span class="line">        )</span><br><span class="line">            strong= val.msg</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="關於驗證"><a href="#關於驗證" class="headerlink" title="關於驗證"></a>關於驗證</h3><h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>這邊使用 <strong><a target="_blank" rel="noopener" href="https://express-validator.github.io/docs/">express-validator-v6.6.1</a></strong> 作為驗證，一般驗證我們不止透過前端驗證，後端也需要驗證，而這邊使用這個套件也提供了很簡單的驗證方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安裝套件</span><br><span class="line">$ npm install express-validator</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入套件 </span></span><br><span class="line"><span class="keyword">const</span> &#123; check, body, cookie, header, param  &#125; = <span class="built_in">require</span>(<span class="string">&#x27;express-validator&#x27;</span>)</span><br><span class="line"><span class="comment">// 更多引入方法可查看 https://express-validator.github.io/docs/check-api.html</span></span><br></pre></td></tr></table></figure>
+
+<p>套件提供了幾種在後端驗證資料的讀取方式：</p>
+<ol>
+<li>check([field, message])</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//- 驗證的欄位為 email</span><br><span class="line">input(type=&quot;email&quot;, name=&quot;email&quot;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>這個方法會從 <code>req.body、req.cookies、req.headers、req.param、req.query</code> 去尋找這個名稱的欄位資料，如果有重複的名稱，則都會驗證！</p>
+</blockquote>
+<ol start="2">
+<li>check 剩下其他的驗證函示</li>
+</ol>
+<p>其他的驗證函示用法幾乎差不多，只是在尋找這個欄位的地方會不一樣，<code>body</code> 只會從 <code>req.body</code> 尋找、<code>header</code> 只會從 <code>req.headers</code> 尋找…等等</p>
+<h4 id="簡單的功能"><a href="#簡單的功能" class="headerlink" title="簡單的功能"></a>簡單的功能</h4><p>其實我們最主要會用到的功能為 <code>notEmpty()</code>，檢查是否為空，而用法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /routes/index.js 24行</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/editTask/:id&#x27;</span>, checkAuth.<span class="property">verifyAuth</span>, [</span><br><span class="line">    <span class="title function_">check</span>(<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;Title is required&#x27;</span>).<span class="title function_">notEmpty</span>(),</span><br><span class="line">    <span class="title function_">check</span>(<span class="string">&#x27;expiry&#x27;</span>, <span class="string">&#x27;Expiry is required&#x27;</span>).<span class="title function_">notEmpty</span>(),</span><br><span class="line">    <span class="title function_">check</span>(<span class="string">&#x27;content&#x27;</span>, <span class="string">&#x27;Content is required&#x27;</span>).<span class="title function_">notEmpty</span>(),</span><br><span class="line">], indexController.<span class="property">postEditTask</span>);</span><br></pre></td></tr></table></figure>
+
+<p>上方會尋找各個欄位名稱為 <code>title</code>、<code>expiry</code> 及 <code>content</code> 的值，檢查是否為空，如果為空就返回提示文字，更多方法可查看 <a target="_blank" rel="noopener" href="https://github.com/validatorjs/validator.js">validator.js</a>。</p>
+<h4 id="回傳錯誤訊息"><a href="#回傳錯誤訊息" class="headerlink" title="回傳錯誤訊息"></a>回傳錯誤訊息</h4><p>而我們如何將錯誤訊息回傳呢？在我們驗證錯誤之後，可以在驗證的檔案最上方引入 <code>const &#123; validationResult &#125; = require(&#39;express-validator&#39;);</code>，接著向下方的方式即可拿到錯誤資訊：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = <span class="title function_">validationResult</span>(req);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣即可拿到錯誤資訊，如果是空的呢？就是沒有檢查到錯誤，接著透過上面提到的 <strong><a target="_blank" rel="noopener" href="https://github.com/jaredhanson/connect-flash">connect-flash</a></strong> 將錯誤資訊放在暫存中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /controllers/index.js 50行</span></span><br><span class="line"><span class="attr">postNewTask</span>: <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> errors = <span class="title function_">validationResult</span>(req);</span><br><span class="line">    <span class="keyword">const</span> &#123; title, expiry, content &#125; = req.<span class="property">body</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!errors.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        <span class="comment">// 如果有錯誤</span></span><br><span class="line">        req.<span class="title function_">flash</span>(<span class="string">&#x27;error&#x27;</span>, errors.<span class="property">errors</span>);</span><br><span class="line">        req.<span class="title function_">flash</span>(<span class="string">&#x27;title_val&#x27;</span>, title);</span><br><span class="line">        req.<span class="title function_">flash</span>(<span class="string">&#x27;expiry_val&#x27;</span>, expiry);</span><br><span class="line">        req.<span class="title function_">flash</span>(<span class="string">&#x27;content_val&#x27;</span>, content);</span><br><span class="line">        res.<span class="title function_">redirect</span>(<span class="string">&#x27;/newTask&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(errors.<span class="title function_">isEmpty</span>()) &#123;</span><br><span class="line">        <span class="comment">// 如果沒錯誤 Do something...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上方可以看到筆者也在 <code>req.body</code> 拿出了相關資訊，因為我們可能會在某一個欄位輸入錯誤，但其他欄位可能是正確的，這時候就必須將原本的值帶回，提升使用者體驗！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/error_msg.png" alt="錯誤提示"></p>
+<hr>
+<h3 id="中介層"><a href="#中介層" class="headerlink" title="中介層"></a>中介層</h3><p>這次的練習也透過 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/session#readme">express-session</a></strong> 將登入權杖存在 <strong>session</strong> 並且前端無法透過開發者工具取得，另外也把登入後 <strong>Firebase</strong> 的相關資訊存在 <strong>session</strong>，方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 5行</span></span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">&#x27;express-session&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>確保有引入套件後在使用下面的方法拿取 Token：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js 24行</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="title function_">session</span>(&#123;</span><br><span class="line">  <span class="attr">secret</span>: <span class="string">&#x27;todo list&#x27;</span>,</span><br><span class="line">  <span class="attr">resave</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">rolling</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">saveUninitialized</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">cookie</span>: &#123;</span><br><span class="line">    <span class="attr">httpOnly</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">maxAge</span>: <span class="number">10</span>*<span class="number">10</span>*<span class="number">10000</span> <span class="comment">// 過期時間</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<p>接著在登入完成後將相關的資訊存在 session：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /controllers/user.js 32行</span></span><br><span class="line">req.<span class="property">session</span>.<span class="property">auth</span> = &#123;</span><br><span class="line">    <span class="attr">uid</span>: response.<span class="property">user</span>.<span class="property">uid</span>,</span><br><span class="line">    <span class="attr">email</span>: response.<span class="property">user</span>.<span class="property">email</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後再寫一支中介層檔案，內容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /middleware/auth.js 1行</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">verifyAuth</span>: <span class="function">(<span class="params">req, res, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!req.<span class="property">sessionID</span> || !req.<span class="property">session</span>.<span class="property">auth</span> || !req.<span class="property">session</span>.<span class="property">auth</span>.<span class="property">uid</span> || !req.<span class="property">session</span>.<span class="property">auth</span>.<span class="property">email</span>) &#123;</span><br><span class="line">      res.<span class="title function_">redirect</span>(<span class="string">&#x27;users/login&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="title function_">next</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣一來就能在想要驗證的路由上使用了，先在要使用的地方引入中介層檔案 <code>const checkAuth = require(&#39;../middleware/auth&#39;);</code>，接著即可使用：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201013/checkAuth.png" alt="中介層"></p>
+<p>如果有通過驗證才會 <code>next()</code> 其他會倒回登入頁面！</p>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>按照慣例這邊附上實作好的 Demo：</p>
+<p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/node-todos">傳送門</a></p>
+<p>Demo: <a target="_blank" rel="noopener" href="https://express-todos-list.herokuapp.com/users/login">傳送門</a></p>
+<blockquote>
+<p><em>因為是使用 Heroku 免費方案，如果太久沒有人打開網頁，打開需要點時間喚醒，請見諒</em></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本篇其實沒有什麼技術成分在，但純分享一下自己小作業做出來的成果，我想還有許多需要改進，<strong><a target="_blank" rel="noopener" href="https://www.hexschool.com/courses/nodejs.html">六角學院 - NodeJS 前後端開發實戰</a></strong> 課程也還沒完成，這邊要在繼續惡補了！</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E6%8A%8A%E7%8E%A9-express-validator-%E5%9C%A8%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%AB%AF%E5%81%9A%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89-797342aab2d3">[筆記] 把玩 express-validator 在伺服器端做表單驗證</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/Back-end/" rel="tag"><i class="fa fa-tag"></i> Back-end</a>
+              <a href="/tags/NodeJS/" rel="tag"><i class="fa fa-tag"></i> NodeJS</a>
+              <a href="/tags/Express/" rel="tag"><i class="fa fa-tag"></i> Express</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/14/20200914/" rel="prev" title="[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談">
+      <i class="fa fa-chevron-left"></i> [NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/09/20201109/" rel="next" title="[NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫">
+      [NodeJS Become A Full Stack Developer] — NodeJS ORM Sequelize Cli 串接資料庫 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E9%AB%94%E8%A6%8F%E5%8A%83"><span class="nav-number">2.1.</span> <span class="nav-text">整體規劃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E5%8A%9F%E8%83%BD"><span class="nav-number">2.2.</span> <span class="nav-text">大致功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E9%A1%8C%E5%A4%96%E8%A9%B1"><span class="nav-number">2.3.</span> <span class="nav-text">模板題外話</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E9%A9%97%E8%AD%89"><span class="nav-number">2.4.</span> <span class="nav-text">關於驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">2.4.1.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B0%A1%E5%96%AE%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">2.4.2.</span> <span class="nav-text">簡單的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E5%82%B3%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF"><span class="nav-number">2.4.3.</span> <span class="nav-text">回傳錯誤訊息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E4%BB%8B%E5%B1%A4"><span class="nav-number">2.5.</span> <span class="nav-text">中介層</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/10/13/20201013/",
+      identifier: "2020/10/13/20201013/",
+      title     : "[NodeJS Become A Full Stack Developer] — 菜雞必經之路 👉 實作一個 Todo List",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

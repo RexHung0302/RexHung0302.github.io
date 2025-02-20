@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言前陣子拖工作專案之福，碰到了 Google Analytics(以下簡稱GA)，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 GA 及 GTM 可以做什麼，及如何設定。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/09/13/20200913/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言前陣子拖工作專案之福，碰到了 Google Analytics(以下簡稱GA)，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 GA 及 GTM 可以做什麼，及如何設定。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-09-13T12:56:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.829Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Google">
+<meta property="article:tag" content="Google Analytics">
+<meta property="article:tag" content="GA">
+<meta property="article:tag" content="Google Tag Manager">
+<meta property="article:tag" content="GTM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/09/13/20200913/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？ | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/09/13/20200913/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-09-13 20:56:00" itemprop="dateCreated datePublished" datetime="2020-09-13T20:56:00+08:00">2020-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Google/" itemprop="url" rel="index"><span itemprop="name">Google</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_logo.png" alt="GA"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>前陣子拖工作專案之福，碰到了 <a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/#/">Google Analytics(以下簡稱GA)</a>，相信有碰到行銷的人應該或多或少都會聽過這個，本篇將會淺談 <strong>GA</strong> 及 <strong>GTM</strong> 可以做什麼，及如何設定。</p>
+<span id="more"></span>
+
+<p>本篇將會使用 <strong>Vue Cli</strong> 來做示範，並且搭配 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 使用，如果是普通的 <strong>HTML</strong> 也可以輕易上手，沒毛病！</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p><img src="/images/others/loading.gif" data-original="/images/20200913/marketing.png" alt="關於行銷"></p>
+<p><strong>GA</strong> 是用於 <strong>行銷、宣傳、分析</strong> 的利器，如果你正需要知道 <strong>GA</strong> 怎麼設定，以及如何查看報表設定等等，可以參考此篇，不過這邊只會淺談，不會過度深入研究。</p>
+<p><strong>GTM</strong> 是用來設定 觸發事件、條件、一些相關設定，緊接著會把相關參數傳送給第三方服務，例如 <strong>GA</strong>。</p>
+<blockquote>
+<p><strong>老樣子本篇文章使用於筆記，有錯誤的地方還請各路大神在下方留言並且給予指教，非常感謝。</strong></p>
+</blockquote>
+<hr>
+<h3 id="關於GA"><a href="#關於GA" class="headerlink" title="關於GA"></a>關於GA</h3><p>如果你在專案上曾經有過，怎麼樣才能使我的東西更有效地推廣，或是有疑慮我的使用者到底都怎麼來，怎麼去？亦或是工作上老闆曾對你說，為什麼我們的網站總是感覺很難推廣開來呢？這時候你可以考慮 <strong>GA</strong> 了！</p>
+<p>GA 是數據分析工具，相信掛上 <strong>Google</strong> 你大概也可以想像得到普及程度及資訊獲取容易程度；另外使用 Google 搜尋引擎的人數應該也不需要筆者提供數據了，可能現在大家都離不開 <strong>餵狗(Google)</strong> 了，所以在數據的準確度上也可以放心的使用。</p>
+<blockquote>
+<p><em>在這邊我們介紹的將會是 <strong>GA</strong> 的免費版本，和付費版本差異在於免費的延誤值在 <strong>3-48小時</strong>，付費版本則確保資訊延誤值在 <strong>4小時</strong> 內，另外需要注意的是如果網站流量超過 <strong>一千萬</strong>，將會被強迫升級至付費版本。</em></p>
+</blockquote>
+<hr>
+<h3 id="GA的好處"><a href="#GA的好處" class="headerlink" title="GA的好處"></a>GA的好處</h3><p>如果你曾經使用過其他的數據分析軟體，可能會想 <strong>GA</strong> 和其他的數據軟體有什麼差異，在 <strong>GA</strong> 上預設是 <strong>30分鐘</strong> 統計一次，所以不會造成數據重複(失真)的情況。</p>
+<p>在分析上可以了解：</p>
+<ol>
+<li><p>使用者怎麼進入網站</p>
+</li>
+<li><p>流量分析、如何開發使用者、活躍使用者的變化、使用者習慣分析、使用者造訪使用的工具</p>
+</li>
+</ol>
+<hr>
+<h3 id="關於GTM"><a href="#關於GTM" class="headerlink" title="關於GTM"></a>關於GTM</h3><p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_logo.png" alt="GTM"></p>
+<p>上面說了 <strong>GA</strong> 這邊也要簡短的介紹一下 <strong>Google Tag Manager(以下簡稱GTM)</strong>，這是一個類似中介站的東西，需要事先在 <strong>GTM</strong> 設定好相關的參數及觸發方法等等，然後再將這些資訊傳送到第三方服務，比方說 <strong>Google AdWords、FB Pixel、Bing</strong> 和 上方提到的 <strong>GA</strong>。</p>
+<blockquote>
+<p><strong>GTM</strong> 介紹很簡短吧，本篇將會簡短介紹如何設定 <strong>GTM</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="前菜不用了"><a href="#前菜不用了" class="headerlink" title="前菜不用了"></a>前菜不用了</h3><p>前面說了這麼多，這邊要教你如何進入 <strong>GA</strong> 及 <strong>GTM</strong> 的世界才是本篇的重點，本次我們將透過 <strong>Vue Cli</strong> 來實作一個分析專案。</p>
+<p>如果你是使用 HTML ，可以再申請 <strong>GTM</strong> 及 <strong>GA</strong> 之後到 <strong>GTM</strong> 的管理後台，點擊右上角的 10個英文數字組合的代碼，在跳出視窗之後按照上面的方法埋入 <strong>GTM</strong> 代碼。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_step1.png" alt="點擊 GTM 右上角的代號"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_step2.png" alt="按照彈窗的指示"></p>
+<p>之後再按照本篇下方的 <strong>GA</strong> <a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">設定教學</a> 即可。</p>
+<hr>
+<h3 id="Vue-專案分析之路"><a href="#Vue-專案分析之路" class="headerlink" title="Vue 專案分析之路"></a>Vue 專案分析之路</h3><p>如果還不知道怎麼建立 <strong>Vue</strong> 專案可以參考 <a href="https://rexhung0302.github.io/2019/03/26/20190325/">[Vue Notes] — Vue-Cli #1 初次見面</a>。</p>
+<blockquote>
+<p><em>由於當初有消息 <strong>Vue3</strong> 即將釋出，所以只寫了一篇就停止了，之後等 <strong>Vue3</strong> 正式釋出會再繼續研究。</em></p>
+</blockquote>
+<p>安裝好 <strong>Vue-cli</strong> 之後就緊接著安裝我們需要用到的 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a>，輸入 <code>npm i vue-gtm -S</code>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/install-gtm.gif" alt="按照彈窗的指示"></p>
+<blockquote>
+<p>*如果您已經會設定 <strong>GTM</strong>，可以跳至 <strong><a href="#%E9%A0%90%E8%A6%BD%E8%A8%AD%E5%AE%9A">預覽設定</a></strong>。*</p>
+</blockquote>
+<hr>
+<h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><p>在我們安裝好套件或使用 <strong>HTML</strong> 掛載好 <strong>GTM</strong> 追蹤碼之後，緊接著要來設定 <strong>GTM</strong>，這兩者之間的關係可以透過下圖來解釋。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_GA_Content.png" alt="流程介紹"></p>
+<p>我們先到 <strong>GTM</strong> 建立一個帳戶，如下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM-apply-step1.png" alt="申請步驟1"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM-apply-step2.png" alt="申請步驟2"></p>
+<p>在上面申請的內容，分別為 <strong>帳戶(Account)、容器(Container)</strong>，這兩個可以用下圖來簡單說明：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_info.png" alt="GTM簡單介紹"></p>
+<p>一個帳戶底下可以有好幾個容器，而容器通常會對應一個網址，接著在每個容器裡面會放進相關的觸發條件，最後再把觸發的結果相關參數傳送至第三方服務，比如 <strong>GA</strong>。</p>
+<hr>
+<h3 id="開始設定"><a href="#開始設定" class="headerlink" title="開始設定"></a>開始設定</h3><p>大致了解運作流程後我們就開始設定吧，這邊我們先設定使用者瀏覽的事件，先到 <strong>GTM</strong> 左方的 <strong>觸發條件</strong>，新增一個 <strong>自訂事件</strong>，我們先取名為 <strong>click-event</strong>，並且選擇部分 <strong>自訂事件</strong>，要剛好 <strong>有事件發生且這些條件全都符合時，啟用這個觸發條件</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/click_event.png" alt="第一個自訂事件"></p>
+<p>接著先到 <strong>GA</strong> 去<a target="_blank" rel="noopener" href="https://analytics.google.com/analytics/web/?authuser=0#provision/SignUp/">申請</a>一個分析，填完內容及同意事項後會出現 <strong>追蹤ID</strong> 保存下來！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_apply.png" alt="建立新的GA"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_info.png" alt="複製追蹤ID"></p>
+<p>然後到 <strong>GTM</strong> 左方的變數新增一個變數，變數類型選擇 <strong>Google Analytics(分析)設定</strong>，然後填上剛剛的追蹤編號，這樣就可以和 <strong>GA</strong> 連結了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_triggerID.png" alt="新增變數"></p>
+<p>然後在順便新增一個 <strong>變數類型</strong> 為 <strong>資料層變數</strong> 的 <strong>userID</strong>，這將會是我們在專案觸發條件之後傳送進來的Key，可以先把這邊的變數想像成 <strong>JavaScript</strong> 的 <strong>全域變數</strong>，而這邊就是宣告一個 <code>var userID;</code>。</p>
+<p>最後再選擇 <strong>GTM</strong> 左方的 <strong>代碼</strong>，然後新增一個 <strong>Google Analytics(分析)設定：通用 Analytics(分析)</strong>，追蹤類型選擇 <strong>事件</strong>，然後再分別填上 <strong>類別、動作、標籤、值</strong>，剛剛我們設定的變數就在這邊起作用了，我們可以直接帶入變數的 <strong>Key</strong>，點擊像 <strong>積木的Icon</strong> 後如下圖：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_variable.png" alt="帶入變數"></p>
+<p>關於上面提到的 <strong>類別、動作、標籤、值</strong> 將會是在埋入 <strong>GTM</strong> 的地方會傳送過來的幾個值，如果想要傳送更多的變數，比如 <strong>userID</strong> 或是 <strong>url</strong> 等等，可能光靠上面幾個欄位放不下，這時候就可以勾選 <strong>在這個代碼啟用覆寫設定</strong>，然後填入剛剛拿到的 <strong>追蹤編號</strong>，之後打開下面的 <strong>更多設定</strong>，然後在打開 <strong>要設定的欄位</strong>，然後填入更多的變數。</p>
+<hr>
+<h3 id="預覽設定"><a href="#預覽設定" class="headerlink" title="預覽設定"></a>預覽設定</h3><p>到這時候其實可以先去看看我們的 <strong>GTM</strong> 有無掛載成功，如果你是使用普通的 <strong>HTMl</strong> 再貼上剛剛一開始提示的彈窗那些程式碼，應該就可以先預覽了，如果是 <strong>Vue-cli</strong> 可以接著使用下面的步驟。</p>
+<p>在安裝完 <a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a> 之後，按照 <strong>Document</strong> 的教學把套件掛進去專案裡。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_install_on_vue.png" alt="掛載GTM"></p>
+<p>上面的步驟就像是在申請完 <strong>GTM</strong> 或是點擊 <strong>GTM</strong> 右上角的十個英文數字編號出現的彈窗，埋入代碼之後一樣的動作。</p>
+<p>在做好的埋 <strong>Code</strong> 或是設定 <strong>vue-gtm</strong> 之後點擊 <strong>GTM</strong> 上方的預覽，再到你埋程式碼的網站，就會看見下方彈出 <strong>GTM</strong> 的預覽 <strong>Debug</strong> 視窗，就代表成功啦。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_debug_preview.png" alt="GTM的開發者工具"></p>
+<hr>
+<h3 id="觸發設定"><a href="#觸發設定" class="headerlink" title="觸發設定"></a>觸發設定</h3><p>確定我們有掛載成功之後，別急著把剛剛設定的那些 <strong>GTM</strong> 提交出去，我們一樣可以先透過預覽查看是否有把事件正確的傳送到 <strong>GTM</strong>。</p>
+<p>先到程式碼那邊，埋下我們的事件，因為我們前面選擇自訂事件，所這邊在我們想觸發的地方埋下我們的事件。筆者這邊放了一個按鈕，在使用者點擊之後會發送事件到 <strong>GTM</strong>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button-primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;sendGTMHandler()&quot;</span>&gt;</span>Send GTM Event<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;App&#x27;</span>,</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">userID</span>: <span class="string">&#x27;ABC-123456&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">sendGTMHandler</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> vm = <span class="variable language_">this</span>;</span><br><span class="line">      vm.<span class="property">$gtm</span>.<span class="title function_">trackEvent</span>(&#123;</span><br><span class="line">        <span class="attr">event</span>: <span class="string">&#x27;click-event&#x27;</span>,</span><br><span class="line">        <span class="attr">category</span>: <span class="string">&#x27;點擊事件&#x27;</span>, <span class="comment">// 類別 字元(必填)</span></span><br><span class="line">        <span class="attr">action</span>: <span class="string">&#x27;click&#x27;</span>, <span class="comment">// 動作 字元(必填)</span></span><br><span class="line">        <span class="attr">label</span>: vm.<span class="property">userID</span>, <span class="comment">// 標籤 字元(選填)</span></span><br><span class="line">        <span class="attr">value</span>: <span class="literal">null</span>, <span class="comment">// 標籤 數字(選填)</span></span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>透過套件的使用方法發送為上方的方法，如果你是使用前面提到的彈窗的內容埋進程式碼裡面，可以使用下面的方法，詳細可參考 <a target="_blank" rel="noopener" href="https://developers.google.com/analytics/devguides/collection/analyticsjs/events?hl=zh-cn">Google Analytics Document</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//當使用者觸發 會發送 類別:導覽清單 ,動作:點擊 ,標籤:註冊會員 , 價值:200</span></span><br><span class="line"><span class="title function_">ga</span>(<span class="string">&#x27;send&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">hitType</span>: <span class="string">&#x27;click-event&#x27;</span>,</span><br><span class="line">  <span class="attr">eventCategory</span>: <span class="string">&#x27;點擊事件&#x27;</span>, <span class="comment">// 類別 字元(必填)</span></span><br><span class="line">  <span class="attr">eventAction</span>: <span class="string">&#x27;click&#x27;</span>, <span class="comment">// 動作 字元(必填)</span></span><br><span class="line">  <span class="attr">eventLabel</span>: vm.<span class="property">userID</span> <span class="comment">// 標籤 字元(選填)</span></span><br><span class="line">  <span class="attr">eventValue</span>: <span class="literal">null</span> <span class="comment">// 標籤 數字(選填)</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 簡化寫法</span></span><br><span class="line"><span class="title function_">ga</span>(<span class="string">&#x27;send&#x27;</span>, <span class="string">&#x27;click-event&#x27;</span>, <span class="string">&#x27;點擊事件&#x27;</span>, <span class="string">&#x27;click&#x27;</span>, vm.<span class="property">userID</span>);</span><br></pre></td></tr></table></figure>
+
+<p>之後去點擊看看你的按鈕吧，會發現 Debug 視窗出現一個新的事件，如果打開後你的事件出現在 <strong>Tags Fired</strong> 代表是成功的，如果是出現在 <strong>Tags Not Fired</strong> 代表是失敗的，點擊 <strong>Tags Fired</strong> 成功的事件進入後也會發現事件名稱旁邊會出現一個成功的小勾勾。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GTM_debug_event_send.png" alt="GTM的開發者工具"></p>
+<hr>
+<h3 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h3><p>最後我們來到 <strong>GA</strong>，因為剛剛有綁定 <strong>資料層 Data Layer</strong>，因為有填寫追蹤編號，所以在 <strong>GA</strong> 這邊會出現現在有什麼事件，以及有幾個人在線上等等，相關的數據統計都可以在這邊找到。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200913/GA_event_success.png" alt="成功追蹤事件了"></p>
+<blockquote>
+<p><em>請別介意畫面有一邊黑色的，因為電腦截圖出現 <strong>Bug</strong> 所以卡住了。</em></p>
+</blockquote>
+<hr>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><p>這邊也會放上範例，但是使用者還是必須自己去申請 <strong>GTM</strong> 及 <strong>GA</strong> 了，但可以直接把專案的 <code>main.js</code> <strong>vue-gtm id</strong> 改為自己的。</p>
+<p>GitHub: <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/GA-GTM-example">傳送門</a></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>其實 <strong>GTM</strong> 及 <strong>GA</strong> 還有很多可以設定，這邊先大致介紹一下如何入門使用，更多的可以再慢慢摸索，拖工作的福，這次摸了好久也有一些概念了，希望能幫到其他人，也順便筆記一下，之後自己忘記還能回來爬文。</p>
+<blockquote>
+<p><em>如果你對 <strong>GTM</strong> 及 <strong>GA</strong> 有興趣也歡迎下面留言一起交流。</em></p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://inboundmarketing.com.tw/websites-optimization/gtm%E6%95%99%E5%AD%B8-%E6%96%B0%E6%89%8B%E8%A7%80%E5%BF%B5%E7%AF%87.html">GTM教學-新手觀念篇，追蹤網站數據你只需Google Tag Manager代碼</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://iandays.com/2018/04/25/gaevents/">Google analytics 事件追蹤、轉換目標設定教學 ga event</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://shian.tw/article/55">GA 帳號申請、GA設定、GA驗證，3個步驟一次說明</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ga.awoo.com.tw/data-layer/">資料層 Data Layer, 存放各種訪客、網頁行為數據的地方</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/mib200/vue-gtm">vue-gtm</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Google/" rel="tag"><i class="fa fa-tag"></i> Google</a>
+              <a href="/tags/Google-Analytics/" rel="tag"><i class="fa fa-tag"></i> Google Analytics</a>
+              <a href="/tags/GA/" rel="tag"><i class="fa fa-tag"></i> GA</a>
+              <a href="/tags/Google-Tag-Manager/" rel="tag"><i class="fa fa-tag"></i> Google Tag Manager</a>
+              <a href="/tags/GTM/" rel="tag"><i class="fa fa-tag"></i> GTM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/11/20200811/" rel="prev" title="[JavaScript Note] — 關於 Url 轉址及 取得參數">
+      <i class="fa fa-chevron-left"></i> [JavaScript Note] — 關於 Url 轉址及 取得參數
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/14/20200914/" rel="next" title="[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談">
+      [NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BCGA"><span class="nav-number">2.1.</span> <span class="nav-text">關於GA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GA%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">2.2.</span> <span class="nav-text">GA的好處</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BCGTM"><span class="nav-number">2.3.</span> <span class="nav-text">關於GTM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%8F%9C%E4%B8%8D%E7%94%A8%E4%BA%86"><span class="nav-number">2.4.</span> <span class="nav-text">前菜不用了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-%E5%B0%88%E6%A1%88%E5%88%86%E6%9E%90%E4%B9%8B%E8%B7%AF"><span class="nav-number">2.5.</span> <span class="nav-text">Vue 專案分析之路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">2.6.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%A7%8B%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.7.</span> <span class="nav-text">開始設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A0%90%E8%A6%BD%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.8.</span> <span class="nav-text">預覽設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%B8%E7%99%BC%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.9.</span> <span class="nav-text">觸發設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number">2.10.</span> <span class="nav-text">大功告成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">2.11.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/09/13/20200913/",
+      identifier: "2020/09/13/20200913/",
+      title     : "[Tool Note] — Google Analytics(GA) 及 Google Tag Manager(GTM) 怎麼用？",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

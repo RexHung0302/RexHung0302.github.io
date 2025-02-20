@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言結束了前兩週的 RWD 地獄式訓練，這週迎來的是難度稍微低一點的後台表單設計，因為後台通常很少用手機看，所以本週沒有 RWD。 因為這次的課程有提到 Bootstrap，所以這次作業老師是建議套上 Bootstrap，但因為平常就有在使用，所以想改用手幹的方式看看能不能幹出一個 Modal 以及 Table。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Web Layout Training] — Week_5 後台表單設計">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/05/12/20200512/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言結束了前兩週的 RWD 地獄式訓練，這週迎來的是難度稍微低一點的後台表單設計，因為後台通常很少用手機看，所以本週沒有 RWD。 因為這次的課程有提到 Bootstrap，所以這次作業老師是建議套上 Bootstrap，但因為平常就有在使用，所以想改用手幹的方式看看能不能幹出一個 Modal 以及 Table。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-05-11T19:33:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.762Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Web-Layout-Training">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/05/12/20200512/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool Web Layout Training] — Week_5 後台表單設計 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/05/12/20200512/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Web Layout Training] — Week_5 後台表單設計
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-05-12 03:33:00" itemprop="dateCreated datePublished" datetime="2020-05-12T03:33:00+08:00">2020-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>6 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200512/week_5_classLogo.png" alt="第五週的練習"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>結束了前兩週的 <strong>RWD</strong> 地獄式訓練，這週迎來的是難度稍微低一點的後台表單設計，因為後台通常很少用手機看，所以本週沒有 <strong>RWD</strong>。</p>
+<p>因為這次的課程有提到 <strong>Bootstrap</strong>，所以這次作業老師是建議套上 <strong>Bootstrap</strong>，但因為平常就有在使用，所以想改用手幹的方式看看能不能幹出一個 <strong>Modal</strong> 以及 <strong>Table</strong>。</p>
+<span id="more"></span>
+
+<p>這次也是使用 <strong>Gulp</strong>，如果你還沒用過或是想知道怎麼從 0 開始建立一個 <strong>Gulp</strong> 歡迎參考我的上一篇文章，<a href="https://rexhung0302.github.io/2020/05/06/20200506/#more">[Tool Notes] — 關於Gulp</a>。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><blockquote>
+<p>*本篇文章將會以三個角度來紀錄， <strong>課程心得(上課後的心得整理)</strong>、<strong>練習心得(做完作業後的心得整理))</strong> 及 <strong>小組任務(每週會有一項小組任務，寫完後的心得)</strong>。*</p>
+</blockquote>
+<p>每週的練習挑戰和地下城有點像，都有自己必須練習到的地方；本週需要練習的目標有至少兩點以上的<a target="_blank" rel="noopener" href="https://hackmd.io/@YmcMgo-NSKOqgTGAjl_5tg/HJpJk8ABU/%2FiE6mxohOS-ujKU398Ewk1w">練習菜單</a>，及額外的一項打字練習。</p>
+<ol>
+<li><p>語意命名</p>
+</li>
+<li><p>再次大推真的加快寫 <strong>Code</strong> 速度很多 -&gt; <strong>幾乎全程使用 <a target="_blank" rel="noopener" href="https://docs.emmet.io/cheat-sheet/">emmet</a> 開發</strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="http://keybr.com/">英打速度</a></strong> 練習</p>
+</li>
+</ol>
+<h4 id="關卡目標"><a href="#關卡目標" class="headerlink" title="關卡目標"></a>關卡目標</h4><ol>
+<li><p><del>Bootstrap 4 套用</del> 本次不使用 Bootstrap</p>
+</li>
+<li><p>後台表單設計</p>
+</li>
+</ol>
+<hr>
+<h3 id="課程心得"><a href="#課程心得" class="headerlink" title="課程心得"></a>課程心得</h3><p>本週課程開始以 <strong>Input</strong> 表單及三劍客(<strong>form、input、submit</strong>)為開頭，介紹了一下關於 <strong>Form</strong> 表單的使用。</p>
+<p>這邊引用 <strong>W3C</strong> 的例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/action_page.php&quot;</span> <span class="attr">methods</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;fname&quot;</span>&gt;</span>First name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;fname&quot;</span> <span class="attr">name</span>=<span class="string">&quot;fname&quot;</span> <span class="attr">value</span>=<span class="string">&quot;John&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;lname&quot;</span>&gt;</span>Last name:<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;lname&quot;</span> <span class="attr">name</span>=<span class="string">&quot;lname&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Doe&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>關於 <strong>Form</strong> 表單的使用時機大多都是在資料表格上，像是要填寫個人資訊或是會員資料…等等，那這個頁面可能就會使用大量的 <strong>Input</strong>。</p>
+<p>而上方提到的例子就是一個表單，<strong>form</strong> 的使用其實很清楚且容易明白，就是把你要送給後端的那些 <strong>值</strong> 的內容全部包起來！然後透過 <code>action=&quot;/action_page.php&quot;</code> 這句的 <code>action</code> 把內容送到特定的位置去！</p>
+<p>至於怎麼送呢，就是透過 <code>methods=&quot;post&quot;</code> 的方式，而方法有兩種，就是 <strong>get</strong> 及 <strong>post</strong>。</p>
+<p>兩種方法的差異如下：</p>
+<ol>
+<li><p><strong>get</strong>: 網址會帶上你的參數，例如上方的 <strong>First name</strong>，將會把 <strong>value</strong> 待在網址後方，<strong>value</strong> 前方會有 <strong>name</strong> 的名稱。例：<a target="_blank" rel="noopener" href="https://xxx.com/?fname=%27123">https://xxx.com?fname=&#39;123</a>‘</p>
+</li>
+<li><p><strong>get</strong>: 有長度限制，因為是 <strong>URL</strong>。</p>
+</li>
+<li><p><strong>post</strong>: 網址不會帶任何參數，相對安全。</p>
+</li>
+<li><p><strong>post</strong>: 因為網址不用帶參數，所以不受 <strong>URL</strong> 長度限制。</p>
+</li>
+</ol>
+<h3 id="關於-CSS-Reset-及-CSS-Normalize"><a href="#關於-CSS-Reset-及-CSS-Normalize" class="headerlink" title="關於 CSS Reset 及 CSS Normalize"></a>關於 CSS Reset 及 CSS Normalize</h3><p>大家通常切版應該都會用到 <strong>CSS Reset</strong> 或是 <strong>CSS Normalize</strong>，兩者的最大差異就是 <strong>CSS Reset</strong> 幾乎是把所有東西都初始化歸零，但是 <strong>CSS Normalize</strong> 並不會將瀏覽器的默認裝置給刪除，某些元素還是保有原本自己的特性。</p>
+<p>這邊舉個大家最熟悉的套件例子，<strong>Bootstrap</strong> 即是使用 <strong>CSS Normalize</strong>。</p>
+<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><p>接下來幾乎都是 <strong>Bootstrap</strong> 的介紹時間，主要提及怎麼引入即使用，這邊就是複習階段了。</p>
+<hr>
+<h3 id="練習心得"><a href="#練習心得" class="headerlink" title="練習心得"></a>練習心得</h3><p>本次最大的挑戰應該就是 <strong>Modal</strong>，所以自己先在腦海大致想了一遍後開始時做。</p>
+<h4 id="關於-Modal"><a href="#關於-Modal" class="headerlink" title="關於 Modal"></a>關於 Modal</h4><p>先提醒一下這邊會用到 <strong>JavaScript</strong> 如果還不太了解的可以先參考我的 <strong>JavaScript</strong> 新手系列從0到1筆記(<strong>第一篇大概就能有個概念</strong>)，如果想先以切版為主，參考下方範例就足夠了：</p>
+<ol>
+<li><p><strong>[JavaScript Notes] — 淺談 JavaScript #1 - <a href="https://rexhung0302.github.io/2019/10/09/20191009/">JavaScript 執行環境及作用域</a></strong></p>
+</li>
+<li><p><strong>[JavaScript Notes] — 淺談 JavaScript #2 - <a href="https://rexhung0302.github.io/2019/10/15/20191015/">運算子、型別與文法</a></strong></p>
+</li>
+<li><p><strong>[JavaScript Notes] — 淺談 JavaScript #3 - <a href="https://rexhung0302.github.io/2019/10/24/20191024/">物件</a></strong></p>
+</li>
+<li><p><strong>[JavaScript Notes] — 淺談 JavaScript #4 - <a href="https://rexhung0302.github.io/2019/10/28/20191028/">關於 This 那些事</a></strong></p>
+</li>
+</ol>
+<p>首先就是要先寫一個 屬性為 <code>position:fixed;</code> 的 <strong>Div</strong> 把整個螢幕包住，然後將 <strong>Modal</strong> 的 <strong>Div</strong> 放置中央，透過 <code>display: flex;</code> 把最外層的 <strong>Div</strong> 設定為 <strong>外元件(Container)</strong>，應該可以很快就辦到！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200512/modal-example.png" alt="先寫一個 Modal Div"></p>
+<p>第二步就是在 <strong>內元件(Item)</strong> 開始寫內容樣式，這邊也可以將第二層當作 <strong>內元件+外容器</strong>，因為你可能會在下一層同時有 <strong>Title</strong> 以及 <strong>關閉按鈕</strong>。</p>
+<p>第三步就是怎麼打開了，這邊用類似上次第三週助教<a target="_blank" rel="noopener" href="https://codepen.io/TzuHui/pen/WNQRjXd">漢堡鈕</a>的寫法，設定好樣式之後，透過最大寬度或是最大高度，預設為 <strong>0</strong> 的方式隱藏它，最後在透過 <strong>JavaScript</strong> 的操作，替設定寬高為 <strong>0</strong> 的那個 <strong>Div</strong> 加上額外的 <strong>Class Name</strong>，比如 <strong>show</strong>，然後透過這個 <strong>Class Name</strong> 去吃另一個設定好的 <em>CSS</em>，之後就會把原本預設寬高為 <strong>0</strong> 的 <strong>CSS</strong> 給蓋過去了！</p>
+<p>這邊提供一下這次自己實作的的方法， <code>.modal</code> 為要顯示的彈窗，加上 <code>background-color: rgba(0, 0, 0, 0.7);</code> 看起來會更有彈窗的感覺：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.modal</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: auto;</span><br><span class="line">  <span class="attribute">transition</span>: all <span class="number">250ms</span> ease;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <strong>Modal</strong> 可以縮放的動畫就是透過 <code>transform: scale(0, 0);</code> 及 <code>transition: all 250ms ease;</code>，其實只要你更改到 CSS 樣式，在那個元件加上 <code>transition: all 250ms ease;</code> 就會替你更改的事情加上補間動畫，有興趣可以參考<a target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201803/css-animation.html">此篇文章</a>。</p>
+<p>接著再透過 <strong>JavaScript</strong> 的操作，在點擊要開啟彈窗的地方加上 <code>onclick=&quot;showDetailModalHandler()&quot;</code>，例如下列程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=<span class="string">&quot;#&quot;</span> onclick=<span class="string">&quot;showDetailModalHandler()&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;material-icons icon&quot;</span>&gt;</span>visibility<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然後在透過 <strong>JavaScript</strong> 或是 <strong>JQuery</strong> 替目標加上 <strong>ClassName</strong>(要使用 <strong>addClass</strong> 或 <strong>toggleClass</strong> 其實都可以)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 顯示個人詳細資訊彈窗</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">showDetailModalHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">  $(<span class="string">&#x27;#detailModal&#x27;</span>).<span class="title function_">addClass</span>(<span class="string">&#x27;modal-show&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">showDetailModalHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> target = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;detailModal&#x27;</span>);</span><br><span class="line">  target.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&quot;modal-show&quot;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>這樣就能打開彈窗，至於關閉作法一模一樣，在要關閉的叉叉上加上 <code>onclick=&quot;closeModal()&quot;</code> 抑或是直接對目標下 <code>click()</code> 事件都可以，例如下方程式碼，這邊使用 <strong>Class Name</strong> 不使用 <strong>ID</strong> 因為很多地方彈窗可能都會用到：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- 關閉個人詳細資訊彈窗 或 關閉新增個人詳細資訊彈窗 或 關閉個人編輯詳細資訊彈窗</span></span><br><span class="line">$(<span class="string">&#x27;.closeModal-btn&#x27;</span>).<span class="title function_">click</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  $(<span class="string">&#x27;#detailModal&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;modal-show&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;#addDetailModal&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;modal-show&#x27;</span>);</span><br><span class="line">  $(<span class="string">&#x27;#editDetailModal&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;modal-show&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>這樣就能做到開啟關閉彈窗，提醒一下這邊不是最好的做法，因為你可能每新增一個彈窗就要再來 <strong>JS</strong> 這邊加上要 <strong>add</strong> 及 <strong>remove</strong> 的 <strong>Class Name</strong>，但目前這樣應該是夠用的！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200512/modal-example-gif.gif" alt="CSS動畫94流暢"></p>
+<p>另外點擊空白處想關閉 Modal 可以參考<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37573608/how-to-make-modal-close-on-click-outside">此篇</a>，這邊我的作法就是抓滑鼠的<strong>鬆開事件</strong>(<strong>點擊事件也可以</strong>)，如果點在目標區域外，就做我要做的事情，範例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- 點擊空白區域外</span></span><br><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">mouseup</span>(<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span><br><span class="line">  <span class="keyword">let</span> clickTargetArea = $(<span class="string">&#x27; #targetOne&#x27;</span>);    <span class="comment">// 設定點擊目標區域</span></span><br><span class="line">  <span class="keyword">if</span>(!clickTargetArea.<span class="title function_">is</span>(e.<span class="property">target</span>) &amp;&amp; clickTargetArea.<span class="title function_">has</span>(e.<span class="property">target</span>).<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//- 關閉個人詳細資訊彈窗 或 關閉新增個人詳細資訊彈窗 或 關閉個人編輯詳細資訊彈窗</span></span><br><span class="line">    $(<span class="string">&#x27;#detailModal&#x27;</span>).<span class="title function_">removeClass</span>(<span class="string">&#x27;modal-show&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>這邊提供完整 <strong>CodePen</strong> 範例 <a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/rNOrmJY">2020春季網頁切版直播班 - 第五週作業範例 - 土炮Modal</a>：</p>
+<iframe height="400" style="width: 100%;" scrolling="no" title="2020春季網頁切版直播班 - 第五週作業範例 - 土炮Modal" src="https://codepen.io/rexhung0302/embed/rNOrmJY?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/rNOrmJY'>2020春季網頁切版直播班 - 第五週作業範例 - 土炮Modal</a> by ZeHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<h4 id="關於對話框"><a href="#關於對話框" class="headerlink" title="關於對話框"></a>關於對話框</h4><p>另外應該就是對話框的部分，這邊也是要透過 <strong>JS</strong> 去取得 <strong>Div</strong> 的寬高。這邊透過 <code>$(&#39;.xxx&#39;).height()</code> <code>$(&#39;.xxx&#39;).width()</code> 這種方式取得元素的高及寬，最後一樣加上 <code>transition: all .5s ease</code> 這樣動畫才跑得順！</p>
+<h4 id="關於-Select"><a href="#關於-Select" class="headerlink" title="關於 Select"></a>關於 Select</h4><p>我記得上課時校長才說如果你的設計師出了很多更改原本 <strong>Select</strong> 樣式的設計稿，記得去跟設計師<del>吵一番</del>討論，因為要強制改 <strong>Select</strong> 的內容是不大可能的，幾乎都要另外寫樣式才能；還好這次六角的設計師還夠有良心，沒有做下拉內部的設計，但是預設的箭頭樣式跟原本的差滿大的，先來一張原本 <strong>Select</strong> 的樣式照片。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200512/select_style.png" alt="預設樣式"></p>
+<p>這時我們大概就是只能更改 <strong>Select</strong> 的背景為白色，然後透過隱藏下拉的箭頭符號，自己替換上圖片或是 <strong>Icon</strong> 來達到外觀與設計稿一致，如果裡面想客製化不另外做成 <strong>Div</strong> 是不太可能了，總之我們先讓他 <strong>87%</strong> 像吧！</p>
+<p>透過使用 <code>appearance:none;</code> 來隱藏預設下拉箭頭，如果怕瀏覽器不同語法支援程度也不同的話可以考慮改為下方範例，改掉箭頭，背景改為透明，取消預設邊框：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">select</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ffffff00</span>;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">  <span class="attribute">appearance</span>:none;  // 隱藏預設下拉箭頭</span><br><span class="line">  -moz-<span class="attribute">appearance</span>:none;</span><br><span class="line">  -webkit-<span class="attribute">appearance</span>:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊提供完整 <strong>CodePen</strong> 範例 <a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/XWmBgvr">2020春季網頁切版直播班 - 第五週作業範例 - 客製化Select</a>：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="2020春季網頁切版直播班 - 第五週作業範例 - 土炮Select" src="https://codepen.io/rexhung0302/embed/XWmBgvr?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/XWmBgvr'>2020春季網頁切版直播班 - 第五週作業範例 - 土炮Select</a> by ZeHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<h4 id="關於輸入框"><a href="#關於輸入框" class="headerlink" title="關於輸入框"></a>關於輸入框</h4><p>最後這個要稍微提一下，因為看到設計稿對話框框的的樣式不像是一般的 <strong>Input</strong>，所以這邊就採用了 <strong>contenteditable</strong> 這個屬性，他是一個可以讓你編輯元素的屬性，只要在 <strong>Element</strong> 上加上這個屬性即可編輯。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">contenteditable</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是我們要怎麽替 <strong>Div</strong> 加上 <strong>PlaceHolder</strong> 呢？這時候就要靠 <strong>CSS</strong> 來幫我們辦到這件事情了！</p>
+<p>這邊我們會用到 <strong>Attribute selectors（屬性選取器）</strong> 來選擇，就是會用中括弧來選擇特定的屬性，透過 <code>[contenteditable][placeholder]</code> 來找到這個 <strong>Div</strong> 並在後面加上 <code>:empty:before</code>，代表內容是空的時候就加上偽元素，這樣是不是超方便的呀，例子就像下方這樣：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[contenteditable]</span><span class="selector-attr">[placeholder]</span><span class="selector-pseudo">:empty</span><span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="built_in">attr</span>(placeholder);</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">color</span>: gray;</span><br><span class="line">  <span class="attribute">background-color</span>: transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這邊提供完整 <strong>CodePen</strong> 範例 <a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/PoPBjxK">2020春季網頁切版直播班 - 第五週作業範例 - 土炮Input</a>：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="PoPBjxK" src="https://codepen.io/rexhung0302/embed/PoPBjxK?height=265&theme-id=dark&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302/pen/PoPBjxK'>PoPBjxK</a> by ZeHung
+  (<a target="_blank" rel="noopener" href='https://codepen.io/rexhung0302'>@rexhung0302</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<hr>
+<h3 id="小組任務"><a href="#小組任務" class="headerlink" title="小組任務"></a>小組任務</h3><h4 id="任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果"><a href="#任務一-請每個小組討論成員，試著載入-BS4-，並作出-modal-效果" class="headerlink" title="任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果"></a>任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果</h4><p>套用 <strong>Bootstrap</strong> 的 <strong>Modal</strong> 效果 <a target="_blank" rel="noopener" href="https://codepen.io/rexhung0302/pen/abvKQGb">點我</a></p>
+<h4 id="任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視"><a href="#任務二-討論-HTML-裡的表格標籤-table、th、tr、td-的用法，請試著做出設計稿裡面的表格設計，並提供-codepen-來檢視" class="headerlink" title="任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視"></a>任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視</h4><p>本次 <strong>Table</strong> 就是使用 <strong>HTML</strong> 裡的表格標籤，就不另外做了。</p>
+<h4 id="任務三-討論第五週版型該怎麼做"><a href="#任務三-討論第五週版型該怎麼做" class="headerlink" title="任務三 - 討論第五週版型該怎麼做"></a>任務三 - 討論第五週版型該怎麼做</h4><hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>本週其實沒有太多需要一直爬文的特別內容，主要就是回歸到切版的部分，這也是為什麼本週我不使用 <strong>Bootstrap</strong>，自己覺得 <strong>Class Name</strong> 命名的部分還能再加油一點！</p>
+<p>這次排版也幾乎都是使用 <code>display: flex;</code> 排版完成，因為不需要 <strong>RWD</strong> 所以排起來算輕鬆，但我想還是有許多可以改進的地方。</p>
+<p>另外其實還是算有參考 <strong>Bootstrap</strong> 的表隔排版方式，自己最後又加上 <strong>thead</strong> 及 <strong>tbody</strong>，只能說 <strong>Bootstrap</strong> 真Ｄ神。</p>
+<p>最後想知道 Flex 還是推薦可以參考我的前幾篇文章 -&gt; <strong><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手</a></strong></p>
+<hr>
+<h2 id="Demo-成果程式碼"><a href="#Demo-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>Source Code：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-web-layout-training/tree/master/Week_5">點我</a></p>
+<p>Demo：<a href="https://rexhung0302.github.io/Hexschool-web-layout-training/Week_5/dist/assignment.html">點我</a></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a href="https://rexhung0302.github.io/2020/03/23/20200323/#more">[CSS Notes] - 第一次 Flex 就上手</a></p>
+</li>
+<li><p><a href="https://rexhung0302.github.io/2020/05/06/20200506/#more">[Tool Notes] — 關於Gulp</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://bootstrap.hexschool.com/docs/4.2/components/modal/">Bootstrap</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"><i class="fa fa-tag"></i> Web-Layout-Training</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/06/20200506/" rel="prev" title="[Tool Note] — 關於Gulp">
+      <i class="fa fa-chevron-left"></i> [Tool Note] — 關於Gulp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/24/20200524/" rel="next" title="[Hexschool Web Layout Training] — Week_6 導入網頁規範設計流程">
+      [Hexschool Web Layout Training] — Week_6 導入網頁規範設計流程 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E5%8D%A1%E7%9B%AE%E6%A8%99"><span class="nav-number">2.0.1.</span> <span class="nav-text">關卡目標</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E5%BF%83%E5%BE%97"><span class="nav-number">2.1.</span> <span class="nav-text">課程心得</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-CSS-Reset-%E5%8F%8A-CSS-Normalize"><span class="nav-number">2.2.</span> <span class="nav-text">關於 CSS Reset 及 CSS Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap"><span class="nav-number">2.3.</span> <span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E5%BF%83%E5%BE%97"><span class="nav-number">2.4.</span> <span class="nav-text">練習心得</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-Modal"><span class="nav-number">2.4.1.</span> <span class="nav-text">關於 Modal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%B0%8D%E8%A9%B1%E6%A1%86"><span class="nav-number">2.4.2.</span> <span class="nav-text">關於對話框</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E6%96%BC-Select"><span class="nav-number">2.4.3.</span> <span class="nav-text">關於 Select</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E8%BC%B8%E5%85%A5%E6%A1%86"><span class="nav-number">2.4.4.</span> <span class="nav-text">關於輸入框</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%B5%84%E4%BB%BB%E5%8B%99"><span class="nav-number">2.5.</span> <span class="nav-text">小組任務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%B8%80-%E8%AB%8B%E6%AF%8F%E5%80%8B%E5%B0%8F%E7%B5%84%E8%A8%8E%E8%AB%96%E6%88%90%E5%93%A1%EF%BC%8C%E8%A9%A6%E8%91%97%E8%BC%89%E5%85%A5-BS4-%EF%BC%8C%E4%B8%A6%E4%BD%9C%E5%87%BA-modal-%E6%95%88%E6%9E%9C"><span class="nav-number">2.5.1.</span> <span class="nav-text">任務一 - 請每個小組討論成員，試著載入 BS4 ，並作出 modal 效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%BA%8C-%E8%A8%8E%E8%AB%96-HTML-%E8%A3%A1%E7%9A%84%E8%A1%A8%E6%A0%BC%E6%A8%99%E7%B1%A4-table%E3%80%81th%E3%80%81tr%E3%80%81td-%E7%9A%84%E7%94%A8%E6%B3%95%EF%BC%8C%E8%AB%8B%E8%A9%A6%E8%91%97%E5%81%9A%E5%87%BA%E8%A8%AD%E8%A8%88%E7%A8%BF%E8%A3%A1%E9%9D%A2%E7%9A%84%E8%A1%A8%E6%A0%BC%E8%A8%AD%E8%A8%88%EF%BC%8C%E4%B8%A6%E6%8F%90%E4%BE%9B-codepen-%E4%BE%86%E6%AA%A2%E8%A6%96"><span class="nav-number">2.5.2.</span> <span class="nav-text">任務二 - 討論 HTML 裡的表格標籤(table、th、tr、td)的用法，請試著做出設計稿裡面的表格設計，並提供 codepen 來檢視</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8B%99%E4%B8%89-%E8%A8%8E%E8%AB%96%E7%AC%AC%E4%BA%94%E9%80%B1%E7%89%88%E5%9E%8B%E8%A9%B2%E6%80%8E%E9%BA%BC%E5%81%9A"><span class="nav-number">2.5.3.</span> <span class="nav-text">任務三 - 討論第五週版型該怎麼做</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-%E6%88%90%E6%9E%9C%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/05/12/20200512/",
+      identifier: "2020/05/12/20200512/",
+      title     : "[Hexschool Web Layout Training] — Week_5 後台表單設計",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

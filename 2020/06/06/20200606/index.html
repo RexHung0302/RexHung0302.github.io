@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言為期八週的切版直播班結束了，但真正的挑戰才正要開始。 如果你跟我一樣，不是在切版就是在前往切版的路上，但是想加強自己的切版能力，所以正在思考要不要購買課程，那就可以考慮看看這篇心得文。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Hexschool Web Layout Training] — 八週總結">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/06/06/20200606/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言為期八週的切版直播班結束了，但真正的挑戰才正要開始。 如果你跟我一樣，不是在切版就是在前往切版的路上，但是想加強自己的切版能力，所以正在思考要不要購買課程，那就可以考慮看看這篇心得文。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-06-05T21:55:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.782Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="HexSchool">
+<meta property="article:tag" content="Web-Layout-Training">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/06/06/20200606/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Hexschool Web Layout Training] — 八週總結 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/06/06/20200606/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Hexschool Web Layout Training] — 八週總結
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-06-06 05:55:00" itemprop="dateCreated datePublished" datetime="2020-06-06T05:55:00+08:00">2020-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/%E5%89%8D%E7%AB%AF/Hexschool-Web-Layout-Training-%E5%85%AD%E8%A7%92%E7%B6%B2%E9%A0%81%E5%88%87%E7%89%88%E7%9B%B4%E6%92%AD%E7%8F%AD/" itemprop="url" rel="index"><span itemprop="name">Hexschool-Web-Layout-Training[六角網頁切版直播班]</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>3.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/images/others/loading.gif" data-original="/images/20200606/class_logo_gif.gif" alt="2020春季網頁切版直播班"></p>
+<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>為期八週的切版直播班結束了，但真正的挑戰才正要開始。</p>
+<p>如果你跟我一樣，不是在切版就是在前往切版的路上，但是想加強自己的切版能力，所以正在思考要不要購買課程，那就可以考慮看看這篇心得文。</p>
+<span id="more"></span>
+
+<p>如果已經聽過 <strong><a target="_blank" rel="noopener" href="https://www.hexschool.com/">六角學院</a></strong> 且購買過他們的課程，也可以看看這篇文章，說不定你會成為我的下一屆學<del>弟</del>妹？！</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><ol>
+<li><p><a href="#%E6%88%91%E7%82%BA%E4%BB%80%E9%BA%BC%E5%A0%B1%E5%90%8D%E9%80%99%E5%A0%82%E8%AA%B2%EF%BC%9F">我為什麼報名這堂課？</a></p>
+</li>
+<li><p><a href="#%E5%9C%A8%E9%80%99%E5%A0%82%E8%AA%B2%E6%88%91%E7%8D%B2%E5%BE%97%E4%BB%80%E9%BA%BC%EF%BC%9F">在這堂課我獲得什麼？</a></p>
+</li>
+<li><p><a href="#%E7%B8%BD%E7%B5%90">總結</a></p>
+</li>
+</ol>
+<hr>
+<h3 id="我為什麼報名這堂課？"><a href="#我為什麼報名這堂課？" class="headerlink" title="我為什麼報名這堂課？"></a>我為什麼報名這堂課？</h3><p>雖然第一週已經提過為什麼會參加，但總結不免還是要在回顧一次自己這八週的過程。</p>
+<h4 id="專案時程"><a href="#專案時程" class="headerlink" title="專案時程"></a>專案時程</h4><p>沒錯！就是專案時程；先大致描述一下自己，目前筆者正在某一間專門做 <strong>LINE CRM(顧客管理)</strong> 的公司，做一些關於 <strong>LINE</strong> 上可以看到某一些官方帳號或是私人企業的活動，以及 <strong>LINE 機器人、推播、LINE 後台</strong>…等等，大概就是跟 <strong>LINE</strong> 有關係的都會做到。</p>
+<p>為什麼提到這個呢？其實我們有自己的後台供顧客使用沒有錯，但其實客戶都會想要 <strong>客製化</strong>，所以常常在某些節日，抑或是企業的行銷申請到一大筆經費要搞活動的時候，就是我們 <strong><del>發大財</del>倒大楣</strong> 的時候。</p>
+<p>這時候除了工程師自己的工作時程要拿捏好之外，<strong>PM(註1)</strong> 也一樣重要！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/pm.png" alt="PM大概分為這幾種，詳細介紹可看註解"></p>
+<p>會提到這個是筆者個人覺得 <strong>PM</strong> 並沒有真的把時間安排得很好，且大部分都是客戶說什麼功能，就接什麼功能，然後再丟給工程師請工程師盡量能做到，由於筆者還很菜，而且是的我是奴工，不敢打倒資本主義的 <strong>高強</strong>，所以只能盡量去做了。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/freeMan.png" alt="取至 Youtuber &#39;反正我很閒&#39;"></p>
+<p>廢話說太多，下面我們會繼續說；因為有前因，所以後果就是筆者必須加強自己的切版能力，我想提升自己的切版能力後，總能一個打十個吧？</p>
+<h4 id="誤打誤撞"><a href="#誤打誤撞" class="headerlink" title="誤打誤撞"></a>誤打誤撞</h4><p>就這麼恰巧，六角學院就推播了一則訊息來，又是剛好關於切版，所以想了幾分鐘後就報名了，這幾分鐘想什麼呢？是關於 <strong>實體</strong> 或是 <strong>線上課程</strong> 的差別嗎？錯！<del>是想我的荷包君夠不夠力</del>；關於 <strong>實體</strong> 或 <strong>線上課程</strong> 的差別後面會提到。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200412/line_class_message.png" alt="限量就是邪惡 一秒開啟菜市場大嬸模式"></p>
+<blockquote>
+<p>*註1: <strong>PM</strong>最常指的職位大致上可分為兩種，<strong>專案經理(Project Manager)</strong> 和 <strong>產品經理(Product Manager)</strong>，前者為規劃整個大致計畫流程、時間、架構，更重要的就是協調 <strong>產品經理(Product Manager)</strong> 去做任務的職位；後者大概就是接受前者任務然後負責追進度的！有興趣可以參考<a target="_blank" rel="noopener" href="https://technews.tw/2020/05/17/what-is-pm/">這 5 種角色都叫 PM！專案經理、產品經理，差在哪？</a>*</p>
+</blockquote>
+<hr>
+<h3 id="在這堂課我獲得什麼？"><a href="#在這堂課我獲得什麼？" class="headerlink" title="在這堂課我獲得什麼？"></a>在這堂課我獲得什麼？</h3><p>這堂課程其實滿特別，以往都是 <strong>Udemy</strong> 購買課程，然後獲得影片，在隨自己的進度去看，然後往往都沒看完，或是看一兩片就沒然後了…</p>
+<p>這堂課開頭就寫明是直播，而且上限只收 <strong>200</strong> 個人，因為每週一堂課，且校長每週都會出作業，然後可以透過他們的後台系統提交，所以為了改程式碼的品質，就收 <strong>200</strong> 為主。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/slack.png" alt="校長幾乎每天都在"></p>
+<p>在課程開始前校長就請大家先自我介紹然後幫大家分組，且請大家加入專屬的 <strong>Slack</strong>，所以大家除了共用頻道外，還有各個小組的頻道，每週除了個人作業外，還有小組作業，所以才會分組，目的除了解任務，最主要我覺得還是透過彼此加油打氣讓自己更有動力往前進！</p>
+<p>分組的原則基本上是藉由自我介紹來分組，會將差不多性質的同學歸再一起，比如說 <strong>設計師、學生、轉職者</strong>…等等。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/group.gif" alt="分組活動"></p>
+<p>這次筆者被分配到 <strong>鞋鋼鍊金2組</strong>，其實剛開始筆者覺得應該是要被分配到 <strong>軟工盾坦組(適合以前有做過程式工作，或是現職程式領域的勇者)</strong>，但自己分到的這組同學都太給力了，最後就不小心達成了一次作業率繳交第一的成績。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/group.png" alt="分組活動"></p>
+<p>分組結束就是每週五的上課，然後從八點開始一路到十點半，有時候會超過，雖然我們是消費者心態，超過就是爽，賺到了，但其實你也知道 <strong>關於注意力的研究顯示，人能維持專注的時間約在10到18分鐘，過了18分鐘後，人的身體因為能量耗盡…ballaballa(詳細可參考 <a target="_blank" rel="noopener" href="https://www.businessweekly.com.tw/careers/blog/21935">每次開會都落落長？美研究：最多●人、最長●分鐘，最能保持專注</a>)</strong>，所以後面常常上課上到出神，但還好課程跟大部分線上課程一樣都還是可以參考重播影片。</p>
+<p>而且上課同學都很熱心，甚至還有自發性的 <strong>義工團</strong>，他們 <strong>替重播影片加上重點時間</strong>、<strong>寫課程範例</strong>、<strong>提供能力內的指導</strong>…等等，根本就是 <strong>上班族福音</strong>！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/video.png" alt="貼心！"></p>
+<p>除了上方提到的 <strong>分組、重播影片</strong> 外，這次六角學院還準備了很特別的 <strong>BOSS系統</strong>，每週提交作業都能對 <strong>BOSS</strong> 造成傷害，算是挺有意思的！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/BOSS.png" alt="強大的BOSS"></p>
+<p>講完一些廢話要進入廢話重點了，就是課程本身，由於這次接版直播班是從０開始的，所以課程很多地方都是從基礎開始說，不怕銜接不上，因為筆者也想把基礎打好，所以這次課程對我來說很剛好！</p>
+<p>上課除了老師單方面的講解外，隨時都能發問。雖然講解者(校長)本身可能會因為被頻道文字洗掉問題，但都隨時可以在 <strong>Slack</strong> 上對校長或是助教發問。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/talk.png" alt="動力來源之一(誤)"></p>
+<blockquote>
+<p>偷偷說助教真的人超好啊，而且直播也講解的淺顯易懂！</p>
+</blockquote>
+<p>此外作業批改的時間也都算是很迅速，幾乎都是在提交後的最晚三四天內會收到回饋，而且也不是隨便看一看，是真的有用心在回覆，我都擔心校長及助教的肝了…</p>
+<p>最後要提的大概就是最狂的 <strong>Code Review</strong> 升級版 <strong>Video Code Review</strong> 了！校長除了看你的程式碼外，還鼓勵學生錄下自己切版的影片過程給他，然後他會給你更多建議。雖然通常老王賣瓜都會自誇，但誠如校長所說，還真沒見過課程老師會願意用那麼多時間，甚至假日的時間都在批改且觀看學生的程式碼，光這點就值得滿分了。</p>
+<blockquote>
+<p><em>你說！老師都這麼用心了，你還有什麼藉口不努力認真？</em></p>
+</blockquote>
+<h4 id="業配？"><a href="#業配？" class="headerlink" title="業配？"></a>業配？</h4><p>前面講了一堆好處，你可能會以為我在業配，雖然我也很想，但筆者為人秉持的原則是實話實說，所以這邊也要來說說筆者認為的幾個缺點(希望不會被黑名單</p>
+<p>線上課程除了大家都知道的比起實體課程會較沒推動力，容易懶惰外，這點其實還算可以放心。</p>
+<p>前幾週校長有提到每週上課都需要簽到，如果沒有簽到校長會請專員或是親自打電話萊督促你上課，但我想既然你都來上課了，沒有點自制力，最大問題還是自己。</p>
+<p>因為筆者自己能力不夠別人好，所以常常覺得是不是會落後別人，所以每週課程結束就會休息一天然後接著做作業，以前幾週來看幾乎都是可以完成的，且難度適中。</p>
+<p>不過這邊說好了要說缺點，大致上就是課程或許算是比較趕，所以大概在第三週加入 <strong>RWD</strong> 後突然難度倍增，可能許多人會切到有點心灰意冷，但其實校長希望大家都能慢慢來，觀念正確最重要，所以交作業期限並非一個禮拜為限。</p>
+<p>而 <strong>BOSS系統</strong> 我覺得似乎真的是比較娛樂性，和分組一樣，組員們並沒有真的到非常熱絡，大概就是每週討論一次，此外筆者認為小組跟 <strong>BOSS</strong> 也許能有更多的互動，比方說 <strong>支線任務</strong>，<br>雖然 <strong>BOSS</strong> 並非上課重點。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/mession.png" alt="任務系統"></p>
+<p>以上大概就是筆者覺得的缺點，但似乎也不算什麼缺點，筆者依舊認為上課最主要還是自己的態度為主，如果自己都不鞭策自己，那別人也幫不了你。</p>
+<hr>
+<h3 id="線上課程值得嗎？"><a href="#線上課程值得嗎？" class="headerlink" title="線上課程值得嗎？"></a>線上課程值得嗎？</h3><p>上面談完了優缺點之後，就該思考線上課程值不值得，筆者認為<strong>線上</strong> 及 <strong>實體</strong> 肯定都各有優缺點，但如果今天你的情況符合以下幾點，那你就可以不用考慮可以直接拿出錢包了：</p>
+<ol>
+<li><p><strong>較無法抽出固定時間</strong></p>
+</li>
+<li><p><strong>需要有品質保證，不是隨便的三流教師來上課的課程</strong></p>
+</li>
+<li><p><strong>想要擁有一大批一起努力的同溫層同伴們</strong></p>
+</li>
+<li><p><strong>錢包受得了</strong></p>
+</li>
+</ol>
+<p>最後一點肯定要解釋一下，不是課程貴，而是你買了一堂後你會欲罷不能想再買下一堂，這大概就是 <strong>六角學院</strong> 的魔力吧！不信你試試看。</p>
+<p>我不敢說 <strong>六角學院</strong> 的課程跟其他課程比起來一定是最好的，但我能保證在 <strong>用心、態度、師資</strong>…等等 你都不用擔心。</p>
+<blockquote>
+<p><em>完蛋了更像業配了…</em></p>
+</blockquote>
+<p>上面有提到筆者通常會在課後休息一天在開始動工，這也是最近筆者一直想到的，<strong>工作、學習、放鬆</strong>，這三件事情就應該要剛好像是 <code>width: calc(100% / 3);</code> 那樣剛好各佔 <strong>1&#x2F;3</strong> 等份，這樣生活才能達到平衡。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/life.png" alt="生活三角"></p>
+<blockquote>
+<p><em>有好的學習才能應付工作，有好的工作結果才能夠好好放鬆生活，千萬不要讓任何一邊比重超過，你的生活會慢慢出問題。</em></p>
+</blockquote>
+<p>因為好多工程師同事及朋友都因為工作而失去動力，筆者認為最理想情況就是工作及興趣合二為一，現實狀況或許很難，但相較從興趣去找尋理想的工作，筆者認為更適合從工作中尋找興趣，帶給你的不只會是成就感，也會是滿滿的經驗，甚至可能會成為你的武器，而你的生活也會過得更快樂，不是一部工作機器。</p>
+<hr>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>我想很多人比較喜歡看總結，所以這邊就簡單的來總結一下這們課程的八週心得。</p>
+<ol>
+<li><p>門檻低好入門。</p>
+</li>
+<li><p>講解清晰易懂，老師助教有問必答。</p>
+</li>
+<li><p>不脫離主題之外，課程設計有趣及多元化。</p>
+</li>
+<li><p>有一大批的熱情六角同學隨時陪你奮鬥，這條路上不孤單。</p>
+</li>
+<li><p><strong><del>校長課程大放送！</del></strong></p>
+</li>
+</ol>
+<p>第五點其實不是每個課程都有啦，剛好這次的直播課程結尾校長為了讓各位更有前進的動力，所以推出了很多完成幾項作品會有什麼獎勵，其中不乏更多的免費課程影片或課程折價，甚至可以加入菁英頻道，或許之後的每一部關於這個 <strong>直播班(第二屆、第三屆…)</strong> 的加碼 <strong>DLC</strong> 影片🤫。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/reward.png" alt="獎品大放送"></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>上方總結提到的就是個人簡短課程心得，接下來筆者會繼續在前端的路上邁進，可能偶爾偷偷摸個後端，但還是希望大家除了在變強的道路上一起加油外，切勿忘了生活的比重，好好的工作，也好好的陪伴家人！致正在努力的你&#x2F;妳。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/reward_2.png" alt="實體獎品"></p>
+<blockquote>
+<p><em>連實體獎品都有了，真的超級用心！</em></p>
+</blockquote>
+<hr>
+<h2 id="Demo-成果程式碼"><a href="#Demo-成果程式碼" class="headerlink" title="Demo &amp; 成果程式碼"></a>Demo &amp; 成果程式碼</h2><p>八週的 Source Code：<a target="_blank" rel="noopener" href="https://github.com/RexHung0302/Hexschool-web-layout-training">點我</a></p>
+<blockquote>
+<p><strong>Demo</strong> 也可從 <strong>Source Code</strong> 進入觀看</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/final.png" alt="八週作品"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20200606/final_2.png" alt="也有 RWD 可以到 DEMO 拉小觀看"></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.hexschool.com/">六角學院</a></p>
+</li>
+<li><p><a href="chrome-extension://klbibkeccnjlkjkiokjodocebajanakg/suspended.html#ttl=%E6%AF%8F%E6%AC%A1%E9%96%8B%E6%9C%83%E9%83%BD%E8%90%BD%E8%90%BD%E9%95%B7%EF%BC%9F%E7%BE%8E%E7%A0%94%E7%A9%B6%EF%BC%9A%E6%9C%80%E5%A4%9A%E2%97%8F%E4%BA%BA%E3%80%81%E6%9C%80%E9%95%B7%E2%97%8F%E5%88%86%E9%90%98%EF%BC%8C%E6%9C%80%E8%83%BD%E4%BF%9D%E6%8C%81%E5%B0%88%E6%B3%A8%EF%BC%8DSmartM%E4%BA%BA%E6%89%8D%E5%9F%B9%E8%A8%93%E7%B6%B2%EF%BD%9C%E5%95%86%E5%91%A8&pos=0&uri=https://www.businessweekly.com.tw/careers/blog/21935">每次開會都落落長？美研究：最多●人、最長●分鐘，最能保持專注</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://technews.tw/2020/05/17/what-is-pm/">這 5 種角色都叫 PM！專案經理、產品經理，差在哪？</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/HexSchool/" rel="tag"><i class="fa fa-tag"></i> HexSchool</a>
+              <a href="/tags/Web-Layout-Training/" rel="tag"><i class="fa fa-tag"></i> Web-Layout-Training</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/05/20200605/" rel="prev" title="[Hexschool Web Layout Training] — Week_8 CSS 模組化管理">
+      <i class="fa fa-chevron-left"></i> [Hexschool Web Layout Training] — Week_8 CSS 模組化管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/07/20200607/" rel="next" title="[Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30">
+      [Hexschool JS60 Training] — 60天 JavaScript 學徒試煉 Day1-30 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%82%BA%E4%BB%80%E9%BA%BC%E5%A0%B1%E5%90%8D%E9%80%99%E5%A0%82%E8%AA%B2%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">我為什麼報名這堂課？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%88%E6%A1%88%E6%99%82%E7%A8%8B"><span class="nav-number">2.1.1.</span> <span class="nav-text">專案時程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AA%A4%E6%89%93%E8%AA%A4%E6%92%9E"><span class="nav-number">2.1.2.</span> <span class="nav-text">誤打誤撞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E9%80%99%E5%A0%82%E8%AA%B2%E6%88%91%E7%8D%B2%E5%BE%97%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">在這堂課我獲得什麼？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A5%AD%E9%85%8D%EF%BC%9F"><span class="nav-number">2.2.1.</span> <span class="nav-text">業配？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B7%9A%E4%B8%8A%E8%AA%B2%E7%A8%8B%E5%80%BC%E5%BE%97%E5%97%8E%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">線上課程值得嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">2.4.</span> <span class="nav-text">總結</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo-%E6%88%90%E6%9E%9C%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">Demo &amp; 成果程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/06/06/20200606/",
+      identifier: "2020/06/06/20200606/",
+      title     : "[Hexschool Web Layout Training] — 八週總結",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

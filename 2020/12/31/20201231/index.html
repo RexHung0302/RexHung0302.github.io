@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 今年最後一篇文章就獻給 AWS S3(下稱 S3) 了，這篇文章用來記錄如何將自己的圖片上傳至第三方儲存空間，並且可以取得瀏覽網址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Third party service Note] - 第一次使用 AWS S3 上傳圖片就上手">
+<meta property="og:url" content="https://rexhung0302.github.io/2020/12/31/20201231/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 今年最後一篇文章就獻給 AWS S3(下稱 S3) 了，這篇文章用來記錄如何將自己的圖片上傳至第三方儲存空間，並且可以取得瀏覽網址。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2020-12-31T05:27:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.876Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Note">
+<meta property="article:tag" content="Third party service">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="S3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2020/12/31/20201231/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Third party service Note] - 第一次使用 AWS S3 上傳圖片就上手 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2020/12/31/20201231/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Third party service Note] - 第一次使用 AWS S3 上傳圖片就上手
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-12-31 13:27:00" itemprop="dateCreated datePublished" datetime="2020-12-31T13:27:00+08:00">2020-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Third-Party-Service/" itemprop="url" rel="index"><span itemprop="name">Third Party Service</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Third-Party-Service/AWS/" itemprop="url" rel="index"><span itemprop="name">AWS</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Third-Party-Service/AWS/S3/" itemprop="url" rel="index"><span itemprop="name">S3</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20201231/logo.png" alt="AWS S3"></p>
+<p>今年最後一篇文章就獻給 <strong>AWS S3</strong>(下稱 <strong>S3</strong>) 了，這篇文章用來記錄如何將自己的圖片上傳至第三方儲存空間，並且可以取得瀏覽網址。</p>
+<span id="more"></span>
+
+<p>這篇對於 <strong>S3</strong> 不會有太深的介紹以及講解，主要用來介紹並且筆記，如果你也在思考自己的專案想要將圖片放在哪裡，是專案主機呢？還是 <strong>S3</strong>？這邊並不會做過多的討論以及比較，但如果你已經確定要將圖片放置在 <strong>S3</strong> 那就可以參考接下來的內容！</p>
+<hr>
+<h3 id="什麼是-AWS-Amazon-Simple-Storage-Service-S3"><a href="#什麼是-AWS-Amazon-Simple-Storage-Service-S3" class="headerlink" title="什麼是 AWS(Amazon Simple Storage Service) S3"></a>什麼是 AWS(Amazon Simple Storage Service) S3</h3><p><img src="/images/others/loading.gif" data-original="/images/20201231/cloud.png" alt="雲"></p>
+<p>相信會看到這篇文章的，有 <strong>87%</strong> 大概都知道 <strong>S3</strong> 是什麼了，但這邊還是在稍微再提一下。</p>
+<p><strong>S3</strong> 就是一個儲存服務，也是雲端服務，好處在於該設定以及安全性問題，<strong>AWS</strong> 都已經幫你想好了，你只需要上傳檔案，以及使用他們現有的 <strong>API</strong>，比如 **瀏覽檔案、刪除檔案…**等等，由 <strong>亞馬遜網路服務公司(Amazon Web Services)</strong> 推出的服務。</p>
+<p>你可能會想單純檔案瀏覽上傳並下載其實我們放到 <strong>imgur.com</strong> 就好了呀，其實使用 <strong>S3</strong> 的好處還有在 <strong>存取權授</strong> 這邊，也是在 <strong>S3</strong> 上設定即可，也可以設定開發人員，透過指派的方式，可給予每個指派人員唯一金鑰去做存取動作。</p>
+<hr>
+<h3 id="加碼場-Multer"><a href="#加碼場-Multer" class="headerlink" title="加碼場 Multer"></a>加碼場 Multer</h3><p>由於我們會透過 <strong>form-data</strong> 從前端傳送圖片檔案到後端，再由後端上傳至 <strong>S3</strong>，在接收檔案以及查看檔案是否符合規格時，我們可以使用這個套件，方便我們做檢查及上傳的輔助橋樑。</p>
+<blockquote>
+<p>如果有興趣透過 <strong>Node.js</strong> 傳送圖片至 <strong>S3</strong> 的人可以先到 <strong><a target="_blank" rel="noopener" href="https://github.com/expressjs/multer">Multer GitHub</a></strong> 瀏覽一下，如果沒興趣只想知道怎麼開通 <strong>S3</strong> 服務最後一節可以跳過。</p>
+</blockquote>
+<hr>
+<h3 id="開始使用-S3-服務"><a href="#開始使用-S3-服務" class="headerlink" title="開始使用 S3 服務"></a>開始使用 S3 服務</h3><h4 id="S3-憑證"><a href="#S3-憑證" class="headerlink" title="S3 憑證"></a>S3 憑證</h4><p>如同 <strong>Google Analytics</strong> 一樣，<strong>S3</strong> 只是 <strong>AWS</strong> 的眾多服務之一，您必須先到 <strong><a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/free">AWS</a></strong> 去註冊帳號密碼。</p>
+<p>註冊結束後進入 <strong><a target="_blank" rel="noopener" href="https://ap-northeast-1.console.aws.amazon.com/console/home">AWS 管理控制台</a></strong>，</p>
+<p>這和其他第三方服務一樣，您需要有 <strong>Token</strong> 這類的東西才能夠使用它們的服務，而 <strong>AWS</strong> 需要 <strong>訪問密鑰ID(Access ID)</strong> 和 <strong>私有訪問密鑰(Secret Access key)</strong> 您才能使用這項服務。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/console.png" alt="AWS 管理控制台"></p>
+<p>點選 <strong>My Security Credentials</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/create_new_token.png" alt="創建新的訪問密鑰"></p>
+<p>點選 <strong>訪問密鑰(訪問密鑰 ID 和秘密訪問密鑰)(Access keys(access key ID and secret access key))</strong> 之後緊接著點選 <strong>創建新的訪問密鑰(Create New Access Key)</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/store_result.png" alt="拿到新的 Access ID 及 Access Key"></p>
+<p>跳出彈窗代表您已經建立成功，然後將您的 <strong>訪問密鑰ID(Access ID)</strong> 和 <strong>私有訪問密鑰(Secret Access key)</strong> 記下或是點選 <strong>下載密鑰文件(Download Key File)</strong> 下載 <strong>.csv</strong> 文件。</p>
+<h4 id="新增一個-Bucket"><a href="#新增一個-Bucket" class="headerlink" title="新增一個 Bucket"></a>新增一個 Bucket</h4><p><img src="/images/others/loading.gif" data-original="/images/20201231/select_S3.png" alt="S3"></p>
+<p>接下然我們要創建一個 <strong>S3</strong> 的 <strong>服務儲存桶</strong>，點選左上角的 <strong>Services</strong> 你會發現 <strong>AWS</strong> 的眾多服務，看到左邊第一排的 <strong>S3</strong> 點進去。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/s3_bucket.png" alt="點擊新增S3儲存桶"></p>
+<p>然後點選新<strong>增儲存桶(Create New Bucket)</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/create_new_bucket.png" alt="地區選擇"></p>
+<p>之後輸入 <strong>儲存桶(Bucket)</strong> 的名稱，然後地區建議選擇離你當下比較近的位子，像筆者住在台灣，所以就會選擇 <strong>亞太地區(東京)ap-northeast-1</strong> 或 <strong>亞太地區(新加坡)ap-southeast-1</strong> 其中之一，有道是越近越快。不過這邊不討論這個問題。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/cancel_prohibit_setting.gif" alt="阻止公有訪問設定"></p>
+<p>然後下方的 <strong>阻止公有訪問設定</strong> 請一定要勾掉，不然之後圖片上傳完成後，如果想要訪問，就會出現下方的內容。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/access_denied.png" alt="Access 權限錯誤"></p>
+<p>如果忘記勾選掉，之後進去儲存桶後也可以到 <strong>權限</strong> 去點選編輯然後勾掉。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/cancel_prohibit_way_2.png" alt="阻止公有訪問設定 權限設定"></p>
+<p>因為我們只是要上傳圖片，並且讓所有人都能看見，所以這邊必須勾掉！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/upload_image.png" alt="上傳圖片"></p>
+<p>最後就可以上傳圖片啦，上傳完成後就可以點擊圖片名稱，</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/preview_img.png" alt="預覽圖片"></p>
+<blockquote>
+<p><strong>儲存桶進入後還可以在資料夾，檔案就可以分類了。</strong></p>
+</blockquote>
+<p>到這邊就大功告成啦！如果有興趣如何透過 <strong>Node.js</strong> 接收檔案並上傳到 <strong>S3</strong> 可以接著繼續看，如果沒興趣也可以直接跳到結論囉。</p>
+<hr>
+<h3 id="Multer"><a href="#Multer" class="headerlink" title="Multer"></a>Multer</h3><p>開始前先介紹筆者的環境。</p>
+<ul>
+<li><p>node v-v12.16.1</p>
+</li>
+<li><p>express v-4.16.1</p>
+</li>
+</ul>
+<p>先說說為什麼會用這個套件，因為在 <strong>Express 4.16</strong> 版本以前跟之後讀取 <strong>Form Data</strong> 的方式不太一樣，筆者上網爬文過後發現這個套件可以檢查檔案格式或是限制檔案大小，並且可以方便抓取檔案，所以就入坑了。</p>
+<h4 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h4><p>首先必須安裝套件以及上傳圖片至 <strong>S3</strong> 必須使用的套件(關於 <strong>Node</strong> 環境如何建立可以參考我的另篇文章 <a href="https://rexhung0302.github.io/2020/09/14/20200914/">[NodeJS Become A Full Stack Developer] — Express、Router 及 EJS 入門淺談</a>，這邊先預設您已經安裝好且環境都設定好了)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i aws-sdk multer --save</span><br></pre></td></tr></table></figure>
+
+<h4 id="抓取上傳檔案"><a href="#抓取上傳檔案" class="headerlink" title="抓取上傳檔案"></a>抓取上傳檔案</h4><p>其實官方教學已經寫得差不多，但這次我把抓取檔案的流程寫在 <strong>Middleware</strong>，一來方便管理，二來乾淨清爽。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/middleware.png" alt="中介層"></p>
+<p>然後在裡面謝上相關程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">&#x27;multer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 圖片上傳</span></span><br><span class="line"><span class="keyword">const</span> profileUpload = <span class="title function_">multer</span>(&#123;</span><br><span class="line">  <span class="attr">limit</span>: &#123;</span><br><span class="line">    <span class="comment">// 限制上傳檔案的大小為 1MB</span></span><br><span class="line">    <span class="attr">fileSize</span>: <span class="number">1000000</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">fileFilter</span>(<span class="params">req, file, cb</span>) &#123;</span><br><span class="line">    <span class="comment">// 只接受三種圖片格式</span></span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="property">originalname</span>.<span class="title function_">match</span>(<span class="regexp">/\.(jpg|jpeg|png)$/</span>)) &#123;</span><br><span class="line">      <span class="title function_">cb</span>(<span class="literal">null</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">cb</span>(<span class="literal">null</span>, <span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  profileUpload</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>引入套件並且檢查檔案大小及格式。</em></p>
+</blockquote>
+<p>接著在路由加上您的仲介層：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; profileUpload &#125; = <span class="built_in">require</span>(<span class="string">&#x27;../../../middleware/file&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fileController = <span class="built_in">require</span>(<span class="string">&#x27;../../../controllers/file&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fileSchema = <span class="built_in">require</span>(<span class="string">&#x27;./schema&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> apiBasePath = <span class="string">`/file`</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router</span><br><span class="line">  .<span class="title function_">post</span>(<span class="string">`<span class="subst">$&#123;apiBasePath&#125;</span>/upload-file`</span>,  profileUpload.<span class="title function_">single</span>(<span class="string">&#x27;profile_img&#x27;</span>), fileSchema.<span class="property">request</span>.<span class="property">uploadSchema</span>, fileController.<span class="property">upload</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+
+<p>這邊只要使用 <code>profileUpload.single(&#39;File Name or Form Data Key&#39;)</code> 就可以進入剛剛的仲介層然後檢查檔案，如果不想拆這麼細，其實也可以向官方介紹的一樣，寫在一起。</p>
+<p>接著只要在想要讀取檔案的地方使用 <code>req.file</code> 就可以拿到相關資訊。</p>
+<h4 id="上傳至-S3"><a href="#上傳至-S3" class="headerlink" title="上傳至 S3"></a>上傳至 S3</h4><p>重頭戲就是從 <strong>Node.js</strong> 上傳檔案至 <strong>S3</strong> 啦，先在我們需要上傳檔案的地方引入套件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">AWS</span> = <span class="built_in">require</span>(<span class="string">&#x27;aws-sdk&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把上面新增完 儲存桶(Bucket) 拿到的那個檔案裡面的 Access Key ID 及 Secret Access Key 填上</span></span><br><span class="line"><span class="keyword">const</span> s3 = <span class="keyword">new</span> <span class="variable constant_">AWS</span>.<span class="title function_">S3</span>(&#123;</span><br><span class="line">  <span class="attr">accessKeyId</span>: <span class="string">&#x27;xxx-xxx-xxx-xxx&#x27;</span>,</span><br><span class="line">  <span class="attr">secretAccessKey</span>: <span class="string">&#x27;xxx-xxx-xxx-xxx-xxx&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>然後按照官方的 <strong>API</strong> 文件，繼續下面的程式碼：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> params = &#123;</span><br><span class="line">  <span class="title class_">Bucket</span>: <span class="string">&#x27;test-bucket/user-image&#x27;</span>, <span class="comment">// 相簿位子</span></span><br><span class="line">  <span class="title class_">Key</span>: <span class="string">&#x27;test-1&#x27;</span>, <span class="comment">// 你希望儲存在 S3 上的檔案名稱</span></span><br><span class="line">  <span class="title class_">Body</span>: req.<span class="property">file</span>.<span class="property">buffer</span>, <span class="comment">// 檔案</span></span><br><span class="line">  <span class="attr">ACL</span>: <span class="string">&#x27;public-read&#x27;</span>, <span class="comment">// 檔案權限</span></span><br><span class="line">  <span class="title class_">ContentType</span>: req.<span class="property">file</span>.<span class="property">mimetype</span> <span class="comment">// 副檔名</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">s3.<span class="title function_">upload</span>(params, <span class="keyword">function</span>(<span class="params">err, data</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="variable language_">console</span>.<span class="title function_">log</span>(err, err.<span class="property">stack</span>);</span><br><span class="line">  <span class="keyword">else</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Bucket Created Successfully&#x27;</span>, data.<span class="property">Location</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>請記得關於 <strong>儲存桶(Bucket)</strong> 的資料夾呼叫還有使用方式，都是加上斜線，像上面的範例就是 <code>test-bucket</code> 這個 <strong>儲存桶(Bucket)</strong> 裡面的資料夾 <code>user-image</code>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20201231/success_upload_img.png" alt="上傳成功"></p>
+<blockquote>
+<p>上傳成功後如果 <code>console.log(data)</code> 可以看見更多資訊，只是 <strong>data.Location</strong> 就是我們要用來預覽的檔案，如果點選網址變成下載，請記得一定要檢查你的副檔名稱是不是正確的(Ex:.jpg|.jpeg|.png)。</p>
+</blockquote>
+<p>相關上傳、刪除、瀏覽的 API 可以參考 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html">從瀏覽器上傳相片至 Amazon S3</a>，這邊也有詳盡的介紹。</p>
+<h4 id="本地新增刪除儲存桶"><a href="#本地新增刪除儲存桶" class="headerlink" title="本地新增刪除儲存桶"></a>本地新增刪除儲存桶</h4><p>如果您不想要線上建立 <strong>儲存桶(Bucket)</strong> 其實也可以本地建立，有興趣可以參考 <strong><a target="_blank" rel="noopener" href="https://stackabuse.com/uploading-files-to-aws-s3-with-node-js/#creatingans3bucket">Uploading Files to AWS S3 with Node.js</a></strong> 的下半篇文章，或是參考官方的 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#createBucket-property">API Document</a></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>會有這篇文章的起因為筆者目前正在實踐開始寫程式兩年自己的目標計畫，完成前後端電商的 <strong>Side Project</strong>，但由於剛好親朋好友有個需求可以寫成 <strong>Side Project</strong> 就改成寫預約系統了，這次剛好有使用者上傳大頭貼的部分，就研究了一直聽同事在說的 <strong>S3</strong>(為什麼沒挑 <strong>GCP</strong> 呢，因為聽說 <strong>GCP</strong> 比較貴)。</p>
+<p>而同事也有跟我說其實放專案本機即可，但秉持著<strong>碰到就研究是最好的學習</strong>，所以就一頭栽進去啦，其實整個過程挺好玩的，並沒有想像中複雜。</p>
+<p>其實在寫這篇文章的時候已經 2021&#x2F;1&#x2F;1 了，但還是想說說這一年來的簡短感想，除了中途迷惘過一陣子，這段時間程式帶給我的不止是成就感也有更多的快樂，我想只要是工程師就面臨不了工作及生活上的分配以及取捨，我想這還是工程師要面臨最大的難題，所以筆者認為適時的補充知識(任何方面)及學習是不可或缺的，但當工作及學習已經融入你的生活當中，可能還是不太好的(<del>筆者得想法，請不要砲我</del>)，在 2020 我相信大家都深深的體會到時間多麽珍貴，以及珍惜的重要，有的時候放下你身邊的工作及忙碌的事情，好好的陪伴家人、朋友，有些東西失去了、沒了，就再也回不去了。</p>
+<p>講起來好像滿感傷的，其實筆者這一年過的還是很開心，要謝的人很多很多，<strong>親人、愛人、朋友、上司、老闆</strong> 還有 <strong>家裡那兩條狗</strong>，願我們不止 2021 還有以後的每一年都會越來越好、越來越棒！</p>
+<p>也再次謝謝已在程式碼打混多年的各位前輩們，還有剛接觸不久的你們，不管是哪一點也好，對這個世界以及人們都繼續推使他們更便利更進步，我想這也是我喜歡這個行業的原因之一，我想幫助更多的人，讓自己是付出的一端。</p>
+<p><strong>揮別 2020 歡迎 2021。</strong></p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p>AWS - <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/zh_tw/sdk-for-javascript/v2/developer-guide/s3-example-photo-album.html">從瀏覽器上傳相片至 Amazon S3</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://twitter.com/JanithKasun">Janith Kasun</a> — <a target="_blank" rel="noopener" href="https://stackabuse.com/uploading-files-to-aws-s3-with-node-js/#creatingans3bucket">Uploading Files to AWS S3 with Node.js</a></p>
+</li>
+<li><p>Mike Huang — <a target="_blank" rel="noopener" href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-%E4%BD%BF%E7%94%A8-multer-%E5%AF%A6%E4%BD%9C%E5%A4%A7%E9%A0%AD%E8%B2%BC%E4%B8%8A%E5%82%B3-ee5bf1683113">[筆記] 使用 Multer 實作大頭貼上傳(Part 1)</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Note/" rel="tag"><i class="fa fa-tag"></i> Note</a>
+              <a href="/tags/Third-party-service/" rel="tag"><i class="fa fa-tag"></i> Third party service</a>
+              <a href="/tags/AWS/" rel="tag"><i class="fa fa-tag"></i> AWS</a>
+              <a href="/tags/S3/" rel="tag"><i class="fa fa-tag"></i> S3</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/19/20201219/" rel="prev" title="[Life Note] - LINE TAIWAN TechPulse 2020">
+      <i class="fa fa-chevron-left"></i> [Life Note] - LINE TAIWAN TechPulse 2020
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/04/20210104/" rel="next" title="[Third party service Note] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手">
+      [Third party service Note] - Vue + Node.js + Nginx + MySQL5.7, 第一次使用 VPS(Linode, DigitalOcean) 就可能會碰到的問題之如何簡單上手 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-AWS-Amazon-Simple-Storage-Service-S3"><span class="nav-number">1.1.</span> <span class="nav-text">什麼是 AWS(Amazon Simple Storage Service) S3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E7%A2%BC%E5%A0%B4-Multer"><span class="nav-number">1.2.</span> <span class="nav-text">加碼場 Multer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%A7%8B%E4%BD%BF%E7%94%A8-S3-%E6%9C%8D%E5%8B%99"><span class="nav-number">1.3.</span> <span class="nav-text">開始使用 S3 服務</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#S3-%E6%86%91%E8%AD%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">S3 憑證</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%B8%80%E5%80%8B-Bucket"><span class="nav-number">1.3.2.</span> <span class="nav-text">新增一個 Bucket</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multer"><span class="nav-number">1.4.</span> <span class="nav-text">Multer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">1.4.1.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%93%E5%8F%96%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88"><span class="nav-number">1.4.2.</span> <span class="nav-text">抓取上傳檔案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E5%82%B3%E8%87%B3-S3"><span class="nav-number">1.4.3.</span> <span class="nav-text">上傳至 S3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B0%E5%A2%9E%E5%88%AA%E9%99%A4%E5%84%B2%E5%AD%98%E6%A1%B6"><span class="nav-number">1.4.4.</span> <span class="nav-text">本地新增刪除儲存桶</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">3.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2020/12/31/20201231/",
+      identifier: "2020/12/31/20201231/",
+      title     : "[Third party service Note] - 第一次使用 AWS S3 上傳圖片就上手",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

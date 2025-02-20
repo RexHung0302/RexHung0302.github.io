@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言  還在找怎麼最簡單在 Vue3 引入 I18n 的使用方式嗎？看到這邊就對了，Vue2 也適用。  首先強調本篇絕對不是說 Vue3 結果使用 Vue Cli3.0，是確確實實的 Vue3 沒有錯，放心地看下去沒關係；至於會有這篇文章也是剛好最近的 Side Project 碰到多語系的功能，第一次實作後將過程記錄下來，如果中途或是內容有任何錯誤，歡迎下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Vue Note] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新">
+<meta property="og:url" content="https://rexhung0302.github.io/2021/05/28/20210528/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言  還在找怎麼最簡單在 Vue3 引入 I18n 的使用方式嗎？看到這邊就對了，Vue2 也適用。  首先強調本篇絕對不是說 Vue3 結果使用 Vue Cli3.0，是確確實實的 Vue3 沒有錯，放心地看下去沒關係；至於會有這篇文章也是剛好最近的 Side Project 碰到多語系的功能，第一次實作後將過程記錄下來，如果中途或是內容有任何錯誤，歡迎下">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2021-05-28T10:10:00.000Z">
+<meta property="article:modified_time" content="2025-02-20T17:36:05.911Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="FrameWork">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="i18n">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2021/05/28/20210528/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Vue Note] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2021/05/28/20210528/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Vue Note] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-05-28 18:10:00" itemprop="dateCreated datePublished" datetime="2021-05-28T18:10:00+08:00">2021-05-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-02-21 01:36:05" itemprop="dateModified" datetime="2025-02-21T01:36:05+08:00">2025-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>10 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20210528/i18nBanner.png" alt="I18n"></p>
+<blockquote>
+<p>還在找怎麼最簡單在 <strong>Vue3</strong> 引入 <strong>I18n</strong> 的使用方式嗎？看到這邊就對了，<strong>Vue2</strong> 也適用。</p>
+</blockquote>
+<p>首先強調本篇絕對不是說 <strong>Vue3</strong> 結果使用 <strong>Vue Cli3.0</strong>，是確確實實的 <strong>Vue3</strong> 沒有錯，放心地看下去沒關係；至於會有這篇文章也是剛好最近的 <strong>Side Project</strong> 碰到多語系的功能，第一次實作後將過程記錄下來，如果中途或是內容有任何錯誤，歡迎下方留言告訴筆者。</p>
+<p>先說一下筆者的環境(當然 <strong>Vue2</strong> 也可以參考)：</p>
+<ul>
+<li>nodejs v12.16.1</li>
+<li>vue 3.0</li>
+<li>vue-cli 4.5.12</li>
+</ul>
+<span id="more"></span>
+
+<p>首先如果不知道 <strong>I18n</strong> 的話這邊快速解釋一下，就是透過 <strong>I18n</strong> 這個套件可以做到一個網站多語系；在我們手動建立好各種語言的翻譯之後，只要將套件引入，在隨時都可以切換指定現在要使用什麼語系顯示文字，達到多語系網站的目的。</p>
+<p>引用套件其實並不稀奇，但碰到了 <strong>Vue3 + TypeScript</strong> 對還不熟的筆者來說差點<strong>要我命3000</strong>，在確定引入成功後，想起前陣子在公司接觸到的專案，在厲害的其他前端同事處理之下可以達到指令更新最新的語言包，並且透過網站統一管理，各自新增並且不影響 <strong>commit</strong>，這邊就深深覺得一定要筆記了。</p>
+<blockquote>
+<p><em>筆者目前還沒有在網路上看到相關的教學，如果有的話還請見諒，也歡迎互相切磋交流。</em></p>
+</blockquote>
+<p>詳細解釋為麼叫 <strong>I18n</strong>， 沒有興趣可跳過。</p>
+<p><strong>I18n</strong> 的全名為 <strong>『Internationalization』</strong>，共有<strong>20個字母</strong>，去掉頭尾的 <strong>I</strong> 及 <strong>n</strong> 中間有 <strong>18個字</strong>，如果每次提到都要打或是說這麼長的一串文字其實很麻煩，所以就乾脆簡稱 <strong>『I18n』</strong>，筆者剛開始還以為是不是拿了18國當範例之類的，請見諒我是小菜雞。</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本次筆記將會記錄幾個摘要，如果你不想要透過網站統一管理，那其實做到安裝完套件並且引入即可，不會太麻煩。</p>
+<ol>
+<li><p><strong>I18n</strong> 引入方式</p>
+</li>
+<li><p><strong>I18n</strong> 進階用法</p>
+</li>
+<li><p><strong>線上網站統一管理語言包</strong></p>
+</li>
+<li><p><strong>一鍵更新語言包</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="I18n-引入方式"><a href="#I18n-引入方式" class="headerlink" title="I18n 引入方式"></a><strong>I18n</strong> 引入方式</h3><p>上網查詢了一下 <strong>Vue</strong> 的 <strong>I18n</strong> 引入方式有些都特別麻煩，這邊簡單的記錄一下該怎麼引入。</p>
+<h4 id="安裝套件"><a href="#安裝套件" class="headerlink" title="安裝套件"></a>安裝套件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$npm i vue-i18n -S</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"></span><br><span class="line">$yarn add vue-i18n -S</span><br></pre></td></tr></table></figure>
+
+<p>安裝 <code>vue-i18n</code> 即可，有些教學會請你安裝類似 <code>vue-i18n@next</code> 這種的套件，其實不需要再另外安裝。</p>
+<h4 id="檔案架構"><a href="#檔案架構" class="headerlink" title="檔案架構"></a>檔案架構</h4><p>接著在專案 <code>/src</code> 下新增放語言包的資料夾及檔案，如下：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/createNewFile.png" alt="新增資料夾"></p>
+<p>有些教學會請你新增的語言包是分開的，例如 <code>en.json</code>、<code>ch.json</code>…等等也可以，但是在引入語言包的時候需要注意！</p>
+<p>這邊 <code>common.json</code> 裡面請先打上下面的內容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @/src/i18n/common.json</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;zh-TW&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;welcome&quot;</span><span class="punctuation">:</span> <span class="string">&quot;歡迎&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;ja-JP&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;welcome&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ようこそ&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;en-US&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;welcome&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Welcome&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>沒錯上面就是我們的語言包，如果拆成多支檔案，只需要鍵入內容即可(以下為範例)：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/i18n/ch.json</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;welcome&quot;</span><span class="punctuation">:</span> <span class="string">&quot;歡迎&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>index.ts</code>(或是 <code>index.js</code>) 打上下列內容：</p>
+<ol>
+<li>如果是合併再一起的語言包</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/i18n/index.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createI18n &#125; <span class="keyword">from</span> <span class="string">&quot;vue-i18n&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> message <span class="keyword">from</span> <span class="string">&quot;./common.json&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> i18n = <span class="keyword">new</span> <span class="title function_">createI18n</span>(&#123;</span><br><span class="line">  <span class="attr">locale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">  <span class="attr">messages</span>: message,</span><br><span class="line">  <span class="attr">fallbackLocale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; i18n &#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果是分開的語言包</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/i18n/index.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createI18n &#125; <span class="keyword">from</span> <span class="string">&quot;vue-i18n&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> ch <span class="keyword">from</span> <span class="string">&quot;./ch.json&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> en <span class="keyword">from</span> <span class="string">&quot;./en.json&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> i18n = <span class="keyword">new</span> <span class="title function_">createI18n</span>(&#123;</span><br><span class="line">  <span class="attr">locale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">  <span class="attr">messages</span>: &#123;</span><br><span class="line">    ch,</span><br><span class="line">    en</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">fallbackLocale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; i18n &#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>所以其實分開合再一起結果都一樣的，但因為後面方便使用網站管理，這邊筆者使用合併的方式。</strong></p>
+</blockquote>
+<h4 id="引入套件"><a href="#引入套件" class="headerlink" title="引入套件"></a>引入套件</h4><p>下一步到我們的入口 <code>main.ts</code> 或 <code>main.js</code>，引入剛剛使用的 <strong>I18n</strong> 套件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/main.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&quot;./App.vue&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&quot;./router&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;./store&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; i18n &#125; <span class="keyword">from</span> <span class="string">&quot;@/i18n&quot;</span>; <span class="comment">// 引入 I18n 套件</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">createApp</span>(<span class="title class_">App</span>)</span><br><span class="line">  .<span class="title function_">use</span>(store)</span><br><span class="line">  .<span class="title function_">use</span>(router)</span><br><span class="line">  .<span class="title function_">use</span>(i18n) <span class="comment">// &lt;-- 這樣就全局引入了</span></span><br><span class="line">  .<span class="title function_">mount</span>(<span class="string">&quot;#app&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h4><p>到此地你已經可以使用多語系了，到隨便一個頁面，新增選項，就可以更改多語系：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/App.vue</span></span><br><span class="line"></span><br><span class="line">&lt;template lang=<span class="string">&quot;pug&quot;</span>&gt;</span><br><span class="line"><span class="title function_">button</span>(</span><br><span class="line">  @click=<span class="string">&quot;$i18n.locale = &#x27;ch&#x27;&quot;</span></span><br><span class="line">) 繁體中文</span><br><span class="line"><span class="title function_">button</span>(</span><br><span class="line">  @click=<span class="string">&quot;$i18n.locale = &#x27;en&#x27;&quot;</span></span><br><span class="line">) <span class="title class_">English</span></span><br><span class="line"></span><br><span class="line">h2 &#123;&#123; $t(<span class="string">&quot;-welcome&quot;</span>) &#125;&#125;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也許你查看了許多文章，會叫你使用 <code>import &#123; useI18n &#125; from &quot;vue-i18n&quot;;</code> 引入套件，然後透過 <code>const &#123; t, locale &#125; = useI18n();</code> 來渲染文字或者更改語言，其實 <code>t</code> 是可以省略的，如果有另外寫 <strong>methods</strong> 才需要用到引入套件並且使用 <code>locale</code> 去更改語系。</p>
+<blockquote>
+<p><strong>到這邊你已經成功的將多語系引入進來了，下一步將會講解如何在使用者關閉網頁之後也持續記錄著使用者所選擇的語系。</strong></p>
+</blockquote>
+<hr>
+<h3 id="I18n-進階用法"><a href="#I18n-進階用法" class="headerlink" title="I18n 進階用法"></a><strong>I18n</strong> 進階用法</h3><p>其實也不算進階用法，這一步只是為了要紀錄使用者所選擇的語系，在關閉網頁之後不會再讓語系跳回來，所以我們要做的事情有幾件。</p>
+<ol>
+<li><p>將使用者語系紀錄到 LocalStorage</p>
+</li>
+<li><p>使用 VueX 去更改使用者選擇的語系，也順便將語系紀錄在 VueX(非必要，如果想在任何一頁單獨修改也可以)</p>
+</li>
+</ol>
+<h4 id="修改-VueX"><a href="#修改-VueX" class="headerlink" title="修改 VueX"></a>修改 VueX</h4><p>為了達到上面的目的，我們必須先改寫 <strong>VueX</strong> 這邊，在這邊我們統一透過 <code>localStorage.setItem(&quot;i18nLang&quot;, value);</code> 來紀錄目前使用者所選擇的語系 <strong>localStorage</strong>，這樣下次我們只要撈取 <strong>localStorage</strong> 便可以知道使用者上次有沒有選擇了什麼語系。</p>
+<p>打開 <code>./src/store/index.ts</code> 這隻檔案並且修改為：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/store/index.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Prototype[State]</span></span><br><span class="line">type stateType = &#123;</span><br><span class="line">  <span class="attr">langsOption</span>: lang.<span class="property">langsOptionType</span>[];</span><br><span class="line">  <span class="attr">lang</span>: string | <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">stateInit</span>: stateType = &#123;</span><br><span class="line">  <span class="attr">langsOption</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">key</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&quot;繁體中文&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">key</span>: <span class="string">&quot;en-US&quot;</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&quot;English(United States)&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">key</span>: <span class="string">&quot;ja-JP&quot;</span>,</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&quot;日本語&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">lang</span>: <span class="literal">null</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createStore</span>(&#123;</span><br><span class="line">  <span class="attr">state</span>: stateInit,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">    <span class="comment">// 切換語系設定</span></span><br><span class="line">    <span class="title function_">setI18nLang</span>(<span class="params">state, value</span>) &#123;</span><br><span class="line">      state.<span class="property">lang</span> = value;</span><br><span class="line">      <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&quot;i18nLang&quot;</span>, value);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">actions</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">modules</span>: &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果不是 <strong>TypeScript</strong> 的話直接使用下面的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/store/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">createStore</span>(&#123;</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">    <span class="attr">langsOption</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;繁體中文&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;en-US&quot;</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;English(United States)&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">id</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;ja-JP&quot;</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;日本語&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">lang</span>: <span class="literal">null</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">    <span class="comment">// 切換語系設定</span></span><br><span class="line">    <span class="title function_">setI18nLang</span>(<span class="params">state, value</span>) &#123;</span><br><span class="line">      state.<span class="property">lang</span> = value;</span><br><span class="line">      <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&quot;i18nLang&quot;</span>, value);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">actions</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">modules</span>: &#123;&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="改寫套件引入檔案"><a href="#改寫套件引入檔案" class="headerlink" title="改寫套件引入檔案"></a>改寫套件引入檔案</h4><p>接著改寫 <code>./src/i18n/index.ts</code> 這隻檔案，改寫成下面的內容(聰明的你一定知道這邊要去讀取 <strong>localStorage</strong> 拿取上次使用者是否有選擇語系)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/i18n/index.ts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&quot;@/store&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; createI18n &#125; <span class="keyword">from</span> <span class="string">&quot;vue-i18n&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> message <span class="keyword">from</span> <span class="string">&quot;./common.json&quot;</span>; <span class="comment">// 這邊之後統一示範全部檔案集中在同一支 JSON 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> locale = <span class="string">&quot;zh-TW&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判斷之前是否有改過語系, 讀取紀錄</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&quot;i18nLang&quot;</span>)) &#123;</span><br><span class="line">  <span class="comment">// 必須先賦予一個變數, 不然 TS 會出現 &quot;類型 &#x27;string | null&#x27; 不可指派給類型 &#x27;string&#x27;。類型 &#x27;null&#x27; 不可指派給類型 &#x27;string&#x27;。&quot; 的錯誤</span></span><br><span class="line">  <span class="keyword">const</span> localeData = <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&quot;i18nLang&quot;</span>);</span><br><span class="line">  locale = localeData !== <span class="literal">null</span> ? localeData : <span class="string">&quot;zh-TW&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&quot;i18nLang&quot;</span>, locale);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// VueX 更改</span></span><br><span class="line">store.<span class="title function_">commit</span>(<span class="string">&quot;setI18nLang&quot;</span>, locale);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> i18n = <span class="keyword">new</span> <span class="title function_">createI18n</span>(&#123;</span><br><span class="line">  locale,</span><br><span class="line">  <span class="attr">messages</span>: message,</span><br><span class="line">  <span class="attr">fallbackLocale</span>: <span class="string">&quot;zh-TW&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; i18n &#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>這邊題外話一下， <code>const localeData = localStorage.getItem(&quot;i18nLang&quot;);</code> 那邊一定要這樣使用，不然會噴錯，如果有哪路大神知道為什麼的歡迎在下方留言告訴筆者，感激不盡。</em></p>
+</blockquote>
+<h4 id="最後修改要讓使用者選擇的頁面"><a href="#最後修改要讓使用者選擇的頁面" class="headerlink" title="最後修改要讓使用者選擇的頁面"></a>最後修改要讓使用者選擇的頁面</h4><p>這邊就依照個人喜好修改，附上使用者覺得很方便的 <strong>select</strong> 使用 <strong>v-model</strong> 綁定 <strong>VueX</strong> 的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 某支 .vue 檔</span></span><br><span class="line"></span><br><span class="line">&lt;template lang=<span class="string">&quot;pug&quot;</span>&gt;</span><br><span class="line"><span class="title function_">select</span>(</span><br><span class="line">  v-model=<span class="string">&quot;lang&quot;</span></span><br><span class="line">)</span><br><span class="line">  <span class="title function_">option</span>(<span class="params"></span></span><br><span class="line"><span class="params">    v-<span class="keyword">for</span>=<span class="string">&quot;lang in langsOption&quot;</span>,</span></span><br><span class="line"><span class="params">    :key=<span class="string">&quot;lang.id&quot;</span>,</span></span><br><span class="line"><span class="params">    :value=<span class="string">&quot;lang.key&quot;</span></span></span><br><span class="line"><span class="params">  </span>) &#123;&#123; lang.<span class="property">title</span> &#125;&#125;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; defineComponent, ref, computed &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; useStore &#125; <span class="keyword">from</span> <span class="string">&quot;vuex&quot;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> &#123; useI18n &#125; <span class="keyword">from</span> <span class="string">&quot;vue-i18n&quot;</span>; <span class="comment">// 這邊必須要透過 methods 去修改語系，所以必須要引入 vue-i18n，另外也可寫在 VueX 看個人喜好</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">name</span>: <span class="string">&quot;index&quot;</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// Vue Tools</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">const</span> store = <span class="title function_">useStore</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// i18n</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">const</span> &#123; locale &#125; = <span class="title function_">useI18n</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">langsOption</span>: <span class="title function_">computed</span>(<span class="function">() =&gt;</span> store.<span class="property">state</span>.<span class="property">langsOption</span>),</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="attr">lang</span>: <span class="title function_">computed</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">get</span>: <span class="function">() =&gt;</span> store.<span class="property">state</span>.<span class="property">lang</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="attr">set</span>: <span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="keyword">if</span> (val === store.<span class="property">state</span>.<span class="property">lang</span>) <span class="keyword">return</span>; <span class="comment">// 如果和原本一樣就不更改</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          locale.<span class="property">value</span> = val; <span class="comment">// 修改 i18n 套件的語系設定, 這邊也可改寫在 VueX, 依個人喜好</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          store.<span class="title function_">commit</span>(<span class="string">&quot;setI18nLang&quot;</span>, val); <span class="comment">// 修改 VueX 的值</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;),</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>透過上面方法即可達到快速更改語系，也可記錄使用者語系至 <strong>localStorage</strong>，到這邊基本的用法都差不多了，如果你想再繼續下去學習透過網站統一管理語言包就接著下一步吧 Go～</p>
+<hr>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/LocoLogo.png" alt="Localise.biz"></p>
+<h3 id="線上網站統一管理語言包"><a href="#線上網站統一管理語言包" class="headerlink" title="線上網站統一管理語言包"></a><strong>線上網站統一管理語言包</strong></h3><p>其實本地新增編輯語言包真的不太方便，如果多人開發的時候又會碰到需要解 <strong>Git</strong> 衝突的情況，今天如果有幾十個專案，就又要一個一個比對並且複製貼上去修改，太不人性化了。</p>
+<p>因為前陣子筆者接觸公司的專案，發現強大的前端同事使用了一個方便的網站，索性便在這次的 <strong>Side Project</strong> 使用上，這邊也一起記錄下來。</p>
+<h4 id="註冊網站帳號"><a href="#註冊網站帳號" class="headerlink" title="註冊網站帳號"></a>註冊網站帳號</h4><p><img src="/images/others/loading.gif" data-original="/images/20210528/plan.png" alt="Plan"></p>
+<p>沒錯，因為需要透過網站去申請帳號密碼，才能把語言包紀錄在該網站的資料庫，但放心，免費的額度還是有的。</p>
+<p>『每一個字串一種語言為一個項目，免費額度基本上的項目為 2000』，其實很夠用了，因為該網站為專案式管理語言包，所以如果公司專案覺得不錯的話，其實可以小花 <strong>$19.59&#x2F;mo(美金)</strong> 購買商業方案，筆者覺得很划算。</p>
+<h4 id="建立專案"><a href="#建立專案" class="headerlink" title="建立專案"></a>建立專案</h4><p>申請結束後請建立專案，然後輸入專案名稱。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/createNewProject.png" alt="Create New Project"></p>
+<p>這邊可以看見我已經有使用一個專案，因為筆者裡面設定了<strong>三種語言</strong>，所以每一個項目都會*3，目前有九個翻譯，就是佔用了 <strong>27</strong> 個 <strong>Translation</strong>。</p>
+<p>另外這個網站還有個好處是語言包除了可以下載之外，也可以匯入，所以其實是很安全的，不怕語系檔案不見。</p>
+<h4 id="建立第一個翻譯"><a href="#建立第一個翻譯" class="headerlink" title="建立第一個翻譯"></a>建立第一個翻譯</h4><p><img src="/images/others/loading.gif" data-original="/images/20210528/newAsset.png" alt="第一個翻譯"></p>
+<p>之後點擊綠色的按鈕新增第一個翻譯，然後在 <strong>Asset ID</strong> 輸入要設定的語系 <strong>Key</strong>，這邊先測試輸入 <strong>welcome</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/newAsset-2.png" alt="目前語系"></p>
+<p>這邊你會發現目前只有中文，查看右邊的地方有一個地球的 <strong>Icon</strong>，點擊後下面會出現 <strong>New locale</strong>，再度點擊後會彈出一個視窗，這時候就可以輸入你想新增的語系了，但記得，語系越多，佔用的 <strong>Translation</strong> 就會越多！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/newLocales.png" alt="新增語系"></p>
+<p>最後在大框框那邊輸入你想翻譯的文字，然後再透過下拉去切換語言，把你設定的語言都新增好，右邊地球那邊會顯示你的百分比，如果某些語言沒有翻譯，就不會 <strong>100%</strong>。</p>
+<h4 id="拿取-API-Key"><a href="#拿取-API-Key" class="headerlink" title="拿取 API Key"></a>拿取 API Key</h4><p><img src="/images/others/loading.gif" data-original="/images/20210528/APIKeys.png" alt="記好你的Key"></p>
+<p>與大多的網站差不多，通常要打那個網站的 <strong>API</strong>，都會需要帶 <strong>Key</strong>，一樣看到剛剛右邊的地球，點擊地球右邊的板手 <strong>Icon</strong>，下方有一個 <strong>API Keys</strong>，點擊後又會彈出一個視窗，記下你的 <strong>API Keys</strong>，記得請使用上方的，下方的會包含可以修改的權限，這邊我們不需要。</p>
+<blockquote>
+<p>放心這個專案在示範完之後就會砍掉了，所以上面的 <strong>Key</strong> 是沒用的。</p>
+</blockquote>
+<h4 id="查閱-Document"><a href="#查閱-Document" class="headerlink" title="查閱 Document"></a>查閱 Document</h4><p>接著到網站的 <strong><a target="_blank" rel="noopener" href="https://localise.biz/api/docs">API 文件</a></strong> 可以看見許多 <strong>API</strong> 的介紹，這邊我們只需要找到 <strong><a target="_blank" rel="noopener" href="https://localise.biz/api/docs/export">Export API</a></strong> 就可以了，進去後我們需要用到的是 <code>GET /api/export/all.&#123;ext&#125;</code> 這支 <strong>API</strong>；有些人會使用 <code>GET /api/export/archive/&#123;ext&#125;.zip</code>，但這個需要再解壓縮並且引入方式也要分開，筆者採用最暴力且簡單的方式，透過 <strong>API</strong> 取得語言包的 <strong>JSON</strong> 然後載入套件中。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20210528/LocoSwagger.png" alt="測試 API"></p>
+<p>這邊推薦可以先使用該網站的 <strong><a target="_blank" rel="noopener" href="https://localise.biz/api#!/export/exportArchive">API Explorer</a></strong> 去查看你的 <strong>API</strong> 打不打得過，類似 <strong>Swagger</strong>，很方便。</p>
+<hr>
+<h3 id="一鍵更新語言包"><a href="#一鍵更新語言包" class="headerlink" title="一鍵更新語言包"></a><strong>一鍵更新語言包</strong></h3><p>這邊就要開始來講最後的重頭戲了，怎麼透過指令去直接抓取最新的語言包呢？首先到專案目錄新增 <code>loadi18nFile.js</code> 這支檔案，然後在裡面打上下列的內容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 至 Loco 網站抓取語言檔(這邊直接抓取 JSON 不需再分資料夾)</span></span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">&#x27;https&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> bl = <span class="built_in">require</span>(<span class="string">&#x27;bl&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> colors = <span class="built_in">require</span>(<span class="string">&#x27;colors&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> i18nPath = path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;./src/i18n&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> locoApiKey = <span class="string">&quot;p90GaanWIslvbDG01a41e72qyown4xZC&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> locoGetJSONApiUrl = <span class="string">&quot;https://localise.biz/api/export/all?key=&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> localesDownloadUrl = <span class="string">`<span class="subst">$&#123;locoGetJSONApiUrl&#125;</span><span class="subst">$&#123;locoApiKey&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">downloadLocoJson</span>(<span class="params"></span>) &#123;</span><br><span class="line">    https</span><br><span class="line">        .<span class="title function_">get</span>(localesDownloadUrl, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">            response.<span class="title function_">setEncoding</span>(<span class="string">&#x27;utf8&#x27;</span>);</span><br><span class="line">            response.<span class="title function_">pipe</span>(<span class="title function_">bl</span>(<span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                    <span class="title function_">reject</span>(err);</span><br><span class="line">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Loco JSON pipe failed&#x27;</span>.<span class="property">red</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">let</span> i18nJSON = data.<span class="title function_">toString</span>();</span><br><span class="line">                <span class="keyword">if</span> (i18nJSON) &#123;</span><br><span class="line">                    fs.<span class="title function_">writeFile</span>(<span class="string">`<span class="subst">$&#123;i18nPath&#125;</span>/common.json`</span>, i18nJSON, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">                        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Loco JSON writeFile failed&#x27;</span>.<span class="property">red</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Loco JSON writeFile success&#x27;</span>.<span class="property">green</span>);</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Loco JSON downloading success&#x27;</span>.<span class="property">green</span>);</span><br><span class="line">            &#125;));</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// Handle errors</span></span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Loco JSON downloading failed&#x27;</span>.<span class="property">red</span>);</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(err);</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">downloadLocoJson</span>();</span><br></pre></td></tr></table></figure>
+
+<p>如果想謹慎一點，也可以將 <strong>API Key</strong> 放在 <strong>.env</strong> 中，再透過套件 <code>require(&#39;dotenv&#39;).config();</code> 去取得 <code>process.env.VUE_API_KEY</code> 也會比較安全。</p>
+<blockquote>
+<p><strong>關於上面的內容也可以自行研究一下，例如 <code>setEncoding</code>、<code>writeFile</code> 都可以在網路上查看該用法是什麼，這個比較偏向 <strong>Node.js</strong> 故這邊不多做解釋，有興趣可以參考 <a href="https://rexhung0302.github.io/2020/08/06/20200806/#more">[NodeJS Become A Full Stack Developer] — 從0開始 NodeJS 小試身手</a></strong></p>
+</blockquote>
+<h4 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h4><p>最後的最後我們只需要修改 <code>package.json</code>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;i18n-Test-project&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;serve&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node loadI18nFile &amp;&amp; vue-cli-service serve&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vue-cli-service build&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vue-cli-service lint&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;loadI18n&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node loadI18nFile&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="comment">// ... 略</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>之後就可以透過 <code>yarn run loadI18n</code> 或 <code>npm run loadI18n</code> 來直接更新語言包啦！或是在 <code>yarn serve</code> 之前先去更新一波語言包，這樣多人開發起來更方便了。</p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次在做的 <strong>Side Project</strong> 其實是從去年底開始因為家人剛好有需求，拿來一邊練習一邊開發的，原本前台的頁面其實都做好了，因為想挑戰看看開始實作後台，這時候才了解後端工程師真的辛苦啊(原本就深感辛苦，別砲我QQ)。</p>
+<p>透過這次的練習其實又收穫滿滿，除了上一篇的 <strong><a href="https://rexhung0302.github.io/2021/05/16/20210516/">[Vue Notes] — 在 Vue 優雅的引入 SVG 幾種方式</a></strong> 之外，這次又學到怎麼使用 <strong>I18n</strong>。對了，還有被 <strong>Vue3 + TS</strong> 摧殘得不成人形…</p>
+<p>希望之後能學到更多優雅的使用方式再繼續上來筆記，如果各位有什麼更好的方式也請不要吝設在下方留言讓筆者知道，感謝各位。</p>
+<p>結論的最後也再次希望近期的疫情可以快點結束，願那些因為疫情而辛苦或是受傷的人也可以事事順利或早日康復，願台灣會更好願你我都會更好，一起加油！</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><p>Youtuber - Scalable Scripts - <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RIjIkMcdoII">Vue 3 Language Translations (i18n) using vue-i18n-next</a></p>
+</li>
+<li><p>mks — <a target="_blank" rel="noopener" href="https://mks.tw/3272/vue3-0-%E4%BD%BF%E7%94%A8-vue-3-0-vue-cli-4-%E9%96%8B%E7%99%BC-i18n-%E5%A4%9A%E5%9C%8B%E8%AA%9E%E8%A8%80-%E5%9C%8B%E9%9A%9B%E5%8C%96%E9%96%8B%E7%99%BC">[ Vue3.0 ] 使用 Vue 3.0 &#x2F; Vue-cli 4 開發 i18n 國際化 多國語言功能</a></p>
+</li>
+<li><p>MIS腳印 - <a target="_blank" rel="noopener" href="https://www.footmark.info/programming-language/vuejs/vue-cli3-i18n/">Vue Cli 3 使用 Vue I18n 實作多國語言網站和多語系切換功能</a></p>
+</li>
+<li><p>Dylan’s Blog - <a target="_blank" rel="noopener" href="https://dylan237.github.io/nodejs-readfile-and-writefile.html">使用 Node.js 讀取及寫入檔案</a></p>
+</li>
+<li><p>iT邦幫忙 - <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10188311">實用Gem介紹：i18n-js</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/FrameWork/" rel="tag"><i class="fa fa-tag"></i> FrameWork</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/i18n/" rel="tag"><i class="fa fa-tag"></i> i18n</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/16/20210516/" rel="prev" title="[Vue Note] — 在 Vue 優雅的引入 SVG 幾種方式">
+      <i class="fa fa-chevron-left"></i> [Vue Note] — 在 Vue 優雅的引入 SVG 幾種方式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/09/20210609/" rel="next" title="[Git Note] — Vue3 部署至 GitHub Page 超級淺入遷出">
+      [Git Note] — Vue3 部署至 GitHub Page 超級淺入遷出 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I18n-%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">I18n 引入方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">安裝套件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AA%94%E6%A1%88%E6%9E%B6%E6%A7%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">檔案架構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E5%A5%97%E4%BB%B6"><span class="nav-number">2.1.3.</span> <span class="nav-text">引入套件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%A5%97%E4%BB%B6"><span class="nav-number">2.1.4.</span> <span class="nav-text">使用套件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I18n-%E9%80%B2%E9%9A%8E%E7%94%A8%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">I18n 進階用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-VueX"><span class="nav-number">2.2.1.</span> <span class="nav-text">修改 VueX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E5%AF%AB%E5%A5%97%E4%BB%B6%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88"><span class="nav-number">2.2.2.</span> <span class="nav-text">改寫套件引入檔案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%BE%8C%E4%BF%AE%E6%94%B9%E8%A6%81%E8%AE%93%E4%BD%BF%E7%94%A8%E8%80%85%E9%81%B8%E6%93%87%E7%9A%84%E9%A0%81%E9%9D%A2"><span class="nav-number">2.2.3.</span> <span class="nav-text">最後修改要讓使用者選擇的頁面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B7%9A%E4%B8%8A%E7%B6%B2%E7%AB%99%E7%B5%B1%E4%B8%80%E7%AE%A1%E7%90%86%E8%AA%9E%E8%A8%80%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">線上網站統一管理語言包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A%E7%B6%B2%E7%AB%99%E5%B8%B3%E8%99%9F"><span class="nav-number">2.3.1.</span> <span class="nav-text">註冊網站帳號</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%B0%88%E6%A1%88"><span class="nav-number">2.3.2.</span> <span class="nav-text">建立專案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E7%AC%AC%E4%B8%80%E5%80%8B%E7%BF%BB%E8%AD%AF"><span class="nav-number">2.3.3.</span> <span class="nav-text">建立第一個翻譯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%BF%E5%8F%96-API-Key"><span class="nav-number">2.3.4.</span> <span class="nav-text">拿取 API Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E9%96%B1-Document"><span class="nav-number">2.3.5.</span> <span class="nav-text">查閱 Document</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E9%8D%B5%E6%9B%B4%E6%96%B0%E8%AA%9E%E8%A8%80%E5%8C%85"><span class="nav-number">2.4.</span> <span class="nav-text">一鍵更新語言包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number">2.4.1.</span> <span class="nav-text">大功告成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">81</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2021/05/28/20210528/",
+      identifier: "2021/05/28/20210528/",
+      title     : "[Vue Note] — 在 Vue3 優雅的引入 I18n 之餘，透過網站統一管理並一鍵更新",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
