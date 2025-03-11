@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Introduction &amp; 前言 『奇怪怎麼程式碼越寫越大包？』『同事的 PR 一次常常都幾百幾千行，到底怎麼看？』『專案的技術債越來越重啊…』 你是不是曾經有過這樣的時候呢？當專案越來越多人的時候，發現技術債越來越龐大時，似乎已經來不及了，有沒有什麼好方法呢？ 這篇文章將會帶你簡單入門 SonarQube，讓你在代碼審視上更加輕鬆。">
+  <meta name="description" content="Introduction &amp; 前言 『奇怪怎麼程式碼越寫越大包？』『同事的 PR 一次常常都幾百幾千行，到底怎麼看？』『專案的技術債越來越重啊…』 你是不是曾經有過這樣的時候呢？當專案越來越多人的時候，發現技術債越來越龐大時，似乎已經來不及了，有沒有什麼好方法呢？ 這篇文章將會帶你簡單入門 SonarQube ，讓你在代碼審視上更加輕鬆。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Tool Note] - 讓 SonarQube 成為你的糞 Code 守門員">
 <meta property="og:url" content="https://rexhung0302.github.io/2022/12/12/20221212/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言 『奇怪怎麼程式碼越寫越大包？』『同事的 PR 一次常常都幾百幾千行，到底怎麼看？』『專案的技術債越來越重啊…』 你是不是曾經有過這樣的時候呢？當專案越來越多人的時候，發現技術債越來越龐大時，似乎已經來不及了，有沒有什麼好方法呢？ 這篇文章將會帶你簡單入門 SonarQube，讓你在代碼審視上更加輕鬆。">
+<meta property="og:description" content="Introduction &amp; 前言 『奇怪怎麼程式碼越寫越大包？』『同事的 PR 一次常常都幾百幾千行，到底怎麼看？』『專案的技術債越來越重啊…』 你是不是曾經有過這樣的時候呢？當專案越來越多人的時候，發現技術債越來越龐大時，似乎已經來不及了，有沒有什麼好方法呢？ 這篇文章將會帶你簡單入門 SonarQube ，讓你在代碼審視上更加輕鬆。">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
@@ -63,7 +63,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2022-12-12T05:00:00.000Z">
-<meta property="article:modified_time" content="2025-02-20T17:36:06.004Z">
+<meta property="article:modified_time" content="2025-03-11T10:14:41.948Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -269,7 +269,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-02-21 01:36:06" itemprop="dateModified" datetime="2025-02-21T01:36:06+08:00">2025-02-21</time>
+                <time title="修改時間：2025-03-11 18:14:41" itemprop="dateModified" datetime="2025-03-11T18:14:41+08:00">2025-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,7 +317,7 @@
         <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_page_demo.png" alt="SonarQube 糞 Code 守門員"></p>
 <p>『奇怪怎麼程式碼越寫越大包？』『同事的 PR 一次常常都幾百幾千行，到底怎麼看？』『專案的技術債越來越重啊…』</p>
 <p>你是不是曾經有過這樣的時候呢？當專案越來越多人的時候，發現技術債越來越龐大時，似乎已經來不及了，有沒有什麼好方法呢？</p>
-<p>這篇文章將會帶你簡單入門 <strong>SonarQube</strong>，讓你在代碼審視上更加輕鬆。</p>
+<p>這篇文章將會帶你簡單入門 <strong>SonarQube</strong> ，讓你在代碼審視上更加輕鬆。</p>
 <span id="more"></span>
 
 <p><em><strong>這次世足大家都看 <del>買好買滿</del>(看好看滿) 了嗎？ <strong>SonarQube</strong> 將會像是克羅埃西雅強大的守門員一樣，幫你守住重重困難，直到勝利到手。</strong></em></p>
@@ -340,22 +340,22 @@
 </ol>
 <p><em><strong>備註：如果不會 Docker 也無妨，SonarQube 官方也有提供下載檔案方式安裝，但是透過 Docker 會更省事，有興趣也可以參考筆者的另一篇文章 <a href="https://rexhung0302.github.io/2021/12/10/20211210/#more">[CI&#x2F;CD Note] — 透過 Docker 快速建立及部署環境</a>。</strong></em></p>
 <hr>
-<h3 id="為何要寫這篇"><a href="#為何要寫這篇" class="headerlink" title="為何要寫這篇"></a>為何要寫這篇</h3><p>在開始前要先說一下為什麼要寫這篇文章，最近在幾個朋友間的談論，無意間討論到有個工程師常常需要幫同事 <strong>Code Review</strong>，雖然這個滿正常的，但他說每次的 <strong>PR</strong> 都是幾千行起跳，他都快跪下來了。</p>
+<h3 id="為何要寫這篇"><a href="#為何要寫這篇" class="headerlink" title="為何要寫這篇"></a>為何要寫這篇</h3><p>在開始前要先說一下為什麼要寫這篇文章，最近在幾個朋友間的談論，無意間討論到有個工程師常常需要幫同事 <strong>Code Review</strong> ，雖然這個滿正常的，但他說每次的 <strong>PR</strong> 都是幾千行起跳，他都快跪下來了。</p>
 <p>先撇除公司的制裁，該工程師詢問有無其它的方法可以解決這個問題，就在這時候有個朋友就跳出來說，試試看 <strong>SonarQube</strong> 啊！</p>
 <p>基於好康道相報的原因，筆者將此物分享給公司同事，剛好就獲得一個技術分享的機會，順道將過程記錄下來，方便日後複習，也方便有更多有興趣的人一起研究。</p>
 <hr>
 <h3 id="基礎認識"><a href="#基礎認識" class="headerlink" title="基礎認識"></a>基礎認識</h3><p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_logo.png" alt="SonarQube Logo v9.7"></p>
-<p>這邊就廢話不多說，直接介紹本日主角 <strong>SonarQube</strong>，這是一款開源的程式碼檢測平台，雖然目前有很多的檢測工具軟體，但滿多都還是需要花費價格，對於一些資金吃緊的團隊來說，這往往只是可替代性的東西，雖然方便，但我們先共體時艱辛苦一下用肉眼檢測就可以解決了對吧？</p>
+<p>這邊就廢話不多說，直接介紹本日主角 <strong>SonarQube</strong> ，這是一款開源的程式碼檢測平台，雖然目前有很多的檢測工具軟體，但滿多都還是需要花費價格，對於一些資金吃緊的團隊來說，這往往只是可替代性的東西，雖然方便，但我們先共體時艱辛苦一下用肉眼檢測就可以解決了對吧？</p>
 <p><strong>SonarQube</strong> 是基於 <strong>Java</strong> 開發的程式碼檢測與品質管理系統，因為 <strong>Java</strong> 的關係，是可以跨平台使用的。</p>
-<p>先說一下要使用這套工具最後還會搭配一個叫做 <strong>SonarScanner</strong> 的分析工具，整體流程大概會像是下圖一樣，我們會有一台伺服器專門拿來放置 <strong>SonarQube</strong>，然後會在想要檢測程式碼的那一個專案的伺服器環境內安裝 <strong>SonarScanner</strong>。</p>
+<p>先說一下要使用這套工具最後還會搭配一個叫做 <strong>SonarScanner</strong> 的分析工具，整體流程大概會像是下圖一樣，我們會有一台伺服器專門拿來放置 <strong>SonarQube</strong> ，然後會在想要檢測程式碼的那一個專案的伺服器環境內安裝 <strong>SonarScanner</strong>。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarscanner_demo.png" alt="大致概念圖"></p>
-<p>基於這樣的設定，我們可以在不同專案內建置 <strong>SonarScanner</strong>，只要最後將掃描後的結果傳遞至放置 <strong>SonarQube</strong> 的伺服器內產出報告即可。</p>
+<p>基於這樣的設定，我們可以在不同專案內建置 <strong>SonarScanner</strong> ，只要最後將掃描後的結果傳遞至放置 <strong>SonarQube</strong> 的伺服器內產出報告即可。</p>
 <hr>
 <h3 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h3><h4 id="關於-Docker"><a href="#關於-Docker" class="headerlink" title="關於 Docker"></a>關於 Docker</h4><p>這次我們會將 <strong>SonarQube</strong> 透過 <strong>Docker</strong> 的方式安裝在本地，如果你有一台 <strong>VM</strong> 可以放置 <strong>SonarQube</strong> 的話當然更好。</p>
 <p>如果你不會或者沒有使用 <strong>Docker</strong> 的話，官方也提供另一種直接安裝的方式，只是這種方式需要注意一下環境的部分，詳細可參考官方文件 <a target="_blank" rel="noopener" href="https://docs.sonarqube.org/latest/setup/get-started-2-minutes/">Installing a local instance of SonarQube</a>。</p>
 <p>先透過 <strong>Docker</strong> 官網下載安裝 <a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a>，如果你是 <strong>Win10</strong> 之前的版本，可以參考這篇文章 <a target="_blank" rel="noopener" href="https://devconnected.com/how-to-install-docker-on-windows-7-8-10-home-and-pro/">How To Install Docker on Windows 7&#x2F;8&#x2F;10 Home and Pro</a>。</p>
 <p><em>備註：如果是 <strong>Win10</strong> 安裝 <strong>Docker Desktop</strong> 也要記得注意一下  <strong>WSL2</strong> 的問題，可參考 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-tw/windows/wsl/tutorials/wsl-containers">在 WSL 2 上開始使用 Docker 遠端容器</a></em>。</p>
-<p>另外我們會使用到 <strong>Docker Compose</strong>，這邊就不詳述安裝方式，可參考 <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-compose.html">Runoob.com 的 Docker Compose 介紹簡介</a>，內有各種環境安裝介紹。</p>
+<p>另外我們會使用到 <strong>Docker Compose</strong> ，這邊就不詳述安裝方式，可參考 <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-compose.html">Runoob.com 的 Docker Compose 介紹簡介</a>，內有各種環境安裝介紹。</p>
 <h4 id="關於-SonarQube"><a href="#關於-SonarQube" class="headerlink" title="關於 SonarQube"></a>關於 SonarQube</h4><p><img src="/images/others/loading.gif" data-original="/images/20221212/download_sonarqube_doc.png" alt="官網 SonarQube 各版本介紹頁面"></p>
 <p><strong>SonarQube</strong> 有幾個版本(詳細可查看 <a target="_blank" rel="noopener" href="https://www.sonarqube.org/downloads/">Download SonarQube Document</a>)，基本上分為免費的開源版本及付費的商業版本，這邊我們使用免費的開源版本，不過不用點擊下載，因為我們要透過 <strong>Docker</strong> 來安裝。</p>
 <h4 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h4><p>這邊對於 <strong>M1&#x2F;M2</strong> 晶片請用不同安裝方式，由於官方提供的安裝方式會直接安裝到 <strong>AMD64</strong> 的版本，速度會很慢，所以請改透過使用 <a target="_blank" rel="noopener" href="https://hub.docker.com/r/mwizner/sonarqube/tags">mwizner&#x2F;sonarqube</a> 這個 <strong>Docker Image</strong> 來安裝。</p>
@@ -383,7 +383,7 @@
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_docker_composer_demo.gif" alt="跑起來"></p>
 <p>之後等待一小段時間，讓 <strong>sonarQube</strong> 服務運行起來，再去瀏覽器輸入 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a>，就會看到畫面了，如果出現找不到畫面，可能是服務還沒起起來，可以再稍等一下在刷新頁面。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_login.png" alt="登入畫面"></p>
-<p>第一次登入帳號密碼都是 <strong>admin</strong>，登入後系統會要求你改密碼。</p>
+<p>第一次登入帳號密碼都是 <strong>admin</strong> ，登入後系統會要求你改密碼。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/change_pwd.png" alt="更改密碼"></p>
 <p>最後可以點開 <strong>Docker Desktop</strong> 查看服務是否都成功啟動了。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/docker_desktop.png" alt="Docker Desktop"></p>
@@ -391,22 +391,22 @@
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_setup.png" alt="更新系統"></p>
 <p><em><strong>備註2：如果服務啟動後掛了，可以參考一下 Terminal 是否有顯示 <code>memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</code> 這種錯誤訊息，是的話代表記憶體不足，詳細解決方式可參考 <a target="_blank" rel="noopener" href="https://github.com/SonarSource/docker-sonarqube/issues/282">Sonarqube crashed still with latest image #282</a>，其實只要提高 Docker 映像檔記憶體上線即可，輸入 <code>sysctl -w vm.max_map_count=262144</code>，之後重啟 Container</strong></em></p>
 <h4 id="步驟二"><a href="#步驟二" class="headerlink" title="步驟二"></a>步驟二</h4><p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_add_project.png" alt="創建專案"></p>
-<p>在接著繼續下去之前我們先在 <strong>sonarQube</strong> 上創建專案，一般免費版是不支援多分支掃描，所以有的教學文章會請你一個分支創建一個 <strong>Project</strong>，不過等等後面我們會透過安裝插件的方式解決。</p>
+<p>在接著繼續下去之前我們先在 <strong>sonarQube</strong> 上創建專案，一般免費版是不支援多分支掃描，所以有的教學文章會請你一個分支創建一個 <strong>Project</strong> ，不過等等後面我們會透過安裝插件的方式解決。</p>
 <p>登入後應該正常都是空的，點擊 <strong>Add a project</strong> 按鈕。</p>
-<p>接下來我們選擇 <strong>Manually</strong>，筆者沒記錯的話，在 <strong>Community</strong> 版本中，專案類型只支援手動(<strong>Manually</strong>) 的方式。</p>
+<p>接下來我們選擇 <strong>Manually</strong> ，筆者沒記錯的話，在 <strong>Community</strong> 版本中，專案類型只支援手動(<strong>Manually</strong>) 的方式。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_create_project_by_manually.png" alt="Manually"></p>
-<p>這邊需要再輸入專案的 <strong>Key</strong>，可以使用 <strong>英文、數字、連字線（-）、底線（_）、句點（.）或 冒號（:）</strong>。</p>
+<p>這邊需要再輸入專案的 <strong>Key</strong> ，可以使用 <strong>英文、數字、連字線（-）、底線（_）、句點（.）或 冒號（:）</strong>。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_project_key.png" alt="Project Key"></p>
 <p>接著會需要設定一個 <strong>Token</strong> 名稱，然後按下 <strong>Generate</strong> 按鈕，產生一個新的 <strong>Token</strong>。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_add_token_name.png" alt="新建 Token"></p>
-<p>這時候會產生一組 <strong>Token</strong>，請自行保管好，不要外洩，這就相當於是專案的密碼。</p>
+<p>這時候會產生一組 <strong>Token</strong> ，請自行保管好，不要外洩，這就相當於是專案的密碼。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_get_token.png" alt="產出 Token"></p>
-<p>產生完 <strong>Token</strong> 之後，點擊 <strong>Continue</strong> 會跳到 <strong>Run analysis on your project</strong>，這邊會簡單的詢問要跑 <strong>Scanner</strong> 的環境是什麼，也會請你查看 <strong>official documentation of the Scanner</strong> 頁面安裝 <strong>sonar-scanner</strong>，下面會簡單產出掃描的指令。</p>
+<p>產生完 <strong>Token</strong> 之後，點擊 <strong>Continue</strong> 會跳到 <strong>Run analysis on your project</strong> ，這邊會簡單的詢問要跑 <strong>Scanner</strong> 的環境是什麼，也會請你查看 <strong>official documentation of the Scanner</strong> 頁面安裝 <strong>sonar-scanner</strong> ，下面會簡單產出掃描的指令。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_project_select_env.gif" alt="依要分析的專案當下環境去選擇"></p>
 <p>這時候就可以繼續下一步啦。</p>
 <h4 id="步驟三"><a href="#步驟三" class="headerlink" title="步驟三"></a>步驟三</h4><p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarScanner_download_doc.png" alt="Sonar Scanner"></p>
-<p>安裝完 <strong>sonarQube</strong> 之後，就要安裝主角之一的 <strong>sonar-scanner</strong>，安裝方式有兩種，一種直接將 <strong>sonar-scanner</strong> 下載到本地（如果之後是在 <strong>VM</strong> 上請安裝到 <strong>VM</strong> 的全域環境，還記得嗎？我們上面的圖有說明道，不同專案可以透過 <strong>sonar-scanner</strong> 將掃描報告輸出到 <strong>sonarQube</strong> 去），另一種則是透過 <strong>Docker</strong>。</p>
-<p><em>備註：<strong>M1&#x2F;M2 Mac</strong> 的人建議使用 <strong>Mac OS X 64-bit</strong> 的下載點直接安裝，不要透過 <strong>Docker</strong>，掃描速度會非常慢</em></p>
+<p>安裝完 <strong>sonarQube</strong> 之後，就要安裝主角之一的 <strong>sonar-scanner</strong> ，安裝方式有兩種，一種直接將 <strong>sonar-scanner</strong> 下載到本地（如果之後是在 <strong>VM</strong> 上請安裝到 <strong>VM</strong> 的全域環境，還記得嗎？我們上面的圖有說明道，不同專案可以透過 <strong>sonar-scanner</strong> 將掃描報告輸出到 <strong>sonarQube</strong> 去），另一種則是透過 <strong>Docker</strong>。</p>
+<p><em>備註：<strong>M1&#x2F;M2 Mac</strong> 的人建議使用 <strong>Mac OS X 64-bit</strong> 的下載點直接安裝，不要透過 <strong>Docker</strong> ，掃描速度會非常慢</em></p>
 <h4 id="安裝方式一：Docker"><a href="#安裝方式一：Docker" class="headerlink" title="安裝方式一：Docker"></a>安裝方式一：Docker</h4><p>第一種安裝方式比較簡單；我們先拿隨便一個專案來試試手，選好專案後取得該專案的路徑，然後在 <strong>Terminal</strong> 裡輸入以下內容：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --rm \</span><br><span class="line">    --network=host \</span><br><span class="line">    -e SONAR_HOST_URL=&#x27;http://127.0.0.1:9000&#x27; \</span><br><span class="line">    -e SONAR_SCANNER_OPTS=&quot;-Dsonar.projectKey=$&#123;站台創建的 Project 名稱&#125; -Dsonar.inclusions=/src/*&quot; \</span><br><span class="line">    -e SONAR_LOGIN=&quot;$&#123;站台創建 Token&#125;&quot; \</span><br><span class="line">    -v &quot;$&#123;專案路徑&#125;:/usr/src&quot; \</span><br><span class="line">    sonarsource/sonar-scanner-cli</span><br></pre></td></tr></table></figure>
 
@@ -433,19 +433,19 @@
 </ul>
 <p><em>備註：如果 <strong>Token</strong> 遺忘了，可以透過 <strong>My Account</strong> 裡面的 <strong>Security</strong> 再去 <strong>Generate</strong> 一個 <strong>Token</strong></em></p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/generate_token.png" alt="產生新 Token"></p>
-<h4 id="步驟四"><a href="#步驟四" class="headerlink" title="步驟四"></a>步驟四</h4><p>在跑完分析後，我們就可以刷新 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 頁面，這時候看一下剛剛新增的 <strong>Project</strong>，應該會長得不一樣，點擊該 <strong>Project</strong> 進去，可以查看更多訊息。</p>
+<h4 id="步驟四"><a href="#步驟四" class="headerlink" title="步驟四"></a>步驟四</h4><p>在跑完分析後，我們就可以刷新 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 頁面，這時候看一下剛剛新增的 <strong>Project</strong> ，應該會長得不一樣，點擊該 <strong>Project</strong> 進去，可以查看更多訊息。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/after_scanner_project.png" alt="掃描結束"></p>
 <p>點擊進入後，我們可以看到更多的訊息，包含**技術債、Code Smells…**等等，其中這邊會有兩個頁籤，一個為 <strong>New Code</strong> 一個為 <strong>Overall Code</strong>。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/scanner_new_code_and_over_call_code.png" alt="頁籤切換"></p>
 <p>下面會有線圖可以看，這個可以很清楚地看到技術債是否有被解決或者越來越嚴重，另外也可以看到目前測試的涵蓋率。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/scanner_report.gif" alt="技術債及測試涵蓋率"></p>
 <hr>
-<h3 id="多分支設定"><a href="#多分支設定" class="headerlink" title="多分支設定"></a>多分支設定</h3><p>當我們一個專案多人開發，不太可能會只有掃描 <strong>Develop</strong> 或者 <strong>Master</strong>，我們可能會想要在同事發 <strong>PR</strong> 時就先檢測一次，這時候請安裝 <strong>Community</strong> 版本分支套件。</p>
+<h3 id="多分支設定"><a href="#多分支設定" class="headerlink" title="多分支設定"></a>多分支設定</h3><p>當我們一個專案多人開發，不太可能會只有掃描 <strong>Develop</strong> 或者 <strong>Master</strong> ，我們可能會想要在同事發 <strong>PR</strong> 時就先檢測一次，這時候請安裝 <strong>Community</strong> 版本分支套件。</p>
 <p>下面將會有三個步驟來安裝這個套件，如果你覺得不好理解或者不知道怎麼操作，也可以參考官方的指南 <strong><a target="_blank" rel="noopener" href="https://github.com/mc1arke/sonarqube-community-branch-plugin#installation">Manual Install</a></strong>。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/manual_install_doc.png" alt="套件安裝步驟"></p>
 <h4 id="步驟一-1"><a href="#步驟一-1" class="headerlink" title="步驟一"></a>步驟一</h4><p>這邊需要先到套件 <a target="_blank" rel="noopener" href="https://github.com/mc1arke/sonarqube-community-branch-plugin">Sonarqube Community Branch Plugin - GitHub</a> 去查看目前適用於你 <strong>SonarQube</strong> 版本的掃描分支套件，不同版本必須安裝不同版本的掃描套件版本。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_community_branch_plugin_version.png" alt="查看適用的版本"></p>
-<p>因為我們剛剛安裝的 <strong>SonarQube Version</strong> 為 <strong>lts</strong>，所以查看版本的方式可以直接到 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 頁面的底部看。</p>
+<p>因為我們剛剛安裝的 <strong>SonarQube Version</strong> 為 <strong>lts</strong> ，所以查看版本的方式可以直接到 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 頁面的底部看。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_version.png" alt="版本在此"></p>
 <p>對應 <strong>8.9.10</strong> 我們必須要安裝 <strong>Plugin Version</strong> 為 <strong>1.8.2</strong> 的版本，請到 <a target="_blank" rel="noopener" href="https://github.com/mc1arke/sonarqube-community-branch-plugin/releases">sonarqube-community-branch-plugin - Release</a> 去下載 <strong>1.8.2</strong> 的 <strong>jar</strong> 檔。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/sonarqube_plugin_release.png" alt="請找到對應版本的 Release，下載 .jar 檔"></p>
@@ -462,7 +462,7 @@
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/vi_sonar_properties.png" alt="修改設定檔"></p>
 <p>結束後重啟這個映像檔，再次輸入 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 進入到站台頁面，這時候應該會看到跳出警示，點擊 <strong>I understand the risk</strong> 按鈕。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/installation_of_plugins.png" alt="我了解風險！！"></p>
-<p>之後點擊上面的 <strong>Administration</strong> 之後，點擊 <strong>Marketplace</strong>，點擊底下的 <strong>Installed</strong>，確認套件已安裝成功。</p>
+<p>之後點擊上面的 <strong>Administration</strong> 之後，點擊 <strong>Marketplace</strong> ，點擊底下的 <strong>Installed</strong> ，確認套件已安裝成功。</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/confirm_plugin_installed.png" alt="確認套件已經安裝成功了"></p>
 <h4 id="步驟四-1"><a href="#步驟四-1" class="headerlink" title="步驟四"></a>步驟四</h4><p>最後我們需要更改掃描的命令，還有切換到即將發 <strong>PR</strong> 的分支，然後在 <strong>Terminal</strong> 上輸入：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --rm \</span><br><span class="line">    --network=host \</span><br><span class="line">    -e SONAR_HOST_URL=&#x27;http://127.0.0.1:9000&#x27; \</span><br><span class="line">    -e SONAR_SCANNER_OPTS=&quot; \</span><br><span class="line">    -Dsonar.projectKey=$&#123;站台創建的 Project 名稱&#125; \</span><br><span class="line">    -Dsonar.inclusions=/src/* \</span><br><span class="line">    -Dsonar.pullrequest.key=$&#123;輸入隨意數字&#125; \</span><br><span class="line">    -Dsonar.pullrequest.branch=$&#123;分支名稱&#125; \</span><br><span class="line">    -Dsonar.pullrequest.base=master&quot; \</span><br><span class="line">    -e SONAR_LOGIN=&quot;$&#123;站台創建 Token&#125;&quot; \</span><br><span class="line">    -v &quot;$&#123;專案路徑&#125;:/usr/src&quot; \</span><br><span class="line">    sonarsource/sonar-scanner-cli</span><br></pre></td></tr></table></figure>
@@ -473,10 +473,10 @@
 <p>掃描結束後刷新 <a target="_blank" rel="noopener" href="http://localhost:9000/">http://localhost:9000</a> 頁面去看一下專案裡的分支，點擊下拉後就會發現一個新的分支出現了，也就是剛剛掃描的分之，就此，大功告成！</p>
 <p><img src="/images/others/loading.gif" data-original="/images/20221212/branch_plugin_working.png" alt="新分支出現了"></p>
 <hr>
-<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>其實這次一聽到有工具可以檢測程式碼是否有 <strong>Code Smell</strong> 且可以整合到 <strong>CI&#x2F;CD</strong> 內就非常吸引我，抓了時間就研究起來，這套工具不只是可以單純手動跑檢測，如果搭配 <strong>Git Pre-commit</strong> 的指令，或是 <strong>GitLab Pipeline</strong>，肯定都能發揮莫大用處。</p>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><p>其實這次一聽到有工具可以檢測程式碼是否有 <strong>Code Smell</strong> 且可以整合到 <strong>CI&#x2F;CD</strong> 內就非常吸引我，抓了時間就研究起來，這套工具不只是可以單純手動跑檢測，如果搭配 <strong>Git Pre-commit</strong> 的指令，或是 <strong>GitLab Pipeline</strong> ，肯定都能發揮莫大用處。</p>
 <p>筆者一直想要摸索 <strong>CI&#x2F;CD</strong> 的領域，從 <strong>Docker</strong> 入門後突然地接觸到這套工具，讓我有了點方向，我想下次就可以來玩玩 **Docker + SonarQube + Bot 推播…**等等的 <strong>Side Project</strong>。 </p>
 <p>依照官網的介紹，還能搭配 <strong>SonarLint</strong> 做一個全方位的檢測，從程式碼的書寫規則檢測一直到技術方面的檢測，其中能搭配 <strong>Jenkins</strong> 等等打出一套組合拳，真的是相當香啊！</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20221212/sonar_dev_cycle.png.png" alt="Dev Cycle"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20221212/sonar_dev_cycle.png" alt="Dev Cycle"></p>
 <p><strong>備註：如果沒有要使用 SonarQube 的時候，請記得要把 Docker Container 關閉，不然這個工具其實很吃資源的，這大概是這工具唯一的缺點，畢竟他會把你整份代碼 Clone 下來去分析</strong></p>
 <hr>
 <h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次只是在本地部署，下次會開始嘗試部署到服務器上去，到時候或許又會碰到不一樣的坑，不過寫程式的樂趣就在這邊，解決問題的同時或的成就感，同時筆記下來或許能幫助到下一個也正要啟程的勇者，希望本篇文章能幫助到你&#x2F;妳。</p>
