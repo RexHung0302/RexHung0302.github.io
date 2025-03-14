@@ -13938,4 +13938,338 @@
         <tag>npm</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[React Note] — React.js Test 深入淺出 ft. TypeScript</title>
+    <url>/2025/04/14/20250414/</url>
+    <content><![CDATA[<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20250414/banner.png" alt="Test"></p>
+<blockquote>
+<p>背景來至 <a href="https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo">unsplash.com 的 Christopher Gower</a></p>
+</blockquote>
+<p>開始寫程式之後，是不是常常被問你該怎麼確保程式碼沒問題？</p>
+<p>開始寫程式之後，是不是總想著怎麼不用再透過手動的方式確保程式碼沒問題？</p>
+<p>開始寫程式之後，是不是常常被問，你會不會寫測試？</p>
+<blockquote>
+<p>來！看這篇，這是一篇關於 <strong>React.js</strong> + <strong>TypeScript</strong> 為主的測試</p>
+</blockquote>
+<span id="more"></span>
+
+<p><em><strong>整篇文章是筆者自己的心得，如果文內有錯誤的地方，還請盡情指出。</strong></em></p>
+<p>該篇文章參考了其他的教學，加上自己碰到的坑，整理出心得並作為筆記釋出，其中也補足了其他教學文中少的部分，而看文章的你一定會有自己的需求，請先別急，看完文章後請截取自己需要的部分，如果你覺得這篇文章對你有幫助，還請將文章分享給更多人知道，或者結合自己的心得，在發布其他更多的文章幫助更多的開發者。</p>
+<p>由於筆者使用的專案建構工具為 <strong>Vite</strong> ，但因為先前曾經試過一次 <strong><a href="https://cn.vitest.dev/">Vitest</a></strong> 碰到些許問題，這邊就使用較為單純的 <strong>jest</strong> 進行測試，如果各位有興趣，筆者之後也會再繼續研究並且發布相關筆記介紹關於 <strong>Vitest</strong> ，但是本篇文章不會跟 <strong>Vite</strong> 有什麼關係</p>
+<blockquote>
+<p>如果你的專案不是使用 <strong>TypeScript</strong> ，中間會有些設定需要改掉，例如檔案結尾為 <code>.ts</code>，請自行改為 <code>.js</code>，如果有使用到相關套件例如 <strong>@babel&#x2F;preset-typescript</strong> 可以不用安裝，但整體建議專案是 <strong>TypeScript</strong> 的朋友在完全按照文章步驟走</p>
+</blockquote>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>會 Node.js(NPM)、終端機、及 React.js 的使用</li>
+<li>會 TypeScript(以下將會開始簡稱 TS)</li>
+<li>一顆熱忱的心 -&gt; 超級重要，碰到坑千萬不要氣餒</li>
+</ul>
+<p>本篇文章將有以下幾個步驟:</p>
+<ol>
+<li><a href="#%E5%89%8D%E5%89%8D%E5%89%8D%E8%A8%80">前前前言</a></li>
+<li><a href="#%E6%B8%AC%E8%A9%A6%E4%BB%8B%E7%B4%B9">測試介紹</a></li>
+<li><a href="#%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83">安裝環境</a></li>
+<li><a href="#%E7%92%B0%E5%A2%83%E8%A8%AD%E7%BD%AE">環境設置</a></li>
+<li><a href="#%E6%92%B0%E5%AF%AB%E5%9F%BA%E7%A4%8E%E6%B8%AC%E8%A9%A6">撰寫基礎測試</a></li>
+<li><a href="#%E6%92%B0%E5%AF%AB-React.js-%E6%B8%AC%E8%A9%A6">撰寫 React.js 測試</a></li>
+<li><a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a></li>
+<li><a href="#%E6%B8%AC%E8%A9%A6%E8%A6%86%E8%93%8B%E7%8E%87">測試覆蓋率</a></li>
+<li><a href="#React.js-%E6%9E%B6%E6%A7%8B%E6%8E%A2%E8%A8%8E">React.js 架構探討</a></li>
+</ol>
+<hr>
+<h3 id="前前前言"><a href="#前前前言" class="headerlink" title="前前前言"></a>前前前言</h3><p>在開始寫前端後的幾年，常常被問到是不是有在寫測試，加上筆者目前所待的公司過去曾經盛行測試文化，在後端的開發幾乎是以 <strong>TDD(註1)</strong> 為核心</p>
+<p>在現職的公司前陣子與主管討論後，決定在前端導入測試，一直沒有導入的原因其實一部分是因為團隊專案在初期，很多東西還沒有制式規格，滿長會碰到需要更改核心或商業邏輯的情況</p>
+<p>在團隊人員開始增長情況下，變得比較有餘力去做這件事情，同時因為近期面臨到需要帶領前端團隊人員一起成長的情況，決定透過測試下手</p>
+<p>因為我們是先開發專案到一半，才決定導入測試，所以這邊我們就不講 <strong>TDD</strong> ，但是在文章末可以提及一下目前團隊專案 <strong>React.js</strong> 的<a href="(#React.js-%E6%9E%B6%E6%A7%8B%E6%8E%A2%E8%A8%8E)">架構概念</a></p>
+<blockquote>
+<p>註1：TDD 全名為 Test-Driven Development，中文翻譯為『測試驅動開發』，簡單說核心概念為『先寫測試，在寫開發』，相關文章可參考 <a href="https://kucw.io/blog/test-driven-development/">TDD 是什麼？認識 Test-Driven Development（測試驅動開發）</a></p>
+</blockquote>
+<hr>
+<h3 id="測試介紹"><a href="#測試介紹" class="headerlink" title="測試介紹"></a>測試介紹</h3><p>這邊要先說一下對於測試通常我們有幾個測試的點，其中我們最想確保的是程式碼沒有問題，所以我們應該要測試的邏輯部分是在比較核心的商業邏輯層，不應該是 <strong>View</strong> 層，除非今天你很確定畫面不會再改變了，不然測試寫好了，突然老闆覺得這樣比較好，改版後，客戶又覺得那樣比較好，你會開始覺得測試是不是只是絆腳石</p>
+<p>如果有興趣想知道測試通常有哪些分類，可以上網查詢一下，資源非常的多，這邊就提幾個比較長被拿來討論的</p>
+<ul>
+<li><p>單元測試(Unit testing)</p>
+<ul>
+<li>最小的測試單位，盡量撰寫最基本的測試，不應該過於複雜。單元測試主要針對單一功能或模組進行測試，確保其獨立運作正常。</li>
+</ul>
+</li>
+<li><p>整合測試(Integration testing)</p>
+<ul>
+<li>測試多個模組或系統組件之間的互動，確保它們能夠正確地協同工作。整合測試通常在單元測試之後進行。</li>
+</ul>
+</li>
+<li><p>端對端測試(End-to-end testing、E2E testing)</p>
+<ul>
+<li>模擬真實用戶操作，從頭到尾測試整個應用程式的工作流程。端對端測試通常涵蓋前端和後端，確保整個系統的功能正常。</li>
+</ul>
+</li>
+<li><p>冒煙測試(Smoke Test)</p>
+<ul>
+<li>簡單且快速的測試，檢查應用程式的基本功能是否正常運作。冒煙測試通常在每次新版本發布前進行，以確保沒有重大問題。</li>
+</ul>
+</li>
+<li><p>回歸測試(Regression Test)</p>
+<ul>
+<li>在應用程式進行修改或更新後，重新執行先前的測試案例，確保新變更沒有引入新的錯誤或破壞現有功能。回歸測試有助於維持系統的穩定性。</li>
+</ul>
+</li>
+</ul>
+<p>在本篇文章內我們是從單元測試為目標去進行操作的，如果你的目的不同，那測試的內容也會不一樣</p>
+<hr>
+<h3 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h3><p>先說一下筆者的環境，以及建議使用的環境</p>
+<ul>
+<li>npm &gt;&#x3D;10.7.0</li>
+<li>node &gt;&#x3D;20.14.0</li>
+<li>typescript &gt;&#x3D;5.6.2</li>
+</ul>
+<p>這邊就不講解怎麼建立一個新的環境，預設情況下你已經有一個 <strong>React.js</strong> 專案，我們就直接開始安裝相關的測試套件吧</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm i -D jest ts-jest babel-jest @types/jest @babel/preset-env @babel/preset-react  @babel/preset-typescript ts-node @testing-library/react @testing-library/user-event identity-obj-proxy @testing-library/jest-dom jest-environment-jsdom</span><br></pre></td></tr></table></figure>
+
+<p>因為一次安裝全部的相關套件，所以可能會覺的非常多，但接下來會解釋一下這些套件作用</p>
+<ul>
+<li>jest -&gt; 測試的主要核心，如果不安裝，無法使用 <code>npm run jest</code></li>
+<li>ts-jest -&gt; 在需要測試的專案我們會有一份 <strong>jest.config.js(ts)</strong> 的檔案，如果你不是使用 <strong>ts</strong> 可以不用使用這個，請安裝 <strong>jest</strong></li>
+<li>@types&#x2F;jest -&gt; 在測試中我們會寫 <strong>describe、it、test、jest…</strong> 等等，如果不安裝 <strong>babel-jest</strong> 會導致這些 <strong>TS</strong> 定義都找不到，<strong>IDE</strong> 上會出現紅色蚯蚓，編譯也不會成功，如果不想要安裝這個套件可以改用 <strong>@jest&#x2F;globals</strong> 取代</li>
+<li>@babel&#x2F;preset-env -&gt; 放在 <strong>babel.config.js(ts)</strong> 中的，透過 <strong>babel(註2)</strong> 主要用來轉譯比較新的 <strong>JS(ES)</strong> ，讓舊版瀏覽器能夠讀懂</li>
+<li>@babel&#x2F;preset-react -&gt; 同 <strong>@babel&#x2F;preset-env</strong></li>
+<li>@babel&#x2F;preset-typescript -&gt; 同 <strong>@babel&#x2F;preset-env</strong></li>
+<li>ts-node -&gt; 用於在 <strong>Node.js</strong> 環境中直接執行 <strong>TS</strong> 代碼</li>
+<li>@testing-library&#x2F;react -&gt; 測試中我們會用到類似於 <strong>render、screen</strong> 這種方法，它是 React 測試庫，提供操作 <strong>Jest</strong> 以及網頁 <strong>DOM(註3)</strong> 的方法</li>
+<li>@testing-library&#x2F;user-event -&gt; 模擬使用者操作的事件，例如 <a href="https://juejin.cn/post/7029304095944998926">React-5 测试模拟用户事件</a></li>
+<li>identity-obj-proxy -&gt; 轉譯 <strong>CSS</strong> 相關資源，用來講 <strong>CSS</strong> 模組映射為簡單對象，詳細套件解釋可參考 <a href="https://github.com/keyz/identity-obj-proxy">identity-obj-proxy github</a></li>
+<li>@testing-library&#x2F;jest-dom -&gt; 用來解決 <code>Property ‘toBeInTheDocument’ does not exist on type ‘Matchers’</code></li>
+<li>jest-environment-jsdom -&gt; <strong>Jest</strong> 的測試環境，模擬瀏覽器 <strong>DOM</strong> 環境，如果不安裝，會出現 <code>Test environment jest-environment-jsdom cannot be found. Make sure the testEnvironment configuration option points to an existing node module.</code> 錯誤</li>
+</ul>
+<p>這些套件都可以在指令加上 <code>-D</code>或 <code>--save-dev</code> 安裝到 <strong>devDependencies</strong> 去，我們只有在開發中會使用到</p>
+<blockquote>
+<p>註2：<a href="https://www.babeljs.cn/docs">babel 是什麼？</a></p>
+</blockquote>
+<blockquote>
+<p>註3：<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document_Object_Model">文件物件模型 (DOM)</a></p>
+</blockquote>
+<hr>
+<h3 id="環境設置"><a href="#環境設置" class="headerlink" title="環境設置"></a>環境設置</h3><p>環境安裝結束後，我們要開始設置一些設定配置，首先打開 <strong>package.json</strong> 然後加上指令到 <strong>scripts</strong></p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">//...其他指令</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jest&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;test:watch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jest --watch&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>基本上我們通常只會用到 <code>npm run test</code>，不太會用 <strong>jest –watch</strong> ，後者是會一直啟動測試監聽，只要改一行測試程式碼，就會重跑一次測試，會耗費比較多資源</p>
+<p>之後我們在本地建立 <strong>jest.config.ts</strong> 或者在終端機輸入 <code>jest --init</code>(註4)，前者的方式請貼下以下內容，如果是後者的話可以按照問答一步一步回答，之後就會新增一個 <strong>jest.config.ts</strong> 的檔案，內容也可以補上跟下面差不多的內容</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * For a detailed explanation regarding each configuration property, visit:</span></span><br><span class="line"><span class="comment"> * https://jestjs.io/docs/configuration</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// import type &#123;Config&#125; from &#x27;jest&#x27;;</span></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">type</span> &#123; <span class="title class_">JestConfigWithTsJest</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;ts-jest&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> babelConfig <span class="keyword">from</span> <span class="string">&#x27;./babel.config&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">config</span>: <span class="title class_">JestConfigWithTsJest</span> = &#123;</span><br><span class="line">  <span class="comment">// All imported modules in your tests should be mocked automatically</span></span><br><span class="line">  <span class="comment">// automock: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Stop running tests after `n` failures</span></span><br><span class="line">  <span class="comment">// bail: 0,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The directory where Jest should store its cached dependency information</span></span><br><span class="line">  <span class="comment">// cacheDirectory: &quot;/private/var/folders/y9/v8qqkg955_z3wg6qqtsqs0p00000gn/T/jest_dx&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Automatically clear mock calls, instances, contexts and results before every test</span></span><br><span class="line">  <span class="attr">clearMocks</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Indicates whether the coverage information should be collected while executing the test</span></span><br><span class="line">  <span class="attr">collectCoverage</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of glob patterns indicating a set of files for which coverage information should be collected</span></span><br><span class="line">  <span class="comment">// collectCoverageFrom: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The directory where Jest should output its coverage files</span></span><br><span class="line">  <span class="attr">coverageDirectory</span>: <span class="string">&#x27;coverage&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp pattern strings used to skip coverage collection</span></span><br><span class="line">  <span class="comment">// coveragePathIgnorePatterns: [</span></span><br><span class="line">  <span class="comment">//   &quot;/node_modules/&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Indicates which provider should be used to instrument code for coverage</span></span><br><span class="line">  <span class="comment">// coverageProvider: &quot;babel&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A list of reporter names that Jest uses when writing coverage reports</span></span><br><span class="line">  <span class="comment">// coverageReporters: [</span></span><br><span class="line">  <span class="comment">//   &quot;json&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;text&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;lcov&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;clover&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An object that configures minimum threshold enforcement for coverage results</span></span><br><span class="line">  <span class="comment">// coverageThreshold: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A path to a custom dependency extractor</span></span><br><span class="line">  <span class="comment">// dependencyExtractor: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Make calling deprecated APIs throw helpful error messages</span></span><br><span class="line">  <span class="comment">// errorOnDeprecated: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The default configuration for fake timers</span></span><br><span class="line">  <span class="comment">// fakeTimers: &#123;</span></span><br><span class="line">  <span class="comment">//   &quot;enableGlobally&quot;: false</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Force coverage collection from ignored files using an array of glob patterns</span></span><br><span class="line">  <span class="comment">// forceCoverageMatch: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A path to a module which exports an async function that is triggered once before all test suites</span></span><br><span class="line">  <span class="comment">// globalSetup: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A path to a module which exports an async function that is triggered once after all test suites</span></span><br><span class="line">  <span class="comment">// globalTeardown: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A set of global variables that need to be available in all test environments</span></span><br><span class="line">  <span class="comment">// globals: &#123;&#125;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.</span></span><br><span class="line">  <span class="comment">// maxWorkers: &quot;50%&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of directory names to be searched recursively up from the requiring module&#x27;s location</span></span><br><span class="line">  <span class="comment">// moduleDirectories: [</span></span><br><span class="line">  <span class="comment">//   &quot;node_modules&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of file extensions your modules use</span></span><br><span class="line">  <span class="comment">// moduleFileExtensions: [</span></span><br><span class="line">  <span class="comment">//   &quot;js&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;mjs&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;cjs&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;jsx&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;ts&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;tsx&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;json&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;node&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module</span></span><br><span class="line">  <span class="comment">// moduleNameMapper: &#123;&#125;,</span></span><br><span class="line">  <span class="attr">moduleNameMapper</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;^@/(.*)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/src/$1&#x27;</span>, <span class="comment">// 解決 alias 問題</span></span><br><span class="line">    <span class="string">&#x27;\\.(css|less|sass|scss)$&#x27;</span>: <span class="string">&#x27;identity-obj-proxy&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\\.(gif|ttf|eot|svg|png)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/fileMock.ts&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp pattern strings, matched against all module paths before considered &#x27;visible&#x27; to the module loader</span></span><br><span class="line">  <span class="comment">// modulePathIgnorePatterns: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Activates notifications for test results</span></span><br><span class="line">  <span class="comment">// notify: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An enum that specifies notification mode. Requires &#123; notify: true &#125;</span></span><br><span class="line">  <span class="comment">// notifyMode: &quot;failure-change&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A preset that is used as a base for Jest&#x27;s configuration</span></span><br><span class="line">  <span class="comment">// preset: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Run tests from one or more projects</span></span><br><span class="line">  <span class="comment">// projects: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Use this configuration option to add custom reporters to Jest</span></span><br><span class="line">  <span class="comment">// reporters: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Automatically reset mock state before every test</span></span><br><span class="line">  <span class="comment">// resetMocks: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Reset the module registry before running each individual test</span></span><br><span class="line">  <span class="comment">// resetModules: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A path to a custom resolver</span></span><br><span class="line">  <span class="comment">// resolver: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Automatically restore mock state and implementation before every test</span></span><br><span class="line">  <span class="comment">// restoreMocks: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The root directory that Jest should scan for tests and modules within</span></span><br><span class="line">  <span class="comment">// rootDir: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A list of paths to directories that Jest should use to search for files in</span></span><br><span class="line">  <span class="comment">// roots: [</span></span><br><span class="line">  <span class="comment">//   &quot;&lt;rootDir&gt;&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Allows you to use a custom runner instead of Jest&#x27;s default test runner</span></span><br><span class="line">  <span class="comment">// runner: &quot;jest-runner&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The paths to modules that run some code to configure or set up the testing environment before each test</span></span><br><span class="line">  <span class="comment">// setupFiles: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A list of paths to modules that run some code to configure or set up the testing framework before each test</span></span><br><span class="line">  <span class="comment">// setupFilesAfterEnv: [],</span></span><br><span class="line">  <span class="attr">setupFilesAfterEnv</span>: [<span class="string">&#x27;&lt;rootDir&gt;/test/jest.setup.ts&#x27;</span>],</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The number of seconds after which a test is considered as slow and reported as such in the results.</span></span><br><span class="line">  <span class="comment">// slowTestThreshold: 5,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A list of paths to snapshot serializer modules Jest should use for snapshot testing</span></span><br><span class="line">  <span class="comment">// snapshotSerializers: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The test environment that will be used for testing</span></span><br><span class="line">  <span class="attr">testEnvironment</span>: <span class="string">&#x27;jsdom&#x27;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Options that will be passed to the testEnvironment</span></span><br><span class="line">  <span class="comment">// testEnvironmentOptions: &#123;&#125;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Adds a location field to test results</span></span><br><span class="line">  <span class="comment">// testLocationInResults: false,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The glob patterns Jest uses to detect test files</span></span><br><span class="line">  <span class="comment">// testMatch: [</span></span><br><span class="line">  <span class="comment">//   &quot;**/__tests__/**/*.[jt]s?(x)&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;**/?(*.)+(spec|test).[tj]s?(x)&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped</span></span><br><span class="line">  <span class="comment">// testPathIgnorePatterns: [</span></span><br><span class="line">  <span class="comment">//   &quot;/node_modules/&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// The regexp pattern or array of patterns that Jest uses to detect test files</span></span><br><span class="line">  <span class="comment">// testRegex: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// This option allows the use of a custom results processor</span></span><br><span class="line">  <span class="comment">// testResultsProcessor: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// This option allows use of a custom test runner</span></span><br><span class="line">  <span class="comment">// testRunner: &quot;jest-circus/runner&quot;,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// A map from regular expressions to paths to transformers</span></span><br><span class="line">  <span class="comment">// transform: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation</span></span><br><span class="line">  <span class="comment">// transformIgnorePatterns: [</span></span><br><span class="line">  <span class="comment">//   &quot;/node_modules/&quot;,</span></span><br><span class="line">  <span class="comment">//   &quot;\\.pnp\\.[^\\/]+$&quot;</span></span><br><span class="line">  <span class="comment">// ],</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">transform</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;^.+\\.tsx?$&#x27;</span>: [</span><br><span class="line">      <span class="string">&#x27;ts-jest&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        babelConfig,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them</span></span><br><span class="line">  <span class="comment">// unmockedModulePathPatterns: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Indicates whether each individual test should be reported during the run</span></span><br><span class="line">  <span class="comment">// verbose: undefined,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode</span></span><br><span class="line">  <span class="comment">// watchPathIgnorePatterns: [],</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Whether to use watchman for file crawling</span></span><br><span class="line">  <span class="comment">// watchman: true,</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> config;</span><br></pre></td></tr></table></figure>
+
+<p>上面內容主要修改部分為</p>
+<ul>
+<li>如果你使用 <strong>TS</strong> 請把 <strong>Config</strong> 引入定義改為 <strong>JestConfigWithTsJest</strong> ，如果不是可以繼續使用 <strong>jest</strong> 引入的 <strong>Config</strong></li>
+<li><strong>moduleNameMapper</strong> 的部分之後有用到第三方套件也都可以往內補資訊，功用是在跑每一個測試的時候，都會先去跑過一次這邊的檢查，有 <strong>Mapping</strong> 到的 <strong>key</strong> ，就會去使用 <strong>value</strong> 處引入的檔案，等等我們會繼續新增這塊，這邊可以先照上面寫</li>
+<li><strong>transform</strong> 的部分是我們要帶入 <strong>babel</strong> 轉譯，因為我們測試檔案內會有許多較新的 <strong>ES</strong> 寫法</li>
+</ul>
+<p>再來我們需要建立幾個檔案，首先一樣在專案根目錄建立 <code>babel.config.ts</code></p>
+<blockquote>
+<p>再次提醒，如果不是使用 <strong>TS</strong> ，檔案跟設定請自行修改為 <strong>.js</strong> 以及非 <strong>ts</strong> 的設定，後續將不會再繼續提醒</p>
+</blockquote>
+<p>如果專案是使用 <strong>.ts</strong> 請輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  presets: [[&#x27;@babel/preset-env&#x27;, &#123; targets: &#123; node: &#x27;current&#x27; &#125;, modules: false &#125;], [&#x27;@babel/preset-react&#x27;, &#123; runtime: &#x27;automatic&#x27; &#125;], &#x27;@babel/preset-typescript&#x27;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如果專案是使用 <strong>.js</strong> 請輸入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  presets: [[&#x27;@babel/preset-env&#x27;, &#123; targets: &#123; node: &#x27;current&#x27; &#125;, modules: false &#125;], [&#x27;@babel/preset-react&#x27;, &#123; runtime: &#x27;automatic&#x27; &#125;], &#x27;@babel/preset-typescript&#x27;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提醒：如果專案有使用 <strong>TS</strong> ，記得要把該檔案加入到 <strong>tsconfig.json</strong> 的 <strong>include</strong></p>
+</blockquote>
+<p>再來建立資料夾 <code>test/__mocks__</code> 然後在這兩層的底下再新增一個檔案 <strong>fileMock.ts</strong> ，內容為下</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// TS 請使用</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">&#x27;test-file-stub&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JS 請使用</span></span><br><span class="line"><span class="comment">// module.exports = &#x27;test-file-stub&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>新增這個檔案用意主要是碰到 <code>\\.(gif|ttf|eot|svg|png)$</code> 這些靜態資源的時候，通常這些不是我們測試的重點，可以直接使用模擬的方式將靜態資源載入。</p>
+<p>接下來一樣在 <code>test</code> 資料夾底下新增 <strong>jest.setup.ts</strong> ，內容為下</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 解決 Property ‘toBeInTheDocument’ does not exist on type ‘Matchers’</span></span><br><span class="line"><span class="comment">// 測試檔案內如果有用到 toBeInTheDocument 需要再另外單獨引入，不然雖然測試會成功，但是編輯器會出現紅色蚯蚓</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@testing-library/jest-dom&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這個部分主要是想避免使用 <code>toBeInTheDocument()</code> 的時候會出現錯誤</p>
+<blockquote>
+<p>註4：關於 <code>jest --init</code> 的配置介紹，可以參考 <a href="https://titangene.github.io/article/jest-build-test-env.html#Jest-Config">Jest：建置測試環境 (包含 Babel) 的章節 Jest Config</a></p>
+</blockquote>
+<hr>
+<h3 id="撰寫基礎測試"><a href="#撰寫基礎測試" class="headerlink" title="撰寫基礎測試"></a>撰寫基礎測試</h3><p>這時候我們可以先來小試身手，先來一個簡單的測試</p>
+<p>在專案根目錄底下建立 <code>__test__/utils</code> 資料夾，並且在底下建立 <strong>sum.test.ts</strong> ，內容輸入</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params"><span class="attr">a</span>: <span class="built_in">number</span>, <span class="attr">b</span>: <span class="built_in">number</span></span>) =&gt; a + b;</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;sum module&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;adds 1 + 2 to equal 3&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">expect</span>(<span class="title function_">sum</span>(<span class="number">1</span>, <span class="number">2</span>)).<span class="title function_">toBe</span>(<span class="number">3</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果有出現 <strong>describe、it</strong> 找不到的情況，需要再檢查一下 <strong>@types&#x2F;jest</strong> 是否正常安裝成功，如果有問題可以刪掉 <strong>node_modules</strong> 重新安裝試試看</p>
+<p>如果真的不行，下下策可以考慮安裝 <strong>@jest&#x2F;globals</strong> ，但需要在測試檔案開頭處都引入該套件</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; describe, expect, it &#125; <span class="keyword">from</span> <span class="string">&#x27;@jest/globals&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params"><span class="attr">a</span>: <span class="built_in">number</span>, <span class="attr">b</span>: <span class="built_in">number</span></span>) =&gt; a + b;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...略</span></span><br></pre></td></tr></table></figure>
+
+<p>接著可以執行 <code>npm run test</code> 跑跑看測試</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/sum-test.png" alt="SUM Test"></p>
+<p>如果 <strong>IDE</strong> 有提供測試功能，也可以直接在 <strong>IDE</strong> 上面點擊，如 <strong>VSCode</strong> 為例，可以點擊綠色勾勾的地方，在還沒跑測試之前應該是播放案件，這邊不要去點 <strong>Run(Vitest)</strong> ，因為我們不是使用 <strong>Vitest</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/run-test.gif" alt="RUN Test"></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Test Suites: 1 passed, 1 total</span><br><span class="line">Tests:       1 passed, 1 total</span><br><span class="line">Snapshots:   0 total</span><br><span class="line">Time:        6.251 s</span><br></pre></td></tr></table></figure>
+
+<p>如果看到 <code>1 passed, 1 total</code> 就代表通過了，如果有寫錯，在終端機也會爆出錯誤</p>
+<hr>
+<h3 id="撰寫-React-js-測試"><a href="#撰寫-React-js-測試" class="headerlink" title="撰寫 React.js 測試"></a>撰寫 React.js 測試</h3><p>基本上普通的測試應該大家都能寫也會寫，真正難的通常都是自己開始動工後，就像以前考試老師說的我都懂…</p>
+<p>首先我們先建立一支普通的 <strong>React.js Component</strong> ，這邊筆者使用專案已經存在的 <strong>Link</strong> 元件作為範例，同時也會告訴你碰到的坑</p>
+<p>先在專案內建立該元件，並填入以下內容</p>
+<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> clsx <span class="keyword">from</span> <span class="string">&#x27;clsx&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">FaExternalLinkAlt</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react-icons/fa&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Props</span> &#123;</span><br><span class="line">  <span class="attr">children</span>: <span class="title class_">React</span>.<span class="property">ReactNode</span>;</span><br><span class="line">  <span class="attr">link</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">className</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">showIcon</span>?: <span class="built_in">boolean</span>;</span><br><span class="line">  <span class="attr">iconClassName</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">target</span>?: <span class="string">&#x27;_blank&#x27;</span> | <span class="string">&#x27;_self&#x27;</span> | <span class="string">&#x27;_parent&#x27;</span> | <span class="string">&#x27;_top&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Link</span> = (<span class="params">&#123; children, link = <span class="string">&#x27;&#x27;</span>, className = <span class="string">&#x27;&#x27;</span>, showIcon = <span class="literal">false</span>, iconClassName = <span class="string">&#x27;&#x27;</span>, target = <span class="string">&#x27;_self&#x27;</span> &#125;: <span class="title class_">Props</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;link</span> ? <span class="attr">link</span> <span class="attr">:</span> <span class="attr">undefined</span>&#125; <span class="attr">className</span>=<span class="string">&#123;clsx(className,</span> &#x27;<span class="attr">text-gray-400</span> <span class="attr">hover:text-white</span>&#x27;)&#125; <span class="attr">target</span>=<span class="string">&#123;target&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">&#x27;inline-flex items-center&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;children&#125; &#123;showIcon &amp;&amp; <span class="tag">&lt;<span class="name">FaExternalLinkAlt</span> <span class="attr">className</span>=<span class="string">&#123;clsx(</span>&#x27;<span class="attr">text-xs</span> <span class="attr">ml-1</span>&#x27;, <span class="attr">iconClassName</span>)&#125; /&gt;</span>&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Link</span>;</span><br></pre></td></tr></table></figure>
+
+<p>同時在 <code>__test__</code> 資料夾底下新增 <code>components</code> 資料夾，並且新增<br><strong>Link.test.tsx</strong> 檔案，內容為下</p>
+<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 雖然有在設定檔 jest.setup.ts 全域引入，但這邊需要再度引入才不會出現紅色蚯蚓</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@testing-library/jest-dom&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; render, screen &#125; <span class="keyword">from</span> <span class="string">&#x27;@testing-library/react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Link</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Link/index&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;Link Component Test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should render correctly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">link</span>=<span class="string">&#x27;/&#x27;</span>&gt;</span>Home Page<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span>);</span><br><span class="line">    <span class="title function_">expect</span>(screen.<span class="title function_">getByText</span>(<span class="string">&#x27;Home Page&#x27;</span>)).<span class="title function_">toBeInTheDocument</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在 <strong>jest.setup.ts</strong> 我們有配置 <strong>@testing-library&#x2F;jest-dom</strong> 的引入，跑編譯的情況下會通過，但是 <strong>IDE</strong> 還是會出錯誤，找不到 <code>toBeInTheDocument()</code>，所以這邊我們還是必須要加上這個引用</p>
+<p>雖然前面提到我們是想跑單元測試，但這邊我們要先確保元件可以正常執行，且我們可能會測試使用者模擬點擊的情況，所以在測試中我們會去渲染 <strong>React Component</strong></p>
+<p>接著執行</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/clsx-error.png" alt="Third part plugin error"></p>
+<p>上面的測試實際執行後會發現測試出錯了，出現了好一大串錯誤，仔細看一下中間的部分，會發現錯誤的部分似乎是落在 <strong>clsx(註6)</strong> 這個套件</p>
+<p>開始寫測試後，你會發現常常會碰到一些第三方套件的引入，對我們來說，第三方套件應該在作者實作推出後，就要確跑程式沒問題，所以基本上我們是持著『程式本善』的心情去看待它，所以在測試時我們大部分時候都會把第三方套件 <strong>Mock</strong> 掉，並且直接改成我們的預期結果</p>
+<p>這邊我們需要直接到 <code>test/__mocks__</code> 資料夾底下，新增 <strong>clsx.ts</strong> 的檔案，內容貼上</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> mockClsx = jest.<span class="title function_">fn</span>().<span class="title function_">mockImplementation</span>(<span class="function">(<span class="params">...args</span>) =&gt;</span> args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>));</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mockClsx;</span><br></pre></td></tr></table></figure>
+
+<p>接著到 <strong>jest.config.ts</strong> 去，在中間 <strong>moduleNameMapper</strong> 設定處補上 <strong>clsx</strong> 的配置，並把剛剛的檔案引入進來</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">//...略</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">config</span>: <span class="title class_">JestConfigWithTsJest</span> = &#123;</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  <span class="attr">moduleNameMapper</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;^@/(.*)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/src/$1&#x27;</span>, <span class="comment">// 解決 alias 問題</span></span><br><span class="line">    <span class="string">&#x27;\\.(css|less|sass|scss)$&#x27;</span>: <span class="string">&#x27;identity-obj-proxy&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\\.(gif|ttf|eot|svg|png)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/fileMock.ts&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;^clsx$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/clsx.ts&#x27;</span>, <span class="comment">// 新增這行</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後再跑一次</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/npm-run-test-after-clsx.gif" alt="Run Test after clsx setting"></p>
+<p>恭喜你，這次就應該能透通過了！</p>
+<p>之後如果還有碰到測試需要引入第三方的套件，都可以像這樣去使用，下面再<a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a>的部份會提到 <a href="#i18n-%E7%9A%84-Mock">i18n 的 Mock</a></p>
+<blockquote>
+<p>註6：關於 <a href="https://github.com/lukeed/clsx">clsx</a> 這個套件是用來組合 <strong>class</strong> 名稱的，也能讓你在 <strong>React.js className</strong> 裡面寫判斷，甚至是 <code>true &amp;&amp; &#39;text-red-500&#39;</code> 這種寫法</p>
+</blockquote>
+<hr>
+<h3 id="測試覆蓋率"><a href="#測試覆蓋率" class="headerlink" title="測試覆蓋率"></a>測試覆蓋率</h3><p><img src="/images/others/loading.gif" data-original="/images/20250414/coverage-folder.png" alt="Coverage"></p>
+<p>測試跑完之後，你應該會在專案資料夾跟目錄看見 <strong>coverage</strong> ，這個資料夾打開後可以找到 <strong>lcov-report</strong> 資料夾，並打開底下的 <strong>index.html</strong> ，路徑為 <code>coverage/lcov-report/index.html</code>，打開它</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/coverage-report.png" alt="Coverage Report"></p>
+<p>打開後會發現裡面有一個表格，表格下的資料代表的是你的測試有覆蓋到的檔案</p>
+<p>在表格的 Title 有幾個種類，意思分別是</p>
+<ul>
+<li><p>File(檔案&#x2F;文件)</p>
+<ul>
+<li>只要有覆蓋到測試的檔案都會被列出來</li>
+</ul>
+</li>
+<li><p>Statements(陳述式)</p>
+<ul>
+<li>代表該檔案中的陳述式有多少被執行過</li>
+<li>例如 <code>if(A === true &amp;&amp; B === true) &#123;&#125;</code> 加上 <code>if (A === true &amp;&amp; B === false)</code>，那麼要執行到所有陳述式，至少要符合 <strong>1. A &#x3D; true &amp;&amp; B &#x3D; true 2. A &#x3D; true &amp;&amp; B &#x3D; false</strong></li>
+</ul>
+</li>
+<li><p>Branches(分支)</p>
+<ul>
+<li>代表所有條件分支</li>
+<li>覆蓋率 &#x3D; 已測試的分支 &#x2F; 總分支數量。</li>
+<li>若 if 語句的 true 和 false 都有被測試到，則該 if 語句的分支覆蓋率為 100%</li>
+</ul>
+</li>
+<li><p>Functions(函式)</p>
+<ul>
+<li>代表該檔案內的函式（function 或 arrow function）被測試的比例</li>
+<li>覆蓋率 &#x3D; 被執行的函式數 &#x2F; 總函式數量</li>
+</ul>
+</li>
+<li><p>Lines(行數)</p>
+<ul>
+<li>代表有執行過的程式碼行數與總行數的比例</li>
+<li>這與 Statements 相似，但更細緻，通常用來衡量某行內是否真的執行</li>
+</ul>
+</li>
+<li><p>沒有 Title 的欄位</p>
+<ul>
+<li>被執行的函式數 &#x2F; 總函式數量</li>
+</ul>
+</li>
+</ul>
+<p>基本上我們比較關注 <strong>Statements</strong> 再來是 <strong>Branches</strong> ，樂觀的情況是我們必須要確保要測試的程式碼都要涵蓋在內，這樣才能確保我們的程式碼都受到保護</p>
+<p>但實務上我們還是要看我們的目的，並非只是一昧的提高覆蓋率就是棒</p>
+<blockquote>
+<p><em><strong>最後記得在 .gitignore 內加上 coverage，不要把這份內容上傳了</strong></em></p>
+</blockquote>
+<hr>
+<h3 id="額外問題"><a href="#額外問題" class="headerlink" title="額外問題"></a>額外問題</h3><h4 id="i18n-的-Mock"><a href="#i18n-的-Mock" class="headerlink" title="i18n 的 Mock"></a>i18n 的 Mock</h4><p><img src="/images/others/loading.gif" data-original="/images/20250414/i18n-error.png" alt="I18n Error"></p>
+<p>如果你用 <strong>React.js</strong> 跑測試，且元件內有使用到 <strong>i18n</strong> 的話，可能會出現上面的錯誤</p>
+<p>依照前面的說明理解，第三方套件要測試我們基本上都是 <strong>Mock Mock Mock</strong> ，而 <strong>Mock</strong> 的流程不外乎就是在 <code>test/__mocks__</code> 底下新增要模擬的內容(註7)</p>
+<p>新增一支叫做 <strong>reactI18next.ts</strong> 的檔案，然後內容貼上</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">useTranslation</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">t</span>: <span class="function">(<span class="params"><span class="attr">key</span>: <span class="built_in">string</span></span>) =&gt;</span> key,</span><br><span class="line">    <span class="attr">i18n</span>: &#123;</span><br><span class="line">      <span class="attr">changeLanguage</span>: jest.<span class="title function_">fn</span>(),</span><br><span class="line">      <span class="attr">language</span>: <span class="string">&#x27;en&#x27;</span>, <span class="comment">// 取決於你的 I18n key 叫什麼，這行也可以不用</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  useTranslation,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>jest.fn()</code> 其實就是模擬一個函式，並且我們可以模擬函式回傳，有興趣可以參考 <a href="https://medium.com/unalai/jest-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-mock-functions-4dfe8804f2c0">JEST 單元測試學習筆記 | Mock Functions</a></p>
+<blockquote>
+<p>對於 <strong>i18n</strong> 的 <strong>test mock</strong> 其實還有很多方式，可以參考 <strong><a href="https://react.i18next.com/misc/testing">react-i18n documentation - Testing</a></strong></p>
+</blockquote>
+<p>接著我們再去 <strong>jest.config.ts</strong> 補上設定，補上 <strong>react-i18next</strong> 的設定如下</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">//...略</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">config</span>: <span class="title class_">JestConfigWithTsJest</span> = &#123;</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  <span class="attr">moduleNameMapper</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;^@/(.*)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/src/$1&#x27;</span>, <span class="comment">// 解決 alias 問題</span></span><br><span class="line">    <span class="string">&#x27;\\.(css|less|sass|scss)$&#x27;</span>: <span class="string">&#x27;identity-obj-proxy&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\\.(gif|ttf|eot|svg|png)$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/fileMock.ts&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;^clsx$&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/clsx.ts&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;react-i18next&#x27;</span>: <span class="string">&#x27;&lt;rootDir&gt;/test/__mocks__/reactI18next.ts&#x27;</span>, <span class="comment">// 新增這行</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之後再跑一次測試</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/npm-run-test-after-i18n.gif" alt="Npm run test after i18n setting"></p>
+<p>這時候可以看到測試就能通過了，上面範例有紅色的部分是因為目前測試還沒有涵蓋到這部分，可以略過紅色部分，而有一些黃色的部分也是測試希望你能把涵蓋率補高一點</p>
+<blockquote>
+<p>註7：請注意，如果是測試會常常跑到的第三方套件，建議在新增在這邊，然後透過 <strong>jest.config.ts</strong> 的 <strong>moduleNameMapper</strong> 去引入，但如果只是某幾個或是某一個測試會用到，就直接在測試檔案裡面使用 <strong>mock</strong> 吧</p>
+</blockquote>
+<hr>
+<h3 id="React-js-架構探討"><a href="#React-js-架構探討" class="headerlink" title="React.js 架構探討"></a>React.js 架構探討</h3><blockquote>
+<p><em><strong>這部分沒興趣可以跳過，這邊比較多部分會講解概念，不會實作太多程式碼</strong></em></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20250414/react-flow.png" alt="React Flow"></p>
+<p>前面有提到，之前有跟主管在探討 <strong>React.js</strong> 的部分能不能做一些系統性規劃，對於後端來說，他們可以比較輕易的整理出 <strong>MVC(註8)</strong> 架構，但前端的程式碼大部分的工程師都像是義大利麵一樣，寫成一團</p>
+<p>在近幾年開始有 <strong>Component</strong> 拆分後，有慢慢比較好一點，但很多東西還是混在一起，這就會造成測試困難，耦合太嚴重</p>
+<p>在與主管討論之後，其實目前我們的專案最基本最基本就是把 <strong>View</strong> 跟 <strong>邏輯</strong> 拆開，這是絕對守則，唯有如此，才能跑測試，後續修改也比較不麻煩</p>
+<p>基本上你看到大部分得程式碼，都會把邏輯寫在 <strong>Component</strong> 內，就算該工程師已經把該檔案拆的十分乾淨了，如下</p>
+<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">handleClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      You pressed me &#123;count&#125; times</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>來自官網的範例 <a href="https://react.dev/blog/2023/03/16/introducing-react-dev#examples-basic">Basic useState examples</a></p>
+</blockquote>
+<p>這種情況如果今天你想要單純測試 <strong>handleClick</strong> ，勢必要 <strong>Counter</strong> 整個一起放進來測試，但如果今天需求變了，想要把這個畫面做點調整，很大機率會跟你的測試發生碰撞</p>
+<p>比較好得做法是都把邏輯丟進去另一支檔案，而進行邏輯操作的部分我們統稱為 <strong>Controller</strong> ，另外因為 <strong>React.js</strong> 的 <strong>custom hook(註9)</strong> 概念，在這邊筆者都將他們命名為 <strong>useXXXController</strong></p>
+<p>我們可以建立一支 <strong>useCounterController.ts</strong> 的檔案，內容不涉及任何 <strong>View</strong> 的部分，把上面檔案改為如下</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; count, handleClick &#125; = <span class="title function_">useCounter</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      You pressed me &#123;count&#125; times</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在新增的 <strong>useCounterController.ts</strong> 檔案寫上</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">useCounterController</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">handleClick</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    count,</span><br><span class="line">    handleClick</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如此一來就能去單獨測試我們的 <strong>useCounterController.ts</strong> 了，後續要更改 <strong>View</strong> 的部分也不用擔心會影響到邏輯部分</p>
+<p>另外，大部分工程師都習慣在 <strong>Controller</strong> 直接去 <strong>fetch</strong> 或者透過 <strong>axios</strong> 請求資料</p>
+<p>依照 <strong>SOLID(註10)</strong> 的依賴反轉概念，高層次的模組不應該依賴於低層次的模組，所以我們應該將打 <strong>API</strong> 的部分抽離出來封裝成一個 <strong>Server</strong> 層，這部分是低層次的模組，當低層次的模組要進行更換時，例如 <strong>Fetch</strong> 更換為 <strong>Axios</strong> 或 <strong>XHR</strong> ，我們都不應該擔心是不是 <strong>Controller</strong> 的高層次模組會壞掉，只要專心修改 <strong>Server</strong> 層就好，透過 <strong>Redux</strong> 的 <strong>Thunk</strong> 可以做到這點</p>
+<p>基本上目前的 <strong>Controller</strong> 及 <strong>View</strong> 拆分，應該能滿足基本的單元測試需求</p>
+<blockquote>
+<p>註8：<a href="https://www.runoob.com/design-pattern/mvc-pattern.html">MVC 模試？</a></p>
+</blockquote>
+<blockquote>
+<p>註9：<a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing Logic with Custom Hooks</a></p>
+</blockquote>
+<blockquote>
+<p>註10：<a href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>之前一直想了好久要引入測試，途中也嘗試了 <strong>Vitest</strong> ，但是光配置就被搞死了，後來因為團隊夥伴也剛好安排到測試的這一項目標，所以就一起研究了，沒想到這次單純使用 <strong>jest</strong> 去跑 <strong>test</strong> 還滿順利的，環境相對單純多了</p>
+<p>在測試的部分其實還缺少對於 <strong>Redux</strong> 或者 <strong>API</strong> 的測試，後續如果有做到這一塊，筆者也會慢慢補上來，希望目前的部分能幫助到需要幫助的人</p>
+<p>測試的路上你我不孤單，但還是祝福每間公司需求都明確，不要三五一小改，敏捷開發當真敏捷開發</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a href="https://medium.com/@weiyun0912/jest-react-typescript-%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A-a459ad4484d6">Jest React (TypeScript) 環境設定 (react testing)</a></li>
+<li><a href="https://www.babeljs.cn/docs">babel 是什麼？</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document_Object_Model">文件物件模型 (DOM)</a></li>
+<li><a href="https://juejin.cn/post/7029304095944998926">React-5 测试模拟用户事件</a><br><a href="https://titangene.github.io/article/jest-build-test-env.html#Jest-Config">Jest：建置測試環境 (包含 Babel)</a></li>
+<li><a href="https://react.i18next.com/misc/testing">react-i18n documentation - Testing</a></li>
+<li><a href="https://react.dev/blog/2023/03/16/introducing-react-dev#examples-basic">Basic useState examples</a></li>
+<li><a href="https://www.runoob.com/design-pattern/mvc-pattern.html">MVC 模試？</a></li>
+<li><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing Logic with Custom Hooks</a></li>
+<li><a href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Note</category>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>HTML</tag>
+        <tag>CSS</tag>
+        <tag>JavaScript</tag>
+        <tag>FrameWork</tag>
+        <tag>React</tag>
+        <tag>Jest</tag>
+      </tags>
+  </entry>
 </search>
