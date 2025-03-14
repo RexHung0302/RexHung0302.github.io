@@ -14029,18 +14029,54 @@
 
 <p>因為一次安裝全部的相關套件，所以可能會覺的非常多，但接下來會解釋一下這些套件作用</p>
 <ul>
-<li>jest -&gt; 測試的主要核心，如果不安裝，無法使用 <code>npm run jest</code></li>
-<li>ts-jest -&gt; 在需要測試的專案我們會有一份 <strong>jest.config.js(ts)</strong> 的檔案，如果你不是使用 <strong>ts</strong> 可以不用使用這個，請安裝 <strong>jest</strong></li>
-<li>@types&#x2F;jest -&gt; 在測試中我們會寫 <strong>describe、it、test、jest…</strong> 等等，如果不安裝 <strong>babel-jest</strong> 會導致這些 <strong>TS</strong> 定義都找不到，<strong>IDE</strong> 上會出現紅色蚯蚓，編譯也不會成功，如果不想要安裝這個套件可以改用 <strong>@jest&#x2F;globals</strong> 取代</li>
-<li>@babel&#x2F;preset-env -&gt; 放在 <strong>babel.config.js(ts)</strong> 中的，透過 <strong>babel(註2)</strong> 主要用來轉譯比較新的 <strong>JS(ES)</strong> ，讓舊版瀏覽器能夠讀懂</li>
-<li>@babel&#x2F;preset-react -&gt; 同 <strong>@babel&#x2F;preset-env</strong></li>
-<li>@babel&#x2F;preset-typescript -&gt; 同 <strong>@babel&#x2F;preset-env</strong></li>
-<li>ts-node -&gt; 用於在 <strong>Node.js</strong> 環境中直接執行 <strong>TS</strong> 代碼</li>
-<li>@testing-library&#x2F;react -&gt; 測試中我們會用到類似於 <strong>render、screen</strong> 這種方法，它是 React 測試庫，提供操作 <strong>Jest</strong> 以及網頁 <strong>DOM(註3)</strong> 的方法</li>
-<li>@testing-library&#x2F;user-event -&gt; 模擬使用者操作的事件，例如 <a href="https://juejin.cn/post/7029304095944998926">React-5 测试模拟用户事件</a></li>
-<li>identity-obj-proxy -&gt; 轉譯 <strong>CSS</strong> 相關資源，用來講 <strong>CSS</strong> 模組映射為簡單對象，詳細套件解釋可參考 <a href="https://github.com/keyz/identity-obj-proxy">identity-obj-proxy github</a></li>
-<li>@testing-library&#x2F;jest-dom -&gt; 用來解決 <code>Property ‘toBeInTheDocument’ does not exist on type ‘Matchers’</code></li>
-<li>jest-environment-jsdom -&gt; <strong>Jest</strong> 的測試環境，模擬瀏覽器 <strong>DOM</strong> 環境，如果不安裝，會出現 <code>Test environment jest-environment-jsdom cannot be found. Make sure the testEnvironment configuration option points to an existing node module.</code> 錯誤</li>
+<li>jest<ul>
+<li>測試的主要核心，如果不安裝，無法使用 <code>npm run jest</code></li>
+</ul>
+</li>
+<li>ts-jest<ul>
+<li>在需要測試的專案我們會有一份 <strong>jest.config.js(ts)</strong> 的檔案，如果你不是使用 <strong>ts</strong> 可以不用使用這個，請安裝 <strong>jest</strong></li>
+</ul>
+</li>
+<li>@types&#x2F;jest<ul>
+<li>在測試中我們會寫 <strong>describe、it、test、jest…</strong> 等等，如果不安裝 <strong>babel-jest</strong> 會導致這些 <strong>TS</strong> 定義都找不到，<strong>IDE</strong> 上會出現紅色蚯蚓，編譯也不會成功，如果不想要安裝這個套件可以改用 <strong>@jest&#x2F;globals</strong> 取代</li>
+</ul>
+</li>
+<li>@babel&#x2F;preset-env<ul>
+<li>放在 <strong>babel.config.js(ts)</strong> 中的，透過 <strong>babel(註2)</strong> 主要用來轉譯比較新的 <strong>JS(ES)</strong> ，讓舊版瀏覽器能夠讀懂</li>
+</ul>
+</li>
+<li>@babel&#x2F;preset-react<ul>
+<li>同 <strong>@babel&#x2F;preset-env</strong></li>
+</ul>
+</li>
+<li>@babel&#x2F;preset-typescript<ul>
+<li>同 <strong>@babel&#x2F;preset-env</strong></li>
+</ul>
+</li>
+<li>ts-node<ul>
+<li>用於在 <strong>Node.js</strong> 環境中直接執行 <strong>TS</strong> 代碼</li>
+</ul>
+</li>
+<li>@testing-library&#x2F;react<ul>
+<li>測試中我們會用到類似於 <strong>render、screen</strong> 這種方法，它是 React 測試庫，提供操作 <strong>Jest</strong> 以及網頁 <strong>DOM(註3)</strong> 的方法</li>
+</ul>
+</li>
+<li>@testing-library&#x2F;user-event<ul>
+<li>模擬使用者操作的事件，例如 <a href="https://juejin.cn/post/7029304095944998926">React-5 测试模拟用户事件</a></li>
+</ul>
+</li>
+<li>identity-obj-proxy<ul>
+<li>轉譯 <strong>CSS</strong> 相關資源，用來講 <strong>CSS</strong> 模組映射為簡單對象，詳細套件解釋可參考 <a href="https://github.com/keyz/identity-obj-proxy">identity-obj-proxy github</a></li>
+</ul>
+</li>
+<li>@testing-library&#x2F;jest-dom<ul>
+<li>用來解決 <code>Property ‘toBeInTheDocument’ does not exist on type ‘Matchers’</code></li>
+</ul>
+</li>
+<li>jest-environment-jsdom<ul>
+<li><strong>Jest</strong> 的測試環境，模擬瀏覽器 <strong>DOM</strong> 環境，如果不安裝，會出現 <code>Test environment jest-environment-jsdom cannot be found. Make sure the testEnvironment configuration option points to an existing node module.</code> 錯誤</li>
+</ul>
+</li>
 </ul>
 <p>這些套件都可以在指令加上 <code>-D</code>或 <code>--save-dev</code> 安裝到 <strong>devDependencies</strong> 去，我們只有在開發中會使用到</p>
 <blockquote>
