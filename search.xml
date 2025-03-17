@@ -14146,15 +14146,16 @@
 <figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> clsx <span class="keyword">from</span> <span class="string">&#x27;clsx&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">FaExternalLinkAlt</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react-icons/fa&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Props</span> &#123;</span><br><span class="line">  <span class="attr">children</span>: <span class="title class_">React</span>.<span class="property">ReactNode</span>;</span><br><span class="line">  <span class="attr">link</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">className</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">showIcon</span>?: <span class="built_in">boolean</span>;</span><br><span class="line">  <span class="attr">iconClassName</span>?: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">target</span>?: <span class="string">&#x27;_blank&#x27;</span> | <span class="string">&#x27;_self&#x27;</span> | <span class="string">&#x27;_parent&#x27;</span> | <span class="string">&#x27;_top&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Link</span> = (<span class="params">&#123; children, link = <span class="string">&#x27;&#x27;</span>, className = <span class="string">&#x27;&#x27;</span>, showIcon = <span class="literal">false</span>, iconClassName = <span class="string">&#x27;&#x27;</span>, target = <span class="string">&#x27;_self&#x27;</span> &#125;: <span class="title class_">Props</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;link</span> ? <span class="attr">link</span> <span class="attr">:</span> <span class="attr">undefined</span>&#125; <span class="attr">className</span>=<span class="string">&#123;clsx(className,</span> &#x27;<span class="attr">text-gray-400</span> <span class="attr">hover:text-white</span>&#x27;)&#125; <span class="attr">target</span>=<span class="string">&#123;target&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">className</span>=<span class="string">&#x27;inline-flex items-center&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;children&#125; &#123;showIcon &amp;&amp; <span class="tag">&lt;<span class="name">FaExternalLinkAlt</span> <span class="attr">className</span>=<span class="string">&#123;clsx(</span>&#x27;<span class="attr">text-xs</span> <span class="attr">ml-1</span>&#x27;, <span class="attr">iconClassName</span>)&#125; /&gt;</span>&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Link</span>;</span><br></pre></td></tr></table></figure>
 
 <p>同時在 <code>__test__</code> 資料夾底下新增 <code>components</code> 資料夾，並且新增<br><strong>Link.test.tsx</strong> 檔案，內容為下</p>
-<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 雖然有在設定檔 jest.setup.ts 全域引入，但這邊需要再度引入才不會出現紅色蚯蚓</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@testing-library/jest-dom&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; render, screen &#125; <span class="keyword">from</span> <span class="string">&#x27;@testing-library/react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Link</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Link/index&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;Link Component Test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should render correctly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">link</span>=<span class="string">&#x27;/&#x27;</span>&gt;</span>Home Page<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span>);</span><br><span class="line">    <span class="title function_">expect</span>(screen.<span class="title function_">getByText</span>(<span class="string">&#x27;Home Page&#x27;</span>)).<span class="title function_">toBeInTheDocument</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 雖然有在設定檔 jest.setup.ts 全域引入，如果 IDE 有出現錯誤，這邊需要再度引入才不會出現紅色蚯蚓，如果沒有出現錯誤就不用在引入</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;@testing-library/jest-dom&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; render, screen &#125; <span class="keyword">from</span> <span class="string">&#x27;@testing-library/react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Link</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Link/index&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="title function_">describe</span>(<span class="string">&#x27;Link Component Test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">it</span>(<span class="string">&#x27;should render correctly&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">link</span>=<span class="string">&#x27;/&#x27;</span>&gt;</span>Home Page<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span>);</span><br><span class="line">    <span class="title function_">expect</span>(screen.<span class="title function_">getByText</span>(<span class="string">&#x27;Home Page&#x27;</span>)).<span class="title function_">toBeInTheDocument</span>();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>在 <strong>jest.setup.ts</strong> 我們有配置 <strong>@testing-library&#x2F;jest-dom</strong> 的引入，跑編譯的情況下會通過，但是 <strong>IDE</strong> 還是會出錯誤，找不到 <code>toBeInTheDocument()</code>，所以這邊我們還是必須要加上這個引用</p>
+<p>在 <strong>jest.setup.ts</strong> 我們有配置 <strong>@testing-library&#x2F;jest-dom</strong> 的引入，跑編譯的情況下會通過，但是 <strong>IDE(註6)</strong> 可能還是會出錯誤，找不到 <code>toBeInTheDocument()</code></p>
+<p>如果 <strong>IDE</strong> 有出現錯誤，這邊我們還是必須要加上這個引用，如果沒有可以不用加入這個引入，可以嘗試刪除或者加入跑跑看 <code>npm run test</code></p>
 <p>雖然前面提到我們是想跑單元測試，但這邊我們要先確保元件可以正常執行，且我們可能會測試使用者模擬點擊的情況，所以在測試中我們會去渲染 <strong>React Component</strong></p>
 <p>接著執行</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/images/others/loading.gif" data-original="/images/20250414/clsx-error.png" alt="Third part plugin error"></p>
-<p>上面的測試實際執行後會發現測試出錯了，出現了好一大串錯誤，仔細看一下中間的部分，會發現錯誤的部分似乎是落在 <strong>clsx(註6)</strong> 這個套件</p>
+<p>上面的測試實際執行後會發現測試出錯了，出現了好一大串錯誤，仔細看一下中間的部分，會發現錯誤的部分似乎是落在 <strong>clsx(註7)</strong> 這個套件</p>
 <p>開始寫測試後，你會發現常常會碰到一些第三方套件的引入，對我們來說，第三方套件應該在作者實作推出後，就要確跑程式沒問題，所以基本上我們是持著『程式本善』的心情去看待它，所以在測試時我們大部分時候都會把第三方套件 <strong>Mock</strong> 掉，並且直接改成我們的預期結果</p>
 <p>這邊我們需要直接到 <code>test/__mocks__</code> 資料夾底下，新增 <strong>clsx.ts</strong> 的檔案，內容貼上</p>
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> mockClsx = jest.<span class="title function_">fn</span>().<span class="title function_">mockImplementation</span>(<span class="function">(<span class="params">...args</span>) =&gt;</span> args.<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>));</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mockClsx;</span><br></pre></td></tr></table></figure>
@@ -14169,7 +14170,10 @@
 <p>恭喜你，這次就應該能透通過了！</p>
 <p>之後如果還有碰到測試需要引入第三方的套件，都可以像這樣去使用，下面再<a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a>的部份會提到 <a href="#i18n-%E7%9A%84-Mock">i18n 的 Mock</a></p>
 <blockquote>
-<p>註6：關於 <a href="https://github.com/lukeed/clsx">clsx</a> 這個套件是用來組合 <strong>class</strong> 名稱的，也能讓你在 <strong>React.js className</strong> 裡面寫判斷，甚至是 <code>true &amp;&amp; &#39;text-red-500&#39;</code> 這種寫法</p>
+<p>註6：<a href="https://aws.amazon.com/tw/what-is/ide/">什麼是 IDE (整合開發環境)？</a></p>
+</blockquote>
+<blockquote>
+<p>註7：關於 <a href="https://github.com/lukeed/clsx">clsx</a> 這個套件是用來組合 <strong>class</strong> 名稱的，也能讓你在 <strong>React.js className</strong> 裡面寫判斷，甚至是 <code>true &amp;&amp; &#39;text-red-500&#39;</code> 這種寫法</p>
 </blockquote>
 <hr>
 <h3 id="測試覆蓋率"><a href="#測試覆蓋率" class="headerlink" title="測試覆蓋率"></a>測試覆蓋率</h3><p><img src="/images/others/loading.gif" data-original="/images/20250414/coverage-folder.png" alt="Coverage"></p>
@@ -14222,7 +14226,7 @@
 <hr>
 <h3 id="額外問題"><a href="#額外問題" class="headerlink" title="額外問題"></a>額外問題</h3><h4 id="i18n-的-Mock"><a href="#i18n-的-Mock" class="headerlink" title="i18n 的 Mock"></a>i18n 的 Mock</h4><p><img src="/images/others/loading.gif" data-original="/images/20250414/i18n-error.png" alt="I18n Error"></p>
 <p>如果你用 <strong>React.js</strong> 跑測試，且元件內有使用到 <strong>i18n</strong> 的話，可能會出現上面的錯誤</p>
-<p>依照前面的說明理解，第三方套件要測試我們基本上都是 <strong>Mock Mock Mock</strong> ，而 <strong>Mock</strong> 的流程不外乎就是在 <code>test/__mocks__</code> 底下新增要模擬的內容(註7)</p>
+<p>依照前面的說明理解，第三方套件要測試我們基本上都是 <strong>Mock Mock Mock</strong> ，而 <strong>Mock</strong> 的流程不外乎就是在 <code>test/__mocks__</code> 底下新增要模擬的內容(註8)</p>
 <p>新增一支叫做 <strong>reactI18next.ts</strong> 的檔案，然後內容貼上</p>
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">useTranslation</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">t</span>: <span class="function">(<span class="params"><span class="attr">key</span>: <span class="built_in">string</span></span>) =&gt;</span> key,</span><br><span class="line">    <span class="attr">i18n</span>: &#123;</span><br><span class="line">      <span class="attr">changeLanguage</span>: jest.<span class="title function_">fn</span>(),</span><br><span class="line">      <span class="attr">language</span>: <span class="string">&#x27;en&#x27;</span>, <span class="comment">// 取決於你的 I18n key 叫什麼，這行也可以不用</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  useTranslation,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -14239,14 +14243,14 @@
 <p><img src="/images/others/loading.gif" data-original="/images/20250414/npm-run-test-after-i18n.gif" alt="Npm run test after i18n setting"></p>
 <p>這時候可以看到測試就能通過了，上面範例有紅色的部分是因為目前測試還沒有涵蓋到這部分，可以略過紅色部分，而有一些黃色的部分也是測試希望你能把涵蓋率補高一點</p>
 <blockquote>
-<p>註7：請注意，如果是測試會常常跑到的第三方套件，建議在新增在這邊，然後透過 <strong>jest.config.ts</strong> 的 <strong>moduleNameMapper</strong> 去引入，但如果只是某幾個或是某一個測試會用到，就直接在測試檔案裡面使用 <strong>mock</strong> 吧</p>
+<p>註8：請注意，如果是測試會常常跑到的第三方套件，建議在新增在這邊，然後透過 <strong>jest.config.ts</strong> 的 <strong>moduleNameMapper</strong> 去引入，但如果只是某幾個或是某一個測試會用到，就直接在測試檔案裡面使用 <strong>mock</strong> 吧</p>
 </blockquote>
 <hr>
 <h3 id="React-js-架構探討"><a href="#React-js-架構探討" class="headerlink" title="React.js 架構探討"></a>React.js 架構探討</h3><blockquote>
 <p><em><strong>這部分沒興趣可以跳過，這邊比較多部分會講解概念，不會實作太多程式碼</strong></em></p>
 </blockquote>
 <p><img src="/images/others/loading.gif" data-original="/images/20250414/react-flow.png" alt="React Flow"></p>
-<p>前面有提到，之前有跟主管在探討 <strong>React.js</strong> 的部分能不能做一些系統性規劃，對於後端來說，他們可以比較輕易的整理出 <strong>MVC(註8)</strong> 架構，但前端的程式碼大部分的工程師都像是義大利麵一樣，寫成一團</p>
+<p>前面有提到，之前有跟主管在探討 <strong>React.js</strong> 的部分能不能做一些系統性規劃，對於後端來說，他們可以比較輕易的整理出 <strong>MVC(註9)</strong> 架構，但前端的程式碼大部分的工程師都像是義大利麵一樣，寫成一團</p>
 <p>在近幾年開始有 <strong>Component</strong> 拆分後，有慢慢比較好一點，但很多東西還是混在一起，這就會造成測試困難，耦合太嚴重</p>
 <p>在與主管討論之後，其實目前我們的專案最基本最基本就是把 <strong>View</strong> 跟 <strong>邏輯</strong> 拆開，這是絕對守則，唯有如此，才能跑測試，後續修改也比較不麻煩</p>
 <p>基本上你看到大部分得程式碼，都會把邏輯寫在 <strong>Component</strong> 內，就算該工程師已經把該檔案拆的十分乾淨了，如下</p>
@@ -14256,7 +14260,7 @@
 <p>來自官網的範例 <a href="https://react.dev/blog/2023/03/16/introducing-react-dev#examples-basic">Basic useState examples</a></p>
 </blockquote>
 <p>這種情況如果今天你想要單純測試 <strong>handleClick</strong> ，勢必要 <strong>Counter</strong> 整個一起放進來測試，但如果今天需求變了，想要把這個畫面做點調整，很大機率會跟你的測試發生碰撞</p>
-<p>比較好得做法是都把邏輯丟進去另一支檔案，而進行邏輯操作的部分我們統稱為 <strong>Controller</strong> ，另外因為 <strong>React.js</strong> 的 <strong>custom hook(註9)</strong> 概念，在這邊筆者都將他們命名為 <strong>useXXXController</strong></p>
+<p>比較好得做法是都把邏輯丟進去另一支檔案，而進行邏輯操作的部分我們統稱為 <strong>Controller</strong> ，另外因為 <strong>React.js</strong> 的 <strong>custom hook(註10)</strong> 概念，在這邊筆者都將他們命名為 <strong>useXXXController</strong></p>
 <p>我們可以建立一支 <strong>useCounterController.ts</strong> 的檔案，內容不涉及任何 <strong>View</strong> 的部分，把上面檔案改為如下</p>
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; count, handleClick &#125; = <span class="title function_">useCounter</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClick&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      You pressed me &#123;count&#125; times</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -14265,16 +14269,16 @@
 
 <p>如此一來就能去單獨測試我們的 <strong>useCounterController.ts</strong> 了，後續要更改 <strong>View</strong> 的部分也不用擔心會影響到邏輯部分</p>
 <p>另外，大部分工程師都習慣在 <strong>Controller</strong> 直接去 <strong>fetch</strong> 或者透過 <strong>axios</strong> 請求資料</p>
-<p>依照 <strong>SOLID(註10)</strong> 的依賴反轉概念，高層次的模組不應該依賴於低層次的模組，所以我們應該將打 <strong>API</strong> 的部分抽離出來封裝成一個 <strong>Server</strong> 層，這部分是低層次的模組，當低層次的模組要進行更換時，例如 <strong>Fetch</strong> 更換為 <strong>Axios</strong> 或 <strong>XHR</strong> ，我們都不應該擔心是不是 <strong>Controller</strong> 的高層次模組會壞掉，只要專心修改 <strong>Server</strong> 層就好，透過 <strong>Redux</strong> 的 <strong>Thunk</strong> 可以做到這點</p>
+<p>依照 <strong>SOLID(註11)</strong> 的依賴反轉概念，高層次的模組不應該依賴於低層次的模組，所以我們應該將打 <strong>API</strong> 的部分抽離出來封裝成一個 <strong>Server</strong> 層，這部分是低層次的模組，當低層次的模組要進行更換時，例如 <strong>Fetch</strong> 更換為 <strong>Axios</strong> 或 <strong>XHR</strong> ，我們都不應該擔心是不是 <strong>Controller</strong> 的高層次模組會壞掉，只要專心修改 <strong>Server</strong> 層就好，透過 <strong>Redux</strong> 的 <strong>Thunk</strong> 可以做到這點</p>
 <p>基本上目前的 <strong>Controller</strong> 及 <strong>View</strong> 拆分，應該能滿足基本的單元測試需求</p>
 <blockquote>
-<p>註8：<a href="https://www.runoob.com/design-pattern/mvc-pattern.html">MVC 模試？</a></p>
+<p>註9：<a href="https://www.runoob.com/design-pattern/mvc-pattern.html">MVC 模試？</a></p>
 </blockquote>
 <blockquote>
-<p>註9：<a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing Logic with Custom Hooks</a></p>
+<p>註10：<a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing Logic with Custom Hooks</a></p>
 </blockquote>
 <blockquote>
-<p>註10：<a href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></p>
+<p>註11：<a href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></p>
 </blockquote>
 <hr>
 <h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>之前一直想了好久要引入測試，途中也嘗試了 <strong>Vitest</strong> ，但是光配置就被搞死了，後來因為團隊夥伴也剛好安排到測試的這一項目標，所以就一起研究了，沒想到這次單純使用 <strong>jest</strong> 去跑 <strong>test</strong> 還滿順利的，環境相對單純多了</p>
@@ -14288,6 +14292,9 @@
 <li><a href="https://juejin.cn/post/7029304095944998926">React-5 测试模拟用户事件</a><br><a href="https://titangene.github.io/article/jest-build-test-env.html#Jest-Config">Jest：建置測試環境 (包含 Babel)</a></li>
 <li><a href="https://react.i18next.com/misc/testing">react-i18n documentation - Testing</a></li>
 <li><a href="https://react.dev/blog/2023/03/16/introducing-react-dev#examples-basic">Basic useState examples</a></li>
+<li><a href="https://aws.amazon.com/tw/what-is/ide/">什麼是 IDE (整合開發環境)？</a></li>
+<li><a href="https://github.com/lukeed/clsx">clsx</a></li>
+<li><a href="https://medium.com/unalai/jest-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-mock-functions-4dfe8804f2c0">JEST 單元測試學習筆記 | Mock Functions</a></li>
 <li><a href="https://www.runoob.com/design-pattern/mvc-pattern.html">MVC 模試？</a></li>
 <li><a href="https://react.dev/learn/reusing-logic-with-custom-hooks">Reusing Logic with Custom Hooks</a></li>
 <li><a href="https://medium.com/%E7%A8%8B%E5%BC%8F%E6%84%9B%E5%A5%BD%E8%80%85/%E4%BD%BF%E4%BA%BA%E7%98%8B%E7%8B%82%E7%9A%84-solid-%E5%8E%9F%E5%89%87-%E7%9B%AE%E9%8C%84-b33fdfc983ca">使人瘋狂的 SOLID 原則：目錄</a></li>
