@@ -141,8 +141,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -281,8 +281,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -457,8 +457,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -655,8 +655,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -757,7 +757,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Vue</category>
       </categories>
       <tags>
@@ -906,8 +906,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -1086,8 +1086,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -1221,7 +1221,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>CSS</category>
       </categories>
       <tags>
@@ -1513,7 +1513,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Back-end</category>
         <category>PHP</category>
       </categories>
       <tags>
@@ -1682,8 +1682,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -2027,7 +2027,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -2162,7 +2162,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -2266,8 +2266,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>HeroOfUnground[地下城]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -2405,7 +2405,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -2507,7 +2507,6 @@
 <h1 id="MarkDown-筆記區"><a href="#MarkDown-筆記區" class="headerlink" title="MarkDown 筆記區"></a>MarkDown 筆記區</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% note success %&#125;</span><br><span class="line">#### Warning Header</span><br><span class="line">**Welcome** to [Hexo!](https://hexo.io)</span><br><span class="line"></span><br><span class="line">[class]   : default | primary | success | info | warning | danger.</span><br><span class="line">[no-icon] : Disable icon in note.</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Code</category>
         <category>Hexo</category>
       </categories>
       <tags>
@@ -2659,7 +2658,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -3002,8 +3001,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
-        <category>Note</category>
+        <category>Life</category>
         <category>LINE</category>
       </categories>
       <tags>
@@ -3015,7 +3013,7 @@
       </tags>
   </entry>
   <entry>
-    <title>[Tool Note] - Mac OS 使用 HomeBrew 建置 Web 開發環境</title>
+    <title>[Tool Note] - Mac OS 使用 Homebrew 建置 Web 開發環境</title>
     <url>/2019/11/04/20191104/</url>
     <content><![CDATA[<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>最近終於擺脫了舊電腦，可以捨棄那猶如牛車的速度，每次 <strong>yarn server</strong> 電腦就像是要起飛了一樣，噢！不對是快爆炸了！最近托公司的福終於換了一台筆電，但是環境就必須重來啦～</p>
 <p>鑑於之前環境太髒亂，那時候什麼都不了解胡亂裝了一通，這次剛好 <strong>Blog</strong> 搬家了，就剛好做個筆記記錄一下吧。</p>
@@ -3138,7 +3136,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Other</category>
+        <category>Note</category>
+        <category>Homebrew</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -3236,7 +3235,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
+        <category>Front-end</category>
         <category>TheF2E</category>
       </categories>
       <tags>
@@ -3315,7 +3314,6 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
         <category>Hexo</category>
       </categories>
       <tags>
@@ -3426,7 +3424,6 @@
         <category>Code</category>
         <category>Note</category>
         <category>Webpack</category>
-        <category>Babel</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -3628,10 +3625,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>CSS</category>
-        <category>Flex</category>
-        <category>Flexbox</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -3783,8 +3778,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -3993,8 +3988,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4272,8 +4267,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4423,8 +4418,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4555,8 +4550,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4709,8 +4704,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4850,8 +4845,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -4921,8 +4916,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -5061,8 +5056,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>前端</category>
-        <category>Hexschool-Web-Layout-Training[六角網頁切版直播班]</category>
+        <category>Front-end</category>
+        <category>Hexschool</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -5379,6 +5374,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -6169,6 +6165,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -6453,7 +6450,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>JavaScript</category>
       </categories>
       <tags>
@@ -6923,9 +6920,6 @@
       <categories>
         <category>Code</category>
         <category>Back-end</category>
-        <category>NodeJS</category>
-        <category>MySQL</category>
-        <category>ORM</category>
         <category>Sequelize</category>
       </categories>
       <tags>
@@ -7133,8 +7127,6 @@
         <category>Code</category>
         <category>Note</category>
         <category>Shell Script</category>
-        <category>Env</category>
-        <category>env</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -7341,8 +7333,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
-        <category>Note</category>
+        <category>Life</category>
         <category>LINE</category>
       </categories>
       <tags>
@@ -7459,8 +7450,6 @@
         <category>Code</category>
         <category>Note</category>
         <category>Third Party Service</category>
-        <category>AWS</category>
-        <category>S3</category>
       </categories>
       <tags>
         <tag>Note</tag>
@@ -7771,7 +7760,6 @@
         <category>Code</category>
         <category>Note</category>
         <category>Third Party Service</category>
-        <category>Linode</category>
       </categories>
       <tags>
         <tag>Note</tag>
@@ -7937,7 +7925,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Vue</category>
       </categories>
       <tags>
@@ -8105,7 +8093,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Vue</category>
       </categories>
       <tags>
@@ -8283,7 +8271,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>React</category>
       </categories>
       <tags>
@@ -8463,7 +8451,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>React</category>
       </categories>
       <tags>
@@ -8890,11 +8878,8 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Back-end</category>
-        <category>NodeJS</category>
-        <category>Express</category>
-        <category>React</category>
-        <category>Socket.io</category>
+        <category>Note</category>
+        <category>Socket</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -9022,6 +9007,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
+        <category>Front-end</category>
         <category>UI/UX</category>
       </categories>
       <tags>
@@ -9092,7 +9078,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>React</category>
       </categories>
       <tags>
@@ -9473,17 +9459,14 @@
       <categories>
         <category>Code</category>
         <category>Note</category>
-        <category>Solidity</category>
+        <category>Git</category>
       </categories>
       <tags>
         <tag>Code</tag>
         <tag>HTML</tag>
         <tag>CSS</tag>
         <tag>JavaScript</tag>
-        <tag>Solidity</tag>
-        <tag>NFT</tag>
-        <tag>Mint</tag>
-        <tag>OpenSea</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -9782,8 +9765,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
-        <category>Solidity</category>
+        <category>Web3</category>
       </categories>
       <tags>
         <tag>Code</tag>
@@ -9952,7 +9934,6 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
         <category>Solidity</category>
       </categories>
       <tags>
@@ -10458,7 +10439,6 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
         <category>Solidity</category>
       </categories>
       <tags>
@@ -10683,7 +10663,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Next</category>
       </categories>
       <tags>
@@ -11171,8 +11151,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
-        <category>Note</category>
+        <category>Life</category>
         <category>LINE</category>
       </categories>
       <tags>
@@ -11320,7 +11299,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Next</category>
       </categories>
       <tags>
@@ -11486,7 +11465,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>Vue</category>
       </categories>
       <tags>
@@ -11778,8 +11757,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
-        <category>Note</category>
+        <category>Life</category>
         <category>WebConf</category>
       </categories>
       <tags>
@@ -12050,8 +12028,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>Code</category>
-        <category>Note</category>
+        <category>Life</category>
         <category>WebConf</category>
       </categories>
       <tags>
@@ -12537,7 +12514,6 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
         <category>Flutter</category>
       </categories>
       <tags>
@@ -13117,7 +13093,6 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
         <category>Flutter</category>
       </categories>
       <tags>
@@ -13624,7 +13599,6 @@
         <category>Code</category>
         <category>Note</category>
         <category>Third Party Service</category>
-        <category>Linode</category>
       </categories>
       <tags>
         <tag>Note</tag>
@@ -14302,7 +14276,7 @@
 ]]></content>
       <categories>
         <category>Code</category>
-        <category>Note</category>
+        <category>Front-end</category>
         <category>React</category>
       </categories>
       <tags>
@@ -14313,6 +14287,191 @@
         <tag>FrameWork</tag>
         <tag>React</tag>
         <tag>Jest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[Tool Note] — ESLint v9 大更新隨手記</title>
+    <url>/2025/03/23/20250323/</url>
+    <content><![CDATA[<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20250323/banner.png" alt="Banner"></p>
+<p>你的專案正在使用 <strong>ESLint</strong> 嗎？</p>
+<p>舊的 <strong>Config</strong> 無法在新版本使用了你知道嗎？新版本也不支援 <strong>Node.js v19</strong> 以前的版本了</p>
+<p>這是一篇關於升級到 <strong>9.x</strong> 版本的紀錄，有興趣的話可以繼續往下看，這篇比較大篇幅可能都會在筆者的操作心得，不會有太多講解</p>
+<blockquote>
+<p>如果你的專案還沒有使用 <strong>ESLint</strong> 可以參考筆者的這篇文章 <a href="https://rexhung0302.github.io/2022/11/06/20221106/">[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸</a></p>
+</blockquote>
+<span id="more"></span>
+
+<p><em><strong>整篇文章是筆者自己的心得，如果文內有錯誤的地方，還請盡情指出。</strong></em></p>
+<p>本篇文章將會有兩個路線，一個是舊專案升級，一個則是新專案建立，可以依照自己所需在下面目錄跳轉</p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>知道 <strong>ESLint</strong> 在做什麼</li>
+<li>會使用終端機安裝套件</li>
+<li>一顆熱忱的心 -&gt; 超級重要，碰到坑千萬不要氣餒</li>
+</ul>
+<p>本篇文章將有以下幾個步驟:</p>
+<ol>
+<li><a href="#%E5%89%8D%E5%89%8D%E5%89%8D%E8%A8%80">前前前言</a></li>
+<li><a href="#%E8%88%8A%E5%B0%88%E6%A1%88%E5%8D%87%E7%B4%9A">舊專案升級</a></li>
+<li><a href="#%E6%96%B0%E5%B0%88%E6%A1%88%E5%AE%89%E8%A3%9D">新專案安裝</a></li>
+<li><a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a></li>
+</ol>
+<hr>
+<h3 id="前前前言"><a href="#前前前言" class="headerlink" title="前前前言"></a>前前前言</h3><p>最近剛好同事搬移了一個新專案，由於一些前端的套件設定同事都是直接複製過去的，在筆者實際進行操作後，發現有一些東西沒有執行，查看之後才發現有些東西設定壞掉以及根本沒有啟用</p>
+<p>因為 <strong>ESLint</strong> 同事是直接複製舊專案的設定檔案過去，但是跑安裝時候 <strong>ESLint</strong> 安裝了新版本，導致筆者想跑 <code>lint</code> 檢查時，出現錯誤，也就有了這篇文章</p>
+<p>關於升級的部分可以參考官方文件解說，在 2023 年九月官方就有發文 <a href="https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/">Preparing your custom rules for ESLint v9.0.0</a></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/no-longer-maintained.png" alt="No longer maintained"></p>
+<p>如果到<a href="https://eslint.org/">官網</a>也能發現上面顯示 <strong>ESLint v8.x reached end-of-life on 2024-10-05 and is no longer maintained. Upgrade or consider long-term support options</strong> ，表示 <strong>2024-10-05</strong> 開始就不在維護 <strong>v8.x</strong> 版本了，甚至以下的版本都盡量不要再使用了</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/when-your-code-works-meme.png" alt="Meme"></p>
+<p>但如果舊專案跑的好好的就不要去動它了</p>
+<p>再次提醒，如果要升級或使用的專案環境正在使用 <strong>Node.js v19</strong> 以前版本，也不要升級或使用 <strong>ESLint v9.x</strong> 之後(包含)版本了，前面有提到 <code>新版本也不支援 **Node.js v19** 以前的版本了</code></p>
+<blockquote>
+<p>本篇文章也大篇幅參考 稀土掘金 - <a href="https://juejin.cn/user/981178512313319/posts">无聊波波</a> 的 <a href="https://juejin.cn/post/7354298118236864566">ESLint 9.0大版本发布，配置文件大更新</a></p>
+</blockquote>
+<p>這次更新主要是因為設定檔的方式改了，新版本改為 <strong>Flat Config(註1)</strong> 配置，可以理解為平面配置，會比原本的配置更簡單更好懂，另外也從 <strong>CJS</strong> 轉到 <strong>ESM</strong> (註2)</p>
+<p>一些重大的更新可以參考 <strong>ESLint</strong> 官方的 <a href="https://eslint.org/docs/latest/use/migrate-to-9.0.0">Migrate to v9.x</a></p>
+<blockquote>
+<p>註1：<a href="https://eslint.org/blog/2022/08/new-config-system-part-2/">ESLint’s new config system, Part 2: Introduction to flat config</a></p>
+</blockquote>
+<blockquote>
+<p>註2：<a href="https://vocus.cc/article/649cc0e0fd89780001a7d34d">【程式語言 - Javascript】 ESM與CJS</a></p>
+</blockquote>
+<hr>
+<h3 id="舊專案升級"><a href="#舊專案升級" class="headerlink" title="舊專案升級"></a>舊專案升級</h3><blockquote>
+<p>如果你是新專案可以跳過這塊，直接看 <a href="#%E6%96%B0%E5%B0%88%E6%A1%88%E5%AE%89%E8%A3%9D">新專案安裝</a></p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/eslint-couldnt-find-an-eslint-config.png" alt="ESLint couldn&#39;t find an eslint.config"></p>
+<p>這次筆者在跑 <strong>lint</strong> 的時候出現圖上的錯誤，上面顯示 <strong>ESLintIgnoreWarning: The “eslintignore” file is no longer supported.</strong> ，然後在下面也可以看到 <strong>ESLint couldn’t find an eslint.config.(js|mjs|cjs) file.</strong></p>
+<p>沒錯，在 <strong>v9.x</strong> 版本開始不在使用 <code>.eslintignore</code> 也不在使用 <code>.eslintrc.*</code> 了</p>
+<p>在內容有說到，如果你有原本使用的 <code>.eslintrc.*</code> 可以參考網址 <a href="https://eslint.org/docs/latest/use/configure/migration-guide">https://eslint.org/docs/latest/use/configure/migration-guide</a> 一文的 <strong>Configuration Migration Guide</strong></p>
+<blockquote>
+<p><em><em>If you are using a .eslintrc.</em> file, please follow the migration guide to update your configuration file to the new format: <a href="https://eslint.org/docs/latest/use/configure/migration-guide">https://eslint.org/docs/latest/use/configure/migration-guide</a></em>*</p>
+</blockquote>
+<p>基本上照的裡面的指令走不會有太大問題，所以這篇文章筆者不會放在多重點在怎麼操作，會大略帶過，如果有碰到什麼新問題會再放上來筆記</p>
+<p>在新專案可以跑以下指令去執行轉換，請記得把後面的 <code>.eslintrc.json</code> 更換成你舊的配置檔案名稱，例如筆者舊的檔案叫做 <code>.eslintrc.cjs</code>，那指令就會變成 <code>npx  @eslint/migrate-config .eslintrc.cjs</code></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npx  @eslint/migrate-config .eslintrc.json</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>npx 的意思是安裝後就會移除，我們只會使用當下那次</p>
+</blockquote>
+<p>之後專案目錄就會出現新的檔案 <code>eslint.config.mjs</code>，依據你原本專案有在 <code>.eslintrc.*</code> 內配置的功能，這邊也會相對應幫你搬移過來一些設定</p>
+<p>而舊的檔案就可以刪除了，另外也別忘記把 <code>.eslintignore</code> 刪除，現在新版本的設定全部都設定在 <code>eslint.config.mjs</code> 內即可</p>
+<p>用升級的方式跟新專案的設定方式會有點不同，這邊先說說升級的方式要怎麼加入忽略檔案</p>
+<p>以往我們都是透過 <code>.eslintignore</code>，而新升級的專案應該會是使用 <strong>globalIgnores</strong> 這個來自 <code>eslint/config</code> 套件的功能，升級時會自動安裝一些基本所必要的套件，所以不需要自己安裝</p>
+<p>然後會有下面的寫法</p>
+<figure class="highlight mjs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig, globalIgnores &#125; <span class="keyword">from</span> <span class="string">&quot;eslint/config&quot;</span>;</span><br><span class="line"><span class="comment">//...略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>([<span class="title function_">globalIgnores</span>([</span><br><span class="line">    <span class="string">&quot;**/node_modules/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/build/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/dist/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/public/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/postcss.config.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/tailwind.config.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/webpack.config.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/i18nTools.js&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/public&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/node_modules&quot;</span>,</span><br><span class="line">    <span class="string">&quot;**/jenkinsfile&quot;</span>,</span><br><span class="line">    <span class="string">&quot;params-script.cjs&quot;</span>,</span><br><span class="line">    <span class="comment">// 有一些你沒有的檔案可以自行刪除，例如 i18nTools.js</span></span><br><span class="line">]), &#123;</span><br><span class="line"><span class="comment">//... 略</span></span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+
+<p>之後有想新增的忽略檔案就直接加在那些字串後就好</p>
+<p>之後我們去 <strong>package.json</strong> 新增兩行指令到 <strong>scripts</strong> 去</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">//...略</span></span><br><span class="line">    <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eslint . --ext .ts,.tsx,.js,.jsx&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;lint:fix&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eslint . --ext .ts,.tsx,.js,.jsx --fix&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然後跑以下指令</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run lint</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/exports-error.png" alt="exports error"></p>
+<p>如果出現以上指令，代表你的設定檔有些問題，有可能你不是使用 <strong>ESM</strong> 的 <strong>export default</strong> ，而是使用 <strong>module.exports</strong> 需要去修改一下</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/package-not-found.png" alt="Cannot find package"></p>
+<p>雖然前面有說，透過指令升級會幫你安裝所需要用到的套件，但是只是會幫你安裝基本必須會用到的套件，如果有跑出什麼套件找不到，還是需要手動安裝一下</p>
+<p>像上圖出現 <code>Cannot find package &#39;eslint-plugin-react&#39; imported from /Users/xxxx</code> 就是找不到之前配置所需要的套件，這邊需要手動安裝</p>
+<p>之後都就緒沒問題，就可以跑測試，這次應該就會成功了</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/pnpm-run-lint.gif" alt="Run Lint"></p>
+<hr>
+<h3 id="新專案安裝"><a href="#新專案安裝" class="headerlink" title="新專案安裝"></a>新專案安裝</h3><p>新專案的話相對比較單純一點，可以參考 <strong>ESLint</strong> 官方的 <a href="https://eslint.org/docs/latest/use/getting-started">Getting Started with ESLint</a></p>
+<p>建立新專案的環境</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> eslint-9-test</span><br><span class="line"><span class="built_in">cd</span> eslint-9-test</span><br><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
+
+<p>初始化</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
+
+<p>期間依照你的專案環境或者使用的項目去回答他要你選擇的問題</p>
+<p>回答結束後專案根目錄就會出現 <strong>eslint.config.mjs</strong> 這個檔案，打開它</p>
+<p>這邊會發現新專案產生的設定跟舊專案升級的格式不太一樣，這邊比較單純一點就是一個陣列，有需要的設定就當成物件丟進去</p>
+<figure class="highlight mjs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&quot;eslint/config&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> globals <span class="keyword">from</span> <span class="string">&quot;globals&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> js <span class="keyword">from</span> <span class="string">&quot;@eslint/js&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> tseslint <span class="keyword">from</span> <span class="string">&quot;typescript-eslint&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> pluginReact <span class="keyword">from</span> <span class="string">&quot;eslint-plugin-react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>([</span><br><span class="line">  &#123; <span class="attr">files</span>: [<span class="string">&quot;**/*.&#123;js,mjs,cjs,ts,jsx,tsx&#125;&quot;</span>] &#125;,</span><br><span class="line">  &#123; <span class="attr">files</span>: [<span class="string">&quot;**/*.js&quot;</span>], <span class="attr">languageOptions</span>: &#123; <span class="attr">sourceType</span>: <span class="string">&quot;commonjs&quot;</span> &#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">files</span>: [<span class="string">&quot;**/*.&#123;js,mjs,cjs,ts,jsx,tsx&#125;&quot;</span>], <span class="attr">languageOptions</span>: &#123; <span class="attr">globals</span>: globals.<span class="property">browser</span> &#125; &#125;,</span><br><span class="line">  &#123; <span class="attr">files</span>: [<span class="string">&quot;**/*.&#123;js,mjs,cjs,ts,jsx,tsx&#125;&quot;</span>], <span class="attr">plugins</span>: &#123; js &#125;, <span class="attr">extends</span>: [<span class="string">&quot;js/recommended&quot;</span>] &#125;,</span><br><span class="line">  tseslint.<span class="property">configs</span>.<span class="property">recommended</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">      <span class="attr">quotes</span>: [<span class="string">&#x27;error&#x27;</span>, <span class="string">&#x27;single&#x27;</span>],</span><br><span class="line">      <span class="attr">eqeqeq</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">      <span class="string">&quot;no-unused-vars&quot;</span>: <span class="string">&quot;error&quot;</span>,</span><br><span class="line">      <span class="string">&quot;prefer-const&quot;</span>: [<span class="string">&quot;error&quot;</span>, &#123; <span class="string">&quot;ignoreReadBeforeAssign&quot;</span>: <span class="literal">true</span> &#125;]</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    ...pluginReact.<span class="property">configs</span>.<span class="property">flat</span>.<span class="property">recommended</span>,</span><br><span class="line">    <span class="attr">settings</span>: &#123;</span><br><span class="line">      <span class="attr">react</span>: &#123;</span><br><span class="line">        <span class="attr">version</span>: <span class="string">&quot;detect&quot;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Prettier-安裝"><a href="#Prettier-安裝" class="headerlink" title="Prettier 安裝"></a>Prettier 安裝</h4><p>因為 <strong>ESLint</strong> 只會檢查錯誤，但是一些縮排等等的東西需要 <strong>Prettier</strong> 去達到，這邊有需要也可以另外安裝</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm i prettier eslint-config-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>記得要另外安裝 <strong>eslint-config-prettier</strong> 這個插件會禁用一些跟 <strong>Prettier</strong> 衝突的 <strong>ESLint</strong> 規則，也就是會以 <strong>Prettier</strong> 的為主</p>
+<p>然後到 <strong>eslint.config.mjs</strong> 去新增設定</p>
+<figure class="highlight mjs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> eslintConfigPrettier <span class="keyword">from</span> <span class="string">&quot;eslint-config-prettier&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>([</span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  eslintConfigPrettier, <span class="comment">// 在中間隨機一行插入這個，但不要包在任何一個物件內</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">plugins</span>: &#123;</span><br><span class="line">      <span class="attr">prettier</span>: &#123; <span class="comment">// 設邊可以設定套件的規則</span></span><br><span class="line">        <span class="attr">rules</span>: &#123;</span><br><span class="line">          <span class="comment">// 开启这条规则后，会将prettier的校验规则传递给eslint，这样eslint就可以按照prettier的方式来进行代码格式的校验</span></span><br><span class="line">          <span class="string">&#x27;prettier/prettier&#x27;</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">          <span class="comment">// eslint（https://eslint.bootcss.com/docs/rules/）</span></span><br><span class="line">          <span class="string">&#x27;no-var&#x27;</span>: <span class="string">&#x27;error&#x27;</span>, <span class="comment">// 要求使用 let 或 const 而不是 var</span></span><br><span class="line">          <span class="string">&#x27;no-multiple-empty-lines&#x27;</span>: [<span class="string">&#x27;warn&#x27;</span>, &#123; <span class="attr">max</span>: <span class="number">1</span> &#125;], <span class="comment">// 不允许多个空行</span></span><br><span class="line">          <span class="string">&#x27;no-console&#x27;</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;no-debugger&#x27;</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;no-unexpected-multiline&#x27;</span>: <span class="string">&#x27;error&#x27;</span>, <span class="comment">// 禁止空余的多行</span></span><br><span class="line">          <span class="string">&#x27;no-useless-escape&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 禁止不必要的转义字符</span></span><br><span class="line">    </span><br><span class="line">          <span class="comment">// typeScript (https://typescript-eslint.io/rules)</span></span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/no-unused-vars&#x27;</span>: <span class="string">&#x27;error&#x27;</span>, <span class="comment">// 禁止定义未使用的变量</span></span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/prefer-ts-expect-error&#x27;</span>: <span class="string">&#x27;error&#x27;</span>, <span class="comment">// 禁止使用 @ts-ignore</span></span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/no-explicit-any&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 禁止使用 any 类型</span></span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/no-non-null-assertion&#x27;</span>: <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/no-namespace&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 禁止使用自定义 TypeScript 模块和命名空间。</span></span><br><span class="line">          <span class="string">&#x27;@typescript-eslint/semi&#x27;</span>: <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">    </span><br><span class="line">          <span class="comment">// eslint-plugin-vue (https://eslint.vuejs.org/rules/)</span></span><br><span class="line">          <span class="string">&#x27;vue/multi-word-component-names&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 要求组件名称始终为 “-” 链接的单词</span></span><br><span class="line">          <span class="string">&#x27;vue/script-setup-uses-vars&#x27;</span>: <span class="string">&#x27;error&#x27;</span>, <span class="comment">// 防止&lt;script setup&gt;使用的变量&lt;template&gt;被标记为未使用</span></span><br><span class="line">          <span class="string">&#x27;vue/no-mutating-props&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 不允许组件 prop的改变</span></span><br><span class="line">          <span class="string">&#x27;vue/attribute-hyphenation&#x27;</span>: <span class="string">&#x27;off&#x27;</span>, <span class="comment">// 对模板中的自定义组件强制执行属性命名样式</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">ignores</span>: [</span><br><span class="line">          <span class="string">&quot;node_modules&quot;</span>,</span><br><span class="line">          <span class="string">&quot;dist&quot;</span>,</span><br><span class="line">          <span class="string">&quot;build&quot;</span>,</span><br><span class="line">          <span class="string">&quot;coverage&quot;</span>,</span><br><span class="line">          <span class="string">&#x27;eslint.config.mjs&#x27;</span>,</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<p>之後可以參考下面的 <a href="#%E8%87%AA%E5%8B%95%E6%AA%A2%E6%B8%AC%E9%8C%AF%E8%AA%A4">自動檢測錯誤</a> 及 <a href="#%E5%84%B2%E5%AD%98%E8%87%AA%E5%8B%95%E4%BF%AE%E6%AD%A3">儲存自動修正</a></p>
+<p>都設定完可以跑跑看 <code>npm run lint</code></p>
+<blockquote>
+<p>另外你可能會聽到 <strong>eslint-plugin-prettier</strong> 這個套件，實際爬文之後，網路有提到這個套件並不會用到，筆者確實也沒有用到，可以不需要安裝，除非你真得有碰到需要使用的情況，差異詳情可參考 <a href="https://www.cnblogs.com/johnjackson/p/17656025.html">eslint-config-prettier和eslint-plugin-prettier有什么关系</a></p>
+</blockquote>
+<blockquote>
+<p>這邊再次推一下可以看看筆者這篇 <a href="https://rexhung0302.github.io/2022/11/06/20221106/">[Next Note] - 把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸</a></p>
+</blockquote>
+<hr>
+<h3 id="額外問題"><a href="#額外問題" class="headerlink" title="額外問題"></a>額外問題</h3><h4 id="自動檢測錯誤"><a href="#自動檢測錯誤" class="headerlink" title="自動檢測錯誤"></a>自動檢測錯誤</h4><p>如果你想要在寫程式的時候就自動檢測錯誤，也剛好你使用的是 <strong>VSCode</strong> 的話，請在專案本地打開設定</p>
+<p><strong>Mac</strong> 的快捷鍵為 <code>Command + P</code> 而 <strong>Windows</strong> 則是 <code>Ctrl + Shift + P</code></p>
+<p>然後在輸入框中輸入 <code>&gt;Settings</code>，接著選擇 <code>喜好設定：開啟工作區設定</code></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/open-settings.png" alt="Open Settings"></p>
+<blockquote>
+<p>切記不要選擇到 <code>喜好設定：開啟使用者設定(JSON)</code>，這個設定是針對這台電腦全部的專案設定</p>
+</blockquote>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/click-to-file-icon.png" alt="Click Icon"></p>
+<p>然後點擊右方的 <strong>檔案箭頭 Icon</strong> 會出現一個空白檔案，除非你的專案資料夾根目錄底下已經有 <code>.vscode/settings.json</code></p>
+<p>這時候貼上</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;eslint.enable&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;eslint.run&quot;</span><span class="punctuation">:</span> <span class="string">&quot;onType&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/eslint-remind-error.png" alt="ESLint show error"></p>
+<p>這時候就能看到紅色蚯蚓出現了，如果沒有請關掉專案重新打開</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/vscode-settings.png" alt="VSCode Settings"></p>
+<p>請記得看專案根目錄是不是有出現這個檔案，之後建議這個檔案也要推上去 <strong>git</strong> ，其他一起共同開發的工程師才能用到一樣的設定</p>
+<h4 id="儲存自動修正"><a href="#儲存自動修正" class="headerlink" title="儲存自動修正"></a>儲存自動修正</h4><p>如果每次我們都需要跑 <code>eslint . --ext .ts,.tsx,.js,.jsx --fix</code> 才能修正檔案，未免效率也太低了些</p>
+<p>這時候我們可以在 <code>.vscode/settings.json</code> 內加入以下兩個設定並儲存</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line">  <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.codeActionsOnSave&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;source.fixAll.eslint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;always&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">//...略</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/auto-fix.gif" alt="Auto fix"></p>
+<p>之後一儲存就會自動修正你有設定的 <strong>Rule</strong> 錯誤啦，但有一些比較麻煩一點的可能還是需要手動去修正</p>
+<h4 id="not-include-this-file"><a href="#not-include-this-file" class="headerlink" title="not include this file"></a>not include this file</h4><p><img src="/images/others/loading.gif" data-original="/images/20250323/not-include-this-file.png" alt="沒有找到該檔案被包含在內的錯誤"></p>
+<p>如果出現上圖錯誤，很大概率是你的某個檔案有被 <strong>ESLint</strong> 檢測到錯誤，但他無法自動修正</p>
+<p>如果你不想到那個檔案被檢測，可以在上面提到的忽略檔案內加入，例如你的 <strong>ESLint</strong> 配置檔案不想要被 <strong>ESLint</strong> 規則所束縛，那就在下面新增 <code>**/eslint.*</code></p>
+<figure class="highlight mjs"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig, globalIgnores &#125; <span class="keyword">from</span> <span class="string">&quot;eslint/config&quot;</span>;</span><br><span class="line"><span class="comment">//...略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>([<span class="title function_">globalIgnores</span>([</span><br><span class="line">    <span class="comment">//...略</span></span><br><span class="line">    <span class="string">&quot;**/eslint.*&quot;</span>,</span><br><span class="line">    <span class="comment">// 有一些你沒有的檔案可以自行刪除，例如 i18nTools.js</span></span><br><span class="line">]), &#123;</span><br><span class="line"><span class="comment">//... 略</span></span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置的寫法"><a href="#配置的寫法" class="headerlink" title="配置的寫法"></a>配置的寫法</h4><blockquote>
+<p>配置寫法可先參考 稀土掘金 - <a href="https://juejin.cn/user/193965341808077/posts">KirkLin</a> 的 <a href="https://juejin.cn/post/7282603369966747708">ESLint配置文件有新写法啦，ESLINT FLAT CONFIG</a>，筆者有記錄會補充上來</p>
+</blockquote>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次新專案設定 <strong>ESLint</strong> 算是又重新跑了一次流程，重新喚起一些以前的記憶，但前端似乎趨勢就是這樣，更迭的很快</p>
+<p>舉例最近 <strong>CRA(註3)</strong> 也被官方廢除了，可參考 <a href="https://react.dev/blog/2025/02/14/sunsetting-create-react-app">Sunsetting Create React App</a> 及 <a href="https://calpa.me/blog/create-react-app-eliminated-vite-rise/?fbclid=IwZXh0bgNhZW0CMTEAAR3hhXGZaAF-wLZ8m1HM5JUTt2VfXYDkbH7Mp76WQ3HchXJeQX6gFewuj7A_aem_zcLi9IiV_4qAbh_VZkx3PA">Create React App 的終結：為何被淘汰及 Vite 的崛起</a>，我還記得不久之前開始寫 <strong>React.js</strong> 都還是用 <strong>CRA</strong> 的</p>
+<p>這種筆記文章日後應該還是會很常出現，畢竟停下來一陣子就可能會突然落後別人好遠</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250323/no-more-update.png" alt="No more update"></p>
+<blockquote>
+<p><strong><a href="https://github.com/denoland/deno/issues/25">求別再更新啦！！！！</a></strong></p>
+</blockquote>
+<p>希望這個筆記可以幫助到你，也能讓日後的我喚回一些記憶，日後也會慢慢更新碰到的問題</p>
+<p>如果你有疑問也歡迎在下面留言一起討論</p>
+<blockquote>
+<p><em><strong>註3：CRA 是 React.js 官方釋出的一套轉譯工具，旨在讓使用者可以快速建構 React.js 環境，並且進行開發</strong></em></p>
+</blockquote>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a href="https://juejin.cn/post/7354298118236864566">ESLint 9.0大版本发布，配置文件大更新</a></li>
+<li><a href="https://eslint.org/">ESLint</a></li>
+<li><a href="https://eslint.org/blog/2022/08/new-config-system-part-2/">ESLint’s new config system, Part 2: Introduction to flat config</a></li>
+<li><a href="https://vocus.cc/article/649cc0e0fd89780001a7d34d">【程式語言 - Javascript】 ESM與CJS</a></li>
+<li><a href="https://eslint.org/docs/latest/use/migrate-to-9.0.0">Migrate to v9.x</a></li>
+<li><a href="https://www.cnblogs.com/johnjackson/p/17656025.html">eslint-config-prettier和eslint-plugin-prettier有什么关系</a></li>
+<li><a href="https://juejin.cn/post/7282603369966747708">ESLint配置文件有新写法啦，ESLINT FLAT CONFIG</a></li>
+<li><a href="https://react.dev/blog/2025/02/14/sunsetting-create-react-app">Sunsetting Create React App</a></li>
+<li><a href="https://calpa.me/blog/create-react-app-eliminated-vite-rise/?fbclid=IwZXh0bgNhZW0CMTEAAR3hhXGZaAF-wLZ8m1HM5JUTt2VfXYDkbH7Mp76WQ3HchXJeQX6gFewuj7A_aem_zcLi9IiV_4qAbh_VZkx3PA">Create React App 的終結：為何被淘汰及 Vite 的崛起</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Code</category>
+        <category>Note</category>
+        <category>Other</category>
+      </categories>
+      <tags>
+        <tag>Code</tag>
+        <tag>HTML</tag>
+        <tag>CSS</tag>
+        <tag>JavaScript</tag>
+        <tag>Webpack</tag>
       </tags>
   </entry>
 </search>
