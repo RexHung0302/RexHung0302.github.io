@@ -13940,8 +13940,8 @@
   </entry>
   <entry>
     <title>[React Note] — React.js Test 深入淺出 ft. TypeScript</title>
-    <url>/2025/04/14/20250414/</url>
-    <content><![CDATA[<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20250414/banner.png" alt="Test"></p>
+    <url>/2025/03/17/20250317/</url>
+    <content><![CDATA[<h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20250317/banner.png" alt="Test"></p>
 <blockquote>
 <p>背景來至 <a href="https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo">unsplash.com 的 Christopher Gower</a></p>
 </blockquote>
@@ -14133,9 +14133,9 @@
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; describe, expect, it &#125; <span class="keyword">from</span> <span class="string">&#x27;@jest/globals&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params"><span class="attr">a</span>: <span class="built_in">number</span>, <span class="attr">b</span>: <span class="built_in">number</span></span>) =&gt; a + b;</span><br><span class="line"></span><br><span class="line"><span class="comment">//...略</span></span><br></pre></td></tr></table></figure>
 
 <p>接著可以執行 <code>npm run test</code> 跑跑看測試</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/sum-test.png" alt="SUM Test"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/sum-test.png" alt="SUM Test"></p>
 <p>如果 <strong>IDE</strong> 有提供測試功能，也可以直接在 <strong>IDE</strong> 上面點擊，如 <strong>VSCode</strong> 為例，可以點擊綠色勾勾的地方，在還沒跑測試之前應該是播放案件，這邊不要去點 <strong>Run(Vitest)</strong> ，因為我們不是使用 <strong>Vitest</strong></p>
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/run-test.gif" alt="RUN Test"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/run-test.gif" alt="RUN Test"></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Test Suites: 1 passed, 1 total</span><br><span class="line">Tests:       1 passed, 1 total</span><br><span class="line">Snapshots:   0 total</span><br><span class="line">Time:        6.251 s</span><br></pre></td></tr></table></figure>
 
 <p>如果看到 <code>1 passed, 1 total</code> 就代表通過了，如果有寫錯，在終端機也會爆出錯誤</p>
@@ -14154,7 +14154,7 @@
 <p>接著執行</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/clsx-error.png" alt="Third part plugin error"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/clsx-error.png" alt="Third part plugin error"></p>
 <p>上面的測試實際執行後會發現測試出錯了，出現了好一大串錯誤，仔細看一下中間的部分，會發現錯誤的部分似乎是落在 <strong>clsx(註7)</strong> 這個套件</p>
 <p>開始寫測試後，你會發現常常會碰到一些第三方套件的引入，對我們來說，第三方套件應該在作者實作推出後，就要確跑程式沒問題，所以基本上我們是持著『程式本善』的心情去看待它，所以在測試時我們大部分時候都會把第三方套件 <strong>Mock</strong> 掉，並且直接改成我們的預期結果</p>
 <p>這邊我們需要直接到 <code>test/__mocks__</code> 資料夾底下，新增 <strong>clsx.ts</strong> 的檔案，內容貼上</p>
@@ -14166,7 +14166,7 @@
 <p>然後再跑一次</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/npm-run-test-after-clsx.gif" alt="Run Test after clsx setting"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/npm-run-test-after-clsx.gif" alt="Run Test after clsx setting"></p>
 <p>恭喜你，這次就應該能透通過了！</p>
 <p>之後如果還有碰到測試需要引入第三方的套件，都可以像這樣去使用，下面再<a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a>的部份會提到 <a href="#i18n-%E7%9A%84-Mock">i18n 的 Mock</a></p>
 <blockquote>
@@ -14176,9 +14176,9 @@
 <p>註7：關於 <a href="https://github.com/lukeed/clsx">clsx</a> 這個套件是用來組合 <strong>class</strong> 名稱的，也能讓你在 <strong>React.js className</strong> 裡面寫判斷，甚至是 <code>true &amp;&amp; &#39;text-red-500&#39;</code> 這種寫法</p>
 </blockquote>
 <hr>
-<h3 id="測試覆蓋率"><a href="#測試覆蓋率" class="headerlink" title="測試覆蓋率"></a>測試覆蓋率</h3><p><img src="/images/others/loading.gif" data-original="/images/20250414/coverage-folder.png" alt="Coverage"></p>
+<h3 id="測試覆蓋率"><a href="#測試覆蓋率" class="headerlink" title="測試覆蓋率"></a>測試覆蓋率</h3><p><img src="/images/others/loading.gif" data-original="/images/20250317/coverage-folder.png" alt="Coverage"></p>
 <p>測試跑完之後，你應該會在專案資料夾跟目錄看見 <strong>coverage</strong> ，這個資料夾打開後可以找到 <strong>lcov-report</strong> 資料夾，並打開底下的 <strong>index.html</strong> ，路徑為 <code>coverage/lcov-report/index.html</code>，打開它</p>
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/coverage-report.png" alt="Coverage Report"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/coverage-report.png" alt="Coverage Report"></p>
 <p>打開後會發現裡面有一個表格，表格下的資料代表的是你的測試有覆蓋到的檔案</p>
 <p>在表格的 Title 有幾個種類，意思分別是</p>
 <ul>
@@ -14224,7 +14224,7 @@
 <p><em><strong>最後記得在 .gitignore 內加上 coverage，不要把這份內容上傳了</strong></em></p>
 </blockquote>
 <hr>
-<h3 id="額外問題"><a href="#額外問題" class="headerlink" title="額外問題"></a>額外問題</h3><h4 id="i18n-的-Mock"><a href="#i18n-的-Mock" class="headerlink" title="i18n 的 Mock"></a>i18n 的 Mock</h4><p><img src="/images/others/loading.gif" data-original="/images/20250414/i18n-error.png" alt="I18n Error"></p>
+<h3 id="額外問題"><a href="#額外問題" class="headerlink" title="額外問題"></a>額外問題</h3><h4 id="i18n-的-Mock"><a href="#i18n-的-Mock" class="headerlink" title="i18n 的 Mock"></a>i18n 的 Mock</h4><p><img src="/images/others/loading.gif" data-original="/images/20250317/i18n-error.png" alt="I18n Error"></p>
 <p>如果你用 <strong>React.js</strong> 跑測試，且元件內有使用到 <strong>i18n</strong> 的話，可能會出現上面的錯誤</p>
 <p>依照前面的說明理解，第三方套件要測試我們基本上都是 <strong>Mock Mock Mock</strong> ，而 <strong>Mock</strong> 的流程不外乎就是在 <code>test/__mocks__</code> 底下新增要模擬的內容(註8)</p>
 <p>新增一支叫做 <strong>reactI18next.ts</strong> 的檔案，然後內容貼上</p>
@@ -14240,7 +14240,7 @@
 <p>之後再跑一次測試</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm run <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/npm-run-test-after-i18n.gif" alt="Npm run test after i18n setting"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/npm-run-test-after-i18n.gif" alt="Npm run test after i18n setting"></p>
 <p>這時候可以看到測試就能通過了，上面範例有紅色的部分是因為目前測試還沒有涵蓋到這部分，可以略過紅色部分，而有一些黃色的部分也是測試希望你能把涵蓋率補高一點</p>
 <blockquote>
 <p>註8：請注意，如果是測試會常常跑到的第三方套件，建議在新增在這邊，然後透過 <strong>jest.config.ts</strong> 的 <strong>moduleNameMapper</strong> 去引入，但如果只是某幾個或是某一個測試會用到，就直接在測試檔案裡面使用 <strong>mock</strong> 吧</p>
@@ -14249,7 +14249,7 @@
 <h3 id="React-js-架構探討"><a href="#React-js-架構探討" class="headerlink" title="React.js 架構探討"></a>React.js 架構探討</h3><blockquote>
 <p><em><strong>這部分沒興趣可以跳過，這邊比較多部分會講解概念，不會實作太多程式碼</strong></em></p>
 </blockquote>
-<p><img src="/images/others/loading.gif" data-original="/images/20250414/react-flow.png" alt="React Flow"></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20250317/react-flow.png" alt="React Flow"></p>
 <p>前面有提到，之前有跟主管在探討 <strong>React.js</strong> 的部分能不能做一些系統性規劃，對於後端來說，他們可以比較輕易的整理出 <strong>MVC(註9)</strong> 架構，但前端的程式碼大部分的工程師都像是義大利麵一樣，寫成一團</p>
 <p>在近幾年開始有 <strong>Component</strong> 拆分後，有慢慢比較好一點，但很多東西還是混在一起，這就會造成測試困難，耦合太嚴重</p>
 <p>在與主管討論之後，其實目前我們的專案最基本最基本就是把 <strong>View</strong> 跟 <strong>邏輯</strong> 拆開，這是絕對守則，唯有如此，才能跑測試，後續修改也比較不麻煩</p>
