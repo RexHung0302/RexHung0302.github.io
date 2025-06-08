@@ -14661,8 +14661,11 @@
 <figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">type</span> &#123; <span class="title class_">NextConfig</span> &#125; <span class="keyword">from</span> <span class="string">&quot;next&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="attr">nextConfig</span>: <span class="title class_">NextConfig</span> = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="attr">webpack</span>: <span class="function">(<span class="params">config</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* config options here */</span></span><br><span class="line">  <span class="keyword">const</span> iconPath = path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;src/components/SvgIcon/svg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  config.<span class="property">module</span>.<span class="property">rules</span>.<span class="title function_">push</span>(&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.svg$/</span>,</span><br><span class="line">    <span class="attr">include</span>: iconPath,</span><br><span class="line">    <span class="attr">use</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;@svgr/webpack&#x27;</span>,</span><br><span class="line">        <span class="attr">options</span>: &#123;</span><br><span class="line">          <span class="attr">svgo</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">template</span>: <span class="function">(<span class="params">variables, &#123; tpl &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 這邊可以對你的 SVGIcon Component 做一些設定</span></span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>透過 <strong>include</strong> 可以只針對你的 <strong>SvgIcon</strong> 底下的 <strong>SVG</strong> 去進行轉換而已，不會影響到其他單純直接引入的 <strong>SVG</strong> 圖案</p>
+<blockquote>
+<p><em>相關文章也可以參考這篇 <a href="https://juejin.cn/post/7084147998376574990">今天聊聊@svgr&#x2F;webpack遇到的坑</a></em></p>
+</blockquote>
 <h4 id="使用-svgr-插件，但是在-turbopack-模式下發生錯誤"><a href="#使用-svgr-插件，但是在-turbopack-模式下發生錯誤" class="headerlink" title="使用 svgr 插件，但是在 turbopack 模式下發生錯誤"></a>使用 <strong>svgr</strong> 插件，但是在 <strong>turbopack</strong> 模式下發生錯誤</h4><p>可以參考這篇文章 <a href="https://github.com/vercel/next.js/discussions/50337">How to integrate @svgr&#x2F;webpack to make turbopack work? #50337</a></p>
-<h4 id="使用-Serve-模式下出現錯誤"><a href="#使用-Serve-模式下出現錯誤" class="headerlink" title="使用 Serve 模式下出現錯誤"></a>使用 Serve 模式下出現錯誤</h4><hr>
+<hr>
 <h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><hr>
 <h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
 <li><p><a href="https://www.npmjs.com/package/@svgr/webpack">@svgr&#x2F;webpack</a></p>
@@ -14674,6 +14677,8 @@
 <li><p><a href="https://www.npmjs.com/package/prettier">prettier</a></p>
 </li>
 <li><p><a href="https://github.com/vercel/next.js/discussions/50337">How to integrate @svgr&#x2F;webpack to make turbopack work? #50337</a></p>
+</li>
+<li><p><a href="https://juejin.cn/post/7084147998376574990">今天聊聊@svgr&#x2F;webpack遇到的坑</a></p>
 </li>
 </ul>
 ]]></content>
