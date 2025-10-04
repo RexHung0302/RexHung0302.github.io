@@ -22,7 +22,7 @@
 
   <meta name="description" content="Introduction &amp; 前言  背景來至 unsplash.com 的 Christopher Gower  開始寫程式之後，是不是常常被問你該怎麼確保程式碼沒問題？ 開始寫程式之後，是不是總想著怎麼不用再透過手動的方式確保程式碼沒問題？ 開始寫程式之後，是不是常常被問，你會不會寫測試？  來！看這篇，這是一篇關於 React.js + TypeScript 為主的測試">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[React Note] — React.js Test 深入淺出 ft. TypeScript">
+<meta property="og:title" content="[React Note]  — React.js Test 深入淺出 ft. TypeScript">
 <meta property="og:url" content="https://rexhung0302.github.io/2025/03/17/20250317/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
 <meta property="og:description" content="Introduction &amp; 前言  背景來至 unsplash.com 的 Christopher Gower  開始寫程式之後，是不是常常被問你該怎麼確保程式碼沒問題？ 開始寫程式之後，是不是總想著怎麼不用再透過手動的方式確保程式碼沒問題？ 開始寫程式之後，是不是常常被問，你會不會寫測試？  來！看這篇，這是一篇關於 React.js + TypeScript 為主的測試">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2025-03-17T02:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-23T09:59:10.115Z">
+<meta property="article:modified_time" content="2025-10-04T15:41:31.181Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="HTML">
@@ -63,7 +63,7 @@
   };
 </script>
 
-  <title>[React Note] — React.js Test 深入淺出 ft. TypeScript | RexHung's Blog</title>
+  <title>[React Note]  — React.js Test 深入淺出 ft. TypeScript | RexHung's Blog</title>
   
 
 
@@ -227,7 +227,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [React Note] — React.js Test 深入淺出 ft. TypeScript
+          [React Note]  — React.js Test 深入淺出 ft. TypeScript
         </h1>
 
         <div class="post-meta">
@@ -244,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-03-23 17:59:10" itemprop="dateModified" datetime="2025-03-23T17:59:10+08:00">2025-03-23</time>
+                <time title="修改時間：2025-10-04 23:41:31" itemprop="dateModified" datetime="2025-10-04T23:41:31+08:00">2025-10-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -315,17 +315,26 @@
 <li>一顆熱忱的心 -&gt; 超級重要，碰到坑千萬不要氣餒</li>
 </ul>
 <p>本篇文章將有以下幾個步驟:</p>
-<ol>
+<ul>
+<li><a href="#introduction--%E5%89%8D%E8%A8%80">Introduction &amp; 前言</a></li>
+<li><a href="#summary--%E6%91%98%E8%A6%81">Summary &amp; 摘要</a><ul>
 <li><a href="#%E5%89%8D%E5%89%8D%E5%89%8D%E8%A8%80">前前前言</a></li>
 <li><a href="#%E6%B8%AC%E8%A9%A6%E4%BB%8B%E7%B4%B9">測試介紹</a></li>
 <li><a href="#%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83">安裝環境</a></li>
 <li><a href="#%E7%92%B0%E5%A2%83%E8%A8%AD%E7%BD%AE">環境設置</a></li>
 <li><a href="#%E6%92%B0%E5%AF%AB%E5%9F%BA%E7%A4%8E%E6%B8%AC%E8%A9%A6">撰寫基礎測試</a></li>
-<li><a href="#%E6%92%B0%E5%AF%AB-React.js-%E6%B8%AC%E8%A9%A6">撰寫 React.js 測試</a></li>
-<li><a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a></li>
+<li><a href="#%E6%92%B0%E5%AF%AB-reactjs-%E6%B8%AC%E8%A9%A6">撰寫 React.js 測試</a></li>
 <li><a href="#%E6%B8%AC%E8%A9%A6%E8%A6%86%E8%93%8B%E7%8E%87">測試覆蓋率</a></li>
-<li><a href="#React.js-%E6%9E%B6%E6%A7%8B%E6%8E%A2%E8%A8%8E">React.js 架構探討</a></li>
-</ol>
+<li><a href="#%E9%A1%8D%E5%A4%96%E5%95%8F%E9%A1%8C">額外問題</a><ul>
+<li><a href="#i18n-%E7%9A%84-mock">i18n 的 Mock</a></li>
+</ul>
+</li>
+<li><a href="#reactjs-%E6%9E%B6%E6%A7%8B%E6%8E%A2%E8%A8%8E">React.js 架構探討</a></li>
+</ul>
+</li>
+<li><a href="#conclusion--%E7%B5%90%E8%AB%96">Conclusion &amp; 結論</a></li>
+<li><a href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99">參考網站</a></li>
+</ul>
 <hr>
 <h3 id="前前前言"><a href="#前前前言" class="headerlink" title="前前前言"></a>前前前言</h3><p>在開始寫前端後的幾年，常常被問到是不是有在寫測試，加上筆者目前所待的公司過去曾經盛行測試文化，在後端的開發幾乎是以 <strong>TDD(註1)</strong> 為核心</p>
 <p>在現職的公司前陣子與主管討論後，決定在前端導入測試，一直沒有導入的原因其實一部分是因為團隊專案在初期，很多東西還沒有制式規格，滿長會碰到需要更改核心或商業邏輯的情況</p>
@@ -687,12 +696,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2025/03/09/20250309/" rel="prev" title="[Tool Note] — 透過 Webpack 發布 React.js(TypeScript) 元件至 npm">
-      <i class="fa fa-chevron-left"></i> [Tool Note] — 透過 Webpack 發布 React.js(TypeScript) 元件至 npm
+    <a href="/2025/03/09/20250309/" rel="prev" title="[Tool Note]  —  透過 Webpack 發布 React.js(TypeScript) 元件至 npm">
+      <i class="fa fa-chevron-left"></i> [Tool Note]  —  透過 Webpack 發布 React.js(TypeScript) 元件至 npm
     </a></div>
       <div class="post-nav-item">
-    <a href="/2025/03/23/20250323/" rel="next" title="[Tool Note] — ESLint v9 大更新隨手記">
-      [Tool Note] — ESLint v9 大更新隨手記 <i class="fa fa-chevron-right"></i>
+    <a href="/2025/03/23/20250323/" rel="next" title="[Tool Note]  — ESLint v9 大更新隨手記">
+      [Tool Note]  — ESLint v9 大更新隨手記 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -775,20 +784,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">84</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -907,7 +916,7 @@ NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
       shortname : 'rexhung0302',
       url       : "https://rexhung0302.github.io/2025/03/17/20250317/",
       identifier: "2025/03/17/20250317/",
-      title     : "[React Note] — React.js Test 深入淺出 ft. TypeScript",
+      title     : "[React Note]  — React.js Test 深入淺出 ft. TypeScript",
     });
   }, window.DisqusJS);
 });

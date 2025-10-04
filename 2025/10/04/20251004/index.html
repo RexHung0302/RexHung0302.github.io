@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 你肯定聽過 n8n ，你有一天肯定要用 n8n ，那為什麼不現在就用？ 往下看，教你怎麼快速在 本地 或 VM(虛擬機) 上架設 n8n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Tool Note]  — 架設 n8n &amp; 簡易使用指南">
+<meta property="og:url" content="https://rexhung0302.github.io/2025/10/04/20251004/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 你肯定聽過 n8n ，你有一天肯定要用 n8n ，那為什麼不現在就用？ 往下看，教你怎麼快速在 本地 或 VM(虛擬機) 上架設 n8n">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2025-10-04T15:42:00.000Z">
+<meta property="article:modified_time" content="2025-10-04T17:54:02.315Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="n8n">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2025/10/04/20251004/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Tool Note]  — 架設 n8n & 簡易使用指南 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2025/10/04/20251004/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Tool Note]  — 架設 n8n & 簡易使用指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2025-10-04 23:42:00" itemprop="dateCreated datePublished" datetime="2025-10-04T23:42:00+08:00">2025-10-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-10-05 01:54:02" itemprop="dateModified" datetime="2025-10-05T01:54:02+08:00">2025-10-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/n8n/" itemprop="url" rel="index"><span itemprop="name">n8n</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>4 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_logo.png" alt="Banner"></p>
+<p>你肯定聽過 <strong>n8n</strong> ，你有一天肯定要用 <strong>n8n</strong> ，那為什麼不現在就用？</p>
+<p>往下看，教你怎麼快速在 <strong>本地</strong> 或 <strong>VM(虛擬機)</strong> 上架設 <strong>n8n</strong></p>
+<span id="more"></span>
+
+<p><em><strong>整篇文章是筆者自己的心得，如果文內有錯誤的地方，還請盡情指出。</strong></em></p>
+<p>本篇文章將會有兩個方法架設 <strong>n8n</strong> ，一個是本地，一個是透過 <strong>VM</strong></p>
+<p><em><strong>P.S：當然如果你不想自己安裝這麼麻煩，可以直接使用 n8n 官網提供的線上版本，不過線上會有執行次數限制且需要付費，且線上版本會是比較舊的，自行架設的可以依照自己的使用需求升級</strong></em></p>
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章預設學習前的基本條件需求：</p>
+<ul>
+<li>會使用終端機安裝套件</li>
+<li>一顆熱忱的心 -&gt; 超級重要，碰到坑千萬不要氣餒</li>
+</ul>
+<p>本篇文章將有以下幾個步驟:</p>
+<ol>
+<li><a href="#%E5%89%8D%E5%89%8D%E5%89%8D%E8%A8%80">前前前言</a></li>
+<li><a href="#%E5%AE%89%E8%A3%9Dn8n">安裝n8n</a></li>
+<li><a href="#%E8%A7%A3%E6%B1%BA%E6%B0%B8%E4%B9%85%E9%80%B2%E9%9A%8E%E5%8A%9F%E8%83%BD">解決永久進階功能</a></li>
+<li><a href="#%E7%B0%A1%E6%98%93%E7%AF%84%E4%BE%8B">簡易範例</a></li>
+<li><a href="#%E5%85%B6%E5%AE%83%E5%95%8F%E9%A1%8C">其它問題</a></li>
+</ol>
+<p><em><strong>P.S：如果你想知道怎麼架設 VM 可以參考筆者之前的文章 <a href="https://rexhung0302.github.io/2025/02/18/20250218/">[Third party service Note] - 全端手動部署 VPS(VM) 踩坑全記錄 By Vue + Node.js + Nginx + MySQL8 + CentOS Stream 9
+</a></strong></em></p>
+<hr>
+<h3 id="前前前言"><a href="#前前前言" class="headerlink" title="前前前言"></a>前前前言</h3><p>前陣子一直聽到 <strong>n8n</strong> ，剛好最近有碰到想做機器人的需求，就想著可以來搞一個 <strong>n8n</strong> 機器人</p>
+<p>如果你還不知道 <strong>n8n</strong> 是什麼，這邊也簡單介紹一下</p>
+<p>!這邊請 AI 幫我補充!</p>
+<hr>
+<h3 id="安裝n8n"><a href="#安裝n8n" class="headerlink" title="安裝n8n"></a>安裝n8n</h3><p>這邊我們會介紹兩種路線，不過兩種路線安裝方式其實大同小異</p>
+<ol>
+<li>首先開一個資料夾，放哪裡都可以，然後進入資料夾中，隨後創建一個 <code>docker-compose.yml</code> 檔案</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> n8n</span><br><span class="line"><span class="built_in">cd</span> n8n</span><br><span class="line"><span class="built_in">touch</span> docker-compose.yml <span class="comment"># 如果直接電腦操作創建檔案就不用這行指令</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>打開 <strong>docker-compose.yml</strong> 並在檔案內貼上下面內容</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">n8n:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">n8nio/n8n</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">n8n_container</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">N8N_BASIC_AUTH_ACTIVE=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">WEBHOOK_TUNNEL_URL=https://n8n.your-domain.com</span> <span class="comment"># 如果你是架設在 VM 上才需要，不然這行可以刪掉</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">N8N_HOST=n8n.your-domain.com</span> <span class="comment"># 同上</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">N8N_PROTOCOL=https</span> <span class="comment"># 同上</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">N8N_PORT=5678</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./n8n_data:/home/node/.n8n</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5678:5678&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><em><strong>注意：內容有三行是你架設在 VM 才會需要輸入的，如果是本地就直接刪掉那三行即可</strong></em></p>
+<p><strong>environment</strong> 的設定可以參考 <strong>n8n</strong> 的 <strong>docker image</strong> <a target="_blank" rel="noopener" href="https://hub.docker.com/r/n8nio/n8n#passing-sensitive-data-using-files">指南</a>，如果一開始沒有加到，後面可以再把 n8n 暫停重新加入配置後再重啟也可以，不避擔心</p>
+<ol start="3">
+<li>啟動 n8n</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>接下來如果你在本地使用的話，就可以直接網頁打開 <a target="_blank" rel="noopener" href="http://localhost:5678/">http://localhost:5678</a> 應該能看到下面的畫面</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_login_page.png" alt="n8n 登入頁面"></p>
+<p>如果不是架設在線上 <strong>VM</strong> ，可以直接跳到下一小節 <a href="#%E7%B0%A1%E6%98%93%E7%AF%84%E4%BE%8B">簡易範例</a></p>
+<ol start="4">
+<li>線上配置會碰到防火牆問題</li>
+</ol>
+<p>如果沒有解決防火牆問題，會碰到下面圖片</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/502_bad_gateway.png" alt="502 Bad Gateway"></p>
+<blockquote>
+<p>圖片來自 <a target="_blank" rel="noopener" href="https://community.localwp.com/t/502-bad-gateway-nginx-1-16-0-in-all-sites-after-update/34030?page=2">Local Community p.verdugo 的提問, 出現在谷歌圖片搜尋</a></p>
+</blockquote>
+<p>先查看 <strong>5678 port</strong> 有沒有打開</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port --list</span><br></pre></td></tr></table></figure>
+
+<p>輸入結束後搜尋 <strong>http_port_t</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/semanage_port_list.png" alt="Semanage port list"></p>
+<p>如果沒有 <strong>5678</strong> ，這時候我們需要把 <strong>5678</strong> 打開，輸入以下指令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">semanage port --add --<span class="built_in">type</span> http_port_t --proto tcp 5678</span><br></pre></td></tr></table></figure>
+
+<p>然後重新刷新你的網頁，有可能會有 <strong>Cache</strong> ，記得清除一下</p>
+<hr>
+<h3 id="解決永久進階功能"><a href="#解決永久進階功能" class="headerlink" title="解決永久進階功能"></a>解決永久進階功能</h3><p>在介紹範例前，如果登入有出現以下畫面，代表你可以透過輸入 <strong>Email</strong> 獲得<strong>永久進階功能(註1)</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/get_paid_features_for_free.png" alt="Get Paid Features For Free"></p>
+<p>輸入結束後到信箱去應該會有類似下面的信件</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_license_key_email.png" alt="License Key Email"></p>
+<p>之後如同信件說的步驟 <strong>settings → usage → plan → enter activation key</strong> ，去設定那邊輸入就能完成了</p>
+<p>依照介紹上面寫的大概是下列四項</p>
+<ol>
+<li>⏰ Workflow history（工作流程歷史）</li>
+</ol>
+<ul>
+<li>可以檢視和還原過去24小時內的任何工作流程版本</li>
+</ul>
+<ol start="2">
+<li>🐞 Advanced debugging（進階除錯）</li>
+</ol>
+<ul>
+<li>輕鬆修復任何出錯的工作流程執行，然後重新運行</li>
+</ul>
+<ol start="3">
+<li>🔎 Execution search and tagging（執行搜尋和標籤）</li>
+</ol>
+<ul>
+<li>搜尋和組織過去的工作流程執行，方便檢視</li>
+</ul>
+<ol start="4">
+<li>🗂️ Folders（資料夾）</li>
+</ol>
+<ul>
+<li>在巢狀資料夾結構中組織您的工作流程</li>
+</ul>
+<p><em><strong>註1：筆者創建時間是 2025&#x2F;10&#x2F;01 如果沒出現大概率是活動結束了</strong></em></p>
+<hr>
+<h3 id="簡易範例"><a href="#簡易範例" class="headerlink" title="簡易範例"></a>簡易範例</h3><p>這邊筆者想用一個簡單的機器人當例子，因為筆者所處的公司平日中午都會舉辦德州撲克的休閒遊戲時間</p>
+<p>而開始前筆者想透過排程去定期發送投票到 <strong>Telegram</strong> 群組去詢問想要參加的人</p>
+<p>隨後筆者會搜集投票 <strong>id</strong> 到 <strong>DB</strong> 去，最後在遊戲結束時間(目前暫定一小時)後，抓取投票的 i<strong>d</strong> ，並且濾出投票結果</p>
+<p>看起來雖然只是單純像發起投票，但是中間我們慢慢還能再加入後期的圖片分析，透過每次遊戲結束後，上傳排行榜圖片去判斷一整個週期下來，誰是第一名，誰是最後一名</p>
+<h4 id="創建定期排程-Schedule"><a href="#創建定期排程-Schedule" class="headerlink" title="創建定期排程(Schedule)"></a>創建定期排程(Schedule)</h4><p>廢話不多說，先做出一個初階的版本，我們先在 <strong>canvas</strong> 上創建一個 <strong>Schedule</strong> 定期排程，點擊桌布上空蕩蕩的 <strong>Add first step…</strong></p>
+<p>隨後右側會跳出抽屜，點擊裡面的 <strong>On a schedule</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_on_a_schedule.png" alt="On a schedule"></p>
+<p>然後再 <strong>Trigger Interval</strong> 選擇你喜好的檢查方式，筆者這邊用 <strong>Custom(Cron)</strong> 進行檢查</p>
+<p>輸入 <code>50 11 * * 1-5</code>，代表每週一到五的 <strong>11:50 AM</strong> 會觸發，可以使用線上 <strong>Cron</strong> 的工具進行測試，如 <a target="_blank" rel="noopener" href="https://crontab.cronhub.io/">Crontab</a></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_on_a_schedule_setting.png" alt="On a schedule Setting"></p>
+<p>設定好之後點擊左上角很小的 <strong>&lt;- Back to canvas</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_back_to_canvas.png" alt="Back to canvas"></p>
+<p><em><strong>這邊必須吐嘲一下這個 UI 做的不是很好，第一次用筆者愣在這邊很久，不知道是要我接下來做什麼</strong></em></p>
+<p>之後你就會看到你 <strong>n8n</strong> 第一個節點了！！</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_first_schedule.png" alt="First n8n node"></p>
+<h4 id="創建-HTTP-Request"><a href="#創建-HTTP-Request" class="headerlink" title="創建 HTTP Request"></a>創建 HTTP Request</h4><p>之後我們再點擊節點右邊 + 符號，然後輸入 <strong>http</strong> ，找到 <strong>HTTP Request</strong> 選項，點擊下去</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_http_request.png" alt="HTTP Request"></p>
+<p>聰明如妳一定能想到，其實 <strong>n8n</strong> 大概就是這樣的流程，如同串烤肉串一樣，串一串後，整串就能拿去吃了</p>
+<p>當然要串什麼料什麼食材，就依照自己喜好去新增</p>
+<p>這邊我們 <strong>Method</strong> 選擇 <strong>POST</strong> ，然後再 <strong>URL</strong> 輸入 <code>https://api.telegram.org/bot&lt;Bot Token&gt;/sendPoll</code></p>
+<p>記得 <strong>Bot Token</strong> 要替換掉，換成你自己的機器人 <strong>Token</strong></p>
+<p><em><strong>如果你不知道怎麼創建 <strong>Telegram</strong> 機器人，可以參考筆者之前寫過的 <a href="https://rexhung0302.github.io/2022/03/01/20220301/">[Tool Note] — 透過 GAS 快速建立後端, 串接TG機器人佐 Google Excel</a> 文章，有介紹怎麼創建機器人</strong></em></p>
+<p>然後往下滑把 <strong>Send Body</strong> 打開，接著 <strong>Specify Body</strong> 選擇 <strong>Using JSON</strong> ，輸入以下指令</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;chat_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;換成你的目標 id&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;question&quot;</span><span class="punctuation">:</span> <span class="string">&quot;今天中午要 All-in 嗎？&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;All 啦&quot;</span><span class="punctuation">,</span> <span class="string">&quot;不 All&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;is_anonymous&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>關於 <strong>chat_id</strong> 怎麼查詢，可以先傳訊息給你的機器人，然後在網址輸入 <code>https://api.telegram.org/bot&lt;Bot Token&gt;/getUpdates</code></p>
+<p>然後會取得以下的回應，把那串 <strong>Chat ID</strong> 拿去替換 <strong>POST JSON Body</strong> 中的 <strong>chat_id</strong> 就行</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/TG_chat_ID.png" alt="TG Chat ID"></p>
+<p>完成後大概如下</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_http_request_setting.png" alt="HTTP Request Setting"></p>
+<h4 id="執行一次流程"><a href="#執行一次流程" class="headerlink" title="執行一次流程"></a>執行一次流程</h4><p>接著回到我們的 <strong>canvas</strong> 去，點擊畫面上的橘色按鈕(Execute workflow)</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/execute_workflow.gif" alt="執行流程"></p>
+<p>接下來就會發現訊息發到 <strong>TG</strong> 上了</p>
+<h4 id="新增-Data-table"><a href="#新增-Data-table" class="headerlink" title="新增 Data table"></a>新增 Data table</h4><p><em><strong>注意：如果要使用 DB 功能至少要將 n8n 版本升級至 v1.113，可參考 <a target="_blank" rel="noopener" href="https://community.n8n.io/t/data-tables-are-here/192256">Data Tables Are Here!</a></strong></em></p>
+<p>接下來我們如果想要把投票 <strong>ID</strong> 傳入 <strong>DB</strong> 內需要先去首頁，點擊左邊 <strong>Personal</strong></p>
+<p>然後點擊 <strong>Tab Data tables</strong> ，再點擊右上角的 <strong>橘色按鈕 “”箭頭””</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_data_tables.png" alt="創建 Data tables"></p>
+<p>會跳出彈窗隨便輸入你喜歡的名稱，例如這邊叫做 <strong>votes</strong></p>
+<p>然後點擊創建的 <strong>Table</strong> 進去，接著點擊右上角的 <strong>Add Column</strong></p>
+<p>在 <strong>Name</strong> 輸入 <strong>pollId</strong> ，型別我們不需要改，再點擊下面大顆的按鈕 <strong>Add Column</strong></p>
+<p>然後在左邊就會看到你新增的 <strong>column</strong> 了</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_create_column.png" alt="創建 Column"></p>
+<h4 id="寫入-DB"><a href="#寫入-DB" class="headerlink" title="寫入 DB"></a>寫入 DB</h4><p>回到我們原本的 <strong>canvas</strong> ，我們先點擊一次 <strong>Execute workflow</strong> 確保等等有資料可以直接使用</p>
+<p>之後點擊 <strong>HTTP Request</strong> 右邊的 + 符號</p>
+<p>在右邊找到 <strong>Data table</strong> 並點擊</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_next_step_data_table.png" alt="選擇 DB"></p>
+<p>接著先點擊點擊 <strong>Insert row</strong></p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_insert_row.png" alt="寫入資料"></p>
+<p>然後再 <strong>Data table</strong> 選擇剛剛創建的 <strong>votes</strong></p>
+<p>再把滑鼠移到左側的 <strong>poll.id</strong> 上面，可以直接拖曳資料過去中間的 <strong>Values to insert pollId</strong> 上面</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_insert_row_setting.png" alt="設定"></p>
+<p>之後再點擊一次上面的 <strong>Execute step</strong> 橘色按鈕</p>
+<p>如果右邊的 <strong>OUTPUT</strong> 有資料，就代表成功了，回去 <strong>DB</strong> 看也一樣會有資料</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20251004/n8n_insert_row_result.png" alt="成功塞入資料"></p>
+<p>接下來聰明的你就能發揮自己的創意，不管是在中間塞入資料，或是使用 <strong>Code</strong> 透過 <strong>JavaScript</strong> 去整理資料</p>
+<p>或是透過 <strong>AI Agent</strong> 去分析資料，可以玩出百千種花樣</p>
+<p><strong>P.S：這邊推薦要使用 <strong>AI Agent</strong> 可以嘗試使用 <strong>OpenRouter LLM</strong> ，當中有免費的模型可以使用，可參考 <a target="_blank" rel="noopener" href="https://medium.com/@pang2258/openrouter-%E7%B5%B1%E4%B8%80%E7%9A%84-llm-api-%E6%9C%8D%E5%8B%99%E5%B9%B3%E5%8F%B0-%E5%85%8D%E8%B2%BBapi%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8-7f7af1e70b16">OpenRouter: 統一的 LLM API 服務平台 — 免費API使用教學</a></strong></p>
+<hr>
+<h2 id="Conclusion-結論"><a href="#Conclusion-結論" class="headerlink" title="Conclusion &amp; 結論"></a>Conclusion &amp; 結論</h2><p>這次因為要玩機器人的緣故去研究 n8n，學到了滿多新奇的東西，同時也感嘆以前要弄個 Line 客服機器人需要很麻煩的步驟</p>
+<p>而且還不一定是真正的 AI 機器人，這幾年技術真的進步很快，同時也更便利，就是一把雙面刃，只是看我們有沒有辦法好好利用</p>
+<hr>
+<h2 id="參考網站"><a href="#參考網站" class="headerlink" title="參考網站"></a>參考網站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://raymondhouch.com/lifehacker/digital-workflow/n8n-deploy-guide/">【一鍵安裝 n8n】圖文教學，獲得無限額度自動化工具＆限時免費升級企業版功能</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cc.ntu.edu.tw/chinese/epaper/home/20250620_007304.html">AI的超自動化武裝【n8n】-安裝篇</a></li>
+<li><a target="_blank" rel="noopener" href="https://community.localwp.com/t/502-bad-gateway-nginx-1-16-0-in-all-sites-after-update/34030?page=2">LOCAL Community - 502 Bad Gateway (nginx&#x2F;1.16.0) in all sites after update</a></li>
+<li><a target="_blank" rel="noopener" href="https://hub.docker.com/r/n8nio/n8n#passing-sensitive-data-using-files">n8nio&#x2F;n8n docker image</a></li>
+<li><a target="_blank" rel="noopener" href="https://n8n.io/?ps_partner_key=ZTQ3ODEwZTBlYjA4&ps_xid=V4G0yv4i6wzlNm&gsxid=V4G0yv4i6wzlNm&gspk=ZTQ3ODEwZTBlYjA4&gad_source=1&gad_campaignid=21765012948&gbraid=0AAAAABUVYR3L6aY7HSkwDKn97qb2vaYlm&gclid=CjwKCAjwi4PHBhA-EiwAnjTHuVis_D3nYqVCAchIasCnkyeTA34ZTllJZZ6KeOA-Ws1bjFhjS9b6HxoCeaEQAvD_BwE">n8n WebSite</a></li>
+<li><a target="_blank" rel="noopener" href="https://crontab.cronhub.io/">Crontab</a></li>
+<li><a target="_blank" rel="noopener" href="https://community.n8n.io/t/data-tables-are-here/192256">Data Tables Are Here!</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@pang2258/openrouter-%E7%B5%B1%E4%B8%80%E7%9A%84-llm-api-%E6%9C%8D%E5%8B%99%E5%B9%B3%E5%8F%B0-%E5%85%8D%E8%B2%BBapi%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8-7f7af1e70b16">OpenRouter: 統一的 LLM API 服務平台 — 免費API使用教學</a>**</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/CI-CD/" rel="tag"><i class="fa fa-tag"></i> CI/CD</a>
+              <a href="/tags/n8n/" rel="tag"><i class="fa fa-tag"></i> n8n</a>
+              <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/06/08/20250608/" rel="prev" title="[Next Note] — 在 Next 優雅的引入 SVG">
+      <i class="fa fa-chevron-left"></i> [Next Note] — 在 Next 優雅的引入 SVG
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%89%8D%E5%89%8D%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">前前前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%9Dn8n"><span class="nav-number">2.2.</span> <span class="nav-text">安裝n8n</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%B0%B8%E4%B9%85%E9%80%B2%E9%9A%8E%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">解決永久進階功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B0%A1%E6%98%93%E7%AF%84%E4%BE%8B"><span class="nav-number">2.4.</span> <span class="nav-text">簡易範例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA%E5%AE%9A%E6%9C%9F%E6%8E%92%E7%A8%8B-Schedule"><span class="nav-number">2.4.1.</span> <span class="nav-text">創建定期排程(Schedule)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%B5%E5%BB%BA-HTTP-Request"><span class="nav-number">2.4.2.</span> <span class="nav-text">創建 HTTP Request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E4%B8%80%E6%AC%A1%E6%B5%81%E7%A8%8B"><span class="nav-number">2.4.3.</span> <span class="nav-text">執行一次流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-Data-table"><span class="nav-number">2.4.4.</span> <span class="nav-text">新增 Data table</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%AB%E5%85%A5-DB"><span class="nav-number">2.4.5.</span> <span class="nav-text">寫入 DB</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion-%E7%B5%90%E8%AB%96"><span class="nav-number">3.</span> <span class="nav-text">Conclusion &amp; 結論</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E7%B6%B2%E7%AB%99"><span class="nav-number">4.</span> <span class="nav-text">參考網站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2025/10/04/20251004/",
+      identifier: "2025/10/04/20251004/",
+      title     : "[Tool Note]  — 架設 n8n & 簡易使用指南",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
