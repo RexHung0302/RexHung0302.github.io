@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Introduction &amp; 前言之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Discord、WhatsApp 等通訊軟體直接呼叫 AI 助手來執行各種任務。 趁著週末有空，我就把它安裝到本機玩了一下，發現整個設定過">
+  <meta name="description" content="Introduction &amp; 前言  提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容  之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Disc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Tool Note] — 架設 clawdbot &amp; 簡易使用指南">
 <meta property="og:url" content="https://rexhung0302.github.io/2026/01/26/20260126/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Discord、WhatsApp 等通訊軟體直接呼叫 AI 助手來執行各種任務。 趁著週末有空，我就把它安裝到本機玩了一下，發現整個設定過">
+<meta property="og:description" content="Introduction &amp; 前言  提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容  之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Disc">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2026-01-26T13:50:00.000Z">
-<meta property="article:modified_time" content="2026-01-26T13:53:10.929Z">
+<meta property="article:modified_time" content="2026-01-26T14:20:28.733Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Telegram">
 <meta property="article:tag" content="AI">
@@ -37,6 +42,7 @@
 <meta property="article:tag" content="Automation">
 <meta property="article:tag" content="Tool">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 
 <link rel="canonical" href="https://rexhung0302.github.io/2026/01/26/20260126/">
 
@@ -226,7 +232,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2026-01-26 21:50:00 / 修改時間：21:53:10" itemprop="dateCreated datePublished" datetime="2026-01-26T21:50:00+08:00">2026-01-26</time>
+              <time title="創建時間：2026-01-26 21:50:00 / 修改時間：22:20:28" itemprop="dateCreated datePublished" datetime="2026-01-26T21:50:00+08:00">2026-01-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +258,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>3.4k</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -271,7 +277,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p>之前有玩過 <strong>n8n</strong> 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 <strong>Clawdbot</strong> 這個專案蠻紅的，它是一個基於 <strong>Claude</strong> 的 AI 助手框架，可以讓你透過 <strong>Telegram</strong>、<strong>Discord</strong>、<strong>WhatsApp</strong> 等通訊軟體直接呼叫 AI 助手來執行各種任務。</p>
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260126/banner.webp" alt="banner"></p>
+<blockquote>
+<p>提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容</p>
+</blockquote>
+<p>之前有玩過 <strong>n8n</strong> 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 <strong>Clawdbot</strong> 這個專案蠻紅的，它是一個基於 <strong>Claude</strong> 的 AI 助手框架，可以讓你透過 <strong>Telegram</strong>、<strong>Discord</strong>、<strong>WhatsApp</strong> 等通訊軟體直接呼叫 AI 助手來執行各種任務。</p>
 <p>趁著週末有空，我就把它安裝到本機玩了一下，發現整個設定過程比想像中簡單，而且功能真的很強大！可以直接讓 AI 幫你操作電腦、瀏覽網頁、查資料，甚至幫你寫程式。</p>
 <p>這篇文章會記錄一下我的安裝過程和一些基本使用方式，如果你也對這個工具有興趣，可以參考看看。</p>
 <span id="more"></span>
@@ -329,6 +339,10 @@
 
 <h3 id="Step-2：執行初始化設定"><a href="#Step-2：執行初始化設定" class="headerlink" title="Step 2：執行初始化設定"></a>Step 2：執行初始化設定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clawdbot onboard</span><br></pre></td></tr></table></figure>
 
+<p>執行後會看到以下畫面：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260126/onboard-install-daemon.png" alt="onboard 安裝畫面"></p>
+<p>安裝過程中會有一些設定需要選擇，例如選擇 Model&#x2F;Auth Provider 等：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260126/install-q-and-a.png" alt="安裝設定選項"></p>
 <p>這個指令會引導你完成基本設定，包括：</p>
 <ul>
 <li>選擇運行模式（本機 &#x2F; 雲端）</li>
@@ -347,7 +361,8 @@
 <p>看到類似以下輸出就代表啟動成功：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Gateway started on http://127.0.0.1:18789</span><br></pre></td></tr></table></figure>
 
-<p>你可以打開瀏覽器訪問 <code>http://127.0.0.1:18789</code> 來使用 Web 介面。</p>
+<p>你可以手動打開瀏覽器訪問 <code>http://127.0.0.1:18789/chat</code> 來使用 Web 介面。第一次進入時，Clawdbot 會問你一些自我介紹的設定，幫助它了解你和建立個人化的 AI 助手：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260126/clawdbot-web-ui.png" alt="Clawdbot Web UI"></p>
 <hr>
 <h2 id="串接-Telegram"><a href="#串接-Telegram" class="headerlink" title="串接 Telegram"></a>串接 Telegram</h2><h3 id="Step-1：建立-Telegram-Bot"><a href="#Step-1：建立-Telegram-Bot" class="headerlink" title="Step 1：建立 Telegram Bot"></a>Step 1：建立 Telegram Bot</h3><ol>
 <li>打開 Telegram，搜尋 <strong>@BotFather</strong></li>
@@ -364,11 +379,17 @@
 <h3 id="Step-3：重啟-Gateway"><a href="#Step-3：重啟-Gateway" class="headerlink" title="Step 3：重啟 Gateway"></a>Step 3：重啟 Gateway</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clawdbot gateway restart</span><br></pre></td></tr></table></figure>
 
 <h3 id="Step-4：配對你的-Telegram-帳號"><a href="#Step-4：配對你的-Telegram-帳號" class="headerlink" title="Step 4：配對你的 Telegram 帳號"></a>Step 4：配對你的 Telegram 帳號</h3><p>在 Telegram 找到你的 Bot，發送任意訊息，你會收到類似這樣的回覆：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260126/tg-setting.png" alt="Telegram 配對訊息"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Clawdbot: access not configured.</span><br><span class="line">Your Telegram user id: 1234567890</span><br><span class="line">Pairing code: XXXXXXXX</span><br><span class="line">Ask the bot owner to approve with: clawdbot pairing approve telegram &lt;code&gt;</span><br></pre></td></tr></table></figure>
 
-<p>在終端機執行：</p>
+<p>這時候你有兩種方式可以進行配對：</p>
+<p><strong>方式一：透過終端機指令</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clawdbot pairing approve telegram XXXXXXXX</span><br></pre></td></tr></table></figure>
 
+<p><strong>方式二：透過 Web UI</strong></p>
+<p>回到 <code>http://127.0.0.1:18789</code>，在 Dashboard 上會顯示待批准的配對請求，直接點擊 Approve 即可。</p>
+<p><strong>方式三：直接傳訊息給 Clawdbot</strong></p>
+<p>如果你已經在其他地方（如 Web UI）配對成功，可以直接請 Clawdbot 幫你執行配對指令。</p>
 <p>看到 <code>Approved telegram sender 1234567890.</code> 就代表配對成功了！</p>
 <hr>
 <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>配對完成後，你就可以直接在 Telegram 跟你的 AI 助手對話了。</p>
