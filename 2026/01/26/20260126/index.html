@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Introduction &amp; 前言  提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容  之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Disc">
+  <meta name="description" content="Introduction &amp; 前言  ⚠️⚠️⚠️ 注意：這邊 2026&#x2F;02&#x2F;02 02:52 更新說明，ClawBot -&gt; MoltBot -&gt; OpenClaw 都是同一的東西，期間有改命過兩次，買名詳細原因可以查查看 又改名了！Moltbot(前Clawdbot) 更名「OpenClaw」並帶來四大更新，尤其加強安全性，以下文章有提到這三個名稱的都">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Tool Note] — 架設 clawdbot &amp; 使用 Google Antigravity 搭配免費模型">
+<meta property="og:title" content="[Tool Note] — 架設 OpenClaw(ClawBot) &amp; 使用 Google Antigravity 搭配免費模型">
 <meta property="og:url" content="https://rexhung0302.github.io/2026/01/26/20260126/index.html">
 <meta property="og:site_name" content="RexHung&#39;s Blog">
-<meta property="og:description" content="Introduction &amp; 前言  提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容  之前有玩過 n8n 這套自動化工具，覺得能夠串接各種服務來打造自己的工作流程真的很方便。最近在社群上看到 Clawdbot 這個專案蠻紅的，它是一個基於 Claude 的 AI 助手框架，可以讓你透過 Telegram、Disc">
+<meta property="og:description" content="Introduction &amp; 前言  ⚠️⚠️⚠️ 注意：這邊 2026&#x2F;02&#x2F;02 02:52 更新說明，ClawBot -&gt; MoltBot -&gt; OpenClaw 都是同一的東西，期間有改命過兩次，買名詳細原因可以查查看 又改名了！Moltbot(前Clawdbot) 更名「OpenClaw」並帶來四大更新，尤其加強安全性，以下文章有提到這三個名稱的都">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
@@ -35,11 +35,13 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2026-01-26T13:50:00.000Z">
-<meta property="article:modified_time" content="2026-02-01T18:08:49.442Z">
+<meta property="article:modified_time" content="2026-02-01T18:54:35.099Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Telegram">
 <meta property="article:tag" content="AI">
 <meta property="article:tag" content="Clawdbot">
+<meta property="article:tag" content="MoltBot">
+<meta property="article:tag" content="OpenClaw">
 <meta property="article:tag" content="Claude">
 <meta property="article:tag" content="Automation">
 <meta property="article:tag" content="Tool">
@@ -59,7 +61,7 @@
   };
 </script>
 
-  <title>[Tool Note] — 架設 clawdbot & 使用 Google Antigravity 搭配免費模型 | RexHung's Blog</title>
+  <title>[Tool Note] — 架設 OpenClaw(ClawBot) & 使用 Google Antigravity 搭配免費模型 | RexHung's Blog</title>
   
 
 
@@ -223,7 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [Tool Note] — 架設 clawdbot & 使用 Google Antigravity 搭配免費模型
+          [Tool Note] — 架設 OpenClaw(ClawBot) & 使用 Google Antigravity 搭配免費模型
         </h1>
 
         <div class="post-meta">
@@ -240,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2026-02-02 02:08:49" itemprop="dateModified" datetime="2026-02-02T02:08:49+08:00">2026-02-02</time>
+                <time title="修改時間：2026-02-02 02:54:35" itemprop="dateModified" datetime="2026-02-02T02:54:35+08:00">2026-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -256,7 +258,7 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Code/Note/clawdbot/" itemprop="url" rel="index"><span itemprop="name">clawdbot</span></a>
+                  <a href="/categories/Code/Note/OpenClaw/" itemprop="url" rel="index"><span itemprop="name">OpenClaw</span></a>
                 </span>
             </span>
 
@@ -266,7 +268,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>9.6k</span>
+              <span>9.7k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
@@ -285,7 +287,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260126/banner.webp" alt="banner"></p>
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260126/banner.gif" alt="banner"></p>
+<blockquote>
+<p><strong>⚠️⚠️⚠️ 注意：這邊 2026&#x2F;02&#x2F;02 02:52 更新說明，ClawBot -&gt; MoltBot -&gt; OpenClaw 都是同一的東西，期間有改命過兩次，買名詳細原因可以查查看 <a target="_blank" rel="noopener" href="https://www.blocktempo.com/openclaw-local-first-ai-agent-security-risks/">又改名了！Moltbot(前Clawdbot) 更名「OpenClaw」並帶來四大更新，尤其加強安全性</a>，以下文章有提到這三個名稱的都是指向同一個工具，如有不便敬請見諒 ⚠️⚠️⚠️</strong></p>
+</blockquote>
 <blockquote>
 <p>提醒：這邊文章是透過 TG 下指令給 Clawdbot 自動產出整篇文章的，如果內容有誤麻煩留言，筆者會盡快修改，感謝包容</p>
 </blockquote>
@@ -670,6 +675,8 @@
               <a href="/tags/Telegram/" rel="tag"><i class="fa fa-tag"></i> Telegram</a>
               <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
               <a href="/tags/Clawdbot/" rel="tag"><i class="fa fa-tag"></i> Clawdbot</a>
+              <a href="/tags/MoltBot/" rel="tag"><i class="fa fa-tag"></i> MoltBot</a>
+              <a href="/tags/OpenClaw/" rel="tag"><i class="fa fa-tag"></i> OpenClaw</a>
               <a href="/tags/Claude/" rel="tag"><i class="fa fa-tag"></i> Claude</a>
               <a href="/tags/Automation/" rel="tag"><i class="fa fa-tag"></i> Automation</a>
               <a href="/tags/Tool/" rel="tag"><i class="fa fa-tag"></i> Tool</a>
@@ -779,7 +786,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -898,7 +905,7 @@ NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
       shortname : 'rexhung0302',
       url       : "https://rexhung0302.github.io/2026/01/26/20260126/",
       identifier: "2026/01/26/20260126/",
-      title     : "[Tool Note] — 架設 clawdbot & 使用 Google Antigravity 搭配免費模型",
+      title     : "[Tool Note] — 架設 OpenClaw(ClawBot) & 使用 Google Antigravity 搭配免費模型",
     });
   }, window.DisqusJS);
 });
