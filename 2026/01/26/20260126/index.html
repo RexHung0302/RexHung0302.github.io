@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2026-01-26T13:50:00.000Z">
-<meta property="article:modified_time" content="2026-02-01T18:57:55.505Z">
+<meta property="article:modified_time" content="2026-02-01T18:59:56.210Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Telegram">
 <meta property="article:tag" content="AI">
@@ -242,7 +242,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2026-02-02 02:57:55" itemprop="dateModified" datetime="2026-02-02T02:57:55+08:00">2026-02-02</time>
+                <time title="修改時間：2026-02-02 02:59:56" itemprop="dateModified" datetime="2026-02-02T02:59:56+08:00">2026-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -533,7 +533,7 @@
 
 <hr>
 <h2 id="補充：在-AWS-EC2-VPS-上安裝-Clawdbot"><a href="#補充：在-AWS-EC2-VPS-上安裝-Clawdbot" class="headerlink" title="補充：在 AWS EC2 VPS 上安裝 Clawdbot"></a>補充：在 AWS EC2 VPS 上安裝 Clawdbot</h2><p>如果你不想在本機上跑 Clawdbot，或是想讓它 24&#x2F;7 全天候運行，可以將它部署到 VPS 上。這邊以 <strong>AWS EC2</strong> 為例，分享完整的安裝步驟。</p>
-<h3 id="為什麼選-t3-small-而不是-t3-micro？"><a href="#為什麼選-t3-small-而不是-t3-micro？" class="headerlink" title="為什麼選 t3.small 而不是 t3.micro？"></a>為什麼選 t3.small 而不是 t3.micro？</h3><p><img src="/images/others/loading.gif" data-original="/images/20260126/t3-small.png" alt="t3.small 規格"></p>
+<h3 id="為什麼選-t3-small-而不是-t3-micro？"><a href="#為什麼選-t3-small-而不是-t3-micro？" class="headerlink" title="為什麼選 t3.small 而不是 t3.micro？"></a>為什麼選 t3.small 而不是 t3.micro？</h3><p><img src="/images/others/loading.gif" data-original="/images/20260126/t3-small.jpg" alt="t3.small 規格"></p>
 <p>很多人（包括筆者）一開始會選最便宜的 <strong>t3.micro</strong>（1GB RAM），但實測發現 <strong>Clawdbot 在 1GB RAM 的環境下會因為記憶體不足（OOM）而無法啟動</strong>。即使加了 1GB 的 Swap，連 <code>openclaw doctor</code> 和 <code>openclaw onboard</code> 都會直接炸掉：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory</span><br></pre></td></tr></table></figure>
 
