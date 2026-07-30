@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 之前有幾次把網站架設到 AWS、VPS 上的經驗，但網站架好之後還有一件很容易被忽略的事情：網域到底要放在哪裡管理？ 筆者的網域是在 GoDaddy 購買，原本 DNS 也直接放在 GoDaddy，這當然可以正常使用；不過如果還想順手加上 CDN、免費 SSL、DDoS 防護與 WAF，Cloudflare 會是一條相對省事的路。 這篇文章會記錄怎麼把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF">
+<meta property="og:url" content="https://rexhung0302.github.io/2026/07/30/20260730/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 之前有幾次把網站架設到 AWS、VPS 上的經驗，但網站架好之後還有一件很容易被忽略的事情：網域到底要放在哪裡管理？ 筆者的網域是在 GoDaddy 購買，原本 DNS 也直接放在 GoDaddy，這當然可以正常使用；不過如果還想順手加上 CDN、免費 SSL、DDoS 防護與 WAF，Cloudflare 會是一條相對省事的路。 這篇文章會記錄怎麼把">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2026-07-30T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-30T03:30:49.746Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="DNS">
+<meta property="article:tag" content="Domain">
+<meta property="article:tag" content="GoDaddy">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="SSL">
+<meta property="article:tag" content="WAF">
+<meta property="article:tag" content="Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2026/07/30/20260730/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2026/07/30/20260730/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2026-07-30 12:00:00 / 修改時間：11:30:49" itemprop="dateCreated datePublished" datetime="2026-07-30T12:00:00+08:00">2026-07-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Cloudflare/" itemprop="url" rel="index"><span itemprop="name">Cloudflare</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>8.8k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>8 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260730/banner.png" alt="GoDaddy 網域託管到 Cloudflare"></p>
+<p>之前有幾次把網站架設到 <strong>AWS</strong>、<strong>VPS</strong> 上的經驗，但網站架好之後還有一件很容易被忽略的事情：網域到底要放在哪裡管理？</p>
+<p>筆者的網域是在 <strong>GoDaddy</strong> 購買，原本 DNS 也直接放在 GoDaddy，這當然可以正常使用；不過如果還想順手加上 CDN、免費 SSL、DDoS 防護與 WAF，Cloudflare 會是一條相對省事的路。</p>
+<p>這篇文章會記錄怎麼把 <strong>GoDaddy 買的網域，改由 Cloudflare 託管 DNS</strong>，最後再把 HTTPS 與 WAF 一起設定好。</p>
+<blockquote>
+<p>先釐清一個很常見的誤會：本文不會把網域「移轉」到 Cloudflare Registrar，也不會改變續約與付款的地方。網域依舊在 GoDaddy，只是把 Nameserver 換成 Cloudflare，之後 DNS Record 要到 Cloudflare 管理。</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本篇文章將會有以下幾個部分：</p>
+<ol>
+<li><a href="#AWS-%E9%82%84%E6%98%AF-Cloudflare">AWS 還是 Cloudflare？</a></li>
+<li><a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%E8%88%87%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85">事前準備與注意事項</a></li>
+<li><a href="#%E5%B0%87%E7%B6%B2%E5%9F%9F%E5%8A%A0%E5%85%A5-Cloudflare">將網域加入 Cloudflare</a></li>
+<li><a href="#%E5%88%B0-GoDaddy-%E6%9B%B4%E6%8F%9B-Nameserver">到 GoDaddy 更換 Nameserver</a></li>
+<li><a href="#%E7%A2%BA%E8%AA%8D-DNS-%E8%88%87-Proxy-%E7%8B%80%E6%85%8B">確認 DNS 與 Proxy 狀態</a></li>
+<li><a href="#%E6%8A%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B6%B2%E5%9D%80%E5%B0%8E%E5%90%91-GitHub-Pages">把自己的網址導向 GitHub Pages</a></li>
+<li><a href="#SSL-%E4%B8%8D%E7%94%A8%E5%8F%A6%E5%A4%96%E7%94%B3%E8%AB%8B%E4%BD%86%E9%82%84%E6%98%AF%E8%A6%81%E8%A8%AD%E5%AE%9A">SSL 不用另外申請，但還是要設定</a></li>
+<li><a href="#%E8%A8%AD%E5%AE%9A-Cloudflare-WAF">設定 Cloudflare WAF</a></li>
+<li><a href="#%E9%A9%97%E8%AD%89%E8%88%87%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C">驗證與常見問題</a></li>
+</ol>
+<p><em><strong>整篇文章是筆者自己的操作紀錄；Cloudflare 後台改版速度不慢，如果按鈕位置有些微不同，可以直接依照文章提到的英文功能名稱搜尋。</strong></em></p>
+<hr>
+<h2 id="AWS-還是-Cloudflare？"><a href="#AWS-還是-Cloudflare？" class="headerlink" title="AWS 還是 Cloudflare？"></a>AWS 還是 Cloudflare？</h2><p>嚴格來說，這裡比較的不是「把網站架在 AWS 還是 Cloudflare」，而是把 <strong>權威 DNS（Authoritative DNS）</strong> 交給誰管理：</p>
+<ul>
+<li>AWS 這條路通常是 <strong>Route 53 + CloudFront + ACM + AWS WAF</strong></li>
+<li>Cloudflare 則是把 <strong>DNS + CDN&#x2F;Proxy + Universal SSL + 基礎 WAF</strong> 整合在同一個 Dashboard</li>
+</ul>
+<p>兩邊都能做到類似的結果，但適合的情境不太一樣。</p>
+<table>
+<thead>
+<tr>
+<th>比較項目</th>
+<th>AWS</th>
+<th>Cloudflare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>上手難度</td>
+<td>服務拆得比較細，需要理解 Route 53、CloudFront、ACM、WAF 之間的關係</td>
+<td>功能集中在同一個網域 Dashboard，個人網站比較容易上手</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>Route 53 功能完整，支援 Alias、Health Check、Failover、Latency 等複雜路由</td>
+<td>DNS 操作直覺，開啟橘色雲朵就能讓 HTTP 流量經過 Proxy</td>
+</tr>
+<tr>
+<td>SSL</td>
+<td>ACM 憑證本身通常不另外收費，但要掛到 CloudFront、ALB 等支援的 AWS 服務</td>
+<td>完整託管後自動提供免費 Universal SSL，不用自己申請與續約</td>
+</tr>
+<tr>
+<td>WAF</td>
+<td>規則、Web ACL 與 AWS 資源整合彈性高，適合完整 AWS 架構</td>
+<td>Free 方案已包含精簡版 Managed Ruleset，也能建立有限數量的 Custom Rules</td>
+</tr>
+<tr>
+<td>費用理解</td>
+<td>多數服務按用量計費，彈性高，但流量、請求、規則與 Log 都可能影響帳單</td>
+<td>Free 方案就能涵蓋一般部落格常用的 DNS、CDN、SSL 與基本防護</td>
+</tr>
+<tr>
+<td>適合情境</td>
+<td>系統本來就在 AWS、多區域容錯、需要 IaC 或精細權限與流量路由</td>
+<td>個人部落格、中小型網站、希望快速完成 HTTPS、CDN 與基本資安</td>
+</tr>
+</tbody></table>
+<p>如果你的架構已經大量使用 <strong>S3、CloudFront、ALB、API Gateway、ECS</strong>，把 DNS 與防護留在 AWS 會比較一致，也能透過 Terraform 或 CloudFormation 一起管理。</p>
+<p>但如果跟筆者一樣，只想替一般網站快速補齊 DNS、SSL、CDN 與基礎 WAF，Cloudflare 的整合度真的很香，Free 方案通常就夠用了。</p>
+<blockquote>
+<p>AWS 的產品與計費會調整，實際採用前可以再查看 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html">Route 53 官方文件</a>、<a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html">CloudFront 官方文件</a> 與 <a target="_blank" rel="noopener" href="https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html">AWS WAF 官方文件</a>。</p>
+</blockquote>
+<hr>
+<h2 id="事前準備與注意事項"><a href="#事前準備與注意事項" class="headerlink" title="事前準備與注意事項"></a>事前準備與注意事項</h2><p>開始前需要準備：</p>
+<ul>
+<li>一個 Cloudflare 帳號</li>
+<li>一個已在 GoDaddy 購買的網域</li>
+<li>目前網站主機的 IP 或服務提供的 CNAME</li>
+<li>如果有使用 Email，要先記錄 <strong>MX、TXT、DKIM、SPF、DMARC</strong> 等 Record</li>
+</ul>
+<p>這邊最重要的不是手速，而是先把舊 DNS 確認清楚。</p>
+<p>更換 Nameserver 之後，網路上的人會改問 Cloudflare：「這個網域要去哪裡？」如果 Cloudflare 漏掉網站、信箱或驗證用 Record，就可能出現網站正常但信箱壞掉，或者反過來的奇妙場面。</p>
+<blockquote>
+<p><em><strong>強烈建議先將 GoDaddy 現有 DNS Record 截圖或匯出，尤其有使用 Google Workspace、Microsoft 365 或其他企業信箱的人。</strong></em></p>
+</blockquote>
+<hr>
+<h2 id="將網域加入-Cloudflare"><a href="#將網域加入-Cloudflare" class="headerlink" title="將網域加入 Cloudflare"></a>將網域加入 Cloudflare</h2><ol>
+<li>登入 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare Dashboard</a></li>
+<li>點擊 <strong>Add a domain</strong>（舊版介面可能顯示 <strong>Add a site</strong>）</li>
+<li>輸入網域，例如 <code>example.com</code>，不要加上 <code>https://</code> 或任何路徑</li>
+<li>選擇方案；一般部落格可以先選 <strong>Free</strong></li>
+<li>Cloudflare 會掃描既有 DNS Record</li>
+</ol>
+<p>掃描結束後不要急著下一步，先逐筆比對 GoDaddy 原本的 DNS：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Content 範例</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>203.0.113.10</code></td>
+<td>根網域指向伺服器 IPv4</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td><code>www</code></td>
+<td><code>example.com</code></td>
+<td><code>www</code> 指回根網域</td>
+</tr>
+<tr>
+<td>MX</td>
+<td><code>@</code></td>
+<td>郵件服務商提供的主機</td>
+<td>收信</td>
+</tr>
+<tr>
+<td>TXT</td>
+<td><code>@</code></td>
+<td>SPF 或網站驗證字串</td>
+<td>信件與服務驗證</td>
+</tr>
+</tbody></table>
+<p>確認後 Cloudflare 會提供兩組專屬 Nameserver，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ada.ns.cloudflare.com</span><br><span class="line">tom.ns.cloudflare.com</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>上面只是範例，請完整複製 Cloudflare 畫面分配給你的兩組 Nameserver，不能照抄文章。</strong></em></p>
+<p>Cloudflare 官方完整流程可參考 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/fundamentals/manage-domains/add-site/">Onboard a domain</a>。</p>
+<hr>
+<h2 id="到-GoDaddy-更換-Nameserver"><a href="#到-GoDaddy-更換-Nameserver" class="headerlink" title="到 GoDaddy 更換 Nameserver"></a>到 GoDaddy 更換 Nameserver</h2><p>回到 <a target="_blank" rel="noopener" href="https://dcc.godaddy.com/">GoDaddy Domain Portfolio</a>，點進準備設定的網域。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/godaddy-domain-portfolio.png" alt="在 GoDaddy Domain Portfolio 選擇網域"></p>
+<p>接著進入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS → Nameservers</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/godaddy-nameservers.png" alt="GoDaddy Nameservers 設定位置"></p>
+<p>選擇 <strong>I’ll use my own nameservers</strong>，把原本的 Nameserver 換成 Cloudflare 分配的兩組網址，最後按下 <strong>Save → Continue</strong>。</p>
+<p>如果網域有開啟 Domain Protection，GoDaddy 可能會要求簡訊、Authenticator 或 Email 驗證，這是正常的。</p>
+<p>GoDaddy 官方說明提到，大部分 DNS 更新在一小時內會生效，但全球同步最久可能需要 <strong>48 小時</strong>。這段時間偶爾有人看到舊網站、有人看到新網站，不一定是你設定壞掉了，可以先泡杯咖啡冷靜一下。</p>
+<blockquote>
+<p>最新操作可以參考 GoDaddy 官方的 <a target="_blank" rel="noopener" href="https://www.godaddy.com/help/change-my-domain-nameservers-664">Change my domain nameservers</a>。官方也特別提醒，更換前後都要檢查網站與 Email Record。</p>
+</blockquote>
+<hr>
+<h2 id="確認-DNS-與-Proxy-狀態"><a href="#確認-DNS-與-Proxy-狀態" class="headerlink" title="確認 DNS 與 Proxy 狀態"></a>確認 DNS 與 Proxy 狀態</h2><p>回到 Cloudflare，等待 Overview 顯示網域為 <strong>Active</strong>，代表 Nameserver 已經切換成功。</p>
+<p>接著到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS → Records</span><br></pre></td></tr></table></figure>
+
+<p>Cloudflare 的 Record 旁邊會看到雲朵：</p>
+<ul>
+<li><strong>Proxied（橘色雲朵）</strong>：流量先經過 Cloudflare，才能使用 CDN、WAF、DDoS 防護與 Edge SSL</li>
+<li><strong>DNS only（灰色雲朵）</strong>：Cloudflare 只回答 DNS，流量直接前往原始主機</li>
+</ul>
+<p>一般網站的 <code>A</code>、<code>AAAA</code>、<code>CNAME</code> 可以視需求開啟 Proxied；<code>MX</code> 與郵件相關紀錄則維持 DNS only。不是所有連線都能直接套一朵橘色雲上去，亂開可能讓 Email 或非 HTTP 服務無法使用。</p>
+<p>可以用以下指令確認 Nameserver：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig NS example.com +short</span><br></pre></td></tr></table></figure>
+
+<p>如果回傳 Cloudflare 分配的兩組 Nameserver，代表委派已經生效。</p>
+<hr>
+<h2 id="把自己的網址導向-GitHub-Pages"><a href="#把自己的網址導向-GitHub-Pages" class="headerlink" title="把自己的網址導向 GitHub Pages"></a>把自己的網址導向 GitHub Pages</h2><p>如果網站已經部署在 GitHub Pages，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://rexhung0302.github.io</span><br></pre></td></tr></table></figure>
+
+<p>想讓訪客輸入自己的 <code>example.com</code> 就能看到網站，大致有兩種方法。第一種只是把訪客轉送到 GitHub 網址；第二種才是真正讓 GitHub Pages 使用你的自訂網域。</p>
+<h3 id="方法一：使用-192-0-2-1-搭配-Redirect-Rule"><a href="#方法一：使用-192-0-2-1-搭配-Redirect-Rule" class="headerlink" title="方法一：使用 192.0.2.1 搭配 Redirect Rule"></a>方法一：使用 192.0.2.1 搭配 Redirect Rule</h3><p>這個方法最簡單，不需要修改 GitHub Repository 的 Pages 設定。</p>
+<p>先到 Cloudflare：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS → Records</span><br></pre></td></tr></table></figure>
+
+<p>新增以下 Record：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Content</th>
+<th>Proxy status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>192.0.2.1</code></td>
+<td>Proxied</td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>www</code></td>
+<td><code>192.0.2.1</code></td>
+<td>Proxied</td>
+</tr>
+</tbody></table>
+<p><code>192.0.2.1</code> 是保留給文件與範例使用的 IP，它不會真的把請求送到某台 Origin Server。這裡只是利用橘色雲朵讓請求先進到 Cloudflare，Cloudflare 才有機會執行 Redirect Rule。</p>
+<p>接著到新版 Dashboard 的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rules → Overview → Create rule → Redirect Rule</span><br></pre></td></tr></table></figure>
+
+<p>如果整個網域都要轉到 GitHub Pages，可以選擇 <strong>All incoming requests</strong>，並設定：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Rule name：Redirect to GitHub Pages</span><br><span class="line">Target URL：https://rexhung0302.github.io</span><br><span class="line">Status code：301</span><br><span class="line">Preserve query string：Enabled</span><br></pre></td></tr></table></figure>
+
+<p>如果希望 <code>/about/</code> 也對應到 GitHub Pages 的 <code>/about/</code>，則使用 Dynamic Redirect：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">concat(&quot;https://rexhung0302.github.io&quot;, http.request.uri.path)</span><br></pre></td></tr></table></figure>
+
+<p>最後按下 <strong>Deploy</strong> 即可。Cloudflare 官方也是使用 <code>192.0.2.1</code> 作為純轉址網域的範例，可以參考 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/fundamentals/manage-domains/redirect-domain/">Redirect one domain to another</a> 與 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/rules/url-forwarding/single-redirects/create-dashboard/">Create a redirect rule in the dashboard</a>。</p>
+<p>這個方法要注意一件事情：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">訪客 → example.com → Cloudflare WAF → 301 Redirect → rexhung0302.github.io</span><br></pre></td></tr></table></figure>
+
+<p>Cloudflare WAF 只能檢查進入 <code>example.com</code>、準備取得 301 回應的那一次請求。瀏覽器跳到 <code>rexhung0302.github.io</code> 之後，網址與流量都已經離開你的 Cloudflare Zone，所以你在 <code>example.com</code> 設定的 WAF、Cache Rule、Analytics 都無法繼續套用。</p>
+<p>GitHub 本身當然仍有自己的平台防護，但那已經不是你在 Cloudflare 設定的這套 WAF。另一個缺點是訪客最後會在網址列看到 <code>rexhung0302.github.io</code>，自己的網域不會保留下來。</p>
+<blockquote>
+<p>如果只是把舊網址轉到新網址，這個方法很方便；如果希望網址列始終顯示自己的網域，請使用下一種方式。</p>
+</blockquote>
+<h3 id="方法二：在-GitHub-Pages-綁定-Custom-Domain"><a href="#方法二：在-GitHub-Pages-綁定-Custom-Domain" class="headerlink" title="方法二：在 GitHub Pages 綁定 Custom Domain"></a>方法二：在 GitHub Pages 綁定 Custom Domain</h3><p>第二種方法不是轉址，而是直接告訴 GitHub Pages：「<code>example.com</code> 就是這個 Repository 的正式網址。」</p>
+<p>先進入 GitHub Pages 專案：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Repository → Settings → Pages → Custom domain</span><br></pre></td></tr></table></figure>
+
+<p>輸入你的網域，例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.example.com</span><br></pre></td></tr></table></figure>
+
+<p>按下 <strong>Save</strong>。GitHub 會檢查 DNS，並在 Pages 部署內容中建立或更新 <code>CNAME</code> 檔案。</p>
+<blockquote>
+<p>GitHub 官方建議先在 Repository 設定 Custom Domain，再建立 DNS Record，避免網域尚未被專案認領時產生 Subdomain Takeover 風險。</p>
+</blockquote>
+<p>如果使用 <code>www.example.com</code> 或 <code>blog.example.com</code> 這類子網域，在 Cloudflare 新增：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Target</th>
+<th>Proxy status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CNAME</td>
+<td><code>www</code></td>
+<td><code>rexhung0302.github.io</code></td>
+<td>DNS only，驗證完成後再視需求改為 Proxied</td>
+</tr>
+</tbody></table>
+<p>如果要直接使用根網域 <code>example.com</code>，依 GitHub 官方目前文件新增四筆 A Record：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">185.199.108.153</span><br><span class="line">185.199.109.153</span><br><span class="line">185.199.110.153</span><br><span class="line">185.199.111.153</span><br></pre></td></tr></table></figure>
+
+<p>設定大致如下：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>185.199.108.153</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>185.199.109.153</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>185.199.110.153</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>@</code></td>
+<td><code>185.199.111.153</code></td>
+</tr>
+</tbody></table>
+<p>GitHub 也提供四組 IPv6 的 AAAA Record，不過不是強制需要，最新數值與完整步驟可以直接查看 <a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Managing a custom domain for your GitHub Pages site</a>。</p>
+<p>完成 GitHub 的 <strong>DNS check successful</strong> 並確認 GitHub Pages HTTPS 憑證生效後，可以把 Cloudflare 對應的 Web Record 改成 <strong>Proxied（橘色雲朵）</strong>。這時訪客仍然使用 <code>example.com</code>，請求也會先經過 Cloudflare：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">訪客 → example.com → Cloudflare SSL/WAF/CDN → GitHub Pages</span><br></pre></td></tr></table></figure>
+
+<p>這樣才能讓自己網域上的正常頁面請求使用 Cloudflare WAF，而不是只有轉址前那一下受到保護。</p>
+<p>不過第一次綁定時筆者建議先使用 <strong>DNS only</strong>，等 GitHub 顯示 DNS Check 成功、Custom Domain 與 <strong>Enforce HTTPS</strong> 都正常後，再切換為 Proxied。若憑證簽發一直卡住，也先切回 DNS only 並確認沒有多餘或衝突的 <code>A</code>、<code>AAAA</code>、<code>CNAME</code> Record。</p>
+<p>兩個方法快速比較：</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th><code>192.0.2.1</code> + Redirect Rule</th>
+<th>GitHub Pages Custom Domain</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>設定難度</td>
+<td>最簡單</td>
+<td>需要 GitHub 與 DNS 兩邊設定</td>
+</tr>
+<tr>
+<td>最後顯示網址</td>
+<td><code>username.github.io</code></td>
+<td><code>example.com</code></td>
+</tr>
+<tr>
+<td>Cloudflare WAF 範圍</td>
+<td>只保護轉址發生前的請求</td>
+<td>開啟 Proxied 後可保護自訂網域的頁面流量</td>
+</tr>
+<tr>
+<td>適合情境</td>
+<td>舊網域導向、短期轉址</td>
+<td>正式網站、部落格長期使用</td>
+</tr>
+</tbody></table>
+<p>如果是自己的部落格，筆者會直接選擇第二種；網址比較好看，也不會讓前面設定的 Cloudflare WAF 只保護到一張 301 車票～</p>
+<hr>
+<h2 id="SSL-不用另外申請，但還是要設定"><a href="#SSL-不用另外申請，但還是要設定" class="headerlink" title="SSL 不用另外申請，但還是要設定"></a>SSL 不用另外申請，但還是要設定</h2><p>這一段直接先說結論：<strong>不用再另外申請 SSL 憑證。</strong></p>
+<p>Cloudflare 完整託管網域後，會自動替根網域與第一層子網域簽發免費的 <strong>Universal SSL</strong>，並自動處理續約。可以到以下位置確認憑證狀態：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SSL/TLS → Edge Certificates</span><br></pre></td></tr></table></figure>
+
+<p>看到 Universal Certificate 為 <strong>Active</strong> 就完成了。剛切換 Nameserver 時，憑證可能還在 Pending，等一段時間再回來看即可。</p>
+<p>不過 SSL 其實有兩段：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">瀏覽器 ← HTTPS → Cloudflare ← HTTPS → Origin Server</span><br></pre></td></tr></table></figure>
+
+<p>Universal SSL 保護的是前半段；後半段仍取決於原始主機有沒有憑證，所以到 <strong>SSL&#x2F;TLS → Overview</strong> 時要正確選擇 Encryption mode。</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Cloudflare 到 Origin</th>
+<th>建議</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Flexible</td>
+<td>HTTP</td>
+<td>只適合暫時救急，可能產生 Redirect Loop，不建議長期使用</td>
+</tr>
+<tr>
+<td>Full</td>
+<td>HTTPS，但不驗證 Origin 憑證是否合法</td>
+<td>比 Flexible 好，但仍可能連到錯誤或偽造憑證</td>
+</tr>
+<tr>
+<td>Full (strict)</td>
+<td>HTTPS，並驗證有效且 Hostname 正確的憑證</td>
+<td><strong>正式環境推薦</strong></td>
+</tr>
+</tbody></table>
+<p>如果主機端已經有 Let’s Encrypt 或其他 CA 簽發的有效憑證，直接使用 <strong>Full (strict)</strong>。如果沒有，也可以在 Cloudflare 建立 <strong>Origin CA Certificate</strong> 安裝到主機；不過它只供 Cloudflare 與 Origin 之間使用，不能拿來讓瀏覽器直接信任。</p>
+<p>最後到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SSL/TLS → Edge Certificates → Always Use HTTPS</span><br></pre></td></tr></table></figure>
+
+<p>把 <strong>Always Use HTTPS</strong> 打開，讓所有 <code>http://</code> 請求自動轉到 <code>https://</code>。如果頁面仍出現 Mixed Content，再檢查網站內是否寫死 <code>http://</code> 圖片或 Script，必要時也可以開啟 <strong>Automatic HTTPS Rewrites</strong>。</p>
+<blockquote>
+<p>Cloudflare 官方文件： <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/edge-certificates/">Edge certificates</a>、<a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/">Always Use HTTPS</a>。</p>
+</blockquote>
+<hr>
+<h2 id="設定-Cloudflare-WAF"><a href="#設定-Cloudflare-WAF" class="headerlink" title="設定 Cloudflare WAF"></a>設定 Cloudflare WAF</h2><p>WAF 全名是 <strong>Web Application Firewall</strong>，它不是取代主機防火牆，而是在 HTTP 請求抵達網站前，依規則攔截 SQL Injection、XSS、惡意 Bot 或異常流量。</p>
+<h3 id="Free-方案已經有基礎防護"><a href="#Free-方案已經有基礎防護" class="headerlink" title="Free 方案已經有基礎防護"></a>Free 方案已經有基礎防護</h3><p>依 Cloudflare 目前官方文件，Free 方案的 <strong>Cloudflare Free Managed Ruleset</strong> 會預設部署，不需要另外按下 Deploy。它是完整版 Cloudflare Managed Ruleset 的精簡子集，適合一般網站先建立基本防線。</p>
+<p>可以到新版介面的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Security → Settings</span><br></pre></td></tr></table></figure>
+
+<p>搜尋 <strong>Web application exploits</strong>，確認 Free Managed Ruleset 的狀態。若你的帳號還是舊版介面，則可能會在：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Security → WAF → Managed rules</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Pro 以上方案才能使用完整版 Cloudflare Managed Ruleset 與 OWASP Core Ruleset；剛啟用時不要一口氣把所有規則調到最嚴，先觀察 Security Events，否則很容易連正常訪客或 API 都一起擋掉。</p>
+</blockquote>
+<h3 id="建立-Custom-Rule"><a href="#建立-Custom-Rule" class="headerlink" title="建立 Custom Rule"></a>建立 Custom Rule</h3><p>Free 方案目前最多可以建立 <strong>5 條 Custom Rules</strong>。新版入口為：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Security → Security rules → Create rule → Custom rules</span><br></pre></td></tr></table></figure>
+
+<p>部分帳號仍會看到舊版入口：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Security → WAF → Custom rules</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/cloudflare-waf-custom-rule.webp" alt="Cloudflare 建立 WAF Custom Rule 的官方現行畫面"></p>
+<p>例如後台只允許台灣 IP 進入，可以建立：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rule name：Challenge non-TW admin traffic</span><br><span class="line">Expression：(http.request.uri.path starts_with &quot;/admin&quot; and ip.src.country ne &quot;TW&quot;)</span><br><span class="line">Action：Managed Challenge</span><br></pre></td></tr></table></figure>
+
+<p>一開始筆者會建議使用 <strong>Managed Challenge</strong>，讓 Cloudflare 判斷是否需要驗證；直接 Block 雖然很乾脆，但出差、VPN、監控服務或第三方 Callback 都可能被你一起關在門外。</p>
+<p>建立規則時依序填入：</p>
+<ol>
+<li><strong>Rule name</strong></li>
+<li><strong>When incoming requests match</strong> 的 Field、Operator、Value</li>
+<li><strong>Then take action</strong></li>
+<li>按下 <strong>Deploy</strong></li>
+</ol>
+<p>Custom Rule 會按照順序執行，前面的 Block 可能讓後面規則沒有機會執行，所以規則越多越需要注意排序。</p>
+<p>詳細限制與最新入口可以參考 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/waf/custom-rules/">Cloudflare Custom Rules</a> 與 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/waf/custom-rules/create-dashboard/">Create a custom rule in the dashboard</a>。</p>
+<h3 id="Bot-與-DDoS"><a href="#Bot-與-DDoS" class="headerlink" title="Bot 與 DDoS"></a>Bot 與 DDoS</h3><p>Cloudflare 的 L3&#x2F;L4 與 L7 DDoS Protection 會自動運作，不需要另外打開。Free 方案還能到 <strong>Security → Settings</strong> 開啟 <strong>Bot Fight Mode</strong>，針對已知自動化 Bot 進行 Challenge。</p>
+<p>但 Bot Fight Mode 無法針對個別路徑設定例外；如果網站有 GitHub Webhook、金流 Callback、Uptime Monitor 或其他合法機器流量，開啟後記得實際測試。</p>
+<hr>
+<h2 id="驗證與常見問題"><a href="#驗證與常見問題" class="headerlink" title="驗證與常見問題"></a>驗證與常見問題</h2><h3 id="檢查-HTTPS"><a href="#檢查-HTTPS" class="headerlink" title="檢查 HTTPS"></a>檢查 HTTPS</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -I http://example.com</span><br><span class="line">curl -I https://example.com</span><br></pre></td></tr></table></figure>
+
+<p>第一個請求應該回傳 301 或 308 並導向 HTTPS；第二個則應正常取得網站回應。</p>
+<h3 id="檢查是否經過-Cloudflare"><a href="#檢查是否經過-Cloudflare" class="headerlink" title="檢查是否經過 Cloudflare"></a>檢查是否經過 Cloudflare</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I https://example.com</span><br></pre></td></tr></table></figure>
+
+<p>回應 Header 通常可以看到 <code>server: cloudflare</code>、<code>cf-ray</code> 等資訊。如果完全看不到，先檢查該 DNS Record 是否為橘色雲朵。</p>
+<h3 id="網站出現-Too-Many-Redirects"><a href="#網站出現-Too-Many-Redirects" class="headerlink" title="網站出現 Too Many Redirects"></a>網站出現 Too Many Redirects</h3><p>常見原因是 Origin 已強制 HTTPS，但 Cloudflare 使用 <strong>Flexible</strong>，兩邊互相轉址到天荒地老。主機有有效憑證時直接改成 <strong>Full (strict)</strong>。</p>
+<h3 id="出現-525-或-526"><a href="#出現-525-或-526" class="headerlink" title="出現 525 或 526"></a>出現 525 或 526</h3><ul>
+<li><strong>525</strong>：Cloudflare 與 Origin 的 TLS Handshake 失敗</li>
+<li><strong>526</strong>：Full (strict) 無法驗證 Origin 憑證</li>
+</ul>
+<p>檢查主機端憑證是否過期、Hostname 是否正確、443 Port 是否開放，以及防火牆有沒有擋住 Cloudflare IP。</p>
+<h3 id="Email-突然收不到"><a href="#Email-突然收不到" class="headerlink" title="Email 突然收不到"></a>Email 突然收不到</h3><p>檢查 MX、SPF、DKIM、DMARC 是否完整搬到 Cloudflare，郵件主機的 Record 也不要錯誤開啟 Proxy。</p>
+<h3 id="WAF-擋到正常使用者"><a href="#WAF-擋到正常使用者" class="headerlink" title="WAF 擋到正常使用者"></a>WAF 擋到正常使用者</h3><p>到 <strong>Security → Events</strong> 查看觸發的 Service、Rule ID、Action 與請求資訊，再針對確定安全的條件建立 Skip 或調整規則。不要只因為一次誤判就把整個 WAF 關掉。</p>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>整個流程其實可以濃縮成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Cloudflare 加入網域</span><br><span class="line">→ 確認 DNS Record</span><br><span class="line">→ GoDaddy 更換 Nameserver</span><br><span class="line">→ 等待網域 Active</span><br><span class="line">→ 確認 Universal SSL</span><br><span class="line">→ 使用 Full (strict) 與 Always Use HTTPS</span><br><span class="line">→ 檢查 WAF 與 Security Events</span><br></pre></td></tr></table></figure>
+
+<p>Cloudflare 最大的優勢不是某一項功能特別神奇，而是把 DNS、Proxy、CDN、SSL、DDoS 與基礎 WAF 放在一起。對個人部落格或中小型網站來說，不用分別串好幾個服務，就能先得到一套堪用的安全與效能基礎。</p>
+<p>當然，開啟 Cloudflare 並不代表網站從此刀槍不入。程式漏洞、套件更新、主機權限、備份與密碼管理還是要自己負責；WAF 是多一層防線，不是無敵星星。</p>
+<p>最後提醒一次：<strong>更換 Nameserver 前先備份 DNS，完成後一定要測試網站、HTTPS、Email 與第三方 Callback。</strong> 這幾個步驟都有確認，基本上就可以安心收工了！</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/AWS/" rel="tag"><i class="fa fa-tag"></i> AWS</a>
+              <a href="/tags/DNS/" rel="tag"><i class="fa fa-tag"></i> DNS</a>
+              <a href="/tags/Domain/" rel="tag"><i class="fa fa-tag"></i> Domain</a>
+              <a href="/tags/GoDaddy/" rel="tag"><i class="fa fa-tag"></i> GoDaddy</a>
+              <a href="/tags/Cloudflare/" rel="tag"><i class="fa fa-tag"></i> Cloudflare</a>
+              <a href="/tags/SSL/" rel="tag"><i class="fa fa-tag"></i> SSL</a>
+              <a href="/tags/WAF/" rel="tag"><i class="fa fa-tag"></i> WAF</a>
+              <a href="/tags/Security/" rel="tag"><i class="fa fa-tag"></i> Security</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/01/26/20260126/" rel="prev" title="[Tool Note] — 架設 OpenClaw(ClawBot) & 使用 Google Antigravity 搭配免費模型">
+      <i class="fa fa-chevron-left"></i> [Tool Note] — 架設 OpenClaw(ClawBot) & 使用 Google Antigravity 搭配免費模型
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS-%E9%82%84%E6%98%AF-Cloudflare%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">AWS 還是 Cloudflare？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%E8%88%87%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">4.</span> <span class="nav-text">事前準備與注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%87%E7%B6%B2%E5%9F%9F%E5%8A%A0%E5%85%A5-Cloudflare"><span class="nav-number">5.</span> <span class="nav-text">將網域加入 Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B0-GoDaddy-%E6%9B%B4%E6%8F%9B-Nameserver"><span class="nav-number">6.</span> <span class="nav-text">到 GoDaddy 更換 Nameserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D-DNS-%E8%88%87-Proxy-%E7%8B%80%E6%85%8B"><span class="nav-number">7.</span> <span class="nav-text">確認 DNS 與 Proxy 狀態</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B6%B2%E5%9D%80%E5%B0%8E%E5%90%91-GitHub-Pages"><span class="nav-number">8.</span> <span class="nav-text">把自己的網址導向 GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8-192-0-2-1-%E6%90%AD%E9%85%8D-Redirect-Rule"><span class="nav-number">8.1.</span> <span class="nav-text">方法一：使用 192.0.2.1 搭配 Redirect Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%9C%A8-GitHub-Pages-%E7%B6%81%E5%AE%9A-Custom-Domain"><span class="nav-number">8.2.</span> <span class="nav-text">方法二：在 GitHub Pages 綁定 Custom Domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-%E4%B8%8D%E7%94%A8%E5%8F%A6%E5%A4%96%E7%94%B3%E8%AB%8B%EF%BC%8C%E4%BD%86%E9%82%84%E6%98%AF%E8%A6%81%E8%A8%AD%E5%AE%9A"><span class="nav-number">9.</span> <span class="nav-text">SSL 不用另外申請，但還是要設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Cloudflare-WAF"><span class="nav-number">10.</span> <span class="nav-text">設定 Cloudflare WAF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Free-%E6%96%B9%E6%A1%88%E5%B7%B2%E7%B6%93%E6%9C%89%E5%9F%BA%E7%A4%8E%E9%98%B2%E8%AD%B7"><span class="nav-number">10.1.</span> <span class="nav-text">Free 方案已經有基礎防護</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Custom-Rule"><span class="nav-number">10.2.</span> <span class="nav-text">建立 Custom Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bot-%E8%88%87-DDoS"><span class="nav-number">10.3.</span> <span class="nav-text">Bot 與 DDoS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E8%88%87%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">11.</span> <span class="nav-text">驗證與常見問題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5-HTTPS"><span class="nav-number">11.1.</span> <span class="nav-text">檢查 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E6%98%AF%E5%90%A6%E7%B6%93%E9%81%8E-Cloudflare"><span class="nav-number">11.2.</span> <span class="nav-text">檢查是否經過 Cloudflare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E5%87%BA%E7%8F%BE-Too-Many-Redirects"><span class="nav-number">11.3.</span> <span class="nav-text">網站出現 Too Many Redirects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8F%BE-525-%E6%88%96-526"><span class="nav-number">11.4.</span> <span class="nav-text">出現 525 或 526</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Email-%E7%AA%81%E7%84%B6%E6%94%B6%E4%B8%8D%E5%88%B0"><span class="nav-number">11.5.</span> <span class="nav-text">Email 突然收不到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAF-%E6%93%8B%E5%88%B0%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%80%85"><span class="nav-number">11.6.</span> <span class="nav-text">WAF 擋到正常使用者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">12.</span> <span class="nav-text">總結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">87</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2026/07/30/20260730/",
+      identifier: "2026/07/30/20260730/",
+      title     : "[Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
