@@ -31,8 +31,13 @@
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
 <meta property="article:published_time" content="2026-07-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-30T03:30:49.746Z">
+<meta property="article:modified_time" content="2026-07-30T03:54:12.770Z">
 <meta property="article:author" content="RexHung">
 <meta property="article:tag" content="Code">
 <meta property="article:tag" content="AWS">
@@ -234,7 +239,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2026-07-30 12:00:00 / 修改時間：11:30:49" itemprop="dateCreated datePublished" datetime="2026-07-30T12:00:00+08:00">2026-07-30</time>
+              <time title="創建時間：2026-07-30 12:00:00 / 修改時間：11:54:12" itemprop="dateCreated datePublished" datetime="2026-07-30T12:00:00+08:00">2026-07-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,14 +265,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">文章字數：</span>
-              <span>8.8k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="所需閱讀時間">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
-              <span>8 分鐘</span>
+              <span>10 分鐘</span>
             </span>
 
         </div>
@@ -438,6 +443,21 @@
 <li><strong>DNS only（灰色雲朵）</strong>：Cloudflare 只回答 DNS，流量直接前往原始主機</li>
 </ul>
 <p>一般網站的 <code>A</code>、<code>AAAA</code>、<code>CNAME</code> 可以視需求開啟 Proxied；<code>MX</code> 與郵件相關紀錄則維持 DNS only。不是所有連線都能直接套一朵橘色雲上去，亂開可能讓 Email 或非 HTTP 服務無法使用。</p>
+<h3 id="開啟橘色雲朵後，請求到底怎麼走？"><a href="#開啟橘色雲朵後，請求到底怎麼走？" class="headerlink" title="開啟橘色雲朵後，請求到底怎麼走？"></a>開啟橘色雲朵後，請求到底怎麼走？</h3><p><img src="/images/others/loading.gif" data-original="/images/20260730/cloudflare-proxy-request-flow.png" alt="Cloudflare Proxy 開啟後的 Request 與 Response 流程"></p>
+<p>當使用者在 Browser 輸入 <code>https://example.com</code>，整個流程大致如下：</p>
+<ol>
+<li><strong>Browser 查詢 DNS</strong>：瀏覽器先詢問 <code>example.com</code> 對應的 IP。</li>
+<li><strong>Cloudflare DNS 回傳 Edge IP</strong>：因為 Record 已開啟 Proxied，DNS 不會直接暴露 Origin Server IP，而是回傳 Cloudflare Anycast IP。</li>
+<li><strong>Request 先進 Cloudflare Proxy</strong>：TLS 連線會先到 Cloudflare Edge。</li>
+<li><strong>套用 SSL、WAF 與 CDN</strong>：Cloudflare 會先處理 HTTPS、檢查 WAF 規則，並判斷 Cache 是否已有可直接回傳的內容。</li>
+<li><strong>需要時才前往 Origin Server</strong>：Cache Miss 或動態請求才會由 Cloudflare 繼續送到後面的 VM、VPS、GitHub Pages 或其他 Origin。</li>
+<li><strong>Response 原路返回</strong>：Origin 回應先回到 Cloudflare，Cloudflare 視規則快取或加工後，再把結果傳回 Browser。</li>
+</ol>
+<p>所以橘色雲朵並不是單純換一個 DNS 而已，它讓 Cloudflare 真正站到訪客與主機中間。WAF 之所以能在惡意請求抵達機器前擋掉它，也是因為流量有先經過這層 Proxy。</p>
+<p>如果切成 <strong>DNS only（灰色雲朵）</strong>，DNS 會直接回傳 Origin 的位址，請求路徑就會變成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Browser → Origin Server</span><br></pre></td></tr></table></figure>
+
+<p>這時 Cloudflare 只負責回答 DNS，不會替這段 Web 流量套用 WAF、CDN、Edge SSL 或 HTTP Analytics。</p>
 <p>可以用以下指令確認 Nameserver：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig NS example.com +short</span><br></pre></td></tr></table></figure>
 
@@ -494,17 +514,47 @@
 <p>如果只是把舊網址轉到新網址，這個方法很方便；如果希望網址列始終顯示自己的網域，請使用下一種方式。</p>
 </blockquote>
 <h3 id="方法二：在-GitHub-Pages-綁定-Custom-Domain"><a href="#方法二：在-GitHub-Pages-綁定-Custom-Domain" class="headerlink" title="方法二：在 GitHub Pages 綁定 Custom Domain"></a>方法二：在 GitHub Pages 綁定 Custom Domain</h3><p>第二種方法不是轉址，而是直接告訴 GitHub Pages：「<code>example.com</code> 就是這個 Repository 的正式網址。」</p>
-<p>先進入 GitHub Pages 專案：</p>
+<h4 id="Step-1：先驗證這個網域真的是你的"><a href="#Step-1：先驗證這個網域真的是你的" class="headerlink" title="Step 1：先驗證這個網域真的是你的"></a>Step 1：先驗證這個網域真的是你的</h4><p>建議先到 GitHub 個人帳號設定：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GitHub Avatar → Settings → Pages → Add a domain</span><br></pre></td></tr></table></figure>
+
+<p>輸入自己的網域後，GitHub 會產生一組專屬的 <strong>TXT Hostname</strong> 與 <strong>TXT Value</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/github-domain-verification.svg" alt="GitHub Pages 產生網域驗證用 TXT Record"></p>
+<p>接著回到 Cloudflare：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS → Records → Add record</span><br></pre></td></tr></table></figure>
+
+<p>新增 GitHub 畫面要求的 TXT Record：</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Content</th>
+<th>TTL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TXT</td>
+<td>GitHub 提供的 Hostname</td>
+<td>GitHub 提供的 Value</td>
+<td>Auto</td>
+</tr>
+</tbody></table>
+<p>每個 GitHub 帳號產生的 Hostname 與驗證碼都不同，請直接複製自己畫面上的內容，不要照抄別人的文章，也不要把完整 TXT Value 公開。</p>
+<p>回 GitHub 按下 <strong>Verify</strong> 後，可能不會立刻成功。DNS 還在傳播時會看到 Unverified 或警告訊息，可以稍等一段時間再驗證，不需要一直刪除重建。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/github-domain-verified-status.svg" alt="GitHub Pages 網域驗證失敗與成功狀態"></p>
+<p>看到 <strong>Successfully verified</strong> 與綠色的 <strong>Verified</strong> 才代表 GitHub 已確認這個網域屬於你。這一步可以避免其他人把你的網域綁到他的 GitHub Pages，官方也建議在設定 Repository Custom Domain 前先完成網域驗證。</p>
+<h4 id="Step-2：在-Repository-設定-Custom-Domain"><a href="#Step-2：在-Repository-設定-Custom-Domain" class="headerlink" title="Step 2：在 Repository 設定 Custom Domain"></a>Step 2：在 Repository 設定 Custom Domain</h4><p>先進入 GitHub Pages 專案：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Repository → Settings → Pages → Custom domain</span><br></pre></td></tr></table></figure>
 
 <p>輸入你的網域，例如：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.example.com</span><br></pre></td></tr></table></figure>
 
-<p>按下 <strong>Save</strong>。GitHub 會檢查 DNS，並在 Pages 部署內容中建立或更新 <code>CNAME</code> 檔案。</p>
+<p>按下 <strong>Save</strong> 後會先看到黃色的 <strong>DNS Check in Progress</strong>。GitHub 正在確認這個網域的 DNS 是否真的指向目前的 Pages 專案，等待完成後才會變成綠色的 <strong>DNS check successful</strong>。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/github-pages-custom-domain.svg" alt="GitHub Pages Custom domain 等待檢查與成功畫面"></p>
 <blockquote>
-<p>GitHub 官方建議先在 Repository 設定 Custom Domain，再建立 DNS Record，避免網域尚未被專案認領時產生 Subdomain Takeover 風險。</p>
+<p>帳號 Settings 內的 <strong>Verified domain</strong> 與 Repository Pages 內的 <strong>DNS check successful</strong> 是兩件事情。前者證明網域是你的，後者確認 DNS 已正確指向這個 Pages 網站，兩個都要完成。</p>
 </blockquote>
-<p>如果使用 <code>www.example.com</code> 或 <code>blog.example.com</code> 這類子網域，在 Cloudflare 新增：</p>
+<h4 id="Step-3：設定-Cloudflare-DNS-指向-GitHub-Pages"><a href="#Step-3：設定-Cloudflare-DNS-指向-GitHub-Pages" class="headerlink" title="Step 3：設定 Cloudflare DNS 指向 GitHub Pages"></a>Step 3：設定 Cloudflare DNS 指向 GitHub Pages</h4><p>如果使用 <code>www.example.com</code> 或 <code>blog.example.com</code> 這類子網域，在 Cloudflare 新增：</p>
 <table>
 <thead>
 <tr>
@@ -555,7 +605,18 @@
 </tr>
 </tbody></table>
 <p>GitHub 也提供四組 IPv6 的 AAAA Record，不過不是強制需要，最新數值與完整步驟可以直接查看 <a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Managing a custom domain for your GitHub Pages site</a>。</p>
-<p>完成 GitHub 的 <strong>DNS check successful</strong> 並確認 GitHub Pages HTTPS 憑證生效後，可以把 Cloudflare 對應的 Web Record 改成 <strong>Proxied（橘色雲朵）</strong>。這時訪客仍然使用 <code>example.com</code>，請求也會先經過 Cloudflare：</p>
+<h4 id="Step-4：確認專案根目錄的-CNAME"><a href="#Step-4：確認專案根目錄的-CNAME" class="headerlink" title="Step 4：確認專案根目錄的 CNAME"></a>Step 4：確認專案根目錄的 CNAME</h4><p>儲存 Custom Domain 後，要確認 GitHub Pages 發布分支的根目錄出現 <code>CNAME</code> 檔案。以這個部落格為例，可以直接查看 <a target="_blank" rel="noopener" href="https://github.com/RexHung0302/RexHung0302.github.io/blob/gh-pages/CNAME">RexHung0302.github.io 的 CNAME</a>。</p>
+<p>檔案內容只需要放自訂網域：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zehung.com</span><br></pre></td></tr></table></figure>
+
+<p>不要寫成 <code>https://zehung.com/</code>，也不要加路徑或放入兩個網域。<code>CNAME</code> 雖然沒有副檔名，本質上只是一個一行文字檔。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260730/github-cname-actions.svg" alt="GitHub Pages 的 CNAME 內容與 Actions 部署狀態"></p>
+<p>如果你的 Hexo 是透過 GitHub Actions 自動 Deploy 到 <code>gh-pages</code>，還要注意產出的 <code>CNAME</code> 不要在下一次部署時被清掉。最穩定的方式是把 <code>CNAME</code> 放進 Hexo 的 <code>source</code> 目錄，讓每次 Generate 都會一起複製到發布結果。</p>
+<h4 id="Step-5：等待-GitHub-Actions-部署完成"><a href="#Step-5：等待-GitHub-Actions-部署完成" class="headerlink" title="Step 5：等待 GitHub Actions 部署完成"></a>Step 5：等待 GitHub Actions 部署完成</h4><p>修改 Custom Domain 或 <code>CNAME</code> 後，GitHub 會重新執行 <strong>pages build and deployment</strong>。到 Repository 的 <strong>Actions</strong> 頁籤確認：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Actions → pages build and deployment</span><br></pre></td></tr></table></figure>
+
+<p>黃色圓圈與 <strong>In progress</strong> 代表仍在部署；必須等 Workflow 顯示綠色勾勾，新的自訂網域設定才算真正部署完成。剛設定完卻仍看到舊網址時，先別急著改 DNS，確認 Action 已跑完並等待 DNS 與 CDN Cache 更新。</p>
+<h4 id="Step-6：最後確認-HTTPS-與-Cloudflare-Proxy"><a href="#Step-6：最後確認-HTTPS-與-Cloudflare-Proxy" class="headerlink" title="Step 6：最後確認 HTTPS 與 Cloudflare Proxy"></a>Step 6：最後確認 HTTPS 與 Cloudflare Proxy</h4><p>完成 GitHub 的 <strong>DNS check successful</strong> 並確認 GitHub Pages HTTPS 憑證生效後，可以把 Cloudflare 對應的 Web Record 改成 <strong>Proxied（橘色雲朵）</strong>。這時訪客仍然使用 <code>example.com</code>，請求也會先經過 Cloudflare：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">訪客 → example.com → Cloudflare SSL/WAF/CDN → GitHub Pages</span><br></pre></td></tr></table></figure>
 
 <p>這樣才能讓自己網域上的正常頁面請求使用 Cloudflare WAF，而不是只有轉址前那一下受到保護。</p>
@@ -800,7 +861,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS-%E9%82%84%E6%98%AF-Cloudflare%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">AWS 還是 Cloudflare？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%E8%88%87%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">4.</span> <span class="nav-text">事前準備與注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%87%E7%B6%B2%E5%9F%9F%E5%8A%A0%E5%85%A5-Cloudflare"><span class="nav-number">5.</span> <span class="nav-text">將網域加入 Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B0-GoDaddy-%E6%9B%B4%E6%8F%9B-Nameserver"><span class="nav-number">6.</span> <span class="nav-text">到 GoDaddy 更換 Nameserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D-DNS-%E8%88%87-Proxy-%E7%8B%80%E6%85%8B"><span class="nav-number">7.</span> <span class="nav-text">確認 DNS 與 Proxy 狀態</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B6%B2%E5%9D%80%E5%B0%8E%E5%90%91-GitHub-Pages"><span class="nav-number">8.</span> <span class="nav-text">把自己的網址導向 GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8-192-0-2-1-%E6%90%AD%E9%85%8D-Redirect-Rule"><span class="nav-number">8.1.</span> <span class="nav-text">方法一：使用 192.0.2.1 搭配 Redirect Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%9C%A8-GitHub-Pages-%E7%B6%81%E5%AE%9A-Custom-Domain"><span class="nav-number">8.2.</span> <span class="nav-text">方法二：在 GitHub Pages 綁定 Custom Domain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-%E4%B8%8D%E7%94%A8%E5%8F%A6%E5%A4%96%E7%94%B3%E8%AB%8B%EF%BC%8C%E4%BD%86%E9%82%84%E6%98%AF%E8%A6%81%E8%A8%AD%E5%AE%9A"><span class="nav-number">9.</span> <span class="nav-text">SSL 不用另外申請，但還是要設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Cloudflare-WAF"><span class="nav-number">10.</span> <span class="nav-text">設定 Cloudflare WAF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Free-%E6%96%B9%E6%A1%88%E5%B7%B2%E7%B6%93%E6%9C%89%E5%9F%BA%E7%A4%8E%E9%98%B2%E8%AD%B7"><span class="nav-number">10.1.</span> <span class="nav-text">Free 方案已經有基礎防護</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Custom-Rule"><span class="nav-number">10.2.</span> <span class="nav-text">建立 Custom Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bot-%E8%88%87-DDoS"><span class="nav-number">10.3.</span> <span class="nav-text">Bot 與 DDoS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E8%88%87%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">11.</span> <span class="nav-text">驗證與常見問題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5-HTTPS"><span class="nav-number">11.1.</span> <span class="nav-text">檢查 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E6%98%AF%E5%90%A6%E7%B6%93%E9%81%8E-Cloudflare"><span class="nav-number">11.2.</span> <span class="nav-text">檢查是否經過 Cloudflare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E5%87%BA%E7%8F%BE-Too-Many-Redirects"><span class="nav-number">11.3.</span> <span class="nav-text">網站出現 Too Many Redirects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8F%BE-525-%E6%88%96-526"><span class="nav-number">11.4.</span> <span class="nav-text">出現 525 或 526</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Email-%E7%AA%81%E7%84%B6%E6%94%B6%E4%B8%8D%E5%88%B0"><span class="nav-number">11.5.</span> <span class="nav-text">Email 突然收不到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAF-%E6%93%8B%E5%88%B0%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%80%85"><span class="nav-number">11.6.</span> <span class="nav-text">WAF 擋到正常使用者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">12.</span> <span class="nav-text">總結</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AWS-%E9%82%84%E6%98%AF-Cloudflare%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">AWS 還是 Cloudflare？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99%E8%88%87%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">4.</span> <span class="nav-text">事前準備與注意事項</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%87%E7%B6%B2%E5%9F%9F%E5%8A%A0%E5%85%A5-Cloudflare"><span class="nav-number">5.</span> <span class="nav-text">將網域加入 Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%B0-GoDaddy-%E6%9B%B4%E6%8F%9B-Nameserver"><span class="nav-number">6.</span> <span class="nav-text">到 GoDaddy 更換 Nameserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D-DNS-%E8%88%87-Proxy-%E7%8B%80%E6%85%8B"><span class="nav-number">7.</span> <span class="nav-text">確認 DNS 與 Proxy 狀態</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E5%95%9F%E6%A9%98%E8%89%B2%E9%9B%B2%E6%9C%B5%E5%BE%8C%EF%BC%8C%E8%AB%8B%E6%B1%82%E5%88%B0%E5%BA%95%E6%80%8E%E9%BA%BC%E8%B5%B0%EF%BC%9F"><span class="nav-number">7.1.</span> <span class="nav-text">開啟橘色雲朵後，請求到底怎麼走？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%8A%E8%87%AA%E5%B7%B1%E7%9A%84%E7%B6%B2%E5%9D%80%E5%B0%8E%E5%90%91-GitHub-Pages"><span class="nav-number">8.</span> <span class="nav-text">把自己的網址導向 GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8-192-0-2-1-%E6%90%AD%E9%85%8D-Redirect-Rule"><span class="nav-number">8.1.</span> <span class="nav-text">方法一：使用 192.0.2.1 搭配 Redirect Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%9C%A8-GitHub-Pages-%E7%B6%81%E5%AE%9A-Custom-Domain"><span class="nav-number">8.2.</span> <span class="nav-text">方法二：在 GitHub Pages 綁定 Custom Domain</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-1%EF%BC%9A%E5%85%88%E9%A9%97%E8%AD%89%E9%80%99%E5%80%8B%E7%B6%B2%E5%9F%9F%E7%9C%9F%E7%9A%84%E6%98%AF%E4%BD%A0%E7%9A%84"><span class="nav-number">8.2.1.</span> <span class="nav-text">Step 1：先驗證這個網域真的是你的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-2%EF%BC%9A%E5%9C%A8-Repository-%E8%A8%AD%E5%AE%9A-Custom-Domain"><span class="nav-number">8.2.2.</span> <span class="nav-text">Step 2：在 Repository 設定 Custom Domain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-3%EF%BC%9A%E8%A8%AD%E5%AE%9A-Cloudflare-DNS-%E6%8C%87%E5%90%91-GitHub-Pages"><span class="nav-number">8.2.3.</span> <span class="nav-text">Step 3：設定 Cloudflare DNS 指向 GitHub Pages</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-4%EF%BC%9A%E7%A2%BA%E8%AA%8D%E5%B0%88%E6%A1%88%E6%A0%B9%E7%9B%AE%E9%8C%84%E7%9A%84-CNAME"><span class="nav-number">8.2.4.</span> <span class="nav-text">Step 4：確認專案根目錄的 CNAME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-5%EF%BC%9A%E7%AD%89%E5%BE%85-GitHub-Actions-%E9%83%A8%E7%BD%B2%E5%AE%8C%E6%88%90"><span class="nav-number">8.2.5.</span> <span class="nav-text">Step 5：等待 GitHub Actions 部署完成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-6%EF%BC%9A%E6%9C%80%E5%BE%8C%E7%A2%BA%E8%AA%8D-HTTPS-%E8%88%87-Cloudflare-Proxy"><span class="nav-number">8.2.6.</span> <span class="nav-text">Step 6：最後確認 HTTPS 與 Cloudflare Proxy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL-%E4%B8%8D%E7%94%A8%E5%8F%A6%E5%A4%96%E7%94%B3%E8%AB%8B%EF%BC%8C%E4%BD%86%E9%82%84%E6%98%AF%E8%A6%81%E8%A8%AD%E5%AE%9A"><span class="nav-number">9.</span> <span class="nav-text">SSL 不用另外申請，但還是要設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Cloudflare-WAF"><span class="nav-number">10.</span> <span class="nav-text">設定 Cloudflare WAF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Free-%E6%96%B9%E6%A1%88%E5%B7%B2%E7%B6%93%E6%9C%89%E5%9F%BA%E7%A4%8E%E9%98%B2%E8%AD%B7"><span class="nav-number">10.1.</span> <span class="nav-text">Free 方案已經有基礎防護</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Custom-Rule"><span class="nav-number">10.2.</span> <span class="nav-text">建立 Custom Rule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bot-%E8%88%87-DDoS"><span class="nav-number">10.3.</span> <span class="nav-text">Bot 與 DDoS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E8%88%87%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">11.</span> <span class="nav-text">驗證與常見問題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5-HTTPS"><span class="nav-number">11.1.</span> <span class="nav-text">檢查 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E6%98%AF%E5%90%A6%E7%B6%93%E9%81%8E-Cloudflare"><span class="nav-number">11.2.</span> <span class="nav-text">檢查是否經過 Cloudflare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%B2%E7%AB%99%E5%87%BA%E7%8F%BE-Too-Many-Redirects"><span class="nav-number">11.3.</span> <span class="nav-text">網站出現 Too Many Redirects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E7%8F%BE-525-%E6%88%96-526"><span class="nav-number">11.4.</span> <span class="nav-text">出現 525 或 526</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Email-%E7%AA%81%E7%84%B6%E6%94%B6%E4%B8%8D%E5%88%B0"><span class="nav-number">11.5.</span> <span class="nav-text">Email 突然收不到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAF-%E6%93%8B%E5%88%B0%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8%E8%80%85"><span class="nav-number">11.6.</span> <span class="nav-text">WAF 擋到正常使用者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">12.</span> <span class="nav-text">總結</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

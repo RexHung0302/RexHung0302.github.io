@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" rx="18" fill="#0d1117"/>
+  <text x="45" y="62" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="30" font-weight="700">GitHub Pages — Verified domains</text>
+  <rect x="45" y="95" width="1110" height="125" rx="10" fill="#35171c" stroke="#f85149"/>
+  <text x="78" y="142" fill="#f85149" font-family="Arial,sans-serif" font-size="22" font-weight="700">⚠ One of your domains is unverified</text>
+  <text x="78" y="182" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="18">先完成 TXT 驗證，避免其他人把網域綁到自己的 Pages site。</text>
+  <rect x="45" y="252" width="535" height="185" rx="10" fill="#161b22" stroke="#30363d"/>
+  <text x="75" y="300" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="22" font-weight="700">尚未通過</text>
+  <text x="75" y="352" fill="#f0f6fc" font-family="monospace" font-size="21">example.com</text>
+  <rect x="270" y="326" width="120" height="36" rx="18" fill="#3d1518" stroke="#f85149"/>
+  <text x="288" y="351" fill="#f85149" font-family="Arial,sans-serif" font-size="16">Unverified</text>
+  <rect x="620" y="252" width="535" height="185" rx="10" fill="#0f2d1b" stroke="#238636"/>
+  <text x="650" y="300" fill="#3fb950" font-family="Arial,sans-serif" font-size="22" font-weight="700">Successfully verified</text>
+  <text x="650" y="352" fill="#f0f6fc" font-family="monospace" font-size="21">zehung.com</text>
+  <rect x="835" y="326" width="94" height="36" rx="18" fill="#102c1a" stroke="#238636"/>
+  <text x="851" y="351" fill="#3fb950" font-family="Arial,sans-serif" font-size="16">Verified</text>
+</svg>

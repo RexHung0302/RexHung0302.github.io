@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" rx="18" fill="#0d1117"/>
+  <text x="45" y="62" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="30" font-weight="700">Repository → Settings → Pages</text>
+  <rect x="45" y="95" width="1110" height="170" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="75" y="140" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="26" font-weight="700">Custom domain</text>
+  <text x="75" y="177" fill="#b1bac4" font-family="Arial,sans-serif" font-size="18">Serve this GitHub Pages site from your own domain.</text>
+  <rect x="75" y="198" width="350" height="48" rx="7" fill="#0d1117" stroke="#8c959f"/>
+  <text x="92" y="229" fill="#f0f6fc" font-family="monospace" font-size="20">zehung.com</text>
+  <rect x="442" y="198" width="92" height="48" rx="7" fill="#238636"/>
+  <text x="465" y="229" fill="white" font-family="Arial,sans-serif" font-size="18" font-weight="700">Save</text>
+  <rect x="45" y="295" width="535" height="150" rx="12" fill="#161b22" stroke="#9e6a03"/>
+  <circle cx="76" cy="342" r="8" fill="#d29922"/>
+  <text x="96" y="350" fill="#d29922" font-family="Arial,sans-serif" font-size="22" font-weight="700">DNS Check in Progress</text>
+  <text x="76" y="390" fill="#b1bac4" font-family="Arial,sans-serif" font-size="18">等待 GitHub 檢查 DNS，不要重複刪除再新增。</text>
+  <rect x="620" y="295" width="535" height="150" rx="12" fill="#161b22" stroke="#238636"/>
+  <circle cx="651" cy="342" r="13" fill="#238636"/>
+  <path d="M644 342l5 5 10-12" fill="none" stroke="white" stroke-width="3"/>
+  <text x="678" y="350" fill="#3fb950" font-family="Arial,sans-serif" font-size="22" font-weight="700">DNS check successful</text>
+  <text x="651" y="390" fill="#b1bac4" font-family="Arial,sans-serif" font-size="18">成功後再確認 Enforce HTTPS 與部署狀態。</text>
+</svg>

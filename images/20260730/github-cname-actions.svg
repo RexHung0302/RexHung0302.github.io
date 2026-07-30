@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" rx="18" fill="#0d1117"/>
+  <text x="45" y="62" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="30" font-weight="700">確認 CNAME 與 Pages deployment</text>
+  <rect x="45" y="95" width="1110" height="210" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="75" y="140" fill="#58a6ff" font-family="Arial,sans-serif" font-size="23" font-weight="700">gh-pages / CNAME</text>
+  <text x="75" y="190" fill="#8c959f" font-family="monospace" font-size="18">1</text>
+  <text x="135" y="190" fill="#f0f6fc" font-family="monospace" font-size="22">zehung.com</text>
+  <text x="75" y="245" fill="#b1bac4" font-family="Arial,sans-serif" font-size="18">檔案只需要一行純網域，不要加入 https://、斜線或路徑。</text>
+  <rect x="45" y="345" width="1110" height="185" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="75" y="395" fill="#f0f6fc" font-family="Arial,sans-serif" font-size="24" font-weight="700">Actions → pages build and deployment</text>
+  <circle cx="86" cy="455" r="12" fill="none" stroke="#d29922" stroke-width="5"/>
+  <text x="120" y="463" fill="#d29922" font-family="Arial,sans-serif" font-size="20" font-weight="700">In progress</text>
+  <text x="295" y="463" fill="#b1bac4" font-family="Arial,sans-serif" font-size="19">等待 Workflow 完成並顯示綠色成功，Custom Domain 才算部署生效。</text>
+</svg>
