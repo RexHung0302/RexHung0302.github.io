@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 相信很多人都看過這種驗證碼：一張扭曲的英數字圖片，旁邊再放一顆重新整理按鈕，使用者必須猜出上面到底寫了什麼。 筆者的 Side Project 很久以前也自己刻了一套，直到最近回頭檢查才發現，這個驗證碼與其說是在防機器人，不如說只是在考驗正常使用者的視力（笑 更嚴重的是，答案存在前端、比對也發生在前端，後端 API 完全不知道有人機驗證這件事情。攻擊者根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證">
+<meta property="og:url" content="https://rexhung0302.github.io/2026/08/01/20260801/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 相信很多人都看過這種驗證碼：一張扭曲的英數字圖片，旁邊再放一顆重新整理按鈕，使用者必須猜出上面到底寫了什麼。 筆者的 Side Project 很久以前也自己刻了一套，直到最近回頭檢查才發現，這個驗證碼與其說是在防機器人，不如說只是在考驗正常使用者的視力（笑 更嚴重的是，答案存在前端、比對也發生在前端，後端 API 完全不知道有人機驗證這件事情。攻擊者根">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2026-08-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-01T10:09:15.278Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="NodeJS">
+<meta property="article:tag" content="Express">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="Turnstile">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2026/08/01/20260801/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證 | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2026/08/01/20260801/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2026-08-01 12:00:00 / 修改時間：18:09:15" itemprop="dateCreated datePublished" datetime="2026-08-01T12:00:00+08:00">2026-08-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/Cloudflare/" itemprop="url" rel="index"><span itemprop="name">Cloudflare</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>14 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260801/banner.png" alt="Cloudflare Turnstile 取代舊式文字驗證碼"></p>
+<p>相信很多人都看過這種驗證碼：一張扭曲的英數字圖片，旁邊再放一顆重新整理按鈕，使用者必須猜出上面到底寫了什麼。</p>
+<p>筆者的 Side Project 很久以前也自己刻了一套，直到最近回頭檢查才發現，這個驗證碼與其說是在防機器人，不如說只是在考驗正常使用者的視力（笑</p>
+<p>更嚴重的是，答案存在前端、比對也發生在前端，後端 API 完全不知道有人機驗證這件事情。攻擊者根本不需要辨識圖片，只要直接呼叫 API 就能無視整套流程。</p>
+<p>所以這次決定把舊文字驗證碼移除，改用 <strong>Cloudflare Turnstile</strong>，並且在 Express 後端呼叫 <strong>Siteverify API</strong> 驗證 Token。</p>
+<p>這次實際改造的專案使用 <strong>Vue 2</strong>，所以文章會以 Vue Component 作為主要範例；不過 Turnstile 本身並不綁定前端框架，後面也會補上一份 <strong>React Hooks</strong> 的對應實作。無論是 Vue、React 或原生 JavaScript，真正不能省略的都是後端 Siteverify。</p>
+<blockquote>
+<p>這篇最重要的觀念只有一句：<strong>換掉前端 Widget 不是重點，把是否放行的決定權移到後端才是。</strong></p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本文實際案例使用的主要技術：</p>
+<ul>
+<li>Vue 2.7、Vue CLI、Webpack、Pug、BootstrapVue</li>
+<li>Vuex、vee-validate</li>
+<li>Express、Sequelize、Joi、Axios</li>
+<li>Cloudflare Turnstile</li>
+</ul>
+<blockquote>
+<p>Vue 2 是本篇的實戰案例，不是使用 Turnstile 的必要條件；React、Vue 3、Next.js 或其他能載入 Browser SDK 並將 Token 送往後端的前端技術都能使用同一套安全流程。</p>
+</blockquote>
+<p>本篇文章將會有以下幾個部分：</p>
+<ul>
+<li><a href="#introduction--%E5%89%8D%E8%A8%80">Introduction &amp; 前言</a></li>
+<li><a href="#summary--%E6%91%98%E8%A6%81">Summary &amp; 摘要</a></li>
+<li><a href="#%E5%8E%9F%E6%9C%AC%E7%9A%84%E9%A9%97%E8%AD%89%E6%96%B9%E5%BC%8F%E6%9C%89%E4%BB%80%E9%BA%BC%E5%95%8F%E9%A1%8C">原本的驗證方式有什麼問題</a></li>
+<li><a href="#turnstile-%E7%9A%84%E5%AE%89%E5%85%A8%E9%A9%97%E8%AD%89%E6%B5%81%E7%A8%8B">Turnstile 的安全驗證流程</a></li>
+<li><a href="#%E5%BB%BA%E7%AB%8B-turnstile-widget-%E8%88%87%E9%87%91%E9%91%B0">建立 Turnstile Widget 與金鑰</a></li>
+<li><a href="#vue-2-%E5%89%8D%E7%AB%AF%E5%85%83%E4%BB%B6%E5%AF%A6%E4%BD%9C">Vue 2 前端元件實作</a></li>
+<li><a href="#react-hooks-%E5%B0%8D%E6%87%89%E5%AF%A6%E4%BD%9C">React Hooks 對應實作</a></li>
+<li><a href="#%E8%A1%A8%E5%96%AE%E5%B8%B6%E4%B8%8A%E4%B8%80%E6%AC%A1%E6%80%A7-token">表單帶上一次性 Token</a></li>
+<li><a href="#express-%E5%BE%8C%E7%AB%AF%E9%A9%97%E8%AD%89-token">Express 後端驗證 Token</a></li>
+<li><a href="#%E6%9C%AC%E6%A9%9F%E8%88%87%E8%87%AA%E5%8B%95%E5%8C%96%E6%B8%AC%E8%A9%A6">本機與自動化測試</a></li>
+<li><a href="#%E5%AF%A6%E9%9A%9B%E8%B8%A9%E5%88%B0%E7%9A%84%E5%9D%91">實際踩到的坑</a><ul>
+<li><a href="#%E5%9D%91-1processenv-%E5%85%A8%E9%83%A8%E9%83%BD%E6%98%AF%E5%AD%97%E4%B8%B2">坑 1：process.env 全部都是字串</a></li>
+<li><a href="#%E5%9D%91-2joi-%E6%93%8B%E6%8E%89%E6%96%B0%E6%AC%84%E4%BD%8D">坑 2：Joi 擋掉新欄位</a></li>
+<li><a href="#%E5%9D%91-3%E4%BF%AE%E6%94%B9-vue-cli-%E7%9A%84-env-%E5%BE%8C%E6%B2%92%E6%9C%89%E9%87%8D%E5%95%9F">坑 3：修改 Vue CLI 的 .env 後沒有重啟</a></li>
+<li><a href="#%E5%9D%91-4token-%E5%A4%B1%E6%95%97%E5%BE%8C%E6%B2%92%E6%9C%89-reset">坑 4：Token 失敗後沒有 Reset</a></li>
+<li><a href="#%E5%9D%91-5%E5%89%8D%E5%BE%8C%E7%AB%AF%E9%96%8B%E9%97%9C%E4%B8%8D%E5%90%8C%E6%AD%A5">坑 5：前後端開關不同步</a></li>
+</ul>
+</li>
+<li><a href="#fail-open-%E9%82%84%E6%98%AF-fail-closed">Fail-open 還是 Fail-closed</a></li>
+<li><a href="#%E9%A9%97%E6%94%B6%E8%88%87%E6%9C%80%E7%B5%82%E6%88%90%E6%9E%9C">驗收與最終成果</a><ul>
+<li><a href="#%E5%89%8D%E7%AB%AF%E9%A9%97%E8%AD%89%E6%88%90%E5%8A%9F">前端驗證成功</a></li>
+<li><a href="#api-%E8%88%87%E9%A0%90%E7%B4%84%E6%B5%81%E7%A8%8B%E6%88%90%E5%8A%9F">API 與預約流程成功</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B8%BD%E7%B5%90">總結</a></li>
+</ul>
+<hr>
+<h2 id="原本的驗證方式有什麼問題"><a href="#原本的驗證方式有什麼問題" class="headerlink" title="原本的驗證方式有什麼問題"></a>原本的驗證方式有什麼問題</h2><p>先看看原本的文字驗證碼：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260801/verify-old-way.png" alt="舊的前端自繪文字驗證碼"></p>
+<p>舊元件會在 Canvas 畫四個隨機英數字，再透過 <code>toDataURL()</code> 變成圖片。看起來似乎有模有樣，但仔細看流程就會發現三個問題：</p>
+<ol>
+<li>答案以明碼存在 Vue Component 的 <code>data.varifyAnswer</code></li>
+<li>送出時只在前端比對輸入值與 <code>$refs.VerifyComponent.varifyAnswer</code></li>
+<li>答案與驗證結果從來沒有送到後端</li>
+</ol>
+<p>簡化後大概就是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (userForm.<span class="property">verify</span> !== $refs.<span class="property">VerifyComponent</span>.<span class="property">varifyAnswer</span>) &#123;</span><br><span class="line">  <span class="comment">// 顯示驗證失敗</span></span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前端覺得成功，就直接呼叫 API</span></span><br><span class="line"><span class="title function_">submitForm</span>();</span><br></pre></td></tr></table></figure>
+
+<p>只要打開 DevTools 就可能讀到答案；就算不讀答案，直接用 Postman、curl 或 Script 呼叫後端 API，也能完全繞過驗證。</p>
+<p>這不是驗證碼長得不夠複雜，而是信任邊界擺錯地方。<strong>瀏覽器裡的 JavaScript、欄位與判斷都能被使用者修改，不能拿來當最後的安全決策。</strong></p>
+<hr>
+<h2 id="Turnstile-的安全驗證流程"><a href="#Turnstile-的安全驗證流程" class="headerlink" title="Turnstile 的安全驗證流程"></a>Turnstile 的安全驗證流程</h2><p>Cloudflare Turnstile 可以獨立使用，不要求網站 DNS 一定要託管在 Cloudflare，也不必開啟橘色雲朵。它真正完整的流程分成前端與後端兩段。</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260801/turnstile-siteverify-flow.png" alt="Cloudflare Turnstile 前端 Token 與後端 Siteverify 流程"></p>
+<p>整體流程如下：</p>
+<ol>
+<li>Vue 頁面使用公開的 <strong>Site Key</strong> Render Turnstile Widget</li>
+<li>使用者通過 Challenge 後，Cloudflare 簽發一次性 Token</li>
+<li>前端把表單資料與 Token 一起送到 Express API</li>
+<li>Express Middleware 使用私密的 <strong>Secret Key</strong> 呼叫 Siteverify</li>
+<li>Cloudflare 回傳 <code>success: true</code> 才執行 Controller</li>
+<li>驗證失敗就拒絕 Request，前端 Reset Widget 並取得新 Token</li>
+</ol>
+<p>前後端職責可以這樣看：</p>
+<table>
+<thead>
+<tr>
+<th>層級</th>
+<th>負責內容</th>
+<th>是否能當最終依據</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vue Widget</td>
+<td>顯示 Challenge、取得 Token、改善 UX</td>
+<td>否，前端可以被竄改</td>
+</tr>
+<tr>
+<td>Express Middleware</td>
+<td>帶 Secret 呼叫 Siteverify，決定是否放行</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<p>Cloudflare 官方也明確說明，只有前端 Widget 並不完整，<strong>Server-side validation 是必須的</strong>。Token 最長只有 300 秒，而且每一組只能成功驗證一次。</p>
+<hr>
+<h2 id="建立-Turnstile-Widget-與金鑰"><a href="#建立-Turnstile-Widget-與金鑰" class="headerlink" title="建立 Turnstile Widget 與金鑰"></a>建立 Turnstile Widget 與金鑰</h2><p>登入 Cloudflare Dashboard 後進入：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Turnstile → Add widget</span><br></pre></td></tr></table></figure>
+
+<p>依序設定：</p>
+<ul>
+<li><strong>Widget name</strong>：取一個看得懂用途的名稱</li>
+<li><strong>Hostname management</strong>：加入正式網站使用的 Domain</li>
+<li><strong>Widget mode</strong>：Managed、Non-Interactive 或 Invisible</li>
+</ul>
+<p>一般表單可以先使用 <strong>Managed</strong>，Cloudflare 會根據風險決定是否需要互動。建立完成後會得到 Site Key 與 Secret Key：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260801/secrect-key-generate.png" alt="Cloudflare Turnstile 建立完成後取得 Site Key 與 Secret Key"></p>
+<p>兩把 Key 的用途完全不同：</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>放置位置</th>
+<th>是否可以公開</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Site Key</td>
+<td>Vue 前端</td>
+<td>可以，本來就會出現在 Browser Bundle</td>
+</tr>
+<tr>
+<td>Secret Key</td>
+<td>Express 後端環境變數</td>
+<td><strong>不可以</strong></td>
+</tr>
+</tbody></table>
+<p><em><strong>Secret Key 絕對不能放進 <code>VUE_APP_</code> 開頭的環境變數。</strong></em></p>
+<p>Vue CLI 會在 Build 階段把 <code>VUE_APP_*</code> 經由 DefinePlugin 寫入前端 Bundle，任何開啟網站的人都可能看到。正確方式是前端只放 Site Key：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">VUE_APP_TURNSTILE_ENABLE=true</span><br><span class="line">VUE_APP_TURNSTILE_SITE_KEY=你的_SITE_KEY</span><br></pre></td></tr></table></figure>
+
+<p>後端才放 Secret Key：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TURNSTILE_ENABLE=true</span><br><span class="line">TURNSTILE_SECRET_KEY=你的_SECRET_KEY</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Secret 只出現一次時要立即保存；不要提交到 Git，也不要放進 Screenshot、Log 或前端錯誤訊息。</p>
+</blockquote>
+<hr>
+<h2 id="Vue-2-前端元件實作"><a href="#Vue-2-前端元件實作" class="headerlink" title="Vue 2 前端元件實作"></a>Vue 2 前端元件實作</h2><p>因為這個專案是 Vue SPA，而且有多個 Create、Edit 頁面共用驗證，所以使用 <code>render=explicit</code> 手動管理 Widget 的生命週期。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=&quot;pug&quot;&gt;</span><br><span class="line">    b-form-group(v-if=&quot;isTurnstileEnable&quot;)</span><br><span class="line">        label</span><br><span class="line">            code *</span><br><span class="line">            span 人機驗證</span><br><span class="line">        #turnstileArea(ref=&quot;container&quot;)</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">const SCRIPT_ID = &#x27;cf-turnstile-script&#x27;;</span><br><span class="line">const SCRIPT_SRC = &#x27;https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&#x27;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;TurnstileComponent&#x27;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      isTurnstileEnable:</span><br><span class="line">        process.env.VUE_APP_TURNSTILE_ENABLE === &#x27;true&#x27; &amp;&amp;</span><br><span class="line">        !!process.env.VUE_APP_TURNSTILE_SITE_KEY,</span><br><span class="line">      widgetId: null,</span><br><span class="line">      token: null</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    if (!this.isTurnstileEnable) return;</span><br><span class="line">    this.loadScript()</span><br><span class="line">      .then(() =&gt; this.renderWidget())</span><br><span class="line">      .catch(() =&gt; this.$emit(&#x27;error&#x27;));</span><br><span class="line">  &#125;,</span><br><span class="line">  beforeDestroy() &#123;</span><br><span class="line">    if (this.widgetId !== null &amp;&amp; window.turnstile) &#123;</span><br><span class="line">      window.turnstile.remove(this.widgetId);</span><br><span class="line">      this.widgetId = null;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    loadScript() &#123;</span><br><span class="line">      if (window.turnstile) return Promise.resolve();</span><br><span class="line"></span><br><span class="line">      const exist = document.getElementById(SCRIPT_ID);</span><br><span class="line">      if (exist) &#123;</span><br><span class="line">        return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">          exist.addEventListener(&#x27;load&#x27;, resolve);</span><br><span class="line">          exist.addEventListener(&#x27;error&#x27;, reject);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        const script = document.createElement(&#x27;script&#x27;);</span><br><span class="line">        script.id = SCRIPT_ID;</span><br><span class="line">        script.src = SCRIPT_SRC;</span><br><span class="line">        script.async = true;</span><br><span class="line">        script.defer = true;</span><br><span class="line">        script.onload = resolve;</span><br><span class="line">        script.onerror = reject;</span><br><span class="line">        document.head.appendChild(script);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    renderWidget() &#123;</span><br><span class="line">      this.widgetId = window.turnstile.render(this.$refs.container, &#123;</span><br><span class="line">        sitekey: process.env.VUE_APP_TURNSTILE_SITE_KEY,</span><br><span class="line">        language: &#x27;zh-tw&#x27;,</span><br><span class="line">        callback: (token) =&gt; &#123;</span><br><span class="line">          this.token = token;</span><br><span class="line">          this.$emit(&#x27;verified&#x27;, token);</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;expired-callback&#x27;: () =&gt; &#123;</span><br><span class="line">          this.token = null;</span><br><span class="line">          this.$emit(&#x27;expired&#x27;);</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x27;error-callback&#x27;: (errorCode) =&gt; &#123;</span><br><span class="line">          this.token = null;</span><br><span class="line">          this.$emit(&#x27;error&#x27;, errorCode);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    isEnabled() &#123;</span><br><span class="line">      return this.isTurnstileEnable;</span><br><span class="line">    &#125;,</span><br><span class="line">    getToken() &#123;</span><br><span class="line">      return this.token;</span><br><span class="line">    &#125;,</span><br><span class="line">    reset() &#123;</span><br><span class="line">      this.token = null;</span><br><span class="line">      if (this.widgetId !== null &amp;&amp; window.turnstile) &#123;</span><br><span class="line">        window.turnstile.reset(this.widgetId);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>這裡有四個刻意做出的選擇：</p>
+<table>
+<thead>
+<tr>
+<th>設計</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>?render=explicit</code></td>
+<td>SPA Route 切換或動態表單需要自己控制 Render 時機</td>
+</tr>
+<tr>
+<td>Script 使用固定 ID</td>
+<td>多頁共用元件時，整站只載入一次 SDK</td>
+</tr>
+<tr>
+<td>使用 <code>$refs.container</code></td>
+<td>避免全域 ID 在多實例之間互相打架</td>
+</tr>
+<tr>
+<td><code>beforeDestroy()</code> 呼叫 <code>remove()</code></td>
+<td>避免換頁後殘留舊 Widget</td>
+</tr>
+</tbody></table>
+<p>Cloudflare 目前的官方文件也建議 SPA、動態內容與需要生命週期控制的頁面使用 Explicit Rendering。</p>
+<hr>
+<h2 id="React-Hooks-對應實作"><a href="#React-Hooks-對應實作" class="headerlink" title="React Hooks 對應實作"></a>React Hooks 對應實作</h2><p>如果專案使用 React，整體概念沒有改變，只是把 Vue 的生命週期與 <code>$refs</code> 換成 React 的 <code>useEffect</code>、<code>useRef</code> 與 <code>useState</code>：</p>
+<table>
+<thead>
+<tr>
+<th>Vue 2</th>
+<th>React</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mounted()</code></td>
+<td><code>useEffect()</code></td>
+</tr>
+<tr>
+<td><code>beforeDestroy()</code></td>
+<td><code>useEffect</code> Cleanup Function</td>
+</tr>
+<tr>
+<td><code>$refs.container</code></td>
+<td><code>useRef()</code></td>
+</tr>
+<tr>
+<td><code>data().token</code></td>
+<td><code>useState()</code> 或由 Callback 往上傳</td>
+</tr>
+<tr>
+<td>Component Method <code>reset()</code></td>
+<td>透過 <code>forwardRef()</code> + <code>useImperativeHandle()</code> 暴露</td>
+</tr>
+</tbody></table>
+<p>以下同樣採用 Explicit Rendering，不額外依賴第三方 React Wrapper：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  forwardRef,</span><br><span class="line">  useEffect,</span><br><span class="line">  useImperativeHandle,</span><br><span class="line">  useRef,</span><br><span class="line">  useState</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">SCRIPT_ID</span> = <span class="string">&#x27;cf-turnstile-script&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">SCRIPT_SRC</span> =</span><br><span class="line">  <span class="string">&#x27;https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadTurnstileScript</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">turnstile</span>) <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> existingScript = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="variable constant_">SCRIPT_ID</span>);</span><br><span class="line">  <span class="keyword">if</span> (existingScript) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      existingScript.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, resolve, &#123; <span class="attr">once</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">      existingScript.<span class="title function_">addEventListener</span>(<span class="string">&#x27;error&#x27;</span>, reject, &#123; <span class="attr">once</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">    script.<span class="property">id</span> = <span class="variable constant_">SCRIPT_ID</span>;</span><br><span class="line">    script.<span class="property">src</span> = <span class="variable constant_">SCRIPT_SRC</span>;</span><br><span class="line">    script.<span class="property">async</span> = <span class="literal">true</span>;</span><br><span class="line">    script.<span class="property">defer</span> = <span class="literal">true</span>;</span><br><span class="line">    script.<span class="property">onload</span> = resolve;</span><br><span class="line">    script.<span class="property">onerror</span> = reject;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(script);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Turnstile</span> = <span class="title function_">forwardRef</span>(<span class="keyword">function</span> <span class="title function_">Turnstile</span>(<span class="params"></span></span><br><span class="line"><span class="params">  &#123; siteKey, onVerified, onExpired, onError &#125;,</span></span><br><span class="line"><span class="params">  ref</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> containerRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> widgetIdRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> callbacksRef = <span class="title function_">useRef</span>(&#123; onVerified, onExpired, onError &#125;);</span><br><span class="line">  <span class="keyword">const</span> [token, setToken] = <span class="title function_">useState</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  callbacksRef.<span class="property">current</span> = &#123; onVerified, onExpired, onError &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> disposed = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">loadTurnstileScript</span>()</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (disposed || !containerRef.<span class="property">current</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        widgetIdRef.<span class="property">current</span> = <span class="variable language_">window</span>.<span class="property">turnstile</span>.<span class="title function_">render</span>(</span><br><span class="line">          containerRef.<span class="property">current</span>,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">sitekey</span>: siteKey,</span><br><span class="line">            <span class="attr">language</span>: <span class="string">&#x27;zh-tw&#x27;</span>,</span><br><span class="line">            <span class="attr">callback</span>: <span class="function">(<span class="params">nextToken</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="title function_">setToken</span>(nextToken);</span><br><span class="line">              callbacksRef.<span class="property">current</span>.<span class="property">onVerified</span>?.(nextToken);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&#x27;expired-callback&#x27;</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">              <span class="title function_">setToken</span>(<span class="literal">null</span>);</span><br><span class="line">              callbacksRef.<span class="property">current</span>.<span class="property">onExpired</span>?.();</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="string">&#x27;error-callback&#x27;</span>: <span class="function">(<span class="params">errorCode</span>) =&gt;</span> &#123;</span><br><span class="line">              <span class="title function_">setToken</span>(<span class="literal">null</span>);</span><br><span class="line">              callbacksRef.<span class="property">current</span>.<span class="property">onError</span>?.(errorCode);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        );</span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">catch</span>(<span class="function">() =&gt;</span> callbacksRef.<span class="property">current</span>.<span class="property">onError</span>?.());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      disposed = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (widgetIdRef.<span class="property">current</span> !== <span class="literal">null</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">turnstile</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">turnstile</span>.<span class="title function_">remove</span>(widgetIdRef.<span class="property">current</span>);</span><br><span class="line">        widgetIdRef.<span class="property">current</span> = <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, [siteKey]);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useImperativeHandle</span>(ref, <span class="function">() =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">getToken</span>: <span class="function">() =&gt;</span> token,</span><br><span class="line">    <span class="attr">reset</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setToken</span>(<span class="literal">null</span>);</span><br><span class="line">      <span class="keyword">if</span> (widgetIdRef.<span class="property">current</span> !== <span class="literal">null</span> &amp;&amp; <span class="variable language_">window</span>.<span class="property">turnstile</span>) &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">turnstile</span>.<span class="title function_">reset</span>(widgetIdRef.<span class="property">current</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;), [token]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;containerRef&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Turnstile</span>;</span><br></pre></td></tr></table></figure>
+
+<p>表單可以保存 Token，送出時與其他欄位一起傳給 Express：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRef, useState &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Turnstile</span> <span class="keyword">from</span> <span class="string">&#x27;./Turnstile&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ReservationForm</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> turnstileRef = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> [turnstileToken, setTurnstileToken] = <span class="title function_">useState</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handleSubmit</span>(<span class="params">event</span>) &#123;</span><br><span class="line">    event.<span class="title function_">preventDefault</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!turnstileToken) &#123;</span><br><span class="line">      <span class="title function_">alert</span>(<span class="string">&#x27;請先完成人機驗證&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/api/reservation&#x27;</span>, &#123;</span><br><span class="line">        <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">        <span class="attr">headers</span>: &#123; <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> &#125;,</span><br><span class="line">        <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">          <span class="comment">// ...其他表單欄位</span></span><br><span class="line">          <span class="attr">cf_turnstile_token</span>: turnstileToken</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (!response.<span class="property">ok</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;Reservation failed&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      <span class="title function_">setTurnstileToken</span>(<span class="literal">null</span>);</span><br><span class="line">      turnstileRef.<span class="property">current</span>?.<span class="title function_">reset</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;handleSubmit&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;/* 其他表單欄位 */&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">Turnstile</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">ref</span>=<span class="string">&#123;turnstileRef&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">siteKey</span>=<span class="string">&#123;import.meta.env.VITE_TURNSTILE_SITE_KEY&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onVerified</span>=<span class="string">&#123;setTurnstileToken&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">onExpired</span>=<span class="string">&#123;()</span> =&gt;</span> setTurnstileToken(null)&#125;</span></span><br><span class="line"><span class="language-xml">        onError=&#123;() =&gt; setTurnstileToken(null)&#125;</span></span><br><span class="line"><span class="language-xml">      /&gt;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span>&gt;</span>送出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面使用的是 Vite，所以前端環境變數為 <code>VITE_TURNSTILE_SITE_KEY</code>；Create React App 則通常使用 <code>REACT_APP_TURNSTILE_SITE_KEY</code>。兩者都會被打包到 Browser，仍然只能放公開的 Site Key，不能放 Secret Key。</p>
+<p>如果是 Next.js 等支援 SSR 的框架，<code>window</code> 只存在 Client，載入 SDK 與 <code>turnstile.render()</code> 必須放在 Client Component 的 <code>useEffect()</code> 內執行。無論 React 專案怎麼組織，Token 最後仍然傳給本文相同的 Express Middleware，後端實作完全不需要因為 Vue 換成 React 而重寫。</p>
+<blockquote>
+<p>React 開發模式如果開啟 Strict Mode，Effect 可能執行額外的 Setup&#x2F;Cleanup 週期來檢查副作用。保留 <code>remove(widgetId)</code> 與 <code>disposed</code> 防護，可以避免開發時殘留或重複建立 Widget。</p>
+</blockquote>
+<hr>
+<h2 id="表單帶上一次性-Token"><a href="#表單帶上一次性-Token" class="headerlink" title="表單帶上一次性 Token"></a>表單帶上一次性 Token</h2><p>把元件放進表單：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TurnstileComponent(</span><br><span class="line">  ref=&quot;TurnstileComponent&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>送出前先檢查 Token，再把它一起放進 Payload：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cfToken = vm.<span class="property">$refs</span>.<span class="property">TurnstileComponent</span>.<span class="title function_">getToken</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (vm.<span class="property">$refs</span>.<span class="property">TurnstileComponent</span>.<span class="title function_">isEnabled</span>() &amp;&amp; !cfToken) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">$swal</span>.<span class="title function_">fire</span>(&#123;</span><br><span class="line">    <span class="attr">icon</span>: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;請先完成人機驗證&#x27;</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vm.<span class="property">$store</span>.<span class="title function_">dispatch</span>(<span class="string">&#x27;member_reservation/storeHandler&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// ...其他表單欄位</span></span><br><span class="line">  <span class="attr">cf_turnstile_token</span>: cfToken</span><br><span class="line">&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 成功流程</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    vm.<span class="property">$refs</span>.<span class="property">TurnstileComponent</span>.<span class="title function_">reset</span>();</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/others/loading.gif" data-original="/images/20260801/verify-demo.png" alt="表單內的 Cloudflare Turnstile Widget"></p>
+<p>這裡的 <code>.catch()</code> 不是可有可無的防禦性程式碼。Turnstile Token 有兩項限制：</p>
+<ul>
+<li>產生後 <strong>300 秒</strong>過期</li>
+<li>每組 Token 只能驗證一次</li>
+</ul>
+<p>只要 API 已經拿 Token 去 Siteverify，不論後續表單因為什麼原因失敗，再按一次送出都不能重用同一組 Token，否則會得到 <code>timeout-or-duplicate</code>。因此失敗後必須 Reset Widget，重新取得新 Token。</p>
+<p>使用者沒有先完成驗證就送出時，前端直接阻止 API：</p>
+<p><img src="/images/others/loading.gif" data-original="/images/20260801/verify-fail.png" alt="尚未完成人機驗證的錯誤提示"></p>
+<p>不過再次提醒，這個前端檢查只是改善體驗。真正防止繞過的仍然是下一段後端 Middleware。</p>
+<hr>
+<h2 id="Express-後端驗證-Token"><a href="#Express-後端驗證-Token" class="headerlink" title="Express 後端驗證 Token"></a>Express 後端驗證 Token</h2><p>後端新增 <code>verifyTurnstileToken</code> Middleware：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">&#x27;axios&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="variable constant_">TURNSTILE_ENABLE</span>, <span class="variable constant_">TURNSTILE_SECRET_KEY</span> &#125; = process.<span class="property">env</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">SITEVERIFY_URL</span> =</span><br><span class="line">  <span class="string">&#x27;https://challenges.cloudflare.com/turnstile/v0/siteverify&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">isTurnstileEnable</span> = (<span class="params"></span>) =&gt;</span><br><span class="line">  <span class="variable constant_">TURNSTILE_ENABLE</span> === <span class="string">&#x27;true&#x27;</span> &amp;&amp; <span class="variable constant_">TURNSTILE_SECRET_KEY</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">verifyTurnstileToken</span> = <span class="keyword">async</span> (<span class="params">req, res, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">isTurnstileEnable</span>()) <span class="keyword">return</span> <span class="title function_">next</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> token = req.<span class="property">body</span>.<span class="property">cf_turnstile_token</span> || <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span> (!token) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">499</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">      <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;非法操作[Err: Turnstile Missing]&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> params = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>();</span><br><span class="line">    params.<span class="title function_">append</span>(<span class="string">&#x27;secret&#x27;</span>, <span class="variable constant_">TURNSTILE_SECRET_KEY</span>);</span><br><span class="line">    params.<span class="title function_">append</span>(<span class="string">&#x27;response&#x27;</span>, token);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123; data &#125; = <span class="keyword">await</span> axios.<span class="title function_">post</span>(<span class="variable constant_">SITEVERIFY_URL</span>, params, &#123;</span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/x-www-form-urlencoded&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">timeout</span>: <span class="number">10000</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!data.<span class="property">success</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> errorCodes = data[<span class="string">&#x27;error-codes&#x27;</span>] || [];</span><br><span class="line">      <span class="keyword">const</span> errMsg = errorCodes.<span class="title function_">includes</span>(<span class="string">&#x27;timeout-or-duplicate&#x27;</span>)</span><br><span class="line">        ? <span class="string">&#x27;驗證已過期，請重新驗證後再送出&#x27;</span></span><br><span class="line">        : <span class="string">&#x27;人機驗證失敗，請重新驗證&#x27;</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">499</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">message</span>: errMsg</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title function_">next</span>();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">499</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">      <span class="attr">success</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">message</span>: <span class="string">&#x27;人機驗證服務異常，請稍後再試&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>499</code> 是這個既有專案沿用的自訂處理。若是新 API，筆者會更傾向依團隊規範使用 <code>400</code>、<code>403</code> 或 <code>503</code>，並透過應用層 Error Code 區分 Missing、Invalid 與 Siteverify unavailable。</p>
+</blockquote>
+<p>Route 的 Middleware 順序也有意義：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.<span class="title function_">post</span>(</span><br><span class="line">  <span class="string">`<span class="subst">$&#123;apiBasePath&#125;</span>/store`</span>,</span><br><span class="line">  verifyMemberAuthToken,</span><br><span class="line">  verifyTurnstileToken,</span><br><span class="line">  storeSchema,</span><br><span class="line">  controller.<span class="property">store</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>流程是：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">確認登入身分 → 驗證 Turnstile → 驗證完整欄位 → 執行 Controller</span><br></pre></td></tr></table></figure>
+
+<p>機器人送來的垃圾 Request 可以在前面被擋下，不必浪費資源跑完整 Schema 與商業邏輯。</p>
+<p>另外 Joi 預設會拒絕沒有宣告的欄位，所以 Schema 也要補上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cf_turnstile_token</span>: <span class="title class_">Joi</span>.<span class="title function_">string</span>().<span class="title function_">allow</span>(<span class="literal">null</span>).<span class="title function_">allow</span>(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>沒有設成 <code>required()</code> 是刻意的，因為是否開啟 Turnstile 由 Middleware 的環境變數決定，Schema 不需要再維護第二份開關邏輯。</p>
+<hr>
+<h2 id="本機與自動化測試"><a href="#本機與自動化測試" class="headerlink" title="本機與自動化測試"></a>本機與自動化測試</h2><p>正式 Site Key 會限制允許的 Hostname，本機自訂 <code>.local</code> Domain 或自動化 Browser 很容易無法通過。Cloudflare 官方提供 Dummy Keys，能穩定測試成功、失敗與 Token 重複使用。</p>
+<table>
+<thead>
+<tr>
+<th>Site Key</th>
+<th>Secret Key</th>
+<th>行為</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>1x00000000000000000000AA</code></td>
+<td><code>1x0000000000000000000000000000000AA</code></td>
+<td>永遠成功</td>
+</tr>
+<tr>
+<td><code>2x00000000000000000000AB</code></td>
+<td><code>2x0000000000000000000000000000000AA</code></td>
+<td>永遠失敗</td>
+</tr>
+<tr>
+<td><code>3x00000000000000000000FF</code></td>
+<td>—</td>
+<td>強制顯示互動 Challenge</td>
+</tr>
+<tr>
+<td><code>1x00000000000000000000AA</code></td>
+<td><code>3x0000000000000000000000000000000AA</code></td>
+<td>回傳 <code>timeout-or-duplicate</code></td>
+</tr>
+</tbody></table>
+<p>Dummy Keys 能在任何 Domain 使用，很適合 Local、Cypress、Playwright 或 CI；但<strong>絕對不能放到 Production</strong>，而且測試 Site Key 必須搭配測試 Secret Key，正式 Secret 不會接受 Dummy Token。</p>
+<p>官方測試金鑰與最新行為可以查看 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/troubleshooting/testing/">Test your Turnstile implementation</a>。</p>
+<hr>
+<h2 id="實際踩到的坑"><a href="#實際踩到的坑" class="headerlink" title="實際踩到的坑"></a>實際踩到的坑</h2><h3 id="坑-1：process-env-全部都是字串"><a href="#坑-1：process-env-全部都是字串" class="headerlink" title="坑 1：process.env 全部都是字串"></a>坑 1：process.env 全部都是字串</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 錯誤：&#x27;false&#x27; 仍然是 truthy</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable constant_">TURNSTILE_ENABLE</span>) <span class="keyword">return</span> <span class="title function_">next</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正確</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable constant_">TURNSTILE_ENABLE</span> !== <span class="string">&#x27;true&#x27;</span>) <span class="keyword">return</span> <span class="title function_">next</span>();</span><br></pre></td></tr></table></figure>
+
+<p>這種 Bug 最陰險的地方是 <code>.env</code> 明明寫著 <code>false</code>，功能卻從來沒有真的關掉。</p>
+<h3 id="坑-2：Joi-擋掉新欄位"><a href="#坑-2：Joi-擋掉新欄位" class="headerlink" title="坑 2：Joi 擋掉新欄位"></a>坑 2：Joi 擋掉新欄位</h3><p>前端加入 <code>cf_turnstile_token</code> 後，如果 Joi Schema 沒有同步宣告，Request 會先被 Unknown Field 擋掉，而且錯誤訊息看起來與 Turnstile 完全無關。</p>
+<h3 id="坑-3：修改-Vue-CLI-的-env-後沒有重啟"><a href="#坑-3：修改-Vue-CLI-的-env-後沒有重啟" class="headerlink" title="坑 3：修改 Vue CLI 的 .env 後沒有重啟"></a>坑 3：修改 Vue CLI 的 .env 後沒有重啟</h3><p>Vue CLI 在 Build 階段將環境變數寫入 Bundle，HMR 不會重新讀取 <code>.env</code>。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改 .env → 重啟 Dev Server</span><br><span class="line">正式環境修改 → 重新 Build 與 Deploy</span><br></pre></td></tr></table></figure>
+
+<p>Widget 一片空白通常先檢查環境變數是否載入；出現紅色錯誤框則檢查 Site Key 與 Hostname 是否授權。</p>
+<h3 id="坑-4：Token-失敗後沒有-Reset"><a href="#坑-4：Token-失敗後沒有-Reset" class="headerlink" title="坑 4：Token 失敗後沒有 Reset"></a>坑 4：Token 失敗後沒有 Reset</h3><p>原本 Promise 只有 <code>.then()</code>，加上 Turnstile 後，API 失敗再送一次會重用已花掉的 Token，使用者就會永遠卡在 <code>timeout-or-duplicate</code>。最後在 <code>.catch()</code> 呼叫 <code>reset()</code> 才補齊完整流程。</p>
+<h3 id="坑-5：前後端開關不同步"><a href="#坑-5：前後端開關不同步" class="headerlink" title="坑 5：前後端開關不同步"></a>坑 5：前後端開關不同步</h3><table>
+<thead>
+<tr>
+<th>狀態</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前端開、後端關</td>
+<td>多做一次 Widget，但 API 仍會放行</td>
+</tr>
+<tr>
+<td><strong>前端關、後端開</strong></td>
+<td><strong>所有 Request 沒 Token，等同網站停機</strong></td>
+</tr>
+</tbody></table>
+<p>因此部署順序最好固定為：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">部署含正確 Site Key 的前端</span><br><span class="line">→ 確認 Widget 正常</span><br><span class="line">→ 部署後端 Secret</span><br><span class="line">→ 開啟後端 TURNSTILE_ENABLE</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Fail-open-還是-Fail-closed"><a href="#Fail-open-還是-Fail-closed" class="headerlink" title="Fail-open 還是 Fail-closed"></a>Fail-open 還是 Fail-closed</h2><p>如果 Express 無法連上 Cloudflare Siteverify，到底要放行還是擋住？這題沒有所有專案都適用的答案。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>Cloudflare 暫時無法連線</th>
+<th>風險</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fail-open</td>
+<td>表單仍能送出</td>
+<td>攻擊者可能利用驗證服務異常繞過防護</td>
+</tr>
+<tr>
+<td>Fail-closed</td>
+<td>表單暫時不能送出</td>
+<td>第三方服務異常會影響可用性</td>
+</tr>
+</tbody></table>
+<p>這個預約表單選擇 <strong>Fail-closed</strong>：Siteverify 發生 Timeout 或其他錯誤時直接拒絕，因為寧願讓使用者稍後重試，也不希望驗證悄悄失效。</p>
+<p>但如果是高營收的電商結帳，停機成本可能比 Bot 穿透更高，就要搭配 Rate Limit、Queue、重試策略與監控重新評估。安全與可用性往往不是是非題，而是業務風險題。</p>
+<hr>
+<h2 id="驗收與最終成果"><a href="#驗收與最終成果" class="headerlink" title="驗收與最終成果"></a>驗收與最終成果</h2><p>這次共有 18 個 Create、Edit 表單要搬遷。比起一口氣批次取代，筆者會建議先手動完成一個 Create 與一個 Edit，確認 Pattern 與 Build 都正確，再把 Diff 當成範本套到其他檔案。</p>
+<p>可以用簡單的搜尋確認遷移覆蓋率：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 舊實作殘留應該是 0</span></span><br><span class="line">rg <span class="string">&quot;VerifyComponent|varifyAnswer|extend\(&#x27;verify&#x27;&quot;</span> src</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新 Token 應該覆蓋所有目標表單</span></span><br><span class="line">rg -l <span class="string">&quot;cf_turnstile_token&quot;</span> src/views/member | <span class="built_in">wc</span> -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pug 是否正確，最終還是要靠 Build</span></span><br><span class="line">npx vue-cli-service build</span><br></pre></td></tr></table></figure>
+
+<p>遷移完成的判斷不是新舊兩套都能跑，而是舊元件、舊規則與沒人使用的死檔已經從 Codebase 消失。</p>
+<h3 id="前端驗證成功"><a href="#前端驗證成功" class="headerlink" title="前端驗證成功"></a>前端驗證成功</h3><p><img src="/images/others/loading.gif" data-original="/images/20260801/verify-success.png" alt="Cloudflare Turnstile 驗證成功"></p>
+<h3 id="API-與預約流程成功"><a href="#API-與預約流程成功" class="headerlink" title="API 與預約流程成功"></a>API 與預約流程成功</h3><p><img src="/images/others/loading.gif" data-original="/images/20260801/verify-success-2.png" alt="Turnstile 驗證成功後完成預約送出"></p>
+<p>失敗情境可以整理成下表：</p>
+<table>
+<thead>
+<tr>
+<th>情境</th>
+<th>擋在哪一層</th>
+<th>使用者結果</th>
+<th>是否進入 API</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Widget 尚未完成</td>
+<td>Vue 前端</td>
+<td>請先完成人機驗證</td>
+<td>否</td>
+</tr>
+<tr>
+<td>Token 超過 300 秒</td>
+<td><code>expired-callback</code></td>
+<td>Widget 重新取得 Token</td>
+<td>否</td>
+</tr>
+<tr>
+<td>直接呼叫 API、未帶 Token</td>
+<td>Express Middleware</td>
+<td>Turnstile Missing</td>
+<td>有，但被拒絕</td>
+</tr>
+<tr>
+<td>Token 無效或偽造</td>
+<td>Siteverify</td>
+<td>請重新驗證</td>
+<td>有，但被拒絕</td>
+</tr>
+<tr>
+<td>Token 被使用第二次</td>
+<td>Siteverify</td>
+<td>驗證已過期，重新驗證</td>
+<td>有，但被拒絕</td>
+</tr>
+<tr>
+<td>Siteverify 服務異常</td>
+<td>Express <code>catch</code></td>
+<td>稍後再試</td>
+<td>有，但被拒絕</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>原本的文字驗證碼看起來像一道門，但鑰匙與門鎖都放在使用者的 Browser 裡，攻擊者甚至可以直接繞過那扇門走 API。</p>
+<p>Cloudflare Turnstile 真正改善的不是圖片變漂亮，而是建立了一個能由後端驗證的一次性 Token：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Browser 取得 Token</span><br><span class="line">→ Express 使用 Secret 呼叫 Siteverify</span><br><span class="line">→ success 才執行真正的 API</span><br></pre></td></tr></table></figure>
+
+<p>實作時最容易忘記的三件事情：</p>
+<ol>
+<li><strong>Secret 永遠只能留在後端</strong></li>
+<li><strong>每一組 Token 只能用一次，失敗後必須 Reset</strong></li>
+<li><strong>前端 Widget 不能取代後端 Siteverify</strong></li>
+</ol>
+<p>把這三件事情守住，才算真的從「看起來有驗證」升級成「後端確實有驗證」。</p>
+<p>官方參考文件：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/get-started/">Cloudflare Turnstile Get started</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/get-started/widget-management/dashboard/">Create and manage widgets</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/">Embed the widget</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/get-started/server-side-validation/">Validate the token</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.cloudflare.com/turnstile/troubleshooting/testing/">Test your Turnstile implementation</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+              <a href="/tags/NodeJS/" rel="tag"><i class="fa fa-tag"></i> NodeJS</a>
+              <a href="/tags/Express/" rel="tag"><i class="fa fa-tag"></i> Express</a>
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+              <a href="/tags/Cloudflare/" rel="tag"><i class="fa fa-tag"></i> Cloudflare</a>
+              <a href="/tags/Security/" rel="tag"><i class="fa fa-tag"></i> Security</a>
+              <a href="/tags/Turnstile/" rel="tag"><i class="fa fa-tag"></i> Turnstile</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/07/30/20260730/" rel="prev" title="[Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF">
+      <i class="fa fa-chevron-left"></i> [Third party service Note] — GoDaddy 網域託管到 Cloudflare，順便搞定 SSL 與 WAF
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E6%9C%AC%E7%9A%84%E9%A9%97%E8%AD%89%E6%96%B9%E5%BC%8F%E6%9C%89%E4%BB%80%E9%BA%BC%E5%95%8F%E9%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">原本的驗證方式有什麼問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Turnstile-%E7%9A%84%E5%AE%89%E5%85%A8%E9%A9%97%E8%AD%89%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">Turnstile 的安全驗證流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Turnstile-Widget-%E8%88%87%E9%87%91%E9%91%B0"><span class="nav-number">5.</span> <span class="nav-text">建立 Turnstile Widget 與金鑰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-2-%E5%89%8D%E7%AB%AF%E5%85%83%E4%BB%B6%E5%AF%A6%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">Vue 2 前端元件實作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-Hooks-%E5%B0%8D%E6%87%89%E5%AF%A6%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">React Hooks 對應實作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E5%B8%B6%E4%B8%8A%E4%B8%80%E6%AC%A1%E6%80%A7-Token"><span class="nav-number">8.</span> <span class="nav-text">表單帶上一次性 Token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express-%E5%BE%8C%E7%AB%AF%E9%A9%97%E8%AD%89-Token"><span class="nav-number">9.</span> <span class="nav-text">Express 後端驗證 Token</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%A9%9F%E8%88%87%E8%87%AA%E5%8B%95%E5%8C%96%E6%B8%AC%E8%A9%A6"><span class="nav-number">10.</span> <span class="nav-text">本機與自動化測試</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E9%9A%9B%E8%B8%A9%E5%88%B0%E7%9A%84%E5%9D%91"><span class="nav-number">11.</span> <span class="nav-text">實際踩到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-1%EF%BC%9Aprocess-env-%E5%85%A8%E9%83%A8%E9%83%BD%E6%98%AF%E5%AD%97%E4%B8%B2"><span class="nav-number">11.1.</span> <span class="nav-text">坑 1：process.env 全部都是字串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-2%EF%BC%9AJoi-%E6%93%8B%E6%8E%89%E6%96%B0%E6%AC%84%E4%BD%8D"><span class="nav-number">11.2.</span> <span class="nav-text">坑 2：Joi 擋掉新欄位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-3%EF%BC%9A%E4%BF%AE%E6%94%B9-Vue-CLI-%E7%9A%84-env-%E5%BE%8C%E6%B2%92%E6%9C%89%E9%87%8D%E5%95%9F"><span class="nav-number">11.3.</span> <span class="nav-text">坑 3：修改 Vue CLI 的 .env 後沒有重啟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-4%EF%BC%9AToken-%E5%A4%B1%E6%95%97%E5%BE%8C%E6%B2%92%E6%9C%89-Reset"><span class="nav-number">11.4.</span> <span class="nav-text">坑 4：Token 失敗後沒有 Reset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%91-5%EF%BC%9A%E5%89%8D%E5%BE%8C%E7%AB%AF%E9%96%8B%E9%97%9C%E4%B8%8D%E5%90%8C%E6%AD%A5"><span class="nav-number">11.5.</span> <span class="nav-text">坑 5：前後端開關不同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fail-open-%E9%82%84%E6%98%AF-Fail-closed"><span class="nav-number">12.</span> <span class="nav-text">Fail-open 還是 Fail-closed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E6%94%B6%E8%88%87%E6%9C%80%E7%B5%82%E6%88%90%E6%9E%9C"><span class="nav-number">13.</span> <span class="nav-text">驗收與最終成果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%A9%97%E8%AD%89%E6%88%90%E5%8A%9F"><span class="nav-number">13.1.</span> <span class="nav-text">前端驗證成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API-%E8%88%87%E9%A0%90%E7%B4%84%E6%B5%81%E7%A8%8B%E6%88%90%E5%8A%9F"><span class="nav-number">13.2.</span> <span class="nav-text">API 與預約流程成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">14.</span> <span class="nav-text">總結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2026/08/01/20260801/",
+      identifier: "2026/08/01/20260801/",
+      title     : "[Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
