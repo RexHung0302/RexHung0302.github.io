@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rexhung0302.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Introduction &amp; 前言 以前 Side Project 要上線時，筆者都是先 SSH 進 VM，再手動執行 git pull、docker build、Migration 與重啟服務。流程不難，但每次都要重新確認指令，久了不只麻煩，也很容易漏掉測試、打錯版本，甚至在錯誤的目錄執行部署。 所以這次把流程搬進 GitLab CI&#x2F;CD：本機只負責建立並推送版本 Tag，G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[DevOps Note] — GitLab CI&#x2F;CD：推送 Tag 後自動驗證，再手動部署到 VM">
+<meta property="og:url" content="https://rexhung0302.github.io/2026/08/13/20260813/index.html">
+<meta property="og:site_name" content="RexHung&#39;s Blog">
+<meta property="og:description" content="Introduction &amp; 前言 以前 Side Project 要上線時，筆者都是先 SSH 進 VM，再手動執行 git pull、docker build、Migration 與重啟服務。流程不難，但每次都要重新確認指令，久了不只麻煩，也很容易漏掉測試、打錯版本，甚至在錯誤的目錄執行部署。 所以這次把流程搬進 GitLab CI&#x2F;CD：本機只負責建立並推送版本 Tag，G">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+<meta property="article:published_time" content="2026-08-13T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-12T17:27:00.551Z">
+<meta property="article:author" content="RexHung">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="GitLab">
+<meta property="article:tag" content="DevOps">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="SSH">
+<meta property="article:tag" content="VM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rexhung0302.github.io/images/others/loading.gif">
+
+<link rel="canonical" href="https://rexhung0302.github.io/2026/08/13/20260813/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>[DevOps Note] — GitLab CI/CD：推送 Tag 後自動驗證，再手動部署到 VM | RexHung's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">RexHung's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">塵世中一個前端迷途小書僮!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/RexHung0302" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://rexhung0302.github.io/2026/08/13/20260813/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile/profile_2.png">
+      <meta itemprop="name" content="RexHung">
+      <meta itemprop="description" content="努力不一定會成功, 不努力一定很輕鬆！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="RexHung's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [DevOps Note] — GitLab CI/CD：推送 Tag 後自動驗證，再手動部署到 VM
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2026-08-13 12:00:00 / 修改時間：01:27:00" itemprop="dateCreated datePublished" datetime="2026-08-13T12:00:00+08:00">2026-08-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/" itemprop="url" rel="index"><span itemprop="name">Code</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Code/Note/DevOps/" itemprop="url" rel="index"><span itemprop="name">DevOps</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="文章字數">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">文章字數：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>14 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Introduction-前言"><a href="#Introduction-前言" class="headerlink" title="Introduction &amp; 前言"></a>Introduction &amp; 前言</h2><p><img src="/images/others/loading.gif" data-original="/images/20260813/gitlab-tag-manual-deploy-flow.svg" alt="GitLab Tag 觸發驗證並手動部署到 VM"></p>
+<p>以前 Side Project 要上線時，筆者都是先 SSH 進 VM，再手動執行 <code>git pull</code>、<code>docker build</code>、Migration 與重啟服務。流程不難，但每次都要重新確認指令，久了不只麻煩，也很容易漏掉測試、打錯版本，甚至在錯誤的目錄執行部署。</p>
+<p>所以這次把流程搬進 <strong>GitLab CI&#x2F;CD</strong>：本機只負責建立並推送版本 Tag，GitLab 收到 Tag 後自動執行檢查；全部通過後，Pipeline 會留下一個需要人工點擊的 Production Deploy Job。按下部署，GitLab Runner 才會使用專用 SSH Key 連進 VM，由 VM 自己取得指定 Tag、建置 Docker Image、執行 Migration 並重啟服務。</p>
+<p>這種做法沒有追求「一 Push 就直接上正式環境」，而是刻意保留最後一道人工確認。對個人專案或小型服務來說，既省掉重複操作，也避免每次建立 Tag 就立刻動到正式機。</p>
+<blockquote>
+<p>本文所有專案名稱、Domain、帳號、IP 與路徑都是示意值，請依自己的環境替換；不要直接照抄 <code>deploy.example.com</code> 或 <code>/opt/example-app</code>。</p>
+</blockquote>
+<span id="more"></span>
+
+<hr>
+<h2 id="Summary-摘要"><a href="#Summary-摘要" class="headerlink" title="Summary &amp; 摘要"></a>Summary &amp; 摘要</h2><p>本文會完成以下流程：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">本機建立 v1.2.3 Tag</span><br><span class="line">        ↓</span><br><span class="line">Push Tag 到 GitLab</span><br><span class="line">        ↓</span><br><span class="line">GitLab 自動執行 Typecheck / Lint / Test</span><br><span class="line">        ↓</span><br><span class="line">驗證通過後等待人工點擊 Deploy</span><br><span class="line">        ↓</span><br><span class="line">GitLab Runner 透過 SSH 連線 VM</span><br><span class="line">        ↓</span><br><span class="line">VM Checkout 指定 Tag、Build、Migration、啟動與健康檢查</span><br></pre></td></tr></table></figure>
+
+<p>本篇文章將有以下幾個部分：</p>
+<ol>
+<li><a href="#%E6%9E%B6%E6%A7%8B%E8%88%87%E5%AE%89%E5%85%A8%E9%82%8A%E7%95%8C">架構與安全邊界</a></li>
+<li><a href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99">事前準備</a></li>
+<li><a href="#%E5%9C%A8-vm-%E5%BB%BA%E7%AB%8B%E5%B0%88%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B8%B3%E8%99%9F">在 VM 建立專用部署帳號</a></li>
+<li><a href="#%E5%BB%BA%E7%AB%8B-gitlab-ci-%E5%B0%88%E7%94%A8-ssh-key">建立 GitLab CI 專用 SSH Key</a></li>
+<li><a href="#%E6%BA%96%E5%82%99-ssh-known-hosts">準備 SSH KNOWN HOSTS</a></li>
+<li><a href="#%E8%A8%AD%E5%AE%9A-gitlab-cicd-variables">設定 GitLab CI&#x2F;CD Variables</a></li>
+<li><a href="#%E4%BF%9D%E8%AD%B7%E6%AD%A3%E5%BC%8F%E7%89%88-tag">保護正式版 Tag</a></li>
+<li><a href="#%E6%92%B0%E5%AF%AB-vm-%E9%83%A8%E7%BD%B2-script">撰寫 VM 部署 Script</a></li>
+<li><a href="#%E6%92%B0%E5%AF%AB-gitlab-ci-%E8%A8%AD%E5%AE%9A">撰寫 gitlab-ci 設定</a></li>
+<li><a href="#%E5%BB%BA%E7%AB%8B-tag-%E4%B8%A6%E5%9F%B7%E8%A1%8C-pipeline">建立 Tag 並執行 Pipeline</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B-environment-%E8%88%87%E9%83%A8%E7%BD%B2%E7%B4%80%E9%8C%84">查看 Environment 與部署紀錄</a></li>
+<li><a href="#%E5%8A%A0%E4%B8%8A-discord-pipeline-%E9%80%9A%E7%9F%A5">加上 Discord Pipeline 通知</a></li>
+<li><a href="#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%88%87%E8%B8%A9%E5%9D%91">常見問題與踩坑</a></li>
+<li><a href="#rollback-%E8%88%87%E5%BE%8C%E7%BA%8C%E5%84%AA%E5%8C%96">Rollback 與後續優化</a></li>
+</ol>
+<p><em><strong>整篇文章是筆者自己的操作紀錄；GitLab UI 與 Runner Image 會持續更新，如果選單位置稍有不同，可以依照文內提到的英文功能名稱搜尋。</strong></em></p>
+<hr>
+<h2 id="架構與安全邊界"><a href="#架構與安全邊界" class="headerlink" title="架構與安全邊界"></a>架構與安全邊界</h2><p>這個版本選擇在 <strong>VM Build</strong>，而不是在 GitLab Runner Build 完再把 Image 傳到 VM。原因很單純：第一版需要的基礎設施比較少，不必先處理 Container Registry、Image Pull 權限與 Registry 清理策略。</p>
+<p>各層負責的事情如下：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>負責內容</th>
+<th>不應該放的東西</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本機</td>
+<td>開發、更新版號、建立與 Push Tag</td>
+<td>正式機自動部署權限</td>
+</tr>
+<tr>
+<td>GitLab Runner</td>
+<td>驗證程式、顯示手動部署按鈕、透過 SSH 下達部署命令</td>
+<td>正式站 <code>.env.production</code> 全文</td>
+</tr>
+<tr>
+<td>VM</td>
+<td>保存正式環境變數、Build Image、Migration、啟動服務</td>
+<td>個人日常使用的 SSH Private Key</td>
+</tr>
+<tr>
+<td>GitLab CI&#x2F;CD Variables</td>
+<td>VM Host、部署帳號、CI 專用 SSH Private Key、Known Hosts</td>
+<td>提交進 Repository 的明文 Secret</td>
+</tr>
+</tbody></table>
+<p>最重要的原則有三個：</p>
+<ol>
+<li><strong>部署固定 Tag，不直接部署 VM 當下碰巧存在的 Branch。</strong></li>
+<li><strong>正式機使用專用部署帳號，不讓 CI 直接使用 root。</strong></li>
+<li><strong>Private Key 只存在本機安全位置與 GitLab Variable；VM 只放 Public Key。</strong></li>
+</ol>
+<hr>
+<h2 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備"></a>事前準備</h2><p>開始前需要：</p>
+<ul>
+<li>一個已啟用 GitLab CI&#x2F;CD 的 Repository</li>
+<li>一台可以透過 SSH 登入的 Linux VM 或 VPS</li>
+<li>VM 已安裝 Git、Docker、Docker Compose Plugin 與 curl</li>
+<li>專案根目錄已有可用的 Dockerfile 與 Production Compose 檔</li>
+<li>正式環境變數已安全放在 VM，例如 <code>/opt/example-app/.env.production</code></li>
+<li>GitLab Runner 可以使用 Docker Executor 執行 Job</li>
+</ul>
+<p>本文範例統一使用：</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>範例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>專案</td>
+<td><code>example-app</code></td>
+</tr>
+<tr>
+<td>VM Domain</td>
+<td><code>deploy.example.com</code></td>
+</tr>
+<tr>
+<td>部署帳號</td>
+<td><code>deployer</code></td>
+</tr>
+<tr>
+<td>VM 專案目錄</td>
+<td><code>/opt/example-app</code></td>
+</tr>
+<tr>
+<td>Production Compose</td>
+<td><code>compose.production.yaml</code></td>
+</tr>
+<tr>
+<td>正式環境變數</td>
+<td><code>.env.production</code></td>
+</tr>
+<tr>
+<td>Tag 格式</td>
+<td><code>v1.2.3</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>尖括號通常代表「請替換內容」。在 zsh 直接輸入 <code>ssh root@&lt;PRODUCTION_HOST&gt;</code>，Shell 會把 <code>&lt;</code> 當成重新導向符號，最後出現 <code>no such file or directory</code>。實際執行時請寫真正的 Domain 或 IP，而且不要保留尖括號。</p>
+</blockquote>
+<hr>
+<h2 id="在-VM-建立專用部署帳號"><a href="#在-VM-建立專用部署帳號" class="headerlink" title="在 VM 建立專用部署帳號"></a>在 VM 建立專用部署帳號</h2><p>第一版很容易偷懶直接使用 <code>root</code>，但 CI 一旦取得 root Private Key，就等於擁有整台 VM 的最高權限。比較好的方式是建立一個專門部署的帳號，例如 <code>deployer</code>。</p>
+<p>先用原本的管理帳號登入 VM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@deploy.example.com</span><br></pre></td></tr></table></figure>
+
+<p>建立帳號並準備 SSH 目錄：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">adduser deployer</span><br><span class="line">usermod -aG docker deployer</span><br><span class="line"></span><br><span class="line">install -d -m 700 -o deployer -g deployer /home/deployer/.ssh</span><br><span class="line"><span class="built_in">touch</span> /home/deployer/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">chown</span> deployer:deployer /home/deployer/.ssh/authorized_keys</span><br><span class="line"><span class="built_in">chmod</span> 600 /home/deployer/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>如果專案原本是 root Clone，記得把 Ownership 改給部署帳號：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R deployer:deployer /opt/example-app</span><br></pre></td></tr></table></figure>
+
+<p>這一步可以避免 Git 出現：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: detected dubious ownership in repository at &#x27;/opt/example-app&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><code>git config --global --add safe.directory /opt/example-app</code> 雖然也能解除限制，但它只是告訴 Git「相信這個目錄」，沒有解決真正的 Ownership 不一致。正式流程最好讓實際執行部署的人擁有 Repository。</p>
+<blockquote>
+<p>將使用者加入 <code>docker</code> Group，等同讓他有接近 root 的主機控制能力。這比直接開放完整 root SSH 好管理，但仍然是高權限；正式環境可以再搭配受限 sudo、Rootless Docker 或獨立 Runner 強化。</p>
+</blockquote>
+<p>登出再登入後，確認部署帳號可以執行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh deployer@deploy.example.com</span><br><span class="line">docker version</span><br><span class="line">docker compose version</span><br><span class="line">git -C /opt/example-app status</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="建立-GitLab-CI-專用-SSH-Key"><a href="#建立-GitLab-CI-專用-SSH-Key" class="headerlink" title="建立 GitLab CI 專用 SSH Key"></a>建立 GitLab CI 專用 SSH Key</h2><p>這把 Key 只給 GitLab Runner 連 VM，不要重複使用自己的日常 SSH Key。</p>
+<p>在本機執行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen \</span><br><span class="line">  -t ed25519 \</span><br><span class="line">  -C <span class="string">&quot;gitlab-ci-deploy&quot;</span> \</span><br><span class="line">  -f ~/.ssh/example_gitlab_ci</span><br></pre></td></tr></table></figure>
+
+<p>CI Job 無法在背景互動輸入 Passphrase，因此這把自動化 Key 通常不設定 Passphrase；相對地，更要限制帳號權限並定期輪替。</p>
+<p>產生後會有兩個檔案：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/.ssh/example_gitlab_ci      # Private Key，只能放本機與 GitLab</span><br><span class="line">~/.ssh/example_gitlab_ci.pub  # Public Key，放到 VM</span><br></pre></td></tr></table></figure>
+
+<p>把 Public Key 加到 VM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/example_gitlab_ci.pub | ssh root@deploy.example.com <span class="string">&#x27;</span></span><br><span class="line"><span class="string">  cat &gt;&gt; /home/deployer/.ssh/authorized_keys</span></span><br><span class="line"><span class="string">  chown deployer:deployer /home/deployer/.ssh/authorized_keys</span></span><br><span class="line"><span class="string">  chmod 600 /home/deployer/.ssh/authorized_keys</span></span><br><span class="line"><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>用指定 Key 測試：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh \</span><br><span class="line">  -o IdentitiesOnly=<span class="built_in">yes</span> \</span><br><span class="line">  -i ~/.ssh/example_gitlab_ci \</span><br><span class="line">  deployer@deploy.example.com</span><br></pre></td></tr></table></figure>
+
+<p>確認成功後再繼續設定 GitLab，否則進 CI 才除錯會更痛苦。</p>
+<hr>
+<h2 id="準備-SSH-KNOWN-HOSTS"><a href="#準備-SSH-KNOWN-HOSTS" class="headerlink" title="準備 SSH KNOWN HOSTS"></a>準備 SSH KNOWN HOSTS</h2><p>SSH 不只要驗證「Client 有沒有正確 Private Key」，Client 也要確認「連到的是不是真的那台 VM」。這就是 <code>known_hosts</code> 的用途。</p>
+<p>在可信任的網路或 VM Console 執行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keyscan -H deploy.example.com</span><br></pre></td></tr></table></figure>
+
+<p>把完整輸出保存起來，等等會放進 GitLab 的 <code>SSH_KNOWN_HOSTS</code> File Variable。</p>
+<p><em><strong>不要在 CI Job 執行時才動態 <code>ssh-keyscan</code> 並立刻信任結果。</strong></em> 如果當下 DNS 或網路被劫持，Runner 可能把攻擊者的 Host Key 當成正確答案。GitLab 官方也建議預先取得並保存 Host Key；Host Key 未預期改變時，部署應該直接失敗，讓人先確認 VM 是否重建或遭到中間人攻擊。</p>
+<p>官方文件可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/jobs/ssh_keys/">Using SSH keys with GitLab CI&#x2F;CD</a>。</p>
+<hr>
+<h2 id="設定-GitLab-CI-CD-Variables"><a href="#設定-GitLab-CI-CD-Variables" class="headerlink" title="設定 GitLab CI&#x2F;CD Variables"></a>設定 GitLab CI&#x2F;CD Variables</h2><p>進入 GitLab Project：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Settings → CI/CD → Variables</span><br></pre></td></tr></table></figure>
+
+<p>新增以下四個變數：</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Value 範例</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PRODUCTION_HOST</code></td>
+<td>Variable</td>
+<td><code>deploy.example.com</code></td>
+<td>VM Domain 或 IP</td>
+</tr>
+<tr>
+<td><code>PRODUCTION_USER</code></td>
+<td>Variable</td>
+<td><code>deployer</code></td>
+<td>VM 部署帳號</td>
+</tr>
+<tr>
+<td><code>SSH_PRIVATE_KEY</code></td>
+<td>File</td>
+<td>Private Key 全文</td>
+<td><code>~/.ssh/example_gitlab_ci</code> 的內容</td>
+</tr>
+<tr>
+<td><code>SSH_KNOWN_HOSTS</code></td>
+<td>File</td>
+<td><code>ssh-keyscan</code> 輸出</td>
+<td>VM Host Public Key</td>
+</tr>
+</tbody></table>
+<p>Private Key 可以在本機查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/example_gitlab_ci</span><br></pre></td></tr></table></figure>
+
+<p>貼進 GitLab 時必須包含：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN OPENSSH PRIVATE KEY-----</span><br><span class="line">...</span><br><span class="line">-----END OPENSSH PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+
+<p>而且最後一行結束後要再留一個換行。少了最後的 LF，Job 可能出現：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error loading key: error in libcrypto</span><br></pre></td></tr></table></figure>
+
+<p>多行 SSH Key 不符合 Masked Variable 的單行限制，因此使用 <strong>File Type Variable</strong>。GitLab 會把內容寫入暫存檔，環境變數的值則是該檔案路徑，所以 CI 裡會使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install -m 600 <span class="string">&quot;<span class="variable">$SSH_PRIVATE_KEY</span>&quot;</span> <span class="string">&quot;<span class="variable">$HOME</span>/.ssh/id_ed25519&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>而不是 <code>echo &quot;$SSH_PRIVATE_KEY&quot;</code>。</p>
+<p>四個變數都建議：</p>
+<ul>
+<li>開啟 <strong>Protect variable</strong></li>
+<li>Environment scope 設為 <code>production</code> 或 <code>*</code></li>
+<li>不開啟 Expand variable reference</li>
+<li>不要在 Job 中執行 <code>env</code>、<code>printenv</code> 或 <code>set -x</code></li>
+</ul>
+<p>GitLab Variables 的完整差異可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/variables/">CI&#x2F;CD variables</a>。</p>
+<hr>
+<h2 id="保護正式版-Tag"><a href="#保護正式版-Tag" class="headerlink" title="保護正式版 Tag"></a>保護正式版 Tag</h2><p>如果 Variables 設為 Protected，它們只會提供給 <strong>Protected Branch 或 Protected Tag</strong> 觸發的 Pipeline。只保護 <code>main</code> 還不夠，因為本文部署流程是由 Tag 觸發。</p>
+<p>到 GitLab：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Settings → Repository → Protected tags</span><br></pre></td></tr></table></figure>
+
+<p>新增規則：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Tag: v*</span><br><span class="line">Allowed to create: Maintainers</span><br></pre></td></tr></table></figure>
+
+<p>這樣 <code>v1.2.3</code> 會是 Protected Tag，只有授權角色能建立，也能在 Pipeline 取得 Protected Variables。</p>
+<p>如果漏掉這一步，最常見的現象就是 Job 明明有設定 Variable，執行時卻在以下檢查失敗：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">test</span> -n <span class="string">&quot;<span class="variable">$PRODUCTION_HOST</span>&quot;</span></span><br><span class="line"><span class="built_in">test</span> -s <span class="string">&quot;<span class="variable">$SSH_PRIVATE_KEY</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>官方文件可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/protected_tags/">Protected tags</a>。</p>
+<hr>
+<h2 id="撰寫-VM-部署-Script"><a href="#撰寫-VM-部署-Script" class="headerlink" title="撰寫 VM 部署 Script"></a>撰寫 VM 部署 Script</h2><p>建議把真正的部署邏輯放進 Repository，例如 <code>scripts/deploy-production.sh</code>，CI 只負責驗證、SSH 與呼叫 Script。這樣部署流程可以版本控制，也能先在 VM 手動測試。</p>
+<p>以下是一份簡化範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"><span class="built_in">set</span> -Eeuo pipefail</span><br><span class="line"></span><br><span class="line">COMPOSE_FILE=<span class="string">&quot;compose.production.yaml&quot;</span></span><br><span class="line">ENV_FILE=<span class="string">&quot;.env.production&quot;</span></span><br><span class="line">DEPLOY_REF=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$&#123;1:-&#125;</span>&quot;</span> == <span class="string">&quot;--ref&quot;</span> &amp;&amp; -n <span class="string">&quot;<span class="variable">$&#123;2:-&#125;</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  DEPLOY_REF=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;Usage: bash scripts/deploy-production.sh --ref v1.2.3&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! <span class="string">&quot;<span class="variable">$DEPLOY_REF</span>&quot;</span> =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;只接受 vX.Y.Z 格式的 Release Tag：<span class="variable">$DEPLOY_REF</span>&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ ! -f <span class="string">&quot;<span class="variable">$COMPOSE_FILE</span>&quot;</span> || ! -f <span class="string">&quot;<span class="variable">$ENV_FILE</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;找不到 <span class="variable">$COMPOSE_FILE</span> 或 <span class="variable">$ENV_FILE</span>&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">command</span> <span class="keyword">in</span> git docker curl; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">command</span> -v <span class="string">&quot;<span class="variable">$command</span>&quot;</span> &gt;/dev/null || &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;缺少必要指令：<span class="variable">$command</span>&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ -n <span class="string">&quot;<span class="subst">$(git status --porcelain)</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;VM Repository 有未提交變更，停止部署。&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[deploy] 取得 main 與 <span class="variable">$DEPLOY_REF</span>&quot;</span></span><br><span class="line">git fetch --prune origin refs/heads/main:refs/remotes/origin/main</span><br><span class="line">git fetch origin <span class="string">&quot;refs/tags/<span class="variable">$DEPLOY_REF</span>:refs/tags/<span class="variable">$DEPLOY_REF</span>&quot;</span></span><br><span class="line"></span><br><span class="line">target_commit=<span class="string">&quot;<span class="subst">$(git rev-parse --verify <span class="string">&quot;refs/tags/<span class="variable">$DEPLOY_REF</span>^&#123;commit&#125;&quot;</span>)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ! git merge-base --is-ancestor <span class="string">&quot;<span class="variable">$target_commit</span>&quot;</span> origin/main; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$DEPLOY_REF</span> 不在 origin/main 上，拒絕部署。&quot;</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">git switch --detach <span class="string">&quot;<span class="variable">$target_commit</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[deploy] Build Production Image&quot;</span></span><br><span class="line">docker compose \</span><br><span class="line">  --env-file <span class="string">&quot;<span class="variable">$ENV_FILE</span>&quot;</span> \</span><br><span class="line">  -f <span class="string">&quot;<span class="variable">$COMPOSE_FILE</span>&quot;</span> \</span><br><span class="line">  build app</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[deploy] 執行資料庫 Migration&quot;</span></span><br><span class="line">docker compose \</span><br><span class="line">  --env-file <span class="string">&quot;<span class="variable">$ENV_FILE</span>&quot;</span> \</span><br><span class="line">  -f <span class="string">&quot;<span class="variable">$COMPOSE_FILE</span>&quot;</span> \</span><br><span class="line">  run --<span class="built_in">rm</span> migrate</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[deploy] 啟動新版服務&quot;</span></span><br><span class="line">docker compose \</span><br><span class="line">  --env-file <span class="string">&quot;<span class="variable">$ENV_FILE</span>&quot;</span> \</span><br><span class="line">  -f <span class="string">&quot;<span class="variable">$COMPOSE_FILE</span>&quot;</span> \</span><br><span class="line">  up -d</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;[deploy] 等待健康檢查&quot;</span></span><br><span class="line"><span class="keyword">for</span> attempt <span class="keyword">in</span> &#123;1..30&#125;; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">if</span> curl --silent --show-error --fail \</span><br><span class="line">    http://127.0.0.1:3000/health &gt;/dev/null; <span class="keyword">then</span></span><br><span class="line">    docker compose -f <span class="string">&quot;<span class="variable">$COMPOSE_FILE</span>&quot;</span> ps</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;[deploy] 完成：<span class="variable">$DEPLOY_REF</span> (<span class="variable">$&#123;target_commit:0:12&#125;</span>)&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 0</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;尚未就緒（<span class="variable">$attempt</span>/30），5 秒後重試&quot;</span></span><br><span class="line">  <span class="built_in">sleep</span> 5</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;健康檢查失敗，請查看 Container Log。&quot;</span> &gt;&amp;2</span><br><span class="line"><span class="built_in">exit</span> 1</span><br></pre></td></tr></table></figure>
+
+<p>實際專案通常還要加入：</p>
+<ul>
+<li>Migration 前的 Database Backup</li>
+<li>舊 Docker Image 的 Rollback Tag</li>
+<li>Build Argument</li>
+<li>Migration 與舊版相容性檢查</li>
+<li>部署鎖，避免兩個流程同時改 Production</li>
+<li>失敗時輸出 <code>docker compose logs --tail=200 app</code></li>
+</ul>
+<p>為什麼還要確認 Tag Commit 位於 <code>origin/main</code>？因為任何人都可能在未合併的 Feature Branch 建立 Tag。沒有這個檢查，Tag 看起來像正式版，內容卻可能從未經過 Main Branch Review。</p>
+<p>腳本加入 Repository 後記得：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> +x scripts/deploy-production.sh</span><br><span class="line">git add scripts/deploy-production.sh</span><br><span class="line">git commit -m <span class="string">&quot;feat: add production deployment script&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="撰寫-gitlab-ci-設定"><a href="#撰寫-gitlab-ci-設定" class="headerlink" title="撰寫 gitlab-ci 設定"></a>撰寫 gitlab-ci 設定</h2><p>在 Repository 根目錄建立 <code>.gitlab-ci.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">workflow:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">when:</span> <span class="string">never</span></span><br><span class="line"></span><br><span class="line"><span class="attr">stages:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">verify</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">deploy</span></span><br><span class="line"></span><br><span class="line"><span class="attr">variables:</span></span><br><span class="line">  <span class="attr">NPM_CONFIG_CACHE:</span> <span class="string">&quot;$CI_PROJECT_DIR/.npm&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="string">.node_verify:</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">node:22-bookworm-slim</span></span><br><span class="line">  <span class="attr">cache:</span></span><br><span class="line">    <span class="attr">key:</span></span><br><span class="line">      <span class="attr">files:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">package-lock.json</span></span><br><span class="line">    <span class="attr">paths:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">.npm/</span></span><br><span class="line">  <span class="attr">before_script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">npm</span> <span class="string">ci</span> <span class="string">--prefer-offline</span> <span class="string">--no-audit</span></span><br><span class="line"></span><br><span class="line"><span class="attr">release_checks:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.node_verify</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">verify</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">|</span></span><br><span class="line"><span class="string">      package_version=&quot;$(node -p &quot;require(&#x27;./package.json&#x27;).version&quot;)&quot;</span></span><br><span class="line"><span class="string">      tag_version=&quot;$&#123;CI_COMMIT_TAG#v&#125;&quot;</span></span><br><span class="line"><span class="string">      test &quot;$package_version&quot; = &quot;$tag_version&quot; || &#123;</span></span><br><span class="line"><span class="string">        echo &quot;Tag $CI_COMMIT_TAG 與 package.json $package_version 不一致。&quot;</span></span><br><span class="line"><span class="string">        exit 1</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string"></span>    <span class="bullet">-</span> <span class="string">bash</span> <span class="string">-n</span> <span class="string">scripts/deploy-production.sh</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">typecheck</span></span><br><span class="line"></span><br><span class="line"><span class="attr">lint:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.node_verify</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">verify</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">lint</span></span><br><span class="line"></span><br><span class="line"><span class="attr">unit_tests:</span></span><br><span class="line">  <span class="attr">extends:</span> <span class="string">.node_verify</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">verify</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">npm</span> <span class="string">test</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy_production:</span></span><br><span class="line">  <span class="attr">stage:</span> <span class="string">deploy</span></span><br><span class="line">  <span class="attr">image:</span> <span class="string">alpine:3.22</span></span><br><span class="line">  <span class="attr">needs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">release_checks</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">lint</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">unit_tests</span></span><br><span class="line">  <span class="attr">resource_group:</span> <span class="string">production</span></span><br><span class="line">  <span class="attr">interruptible:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">timeout:</span> <span class="string">30m</span></span><br><span class="line">  <span class="attr">environment:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">production</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://www.example.com</span></span><br><span class="line">    <span class="attr">deployment_tier:</span> <span class="string">production</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/&#x27;</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">manual</span></span><br><span class="line">      <span class="attr">allow_failure:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">manual_confirmation:</span> <span class="string">&quot;確定要把這個版本部署到正式環境嗎？&quot;</span></span><br><span class="line">  <span class="attr">before_script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">apk</span> <span class="string">add</span> <span class="string">--no-cache</span> <span class="string">openssh-client</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test</span> <span class="string">-n</span> <span class="string">&quot;$PRODUCTION_HOST&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test</span> <span class="string">-n</span> <span class="string">&quot;$PRODUCTION_USER&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test</span> <span class="string">-s</span> <span class="string">&quot;$SSH_PRIVATE_KEY&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">test</span> <span class="string">-s</span> <span class="string">&quot;$SSH_KNOWN_HOSTS&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">install</span> <span class="string">-d</span> <span class="string">-m</span> <span class="number">700</span> <span class="string">&quot;$HOME/.ssh&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">install</span> <span class="string">-m</span> <span class="number">600</span> <span class="string">&quot;$SSH_PRIVATE_KEY&quot;</span> <span class="string">&quot;$HOME/.ssh/id_ed25519&quot;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">install</span> <span class="string">-m</span> <span class="number">644</span> <span class="string">&quot;$SSH_KNOWN_HOSTS&quot;</span> <span class="string">&quot;$HOME/.ssh/known_hosts&quot;</span></span><br><span class="line">  <span class="attr">script:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">|</span></span><br><span class="line"><span class="string">      ssh \</span></span><br><span class="line"><span class="string">        -o BatchMode=yes \</span></span><br><span class="line"><span class="string">        -o IdentitiesOnly=yes \</span></span><br><span class="line"><span class="string">        -i &quot;$HOME/.ssh/id_ed25519&quot; \</span></span><br><span class="line"><span class="string">        &quot;$PRODUCTION_USER@$PRODUCTION_HOST&quot; \</span></span><br><span class="line"><span class="string">        &quot;deploy_script=&#x27;/tmp/example-deploy-$CI_PIPELINE_ID.sh&#x27;;</span></span><br><span class="line"><span class="string">         cd /opt/example-app &amp;&amp;</span></span><br><span class="line"><span class="string">         git fetch origin &#x27;refs/tags/$CI_COMMIT_TAG:refs/tags/$CI_COMMIT_TAG&#x27; &amp;&amp;</span></span><br><span class="line"><span class="string">         git show &#x27;$CI_COMMIT_TAG:scripts/deploy-production.sh&#x27; &gt; \&quot;\$deploy_script\&quot; &amp;&amp;</span></span><br><span class="line"><span class="string">         bash \&quot;\$deploy_script\&quot; --ref &#x27;$CI_COMMIT_TAG&#x27;;</span></span><br><span class="line"><span class="string">         deploy_status=\$?;</span></span><br><span class="line"><span class="string">         rm -f \&quot;\$deploy_script\&quot;;</span></span><br><span class="line"><span class="string">         exit \$deploy_status&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>這份設定有幾個重點。</p>
+<h3 id="只讓正式版-Tag-建立-Pipeline"><a href="#只讓正式版-Tag-建立-Pipeline" class="headerlink" title="只讓正式版 Tag 建立 Pipeline"></a>只讓正式版 Tag 建立 Pipeline</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">workflow:</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">when:</span> <span class="string">never</span></span><br></pre></td></tr></table></figure>
+
+<p><code>CI_COMMIT_TAG</code> 是 GitLab 預先提供的變數。只有 <code>v1.2.3</code> 這類 Tag 會建立 Pipeline，一般 Branch Push 不會產生這條 Release Pipeline。</p>
+<p>如果不想使用 <code>v</code> 前綴，可以改成：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>Tag Pipeline 官方說明可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/repository/tags/">Git tags</a>。</p>
+<h3 id="驗證自動跑，部署手動跑"><a href="#驗證自動跑，部署手動跑" class="headerlink" title="驗證自動跑，部署手動跑"></a>驗證自動跑，部署手動跑</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">if:</span> <span class="string">&#x27;$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/&#x27;</span></span><br><span class="line">    <span class="attr">when:</span> <span class="string">manual</span></span><br><span class="line">    <span class="attr">allow_failure:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><code>when: manual</code> 會讓 Deployment Job 先停在等待狀態，直到有人在 GitLab 點擊播放按鈕。<code>needs</code> 則保證前面的 Check、Lint、Test 完成後才能部署。</p>
+<h3 id="避免同時部署-Production"><a href="#避免同時部署-Production" class="headerlink" title="避免同時部署 Production"></a>避免同時部署 Production</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resource_group:</span> <span class="string">production</span></span><br></pre></td></tr></table></figure>
+
+<p>同一個 Resource Group 同時間只允許一個 Job 使用，避免兩個 Tag Pipeline 一起對同一台 VM Build、Migration 與 Restart。</p>
+<h3 id="為什麼用-git-show-取出部署腳本"><a href="#為什麼用-git-show-取出部署腳本" class="headerlink" title="為什麼用 git show 取出部署腳本"></a>為什麼用 git show 取出部署腳本</h3><p>如果直接在 VM 執行目前 Working Tree 的 <code>scripts/deploy-production.sh</code>，那支 Script 可能還是上一版。CI 先從指定 Tag 取出 Script 到 <code>/tmp</code>，確保「部署 v1.2.3」時，連部署邏輯也是 v1.2.3 版本。</p>
+<h3 id="Environment-不等於-VM-設定"><a href="#Environment-不等於-VM-設定" class="headerlink" title="Environment 不等於 VM 設定"></a>Environment 不等於 VM 設定</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">environment:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">production</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">https://www.example.com</span></span><br><span class="line">  <span class="attr">deployment_tier:</span> <span class="string">production</span></span><br></pre></td></tr></table></figure>
+
+<p>這段是讓 GitLab 紀錄「哪個 Commit 何時部署到 Production」，不會替你建立 VM、DNS 或 <code>.env.production</code>。</p>
+<hr>
+<h2 id="建立-Tag-並執行-Pipeline"><a href="#建立-Tag-並執行-Pipeline" class="headerlink" title="建立 Tag 並執行 Pipeline"></a>建立 Tag 並執行 Pipeline</h2><p>先確保要發布的內容已經合併到 Main Branch，並且本機同步最新狀態：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch main</span><br><span class="line">git pull --ff-only origin main</span><br></pre></td></tr></table></figure>
+
+<p>更新 <code>package.json</code> 版本，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.2.3&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>提交版號後建立 Annotated Tag：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.2.3 -m <span class="string">&quot;release: v1.2.3&quot;</span></span><br><span class="line">git push origin v1.2.3</span><br></pre></td></tr></table></figure>
+
+<p>Tag Push 完成後，到 GitLab：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Build → Pipelines</span><br></pre></td></tr></table></figure>
+
+<p>應該會看到 <code>v1.2.3</code> Pipeline，Verify Stage 會自動執行。全部變綠後，<code>deploy_production</code> 仍會顯示等待手動執行。</p>
+<p>點擊 Job 右側的播放按鈕，確認提示後才會開始部署 VM。Job Log 會依序顯示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Install SSH Client</span><br><span class="line">→ Validate Variables</span><br><span class="line">→ Connect VM</span><br><span class="line">→ Fetch Tag</span><br><span class="line">→ Build</span><br><span class="line">→ Migration</span><br><span class="line">→ Docker Compose Up</span><br><span class="line">→ Health Check</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>不要因為 Tag 建錯就刪掉後重建同名 Tag。</strong></em> Release Tag 應該視為不可變；如果 <code>v1.2.3</code> 有問題，就修正後發布 <code>v1.2.4</code>，Deployment History 才不會出現同名不同內容。</p>
+<hr>
+<h2 id="查看-Environment-與部署紀錄"><a href="#查看-Environment-與部署紀錄" class="headerlink" title="查看 Environment 與部署紀錄"></a>查看 Environment 與部署紀錄</h2><p>部署 Job 成功後，可以到：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Operate → Environments → production</span><br></pre></td></tr></table></figure>
+
+<p>查看：</p>
+<ul>
+<li>目前 Production 對應的 Commit 與 Tag</li>
+<li>部署時間</li>
+<li>Pipeline 與 Job Log</li>
+<li>Environment URL</li>
+<li>過去部署紀錄</li>
+</ul>
+<p>如果側邊欄完全找不到 Environment，先確認：</p>
+<ol>
+<li><code>.gitlab-ci.yml</code> 的 Deploy Job 有設定 <code>environment.name</code></li>
+<li>Deploy Job 至少成功執行過一次</li>
+<li>自己在 Private Project 具備 Reporter 以上權限</li>
+</ol>
+<p>GitLab 只有在 Deployment Job 建立 Deployment 後才會顯示紀錄，不是把 YAML Push 上去就立刻出現。官方說明可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/environments/">Environments</a>。</p>
+<hr>
+<h2 id="加上-Discord-Pipeline-通知"><a href="#加上-Discord-Pipeline-通知" class="headerlink" title="加上 Discord Pipeline 通知"></a>加上 Discord Pipeline 通知</h2><p>如果希望 Tag、Pipeline 成功或失敗時收到 Discord 訊息，不需要把 Webhook 寫進 <code>.gitlab-ci.yml</code>，GitLab 有內建 Discord Notifications Integration。</p>
+<p>先到 Discord 目標頻道：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Edit Channel → Integrations → Webhooks → New Webhook</span><br></pre></td></tr></table></figure>
+
+<p>建立後複製 Webhook URL，再到 GitLab：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Settings → Integrations → Discord Notifications</span><br></pre></td></tr></table></figure>
+
+<p>貼上 Webhook、啟用 Active，並勾選：</p>
+<ul>
+<li>Pipeline</li>
+<li>Tag push</li>
+<li>Deployment（如果目前 GitLab 版本提供）</li>
+</ul>
+<p>Webhook URL 不要提交進 Git，也不要放進公開 Screenshot。設定完成後可以先使用 Test 功能確認 Discord 收得到訊息。</p>
+<p>官方文件可參考：<a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/integrations/discord_notifications/">Discord notifications</a>。</p>
+<hr>
+<h2 id="常見問題與踩坑"><a href="#常見問題與踩坑" class="headerlink" title="常見問題與踩坑"></a>常見問題與踩坑</h2><h3 id="Push-Tag-後沒有-Pipeline"><a href="#Push-Tag-後沒有-Pipeline" class="headerlink" title="Push Tag 後沒有 Pipeline"></a>Push Tag 後沒有 Pipeline</h3><p>先檢查 Tag 格式是否符合 Regex：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag --list</span><br></pre></td></tr></table></figure>
+
+<p>如果 YAML 只接受 <code>v1.2.3</code>，Push <code>1.2.3</code> 就不會建立 Pipeline。也可以到 GitLab 的 Pipeline Editor Validate <code>.gitlab-ci.yml</code>。</p>
+<h3 id="Protected-Variable-在-Job-裡是空的"><a href="#Protected-Variable-在-Job-裡是空的" class="headerlink" title="Protected Variable 在 Job 裡是空的"></a>Protected Variable 在 Job 裡是空的</h3><p>最常見原因是 Tag 沒有被保護。Variables 勾選 Protect 後，請同步建立 <code>v*</code> Protected Tag Rule。</p>
+<h3 id="SSH-PRIVATE-KEY-出現-error-in-libcrypto"><a href="#SSH-PRIVATE-KEY-出現-error-in-libcrypto" class="headerlink" title="SSH_PRIVATE_KEY 出現 error in libcrypto"></a>SSH_PRIVATE_KEY 出現 error in libcrypto</h3><p>確認：</p>
+<ul>
+<li>Variable Type 是 File</li>
+<li>貼入完整 OpenSSH Private Key</li>
+<li><code>END OPENSSH PRIVATE KEY</code> 後有一個換行</li>
+<li>沒有把 Public Key 貼進 Private Key Variable</li>
+</ul>
+<h3 id="zsh-顯示-no-such-file-or-directory-PRODUCTION-HOST"><a href="#zsh-顯示-no-such-file-or-directory-PRODUCTION-HOST" class="headerlink" title="zsh 顯示 no such file or directory PRODUCTION_HOST"></a>zsh 顯示 no such file or directory PRODUCTION_HOST</h3><p>不要直接輸入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@&lt;PRODUCTION_HOST&gt;</span><br></pre></td></tr></table></figure>
+
+<p>要把 Placeholder 換成真正值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@deploy.example.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="fatal-detected-dubious-ownership"><a href="#fatal-detected-dubious-ownership" class="headerlink" title="fatal detected dubious ownership"></a>fatal detected dubious ownership</h3><p>Repository Owner 與執行 Git 的使用者不同。建議修正 VM 目錄 Ownership：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> -R deployer:deployer /opt/example-app</span><br></pre></td></tr></table></figure>
+
+<p>如果 root 與 deployer 都要操作，每個帳號的 Git Global Config 都是獨立的；在 deployer 設定的 <code>safe.directory</code> 不會自動套用到 root。但更好的做法仍是讓部署固定由同一個帳號負責。</p>
+<h3 id="本機-SSH-成功，CI-卻-Permission-denied"><a href="#本機-SSH-成功，CI-卻-Permission-denied" class="headerlink" title="本機 SSH 成功，CI 卻 Permission denied"></a>本機 SSH 成功，CI 卻 Permission denied</h3><p>本機可能使用了 SSH Agent 裡的另一把 Key。測試時加上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh \</span><br><span class="line">  -o IdentitiesOnly=<span class="built_in">yes</span> \</span><br><span class="line">  -i ~/.ssh/example_gitlab_ci \</span><br><span class="line">  deployer@deploy.example.com</span><br></pre></td></tr></table></figure>
+
+<p>這樣才能確定真正測到的是 CI 那把 Key。</p>
+<h3 id="env-production-要不要放進-GitLab"><a href="#env-production-要不要放進-GitLab" class="headerlink" title=".env.production 要不要放進 GitLab"></a>.env.production 要不要放進 GitLab</h3><p>如果 Build 與 Runtime 都發生在 VM，正式 <code>.env.production</code> 留在 VM 即可，不需要整份複製到 GitLab。CI Variables 只保存「GitLab 如何連到 VM」所需的值。</p>
+<p>另外要注意前端 Framework 的 Public Environment Variable 通常會在 Build 時寫進 Bundle。即使 VM Runtime 已經更新 <code>.env.production</code>，只要值需要進 Browser Bundle，就仍然必須重新 Build。</p>
+<h3 id="Docker-Database-顯示-unhealthy"><a href="#Docker-Database-顯示-unhealthy" class="headerlink" title="Docker Database 顯示 unhealthy"></a>Docker Database 顯示 unhealthy</h3><p>先不要一直重跑整個部署，依序查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker compose -f compose.production.yaml ps</span><br><span class="line">docker compose -f compose.production.yaml logs --<span class="built_in">tail</span>=200 db</span><br><span class="line">docker inspect --format <span class="string">&#x27;&#123;&#123;json .State.Health&#125;&#125;&#x27;</span> example-db-1</span><br></pre></td></tr></table></figure>
+
+<p>如果 Database Log 顯示 Crash Recovery 後已經 <code>ready to accept connections</code>，Health Check 也回到成功，有可能只是 Deployment 等待時間太短；反之若 Volume、帳密或 Migration 出錯，就要先修復根因。</p>
+<h3 id="VM-Build-很慢"><a href="#VM-Build-很慢" class="headerlink" title="VM Build 很慢"></a>VM Build 很慢</h3><p>第一版在 VM Build 的優點是簡單，缺點就是每次部署都要在正式機建置。可以先改善：</p>
+<ul>
+<li>Dockerfile 先 Copy Lock File 並安裝依賴，再 Copy Source，增加 Layer Cache 命中率</li>
+<li>不要在部署前執行 <code>docker builder prune -a</code></li>
+<li>npm、pnpm 與 Docker BuildKit 使用 Cache Mount</li>
+<li>避免每次覆蓋整個 Repository 或 <code>.env.production</code></li>
+</ul>
+<p>後續再升級成 GitLab Runner Build Image、Push GitLab Container Registry，VM 只負責 Pull 與 Restart，部署時間會更穩定。</p>
+<hr>
+<h2 id="Rollback-與後續優化"><a href="#Rollback-與後續優化" class="headerlink" title="Rollback 與後續優化"></a>Rollback 與後續優化</h2><p>最低限度的 Rollback 是重新部署上一個已知正常 Tag：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v1.2.3 部署失敗</span><br><span class="line">→ 在 GitLab 找到上一個成功的 v1.2.2 Pipeline</span><br><span class="line">→ 重新執行該版本的 Deploy Job</span><br></pre></td></tr></table></figure>
+
+<p>但 Database Migration 不一定能跟著倒退。要讓 Rollback 可靠，需要：</p>
+<ul>
+<li>Migration 採 Backward-compatible 設計</li>
+<li>Migration 前自動備份 Database</li>
+<li>Build 新 Image 前替舊 Image 加上 Rollback Tag</li>
+<li>健康檢查失敗時不要刪除舊 Image</li>
+<li>將部署與資料轉換拆成不同步驟</li>
+</ul>
+<p>後續可以依序升級：</p>
+<ol>
+<li><strong>GitLab Container Registry</strong>：CI Build 並 Push Image，VM 只 Pull</li>
+<li><strong>Dependency Proxy &#x2F; Build Cache</strong>：減少重複下載</li>
+<li><strong>Protected Environment</strong>：限制誰能點 Production Deploy</li>
+<li><strong>Deployment Approval</strong>：正式環境需要指定角色核准</li>
+<li><strong>Staging Environment</strong>：同一個 Tag 先部署 Staging，再升 Production</li>
+<li><strong>Observability</strong>：部署後自動檢查 Log、Sentry、Metrics 與 Smoke Test</li>
+</ol>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>完成後，日常發布只需要：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git tag -a v1.2.3 -m <span class="string">&quot;release: v1.2.3&quot;</span></span><br><span class="line">git push origin v1.2.3</span><br></pre></td></tr></table></figure>
+
+<p>接著等待 GitLab 自動驗證，最後到 Pipeline 點一下 Deploy。VM 上的 Git、Docker Build、Migration、Restart 與健康檢查都由版本化 Script 統一執行。</p>
+<p>這套流程看起來比直接 SSH 上去多了不少設定，但它真正解決的不是「少打幾行指令」，而是讓每一次正式部署都有固定版本、固定步驟、檢查結果與可追蹤紀錄。等第一版穩定後，再把 Build 搬到 CI 與 Container Registry，就能逐步從手動部署走向更完整的 Release Pipeline。</p>
+<p>最後整理本文使用到的 GitLab 官方文件：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/repository/tags/">Git tags</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/jobs/job_rules/">Specify when jobs run with rules</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/jobs/ssh_keys/">Using SSH keys with GitLab CI&#x2F;CD</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/variables/">CI&#x2F;CD variables</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/protected_tags/">Protected tags</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/ci/environments/">Environments</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.gitlab.com/user/project/integrations/discord_notifications/">Discord notifications</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    捐贈
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/others/bitcoin.png" alt="RexHung 比特幣">
+        <p>比特幣</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Code/" rel="tag"><i class="fa fa-tag"></i> Code</a>
+              <a href="/tags/CI-CD/" rel="tag"><i class="fa fa-tag"></i> CI/CD</a>
+              <a href="/tags/GitLab/" rel="tag"><i class="fa fa-tag"></i> GitLab</a>
+              <a href="/tags/DevOps/" rel="tag"><i class="fa fa-tag"></i> DevOps</a>
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+              <a href="/tags/SSH/" rel="tag"><i class="fa fa-tag"></i> SSH</a>
+              <a href="/tags/VM/" rel="tag"><i class="fa fa-tag"></i> VM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/08/01/20260801/" rel="prev" title="[Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證">
+      <i class="fa fa-chevron-left"></i> [Security Note] — 前端驗證碼真的安全嗎？用 Cloudflare Turnstile 建立前後端人機驗證
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Introduction &amp; 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-%E6%91%98%E8%A6%81"><span class="nav-number">2.</span> <span class="nav-text">Summary &amp; 摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%A7%8B%E8%88%87%E5%AE%89%E5%85%A8%E9%82%8A%E7%95%8C"><span class="nav-number">3.</span> <span class="nav-text">架構與安全邊界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">4.</span> <span class="nav-text">事前準備</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-VM-%E5%BB%BA%E7%AB%8B%E5%B0%88%E7%94%A8%E9%83%A8%E7%BD%B2%E5%B8%B3%E8%99%9F"><span class="nav-number">5.</span> <span class="nav-text">在 VM 建立專用部署帳號</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-GitLab-CI-%E5%B0%88%E7%94%A8-SSH-Key"><span class="nav-number">6.</span> <span class="nav-text">建立 GitLab CI 專用 SSH Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%96%E5%82%99-SSH-KNOWN-HOSTS"><span class="nav-number">7.</span> <span class="nav-text">準備 SSH KNOWN HOSTS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-GitLab-CI-CD-Variables"><span class="nav-number">8.</span> <span class="nav-text">設定 GitLab CI&#x2F;CD Variables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E8%AD%B7%E6%AD%A3%E5%BC%8F%E7%89%88-Tag"><span class="nav-number">9.</span> <span class="nav-text">保護正式版 Tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%B0%E5%AF%AB-VM-%E9%83%A8%E7%BD%B2-Script"><span class="nav-number">10.</span> <span class="nav-text">撰寫 VM 部署 Script</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%B0%E5%AF%AB-gitlab-ci-%E8%A8%AD%E5%AE%9A"><span class="nav-number">11.</span> <span class="nav-text">撰寫 gitlab-ci 設定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E8%AE%93%E6%AD%A3%E5%BC%8F%E7%89%88-Tag-%E5%BB%BA%E7%AB%8B-Pipeline"><span class="nav-number">11.1.</span> <span class="nav-text">只讓正式版 Tag 建立 Pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E8%87%AA%E5%8B%95%E8%B7%91%EF%BC%8C%E9%83%A8%E7%BD%B2%E6%89%8B%E5%8B%95%E8%B7%91"><span class="nav-number">11.2.</span> <span class="nav-text">驗證自動跑，部署手動跑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%90%8C%E6%99%82%E9%83%A8%E7%BD%B2-Production"><span class="nav-number">11.3.</span> <span class="nav-text">避免同時部署 Production</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E7%94%A8-git-show-%E5%8F%96%E5%87%BA%E9%83%A8%E7%BD%B2%E8%85%B3%E6%9C%AC"><span class="nav-number">11.4.</span> <span class="nav-text">為什麼用 git show 取出部署腳本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment-%E4%B8%8D%E7%AD%89%E6%96%BC-VM-%E8%A8%AD%E5%AE%9A"><span class="nav-number">11.5.</span> <span class="nav-text">Environment 不等於 VM 設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Tag-%E4%B8%A6%E5%9F%B7%E8%A1%8C-Pipeline"><span class="nav-number">12.</span> <span class="nav-text">建立 Tag 並執行 Pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-Environment-%E8%88%87%E9%83%A8%E7%BD%B2%E7%B4%80%E9%8C%84"><span class="nav-number">13.</span> <span class="nav-text">查看 Environment 與部署紀錄</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E4%B8%8A-Discord-Pipeline-%E9%80%9A%E7%9F%A5"><span class="nav-number">14.</span> <span class="nav-text">加上 Discord Pipeline 通知</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A6%8B%E5%95%8F%E9%A1%8C%E8%88%87%E8%B8%A9%E5%9D%91"><span class="nav-number">15.</span> <span class="nav-text">常見問題與踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Push-Tag-%E5%BE%8C%E6%B2%92%E6%9C%89-Pipeline"><span class="nav-number">15.1.</span> <span class="nav-text">Push Tag 後沒有 Pipeline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protected-Variable-%E5%9C%A8-Job-%E8%A3%A1%E6%98%AF%E7%A9%BA%E7%9A%84"><span class="nav-number">15.2.</span> <span class="nav-text">Protected Variable 在 Job 裡是空的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH-PRIVATE-KEY-%E5%87%BA%E7%8F%BE-error-in-libcrypto"><span class="nav-number">15.3.</span> <span class="nav-text">SSH_PRIVATE_KEY 出現 error in libcrypto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-%E9%A1%AF%E7%A4%BA-no-such-file-or-directory-PRODUCTION-HOST"><span class="nav-number">15.4.</span> <span class="nav-text">zsh 顯示 no such file or directory PRODUCTION_HOST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fatal-detected-dubious-ownership"><span class="nav-number">15.5.</span> <span class="nav-text">fatal detected dubious ownership</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%A9%9F-SSH-%E6%88%90%E5%8A%9F%EF%BC%8CCI-%E5%8D%BB-Permission-denied"><span class="nav-number">15.6.</span> <span class="nav-text">本機 SSH 成功，CI 卻 Permission denied</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#env-production-%E8%A6%81%E4%B8%8D%E8%A6%81%E6%94%BE%E9%80%B2-GitLab"><span class="nav-number">15.7.</span> <span class="nav-text">.env.production 要不要放進 GitLab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Database-%E9%A1%AF%E7%A4%BA-unhealthy"><span class="nav-number">15.8.</span> <span class="nav-text">Docker Database 顯示 unhealthy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VM-Build-%E5%BE%88%E6%85%A2"><span class="nav-number">15.9.</span> <span class="nav-text">VM Build 很慢</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rollback-%E8%88%87%E5%BE%8C%E7%BA%8C%E5%84%AA%E5%8C%96"><span class="nav-number">16.</span> <span class="nav-text">Rollback 與後續優化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">17.</span> <span class="nav-text">總結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="RexHung"
+      src="/images/profile/profile_2.png">
+  <p class="site-author-name" itemprop="name">RexHung</p>
+  <div class="site-description" itemprop="description">努力不一定會成功, 不努力一定很輕鬆！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RexHung0302" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RexHung0302" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/Zeee_Hung" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;Zeee_Hung" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ze.hung" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;ze.hung" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/chiatse-hung-908b72204/" title="Linked → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;chiatse-hung-908b72204&#x2F;" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.cake.me/me/RexHung" title="CakeResume → https:&#x2F;&#x2F;www.cake.me&#x2F;me&#x2F;RexHung" rel="noopener" target="_blank"><i class="fas fa-birthday-cake fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">RexHung0302 - 轉載文章時請附上作者(RexHung)及原文連結(URL)，感謝配合！</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js', () => {
+    window.dsqjs = new DisqusJS({
+      api       : '' || 'https://disqus.com/api/',
+      apikey    : '6dmTPprC4xIxNcqr3Gi1OHUEoMpwUbUOLi0qQ8BBuAudO2qzoJIfPMMX3Sel7UJE',
+      shortname : 'rexhung0302',
+      url       : "https://rexhung0302.github.io/2026/08/13/20260813/",
+      identifier: "2026/08/13/20260813/",
+      title     : "[DevOps Note] — GitLab CI/CD：推送 Tag 後自動驗證，再手動部署到 VM",
+    });
+  }, window.DisqusJS);
+});
+</script>
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
